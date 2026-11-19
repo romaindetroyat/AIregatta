@@ -220,6 +220,36 @@ input[type=range]{width:100%;accent-color:var(--lime)}
 footer{padding-block:40px 56px;border-top:1px solid var(--filet);color:var(--ivoire-3);font-size:13px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
 
+
+/* À bord */
+.bord{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.seg{display:inline-flex;padding:4px;border-radius:999px;background:rgba(238,240,228,.05);box-shadow:inset 0 0 0 1px var(--filet)}
+.seg button{border:0;border-radius:999px;padding:9px 18px;font:500 14px var(--f-texte);color:var(--ivoire-2);background:transparent;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--degrade);color:var(--nuit);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.views{padding:18px;display:grid;gap:10px}
+.views svg{display:block;width:100%;height:auto}
+.vrow{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.heel{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:20px;align-items:center;padding-top:14px;border-top:1px solid var(--filet)}
+.heel p{font-size:14.5px;color:var(--ivoire-2)}
+.heel b{color:var(--ivoire)}
+.cap{font:500 .68rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ivoire-3)}
+.callout circle{fill:var(--nuit);stroke:var(--lime);stroke-width:1.5}
+.callout text{font:600 12px var(--f-mono);fill:var(--lime)}
+.kv{padding:24px;display:grid;gap:14px}
+.kv ol{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.kv li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;font-size:14px;color:var(--ivoire-2)}
+.kv li .n{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:600 11px var(--f-mono);color:var(--lime);box-shadow:inset 0 0 0 1.5px var(--lime)}
+.kv li b{color:var(--ivoire);font-weight:600}
+.wt{display:grid;gap:6px;margin-top:4px}
+.wt div{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding-bottom:6px;border-bottom:1px solid var(--filet)}
+.wt div span:last-child{font:400 12.5px var(--f-mono);color:var(--ivoire-2);white-space:nowrap}
+.rules{margin-top:16px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.rule{padding:18px;border-radius:20px;background:var(--surface);box-shadow:var(--arete)}
+.rule b{display:block;font:500 1.1rem var(--f-titre);letter-spacing:-.015em;margin-bottom:6px}
+.rule p{font-size:13.5px;color:var(--ivoire-2)}
+[data-v]{transition:opacity .4s var(--ease)}
+@media (max-width:1020px){.bord{grid-template-columns:minmax(0,1fr)}.rules{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.vrow{grid-template-columns:minmax(0,1fr)}.rules{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:1020px){
   .plan,.cost,.qgrid,.g4{grid-template-columns:minmax(0,1fr)}
   .panel{position:static}
@@ -246,6 +276,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
     <a class="logo" href="#top"><img alt="" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiPjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iZyIgY3g9IjAuNSIgY3k9IjAuMyIgZng9IjAuNSIgZnk9IjAuMyIgcj0iMS4wMiI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RjZmYzYSIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjYzdlYjAwIi8+PHN0b3Agb2Zmc2V0PSI3NSUiIHN0b3AtY29sb3I9IiM4ZmQxOGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0M2IzYTMiLz48L3JhZGlhbEdyYWRpZW50PjxtYXNrIGlkPSJtIj48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjZmZmIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTAwLDUwMCkgc2NhbGUoMC43MDAwKSB0cmFuc2xhdGUoLTUwMCwtMjc2LjUpIj48cGF0aCBkPSJNMCw1NTMgUTEzNC44LDI4MC4zIDI1MywwIEw1MDAsMjMwIEwxNzYsNTUzIFogTTEwMDAsNTUzIFE4NjUuMiwyODAuMyA3NDcsMCBMNTAwLDIzMCBMODI0LDU1MyBaIiBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48L2c+PC9tYXNrPjwvZGVmcz48cGF0aCBkPSJNMjU5LjgsMjYuMiBMMjY0LjMsMjUuMSBMMjY4LjksMjQuMSBMMjczLjUsMjMuMSBMMjc4LjEsMjIuMSBMMjgyLjcsMjEuMiBMMjg3LjMsMjAuMiBMMjkxLjksMTkuMyBMMjk2LjUsMTguNSBMMzAxLjEsMTcuNiBMMzA1LjcsMTYuOCBMMzEwLjMsMTYgTDMxNSwxNS4yIEwzMTkuNiwxNC40IEwzMjQuMiwxMy43IEwzMjguOSwxMyBMMzMzLjUsMTIuMyBMMzM4LjEsMTEuNiBMMzQyLjgsMTAuOSBMMzQ3LjQsMTAuMyBMMzUyLjEsOS43IEwzNTYuOCw5LjEgTDM2MS40LDguNSBMMzY2LjEsNy45IEwzNzAuNyw3LjQgTDM3NS40LDYuOSBMMzgwLjEsNi4zIEwzODQuNyw1LjkgTDM4OS40LDUuNCBMMzk0LjEsNC45IEwzOTguOCw0LjUgTDQwMy41LDQuMSBMNDA4LjEsMy43IEw0MTIuOCwzLjQgTDQxNy41LDMgTDQyMi4yLDIuNyBMNDI2LjksMi40IEw0MzEuNiwyLjEgTDQzNi4yLDEuOCBMNDQwLjksMS41IEw0NDUuNiwxLjMgTDQ1MC4zLDEuMSBMNDU1LDAuOSBMNDU5LjcsMC43IEw0NjQuNCwwLjYgTDQ2OS4xLDAuNCBMNDczLjgsMC4zIEw0NzguNSwwLjIgTDQ4My4yLDAuMSBMNDg3LjksMC4xIEw0OTIuNiwwIEw0OTcuMywwIEw1MDIsMCBMNTA2LjYsMCBMNTExLjMsMC4xIEw1MTYsMC4xIEw1MjAuNywwLjIgTDUyNS40LDAuMyBMNTMwLjEsMC40IEw1MzQuOCwwLjUgTDUzOS41LDAuNyBMNTQ0LjIsMC45IEw1NDguOSwxLjEgTDU1My42LDEuMyBMNTU4LjMsMS41IEw1NjMsMS43IEw1NjcuNywyIEw1NzIuMywyLjMgTDU3NywyLjYgTDU4MS43LDIuOSBMNTg2LjQsMy4zIEw1OTEuMSwzLjcgTDU5NS44LDQgTDYwMC40LDQuNSBMNjA1LjEsNC45IEw2MDkuOCw1LjMgTDYxNC41LDUuOCBMNjE5LjEsNi4zIEw2MjMuOCw2LjggTDYyOC41LDcuMyBMNjMzLjEsNy44IEw2MzcuOCw4LjQgTDY0Mi41LDkgTDY0Ny4xLDkuNiBMNjUxLjgsMTAuMiBMNjU2LjQsMTAuOCBMNjYxLjEsMTEuNSBMNjY1LjcsMTIuMiBMNjcwLjQsMTIuOSBMNjc1LDEzLjYgTDY3OS42LDE0LjMgTDY4NC4zLDE1LjEgTDY4OC45LDE1LjkgTDY5My41LDE2LjcgTDY5OC4xLDE3LjUgTDcwMi44LDE4LjMgTDcwNy40LDE5LjIgTDcxMiwyMC4xIEw3MTYuNiwyMSBMNzIxLjIsMjIgTDcyNS44LDIyLjkgTDczMC4zLDIzLjkgTDczNC45LDI0LjkgTDczOS41LDI2IEw3NDQsMjcuMSBMNzQ4LjYsMjguMiBMNzUzLjEsMjkuMyBMNzU3LjYsMzAuNSBMNzYyLjIsMzEuNyBMNzY2LjcsMzMgTDc3MS4xLDM0LjMgTDc3NS42LDM1LjYgTDc4MC4xLDM3IEw3ODQuNSwzOC40IEw3ODguOSwzOS44IEw3OTMuMyw0MS4zIEw3OTcuNyw0Mi44IEw4MDIuMSw0NC40IEw4MDYuNCw0Ni4xIEw4MTAuNyw0Ny44IEw4MTUsNDkuNSBMODE5LjMsNTEuMyBMODIzLjUsNTMuMiBMODI3LjcsNTUuMSBMODMxLjksNTcuMSBMODM2LDU5LjEgTDg0MC4xLDYxLjIgTDg0NC4xLDYzLjQgTDg0OC4xLDY1LjYgTDg1Mi4xLDY3LjkgTDg1Niw3MC4zIEw4NTkuOSw3Mi43IEw4NjMuNyw3NS4yIEw4NjcuNCw3Ny44IEw4NzEuMSw4MC40IEw4NzQuOCw4My4xIEw4NzguNCw4NS45IEw4ODEuOSw4OC43IEw4ODUuNCw5MS43IEw4ODguOCw5NC43IEw4OTIuMSw5Ny43IEw4OTUuNCwxMDAuOSBMODk4LjYsMTA0LjEgTDkwMS44LDEwNy4zIEw5MDQuOCwxMTAuNyBMOTA3LjgsMTE0IEw5MTAuOCwxMTcuNSBMOTEzLjYsMTIxIEw5MTYuNCwxMjQuNiBMOTE5LjEsMTI4LjMgTDkyMS44LDEzMS45IEw5MjQuNCwxMzUuNyBMOTI2LjksMTM5LjUgTDkyOS4zLDE0My40IEw5MzEuNywxNDcuMyBMOTM0LDE1MS4yIEw5MzYuMywxNTUuMiBMOTM4LjQsMTU5LjIgTDk0MC41LDE2My4zIEw5NDIuNiwxNjcuNCBMOTQ0LjYsMTcxLjYgTDk0Ni41LDE3NS44IEw5NDguNCwxODAgTDk1MC4yLDE4NC4zIEw5NTEuOSwxODguNSBMOTUzLjYsMTkyLjggTDk1NS4zLDE5Ny4yIEw5NTYuOSwyMDEuNSBMOTU4LjQsMjA1LjkgTDk1OS45LDIxMC4zIEw5NjEuNCwyMTQuNyBMOTYyLjgsMjE5LjIgTDk2NC4yLDIyMy42IEw5NjUuNSwyMjguMSBMOTY2LjgsMjMyLjYgTDk2OC4xLDIzNy4xIEw5NjkuMywyNDEuNiBMOTcwLjUsMjQ2LjEgTDk3MS42LDI1MC43IEw5NzIuNywyNTUuMiBMOTczLjgsMjU5LjggTDk3NC45LDI2NC4zIEw5NzUuOSwyNjguOSBMOTc2LjksMjczLjUgTDk3Ny45LDI3OC4xIEw5NzguOCwyODIuNyBMOTc5LjgsMjg3LjMgTDk4MC43LDI5MS45IEw5ODEuNSwyOTYuNSBMOTgyLjQsMzAxLjEgTDk4My4yLDMwNS43IEw5ODQsMzEwLjMgTDk4NC44LDMxNSBMOTg1LjYsMzE5LjYgTDk4Ni4zLDMyNC4yIEw5ODcsMzI4LjkgTDk4Ny43LDMzMy41IEw5ODguNCwzMzguMSBMOTg5LjEsMzQyLjggTDk4OS43LDM0Ny40IEw5OTAuMywzNTIuMSBMOTkwLjksMzU2LjggTDk5MS41LDM2MS40IEw5OTIuMSwzNjYuMSBMOTkyLjYsMzcwLjcgTDk5My4xLDM3NS40IEw5OTMuNywzODAuMSBMOTk0LjEsMzg0LjcgTDk5NC42LDM4OS40IEw5OTUuMSwzOTQuMSBMOTk1LjUsMzk4LjggTDk5NS45LDQwMy41IEw5OTYuMyw0MDguMSBMOTk2LjYsNDEyLjggTDk5Nyw0MTcuNSBMOTk3LjMsNDIyLjIgTDk5Ny42LDQyNi45IEw5OTcuOSw0MzEuNiBMOTk4LjIsNDM2LjIgTDk5OC41LDQ0MC45IEw5OTguNyw0NDUuNiBMOTk4LjksNDUwLjMgTDk5OS4xLDQ1NSBMOTk5LjMsNDU5LjcgTDk5OS40LDQ2NC40IEw5OTkuNiw0NjkuMSBMOTk5LjcsNDczLjggTDk5OS44LDQ3OC41IEw5OTkuOSw0ODMuMiBMOTk5LjksNDg3LjkgTDEwMDAsNDkyLjYgTDEwMDAsNDk3LjMgTDEwMDAsNTAyIEwxMDAwLDUwNi42IEw5OTkuOSw1MTEuMyBMOTk5LjksNTE2IEw5OTkuOCw1MjAuNyBMOTk5LjcsNTI1LjQgTDk5OS42LDUzMC4xIEw5OTkuNSw1MzQuOCBMOTk5LjMsNTM5LjUgTDk5OS4xLDU0NC4yIEw5OTguOSw1NDguOSBMOTk4LjcsNTUzLjYgTDk5OC41LDU1OC4zIEw5OTguMyw1NjMgTDk5OCw1NjcuNyBMOTk3LjcsNTcyLjMgTDk5Ny40LDU3NyBMOTk3LjEsNTgxLjcgTDk5Ni43LDU4Ni40IEw5OTYuMyw1OTEuMSBMOTk2LDU5NS44IEw5OTUuNSw2MDAuNCBMOTk1LjEsNjA1LjEgTDk5NC43LDYwOS44IEw5OTQuMiw2MTQuNSBMOTkzLjcsNjE5LjEgTDk5My4yLDYyMy44IEw5OTIuNyw2MjguNSBMOTkyLjIsNjMzLjEgTDk5MS42LDYzNy44IEw5OTEsNjQyLjUgTDk5MC40LDY0Ny4xIEw5ODkuOCw2NTEuOCBMOTg5LjIsNjU2LjQgTDk4OC41LDY2MS4xIEw5ODcuOCw2NjUuNyBMOTg3LjEsNjcwLjQgTDk4Ni40LDY3NSBMOTg1LjcsNjc5LjYgTDk4NC45LDY4NC4zIEw5ODQuMSw2ODguOSBMOTgzLjMsNjkzLjUgTDk4Mi41LDY5OC4xIEw5ODEuNyw3MDIuOCBMOTgwLjgsNzA3LjQgTDk3OS45LDcxMiBMOTc5LDcxNi42IEw5NzgsNzIxLjIgTDk3Ny4xLDcyNS44IEw5NzYuMSw3MzAuMyBMOTc1LjEsNzM0LjkgTDk3NCw3MzkuNSBMOTcyLjksNzQ0IEw5NzEuOCw3NDguNiBMOTcwLjcsNzUzLjEgTDk2OS41LDc1Ny42IEw5NjguMyw3NjIuMiBMOTY3LDc2Ni43IEw5NjUuNyw3NzEuMSBMOTY0LjQsNzc1LjYgTDk2Myw3ODAuMSBMOTYxLjYsNzg0LjUgTDk2MC4yLDc4OC45IEw5NTguNyw3OTMuMyBMOTU3LjIsNzk3LjcgTDk1NS42LDgwMi4xIEw5NTMuOSw4MDYuNCBMOTUyLjIsODEwLjcgTDk1MC41LDgxNSBMOTQ4LjcsODE5LjMgTDk0Ni44LDgyMy41IEw5NDQuOSw4MjcuNyBMOTQyLjksODMxLjkgTDk0MC45LDgzNiBMOTM4LjgsODQwLjEgTDkzNi42LDg0NC4xIEw5MzQuNCw4NDguMSBMOTMyLjEsODUyLjEgTDkyOS43LDg1NiBMOTI3LjMsODU5LjkgTDkyNC44LDg2My43IEw5MjIuMiw4NjcuNCBMOTE5LjYsODcxLjEgTDkxNi45LDg3NC44IEw5MTQuMSw4NzguNCBMOTExLjMsODgxLjkgTDkwOC4zLDg4NS40IEw5MDUuMyw4ODguOCBMOTAyLjMsODkyLjEgTDg5OS4xLDg5NS40IEw4OTUuOSw4OTguNiBMODkyLjcsOTAxLjggTDg4OS4zLDkwNC44IEw4ODYsOTA3LjggTDg4Mi41LDkxMC44IEw4NzksOTEzLjYgTDg3NS40LDkxNi40IEw4NzEuNyw5MTkuMSBMODY4LjEsOTIxLjggTDg2NC4zLDkyNC40IEw4NjAuNSw5MjYuOSBMODU2LjYsOTI5LjMgTDg1Mi43LDkzMS43IEw4NDguOCw5MzQgTDg0NC44LDkzNi4zIEw4NDAuOCw5MzguNCBMODM2LjcsOTQwLjUgTDgzMi42LDk0Mi42IEw4MjguNCw5NDQuNiBMODI0LjIsOTQ2LjUgTDgyMCw5NDguNCBMODE1LjcsOTUwLjIgTDgxMS41LDk1MS45IEw4MDcuMiw5NTMuNiBMODAyLjgsOTU1LjMgTDc5OC41LDk1Ni45IEw3OTQuMSw5NTguNCBMNzg5LjcsOTU5LjkgTDc4NS4zLDk2MS40IEw3ODAuOCw5NjIuOCBMNzc2LjQsOTY0LjIgTDc3MS45LDk2NS41IEw3NjcuNCw5NjYuOCBMNzYyLjksOTY4LjEgTDc1OC40LDk2OS4zIEw3NTMuOSw5NzAuNSBMNzQ5LjMsOTcxLjYgTDc0NC44LDk3Mi43IEw3NDAuMiw5NzMuOCBMNzM1LjcsOTc0LjkgTDczMS4xLDk3NS45IEw3MjYuNSw5NzYuOSBMNzIxLjksOTc3LjkgTDcxNy4zLDk3OC44IEw3MTIuNyw5NzkuOCBMNzA4LjEsOTgwLjcgTDcwMy41LDk4MS41IEw2OTguOSw5ODIuNCBMNjk0LjMsOTgzLjIgTDY4OS43LDk4NCBMNjg1LDk4NC44IEw2ODAuNCw5ODUuNiBMNjc1LjgsOTg2LjMgTDY3MS4xLDk4NyBMNjY2LjUsOTg3LjcgTDY2MS45LDk4OC40IEw2NTcuMiw5ODkuMSBMNjUyLjYsOTg5LjcgTDY0Ny45LDk5MC4zIEw2NDMuMiw5OTAuOSBMNjM4LjYsOTkxLjUgTDYzMy45LDk5Mi4xIEw2MjkuMyw5OTIuNiBMNjI0LjYsOTkzLjEgTDYxOS45LDk5My43IEw2MTUuMyw5OTQuMSBMNjEwLjYsOTk0LjYgTDYwNS45LDk5NS4xIEw2MDEuMiw5OTUuNSBMNTk2LjUsOTk1LjkgTDU5MS45LDk5Ni4zIEw1ODcuMiw5OTYuNiBMNTgyLjUsOTk3IEw1NzcuOCw5OTcuMyBMNTczLjEsOTk3LjYgTDU2OC40LDk5Ny45IEw1NjMuOCw5OTguMiBMNTU5LjEsOTk4LjUgTDU1NC40LDk5OC43IEw1NDkuNyw5OTguOSBMNTQ1LDk5OS4xIEw1NDAuMyw5OTkuMyBMNTM1LjYsOTk5LjQgTDUzMC45LDk5OS42IEw1MjYuMiw5OTkuNyBMNTIxLjUsOTk5LjggTDUxNi44LDk5OS45IEw1MTIuMSw5OTkuOSBMNTA3LjQsMTAwMCBMNTAyLjcsMTAwMCBMNDk4LDEwMDAgTDQ5My40LDEwMDAgTDQ4OC43LDk5OS45IEw0ODQsOTk5LjkgTDQ3OS4zLDk5OS44IEw0NzQuNiw5OTkuNyBMNDY5LjksOTk5LjYgTDQ2NS4yLDk5OS41IEw0NjAuNSw5OTkuMyBMNDU1LjgsOTk5LjEgTDQ1MS4xLDk5OC45IEw0NDYuNCw5OTguNyBMNDQxLjcsOTk4LjUgTDQzNyw5OTguMyBMNDMyLjMsOTk4IEw0MjcuNyw5OTcuNyBMNDIzLDk5Ny40IEw0MTguMyw5OTcuMSBMNDEzLjYsOTk2LjcgTDQwOC45LDk5Ni4zIEw0MDQuMiw5OTYgTDM5OS42LDk5NS41IEwzOTQuOSw5OTUuMSBMMzkwLjIsOTk0LjcgTDM4NS41LDk5NC4yIEwzODAuOSw5OTMuNyBMMzc2LjIsOTkzLjIgTDM3MS41LDk5Mi43IEwzNjYuOSw5OTIuMiBMMzYyLjIsOTkxLjYgTDM1Ny41LDk5MSBMMzUyLjksOTkwLjQgTDM0OC4yLDk4OS44IEwzNDMuNiw5ODkuMiBMMzM4LjksOTg4LjUgTDMzNC4zLDk4Ny44IEwzMjkuNiw5ODcuMSBMMzI1LDk4Ni40IEwzMjAuNCw5ODUuNyBMMzE1LjcsOTg0LjkgTDMxMS4xLDk4NC4xIEwzMDYuNSw5ODMuMyBMMzAxLjksOTgyLjUgTDI5Ny4yLDk4MS43IEwyOTIuNiw5ODAuOCBMMjg4LDk3OS45IEwyODMuNCw5NzkgTDI3OC44LDk3OCBMMjc0LjIsOTc3LjEgTDI2OS43LDk3Ni4xIEwyNjUuMSw5NzUuMSBMMjYwLjUsOTc0IEwyNTYsOTcyLjkgTDI1MS40LDk3MS44IEwyNDYuOSw5NzAuNyBMMjQyLjQsOTY5LjUgTDIzNy44LDk2OC4zIEwyMzMuMyw5NjcgTDIyOC45LDk2NS43IEwyMjQuNCw5NjQuNCBMMjE5LjksOTYzIEwyMTUuNSw5NjEuNiBMMjExLjEsOTYwLjIgTDIwNi43LDk1OC43IEwyMDIuMyw5NTcuMiBMMTk3LjksOTU1LjYgTDE5My42LDk1My45IEwxODkuMyw5NTIuMiBMMTg1LDk1MC41IEwxODAuNyw5NDguNyBMMTc2LjUsOTQ2LjggTDE3Mi4zLDk0NC45IEwxNjguMSw5NDIuOSBMMTY0LDk0MC45IEwxNTkuOSw5MzguOCBMMTU1LjksOTM2LjYgTDE1MS45LDkzNC40IEwxNDcuOSw5MzIuMSBMMTQ0LDkyOS43IEwxNDAuMSw5MjcuMyBMMTM2LjMsOTI0LjggTDEzMi42LDkyMi4yIEwxMjguOSw5MTkuNiBMMTI1LjIsOTE2LjkgTDEyMS42LDkxNC4xIEwxMTguMSw5MTEuMyBMMTE0LjYsOTA4LjMgTDExMS4yLDkwNS4zIEwxMDcuOSw5MDIuMyBMMTA0LjYsODk5LjEgTDEwMS40LDg5NS45IEw5OC4yLDg5Mi43IEw5NS4yLDg4OS4zIEw5Mi4yLDg4NiBMODkuMiw4ODIuNSBMODYuNCw4NzkgTDgzLjYsODc1LjQgTDgwLjksODcxLjcgTDc4LjIsODY4LjEgTDc1LjYsODY0LjMgTDczLjEsODYwLjUgTDcwLjcsODU2LjYgTDY4LjMsODUyLjcgTDY2LDg0OC44IEw2My43LDg0NC44IEw2MS42LDg0MC44IEw1OS41LDgzNi43IEw1Ny40LDgzMi42IEw1NS40LDgyOC40IEw1My41LDgyNC4yIEw1MS42LDgyMCBMNDkuOCw4MTUuNyBMNDguMSw4MTEuNSBMNDYuNCw4MDcuMiBMNDQuNyw4MDIuOCBMNDMuMSw3OTguNSBMNDEuNiw3OTQuMSBMNDAuMSw3ODkuNyBMMzguNiw3ODUuMyBMMzcuMiw3ODAuOCBMMzUuOCw3NzYuNCBMMzQuNSw3NzEuOSBMMzMuMiw3NjcuNCBMMzEuOSw3NjIuOSBMMzAuNyw3NTguNCBMMjkuNSw3NTMuOSBMMjguNCw3NDkuMyBMMjcuMyw3NDQuOCBMMjYuMiw3NDAuMiBMMjUuMSw3MzUuNyBMMjQuMSw3MzEuMSBMMjMuMSw3MjYuNSBMMjIuMSw3MjEuOSBMMjEuMiw3MTcuMyBMMjAuMiw3MTIuNyBMMTkuMyw3MDguMSBMMTguNSw3MDMuNSBMMTcuNiw2OTguOSBMMTYuOCw2OTQuMyBMMTYsNjg5LjcgTDE1LjIsNjg1IEwxNC40LDY4MC40IEwxMy43LDY3NS44IEwxMyw2NzEuMSBMMTIuMyw2NjYuNSBMMTEuNiw2NjEuOSBMMTAuOSw2NTcuMiBMMTAuMyw2NTIuNiBMOS43LDY0Ny45IEw5LjEsNjQzLjIgTDguNSw2MzguNiBMNy45LDYzMy45IEw3LjQsNjI5LjMgTDYuOSw2MjQuNiBMNi4zLDYxOS45IEw1LjksNjE1LjMgTDUuNCw2MTAuNiBMNC45LDYwNS45IEw0LjUsNjAxLjIgTDQuMSw1OTYuNSBMMy43LDU5MS45IEwzLjQsNTg3LjIgTDMsNTgyLjUgTDIuNyw1NzcuOCBMMi40LDU3My4xIEwyLjEsNTY4LjQgTDEuOCw1NjMuOCBMMS41LDU1OS4xIEwxLjMsNTU0LjQgTDEuMSw1NDkuNyBMMC45LDU0NSBMMC43LDU0MC4zIEwwLjYsNTM1LjYgTDAuNCw1MzAuOSBMMC4zLDUyNi4yIEwwLjIsNTIxLjUgTDAuMSw1MTYuOCBMMC4xLDUxMi4xIEwwLDUwNy40IEwwLDUwMi43IEwwLDQ5OCBMMCw0OTMuNCBMMC4xLDQ4OC43IEwwLjEsNDg0IEwwLjIsNDc5LjMgTDAuMyw0NzQuNiBMMC40LDQ2OS45IEwwLjUsNDY1LjIgTDAuNyw0NjAuNSBMMC45LDQ1NS44IEwxLjEsNDUxLjEgTDEuMyw0NDYuNCBMMS41LDQ0MS43IEwxLjcsNDM3IEwyLDQzMi4zIEwyLjMsNDI3LjcgTDIuNiw0MjMgTDIuOSw0MTguMyBMMy4zLDQxMy42IEwzLjcsNDA4LjkgTDQsNDA0LjIgTDQuNSwzOTkuNiBMNC45LDM5NC45IEw1LjMsMzkwLjIgTDUuOCwzODUuNSBMNi4zLDM4MC45IEw2LjgsMzc2LjIgTDcuMywzNzEuNSBMNy44LDM2Ni45IEw4LjQsMzYyLjIgTDksMzU3LjUgTDkuNiwzNTIuOSBMMTAuMiwzNDguMiBMMTAuOCwzNDMuNiBMMTEuNSwzMzguOSBMMTIuMiwzMzQuMyBMMTIuOSwzMjkuNiBMMTMuNiwzMjUgTDE0LjMsMzIwLjQgTDE1LjEsMzE1LjcgTDE1LjksMzExLjEgTDE2LjcsMzA2LjUgTDE3LjUsMzAxLjkgTDE4LjMsMjk3LjIgTDE5LjIsMjkyLjYgTDIwLjEsMjg4IEwyMSwyODMuNCBMMjIsMjc4LjggTDIyLjksMjc0LjIgTDIzLjksMjY5LjcgTDI0LjksMjY1LjEgTDI2LDI2MC41IEwyNy4xLDI1NiBMMjguMiwyNTEuNCBMMjkuMywyNDYuOSBMMzAuNSwyNDIuNCBMMzEuNywyMzcuOCBMMzMsMjMzLjMgTDM0LjMsMjI4LjkgTDM1LjYsMjI0LjQgTDM3LDIxOS45IEwzOC40LDIxNS41IEwzOS44LDIxMS4xIEw0MS4zLDIwNi43IEw0Mi44LDIwMi4zIEw0NC40LDE5Ny45IEw0Ni4xLDE5My42IEw0Ny44LDE4OS4zIEw0OS41LDE4NSBMNTEuMywxODAuNyBMNTMuMiwxNzYuNSBMNTUuMSwxNzIuMyBMNTcuMSwxNjguMSBMNTkuMSwxNjQgTDYxLjIsMTU5LjkgTDYzLjQsMTU1LjkgTDY1LjYsMTUxLjkgTDY3LjksMTQ3LjkgTDcwLjMsMTQ0IEw3Mi43LDE0MC4xIEw3NS4yLDEzNi4zIEw3Ny44LDEzMi42IEw4MC40LDEyOC45IEw4My4xLDEyNS4yIEw4NS45LDEyMS42IEw4OC43LDExOC4xIEw5MS43LDExNC42IEw5NC43LDExMS4yIEw5Ny43LDEwNy45IEwxMDAuOSwxMDQuNiBMMTA0LjEsMTAxLjQgTDEwNy4zLDk4LjIgTDExMC43LDk1LjIgTDExNCw5Mi4yIEwxMTcuNSw4OS4yIEwxMjEsODYuNCBMMTI0LjYsODMuNiBMMTI4LjMsODAuOSBMMTMxLjksNzguMiBMMTM1LjcsNzUuNiBMMTM5LjUsNzMuMSBMMTQzLjQsNzAuNyBMMTQ3LjMsNjguMyBMMTUxLjIsNjYgTDE1NS4yLDYzLjcgTDE1OS4yLDYxLjYgTDE2My4zLDU5LjUgTDE2Ny40LDU3LjQgTDE3MS42LDU1LjQgTDE3NS44LDUzLjUgTDE4MCw1MS42IEwxODQuMyw0OS44IEwxODguNSw0OC4xIEwxOTIuOCw0Ni40IEwxOTcuMiw0NC43IEwyMDEuNSw0My4xIEwyMDUuOSw0MS42IEwyMTAuMyw0MC4xIEwyMTQuNywzOC42IEwyMTkuMiwzNy4yIEwyMjMuNiwzNS44IEwyMjguMSwzNC41IEwyMzIuNiwzMy4yIEwyMzcuMSwzMS45IEwyNDEuNiwzMC43IEwyNDYuMSwyOS41IEwyNTAuNywyOC40IEwyNTUuMiwyNy4zWiIgZmlsbD0idXJsKCNnKSIgbWFzaz0idXJsKCNtKSIvPjwvc3ZnPg=="><span class="nom">meridia</span><span class="sep nom">/</span><span class="nom">AIregatta</span></a>
     <ul>
       <li><a class="l" href="#plan">Plan d’eau</a></li>
+      <li><a class="l" href="#bord">À bord</a></li>
       <li><a class="l" href="#liaisons">Liaisons</a></li>
       <li><a class="l" href="#materiel">Matériel</a></li>
       <li><a class="l" href="#etat">État</a></li>
@@ -277,7 +308,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
   <div class="wrap">
     <div class="sec-head">
       <div><p class="meta">01 · Le dispositif</p><h2>Sur le <em>plan d’eau</em></h2></div>
-      <p class="muted">Plan à l’échelle de l’anse du Mourillon, entre le Fort Saint-Louis et la petite digue. Cliquez sur un élément pour voir son rôle, son matériel et ses liaisons, et activez les flux pour voir qui parle à qui. Animation ralentie : en réalité, chaque balise émet 10 fois par seconde.</p>
+      <p class="muted">Plan à l’échelle de l’anse du Mourillon, entre le Fort Saint-Louis et la petite digue, avec un vent d’ouest : bouée au vent côté Fort, porte sous le vent côté anse Mistral. Cliquez sur un élément pour voir son rôle, son matériel et ses liaisons, et activez les flux pour voir qui parle à qui. Animation ralentie : en réalité, chaque balise émet 10 fois par seconde.</p>
     </div>
     <div class="plan">
       <div class="carte map">
@@ -315,14 +346,14 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
           <text class="sub" x="640" y="122" transform="rotate(27 640 122)">petite digue</text>
           <text class="sub" x="905" y="190">anse Mistral</text>
           <!-- vent -->
-          <g transform="translate(104,500)">
+          <g transform="translate(190,530)">
             <circle r="40" fill="rgba(9,11,7,.7)" stroke="var(--filet)"/>
-            <g transform="rotate(-61)"><path d="M0 26 L0 -22 M-8 -12 L0 -22 L8 -12" stroke="var(--ivoire)" stroke-width="2.5" fill="none" stroke-linecap="round"/></g>
-            <text class="lbl" x="0" y="62" text-anchor="middle">Vent de SE</text>
-            <text class="sub" x="0" y="77" text-anchor="middle">exemple</text>
+            <g transform="rotate(90)"><path d="M0 26 L0 -22 M-8 -12 L0 -22 L8 -12" stroke="var(--ivoire)" stroke-width="2.5" fill="none" stroke-linecap="round"/></g>
+            <text class="lbl" x="60" y="5">Vent d’ouest</text>
+            <text class="sub" x="60" y="20">bouée au vent côté Fort</text>
           </g>
           <!-- échelle -->
-          <g transform="translate(420,580)">
+          <g transform="translate(560,580)">
             <path d="M0 0H156" stroke="var(--ivoire)" stroke-width="2"/><path d="M0 -5V5M156 -5V5M78 -3V3" stroke="var(--ivoire)" stroke-width="2"/>
             <text class="sub" x="78" y="-10" text-anchor="middle">50 m</text>
           </g>
@@ -381,10 +412,108 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
   </div>
 </section>
 
+<section id="bord">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="meta">02 · Installation dans le bateau</p><h2>La balise <em>à bord</em></h2></div>
+      <div style="display:grid;gap:14px"><p class="muted">Le poids reste en bas : batterie et électronique dans un boîtier posé au fond, près de la quille. Seules les antennes, légères, montent sous le pont ou dessus. Choisissez la matière de la coque.</p>
+      <div class="seg" role="group" aria-label="Matière de la coque"><button type="button" data-mat="fibre" aria-pressed="true">Fibre de verre ou bois</button><button type="button" data-mat="carbone" aria-pressed="false">Carbone</button></div></div>
+    </div>
+    <div class="bord">
+      <div class="carte views">
+        <div class="vrow">
+          <div>
+            <p class="cap">Vue de profil</p>
+            <svg viewBox="90 0 720 400" role="img" aria-label="Profil du bateau avec l’emplacement de la balise et des antennes">
+              <defs><linearGradient id="eau" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(14,90,82,.55)"/><stop offset="1" stop-color="rgba(14,90,82,.08)"/></linearGradient></defs>
+              <rect x="0" y="250" width="880" height="150" fill="url(#eau)"/>
+              <line x1="0" y1="250" x2="880" y2="250" stroke="#43B3A3" stroke-width="1.5" stroke-dasharray="6 5"/>
+              <text class="sub" x="100" y="243">flottaison</text>
+              <path d="M364 18 L364 200 L610 204 Z" fill="rgba(238,240,228,.05)" stroke="rgba(238,240,228,.15)"/>
+              <path d="M354 44 L186 206 L348 206 Z" fill="rgba(238,240,228,.04)" stroke="rgba(238,240,228,.12)"/>
+              <line x1="360" y1="208" x2="360" y2="10" stroke-width="5" data-mast stroke="rgba(238,240,228,.55)"/>
+              <path d="M425 283 L455 283 L470 372 L440 372 Z" fill="var(--nuit-3)" stroke="rgba(238,240,228,.35)"/>
+              <ellipse cx="455" cy="380" rx="62" ry="13" fill="#2A3022" stroke="rgba(238,240,228,.35)"/>
+              <path d="M715 262 L735 262 L742 332 L726 332 Z" fill="var(--nuit-3)" stroke="rgba(238,240,228,.35)"/>
+              <path id="coque" d="M120 214 Q440 204 765 222 L762 252 Q600 284 440 286 Q260 282 150 250 Z" fill="rgba(238,240,228,.07)" stroke="var(--ivoire)" stroke-width="2.5"/>
+              <!-- boîtier bas -->
+              <rect x="398" y="246" width="94" height="28" rx="6" fill="var(--lime)" stroke="var(--nuit)" stroke-width="2"/>
+              <text x="445" y="265" text-anchor="middle" style="font:600 12px var(--f-titre);fill:var(--nuit)">BOÎTIER</text>
+              <!-- fibre -->
+              <g data-v="fibre">
+                <path d="M470 246 C480 230 505 226 520 226 M480 246 C500 232 580 228 612 222 M410 246 C380 230 320 224 280 219" fill="none" stroke="rgba(199,235,0,.6)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <rect x="505" y="214" width="30" height="11" rx="3" fill="#DCFF3A"/>
+                <rect x="588" y="216" width="50" height="5" rx="2" fill="#8FD18A"/>
+                <rect x="250" y="215" width="50" height="5" rx="2" fill="#D9C38A"/>
+              </g>
+              <!-- carbone -->
+              <g data-v="carbone" opacity="0">
+                <path d="M470 246 C480 232 512 226 520 212 M482 246 C520 232 596 226 600 214 M492 254 C560 240 618 228 622 214" fill="none" stroke="rgba(199,235,0,.6)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <rect x="503" y="194" width="34" height="16" rx="8" fill="#DCFF3A" stroke="var(--nuit)" stroke-width="2"/>
+                <line x1="600" y1="212" x2="600" y2="168" stroke="#8FD18A" stroke-width="4" stroke-linecap="round"/>
+                <line x1="622" y1="212" x2="622" y2="178" stroke="#D9C38A" stroke-width="4" stroke-linecap="round"/>
+                <rect x="490" y="204" width="150" height="10" rx="3" fill="none" stroke="var(--lime)" stroke-dasharray="4 4" opacity=".7"/>
+                <circle cx="520" cy="212" r="3" fill="var(--ivoire)"/><circle cx="600" cy="213" r="3" fill="var(--ivoire)"/><circle cx="622" cy="213" r="3" fill="var(--ivoire)"/>
+              </g>
+              <!-- repères -->
+              <g class="callout">
+                <g data-v="fibre"><circle cx="520" cy="190" r="11"/><text x="520" y="194" text-anchor="middle">1</text><line x1="520" y1="201" x2="520" y2="213" stroke="var(--lime)"/>
+                  <circle cx="613" cy="190" r="11"/><text x="613" y="194" text-anchor="middle">2</text><line x1="613" y1="201" x2="613" y2="215" stroke="var(--lime)"/>
+                  <circle cx="275" cy="190" r="11"/><text x="275" y="194" text-anchor="middle">3</text><line x1="275" y1="201" x2="275" y2="214" stroke="var(--lime)"/></g>
+                <g data-v="carbone" opacity="0"><circle cx="520" cy="168" r="11"/><text x="520" y="172" text-anchor="middle">1</text><line x1="520" y1="179" x2="520" y2="193" stroke="var(--lime)"/>
+                  <circle cx="574" cy="150" r="11"/><text x="574" y="154" text-anchor="middle">2</text><line x1="583" y1="156" x2="598" y2="168" stroke="var(--lime)"/>
+                  <circle cx="650" cy="160" r="11"/><text x="650" y="164" text-anchor="middle">3</text><line x1="641" y1="167" x2="624" y2="178" stroke="var(--lime)"/>
+                  <circle cx="680" cy="196" r="11"/><text x="680" y="200" text-anchor="middle">5</text><line x1="669" y1="200" x2="642" y2="208" stroke="var(--lime)"/></g>
+                <circle cx="540" cy="318" r="11"/><text x="540" y="322" text-anchor="middle">4</text><line x1="531" y1="311" x2="492" y2="270" stroke="var(--lime)"/>
+              </g>
+            </svg>
+          </div>
+          <div class="heel">
+           <div>
+            <p class="cap">À la gîte (25°)</p>
+            <svg viewBox="0 0 300 400" role="img" aria-label="Coupe du bateau gîté : une antenne sur le côté passe sous l’eau">
+              <rect x="0" y="210" width="300" height="190" fill="url(#eau)"/>
+              <line x1="0" y1="210" x2="300" y2="210" stroke="#43B3A3" stroke-width="1.5" stroke-dasharray="6 5"/>
+              <g transform="translate(150,190) rotate(25)">
+                <line x1="0" y1="-30" x2="0" y2="-185" stroke-width="5" data-mast stroke="rgba(238,240,228,.55)"/>
+                <path d="M-6 40 L6 40 L4 150 L-4 150Z" fill="var(--nuit-3)" stroke="rgba(238,240,228,.35)"/>
+                <ellipse cx="0" cy="156" rx="18" ry="11" fill="#2A3022" stroke="rgba(238,240,228,.35)"/>
+                <path data-hull d="M-72 -30 L72 -30 Q74 28 0 42 Q-74 28 -72 -30Z" fill="rgba(238,240,228,.07)" stroke="var(--ivoire)" stroke-width="2.5"/>
+                <rect x="-22" y="14" width="44" height="18" rx="4" fill="var(--lime)" stroke="var(--nuit)" stroke-width="2"/>
+                <rect x="-14" y="-27" width="28" height="7" rx="2" fill="#DCFF3A"/>
+                <g transform="translate(62,8)"><rect x="-4" y="-12" width="8" height="24" rx="2" fill="#E39B7B"/></g>
+              </g>
+              <g>
+                <circle cx="76" cy="120" r="11" fill="var(--nuit)" stroke="var(--lime)" stroke-width="1.5"/><path d="M71 115 L81 125 M71 125 L81 115" stroke="var(--lime)" stroke-width="0"/>
+                <text x="76" y="124" text-anchor="middle" style="font:600 12px var(--f-mono);fill:var(--lime)">✓</text>
+                <line x1="86" y1="126" x2="150" y2="164" stroke="var(--lime)"/>
+                <circle cx="262" cy="270" r="11" fill="var(--nuit)" stroke="#E39B7B" stroke-width="1.5"/>
+                <text x="262" y="274" text-anchor="middle" style="font:600 12px var(--f-mono);fill:#E39B7B">✕</text>
+                <line x1="253" y1="262" x2="215" y2="234" stroke="#E39B7B"/>
+              </g>
+              <text class="sub" x="290" y="330" text-anchor="end">dans l’axe : au sec</text>
+              <text class="sub" x="290" y="346" text-anchor="end">sur le côté : sous l’eau</text>
+            </svg>
+           </div>
+           <p><b>Pourquoi dans l’axe ?</b> Quand le bateau gîte, le côté sous le vent plonge. Une antenne collée sur ce côté se retrouve sous l’eau, et l’eau de mer coupe le GPS, la 4G et la radio. Collées au milieu, juste sous le pont (ou dessus pour le carbone), les antennes restent au sec. Le boîtier, lui, peut être sous la flottaison : seule la position des antennes compte.</p>
+          </div>
+        </div>
+        <div class="rules">
+          <div class="rule"><b>Poids en bas</b><p>Batterie et électronique (≈ 170 g) dans le boîtier au fond, près de la quille. Seules les antennes montent.</p></div>
+          <div class="rule"><b>Antennes dans l’axe</b><p>Au-dessus de la flottaison et au milieu du pont : à la gîte, une antenne placée sur le côté passe sous l’eau, et l’eau de mer coupe toute liaison.</p></div>
+          <div class="rule"><b>Ciel dégagé</b><p>Rien au-dessus de l’antenne GPS : ni batterie, ni servo, ni pièce carbone. À 10–15 cm au moins du mât s’il est en carbone.</p></div>
+          <div class="rule"><b>Position de l’étrave</b><p>Le GPS mesure la position de son antenne. On mesure la distance antenne → étrave au contrôle ; le PC course en déduit l’étrave avec le cap.</p></div>
+        </div>
+      </div>
+      <aside class="carte kv" id="bordPanel" aria-live="polite"></aside>
+    </div>
+  </div>
+</section>
+
 <section id="liaisons">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="meta">02 · Qui parle à qui</p><h2>Les <em>liaisons</em></h2></div>
+      <div><p class="meta">03 · Qui parle à qui</p><h2>Les <em>liaisons</em></h2></div>
       <p class="muted">Les trois flux essentiels sont mis en lumière : chaque bateau envoie sa position au PC course ; le PC course renvoie celle de tous les bateaux à toutes les équipes, au même instant ; chaque équipe pilote son bateau depuis son PC à terre. Les équipes n’échangent jamais de données entre elles.</p>
     </div>
     <div class="flows" id="flows"></div>
@@ -394,7 +523,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
 <section id="materiel">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="meta">03 · Références</p><h2>Le <em>matériel</em></h2></div>
+      <div><p class="meta">04 · Références</p><h2>Le <em>matériel</em></h2></div>
       <div style="display:grid;gap:14px"><p class="muted">Chaque fiche renvoie à la documentation du fabricant et à des retours d’utilisateurs ou tests indépendants. Prix publics constatés fin 2026.</p><div class="filters" id="hwFilters" role="group" aria-label="Filtrer le matériel"></div></div>
     </div>
     <div class="hwgrid" id="hwgrid"></div>
@@ -404,7 +533,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
 <section id="etat">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="meta">04 · Où on en est</p><h2>Ce qui <em>fonctionne</em>, ce qui reste à faire</h2></div>
+      <div><p class="meta">05 · Où on en est</p><h2>Ce qui <em>fonctionne</em>, ce qui reste à faire</h2></div>
       <div class="filters" role="group" aria-label="Filtrer par domaine" id="domFilters"></div>
     </div>
     <div class="board" id="board"></div>
@@ -414,7 +543,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
 <section id="couts">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="meta">05 · Budget</p><h2>Les <em>coûts</em></h2></div>
+      <div><p class="meta">06 · Budget</p><h2>Les <em>coûts</em></h2></div>
       <p class="muted">Prix publics TTC, en ordre de grandeur. Le logiciel, développé en IA agentique, se résume au temps des personnes qui pilotent les agents et aux abonnements.</p>
     </div>
     <div class="cost">
@@ -445,7 +574,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
 <section id="route">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="meta">06 · Novembre 2026 → mai 2027</p><h2>Le <em>calendrier</em></h2></div>
+      <div><p class="meta">07 · Novembre 2026 → mai 2027</p><h2>Le <em>calendrier</em></h2></div>
       <p class="muted">Le logiciel avance vite grâce aux agents. Le rythme est donné par les livraisons de matériel et les sorties sur l’eau. Cliquez sur une barre ou un jalon pour le détail.</p>
     </div>
     <div class="carte gscroll"><div class="gantt" id="gantt"></div></div>
@@ -457,7 +586,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
 <section id="foule">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="meta">07 · Votre question</p><h2>La foule peut-elle gêner la <em>4G</em> ?</h2></div>
+      <div><p class="meta">08 · Votre question</p><h2>La foule peut-elle gêner la <em>4G</em> ?</h2></div>
       <p class="muted">Tous les téléphones du public partagent la même antenne relais que les balises.</p>
     </div>
     <div class="g4">
@@ -489,7 +618,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
 <section id="questions">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="meta">08 · À trancher</p><h2>Questions en <em>suspens</em></h2></div>
+      <div><p class="meta">09 · À trancher</p><h2>Questions en <em>suspens</em></h2></div>
       <p class="muted">Cochez au fur et à mesure ; les coches restent dans votre navigateur.</p>
     </div>
     <div class="qgrid">
@@ -579,7 +708,7 @@ function bindEnt(g){g.addEventListener('click',()=>renderPanel(g.dataset.id));g.
 /* ---------- Parcours ---------- */
 const NS='http://www.w3.org/2000/svg';
 const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
-const G=[236,124],WM=[930,548];
+const G=[915,385],WM=[95,415];
 const L=Math.hypot(WM[0]-G[0],WM[1]-G[1]);const w=[(WM[0]-G[0])/L,(WM[1]-G[1])/L];const pp=[-w[1],w[0]];
 const T=(u,v)=>[G[0]+u*w[0]+v*pp[0],G[1]+u*w[1]+v*pp[1]];
 const gm=$('#marks'),cl=$('#courseLines');
@@ -597,9 +726,9 @@ function mark(x,y,id,r,label,sub,dx,dy){const g=mk('g',{class:'ent','data-id':id
  if(label){const t=mk('text',{class:'lbl',x:x+dx,y:y+dy});t.textContent=label;g.appendChild(t)}
  if(sub){const t=mk('text',{class:'sub',x:x+dx,y:y+dy+15});t.textContent=sub;g.appendChild(t)}
  gm.appendChild(g);bindEnt(g);return g}
-mark(WM[0],WM[1],'bouee',11,'Bouée au vent','GPS + vent',-150,-6);
+mark(WM[0],WM[1],'bouee',11,'Bouée au vent','GPS + vent',-20,44);
 const g1=T(0,-30),g2=T(0,30);
-mark(g1[0],g1[1],'bouee',9,'','',0,0);mark(g2[0],g2[1],'bouee',9,'Porte sous le vent','GPS + vent',14,30);
+mark(g1[0],g1[1],'bouee',9,'','',0,0);mark(g2[0],g2[1],'bouee',9,'Porte sous le vent','GPS + vent',-150,34);
 const lg=mk('g',{class:'ent','data-id':'ligne',tabindex:0,role:'button','aria-label':'Bouées de ligne'});
 [sA,sB].forEach(p=>lg.appendChild(mk('rect',{class:'hl',x:p[0]-7,y:p[1]-7,width:14,height:14,rx:3,fill:'var(--ivoire)',stroke:'var(--nuit)','stroke-width':2})));
 gm.appendChild(lg);bindEnt(lg);
@@ -652,6 +781,32 @@ requestAnimationFrame(loop);
 const pb=$('#playBtn');const pbl=()=>{pb.textContent=playing?'Pause':'Lecture';pb.setAttribute('aria-pressed',String(playing))};pbl();
 pb.addEventListener('click',()=>{playing=!playing;last=null;pbl()});
 renderPanel('balise');
+
+
+/* ---------- À bord ---------- */
+const BORD={
+ fibre:{t:'Fibre de verre ou bois',v:'Tout reste à l’intérieur',d:'Le GPS, la 4G et la radio traversent un pont en fibre de verre, en bois ou en plastique. Rien ne dépasse du bateau.',
+  items:[['1','Antenne GPS hélicoïdale légère','juste sous le pont, à plat, face au ciel, dans l’axe du bateau'],['2','Antenne 4G souple autocollante','collée sous le pont, dans l’axe, à 10 cm au moins de l’antenne GPS'],['3','Antenne radio 868 MHz souple','collée sous le pont, vers l’avant ; à 300 m, la marge radio couvre sa position couchée'],['4','Boîtier balise','batterie + électronique, au fond, près de la quille, sanglé et scellé ; étanche, car l’eau entre toujours un peu']],
+  wt:[['Boîtier (batterie, cartes)','≈ 170 g, en bas'],['Antennes + câbles','≈ 40–60 g, sous le pont'],['Total','≈ 210–230 g']],
+  watch:'À tester : l’eau de mer qui reste sur le pont atténue un peu les signaux.'},
+ carbone:{t:'Carbone',v:'Les antennes sortent',d:'Le carbone conduit l’électricité et fait écran : ni le GPS ni la 4G ne passent. Le boîtier reste en bas ; les antennes passent sur le pont.',
+  items:[['1','Antenne GPS sous un petit dôme','collée sur le pont, dans l’axe, à 10–15 cm au moins du mât carbone'],['2','Antenne 4G courte','sur le pont, verticale, câble par un passe-coque étanche'],['3','Antenne radio 868 MHz courte','sur le pont, verticale, à côté de la 4G'],['4','Boîtier balise','identique : au fond, près de la quille, sanglé et scellé'],['5','Variante plus propre : fenêtre en fibre de verre','une découpe d’environ 8 × 15 cm dans le pont, refermée en fibre de verre ; les antennes se collent dessous comme sur un bateau en fibre, rien ne dépasse']],
+  wt:[['Boîtier (batterie, cartes)','≈ 170 g, en bas'],['Antennes, dômes, passe-coques','≈ 60–90 g, sur le pont'],['Total','≈ 230–260 g']],
+  watch:'À décider avec les équipes : antennes sur le pont fournies par l’organisation, ou fenêtre en fibre de verre prévue par l’équipe à la construction.'}
+};
+function setMat(m){
+  document.querySelectorAll('[data-mat]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mat===m)));
+  document.querySelectorAll('#bord [data-v]').forEach(g=>g.setAttribute('opacity',g.dataset.v===m?1:0));
+  document.querySelectorAll('#bord [data-mast]').forEach(l=>l.setAttribute('stroke',m==='carbone'?'#3A3D30':'rgba(238,240,228,.55)'));
+  document.querySelectorAll('#bord #coque,#bord [data-hull]').forEach(h=>{h.setAttribute('fill',m==='carbone'?'rgba(9,11,7,.85)':'rgba(238,240,228,.07)')});
+  const b=BORD[m];
+  $('#bordPanel').innerHTML=`<p class="meta">${b.t}</p><h3 style="font-size:1.9rem">${b.v}</h3><p class="muted" style="font-size:15px">${b.d}</p>
+   <ol>${b.items.map(i=>`<li><span class="n">${i[0]}</span><span><b>${i[1]}</b> — ${i[2]}</span></li>`).join('')}</ol>
+   <div><p class="cap">Poids</p><div class="wt">${b.wt.map(w=>`<div><span>${w[0]}</span><span>${w[1]}</span></div>`).join('')}</div></div>
+   <p class="muted" style="font-size:13.5px">${b.watch}</p>`;
+}
+document.querySelectorAll('[data-mat]').forEach(b=>b.addEventListener('click',()=>setMat(b.dataset.mat)));
+setMat('fibre');
 
 /* ---------- Liaisons ---------- */
 const FLOWS=[
@@ -774,7 +929,7 @@ const MILES=[['Format figé','2027-03-15','Plus aucune modification incompatible
 
 /* ---------- Questions ---------- */
 const QS=[
- ['q1','h','Les coques sont-elles en carbone ?','Le carbone bloque le GPS et la 4G. Si oui, l’antenne de la balise devra sortir sur le pont (antenne plate collée). À savoir avant de dessiner le boîtier.',['Matériel']],
+ ['q1','h','Les coques sont-elles en carbone ?','Le carbone bloque le GPS et la 4G : antennes sur le pont, ou fenêtre en fibre de verre dans le pont. Voir la section « À bord ».',['Matériel']],
  ['q2','h','Où installer le PC course et les caméras ?','Esplanade de la petite digue, Fort Saint-Louis, toit voisin ? Il faut l’électricité, le câble Internet et un point à 12 m au plus avec vue sur tout le parcours.',['Site']],
  ['q3','h','Combien de spectateurs attendus sur place ?','C’est ce qui fixe le risque de saturation de la 4G, et l’intérêt d’un Wi-Fi public au village.',['Public','4G']],
  ['q4','m','Qui déplace les bouées quand le vent tourne ?','Avec des bouées ancrées, un bateau d’assistance les repositionne ; le PC course doit savoir quand une bouée est en cours de déplacement.',['Course']],

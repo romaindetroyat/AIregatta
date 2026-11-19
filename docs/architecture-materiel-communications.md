@@ -204,6 +204,14 @@ flowchart TB
 
 **Balise à l'intérieur du bateau** : le GPS et la 4G traversent sans problème une coque ou un pont en fibre de verre, en bois ou en plastique. **Le carbone bloque les ondes** : sur un bateau en carbone, l'antenne GPS doit sortir sur le pont (antenne plate collée, câble vers la balise) **[À TESTER dès le prototype, sur un vrai bateau]**.
 
+**Implantation à bord (poids en bas)** :
+- Boîtier (batterie + électronique, ≈ 170 g) au fond, près de la quille, sanglé et scellé. Il peut être sous la flottaison : seule la position des antennes compte.
+- Antennes au-dessus de la flottaison **et dans l'axe du bateau** : à la gîte, une antenne collée sur le côté sous le vent passe sous l'eau, et l'eau de mer coupe toute liaison.
+- Rien au-dessus de l'antenne GPS (batterie, servo, carbone) ; 10–15 cm au moins d'un mât carbone ; 10 cm entre l'antenne GPS et l'antenne 4G.
+- **Fibre de verre ou bois** : antenne GPS hélicoïdale légère juste sous le pont, antennes 4G et 868 MHz souples collées sous le pont. Rien ne dépasse. Total ≈ 210–230 g.
+- **Carbone** : antennes sur le pont (GPS sous un petit dôme, 4G et 868 MHz courtes), câbles par passe-coque étanche ; ou mieux, une fenêtre en fibre de verre d'environ 8 × 15 cm dans le pont, antennes collées dessous. Total ≈ 230–260 g.
+- La distance antenne → étrave est mesurée au contrôle d'équipement ; le PC course en déduit la position de l'étrave avec le cap.
+
 **Consommation estimée** : environ 1,2 W en moyenne (4G active, GNSS, radio en émission 1 % du temps). Avec 25 Wh, cela donne **une vingtaine d'heures**, avec une large marge sur une journée de course **[À TESTER]**.
 
 **Pourquoi le ZED-F9P plutôt que l'UM980 ?** Les deux conviennent. Le F9P a l'écosystème le plus riche (documentation, bibliothèques ESP32, retours de terrain). L'UM980 capte une bande de plus et coûte à peu près autant. **Recommandation : commander les deux pour le prototype, choisir après l'essai de janvier.** Ce qui compte, c'est d'avoir **le même récepteur sur toutes les balises**, pour l'équité.
