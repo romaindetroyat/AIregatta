@@ -11,6 +11,10 @@
 - Le format de course est défini ; il comporte **du près et du portant** (donc une bouée au vent et une bouée ou porte sous le vent, toutes deux instrumentées en vent).
 - **L'architecture des bateaux est libre.** L'organisation impose seulement la balise officielle et le plan de fréquences.
 - Le logiciel sera développé avec de l'IA agentique (approche GSD).
+- **Moins de 10 bateaux.** Une balise de 250 g est acceptable.
+- **Distance maximale PC course ↔ parcours : 500 m.**
+- **Électricité et Internet filaire disponibles** sur le site.
+- **Pas de sortie de données de la balise officielle vers l'électronique des équipes** : chaque équipe a son propre GPS et sa propre liaison avec son bateau. La balise officielle ne sert qu'à l'organisation (suivi, classement, arbitrage).
 
 ---
 
@@ -86,7 +90,7 @@ flowchart TB
   BAL -- "① 4G : UDP 10 Hz" --> HUB
   BOU -- "① 4G : UDP 1–10 Hz" --> HUB
   BAS -- "① 4G : UDP 1 Hz" --> HUB
-  BAL & BOU & BAS -- "② radio 868 MHz : 1 Hz (secours)" --> GW
+  BAL & BOU & BAS -- "② radio 868 MHz : 2 Hz (secours)" --> GW
   HUB -- "③ RTCM (NTRIP via 4G)" --> BAL & BOU & BAS
   RTK -- "③ RTCM" --> SRV
   HUB <-- "④ tunnel WireGuard" --> RTR
@@ -97,7 +101,6 @@ flowchart TB
   SRV <-- "⑦ WebSocket" --> CON
   SRV -- "⑧ MQTT / WebSocket / NMEA (lecture seule)" --> EQT
   EQT -- "⑨ consignes (canal de l'équipe)" --> EQB
-  BAL -. "⑩ port équipe UART (option)" .-> EQB
   SEC -- "⑪ 2,4 GHz ELRS" --> EQB
   SRV -- "⑫ flux public différé" --> HUB --> CDN --> PWA
 ```
@@ -109,15 +112,14 @@ flowchart TB
 | # | De → vers | Support | Protocole | Cadence | Latence visée | Contenu |
 |---|---|---|---|---|---|---|
 | ① | BAL / BOU / BAS → HUB | 4G LTE Cat-1 | UDP, trames binaires signées (HMAC) | 10 Hz bateaux ; 1 Hz bouées (+ vent 1–4 Hz) | 50–150 ms | Position, vitesse, cap, gîte, qualité RTK, batterie, vent pour les bouées |
-| ② | BAL / BOU / BAS → GW | Radio privée 868 MHz (sous-bande 869,4–869,65 MHz) | Trame binaire compacte, multiplexage temporel calé sur la seconde GNSS | 1 Hz | < 1 s | Position compacte + état. **Chemin de secours, indépendant d'Internet** |
+| ② | BAL / BOU / BAS → GW | Radio privée 868 MHz (sous-bande 869,4–869,65 MHz) | Trame binaire compacte, multiplexage temporel calé sur la seconde GNSS | 2 Hz | < 1 s | Position compacte + état. **Chemin de secours, indépendant d'Internet** |
 | ③ | RTK → SRV → HUB → balises | Série USB, puis tunnel, puis 4G | RTCM 3 (messages MSM4/MSM7 + 1005/1230) diffusé par un caster NTRIP | 1 Hz | < 1 s | Corrections RTK. Secours : base publique Centipede directement depuis la balise |
 | ④ | HUB ↔ site | Internet (5G + 2e accès) | Tunnel WireGuard ; à l'intérieur : UDP relayé + pont MQTT | Continu | 20–50 ms | Les trames ① arrivent sur le SRV ; le flux public ⑫ repart vers le cloud |
 | ⑤ | MET → SRV | Wi-Fi / Ethernet local | API HTTP locale de la station, convertie en MQTT | 0,1–1 Hz | — | Vent, rafales, pression, température |
 | ⑥ | CAM → SRV | Ethernet (PoE) ou faisceau Wi-Fi 5 GHz | RTSP (H.264/H.265) pour la vidéo ; MQTT/JSON pour les résultats de vision | 25–30 i/s ; 1 Hz pour les risées | — | Vidéo live ; carte des risées ; position/orientation PTZ (ONVIF) |
 | ⑦ | SRV ↔ CON | Réseau local orga | WebSocket (JSON) + API HTTP | Temps réel | < 100 ms | Toutes les données ; commandes de direction de course (séquence, parcours, pénalités) |
 | ⑧ | SRV → EQT | Réseau local équipes (Ethernet, même longueur de câble pour tous), et miroir cloud pour les équipes à distance | MQTT en lecture seule (un compte par équipe) ; WebSocket JSON ; flux NMEA 0183 / Signal K en option | 10 Hz bateaux, 1 Hz vent | < 50 ms en local | Positions de tous les bateaux, bouées, vent mesuré et carte de vent, état de la course, événements, classement |
-| ⑨ | EQT → EQB | **Au choix de l'équipe** (4G, radio de télémétrie, ou port équipe ⑩) | Au choix (MAVLink, MQTT, propriétaire) | — | — | Consignes de l'équipe. L'organisation n'intervient pas, sauf plan de fréquences |
-| ⑩ | BAL → EQB (option) | Fil UART 3,3 V sur connecteur étanche | NMEA 0183 (GGA, RMC, HDT) à 10 Hz, + phrases propriétaires pour les consignes reçues | 10 Hz | — | Donne aux équipes la position RTK officielle et, en option, relaie leurs consignes via la 4G de la balise |
+| ⑨ | EQT → EQB | **Au choix de l'équipe** (4G, radio de télémétrie) | Au choix (MAVLink, MQTT, propriétaire) | — | — | Consignes de l'équipe. L'organisation n'intervient pas, sauf plan de fréquences |
 | ⑪ | SEC → EQB | 2,4 GHz, saut de fréquence | ExpressLRS (ELRS) | 50–150 Hz | < 20 ms | Reprise en main manuelle, mode sécurité |
 | ⑫ | SRV → HUB → PWA | Internet | WebSocket diffusé par le cloud (CDN) ; fichiers de replay sur stockage objet | 2–4 Hz, différé de quelques secondes | 2–5 s | Flux public agrégé : positions lissées, classement, vent, événements, commentaire IA |
 
@@ -127,7 +129,7 @@ flowchart TB
 - **La radio 868 MHz est le chemin de secours** : à 1 Hz, sans dépendre d'Internet ni des opérateurs, elle suffit pour que le classement et la sécurité continuent si la 4G ou Internet tombe.
 - **Un hub cloud sert de point de rendez-vous** : les balises en 4G ne peuvent pas joindre directement un PC derrière un routeur 5G. Le VPS reçoit les trames et les renvoie au site par un tunnel chiffré. C'est aussi lui qui sert le public, ce qui évite que des milliers de spectateurs chargent la connexion du site.
 - **Les équipes reçoivent le flux en local, par câble** : même latence pour tous, aucune dépendance à Internet. Le miroir cloud sert aux équipes à distance ou en secours.
-- **Le canal de consignes reste à la main des équipes** (architecture libre). Le port équipe ⑩ est une facilité, pas une obligation.
+- **Le canal de consignes reste à la main des équipes** (architecture libre). La balise officielle n'a aucun lien électrique avec l'électronique de l'équipe : elle est autonome (sa propre batterie) et se fixe simplement sur le bateau.
 
 ---
 
@@ -146,7 +148,7 @@ flowchart TB
 | SIM | SIM IoT multi-opérateurs (1NCE, Things Mobile) | 10–20 € pour la saison | Une SIM d'un autre opérateur sur quelques balises de rechange |
 | Énergie | 2 × accus 18650 de 3 500 mAh (≈ 25 Wh) + carte de charge/protection | ≈ 20 € | Batterie LiPo 1S 5 000 mAh |
 | Boîtier | Boîtier ABS IP67 (gamme Hammond 1554 ou équivalent) + traversées SMA + presse-étoupe + interrupteur magnétique (ILS) | ≈ 25 € | Boîtier imprimé en ASA avec joint torique |
-| Connecteur port équipe ⑩ et charge | Connecteur étanche M8 4 broches | ≈ 10 € | — |
+| Connecteur de charge | Connecteur étanche M8 | ≈ 10 € | — |
 | **Total par balise** | | **≈ 380–450 €** | |
 
 **Consommation estimée** : environ 1,2 W en moyenne (4G active, GNSS, radio en émission 1 % du temps). Avec 25 Wh, cela donne **une vingtaine d'heures**, avec une large marge sur une journée de course **[À TESTER]**.
@@ -177,7 +179,7 @@ Balise officielle en profil "bouée", sans anémomètre : **≈ 400 €** par bo
 |---|---|---|
 | Propulsion | 2 × **Blue Robotics T200** + 2 contrôleurs moteur (ESC) Blue Robotics Basic ESC | ≈ 450–500 € |
 | Pilote | Contrôleur **Matek H743** (ou Holybro Pixhawk 6C) sous **ArduPilot Rover**, mode bateau, maintien en position | ≈ 100–200 € |
-| Position | La balise officielle fournit la position RTK au pilote par le port ⑩ | — |
+| Position | La balise officielle de la bouée fournit la position RTK au pilote par une liaison interne (bouée de l'organisation) | — |
 | Énergie | Batterie LiFePO4 12,8 V 20 Ah | ≈ 150 € |
 | Flotteur + structure | Fabrication | 300–600 € |
 | **Total** | | **≈ 1 500–2 000 € par bouée** (en plus de la balise) |
@@ -203,8 +205,8 @@ Le point d'installation de l'antenne est relevé une fois pour toutes (relevé d
 | Radio | 2 × **Heltec WiFi LoRa 32 V3** (ESP32-S3 + SX1262), utilisées comme modems USB | ≈ 2 × 25 € |
 | Antenne | Antenne colinéaire 868 MHz en fibre de verre, 5–6 dBi | ≈ 60–100 € |
 | Câble | Coaxial faible perte (LMR-400 ou équivalent), le plus court possible | ≈ 40 € |
-| Mât | **Mât télescopique en fibre de verre de 12 m (Spiderbeam ou équivalent)**, si aucun toit n'est disponible | ≈ 120–180 € |
-| **Total** | | **≈ 300–400 €** |
+| Mât | À 500 m, un mât de 4–6 m (ou un toit) suffit largement | ≈ 50–100 € |
+| **Total** | | **≈ 250–300 €** |
 
 Deux passerelles en parallèle : si l'une tombe, l'autre continue. Le serveur supprime les doublons grâce aux numéros de séquence.
 
@@ -215,7 +217,7 @@ Deux passerelles en parallèle : si l'une tombe, l'autre continue. Le serveur su
 | Serveur principal | Mini-PC type **ASUS NUC 14 Pro** (Core i7, 32 Go, SSD 1 To), Linux | ≈ 800–1 000 € |
 | Serveur de secours | Identique, en secours chaud (abonné au même flux, prend le relais en quelques secondes) | ≈ 800–1 000 € |
 | Routeur Internet | **Teltonika RUTX50** (5G, double SIM, bascule automatique, 5 ports Gigabit) | ≈ 450–550 € |
-| 2e accès Internet | Fibre ou ADSL du site si elle existe ; sinon antenne satellite **Starlink** en second lien sur le routeur | 0 € à ≈ 300 € + abonnement |
+| Accès Internet | **Accès filaire du site en principal**, 5G du routeur en secours automatique | abonnement du site + 2 SIM |
 | Commutateur | Commutateur administrable PoE 8–16 ports (gamme TP-Link Omada ou Ubiquiti UniFi), pour séparer orga / équipes / caméras | ≈ 150–300 € |
 | Wi-Fi zone équipes | Borne Wi-Fi extérieure (Ubiquiti UniFi U6 Mesh ou équivalent), en plus des prises Ethernet | ≈ 150–200 € |
 | Faisceau vers le point haut caméra | Paire **Ubiquiti LiteBeam 5AC Gen2** (si le point haut est à distance du PC course) | ≈ 150–200 € la paire |
@@ -268,7 +270,7 @@ Règle proposée : chaque bateau embarque un récepteur ELRS appairé à un éme
 | Autopilote | **Matek H743-SLIM** ou **H743-WING V3** sous **ArduPilot Rover, mode voilier** (girouette, réglage de voile, virements automatiques, navigation par waypoints) | ≈ 80–120 € |
 | Girouette | Capteur d'angle magnétique AS5600 sur une girouette imprimée en 3D | ≈ 10–20 € |
 | Calcul embarqué (pour l'IA à bord) | Raspberry Pi Zero 2 W ou Raspberry Pi 5 / CM5 | ≈ 20–90 € |
-| Position | Port équipe ⑩ de la balise officielle (RTK fourni) | 0 € |
+| Position | GPS propre à l'équipe (module u-blox M10 à ≈ 20 €, ou RTK ZED-F9P si l'équipe le souhaite ; les corrections RTK de la base officielle peuvent être mises à disposition de tous sur le réseau) | 20–250 € |
 | Liaison consignes | Modem 4G USB, ou paire de radios de télémétrie Holybro SiK 868 MHz (MAVLink) | ≈ 40–70 € |
 | Treuil de voile | Servo-treuil de voile (gammes Hitec ou RMG) | ≈ 60–150 € |
 
@@ -301,14 +303,16 @@ Seconde GNSS (1 000 ms)
 ```
 
 - Réglage radio proposé : LoRa SF7, largeur de bande 250 kHz. Une trame de 24 octets dure environ 30 ms ; un créneau de 40 ms laisse une marge de garde.
-- **Capacité : 24 créneaux par seconde**, soit environ 20 bateaux et 4 bouées à 1 Hz.
-- Temps d'émission par balise : 30 ms par seconde, soit **3 %** (sous la limite de 10 %).
+- **Capacité : 24 créneaux par seconde.** Avec moins de 10 bateaux et 4 bouées (14 balises), **chaque balise peut émettre 2 fois par seconde (2 Hz)** : 28 émissions × 35 ms ≈ 1 s. Il est aussi possible de rester à 1 Hz avec beaucoup de marge.
+- Temps d'émission par balise à 2 Hz : 60 ms par seconde, soit **6 %** (sous la limite de 10 %).
 - Créneau 0 : la passerelle diffuse l'état de la course (chrono, rappels) et un accusé de réception groupé. Ce message court peut servir à faire clignoter une LED sur la balise au moment d'un rappel.
 - **Les corrections RTK ne passent pas par cette radio** : le débit et la limite de 10 % ne le permettent pas à 1 Hz. Si la 4G tombe, la balise garde la précision RTK pendant 10 à 30 s, puis passe progressivement en précision métrique. C'est acceptable en secours.
 
 ### 5.3 Bilan de liaison (ordre de grandeur)
 
-Distance de 3 km, 868 MHz : affaiblissement en espace libre ≈ 101 dB. Émission 22 dBm + antenne bateau 2 dBi + antenne à terre 5 dBi − 101 dB − 3 dB de pertes de câble ≈ **−75 dBm reçus**. La sensibilité en SF7 / 250 kHz étant d'environ −121 dBm, **la marge dépasse 40 dB**. Elle absorbe la gîte, les embruns et les réflexions sur l'eau **[À TESTER]**.
+Distance maximale de 500 m, 868 MHz : affaiblissement en espace libre ≈ 85 dB. Émission 22 dBm + antenne bateau 2 dBi + antenne à terre 5 dBi − 85 dB − 3 dB de pertes de câble ≈ **−59 dBm reçus**. La sensibilité en SF7 / 250 kHz étant d'environ −121 dBm, **la marge dépasse 60 dB**. La portée n'est pas un sujet à cette distance ; il reste à vérifier les masquages (coques, voiles) et les réflexions sur l'eau **[À TESTER]**.
+
+À 500 m, on pourrait aussi faire de la radio privée le chemin principal. On garde la 4G en principal parce qu'elle transporte en plus les corrections RTK et les mises à jour à distance des balises.
 
 ---
 
@@ -316,8 +320,8 @@ Distance de 3 km, 868 MHz : affaiblissement en espace libre ≈ 101 dB. Émissio
 
 ```mermaid
 flowchart LR
-  INET1["5G (2 SIM)"] --> RTR
-  INET2["Fibre ou Starlink"] --> RTR
+  INET1["Internet filaire du site (principal)"] --> RTR
+  INET2["5G double SIM (secours)"] --> RTR
   RTR["Routeur Teltonika RUTX50<br/>pare-feu, tunnel WireGuard vers le HUB"] --> SW["Commutateur PoE administrable"]
   SW -- "VLAN 10 ORGA" --> SRV1["SRV principal"] & SRV2["SRV secours"] & CONS["Consoles"] & GWs["Passerelles radio (USB sur SRV)"]
   SW -- "VLAN 20 CAMÉRAS" --> CAMS["Caméras PoE"] & JET["Jetson vision"] & ATEM["Régie vidéo"]
@@ -432,8 +436,9 @@ Le flux NMEA proposé en option reprend les mêmes données en phrases standard 
 
 | Panne | Effet | Ce qui continue | Parade |
 |---|---|---|---|
-| 4G perdue sur un bateau | Plus de trames 10 Hz ni de corrections RTK pour ce bateau | Radio 868 à 1 Hz ; précision RTK conservée 10–30 s puis métrique | Carte SD complète récupérée après la course |
-| Internet du site coupé | Plus de trames 4G au SRV, plus de flux public | Radio 868 pour toutes les balises ; flux local aux équipes ; RTK via la base Centipede directement depuis les balises | 2e accès Internet (fibre/Starlink), bascule automatique du routeur |
+| 4G perdue sur un bateau | Plus de trames 10 Hz ni de corrections RTK pour ce bateau | Radio 868 à 2 Hz ; précision RTK conservée 10–30 s puis métrique | Carte SD complète récupérée après la course |
+| Internet filaire du site coupé | Aucun, si la 5G prend le relais | Tout | Bascule automatique du routeur sur la 5G (double SIM) |
+| Internet totalement coupé (filaire + 5G) | Plus de trames 4G au SRV, plus de flux public | Radio 868 pour toutes les balises ; flux local aux équipes ; RTK via la base Centipede directement depuis les balises | Rare : il faut perdre les deux accès à la fois |
 | HUB cloud indisponible | Idem coupure Internet pour le chemin 4G | Idem | 2e VPS de secours (adresse configurée dans les balises) |
 | Serveur PC course en panne | Consoles et flux équipes interrompus quelques secondes | Le HUB et les balises enregistrent tout | Serveur de secours chaud + adresse IP virtuelle |
 | Passerelle radio en panne | Plus de chemin de secours | 4G | 2e passerelle |
@@ -459,25 +464,25 @@ Une **mesure du spectre** sur le site (petit analyseur type TinySA Ultra, enviro
 
 ## 10. Nomenclature chiffrée
 
-Exemple pour **12 bateaux**, 2 bouées instrumentées (au vent, sous le vent), 2 bouées de ligne, sans bouée robotisée.
+Exemple pour **10 bateaux au maximum**, 2 bouées instrumentées (au vent, sous le vent), 2 bouées de ligne, sans bouée robotisée.
 
 | Poste | Quantité | Prix unitaire | Total |
 |---|---|---|---|
-| Balises officielles (12 + 3 de rechange) | 15 | 420 € | 6 300 € |
+| Balises officielles (10 + 2 de rechange) | 12 | 420 € | 5 040 € |
 | Bouées instrumentées vent | 2 | 1 300 € | 2 600 € |
 | Balises de bouées de ligne | 2 | 420 € | 840 € |
 | Base RTK | 1 | 450 € | 450 € |
-| Passerelles radio + antenne + mât | 1 lot | 350 € | 350 € |
+| Passerelles radio + antenne + petit mât | 1 lot | 250 € | 250 € |
 | PC course (2 serveurs, routeur, commutateur, Wi-Fi, onduleur, écrans) | 1 lot | 4 000 € | 4 000 € |
 | Caméras + vision + régie | 1 lot | 1 500 € | 1 500 € |
 | Station météo | 1 | 230 € | 230 € |
 | Analyseur de spectre | 1 | 150 € | 150 € |
 | Prototypes (2 GNSS de chaque famille, modules radio, IMU, 1 anémomètre de test) | 1 lot | 1 200 € | 1 200 € |
-| Imprévus (≈ 10 %) | | | 1 800 € |
-| **Total matériel** | | | **≈ 19 400 €** |
+| Imprévus (≈ 10 %) | | | 1 600 € |
+| **Total matériel** | | | **≈ 17 900 €** |
 | Fonctionnement : SIM, VPS, Cloudflare, API LLM (6 mois) | | | ≈ 500–1 000 € |
 
-Options : bouées robotisées (+ 1 500–2 000 € chacune), caméras embarquées (+ ≈ 100 € par bateau + récepteurs), 2e caméra PTZ (+ 600 €), Starlink (+ ≈ 300 € + abonnement).
+Options : bouées robotisées (+ 1 500–2 000 € chacune), caméras embarquées (+ ≈ 100 € par bateau + récepteurs), 2e caméra PTZ (+ 600 €).
 
 ### Commande prototype à passer maintenant
 
@@ -520,18 +525,15 @@ Conséquence sur le planning : le logiciel peut être prêt très tôt (dès fin
 
 ## 12. Questions restantes
 
-Questions qui influencent directement le matériel et les communications :
+Réponses obtenues le 19 novembre 2026 : balise de 250 g acceptable ; moins de 10 bateaux ; 500 m au maximum entre le PC course et le parcours ; pas de sortie de données de la balise vers les équipes ; électricité et Internet filaire disponibles.
 
-1. **Taille et poids des bateaux** : la balise de 250 g est-elle acceptable ? Pour des bateaux de moins d'un mètre, il faudra une version allégée (pas de boîtier séparé, batterie plus petite).
-2. **Nombre de bateaux** (fourchette) : il dimensionne les créneaux radio (24 par seconde dans la conception actuelle) et le nombre de balises.
-3. **Distance maximale entre le PC course et le point le plus éloigné du parcours** : elle conditionne la hauteur d'antenne et le choix du point haut.
-4. **Le port équipe ⑩** : fournit-on aux équipes la position RTK officielle par câble ? Accepte-t-on de relayer leurs consignes via la 4G de la balise ? C'est un vrai service rendu aux petites équipes, mais l'organisation devient en partie responsable de leur liaison.
-5. **Où installer la balise** : en tête de mât (meilleure réception GNSS, mais en hauteur et soumise à la gîte) ou sur le pont (plus stable, mais la voile et l'équipage masquent une partie du ciel) ? Il faut aussi définir un point de référence commun (étrave, mât) pour l'arbitrage.
-6. **Électricité et Internet filaire sur le site du PC course et au point haut** : disponibles ou non ?
-7. **Hauteur et emplacement du point haut** pour les caméras.
-8. **Équipes à distance** : certaines équipes travailleront-elles depuis un autre lieu que le site ? Cela conditionne le miroir cloud du flux équipes.
-9. **Différé du flux public** : quelques secondes suffisent-elles, ou faut-il plus pour éviter que la PWA serve de source "officieuse" ? (Moins crucial puisque les équipes reçoivent déjà toutes les données.)
-10. **Bouées robotisées** : à inclure dès 2027 ou à garder pour une édition suivante ?
+Questions encore ouvertes :
+
+1. **Où fixer la balise sur le bateau** : en tête de mât (meilleure réception GPS, mais en hauteur et soumise à la gîte) ou sur le pont (plus stable, mais la voile masque une partie du ciel) ? Il faut aussi définir un point de référence commun (étrave, mât) pour l'arbitrage.
+2. **Hauteur et emplacement du point haut** pour les caméras. À 500 m, 20 m de hauteur suffisent pour bien voir le parcours.
+3. **Équipes à distance** : certaines équipes travailleront-elles depuis un autre lieu que le site ? Cela conditionne le miroir cloud du flux équipes.
+4. **Corrections RTK pour les équipes** : met-on le flux de corrections de la base officielle à disposition de toutes les équipes sur le réseau ? Cela leur permet d'avoir leur propre GPS centimétrique à moindre coût, à égalité.
+5. **Bouées robotisées** : à inclure dès 2027 ou à garder pour une édition suivante ?
 
 ---
 
