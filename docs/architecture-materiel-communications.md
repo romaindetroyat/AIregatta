@@ -450,6 +450,7 @@ Sujets :
 
 ```
 race/{raceId}/state                  # séquence de départ, chrono, manche, statut
+race/{raceId}/clock                  # heure GPS du départ, étape de la procédure, rappels (message conservé)
 race/{raceId}/course                 # bouées, portes, ligne de départ/arrivée, limites
 race/{raceId}/marks/{markId}         # position + vent mesuré (vitesse, direction vraie, rafale)
 race/{raceId}/boats/{boatId}/pos     # position officielle 10 Hz

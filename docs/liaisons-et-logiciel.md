@@ -242,6 +242,23 @@
 | Si elle tombe | Une balise qui échoue au contrôle est remplacée par une balise de rechange. |
 | Modules logiciels | S11, S1 |
 
+### 15. Chrono et procédure de départ (flux essentiel)
+
+**Console de direction de course (comité) → Équipes, médias, application publique** · Données officielles
+
+| | |
+|---|---|
+| Support physique | Réseau local par câble pour les équipes et la régie ; Internet via le hub cloud pour le public |
+| Protocole et format | MQTT, message conservé par le broker : heure GPS du départ, étape de la procédure (avertissement, préparatoire, une minute, départ), rappels, temps de passage et d’arrivée |
+| Ce qui circule | Heure exacte du prochain départ, étape en cours, chrono de course, rappels individuels ou généraux, temps de passage aux bouées, temps d’arrivée |
+| Cadence | À chaque changement, plus un rappel chaque seconde |
+| Débit | Négligeable |
+| Latence | < 1 ms sur place ; chaque écran calcule le compte à rebours sur sa propre horloge, donc le chrono affiché est identique partout à quelques millisecondes près |
+| Sécurité | Seule la console du comité peut publier sur ce sujet |
+| Secours | Signaux sonores et visuels classiques du comité ; console de secours sur le second serveur |
+| Si elle tombe | Si le réseau ralentit, les écrans continuent de compter seuls à partir de l’heure du départ déjà reçue. Si le comité change la procédure, le nouveau message arrive en moins d’une milliseconde sur place. |
+| Modules logiciels | S8, S10, S12, S14, S15 |
+
 ## Les modules logiciels
 
 ### S1 — Firmware de la balise
