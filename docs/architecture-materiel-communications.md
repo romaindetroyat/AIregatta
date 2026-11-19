@@ -16,6 +16,25 @@
 - **Électricité et Internet filaire disponibles** sur le site.
 - **Pas de sortie de données de la balise officielle vers l'électronique des équipes** : chaque équipe a son propre GPS et sa propre liaison avec son bateau. La balise officielle ne sert qu'à l'organisation (suivi, classement, arbitrage).
 
+## Principe central : le flux des positions
+
+```mermaid
+flowchart LR
+  B1["Bateau 1<br/>balise officielle"] --> PC
+  B2["Bateau 2<br/>balise officielle"] --> PC
+  Bn["Bateau n<br/>balise officielle"] --> PC
+  M["Bouées<br/>position + vent"] --> PC
+  PC["PC course<br/>rassemble, vérifie, horodate"] --> E1["Équipe 1"]
+  PC --> E2["Équipe 2"]
+  PC --> En["Équipe n"]
+  PC --> P["Public (différé)"]
+```
+
+1. **Chaque bateau envoie sa position au PC course**, 10 fois par seconde, par sa balise officielle.
+2. **Le PC course rassemble les positions de tous les bateaux et des bouées**, avec le vent mesuré.
+3. **Le PC course renvoie le tout à toutes les équipes en même temps** : chaque équipe reçoit la position de tous les bateaux, la sienne comprise, au même instant et dans le même format.
+4. Les équipes n'échangent jamais de données entre elles : tout passe par le PC course.
+
 ---
 
 ## Sommaire
