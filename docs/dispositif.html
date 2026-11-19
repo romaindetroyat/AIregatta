@@ -2,244 +2,272 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout : page de dossier technique façon "carte marine" — un plan d'eau interactif en tête, puis des sections de lecture. */
+/* Charte Meridia, nuit méditerranéenne. Mise en page : faisceau lime en ouverture, plan d'eau interactif, puis sections de lecture en verre mat. */
 :root{
-  --bg:#F2F6F7; --surface:#FFFFFF; --sea:#D6E8EE; --sea-deep:#BFD9E2; --land:#E6E2D6;
-  --ink:#0E2233; --muted:#566977; --line:#D3DDE2;
-  --accent:#E8590C; --accent-soft:#FDE6D8;
-  --ok:#1C7C63; --ok-soft:#DCF1EA; --dev:#2457D6; --dev-soft:#E0E8FB;
-  --test:#A0670F; --test-soft:#F7ECD6; --opt:#6D5E95; --opt-soft:#ECE8F5;
-  --t1:#E8590C; --t2:#2457D6; --t3:#1C7C63; --t4:#B0337A; --t5:#7A5C12; --t6:#0E7490; --t7:#6D5E95; --t8:#C2410C; --t9:#334155; --t10:#4D7C0F;
-  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
-  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
-  --r:10px;
+  color-scheme:dark;
+  --nuit:#090B07; --nuit-2:#10130D; --nuit-3:#181C13;
+  --ivoire:#EEF0E4; --ivoire-2:rgba(238,240,228,.66); --ivoire-3:rgba(238,240,228,.40); --filet:rgba(238,240,228,.12);
+  --lime:#C7EB00; --lime-vif:#DCFF3A; --lime-doux:rgba(199,235,0,.14); --sarcelle:#0E5A52;
+  --mer:#0A1915; --mer-2:#0C211C; --herbier:#071310; --terre:#1B1F15; --sable:#2A2B1F;
+  --degrade:radial-gradient(130% 160% at 50% 25%,#DCFF3A 0%,#C7EB00 40%,#8FD18A 75%,#43B3A3 100%);
+  --degrade-texte:radial-gradient(140% 220% at 30% 20%,#DCFF3A 0%,#C7EB00 45%,#8FD18A 78%,#43B3A3 100%);
+  --sphere-lime:radial-gradient(circle at 50% 30%,#F0FF9A,#C7EB00 58%,#8FB000);
+  --bille-sombre:radial-gradient(100% 100% at 50% 15%,#2A3022 0%,#12150E 55%,#070906 100%);
+  --surface:radial-gradient(120% 80% at 50% 0%,rgba(238,240,228,.055),rgba(238,240,228,.012) 50%,transparent 75%),var(--nuit-2);
+  --arete:inset 0 1px 0 rgba(238,240,228,.09),inset 0 0 0 1px rgba(238,240,228,.05);
+  --portee:0 30px 60px -36px rgba(0,0,0,.9);
+  --b1:#C7EB00; --b2:#EEF0E4; --b3:#8FD18A; --b4:#43B3A3; --b5:#D9C38A; --b6:#E39B7B;
+  --f-titre:"Funnel Display",system-ui,sans-serif;
+  --f-texte:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#08141F; --surface:#0F2131; --sea:#0D2B3E; --sea-deep:#0A2434; --land:#1C2A33;
-  --ink:#E5EEF3; --muted:#93A7B5; --line:#203849;
-  --accent:#FF7B3A; --accent-soft:#3A2014;
-  --ok:#3FCB9F; --ok-soft:#0F3328; --dev:#7EA6FF; --dev-soft:#15264A; --test:#EDB451; --test-soft:#3A2B10; --opt:#B3A4DB; --opt-soft:#2A2440;
-  --t1:#FF7B3A; --t2:#7EA6FF; --t3:#3FCB9F; --t4:#F07AB8; --t5:#E2C15A; --t6:#4FC3D9; --t7:#B3A4DB; --t8:#FF9F6B; --t9:#C3CFDA; --t10:#A3D45B;
-  color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#08141F; --surface:#0F2131; --sea:#0D2B3E; --sea-deep:#0A2434; --land:#1C2A33;
-  --ink:#E5EEF3; --muted:#93A7B5; --line:#203849;
-  --accent:#FF7B3A; --accent-soft:#3A2014;
-  --ok:#3FCB9F; --ok-soft:#0F3328; --dev:#7EA6FF; --dev-soft:#15264A; --test:#EDB451; --test-soft:#3A2B10; --opt:#B3A4DB; --opt-soft:#2A2440;
-  --t1:#FF7B3A; --t2:#7EA6FF; --t3:#3FCB9F; --t4:#F07AB8; --t5:#E2C15A; --t6:#4FC3D9; --t7:#B3A4DB; --t8:#FF9F6B; --t9:#C3CFDA; --t10:#A3D45B;
-  color-scheme:dark}
-
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
-a{color:var(--accent)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:.01em;text-wrap:balance;margin:0;line-height:1.05}
-h2{font-size:clamp(28px,4vw,40px);text-transform:uppercase}
-h3{font-size:21px;font-weight:600}
+body{background:var(--nuit);color:var(--ivoire);font:400 16px/1.6 var(--f-texte);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--nuit)}
+a{color:var(--lime)}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-titre);font-weight:500;margin:0;text-wrap:balance}
+h2{font-size:clamp(2.2rem,5vw,3.8rem);line-height:.98;letter-spacing:-.024em}
+h3{font-size:clamp(1.25rem,2vw,1.55rem);line-height:1.1;letter-spacing:-.02em}
+h2 em,h1 em{font-style:normal;background:var(--degrade-texte);-webkit-background-clip:text;background-clip:text;color:transparent}
 p{margin:0}
-.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.meta{display:inline-flex;align-items:center;gap:10px;font:500 .75rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ivoire-2)}
+.pastille{width:8px;height:8px;border-radius:50%;background:var(--sphere-lime);box-shadow:0 0 0 4px var(--lime-doux),0 0 18px var(--lime);flex:none}
 .mono{font-family:var(--f-mono)}
 .num{font-variant-numeric:tabular-nums}
+.muted{color:var(--ivoire-2)}
+.grain{position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.carte{background:var(--surface);box-shadow:var(--arete),var(--portee);border-radius:24px}
 
-/* Barre de navigation */
-.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;gap:20px;padding-block:10px}
-.brand{font-family:var(--f-display);font-weight:700;font-size:22px;letter-spacing:.02em;white-space:nowrap}
-.brand span{color:var(--accent)}
-.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
+/* Navigation en verre poli */
+.nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);z-index:20;margin-top:12px}
+.nav .pill{display:flex;align-items:center;gap:18px;padding:8px 10px 8px 14px;border-radius:999px;background:rgba(14,17,11,.62);backdrop-filter:blur(20px) saturate(1.7) brightness(1.04);box-shadow:inset 0 1px 0 rgba(238,240,228,.12),inset 0 0 0 1px rgba(238,240,228,.07),0 24px 50px -30px #000}
+.logo{display:inline-flex;align-items:center;gap:10px;font:500 1.25rem/1 var(--f-titre);letter-spacing:-.027em;white-space:nowrap;color:var(--ivoire);text-decoration:none}
+.logo img{width:28px;height:28px;display:block}
+.logo .nom{transform:translateY(-.07em)}
+.logo .sep{color:var(--ivoire-3);font-weight:400}
+.nav ul{display:flex;gap:2px;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto;scrollbar-width:none}
 .nav ul::-webkit-scrollbar{display:none}
-.nav a{display:block;padding:6px 10px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap}
-.nav a:hover{color:var(--ink);background:var(--bg)}
-.theme-btn{margin-left:auto;flex:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:6px 10px;font:500 13px var(--f-body);cursor:pointer}
+.nav a.l{display:block;padding:8px 12px;border-radius:999px;color:var(--ivoire-2);text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap;transition:color .3s,background .3s}
+.nav a.l:hover{color:var(--ivoire);background:rgba(238,240,228,.06)}
 
-/* En-tête */
-.hero{padding-block:44px 28px}
-.hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:end}
-.hero h1{font-size:clamp(46px,8vw,92px);text-transform:uppercase}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.hero .lede{margin-top:14px;font-size:18px;max-width:60ch;color:var(--muted)}
-.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.fact{background:var(--surface);padding:14px 16px}
-.fact b{display:block;font-family:var(--f-display);font-size:32px;font-weight:600;line-height:1}
-.fact span{font-size:13px;color:var(--muted)}
+/* Ouverture : le faisceau sort de la mer */
+.hero{position:relative;overflow:hidden;padding-block:72px 64px;isolation:isolate}
+.hero::before{content:"";position:absolute;left:68%;top:-10%;bottom:0;width:2px;z-index:-1;background:linear-gradient(to top,rgba(220,255,58,.95),rgba(199,235,0,.55) 40%,rgba(199,235,0,0));box-shadow:0 0 24px 2px rgba(199,235,0,.55),0 0 90px 20px rgba(199,235,0,.12);animation:monte 1.6s var(--ease) both}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;z-index:-2;background:radial-gradient(60% 90% at 68% 100%,rgba(199,235,0,.16),transparent 60%),radial-gradient(90% 100% at 50% 110%,rgba(14,90,82,.55),transparent 70%)}
+@keyframes monte{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;align-items:end}
+.hero h1{font-size:clamp(2.8rem,6.6vw,6rem);line-height:.92;letter-spacing:-.033em;margin-top:18px}
+.lede{margin-top:22px;font-size:1.125rem;color:var(--ivoire-2);max-width:56ch}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fact{padding:18px 18px 16px;border-radius:20px;background:var(--surface);box-shadow:var(--arete),var(--portee)}
+.fact b{display:block;font:500 clamp(1.8rem,3vw,2.4rem)/1 var(--f-titre);letter-spacing:-.03em}
+.fact span{display:block;margin-top:6px;font-size:13px;color:var(--ivoire-2)}
 
-section{padding-block:44px;border-top:1px solid var(--line)}
-.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 24px;margin-bottom:22px}
-.sec-head p{max-width:62ch;color:var(--muted)}
+section{padding-block:clamp(64px,8vw,104px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:16px 40px;align-items:end;margin-bottom:32px}
+.sec-head p.muted{max-width:60ch}
 
 /* Plan d'eau */
-.plan{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
-.map-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.map-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line)}
-.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:5px 11px;font:500 13px var(--f-body);cursor:pointer;user-select:none}
-.chip .dot{width:9px;height:9px;border-radius:50%}
-.chip[aria-pressed="false"]{opacity:.5}
-.chip[aria-pressed="false"] .dot{background:transparent!important;outline:1.5px solid var(--muted)}
-.play{margin-left:auto}
-svg.water{display:block;width:100%;height:auto;background:var(--sea);cursor:default}
+.plan{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start}
+.map{overflow:hidden;padding:0}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:8px 14px;font:500 13px var(--f-texte);color:var(--ivoire);cursor:pointer;background:radial-gradient(120% 160% at 50% 0%,rgba(238,240,228,.09),rgba(238,240,228,.03) 70%);box-shadow:inset 0 1px 0 rgba(238,240,228,.1),inset 0 0 0 1px rgba(238,240,228,.07);transition:opacity .3s,background .3s}
+.chip .d{width:8px;height:8px;border-radius:50%}
+.chip[aria-pressed="false"]{opacity:.45}
+.chip.on[aria-pressed="true"]{background:var(--lime-doux);box-shadow:inset 0 0 0 1px rgba(199,235,0,.35)}
+.tools .play{margin-left:auto}
+svg.water{display:block;width:100%;height:auto;background:var(--mer)}
 .ent{cursor:pointer}
-.ent:hover .hl,.ent.sel .hl{stroke:var(--accent);stroke-width:3}
-.lbl{font:600 13px var(--f-display);letter-spacing:.06em;text-transform:uppercase;fill:var(--ink)}
-.sub{font:400 11px var(--f-mono);fill:var(--muted)}
-.map-foot{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;padding:9px 12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.ent .hl{transition:stroke .2s}
+.ent:hover .hl,.ent.sel .hl{stroke:var(--lime);stroke-width:3}
+.lbl{font:500 15px var(--f-titre);letter-spacing:-.01em;fill:var(--ivoire)}
+.sub{font:400 10.5px var(--f-mono);letter-spacing:.06em;fill:var(--ivoire-2);text-transform:uppercase}
+.mapfoot{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between;padding:12px 14px;font-size:12.5px;color:var(--ivoire-2)}
+.panel{padding:24px;position:sticky;top:96px;min-width:0}
+.panel h3{font-size:1.9rem;margin-top:10px}
+.panel .role{margin-top:12px;color:var(--ivoire-2);font-size:15px}
+.panel dl{margin:18px 0 0;display:grid;gap:14px}
+.panel dt{font:500 .7rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ivoire-3)}
+.panel dd{margin:6px 0 0}
+.lst{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.lst li{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding-bottom:7px;border-bottom:1px solid var(--filet)}
+.lst li span:last-child{font:400 12.5px var(--f-mono);white-space:nowrap;color:var(--ivoire-2)}
+.lk{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:14px}
+.lk li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px}
+.lk b{font:500 13px var(--f-mono);color:var(--lime)}
 
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;position:sticky;top:76px;min-width:0}
-.panel h3{font-size:26px;margin-top:6px}
-.panel .role{margin-top:8px;color:var(--muted)}
-.panel dl{margin:14px 0 0;display:grid;gap:10px}
-.panel dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.panel dd{margin:2px 0 0}
-.hw{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:6px}
-.hw li{display:flex;justify-content:space-between;gap:12px;font-size:14px;border-bottom:1px dashed var(--line);padding-bottom:5px}
-.hw li span:last-child{font-family:var(--f-mono);font-size:13px;white-space:nowrap;color:var(--muted)}
-.links{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:6px;font-size:14px}
-.links li{display:flex;gap:8px}
-.links b{font-family:var(--f-mono);font-weight:500;color:var(--accent)}
-
-.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font:600 12px var(--f-body);white-space:nowrap}
-.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
-.s-ok{color:var(--ok);background:var(--ok-soft)}
-.s-dev{color:var(--dev);background:var(--dev-soft)}
-.s-test{color:var(--test);background:var(--test-soft)}
-.s-opt{color:var(--opt);background:var(--opt-soft)}
+.st{display:inline-flex;align-items:center;gap:8px;font:500 12.5px var(--f-texte);color:var(--ivoire);white-space:nowrap}
+.st i{width:10px;height:10px;border-radius:50%;flex:none}
+.st.ok i{background:var(--sphere-lime);box-shadow:0 0 10px rgba(199,235,0,.6)}
+.st.dev i{border:1.5px solid var(--ivoire)}
+.st.test i{border:1.5px dashed var(--lime)}
+.st.opt i{background:var(--ivoire-3)}
 
 /* Liaisons */
 .flows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.flow{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
-.flow .from{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
-.flow h3{font-size:20px}
-.flow .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
-.tag{font:500 12px var(--f-mono);border:1px solid var(--line);border-radius:5px;padding:2px 7px;color:var(--muted)}
-.flow.key{border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow{padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0;border-radius:24px}
+.flow.key{background:radial-gradient(120% 90% at 50% 0%,rgba(199,235,0,.10),rgba(199,235,0,.02) 55%,transparent 80%),var(--nuit-2);box-shadow:inset 0 0 0 1px rgba(199,235,0,.28),var(--portee)}
+.flow p.d{font-size:14.5px;color:var(--ivoire-2)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tag{font:400 11.5px var(--f-mono);letter-spacing:.04em;border-radius:999px;padding:4px 10px;color:var(--ivoire-2);box-shadow:inset 0 0 0 1px var(--filet)}
 
-/* Tableau d'état */
+/* Matériel */
 .filters{display:flex;flex-wrap:wrap;gap:8px}
+.hwgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+.hw{padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0;border-radius:24px}
+.hw .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.hw .grp{font:500 .68rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ivoire-3)}
+.hw .prix{font:500 1.1rem var(--f-titre);white-space:nowrap}
+.hw p.d{font-size:14px;color:var(--ivoire-2)}
+.hw .links{display:grid;gap:6px;margin-top:auto;padding-top:10px;border-top:1px solid var(--filet)}
+.hw .links a{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;text-decoration:none;color:var(--ivoire)}
+.hw .links a:hover{color:var(--lime)}
+.hw .links a span.k{font:500 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lime);padding-top:2px;flex:none;width:52px}
+.hw .links .none{font-size:13px;color:var(--ivoire-3)}
+
+/* État */
 .board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .col{display:flex;flex-direction:column;gap:10px;min-width:0}
-.col-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:8px;border-bottom:2px solid currentColor}
-.col-head h3{font-size:19px}
-.col-head .count{font:500 13px var(--f-mono)}
-.col p.hint{font-size:13px;color:var(--muted)}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:11px 12px;display:grid;gap:4px}
-.card b{font-weight:600;font-size:14.5px}
-.card span{font-size:13px;color:var(--muted)}
-.card .dom{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.colh{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid var(--filet)}
+.colh .count{font:500 13px var(--f-mono);color:var(--ivoire-2)}
+.col p.hint{font-size:13px;color:var(--ivoire-3)}
+.item{padding:13px 14px;border-radius:16px;background:var(--surface);box-shadow:var(--arete);display:grid;gap:4px}
+.item b{font-weight:600;font-size:14.5px}
+.item span{font-size:13px;color:var(--ivoire-2)}
+.item .dom{font:500 .65rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ivoire-3)}
 
 /* Coûts */
-.cost{display:grid;grid-template-columns:320px minmax(0,1fr);gap:18px;align-items:start}
-.ctrl{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:18px}
-.ctrl label{display:grid;gap:6px;font-weight:500;font-size:14px}
+.cost{display:grid;grid-template-columns:330px minmax(0,1fr);gap:16px;align-items:start}
+.ctrl{padding:24px;display:grid;gap:20px}
+.ctrl label{display:grid;gap:8px;font-weight:500;font-size:14.5px}
 .ctrl .row{display:flex;justify-content:space-between;align-items:baseline}
-.ctrl output{font:600 22px var(--f-display)}
-input[type=range]{width:100%;accent-color:var(--accent)}
-.check{display:flex!important;grid-template-columns:none;align-items:flex-start;gap:10px!important;font-weight:400!important}
-.check input{margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex:none}
-.check small{display:block;color:var(--muted);font-size:12.5px}
-.total{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0}
-.total-top{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:10px 24px;padding-bottom:14px;border-bottom:1px solid var(--line)}
-.big{font-family:var(--f-display);font-weight:700;font-size:clamp(44px,7vw,64px);line-height:.9;color:var(--accent)}
-.bars{display:grid;gap:9px;margin-top:16px}
-.bar{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr) 84px;gap:12px;align-items:center;font-size:13.5px}
-.bar .track{height:12px;background:var(--bg);border-radius:4px;overflow:hidden}
-.bar .fill{height:100%;background:var(--ink);opacity:.82;border-radius:4px;transition:width .35s ease}
-.bar .fill.opt{background:var(--opt)}
-.bar .v{font-family:var(--f-mono);text-align:right;white-space:nowrap}
-.notes{margin-top:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.note{background:var(--bg);border-radius:8px;padding:11px 12px;font-size:13px}
-.note b{display:block;font-family:var(--f-display);font-size:20px;font-weight:600}
+.ctrl output{font:500 1.6rem var(--f-titre);letter-spacing:-.03em}
+input[type=range]{width:100%;accent-color:var(--lime)}
+.check{display:flex!important;align-items:flex-start;gap:10px!important;font-weight:400!important}
+.check input{margin-top:4px;accent-color:var(--lime);width:16px;height:16px;flex:none}
+.check small{display:block;color:var(--ivoire-2);font-size:12.5px}
+.total{padding:24px;min-width:0}
+.ttop{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:10px 24px;padding-bottom:18px;border-bottom:1px solid var(--filet)}
+.big{font:500 clamp(3rem,7vw,5rem)/.9 var(--f-titre);letter-spacing:-.036em;background:var(--degrade-texte);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bars{display:grid;gap:10px;margin-top:18px}
+.bar{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr) 84px;gap:14px;align-items:center;font-size:13.5px}
+.bar .tr{height:10px;background:rgba(238,240,228,.06);border-radius:999px;overflow:hidden}
+.bar .fi{height:100%;border-radius:999px;background:linear-gradient(90deg,#8FB000,#C7EB00);transition:width .5s var(--ease)}
+.bar .fi.opt{background:var(--ivoire-3)}
+.bar .v{font:400 12.5px var(--f-mono);text-align:right;white-space:nowrap;color:var(--ivoire-2)}
+.notes{margin-top:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.note{border-radius:16px;padding:14px;font-size:13px;color:var(--ivoire-2);box-shadow:inset 0 0 0 1px var(--filet)}
+.note b{display:block;font:500 1.3rem var(--f-titre);color:var(--ivoire);letter-spacing:-.02em;margin-bottom:4px}
 
 /* Feuille de route */
-.gantt-scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
-.gantt{min-width:820px;position:relative;padding:0 14px 14px}
-.months{display:grid;grid-template-columns:180px repeat(7,1fr);position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--line)}
-.months div{font:500 12px var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 6px}
-.grp{font:600 15px var(--f-display);text-transform:uppercase;letter-spacing:.06em;padding:12px 0 4px;color:var(--muted)}
-.grow{display:grid;grid-template-columns:180px 1fr;align-items:center;min-height:30px}
-.grow .name{font-size:13px;padding-right:10px}
+.gscroll{overflow-x:auto;border-radius:24px}
+.gantt{min-width:840px;padding:6px 18px 18px}
+.months{display:grid;grid-template-columns:190px repeat(7,1fr);border-bottom:1px solid var(--filet)}
+.months div{font:500 .68rem var(--f-mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ivoire-3);padding:14px 6px}
+.grp{font:500 1rem var(--f-titre);padding:16px 0 6px;color:var(--ivoire-2)}
+.grow{display:grid;grid-template-columns:190px 1fr;align-items:center;min-height:30px}
+.grow .name{font-size:13px;padding-right:10px;color:var(--ivoire)}
 .lane{position:relative;height:22px}
-.gbar{position:absolute;top:3px;height:16px;border-radius:4px;border:0;cursor:pointer;padding:0}
-.gbar.g-cad{background:var(--muted)} .gbar.g-mat{background:var(--test)} .gbar.g-log{background:var(--dev)} .gbar.g-ess{background:var(--ok)} .gbar.g-evt{background:var(--accent)}
-.gbar[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:1px}
-.mile{position:absolute;top:2px;width:14px;height:14px;transform:translateX(-7px) rotate(45deg);background:var(--accent);border:0;cursor:pointer;padding:0}
-.today{position:absolute;top:0;bottom:0;width:0;border-left:2px dashed var(--accent);pointer-events:none}
-.today span{position:absolute;top:6px;left:4px;font:600 11px var(--f-mono);color:var(--accent);white-space:nowrap}
-.gdetail{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:18px}
-.gdetail h3{font-size:24px}
-.gdetail ul{margin:0;padding-left:18px}
-.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:13px;color:var(--muted)}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.gb{position:absolute;top:4px;height:14px;border-radius:999px;border:0;cursor:pointer;padding:0}
+.gb.c1{background:var(--ivoire-3)} .gb.c2{background:#8FD18A} .gb.c3{background:var(--lime)} .gb.c4{background:#43B3A3} .gb.c5{background:var(--degrade);box-shadow:0 0 18px rgba(199,235,0,.5)}
+.gb[aria-pressed="true"]{outline:2px solid var(--ivoire);outline-offset:2px}
+.mile{position:absolute;top:3px;width:14px;height:14px;transform:translateX(-7px) rotate(45deg);background:var(--lime);border:0;cursor:pointer;padding:0;box-shadow:0 0 12px rgba(199,235,0,.6)}
+.today{position:absolute;top:0;bottom:0;width:0;border-left:1.5px dashed var(--lime);pointer-events:none}
+.today span{position:absolute;top:4px;left:6px;font:500 10.5px var(--f-mono);color:var(--lime);white-space:nowrap;letter-spacing:.08em}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-size:13px;color:var(--ivoire-2)}
+.legend i{display:inline-block;width:18px;height:8px;border-radius:999px;margin-right:8px;vertical-align:1px}
+.gd{margin-top:14px;padding:22px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:20px}
+.gd h3{font-size:1.6rem;margin-top:8px}
+.gd ul{margin:8px 0 0;padding-left:18px;color:var(--ivoire-2)}
+
+/* 4G */
+.g4{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.g4 .carte{padding:26px}
+.g4 ol{margin:12px 0 0;padding-left:20px;display:grid;gap:10px;color:var(--ivoire-2)}
+.g4 ol b{color:var(--ivoire);font-weight:600}
+.verdict{font:500 clamp(1.5rem,2.6vw,2rem)/1.15 var(--f-titre);letter-spacing:-.02em;margin-top:10px}
+.gauge{margin-top:18px;display:grid;gap:10px}
+.gauge .r{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;align-items:center;font-size:13.5px}
+.gauge .t{height:8px;border-radius:999px;background:rgba(238,240,228,.06);overflow:hidden}
+.gauge .f{height:100%;border-radius:999px}
 
 /* Questions */
-.qgrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px;align-items:start}
+.qgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
 .qlist{display:grid;gap:10px}
-.q{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px}
-.q input{width:18px;height:18px;margin-top:2px;accent-color:var(--ok)}
-.q .qt{font-weight:600}
-.q .qd{font-size:13.5px;color:var(--muted);margin-top:3px}
-.q .qm{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.q.done{opacity:.55}
+.q{padding:16px 18px;border-radius:20px;background:var(--surface);box-shadow:var(--arete);display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px}
+.q input{width:18px;height:18px;margin-top:3px;accent-color:var(--lime)}
+.q .qt{font-weight:600;cursor:pointer}
+.q .qd{font-size:13.5px;color:var(--ivoire-2);margin-top:4px}
+.q .qm{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.q.done{opacity:.5}
 .q.done .qt{text-decoration:line-through}
-.prio{font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;border-radius:5px;padding:2px 7px}
-.prio.h{color:var(--accent);background:var(--accent-soft)}
-.prio.m{color:var(--test);background:var(--test-soft)}
-.decided{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
-.decided ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:9px}
-.decided li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px;font-size:14px}
-.decided li::before{content:"✓";color:var(--ok);font-weight:700}
-.progress{margin-top:10px;font-size:13px;color:var(--muted)}
+.prio{font:500 .65rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:4px 10px}
+.prio.h{color:var(--nuit);background:var(--lime)}
+.prio.m{color:var(--ivoire-2);box-shadow:inset 0 0 0 1px var(--filet)}
+.side{display:grid;gap:16px}
+.decided{padding:22px}
+.decided ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.decided li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:10px;font-size:14px;color:var(--ivoire-2)}
+.decided li::before{content:"";width:8px;height:8px;margin-top:7px;border-radius:50%;background:var(--sphere-lime)}
+.decided li b{color:var(--ivoire);font-weight:600}
+.progress{margin-top:12px;font:500 .72rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ivoire-3)}
 
-footer{padding-block:28px 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between}
+footer{padding-block:40px 56px;border-top:1px solid var(--filet);color:var(--ivoire-3);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
 
-@media (max-width:980px){
-  .plan,.cost,.qgrid{grid-template-columns:minmax(0,1fr)}
+@media (max-width:1020px){
+  .plan,.cost,.qgrid,.g4{grid-template-columns:minmax(0,1fr)}
   .panel{position:static}
-  .board{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .flows{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .board,.flows,.hwgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sec-head{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:640px){
   .hero-grid{grid-template-columns:minmax(0,1fr)}
-  .board,.flows,.notes{grid-template-columns:minmax(0,1fr)}
+  .board,.flows,.hwgrid,.notes{grid-template-columns:minmax(0,1fr)}
   .bar{grid-template-columns:minmax(0,1fr) 78px}
-  .bar .track{grid-column:1/-1;grid-row:2}
-  .gdetail{grid-template-columns:minmax(0,1fr)}
+  .bar .tr{grid-column:1/-1;grid-row:2}
+  .gd{grid-template-columns:minmax(0,1fr)}
   .nav ul{display:none}
+  .hero::before{left:84%}
+  .gauge .r{grid-template-columns:minmax(0,1fr)}
 }
-@media (prefers-reduced-motion:reduce){.bar .fill{transition:none}}
+@media (prefers-reduced-motion:reduce){.hero::before{animation:none}.bar .fi{transition:none}}
 </style>
 
-<nav class="nav" aria-label="Sections">
-  <div class="wrap">
-    <div class="brand">AI<span>regatta</span></div>
-    <ul>
-      <li><a href="#plan">Le dispositif</a></li>
-      <li><a href="#liaisons">Liaisons</a></li>
-      <li><a href="#etat">État</a></li>
-      <li><a href="#couts">Coûts</a></li>
-      <li><a href="#route">Feuille de route</a></li>
-      <li><a href="#questions">Questions</a></li>
-    </ul>
-    <button class="theme-btn" id="themeBtn" type="button">Thème</button>
-  </div>
-</nav>
+<div class="grain" aria-hidden="true"></div>
 
-<header class="hero">
+<div class="wrap nav">
+  <nav class="pill" aria-label="Sections">
+    <a class="logo" href="#top"><img alt="" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiPjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iZyIgY3g9IjAuNSIgY3k9IjAuMyIgZng9IjAuNSIgZnk9IjAuMyIgcj0iMS4wMiI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RjZmYzYSIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjYzdlYjAwIi8+PHN0b3Agb2Zmc2V0PSI3NSUiIHN0b3AtY29sb3I9IiM4ZmQxOGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0M2IzYTMiLz48L3JhZGlhbEdyYWRpZW50PjxtYXNrIGlkPSJtIj48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjZmZmIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTAwLDUwMCkgc2NhbGUoMC43MDAwKSB0cmFuc2xhdGUoLTUwMCwtMjc2LjUpIj48cGF0aCBkPSJNMCw1NTMgUTEzNC44LDI4MC4zIDI1MywwIEw1MDAsMjMwIEwxNzYsNTUzIFogTTEwMDAsNTUzIFE4NjUuMiwyODAuMyA3NDcsMCBMNTAwLDIzMCBMODI0LDU1MyBaIiBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48L2c+PC9tYXNrPjwvZGVmcz48cGF0aCBkPSJNMjU5LjgsMjYuMiBMMjY0LjMsMjUuMSBMMjY4LjksMjQuMSBMMjczLjUsMjMuMSBMMjc4LjEsMjIuMSBMMjgyLjcsMjEuMiBMMjg3LjMsMjAuMiBMMjkxLjksMTkuMyBMMjk2LjUsMTguNSBMMzAxLjEsMTcuNiBMMzA1LjcsMTYuOCBMMzEwLjMsMTYgTDMxNSwxNS4yIEwzMTkuNiwxNC40IEwzMjQuMiwxMy43IEwzMjguOSwxMyBMMzMzLjUsMTIuMyBMMzM4LjEsMTEuNiBMMzQyLjgsMTAuOSBMMzQ3LjQsMTAuMyBMMzUyLjEsOS43IEwzNTYuOCw5LjEgTDM2MS40LDguNSBMMzY2LjEsNy45IEwzNzAuNyw3LjQgTDM3NS40LDYuOSBMMzgwLjEsNi4zIEwzODQuNyw1LjkgTDM4OS40LDUuNCBMMzk0LjEsNC45IEwzOTguOCw0LjUgTDQwMy41LDQuMSBMNDA4LjEsMy43IEw0MTIuOCwzLjQgTDQxNy41LDMgTDQyMi4yLDIuNyBMNDI2LjksMi40IEw0MzEuNiwyLjEgTDQzNi4yLDEuOCBMNDQwLjksMS41IEw0NDUuNiwxLjMgTDQ1MC4zLDEuMSBMNDU1LDAuOSBMNDU5LjcsMC43IEw0NjQuNCwwLjYgTDQ2OS4xLDAuNCBMNDczLjgsMC4zIEw0NzguNSwwLjIgTDQ4My4yLDAuMSBMNDg3LjksMC4xIEw0OTIuNiwwIEw0OTcuMywwIEw1MDIsMCBMNTA2LjYsMCBMNTExLjMsMC4xIEw1MTYsMC4xIEw1MjAuNywwLjIgTDUyNS40LDAuMyBMNTMwLjEsMC40IEw1MzQuOCwwLjUgTDUzOS41LDAuNyBMNTQ0LjIsMC45IEw1NDguOSwxLjEgTDU1My42LDEuMyBMNTU4LjMsMS41IEw1NjMsMS43IEw1NjcuNywyIEw1NzIuMywyLjMgTDU3NywyLjYgTDU4MS43LDIuOSBMNTg2LjQsMy4zIEw1OTEuMSwzLjcgTDU5NS44LDQgTDYwMC40LDQuNSBMNjA1LjEsNC45IEw2MDkuOCw1LjMgTDYxNC41LDUuOCBMNjE5LjEsNi4zIEw2MjMuOCw2LjggTDYyOC41LDcuMyBMNjMzLjEsNy44IEw2MzcuOCw4LjQgTDY0Mi41LDkgTDY0Ny4xLDkuNiBMNjUxLjgsMTAuMiBMNjU2LjQsMTAuOCBMNjYxLjEsMTEuNSBMNjY1LjcsMTIuMiBMNjcwLjQsMTIuOSBMNjc1LDEzLjYgTDY3OS42LDE0LjMgTDY4NC4zLDE1LjEgTDY4OC45LDE1LjkgTDY5My41LDE2LjcgTDY5OC4xLDE3LjUgTDcwMi44LDE4LjMgTDcwNy40LDE5LjIgTDcxMiwyMC4xIEw3MTYuNiwyMSBMNzIxLjIsMjIgTDcyNS44LDIyLjkgTDczMC4zLDIzLjkgTDczNC45LDI0LjkgTDczOS41LDI2IEw3NDQsMjcuMSBMNzQ4LjYsMjguMiBMNzUzLjEsMjkuMyBMNzU3LjYsMzAuNSBMNzYyLjIsMzEuNyBMNzY2LjcsMzMgTDc3MS4xLDM0LjMgTDc3NS42LDM1LjYgTDc4MC4xLDM3IEw3ODQuNSwzOC40IEw3ODguOSwzOS44IEw3OTMuMyw0MS4zIEw3OTcuNyw0Mi44IEw4MDIuMSw0NC40IEw4MDYuNCw0Ni4xIEw4MTAuNyw0Ny44IEw4MTUsNDkuNSBMODE5LjMsNTEuMyBMODIzLjUsNTMuMiBMODI3LjcsNTUuMSBMODMxLjksNTcuMSBMODM2LDU5LjEgTDg0MC4xLDYxLjIgTDg0NC4xLDYzLjQgTDg0OC4xLDY1LjYgTDg1Mi4xLDY3LjkgTDg1Niw3MC4zIEw4NTkuOSw3Mi43IEw4NjMuNyw3NS4yIEw4NjcuNCw3Ny44IEw4NzEuMSw4MC40IEw4NzQuOCw4My4xIEw4NzguNCw4NS45IEw4ODEuOSw4OC43IEw4ODUuNCw5MS43IEw4ODguOCw5NC43IEw4OTIuMSw5Ny43IEw4OTUuNCwxMDAuOSBMODk4LjYsMTA0LjEgTDkwMS44LDEwNy4zIEw5MDQuOCwxMTAuNyBMOTA3LjgsMTE0IEw5MTAuOCwxMTcuNSBMOTEzLjYsMTIxIEw5MTYuNCwxMjQuNiBMOTE5LjEsMTI4LjMgTDkyMS44LDEzMS45IEw5MjQuNCwxMzUuNyBMOTI2LjksMTM5LjUgTDkyOS4zLDE0My40IEw5MzEuNywxNDcuMyBMOTM0LDE1MS4yIEw5MzYuMywxNTUuMiBMOTM4LjQsMTU5LjIgTDk0MC41LDE2My4zIEw5NDIuNiwxNjcuNCBMOTQ0LjYsMTcxLjYgTDk0Ni41LDE3NS44IEw5NDguNCwxODAgTDk1MC4yLDE4NC4zIEw5NTEuOSwxODguNSBMOTUzLjYsMTkyLjggTDk1NS4zLDE5Ny4yIEw5NTYuOSwyMDEuNSBMOTU4LjQsMjA1LjkgTDk1OS45LDIxMC4zIEw5NjEuNCwyMTQuNyBMOTYyLjgsMjE5LjIgTDk2NC4yLDIyMy42IEw5NjUuNSwyMjguMSBMOTY2LjgsMjMyLjYgTDk2OC4xLDIzNy4xIEw5NjkuMywyNDEuNiBMOTcwLjUsMjQ2LjEgTDk3MS42LDI1MC43IEw5NzIuNywyNTUuMiBMOTczLjgsMjU5LjggTDk3NC45LDI2NC4zIEw5NzUuOSwyNjguOSBMOTc2LjksMjczLjUgTDk3Ny45LDI3OC4xIEw5NzguOCwyODIuNyBMOTc5LjgsMjg3LjMgTDk4MC43LDI5MS45IEw5ODEuNSwyOTYuNSBMOTgyLjQsMzAxLjEgTDk4My4yLDMwNS43IEw5ODQsMzEwLjMgTDk4NC44LDMxNSBMOTg1LjYsMzE5LjYgTDk4Ni4zLDMyNC4yIEw5ODcsMzI4LjkgTDk4Ny43LDMzMy41IEw5ODguNCwzMzguMSBMOTg5LjEsMzQyLjggTDk4OS43LDM0Ny40IEw5OTAuMywzNTIuMSBMOTkwLjksMzU2LjggTDk5MS41LDM2MS40IEw5OTIuMSwzNjYuMSBMOTkyLjYsMzcwLjcgTDk5My4xLDM3NS40IEw5OTMuNywzODAuMSBMOTk0LjEsMzg0LjcgTDk5NC42LDM4OS40IEw5OTUuMSwzOTQuMSBMOTk1LjUsMzk4LjggTDk5NS45LDQwMy41IEw5OTYuMyw0MDguMSBMOTk2LjYsNDEyLjggTDk5Nyw0MTcuNSBMOTk3LjMsNDIyLjIgTDk5Ny42LDQyNi45IEw5OTcuOSw0MzEuNiBMOTk4LjIsNDM2LjIgTDk5OC41LDQ0MC45IEw5OTguNyw0NDUuNiBMOTk4LjksNDUwLjMgTDk5OS4xLDQ1NSBMOTk5LjMsNDU5LjcgTDk5OS40LDQ2NC40IEw5OTkuNiw0NjkuMSBMOTk5LjcsNDczLjggTDk5OS44LDQ3OC41IEw5OTkuOSw0ODMuMiBMOTk5LjksNDg3LjkgTDEwMDAsNDkyLjYgTDEwMDAsNDk3LjMgTDEwMDAsNTAyIEwxMDAwLDUwNi42IEw5OTkuOSw1MTEuMyBMOTk5LjksNTE2IEw5OTkuOCw1MjAuNyBMOTk5LjcsNTI1LjQgTDk5OS42LDUzMC4xIEw5OTkuNSw1MzQuOCBMOTk5LjMsNTM5LjUgTDk5OS4xLDU0NC4yIEw5OTguOSw1NDguOSBMOTk4LjcsNTUzLjYgTDk5OC41LDU1OC4zIEw5OTguMyw1NjMgTDk5OCw1NjcuNyBMOTk3LjcsNTcyLjMgTDk5Ny40LDU3NyBMOTk3LjEsNTgxLjcgTDk5Ni43LDU4Ni40IEw5OTYuMyw1OTEuMSBMOTk2LDU5NS44IEw5OTUuNSw2MDAuNCBMOTk1LjEsNjA1LjEgTDk5NC43LDYwOS44IEw5OTQuMiw2MTQuNSBMOTkzLjcsNjE5LjEgTDk5My4yLDYyMy44IEw5OTIuNyw2MjguNSBMOTkyLjIsNjMzLjEgTDk5MS42LDYzNy44IEw5OTEsNjQyLjUgTDk5MC40LDY0Ny4xIEw5ODkuOCw2NTEuOCBMOTg5LjIsNjU2LjQgTDk4OC41LDY2MS4xIEw5ODcuOCw2NjUuNyBMOTg3LjEsNjcwLjQgTDk4Ni40LDY3NSBMOTg1LjcsNjc5LjYgTDk4NC45LDY4NC4zIEw5ODQuMSw2ODguOSBMOTgzLjMsNjkzLjUgTDk4Mi41LDY5OC4xIEw5ODEuNyw3MDIuOCBMOTgwLjgsNzA3LjQgTDk3OS45LDcxMiBMOTc5LDcxNi42IEw5NzgsNzIxLjIgTDk3Ny4xLDcyNS44IEw5NzYuMSw3MzAuMyBMOTc1LjEsNzM0LjkgTDk3NCw3MzkuNSBMOTcyLjksNzQ0IEw5NzEuOCw3NDguNiBMOTcwLjcsNzUzLjEgTDk2OS41LDc1Ny42IEw5NjguMyw3NjIuMiBMOTY3LDc2Ni43IEw5NjUuNyw3NzEuMSBMOTY0LjQsNzc1LjYgTDk2Myw3ODAuMSBMOTYxLjYsNzg0LjUgTDk2MC4yLDc4OC45IEw5NTguNyw3OTMuMyBMOTU3LjIsNzk3LjcgTDk1NS42LDgwMi4xIEw5NTMuOSw4MDYuNCBMOTUyLjIsODEwLjcgTDk1MC41LDgxNSBMOTQ4LjcsODE5LjMgTDk0Ni44LDgyMy41IEw5NDQuOSw4MjcuNyBMOTQyLjksODMxLjkgTDk0MC45LDgzNiBMOTM4LjgsODQwLjEgTDkzNi42LDg0NC4xIEw5MzQuNCw4NDguMSBMOTMyLjEsODUyLjEgTDkyOS43LDg1NiBMOTI3LjMsODU5LjkgTDkyNC44LDg2My43IEw5MjIuMiw4NjcuNCBMOTE5LjYsODcxLjEgTDkxNi45LDg3NC44IEw5MTQuMSw4NzguNCBMOTExLjMsODgxLjkgTDkwOC4zLDg4NS40IEw5MDUuMyw4ODguOCBMOTAyLjMsODkyLjEgTDg5OS4xLDg5NS40IEw4OTUuOSw4OTguNiBMODkyLjcsOTAxLjggTDg4OS4zLDkwNC44IEw4ODYsOTA3LjggTDg4Mi41LDkxMC44IEw4NzksOTEzLjYgTDg3NS40LDkxNi40IEw4NzEuNyw5MTkuMSBMODY4LjEsOTIxLjggTDg2NC4zLDkyNC40IEw4NjAuNSw5MjYuOSBMODU2LjYsOTI5LjMgTDg1Mi43LDkzMS43IEw4NDguOCw5MzQgTDg0NC44LDkzNi4zIEw4NDAuOCw5MzguNCBMODM2LjcsOTQwLjUgTDgzMi42LDk0Mi42IEw4MjguNCw5NDQuNiBMODI0LjIsOTQ2LjUgTDgyMCw5NDguNCBMODE1LjcsOTUwLjIgTDgxMS41LDk1MS45IEw4MDcuMiw5NTMuNiBMODAyLjgsOTU1LjMgTDc5OC41LDk1Ni45IEw3OTQuMSw5NTguNCBMNzg5LjcsOTU5LjkgTDc4NS4zLDk2MS40IEw3ODAuOCw5NjIuOCBMNzc2LjQsOTY0LjIgTDc3MS45LDk2NS41IEw3NjcuNCw5NjYuOCBMNzYyLjksOTY4LjEgTDc1OC40LDk2OS4zIEw3NTMuOSw5NzAuNSBMNzQ5LjMsOTcxLjYgTDc0NC44LDk3Mi43IEw3NDAuMiw5NzMuOCBMNzM1LjcsOTc0LjkgTDczMS4xLDk3NS45IEw3MjYuNSw5NzYuOSBMNzIxLjksOTc3LjkgTDcxNy4zLDk3OC44IEw3MTIuNyw5NzkuOCBMNzA4LjEsOTgwLjcgTDcwMy41LDk4MS41IEw2OTguOSw5ODIuNCBMNjk0LjMsOTgzLjIgTDY4OS43LDk4NCBMNjg1LDk4NC44IEw2ODAuNCw5ODUuNiBMNjc1LjgsOTg2LjMgTDY3MS4xLDk4NyBMNjY2LjUsOTg3LjcgTDY2MS45LDk4OC40IEw2NTcuMiw5ODkuMSBMNjUyLjYsOTg5LjcgTDY0Ny45LDk5MC4zIEw2NDMuMiw5OTAuOSBMNjM4LjYsOTkxLjUgTDYzMy45LDk5Mi4xIEw2MjkuMyw5OTIuNiBMNjI0LjYsOTkzLjEgTDYxOS45LDk5My43IEw2MTUuMyw5OTQuMSBMNjEwLjYsOTk0LjYgTDYwNS45LDk5NS4xIEw2MDEuMiw5OTUuNSBMNTk2LjUsOTk1LjkgTDU5MS45LDk5Ni4zIEw1ODcuMiw5OTYuNiBMNTgyLjUsOTk3IEw1NzcuOCw5OTcuMyBMNTczLjEsOTk3LjYgTDU2OC40LDk5Ny45IEw1NjMuOCw5OTguMiBMNTU5LjEsOTk4LjUgTDU1NC40LDk5OC43IEw1NDkuNyw5OTguOSBMNTQ1LDk5OS4xIEw1NDAuMyw5OTkuMyBMNTM1LjYsOTk5LjQgTDUzMC45LDk5OS42IEw1MjYuMiw5OTkuNyBMNTIxLjUsOTk5LjggTDUxNi44LDk5OS45IEw1MTIuMSw5OTkuOSBMNTA3LjQsMTAwMCBMNTAyLjcsMTAwMCBMNDk4LDEwMDAgTDQ5My40LDEwMDAgTDQ4OC43LDk5OS45IEw0ODQsOTk5LjkgTDQ3OS4zLDk5OS44IEw0NzQuNiw5OTkuNyBMNDY5LjksOTk5LjYgTDQ2NS4yLDk5OS41IEw0NjAuNSw5OTkuMyBMNDU1LjgsOTk5LjEgTDQ1MS4xLDk5OC45IEw0NDYuNCw5OTguNyBMNDQxLjcsOTk4LjUgTDQzNyw5OTguMyBMNDMyLjMsOTk4IEw0MjcuNyw5OTcuNyBMNDIzLDk5Ny40IEw0MTguMyw5OTcuMSBMNDEzLjYsOTk2LjcgTDQwOC45LDk5Ni4zIEw0MDQuMiw5OTYgTDM5OS42LDk5NS41IEwzOTQuOSw5OTUuMSBMMzkwLjIsOTk0LjcgTDM4NS41LDk5NC4yIEwzODAuOSw5OTMuNyBMMzc2LjIsOTkzLjIgTDM3MS41LDk5Mi43IEwzNjYuOSw5OTIuMiBMMzYyLjIsOTkxLjYgTDM1Ny41LDk5MSBMMzUyLjksOTkwLjQgTDM0OC4yLDk4OS44IEwzNDMuNiw5ODkuMiBMMzM4LjksOTg4LjUgTDMzNC4zLDk4Ny44IEwzMjkuNiw5ODcuMSBMMzI1LDk4Ni40IEwzMjAuNCw5ODUuNyBMMzE1LjcsOTg0LjkgTDMxMS4xLDk4NC4xIEwzMDYuNSw5ODMuMyBMMzAxLjksOTgyLjUgTDI5Ny4yLDk4MS43IEwyOTIuNiw5ODAuOCBMMjg4LDk3OS45IEwyODMuNCw5NzkgTDI3OC44LDk3OCBMMjc0LjIsOTc3LjEgTDI2OS43LDk3Ni4xIEwyNjUuMSw5NzUuMSBMMjYwLjUsOTc0IEwyNTYsOTcyLjkgTDI1MS40LDk3MS44IEwyNDYuOSw5NzAuNyBMMjQyLjQsOTY5LjUgTDIzNy44LDk2OC4zIEwyMzMuMyw5NjcgTDIyOC45LDk2NS43IEwyMjQuNCw5NjQuNCBMMjE5LjksOTYzIEwyMTUuNSw5NjEuNiBMMjExLjEsOTYwLjIgTDIwNi43LDk1OC43IEwyMDIuMyw5NTcuMiBMMTk3LjksOTU1LjYgTDE5My42LDk1My45IEwxODkuMyw5NTIuMiBMMTg1LDk1MC41IEwxODAuNyw5NDguNyBMMTc2LjUsOTQ2LjggTDE3Mi4zLDk0NC45IEwxNjguMSw5NDIuOSBMMTY0LDk0MC45IEwxNTkuOSw5MzguOCBMMTU1LjksOTM2LjYgTDE1MS45LDkzNC40IEwxNDcuOSw5MzIuMSBMMTQ0LDkyOS43IEwxNDAuMSw5MjcuMyBMMTM2LjMsOTI0LjggTDEzMi42LDkyMi4yIEwxMjguOSw5MTkuNiBMMTI1LjIsOTE2LjkgTDEyMS42LDkxNC4xIEwxMTguMSw5MTEuMyBMMTE0LjYsOTA4LjMgTDExMS4yLDkwNS4zIEwxMDcuOSw5MDIuMyBMMTA0LjYsODk5LjEgTDEwMS40LDg5NS45IEw5OC4yLDg5Mi43IEw5NS4yLDg4OS4zIEw5Mi4yLDg4NiBMODkuMiw4ODIuNSBMODYuNCw4NzkgTDgzLjYsODc1LjQgTDgwLjksODcxLjcgTDc4LjIsODY4LjEgTDc1LjYsODY0LjMgTDczLjEsODYwLjUgTDcwLjcsODU2LjYgTDY4LjMsODUyLjcgTDY2LDg0OC44IEw2My43LDg0NC44IEw2MS42LDg0MC44IEw1OS41LDgzNi43IEw1Ny40LDgzMi42IEw1NS40LDgyOC40IEw1My41LDgyNC4yIEw1MS42LDgyMCBMNDkuOCw4MTUuNyBMNDguMSw4MTEuNSBMNDYuNCw4MDcuMiBMNDQuNyw4MDIuOCBMNDMuMSw3OTguNSBMNDEuNiw3OTQuMSBMNDAuMSw3ODkuNyBMMzguNiw3ODUuMyBMMzcuMiw3ODAuOCBMMzUuOCw3NzYuNCBMMzQuNSw3NzEuOSBMMzMuMiw3NjcuNCBMMzEuOSw3NjIuOSBMMzAuNyw3NTguNCBMMjkuNSw3NTMuOSBMMjguNCw3NDkuMyBMMjcuMyw3NDQuOCBMMjYuMiw3NDAuMiBMMjUuMSw3MzUuNyBMMjQuMSw3MzEuMSBMMjMuMSw3MjYuNSBMMjIuMSw3MjEuOSBMMjEuMiw3MTcuMyBMMjAuMiw3MTIuNyBMMTkuMyw3MDguMSBMMTguNSw3MDMuNSBMMTcuNiw2OTguOSBMMTYuOCw2OTQuMyBMMTYsNjg5LjcgTDE1LjIsNjg1IEwxNC40LDY4MC40IEwxMy43LDY3NS44IEwxMyw2NzEuMSBMMTIuMyw2NjYuNSBMMTEuNiw2NjEuOSBMMTAuOSw2NTcuMiBMMTAuMyw2NTIuNiBMOS43LDY0Ny45IEw5LjEsNjQzLjIgTDguNSw2MzguNiBMNy45LDYzMy45IEw3LjQsNjI5LjMgTDYuOSw2MjQuNiBMNi4zLDYxOS45IEw1LjksNjE1LjMgTDUuNCw2MTAuNiBMNC45LDYwNS45IEw0LjUsNjAxLjIgTDQuMSw1OTYuNSBMMy43LDU5MS45IEwzLjQsNTg3LjIgTDMsNTgyLjUgTDIuNyw1NzcuOCBMMi40LDU3My4xIEwyLjEsNTY4LjQgTDEuOCw1NjMuOCBMMS41LDU1OS4xIEwxLjMsNTU0LjQgTDEuMSw1NDkuNyBMMC45LDU0NSBMMC43LDU0MC4zIEwwLjYsNTM1LjYgTDAuNCw1MzAuOSBMMC4zLDUyNi4yIEwwLjIsNTIxLjUgTDAuMSw1MTYuOCBMMC4xLDUxMi4xIEwwLDUwNy40IEwwLDUwMi43IEwwLDQ5OCBMMCw0OTMuNCBMMC4xLDQ4OC43IEwwLjEsNDg0IEwwLjIsNDc5LjMgTDAuMyw0NzQuNiBMMC40LDQ2OS45IEwwLjUsNDY1LjIgTDAuNyw0NjAuNSBMMC45LDQ1NS44IEwxLjEsNDUxLjEgTDEuMyw0NDYuNCBMMS41LDQ0MS43IEwxLjcsNDM3IEwyLDQzMi4zIEwyLjMsNDI3LjcgTDIuNiw0MjMgTDIuOSw0MTguMyBMMy4zLDQxMy42IEwzLjcsNDA4LjkgTDQsNDA0LjIgTDQuNSwzOTkuNiBMNC45LDM5NC45IEw1LjMsMzkwLjIgTDUuOCwzODUuNSBMNi4zLDM4MC45IEw2LjgsMzc2LjIgTDcuMywzNzEuNSBMNy44LDM2Ni45IEw4LjQsMzYyLjIgTDksMzU3LjUgTDkuNiwzNTIuOSBMMTAuMiwzNDguMiBMMTAuOCwzNDMuNiBMMTEuNSwzMzguOSBMMTIuMiwzMzQuMyBMMTIuOSwzMjkuNiBMMTMuNiwzMjUgTDE0LjMsMzIwLjQgTDE1LjEsMzE1LjcgTDE1LjksMzExLjEgTDE2LjcsMzA2LjUgTDE3LjUsMzAxLjkgTDE4LjMsMjk3LjIgTDE5LjIsMjkyLjYgTDIwLjEsMjg4IEwyMSwyODMuNCBMMjIsMjc4LjggTDIyLjksMjc0LjIgTDIzLjksMjY5LjcgTDI0LjksMjY1LjEgTDI2LDI2MC41IEwyNy4xLDI1NiBMMjguMiwyNTEuNCBMMjkuMywyNDYuOSBMMzAuNSwyNDIuNCBMMzEuNywyMzcuOCBMMzMsMjMzLjMgTDM0LjMsMjI4LjkgTDM1LjYsMjI0LjQgTDM3LDIxOS45IEwzOC40LDIxNS41IEwzOS44LDIxMS4xIEw0MS4zLDIwNi43IEw0Mi44LDIwMi4zIEw0NC40LDE5Ny45IEw0Ni4xLDE5My42IEw0Ny44LDE4OS4zIEw0OS41LDE4NSBMNTEuMywxODAuNyBMNTMuMiwxNzYuNSBMNTUuMSwxNzIuMyBMNTcuMSwxNjguMSBMNTkuMSwxNjQgTDYxLjIsMTU5LjkgTDYzLjQsMTU1LjkgTDY1LjYsMTUxLjkgTDY3LjksMTQ3LjkgTDcwLjMsMTQ0IEw3Mi43LDE0MC4xIEw3NS4yLDEzNi4zIEw3Ny44LDEzMi42IEw4MC40LDEyOC45IEw4My4xLDEyNS4yIEw4NS45LDEyMS42IEw4OC43LDExOC4xIEw5MS43LDExNC42IEw5NC43LDExMS4yIEw5Ny43LDEwNy45IEwxMDAuOSwxMDQuNiBMMTA0LjEsMTAxLjQgTDEwNy4zLDk4LjIgTDExMC43LDk1LjIgTDExNCw5Mi4yIEwxMTcuNSw4OS4yIEwxMjEsODYuNCBMMTI0LjYsODMuNiBMMTI4LjMsODAuOSBMMTMxLjksNzguMiBMMTM1LjcsNzUuNiBMMTM5LjUsNzMuMSBMMTQzLjQsNzAuNyBMMTQ3LjMsNjguMyBMMTUxLjIsNjYgTDE1NS4yLDYzLjcgTDE1OS4yLDYxLjYgTDE2My4zLDU5LjUgTDE2Ny40LDU3LjQgTDE3MS42LDU1LjQgTDE3NS44LDUzLjUgTDE4MCw1MS42IEwxODQuMyw0OS44IEwxODguNSw0OC4xIEwxOTIuOCw0Ni40IEwxOTcuMiw0NC43IEwyMDEuNSw0My4xIEwyMDUuOSw0MS42IEwyMTAuMyw0MC4xIEwyMTQuNywzOC42IEwyMTkuMiwzNy4yIEwyMjMuNiwzNS44IEwyMjguMSwzNC41IEwyMzIuNiwzMy4yIEwyMzcuMSwzMS45IEwyNDEuNiwzMC43IEwyNDYuMSwyOS41IEwyNTAuNywyOC40IEwyNTUuMiwyNy4zWiIgZmlsbD0idXJsKCNnKSIgbWFzaz0idXJsKCNtKSIvPjwvc3ZnPg=="><span class="nom">meridia</span><span class="sep nom">/</span><span class="nom">AIregatta</span></a>
+    <ul>
+      <li><a class="l" href="#plan">Plan d’eau</a></li>
+      <li><a class="l" href="#liaisons">Liaisons</a></li>
+      <li><a class="l" href="#materiel">Matériel</a></li>
+      <li><a class="l" href="#etat">État</a></li>
+      <li><a class="l" href="#couts">Coûts</a></li>
+      <li><a class="l" href="#route">Calendrier</a></li>
+      <li><a class="l" href="#questions">Questions</a></li>
+    </ul>
+  </nav>
+</div>
+
+<header class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">Régate de voiliers drones · Toulon · mai 2027</p>
+      <p class="meta"><span class="pastille"></span>Anse du Mourillon · Toulon · 12 – 16 mai 2027</p>
       <h1>Chaque bateau parle au <em>PC course</em>. Le PC course parle à tous.</h1>
-      <p class="lede">Une balise officielle par bateau, des bouées qui mesurent le vent, un PC course qui rassemble tout et le redistribue au même instant à toutes les équipes, et une application publique inspirée de SailGP.</p>
+      <p class="lede">Une balise officielle dans chaque voilier drone, des bouées qui mesurent le vent, un PC course qui rassemble tout et le renvoie au même instant à toutes les équipes, et une application pour le public, inspirée de SailGP.</p>
     </div>
     <div class="facts">
       <div class="fact"><b class="num">&lt; 10</b><span>bateaux, architecture libre</span></div>
-      <div class="fact"><b class="num">500 m</b><span>au plus entre PC course et parcours</span></div>
-      <div class="fact"><b class="num">10 Hz</b><span>positions RTK au centimètre</span></div>
-      <div class="fact"><b class="num" id="heroCost">≈ 17,9 k€</b><span>de matériel (hypothèse 10 bateaux)</span></div>
+      <div class="fact"><b class="num">≈ 300 m</b><span>de parcours, près et portant</span></div>
+      <div class="fact"><b class="num">10 Hz</b><span>positions au centimètre (RTK)</span></div>
+      <div class="fact"><b class="num" id="heroCost">≈ 17,9 k€</b><span>de matériel pour 10 bateaux</span></div>
     </div>
   </div>
 </header>
@@ -248,121 +276,107 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-bet
 <section id="plan">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="eyebrow">01 · Le dispositif</p><h2>Sur le plan d'eau</h2></div>
-      <p>Cliquez sur un élément pour voir son rôle, son matériel et ses liaisons. Activez ou coupez les flux pour voir qui parle à qui. Animation ralentie : en réalité, chaque balise émet 10 fois par seconde.</p>
+      <div><p class="meta">01 · Le dispositif</p><h2>Sur le <em>plan d’eau</em></h2></div>
+      <p class="muted">Plan à l’échelle de l’anse du Mourillon, entre le Fort Saint-Louis et la petite digue. Cliquez sur un élément pour voir son rôle, son matériel et ses liaisons, et activez les flux pour voir qui parle à qui. Animation ralentie : en réalité, chaque balise émet 10 fois par seconde.</p>
     </div>
     <div class="plan">
-      <div class="map-card">
-        <div class="map-tools" role="group" aria-label="Flux affichés">
-          <button class="chip" type="button" data-layer="g4" aria-pressed="true"><span class="dot" style="background:var(--accent)"></span>Positions 4G</button>
-          <button class="chip" type="button" data-layer="radio" aria-pressed="false"><span class="dot" style="background:var(--test)"></span>Radio de secours</button>
-          <button class="chip" type="button" data-layer="teams" aria-pressed="true"><span class="dot" style="background:var(--ok)"></span>Redistribution</button>
-          <button class="chip" type="button" data-layer="rtk" aria-pressed="false"><span class="dot" style="background:var(--dev)"></span>Corrections RTK</button>
-          <button class="chip" type="button" data-layer="safe" aria-pressed="false"><span class="dot" style="background:var(--opt)"></span>Sécurité</button>
+      <div class="carte map">
+        <div class="tools" role="group" aria-label="Flux affichés">
+          <button class="chip on" type="button" data-layer="g4" aria-pressed="true"><span class="d" style="background:var(--lime)"></span>Positions 4G</button>
+          <button class="chip on" type="button" data-layer="radio" aria-pressed="false"><span class="d" style="background:#D9C38A"></span>Radio de secours</button>
+          <button class="chip on" type="button" data-layer="teams" aria-pressed="true"><span class="d" style="background:#8FD18A"></span>Redistribution</button>
+          <button class="chip on" type="button" data-layer="cmd" aria-pressed="true"><span class="d" style="background:#E39B7B"></span>Consignes des équipes</button>
+          <button class="chip on" type="button" data-layer="rtk" aria-pressed="false"><span class="d" style="background:#43B3A3"></span>Corrections RTK</button>
           <button class="chip play" type="button" id="playBtn" aria-pressed="true">Pause</button>
         </div>
-        <svg class="water" id="water" viewBox="0 0 1000 640" role="img" aria-label="Plan schématique du plan d'eau et des éléments du dispositif">
+        <svg class="water" id="water" viewBox="0 0 1000 600" role="img" aria-label="Plan de l’anse du Mourillon avec le parcours et les éléments du dispositif">
           <defs>
-            <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
-              <path d="M100 0H0V100" fill="none" stroke="var(--sea-deep)" stroke-width="1"/>
-            </pattern>
+            <pattern id="grid" width="156.25" height="156.25" patternUnits="userSpaceOnUse"><path d="M156.25 0H0V156.25" fill="none" stroke="rgba(238,240,228,.05)"/></pattern>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(199,235,0,.35)"/><stop offset="100%" stop-color="rgba(199,235,0,0)"/></radialGradient>
           </defs>
-          <rect x="0" y="0" width="1000" height="640" fill="url(#grid)"/>
-          <!-- côte -->
-          <path d="M0 548 C120 540 180 560 260 552 S420 540 500 548 S700 560 780 546 S920 536 1000 544 V640 H0Z" fill="var(--land)"/>
-          <path d="M0 548 C120 540 180 560 260 552 S420 540 500 548 S700 560 780 546 S920 536 1000 544" fill="none" stroke="var(--line)" stroke-width="2"/>
+          <!-- herbiers (zones sombres de la photo) -->
+          <g fill="var(--herbier)" opacity=".9">
+            <path d="M210 40 C260 30 300 70 330 120 C360 180 300 230 250 250 C210 270 170 240 190 190 C205 150 180 90 210 40Z"/>
+            <path d="M420 170 C470 150 520 190 560 230 C600 270 560 320 500 330 C440 340 400 300 410 250 C415 215 400 185 420 170Z"/>
+            <path d="M600 260 C660 240 740 280 760 330 C780 380 720 420 660 410 C610 400 580 350 590 310Z"/>
+            <path d="M150 330 C210 310 280 350 300 400 C320 450 260 490 200 480 C150 470 120 420 130 380Z"/>
+            <path d="M780 420 C840 400 920 440 940 480 C960 530 900 560 850 550 C800 540 770 500 775 460Z"/>
+          </g>
+          <rect width="1000" height="600" fill="url(#grid)"/>
+          <!-- terre : plage et Fort Saint-Louis à gauche, esplanade, digue et anse Mistral à droite -->
+          <path d="M0 0 H92 C86 30 64 56 0 66 Z" fill="var(--sable)"/>
+          <path d="M0 96 C38 98 66 134 62 168 C58 204 38 228 0 232 Z" fill="var(--terre)" stroke="rgba(238,240,228,.18)"/>
+          <path d="M128 192 L34 288" stroke="#3A3D30" stroke-width="12" stroke-linecap="round"/>
+          <path d="M739 0 H1000 V144 C978 132 948 126 912 128 C884 130 856 148 842 200 L636 97 L665 82 L742 65 Z" fill="var(--terre)" stroke="rgba(238,240,228,.18)"/>
+          <path d="M1000 144 C978 132 948 126 912 128 C884 130 868 140 858 160 L874 168 C900 150 950 150 1000 168 Z" fill="var(--sable)"/>
+          <path d="M636 97 L842 202" stroke="#3A3D30" stroke-width="12" stroke-linecap="round"/>
+          <rect x="765" y="0" width="77" height="53" fill="#24281C" stroke="rgba(238,240,228,.12)"/>
+          <text class="sub" x="8" y="252">Fort Saint-Louis</text>
+          <text class="sub" x="640" y="122" transform="rotate(27 640 122)">petite digue</text>
+          <text class="sub" x="905" y="190">anse Mistral</text>
           <!-- vent -->
-          <g transform="translate(70,70)">
-            <circle r="34" fill="var(--surface)" stroke="var(--line)"/>
-            <path d="M0 -22 L0 18 M-8 8 L0 18 L8 8" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <text class="lbl" x="0" y="56" text-anchor="middle">Vent</text>
-            <text class="sub" x="0" y="70" text-anchor="middle">mesuré aux bouées</text>
+          <g transform="translate(104,500)">
+            <circle r="40" fill="rgba(9,11,7,.7)" stroke="var(--filet)"/>
+            <g transform="rotate(-61)"><path d="M0 26 L0 -22 M-8 -12 L0 -22 L8 -12" stroke="var(--ivoire)" stroke-width="2.5" fill="none" stroke-linecap="round"/></g>
+            <text class="lbl" x="0" y="62" text-anchor="middle">Vent de SE</text>
+            <text class="sub" x="0" y="77" text-anchor="middle">exemple</text>
           </g>
           <!-- échelle -->
-          <g transform="translate(830,510)">
-            <path d="M0 0H100" stroke="var(--ink)" stroke-width="2"/><path d="M0 -5V5M100 -5V5M50 -3V3" stroke="var(--ink)" stroke-width="2"/>
-            <text class="sub" x="50" y="-10" text-anchor="middle">100 m</text>
+          <g transform="translate(420,580)">
+            <path d="M0 0H156" stroke="var(--ivoire)" stroke-width="2"/><path d="M0 -5V5M156 -5V5M78 -3V3" stroke="var(--ivoire)" stroke-width="2"/>
+            <text class="sub" x="78" y="-10" text-anchor="middle">50 m</text>
           </g>
-          <!-- lignes fixes : laylines indicatives -->
-          <path d="M500 95 L330 300 M500 95 L670 300" stroke="var(--ink)" stroke-opacity=".12" stroke-dasharray="4 6" fill="none"/>
-          <!-- ligne de départ -->
-          <line x1="400" y1="420" x2="600" y2="420" stroke="var(--ink)" stroke-opacity=".45" stroke-dasharray="6 5" stroke-width="1.5"/>
-          <text class="sub" x="500" y="412" text-anchor="middle">ligne de départ / arrivée</text>
-          <!-- flux et bateaux injectés par le script -->
-          <g id="safeLayer"></g>
+          <g id="courseLines"></g>
           <g id="trails"></g>
           <g id="packets"></g>
           <g id="boats"></g>
+          <g id="marks"></g>
 
-          <!-- bouées -->
-          <g class="ent" data-id="bouee-vent" tabindex="0" role="button" aria-label="Bouée au vent instrumentée">
-            <circle class="hl" cx="500" cy="95" r="15" fill="var(--accent)" stroke="var(--surface)" stroke-width="3"/>
-            <path d="M500 95 V68" stroke="var(--ink)" stroke-width="2"/><circle cx="500" cy="66" r="4" fill="var(--ink)"/>
-            <text class="lbl" x="524" y="92">Bouée au vent</text><text class="sub" x="524" y="107">GPS + anémomètre</text>
-          </g>
-          <g class="ent" data-id="bouee-vent" tabindex="0" role="button" aria-label="Porte sous le vent instrumentée">
-            <circle class="hl" cx="465" cy="485" r="12" fill="var(--accent)" stroke="var(--surface)" stroke-width="3"/>
-            <circle class="hl" cx="535" cy="485" r="12" fill="var(--accent)" stroke="var(--surface)" stroke-width="3"/>
-            <path d="M535 485 V462" stroke="var(--ink)" stroke-width="2"/><circle cx="535" cy="460" r="3.5" fill="var(--ink)"/>
-            <text class="lbl" x="556" y="490">Porte sous le vent</text><text class="sub" x="556" y="504">GPS + anémomètre</text>
-          </g>
-          <g class="ent" data-id="bouee-ligne" tabindex="0" role="button" aria-label="Bouées de ligne">
-            <rect class="hl" x="391" y="411" width="18" height="18" rx="3" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
-            <rect class="hl" x="591" y="411" width="18" height="18" rx="3" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
-          </g>
-
-          <!-- cloud -->
           <g class="ent" data-id="cloud" tabindex="0" role="button" aria-label="Hub cloud">
-            <path class="hl" d="M860 120 h90 a22 22 0 0 0 -8 -42 a30 30 0 0 0 -56 -8 a24 24 0 0 0 -26 50z" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
-            <text class="lbl" x="905" y="146" text-anchor="middle">Hub cloud</text><text class="sub" x="905" y="160" text-anchor="middle">relais 4G + public</text>
+            <path class="hl" d="M398 62 h66 a17 17 0 0 0 -6 -32 a23 23 0 0 0 -42 -6 a18 18 0 0 0 -18 38z" fill="var(--nuit-3)" stroke="var(--filet)" stroke-width="2"/>
+            <text class="lbl" x="432" y="84" text-anchor="middle">Hub cloud</text>
           </g>
-          <!-- public -->
           <g class="ent" data-id="public" tabindex="0" role="button" aria-label="Application publique">
-            <rect class="hl" x="890" y="250" width="30" height="52" rx="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
-            <rect x="896" y="258" width="18" height="32" rx="2" fill="var(--sea)"/>
-            <text class="lbl" x="905" y="322" text-anchor="middle">Public</text><text class="sub" x="905" y="336" text-anchor="middle">PWA, différé</text>
-          </g>
-
-          <!-- à terre -->
-          <g class="ent" data-id="equipes" tabindex="0" role="button" aria-label="Zone équipes">
-            <path class="hl" d="M170 600 l22 -26 l22 26z M214 600 l22 -26 l22 26z M258 600 l22 -26 l22 26z" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
-            <text class="lbl" x="236" y="622" text-anchor="middle">Zone équipes</text>
-          </g>
-          <g class="ent" data-id="rtk" tabindex="0" role="button" aria-label="Base RTK">
-            <path class="hl" d="M398 600 l12 -24 l12 24z" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
-            <circle cx="410" cy="572" r="5" fill="var(--dev)"/>
-            <text class="lbl" x="410" y="622" text-anchor="middle">Base RTK</text>
-          </g>
-          <g class="ent" data-id="pc" tabindex="0" role="button" aria-label="PC course">
-            <rect class="hl" x="460" y="566" width="80" height="40" rx="4" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>
-            <text x="500" y="591" text-anchor="middle" style="font:700 14px var(--f-display);letter-spacing:.08em;fill:var(--surface)">PC COURSE</text>
-            <text class="sub" x="500" y="624" text-anchor="middle">serveur + secours</text>
-          </g>
-          <g class="ent" data-id="gw" tabindex="0" role="button" aria-label="Antenne radio de secours">
-            <path d="M592 604 V560" stroke="var(--ink)" stroke-width="2.5"/>
-            <path class="hl" d="M584 566 l8 -14 l8 14" fill="none" stroke="var(--ink)" stroke-width="2"/>
-            <circle cx="592" cy="552" r="9" fill="none" stroke="var(--test)" stroke-width="1.5"/>
-            <text class="lbl" x="592" y="622" text-anchor="middle">Antenne</text>
-          </g>
-          <g class="ent" data-id="meteo" tabindex="0" role="button" aria-label="Station météo">
-            <path d="M680 604 V572" stroke="var(--ink)" stroke-width="2"/>
-            <path class="hl" d="M670 574 h20 M680 566 v16" stroke="var(--ink)" stroke-width="2"/>
-            <text class="lbl" x="680" y="622" text-anchor="middle">Météo</text>
+            <rect class="hl" x="528" y="18" width="24" height="42" rx="6" fill="var(--nuit-3)" stroke="var(--ivoire-2)" stroke-width="2"/>
+            <rect x="533" y="25" width="14" height="26" rx="2" fill="var(--sarcelle)"/>
+            <text class="lbl" x="540" y="84" text-anchor="middle">Application</text>
           </g>
           <g class="ent" data-id="camera" tabindex="0" role="button" aria-label="Caméras en point haut">
-            <rect x="790" y="560" width="14" height="44" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
-            <rect class="hl" x="782" y="546" width="30" height="16" rx="3" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>
-            <path d="M812 552 L870 470 M812 556 L700 440" stroke="var(--ink)" stroke-opacity=".18" stroke-dasharray="3 5"/>
-            <text class="lbl" x="797" y="622" text-anchor="middle">Point haut</text>
+            <rect class="hl" x="788" y="16" width="30" height="16" rx="4" fill="var(--nuit)" stroke="var(--ivoire-2)" stroke-width="2"/>
+            <circle cx="811" cy="24" r="4" fill="var(--lime)"/>
+            <text class="sub" x="803" y="48" text-anchor="middle">caméras · 12 m</text>
+          </g>
+          <g class="ent" data-id="meteo" tabindex="0" role="button" aria-label="Station météo">
+            <path d="M905 78 V52" stroke="var(--ivoire)" stroke-width="2"/>
+            <path class="hl" d="M895 54 h20 M905 46 v14" stroke="var(--ivoire)" stroke-width="2"/>
+            <text class="sub" x="905" y="40" text-anchor="middle">météo</text>
+          </g>
+          <g class="ent" data-id="rtk" tabindex="0" role="button" aria-label="Base RTK">
+            <path class="hl" d="M694 100 l11 -22 l11 22z" fill="var(--nuit-3)" stroke="var(--ivoire)" stroke-width="2"/>
+            <circle cx="705" cy="76" r="4" fill="#43B3A3"/>
+            <text class="sub" x="705" y="116" text-anchor="middle">base RTK</text>
+          </g>
+          <g class="ent" data-id="pc" tabindex="0" role="button" aria-label="PC course">
+            <rect class="hl" x="738" y="78" width="88" height="34" rx="8" fill="var(--lime)" stroke="var(--nuit)" stroke-width="2"/>
+            <text x="782" y="100" text-anchor="middle" style="font:600 14px var(--f-titre);fill:var(--nuit)">PC course</text>
+          </g>
+          <g class="ent" data-id="gw" tabindex="0" role="button" aria-label="Antenne radio de secours">
+            <path d="M842 150 V118" stroke="var(--ivoire)" stroke-width="2.5"/>
+            <path class="hl" d="M835 124 l7 -12 l7 12" fill="none" stroke="var(--ivoire)" stroke-width="2"/>
+            <circle cx="842" cy="110" r="9" fill="none" stroke="#D9C38A" stroke-width="1.5"/>
+            <text class="sub" x="858" y="140">antenne</text>
+          </g>
+          <g class="ent" data-id="equipes" tabindex="0" role="button" aria-label="Zone équipes">
+            <path class="hl" d="M896 112 l16 -18 l16 18z M928 112 l16 -18 l16 18z M960 112 l16 -18 l16 18z" fill="var(--nuit-3)" stroke="var(--ivoire)" stroke-width="2"/>
+            <text class="sub" x="944" y="84" text-anchor="middle">équipes</text>
           </g>
         </svg>
-        <div class="map-foot">
-          <span>Plan schématique à l'échelle (1 carreau = 100 m), à caler sur le <a href="https://maps.app.goo.gl/a938BVhtw59Eg2h77" target="_blank" rel="noopener">plan d'eau réel</a>.</span>
-          <span class="mono">Bateaux simulés : 6</span>
+        <div class="mapfoot">
+          <span>43,107199 N · 5,941540 E · <a href="https://maps.app.goo.gl/a938BVhtw59Eg2h77" target="_blank" rel="noopener">voir sur Google Maps</a></span>
+          <span>Orientation du parcours selon le vent du jour · 1 carreau = 50 m</span>
         </div>
       </div>
-
-      <aside class="panel" id="panel" aria-live="polite"></aside>
+      <aside class="carte panel" id="panel" aria-live="polite"></aside>
     </div>
   </div>
 </section>
@@ -370,17 +384,27 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-bet
 <section id="liaisons">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="eyebrow">02 · Qui parle à qui</p><h2>Les liaisons</h2></div>
-      <p>Le flux central est encadré : les bateaux envoient leur position au PC course, qui renvoie celle de tous les bateaux à toutes les équipes. Les équipes n'échangent jamais de données entre elles.</p>
+      <div><p class="meta">02 · Qui parle à qui</p><h2>Les <em>liaisons</em></h2></div>
+      <p class="muted">Les trois flux essentiels sont mis en lumière : chaque bateau envoie sa position au PC course ; le PC course renvoie celle de tous les bateaux à toutes les équipes, au même instant ; chaque équipe pilote son bateau depuis son PC à terre. Les équipes n’échangent jamais de données entre elles.</p>
     </div>
     <div class="flows" id="flows"></div>
+  </div>
+</section>
+
+<section id="materiel">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="meta">03 · Références</p><h2>Le <em>matériel</em></h2></div>
+      <div style="display:grid;gap:14px"><p class="muted">Chaque fiche renvoie à la documentation du fabricant et à des retours d’utilisateurs ou tests indépendants. Prix publics constatés fin 2026.</p><div class="filters" id="hwFilters" role="group" aria-label="Filtrer le matériel"></div></div>
+    </div>
+    <div class="hwgrid" id="hwgrid"></div>
   </div>
 </section>
 
 <section id="etat">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="eyebrow">03 · Où on en est</p><h2>Ce qui fonctionne, ce qui reste à faire</h2></div>
+      <div><p class="meta">04 · Où on en est</p><h2>Ce qui <em>fonctionne</em>, ce qui reste à faire</h2></div>
       <div class="filters" role="group" aria-label="Filtrer par domaine" id="domFilters"></div>
     </div>
     <div class="board" id="board"></div>
@@ -390,31 +414,28 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-bet
 <section id="couts">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="eyebrow">04 · Budget</p><h2>Les coûts</h2></div>
-      <p>Prix publics TTC constatés fin 2026, en ordre de grandeur. Le développement logiciel, fait en IA agentique, se résume au temps des personnes qui pilotent les agents et aux abonnements.</p>
+      <div><p class="meta">05 · Budget</p><h2>Les <em>coûts</em></h2></div>
+      <p class="muted">Prix publics TTC, en ordre de grandeur. Le logiciel, développé en IA agentique, se résume au temps des personnes qui pilotent les agents et aux abonnements.</p>
     </div>
     <div class="cost">
-      <form class="ctrl" id="costForm" onsubmit="return false">
-        <label for="nBoats"><span class="row"><span>Bateaux</span><output id="nBoatsOut" class="num">10</output></span>
-          <input type="range" id="nBoats" min="2" max="10" value="10"></label>
-        <label for="nSpare"><span class="row"><span>Balises de rechange</span><output id="nSpareOut" class="num">2</output></span>
-          <input type="range" id="nSpare" min="0" max="4" value="2"></label>
-        <label for="nWind"><span class="row"><span>Bouées qui mesurent le vent</span><output id="nWindOut" class="num">2</output></span>
-          <input type="range" id="nWind" min="2" max="4" value="2"></label>
-        <label class="check" for="oRobot"><input type="checkbox" id="oRobot"><span>Bouées robotisées (2)<small>Tiennent seules leur position, déplaçables si le vent tourne. ≈ 1 750 € chacune.</small></span></label>
-        <label class="check" for="oFpv"><input type="checkbox" id="oFpv"><span>Caméras embarquées<small>≈ 100 € par bateau + 300 € de récepteur.</small></span></label>
-        <label class="check" for="oPtz"><input type="checkbox" id="oPtz"><span>2e caméra PTZ<small>Un second angle pour la diffusion. ≈ 600 €.</small></span></label>
+      <form class="carte ctrl" onsubmit="return false">
+        <label for="nBoats"><span class="row"><span>Bateaux</span><output id="nBoatsOut" class="num">10</output></span><input type="range" id="nBoats" min="2" max="10" value="10"></label>
+        <label for="nSpare"><span class="row"><span>Balises de rechange</span><output id="nSpareOut" class="num">2</output></span><input type="range" id="nSpare" min="0" max="4" value="2"></label>
+        <label for="nWind"><span class="row"><span>Bouées qui mesurent le vent</span><output id="nWindOut" class="num">2</output></span><input type="range" id="nWind" min="2" max="4" value="2"></label>
+        <label class="check" for="oFpv"><input type="checkbox" id="oFpv"><span>Caméras embarquées<small>Images à bord façon SailGP. ≈ 100 € par bateau + 300 € de récepteur.</small></span></label>
+        <label class="check" for="oPtz"><input type="checkbox" id="oPtz"><span>2e caméra PTZ<small>Un second angle pour le commentateur et l’application. ≈ 600 €.</small></span></label>
+        <label class="check" for="oWifi"><input type="checkbox" id="oWifi"><span>Wi-Fi public au village<small>Soulage la 4G sur place. ≈ 800 € de matériel, hors abonnement.</small></span></label>
       </form>
-      <div class="total">
-        <div class="total-top">
-          <div><p class="eyebrow">Total matériel, imprévus 10 % compris</p><div class="big num" id="total">17 900 €</div></div>
-          <p class="mono num" id="perBoat" style="color:var(--muted)"></p>
+      <div class="carte total">
+        <div class="ttop">
+          <div><p class="meta">Total matériel, imprévus 10 % compris</p><div class="big num" id="total" style="margin-top:10px">17 900 €</div></div>
+          <p class="mono num muted" id="perBoat" style="font-size:13px"></p>
         </div>
         <div class="bars" id="bars"></div>
         <div class="notes">
-          <div class="note"><b>≈ 2 500 €</b>Prototype à commander tout de suite (déjà compris dans le total)</div>
-          <div class="note"><b>500 – 1 000 €</b>Fonctionnement sur 6 mois : SIM 4G, serveur cloud, IA du commentaire</div>
-          <div class="note"><b>Temps humain</b>Développement en IA agentique : 1 à 2 personnes qui pilotent les agents</div>
+          <div class="note"><b>≈ 2 500 €</b>Prototype à commander tout de suite, compris dans le total</div>
+          <div class="note"><b>500 – 1 000 €</b>Fonctionnement sur 6 mois : SIM 4G, serveur cloud</div>
+          <div class="note"><b>Temps humain</b>Logiciel en IA agentique : 1 à 2 personnes qui pilotent les agents</div>
         </div>
       </div>
     </div>
@@ -424,40 +445,84 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-bet
 <section id="route">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="eyebrow">05 · De novembre 2026 à mai 2027</p><h2>Feuille de route</h2></div>
-      <p>Le logiciel avance vite grâce aux agents. Ce qui fixe le rythme, ce sont les livraisons de matériel et les sorties sur l'eau. Cliquez sur une barre ou un jalon pour le détail.</p>
+      <div><p class="meta">06 · Novembre 2026 → mai 2027</p><h2>Le <em>calendrier</em></h2></div>
+      <p class="muted">Le logiciel avance vite grâce aux agents. Le rythme est donné par les livraisons de matériel et les sorties sur l’eau. Cliquez sur une barre ou un jalon pour le détail.</p>
     </div>
-    <div class="gantt-scroll"><div class="gantt" id="gantt"></div></div>
-    <div class="legend">
-      <span><i style="background:var(--muted)"></i>Cadrage</span><span><i style="background:var(--test)"></i>Matériel</span><span><i style="background:var(--dev)"></i>Logiciel</span><span><i style="background:var(--ok)"></i>Essais sur l'eau</span><span><i style="background:var(--accent)"></i>Jalon / événement</span>
+    <div class="carte gscroll"><div class="gantt" id="gantt"></div></div>
+    <div class="legend"><span><i style="background:var(--ivoire-3)"></i>Cadrage</span><span><i style="background:#8FD18A"></i>Matériel</span><span><i style="background:var(--lime)"></i>Logiciel</span><span><i style="background:#43B3A3"></i>Essais sur l’eau</span><span><i style="background:var(--degrade)"></i>Régate</span></div>
+    <div class="carte gd" id="gd"></div>
+  </div>
+</section>
+
+<section id="foule">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="meta">07 · Votre question</p><h2>La foule peut-elle gêner la <em>4G</em> ?</h2></div>
+      <p class="muted">Tous les téléphones du public partagent la même antenne relais que les balises.</p>
     </div>
-    <div class="gdetail" id="gdetail"></div>
+    <div class="g4">
+      <div class="carte">
+        <p class="meta">Réponse courte</p>
+        <p class="verdict">Oui, c’est un risque réel. Il est maîtrisé parce que le suivi ne dépend pas que de la 4G.</p>
+        <p class="muted" style="margin-top:14px">Quand des centaines de personnes envoient des vidéos au même endroit, l’antenne sature, surtout dans le sens téléphone → antenne. La latence passe de quelques dizaines de millisecondes à plusieurs secondes, et des paquets se perdent. Nos balises envoient très peu de données (environ 0,4 ko/s chacune), en petits paquets, qui passent mieux que la vidéo.</p>
+        <div class="gauge" aria-label="Risque selon le nombre de spectateurs">
+          <div class="r"><span>Quelques dizaines</span><div class="t"><div class="f" style="width:12%;background:var(--lime)"></div></div></div>
+          <div class="r"><span>Quelques centaines</span><div class="t"><div class="f" style="width:45%;background:#D9C38A"></div></div></div>
+          <div class="r"><span>Plusieurs milliers</span><div class="t"><div class="f" style="width:85%;background:#E39B7B"></div></div></div>
+        </div>
+      </div>
+      <div class="carte">
+        <p class="meta">Les parades</p>
+        <ol>
+          <li><b>La radio privée 868 MHz ne voit pas la foule.</b> Elle prend le relais seule, à 2 positions par seconde.</li>
+          <li><b>SIM multi-opérateurs :</b> la balise bascule sur un autre réseau si le sien sature.</li>
+          <li><b>Le flux des équipes passe par câble</b> sur le site, jamais par la 4G.</li>
+          <li><b>Essai grandeur nature</b> un week-end ensoleillé d’avril, plage du Mourillon pleine.</li>
+          <li><b>Option à tester :</b> le Wi-Fi longue portée intégré à la puce de la balise. À 300 m, une borne au PC course pourrait devenir le chemin principal, sans surcoût.</li>
+          <li><b>Pour le public sur place :</b> une application légère (positions seules, vidéo à part) et, en option, un Wi-Fi au village.</li>
+        </ol>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="questions">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="eyebrow">06 · À trancher</p><h2>Questions en suspens</h2></div>
-      <p>Cochez au fur et à mesure. Les coches restent dans votre navigateur seulement.</p>
+      <div><p class="meta">08 · À trancher</p><h2>Questions en <em>suspens</em></h2></div>
+      <p class="muted">Cochez au fur et à mesure ; les coches restent dans votre navigateur.</p>
     </div>
     <div class="qgrid">
       <div><div class="qlist" id="qlist"></div><p class="progress" id="qprog"></p></div>
-      <aside class="decided">
-        <p class="eyebrow">Déjà décidé</p>
-        <ul>
-          <li>Plan d'eau choisi et validé</li>
-          <li>Moins de 10 bateaux, architecture libre</li>
-          <li>Une balise officielle par bateau, seule source des positions</li>
-          <li>Le PC course envoie à toutes les équipes vent, bouées et positions de tous les bateaux</li>
-          <li>Pas de lien entre la balise et l'électronique des équipes</li>
-          <li>Format défini, avec du près et du portant</li>
-          <li>500 m au plus entre le PC course et le parcours</li>
-          <li>Électricité et Internet filaire disponibles sur le site</li>
-          <li>Balise de 250 g acceptable</li>
-          <li>Développement logiciel en IA agentique (GSD)</li>
-        </ul>
-      </aside>
+      <div class="side">
+        <aside class="carte decided">
+          <p class="meta">Déjà décidé</p>
+          <ul>
+            <li><span><b>Lieu :</b> anse du Mourillon, parcours d’environ 300 m</span></li>
+            <li><span><b>Dates :</b> 12 – 16 mai 2027, sans jour de réserve</span></li>
+            <li><span><b>Bateaux :</b> moins de 10, architecture libre</span></li>
+            <li><span><b>Balise officielle</b> dans chaque bateau, seule source des positions</span></li>
+            <li><span><b>Mêmes informations</b> de positionnement pour toutes les équipes</span></li>
+            <li><span><b>Équipes</b> toutes sur place ; pas d’assistant tactique fourni</span></li>
+            <li><span><b>Bouées ancrées</b> avec mesure du vent</span></li>
+            <li><span><b>Sécurité</b> par bateaux d’assistance, sans reprise en main obligatoire</span></li>
+            <li><span><b>Caméras</b> à 12 m au maximum</span></li>
+            <li><span><b>Public</b> sur place et sur l’application, commentateur humain français</span></li>
+            <li><span><b>Électricité et Internet filaire</b> sur le site</span></li>
+            <li><span><b>Logiciel</b> développé en IA agentique, non open source</span></li>
+            <li><span><b>Règles et arbitrage</b> : plus tard, arbitrage probablement à terre</span></li>
+          </ul>
+        </aside>
+        <aside class="carte decided">
+          <p class="meta">Idées pour l’IA autour du commentateur</p>
+          <ul>
+            <li><span><b>Souffleur :</b> un écran qui signale au commentateur les moments forts (croisement serré, changement de leader, bascule de vent).</span></li>
+            <li><span><b>Fiches prêtes à lire :</b> écarts, vitesses, meilleur bord, historique de chaque équipe.</span></li>
+            <li><span><b>Résumé automatique</b> de chaque manche sur l’application, quelques secondes après l’arrivée.</span></li>
+            <li><span><b>Sous-titres en direct</b> du commentaire, et version anglaise pour l’application.</span></li>
+          </ul>
+        </aside>
+      </div>
     </div>
   </div>
 </section>
@@ -465,293 +530,264 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-bet
 
 <footer>
   <div class="wrap">
-    <span>AIregatta · dossier de travail du 19 novembre 2026</span>
-    <span>Détails : <span class="mono">docs/etude-prealable.md</span> et <span class="mono">docs/architecture-materiel-communications.md</span></span>
+    <span class="logo" style="font-size:1rem"><img alt="" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiPjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iZyIgY3g9IjAuNSIgY3k9IjAuMyIgZng9IjAuNSIgZnk9IjAuMyIgcj0iMS4wMiI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RjZmYzYSIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjYzdlYjAwIi8+PHN0b3Agb2Zmc2V0PSI3NSUiIHN0b3AtY29sb3I9IiM4ZmQxOGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0M2IzYTMiLz48L3JhZGlhbEdyYWRpZW50PjxtYXNrIGlkPSJtIj48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjZmZmIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTAwLDUwMCkgc2NhbGUoMC43MDAwKSB0cmFuc2xhdGUoLTUwMCwtMjc2LjUpIj48cGF0aCBkPSJNMCw1NTMgUTEzNC44LDI4MC4zIDI1MywwIEw1MDAsMjMwIEwxNzYsNTUzIFogTTEwMDAsNTUzIFE4NjUuMiwyODAuMyA3NDcsMCBMNTAwLDIzMCBMODI0LDU1MyBaIiBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48L2c+PC9tYXNrPjwvZGVmcz48cGF0aCBkPSJNMjU5LjgsMjYuMiBMMjY0LjMsMjUuMSBMMjY4LjksMjQuMSBMMjczLjUsMjMuMSBMMjc4LjEsMjIuMSBMMjgyLjcsMjEuMiBMMjg3LjMsMjAuMiBMMjkxLjksMTkuMyBMMjk2LjUsMTguNSBMMzAxLjEsMTcuNiBMMzA1LjcsMTYuOCBMMzEwLjMsMTYgTDMxNSwxNS4yIEwzMTkuNiwxNC40IEwzMjQuMiwxMy43IEwzMjguOSwxMyBMMzMzLjUsMTIuMyBMMzM4LjEsMTEuNiBMMzQyLjgsMTAuOSBMMzQ3LjQsMTAuMyBMMzUyLjEsOS43IEwzNTYuOCw5LjEgTDM2MS40LDguNSBMMzY2LjEsNy45IEwzNzAuNyw3LjQgTDM3NS40LDYuOSBMMzgwLjEsNi4zIEwzODQuNyw1LjkgTDM4OS40LDUuNCBMMzk0LjEsNC45IEwzOTguOCw0LjUgTDQwMy41LDQuMSBMNDA4LjEsMy43IEw0MTIuOCwzLjQgTDQxNy41LDMgTDQyMi4yLDIuNyBMNDI2LjksMi40IEw0MzEuNiwyLjEgTDQzNi4yLDEuOCBMNDQwLjksMS41IEw0NDUuNiwxLjMgTDQ1MC4zLDEuMSBMNDU1LDAuOSBMNDU5LjcsMC43IEw0NjQuNCwwLjYgTDQ2OS4xLDAuNCBMNDczLjgsMC4zIEw0NzguNSwwLjIgTDQ4My4yLDAuMSBMNDg3LjksMC4xIEw0OTIuNiwwIEw0OTcuMywwIEw1MDIsMCBMNTA2LjYsMCBMNTExLjMsMC4xIEw1MTYsMC4xIEw1MjAuNywwLjIgTDUyNS40LDAuMyBMNTMwLjEsMC40IEw1MzQuOCwwLjUgTDUzOS41LDAuNyBMNTQ0LjIsMC45IEw1NDguOSwxLjEgTDU1My42LDEuMyBMNTU4LjMsMS41IEw1NjMsMS43IEw1NjcuNywyIEw1NzIuMywyLjMgTDU3NywyLjYgTDU4MS43LDIuOSBMNTg2LjQsMy4zIEw1OTEuMSwzLjcgTDU5NS44LDQgTDYwMC40LDQuNSBMNjA1LjEsNC45IEw2MDkuOCw1LjMgTDYxNC41LDUuOCBMNjE5LjEsNi4zIEw2MjMuOCw2LjggTDYyOC41LDcuMyBMNjMzLjEsNy44IEw2MzcuOCw4LjQgTDY0Mi41LDkgTDY0Ny4xLDkuNiBMNjUxLjgsMTAuMiBMNjU2LjQsMTAuOCBMNjYxLjEsMTEuNSBMNjY1LjcsMTIuMiBMNjcwLjQsMTIuOSBMNjc1LDEzLjYgTDY3OS42LDE0LjMgTDY4NC4zLDE1LjEgTDY4OC45LDE1LjkgTDY5My41LDE2LjcgTDY5OC4xLDE3LjUgTDcwMi44LDE4LjMgTDcwNy40LDE5LjIgTDcxMiwyMC4xIEw3MTYuNiwyMSBMNzIxLjIsMjIgTDcyNS44LDIyLjkgTDczMC4zLDIzLjkgTDczNC45LDI0LjkgTDczOS41LDI2IEw3NDQsMjcuMSBMNzQ4LjYsMjguMiBMNzUzLjEsMjkuMyBMNzU3LjYsMzAuNSBMNzYyLjIsMzEuNyBMNzY2LjcsMzMgTDc3MS4xLDM0LjMgTDc3NS42LDM1LjYgTDc4MC4xLDM3IEw3ODQuNSwzOC40IEw3ODguOSwzOS44IEw3OTMuMyw0MS4zIEw3OTcuNyw0Mi44IEw4MDIuMSw0NC40IEw4MDYuNCw0Ni4xIEw4MTAuNyw0Ny44IEw4MTUsNDkuNSBMODE5LjMsNTEuMyBMODIzLjUsNTMuMiBMODI3LjcsNTUuMSBMODMxLjksNTcuMSBMODM2LDU5LjEgTDg0MC4xLDYxLjIgTDg0NC4xLDYzLjQgTDg0OC4xLDY1LjYgTDg1Mi4xLDY3LjkgTDg1Niw3MC4zIEw4NTkuOSw3Mi43IEw4NjMuNyw3NS4yIEw4NjcuNCw3Ny44IEw4NzEuMSw4MC40IEw4NzQuOCw4My4xIEw4NzguNCw4NS45IEw4ODEuOSw4OC43IEw4ODUuNCw5MS43IEw4ODguOCw5NC43IEw4OTIuMSw5Ny43IEw4OTUuNCwxMDAuOSBMODk4LjYsMTA0LjEgTDkwMS44LDEwNy4zIEw5MDQuOCwxMTAuNyBMOTA3LjgsMTE0IEw5MTAuOCwxMTcuNSBMOTEzLjYsMTIxIEw5MTYuNCwxMjQuNiBMOTE5LjEsMTI4LjMgTDkyMS44LDEzMS45IEw5MjQuNCwxMzUuNyBMOTI2LjksMTM5LjUgTDkyOS4zLDE0My40IEw5MzEuNywxNDcuMyBMOTM0LDE1MS4yIEw5MzYuMywxNTUuMiBMOTM4LjQsMTU5LjIgTDk0MC41LDE2My4zIEw5NDIuNiwxNjcuNCBMOTQ0LjYsMTcxLjYgTDk0Ni41LDE3NS44IEw5NDguNCwxODAgTDk1MC4yLDE4NC4zIEw5NTEuOSwxODguNSBMOTUzLjYsMTkyLjggTDk1NS4zLDE5Ny4yIEw5NTYuOSwyMDEuNSBMOTU4LjQsMjA1LjkgTDk1OS45LDIxMC4zIEw5NjEuNCwyMTQuNyBMOTYyLjgsMjE5LjIgTDk2NC4yLDIyMy42IEw5NjUuNSwyMjguMSBMOTY2LjgsMjMyLjYgTDk2OC4xLDIzNy4xIEw5NjkuMywyNDEuNiBMOTcwLjUsMjQ2LjEgTDk3MS42LDI1MC43IEw5NzIuNywyNTUuMiBMOTczLjgsMjU5LjggTDk3NC45LDI2NC4zIEw5NzUuOSwyNjguOSBMOTc2LjksMjczLjUgTDk3Ny45LDI3OC4xIEw5NzguOCwyODIuNyBMOTc5LjgsMjg3LjMgTDk4MC43LDI5MS45IEw5ODEuNSwyOTYuNSBMOTgyLjQsMzAxLjEgTDk4My4yLDMwNS43IEw5ODQsMzEwLjMgTDk4NC44LDMxNSBMOTg1LjYsMzE5LjYgTDk4Ni4zLDMyNC4yIEw5ODcsMzI4LjkgTDk4Ny43LDMzMy41IEw5ODguNCwzMzguMSBMOTg5LjEsMzQyLjggTDk4OS43LDM0Ny40IEw5OTAuMywzNTIuMSBMOTkwLjksMzU2LjggTDk5MS41LDM2MS40IEw5OTIuMSwzNjYuMSBMOTkyLjYsMzcwLjcgTDk5My4xLDM3NS40IEw5OTMuNywzODAuMSBMOTk0LjEsMzg0LjcgTDk5NC42LDM4OS40IEw5OTUuMSwzOTQuMSBMOTk1LjUsMzk4LjggTDk5NS45LDQwMy41IEw5OTYuMyw0MDguMSBMOTk2LjYsNDEyLjggTDk5Nyw0MTcuNSBMOTk3LjMsNDIyLjIgTDk5Ny42LDQyNi45IEw5OTcuOSw0MzEuNiBMOTk4LjIsNDM2LjIgTDk5OC41LDQ0MC45IEw5OTguNyw0NDUuNiBMOTk4LjksNDUwLjMgTDk5OS4xLDQ1NSBMOTk5LjMsNDU5LjcgTDk5OS40LDQ2NC40IEw5OTkuNiw0NjkuMSBMOTk5LjcsNDczLjggTDk5OS44LDQ3OC41IEw5OTkuOSw0ODMuMiBMOTk5LjksNDg3LjkgTDEwMDAsNDkyLjYgTDEwMDAsNDk3LjMgTDEwMDAsNTAyIEwxMDAwLDUwNi42IEw5OTkuOSw1MTEuMyBMOTk5LjksNTE2IEw5OTkuOCw1MjAuNyBMOTk5LjcsNTI1LjQgTDk5OS42LDUzMC4xIEw5OTkuNSw1MzQuOCBMOTk5LjMsNTM5LjUgTDk5OS4xLDU0NC4yIEw5OTguOSw1NDguOSBMOTk4LjcsNTUzLjYgTDk5OC41LDU1OC4zIEw5OTguMyw1NjMgTDk5OCw1NjcuNyBMOTk3LjcsNTcyLjMgTDk5Ny40LDU3NyBMOTk3LjEsNTgxLjcgTDk5Ni43LDU4Ni40IEw5OTYuMyw1OTEuMSBMOTk2LDU5NS44IEw5OTUuNSw2MDAuNCBMOTk1LjEsNjA1LjEgTDk5NC43LDYwOS44IEw5OTQuMiw2MTQuNSBMOTkzLjcsNjE5LjEgTDk5My4yLDYyMy44IEw5OTIuNyw2MjguNSBMOTkyLjIsNjMzLjEgTDk5MS42LDYzNy44IEw5OTEsNjQyLjUgTDk5MC40LDY0Ny4xIEw5ODkuOCw2NTEuOCBMOTg5LjIsNjU2LjQgTDk4OC41LDY2MS4xIEw5ODcuOCw2NjUuNyBMOTg3LjEsNjcwLjQgTDk4Ni40LDY3NSBMOTg1LjcsNjc5LjYgTDk4NC45LDY4NC4zIEw5ODQuMSw2ODguOSBMOTgzLjMsNjkzLjUgTDk4Mi41LDY5OC4xIEw5ODEuNyw3MDIuOCBMOTgwLjgsNzA3LjQgTDk3OS45LDcxMiBMOTc5LDcxNi42IEw5NzgsNzIxLjIgTDk3Ny4xLDcyNS44IEw5NzYuMSw3MzAuMyBMOTc1LjEsNzM0LjkgTDk3NCw3MzkuNSBMOTcyLjksNzQ0IEw5NzEuOCw3NDguNiBMOTcwLjcsNzUzLjEgTDk2OS41LDc1Ny42IEw5NjguMyw3NjIuMiBMOTY3LDc2Ni43IEw5NjUuNyw3NzEuMSBMOTY0LjQsNzc1LjYgTDk2Myw3ODAuMSBMOTYxLjYsNzg0LjUgTDk2MC4yLDc4OC45IEw5NTguNyw3OTMuMyBMOTU3LjIsNzk3LjcgTDk1NS42LDgwMi4xIEw5NTMuOSw4MDYuNCBMOTUyLjIsODEwLjcgTDk1MC41LDgxNSBMOTQ4LjcsODE5LjMgTDk0Ni44LDgyMy41IEw5NDQuOSw4MjcuNyBMOTQyLjksODMxLjkgTDk0MC45LDgzNiBMOTM4LjgsODQwLjEgTDkzNi42LDg0NC4xIEw5MzQuNCw4NDguMSBMOTMyLjEsODUyLjEgTDkyOS43LDg1NiBMOTI3LjMsODU5LjkgTDkyNC44LDg2My43IEw5MjIuMiw4NjcuNCBMOTE5LjYsODcxLjEgTDkxNi45LDg3NC44IEw5MTQuMSw4NzguNCBMOTExLjMsODgxLjkgTDkwOC4zLDg4NS40IEw5MDUuMyw4ODguOCBMOTAyLjMsODkyLjEgTDg5OS4xLDg5NS40IEw4OTUuOSw4OTguNiBMODkyLjcsOTAxLjggTDg4OS4zLDkwNC44IEw4ODYsOTA3LjggTDg4Mi41LDkxMC44IEw4NzksOTEzLjYgTDg3NS40LDkxNi40IEw4NzEuNyw5MTkuMSBMODY4LjEsOTIxLjggTDg2NC4zLDkyNC40IEw4NjAuNSw5MjYuOSBMODU2LjYsOTI5LjMgTDg1Mi43LDkzMS43IEw4NDguOCw5MzQgTDg0NC44LDkzNi4zIEw4NDAuOCw5MzguNCBMODM2LjcsOTQwLjUgTDgzMi42LDk0Mi42IEw4MjguNCw5NDQuNiBMODI0LjIsOTQ2LjUgTDgyMCw5NDguNCBMODE1LjcsOTUwLjIgTDgxMS41LDk1MS45IEw4MDcuMiw5NTMuNiBMODAyLjgsOTU1LjMgTDc5OC41LDk1Ni45IEw3OTQuMSw5NTguNCBMNzg5LjcsOTU5LjkgTDc4NS4zLDk2MS40IEw3ODAuOCw5NjIuOCBMNzc2LjQsOTY0LjIgTDc3MS45LDk2NS41IEw3NjcuNCw5NjYuOCBMNzYyLjksOTY4LjEgTDc1OC40LDk2OS4zIEw3NTMuOSw5NzAuNSBMNzQ5LjMsOTcxLjYgTDc0NC44LDk3Mi43IEw3NDAuMiw5NzMuOCBMNzM1LjcsOTc0LjkgTDczMS4xLDk3NS45IEw3MjYuNSw5NzYuOSBMNzIxLjksOTc3LjkgTDcxNy4zLDk3OC44IEw3MTIuNyw5NzkuOCBMNzA4LjEsOTgwLjcgTDcwMy41LDk4MS41IEw2OTguOSw5ODIuNCBMNjk0LjMsOTgzLjIgTDY4OS43LDk4NCBMNjg1LDk4NC44IEw2ODAuNCw5ODUuNiBMNjc1LjgsOTg2LjMgTDY3MS4xLDk4NyBMNjY2LjUsOTg3LjcgTDY2MS45LDk4OC40IEw2NTcuMiw5ODkuMSBMNjUyLjYsOTg5LjcgTDY0Ny45LDk5MC4zIEw2NDMuMiw5OTAuOSBMNjM4LjYsOTkxLjUgTDYzMy45LDk5Mi4xIEw2MjkuMyw5OTIuNiBMNjI0LjYsOTkzLjEgTDYxOS45LDk5My43IEw2MTUuMyw5OTQuMSBMNjEwLjYsOTk0LjYgTDYwNS45LDk5NS4xIEw2MDEuMiw5OTUuNSBMNTk2LjUsOTk1LjkgTDU5MS45LDk5Ni4zIEw1ODcuMiw5OTYuNiBMNTgyLjUsOTk3IEw1NzcuOCw5OTcuMyBMNTczLjEsOTk3LjYgTDU2OC40LDk5Ny45IEw1NjMuOCw5OTguMiBMNTU5LjEsOTk4LjUgTDU1NC40LDk5OC43IEw1NDkuNyw5OTguOSBMNTQ1LDk5OS4xIEw1NDAuMyw5OTkuMyBMNTM1LjYsOTk5LjQgTDUzMC45LDk5OS42IEw1MjYuMiw5OTkuNyBMNTIxLjUsOTk5LjggTDUxNi44LDk5OS45IEw1MTIuMSw5OTkuOSBMNTA3LjQsMTAwMCBMNTAyLjcsMTAwMCBMNDk4LDEwMDAgTDQ5My40LDEwMDAgTDQ4OC43LDk5OS45IEw0ODQsOTk5LjkgTDQ3OS4zLDk5OS44IEw0NzQuNiw5OTkuNyBMNDY5LjksOTk5LjYgTDQ2NS4yLDk5OS41IEw0NjAuNSw5OTkuMyBMNDU1LjgsOTk5LjEgTDQ1MS4xLDk5OC45IEw0NDYuNCw5OTguNyBMNDQxLjcsOTk4LjUgTDQzNyw5OTguMyBMNDMyLjMsOTk4IEw0MjcuNyw5OTcuNyBMNDIzLDk5Ny40IEw0MTguMyw5OTcuMSBMNDEzLjYsOTk2LjcgTDQwOC45LDk5Ni4zIEw0MDQuMiw5OTYgTDM5OS42LDk5NS41IEwzOTQuOSw5OTUuMSBMMzkwLjIsOTk0LjcgTDM4NS41LDk5NC4yIEwzODAuOSw5OTMuNyBMMzc2LjIsOTkzLjIgTDM3MS41LDk5Mi43IEwzNjYuOSw5OTIuMiBMMzYyLjIsOTkxLjYgTDM1Ny41LDk5MSBMMzUyLjksOTkwLjQgTDM0OC4yLDk4OS44IEwzNDMuNiw5ODkuMiBMMzM4LjksOTg4LjUgTDMzNC4zLDk4Ny44IEwzMjkuNiw5ODcuMSBMMzI1LDk4Ni40IEwzMjAuNCw5ODUuNyBMMzE1LjcsOTg0LjkgTDMxMS4xLDk4NC4xIEwzMDYuNSw5ODMuMyBMMzAxLjksOTgyLjUgTDI5Ny4yLDk4MS43IEwyOTIuNiw5ODAuOCBMMjg4LDk3OS45IEwyODMuNCw5NzkgTDI3OC44LDk3OCBMMjc0LjIsOTc3LjEgTDI2OS43LDk3Ni4xIEwyNjUuMSw5NzUuMSBMMjYwLjUsOTc0IEwyNTYsOTcyLjkgTDI1MS40LDk3MS44IEwyNDYuOSw5NzAuNyBMMjQyLjQsOTY5LjUgTDIzNy44LDk2OC4zIEwyMzMuMyw5NjcgTDIyOC45LDk2NS43IEwyMjQuNCw5NjQuNCBMMjE5LjksOTYzIEwyMTUuNSw5NjEuNiBMMjExLjEsOTYwLjIgTDIwNi43LDk1OC43IEwyMDIuMyw5NTcuMiBMMTk3LjksOTU1LjYgTDE5My42LDk1My45IEwxODkuMyw5NTIuMiBMMTg1LDk1MC41IEwxODAuNyw5NDguNyBMMTc2LjUsOTQ2LjggTDE3Mi4zLDk0NC45IEwxNjguMSw5NDIuOSBMMTY0LDk0MC45IEwxNTkuOSw5MzguOCBMMTU1LjksOTM2LjYgTDE1MS45LDkzNC40IEwxNDcuOSw5MzIuMSBMMTQ0LDkyOS43IEwxNDAuMSw5MjcuMyBMMTM2LjMsOTI0LjggTDEzMi42LDkyMi4yIEwxMjguOSw5MTkuNiBMMTI1LjIsOTE2LjkgTDEyMS42LDkxNC4xIEwxMTguMSw5MTEuMyBMMTE0LjYsOTA4LjMgTDExMS4yLDkwNS4zIEwxMDcuOSw5MDIuMyBMMTA0LjYsODk5LjEgTDEwMS40LDg5NS45IEw5OC4yLDg5Mi43IEw5NS4yLDg4OS4zIEw5Mi4yLDg4NiBMODkuMiw4ODIuNSBMODYuNCw4NzkgTDgzLjYsODc1LjQgTDgwLjksODcxLjcgTDc4LjIsODY4LjEgTDc1LjYsODY0LjMgTDczLjEsODYwLjUgTDcwLjcsODU2LjYgTDY4LjMsODUyLjcgTDY2LDg0OC44IEw2My43LDg0NC44IEw2MS42LDg0MC44IEw1OS41LDgzNi43IEw1Ny40LDgzMi42IEw1NS40LDgyOC40IEw1My41LDgyNC4yIEw1MS42LDgyMCBMNDkuOCw4MTUuNyBMNDguMSw4MTEuNSBMNDYuNCw4MDcuMiBMNDQuNyw4MDIuOCBMNDMuMSw3OTguNSBMNDEuNiw3OTQuMSBMNDAuMSw3ODkuNyBMMzguNiw3ODUuMyBMMzcuMiw3ODAuOCBMMzUuOCw3NzYuNCBMMzQuNSw3NzEuOSBMMzMuMiw3NjcuNCBMMzEuOSw3NjIuOSBMMzAuNyw3NTguNCBMMjkuNSw3NTMuOSBMMjguNCw3NDkuMyBMMjcuMyw3NDQuOCBMMjYuMiw3NDAuMiBMMjUuMSw3MzUuNyBMMjQuMSw3MzEuMSBMMjMuMSw3MjYuNSBMMjIuMSw3MjEuOSBMMjEuMiw3MTcuMyBMMjAuMiw3MTIuNyBMMTkuMyw3MDguMSBMMTguNSw3MDMuNSBMMTcuNiw2OTguOSBMMTYuOCw2OTQuMyBMMTYsNjg5LjcgTDE1LjIsNjg1IEwxNC40LDY4MC40IEwxMy43LDY3NS44IEwxMyw2NzEuMSBMMTIuMyw2NjYuNSBMMTEuNiw2NjEuOSBMMTAuOSw2NTcuMiBMMTAuMyw2NTIuNiBMOS43LDY0Ny45IEw5LjEsNjQzLjIgTDguNSw2MzguNiBMNy45LDYzMy45IEw3LjQsNjI5LjMgTDYuOSw2MjQuNiBMNi4zLDYxOS45IEw1LjksNjE1LjMgTDUuNCw2MTAuNiBMNC45LDYwNS45IEw0LjUsNjAxLjIgTDQuMSw1OTYuNSBMMy43LDU5MS45IEwzLjQsNTg3LjIgTDMsNTgyLjUgTDIuNyw1NzcuOCBMMi40LDU3My4xIEwyLjEsNTY4LjQgTDEuOCw1NjMuOCBMMS41LDU1OS4xIEwxLjMsNTU0LjQgTDEuMSw1NDkuNyBMMC45LDU0NSBMMC43LDU0MC4zIEwwLjYsNTM1LjYgTDAuNCw1MzAuOSBMMC4zLDUyNi4yIEwwLjIsNTIxLjUgTDAuMSw1MTYuOCBMMC4xLDUxMi4xIEwwLDUwNy40IEwwLDUwMi43IEwwLDQ5OCBMMCw0OTMuNCBMMC4xLDQ4OC43IEwwLjEsNDg0IEwwLjIsNDc5LjMgTDAuMyw0NzQuNiBMMC40LDQ2OS45IEwwLjUsNDY1LjIgTDAuNyw0NjAuNSBMMC45LDQ1NS44IEwxLjEsNDUxLjEgTDEuMyw0NDYuNCBMMS41LDQ0MS43IEwxLjcsNDM3IEwyLDQzMi4zIEwyLjMsNDI3LjcgTDIuNiw0MjMgTDIuOSw0MTguMyBMMy4zLDQxMy42IEwzLjcsNDA4LjkgTDQsNDA0LjIgTDQuNSwzOTkuNiBMNC45LDM5NC45IEw1LjMsMzkwLjIgTDUuOCwzODUuNSBMNi4zLDM4MC45IEw2LjgsMzc2LjIgTDcuMywzNzEuNSBMNy44LDM2Ni45IEw4LjQsMzYyLjIgTDksMzU3LjUgTDkuNiwzNTIuOSBMMTAuMiwzNDguMiBMMTAuOCwzNDMuNiBMMTEuNSwzMzguOSBMMTIuMiwzMzQuMyBMMTIuOSwzMjkuNiBMMTMuNiwzMjUgTDE0LjMsMzIwLjQgTDE1LjEsMzE1LjcgTDE1LjksMzExLjEgTDE2LjcsMzA2LjUgTDE3LjUsMzAxLjkgTDE4LjMsMjk3LjIgTDE5LjIsMjkyLjYgTDIwLjEsMjg4IEwyMSwyODMuNCBMMjIsMjc4LjggTDIyLjksMjc0LjIgTDIzLjksMjY5LjcgTDI0LjksMjY1LjEgTDI2LDI2MC41IEwyNy4xLDI1NiBMMjguMiwyNTEuNCBMMjkuMywyNDYuOSBMMzAuNSwyNDIuNCBMMzEuNywyMzcuOCBMMzMsMjMzLjMgTDM0LjMsMjI4LjkgTDM1LjYsMjI0LjQgTDM3LDIxOS45IEwzOC40LDIxNS41IEwzOS44LDIxMS4xIEw0MS4zLDIwNi43IEw0Mi44LDIwMi4zIEw0NC40LDE5Ny45IEw0Ni4xLDE5My42IEw0Ny44LDE4OS4zIEw0OS41LDE4NSBMNTEuMywxODAuNyBMNTMuMiwxNzYuNSBMNTUuMSwxNzIuMyBMNTcuMSwxNjguMSBMNTkuMSwxNjQgTDYxLjIsMTU5LjkgTDYzLjQsMTU1LjkgTDY1LjYsMTUxLjkgTDY3LjksMTQ3LjkgTDcwLjMsMTQ0IEw3Mi43LDE0MC4xIEw3NS4yLDEzNi4zIEw3Ny44LDEzMi42IEw4MC40LDEyOC45IEw4My4xLDEyNS4yIEw4NS45LDEyMS42IEw4OC43LDExOC4xIEw5MS43LDExNC42IEw5NC43LDExMS4yIEw5Ny43LDEwNy45IEwxMDAuOSwxMDQuNiBMMTA0LjEsMTAxLjQgTDEwNy4zLDk4LjIgTDExMC43LDk1LjIgTDExNCw5Mi4yIEwxMTcuNSw4OS4yIEwxMjEsODYuNCBMMTI0LjYsODMuNiBMMTI4LjMsODAuOSBMMTMxLjksNzguMiBMMTM1LjcsNzUuNiBMMTM5LjUsNzMuMSBMMTQzLjQsNzAuNyBMMTQ3LjMsNjguMyBMMTUxLjIsNjYgTDE1NS4yLDYzLjcgTDE1OS4yLDYxLjYgTDE2My4zLDU5LjUgTDE2Ny40LDU3LjQgTDE3MS42LDU1LjQgTDE3NS44LDUzLjUgTDE4MCw1MS42IEwxODQuMyw0OS44IEwxODguNSw0OC4xIEwxOTIuOCw0Ni40IEwxOTcuMiw0NC43IEwyMDEuNSw0My4xIEwyMDUuOSw0MS42IEwyMTAuMyw0MC4xIEwyMTQuNywzOC42IEwyMTkuMiwzNy4yIEwyMjMuNiwzNS44IEwyMjguMSwzNC41IEwyMzIuNiwzMy4yIEwyMzcuMSwzMS45IEwyNDEuNiwzMC43IEwyNDYuMSwyOS41IEwyNTAuNywyOC40IEwyNTUuMiwyNy4zWiIgZmlsbD0idXJsKCNnKSIgbWFzaz0idXJsKCNtKSIvPjwvc3ZnPg==" style="width:22px;height:22px"><span class="nom">meridia</span></span>
+    <span class="mono" style="letter-spacing:.08em">TOULON · 43°07′ N — 5°56′ E · DOSSIER DE TRAVAIL DU 20 NOVEMBRE 2026</span>
   </div>
 </footer>
 
+<script id="hwdata" type="application/json">[{"grp": "Balise", "name": "ArduSimple simpleRTK2B Lite", "prix": "≈ 190–210 €", "role": "Récepteur GPS RTK (u-blox ZED-F9P), cœur de la balise. Précision de 2 à 5 cm.", "fiche": [["Page produit ArduSimple", "https://www.ardusimple.com/product/simplertk2blite/"], ["Fiche technique (PDF)", "https://www.mouser.com/datasheet/2/1042/ArduSimple_Datasheet_simpleRTK2Blite-3238991.pdf"]], "avis": [["Test de terrain, université de Caroline du Sud (≈ 2,2 cm)", "https://www.ardusimple.com/field-test-evaluation-of-the-ardusimple-simplertk2blite-zed-f9p-operating-in-rtk-mode-on-the-south-carolina-virtual-reference-network/"], ["Blog GNSS RTK Lab, essais d’une carte ZED-F9P ArduSimple", "https://gnssrtklab.blogspot.com/2022"]]}, {"grp": "Balise", "name": "u-blox ZED-F9P", "prix": "puce", "role": "La puce GPS de la carte ci-dessus. Plusieurs versions existent (-02B, -04B, -05B…) : prendre la fiche de la version achetée.", "fiche": [["Résumé produit u-blox (PDF)", "https://incremental-content.u-blox.com/sites/default/files/ZED-F9P_ProductSummary_UBX-17005151.pdf"], ["Fiche technique (PDF)", "https://www.mouser.com/datasheet/2/813/ZED_F9P_Data_Sheet-2489427.pdf"]], "avis": [["Forum ArduPilot : F9P contre M8P en RTK", "https://discuss.ardupilot.org/t/comparing-a-ublox-f9p-with-a-m8p-with-rtk/43493"], ["Forum SparkFun : précision réelle du ZED-F9P", "https://community.sparkfun.com/t/real-precision-of-the-zed-f9p-30-cm/45136"]]}, {"grp": "Balise", "name": "ArduSimple simpleRTK3B Budget", "prix": "≈ 225–270 €", "role": "Alternative tri-bande (Unicore UM980), à comparer au prototype. Demande une antenne avec la bande L5.", "fiche": [["Page produit ArduSimple", "https://www.ardusimple.com/product/simplertk3b-budget"], ["Guide d’utilisation", "https://www.ardusimple.com/user-guide-simplertk3b-budget"]], "avis": [["Forum SparkFun : UM980 contre ZED-F9P, retours d’utilisateurs", "https://community.sparkfun.com/t/getting-20mm-accuracy-on-rtk-torch-with-local-base/47320?page=2"]]}, {"grp": "Balise", "name": "Antenne u-blox ANN-MB", "prix": "≈ 50–70 €", "role": "Antenne GPS multi-bandes étanche. L’ANN-MB-00 (L1/L2) suffit pour le ZED-F9P ; prendre l’ANN-MB2 (avec L5) si le choix va à l’UM980.", "fiche": [["Fiche ANN-MB (PDF)", "https://www.mouser.com/datasheet/2/813/ANN-MB_DataSheet__UBX-18049862_-1532371.pdf"], ["Résumé produit ANN-MB2 (PDF)", "https://content.u-blox.com/sites/default/files/documents/ANN-MB2_ProductSummary_UBXDOC-963802114-12691.pdf"]], "avis": [["Université de Birmingham : comparaison TOPGNSS / ANN-MB", "https://research.birmingham.ac.uk/en/publications/assessment-of-the-performance-of-the-topgnss-and-ann-mb-antennas-/"], ["Comparatif d’antennes ArduSimple (fabricant)", "https://www.ardusimple.com/?p=1774"]]}, {"grp": "Balise", "name": "LilyGO T-A7670E-S3", "prix": "≈ 35–50 €", "role": "Microcontrôleur ESP32-S3 et modem 4G sur une seule carte, avec lecteur de carte microSD. Pic de courant ≈ 2 A à prévoir.", "fiche": [["Dépôt officiel LilyGO (documentation)", "https://github.com/Xinyuan-LilyGO/LilyGO-T-A76XX"], ["Page produit LilyGO", "https://www.tindie.com/products/lilygo/t-a7670esa-s3-standard-development-board/"]], "avis": [["Forum LilyGO : problème de GPS intégré", "https://community.lilygo.cc/post/1548"], ["Forum Arduino : GPS de la T-A7670 (sans impact, on utilise le RTK)", "https://forum.arduino.cc/t/t-a7670x-gps-gnss-not-working/1119704"]]}, {"grp": "Balise", "name": "EByte E22-900M22S", "prix": "≈ 8–12 €", "role": "Module radio 868 MHz (Semtech SX1262) pour le chemin de secours. Ne pas confondre avec les versions MM22S ou T22S.", "fiche": [["Page produit EByte", "https://ebyteiot.com/products/sx1262-868mhz-module-electronic-components-22dbm-wireless-transceiver-lora-gfsk-iot-long-range-7km-ebyte-e22-900m22s-spi"], ["Fiche technique (PDF)", "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_Chengdu-Ebyte-Elec-Tech-E22-900M22S_C411293.pdf"]], "avis": []}, {"grp": "Balise", "name": "Adafruit BNO085", "prix": "≈ 25–30 €", "role": "Centrale inertielle : cap, gîte, tangage. Le cap magnétique demande un étalonnage soigné à bord.", "fiche": [["Page produit Adafruit", "https://www.adafruit.com/products/4754"]], "avis": [["Forum SparkFun : cap et étalonnage du BNO085", "https://community.sparkfun.com/t/inaccurate-heading-and-calibration-issues-with-bno085-imu/47544"], ["Forum Arduino : compas compensé en inclinaison", "https://forum.arduino.cc/t/reliable-tilt-compensated-compass-system/1047030"]]}, {"grp": "Bouées", "name": "Calypso ULP STD", "prix": "≈ 500 €", "role": "Anémomètre ultrasonique sans pièce mobile, très basse consommation. Version UART/I²C (CMI1018) ou RS485 (CMI1017) : vérifier l’interface avant câblage.", "fiche": [["Catalogue Calypso (NauticExpo)", "https://pdf.nauticexpo.com/pdf/calypso-marine-instruments/ultra-low-power-ultrasonic-wind-meter/66232-126983.html"], ["Manuel CMI1018", "https://manuals.plus/calypso/cmi1018-ultra-low-power-ultrasonic-std-wind-meter-manual"], ["Fiche revendeur CMI1017 (RS485)", "https://www.upffront.com/calypso-ulp-std-45m-s-rs485-nmea0183-wired-range-cmi1017-227169"]], "avis": [["Panbo : article sur la version ULP NMEA 2000", "https://panbo.com/?p=105684"], ["Avis clients Force4", "https://www.reviews.co.uk/product-reviews/store/www.force4.co.uk/41620"]]}, {"grp": "Bouées", "name": "Heltec WiFi LoRa 32 V3", "prix": "≈ 20–25 €", "role": "Récepteur de la radio de secours, branché en USB au PC course (deux pour la redondance). Une V4 au même format existe.", "fiche": [["Page produit Heltec", "https://heltec.org/project/wifi-lora-32-v3/"], ["Documentation Heltec", "https://wiki.heltec.org/docs/devices/open-source-hardware/esp32-series/lora-32/wifi-lora-32-v3/"]], "avis": [["Forum Meshtastic : consommation mesurée", "https://meshtastic.discourse.group/t/heltec-v3-shutdown-light-versus-deep-sleep/9930"], ["OpenELAB : V3 ou V4, guide d’achat", "https://openelab.io/da/blogs/learn/heltec-wifi-lora-32-v3-vs-v4-differences-and-buying-guide"]]}, {"grp": "Base RTK", "name": "Antenne géodésique ArduSimple", "prix": "≈ 200 €", "role": "Antenne calibrée de la base RTK, fixée sur un point dégagé. À relier à une carte simpleRTK2B.", "fiche": [["Page produit ArduSimple", "https://www.ardusimple.com/product/calibrated-survey-gnss-quadband-antenna-ip67/"], ["Fiche technique (PDF)", "https://mouser.com/datasheet/2/1042/ArduSimple_Datasheet_simpleANT3B_Calibrated_Survey-3451859.pdf"]], "avis": []}, {"grp": "Base RTK", "name": "Réseau Centipede RTK", "prix": "gratuit", "role": "Réseau public de bases RTK, en secours de notre base. Serveur : caster.centipede.fr, port 2101.", "fiche": [["Carte des bases", "https://map.centipede.fr"], ["Documentation", "https://docs.centipede.fr/docs/publication"]], "avis": [["Réussir : Centipede plus performant avec Millipede", "https://www.reussir.fr/machinisme/autoguidage-le-reseau-centipede-rtk-nettement-plus-performant-avec-millipede"], ["SciTePress 2025 : récepteurs bas coût sur Centipede", "https://scitepress.org/PublishedPapers/2025/134448"]]}, {"grp": "PC course", "name": "Teltonika RUTC50 (ex-RUTX50)", "prix": "≈ 450–550 €", "role": "Routeur 5G double SIM, secours automatique de la ligne filaire. Le RUTX50 n’est plus commandable après le 3 février 2027 ; Teltonika le remplace par les RUTC50 et RUTM50.", "fiche": [["Page produit RUTX50 (avis de fin de vie)", "https://teltonika-networks.com/products/routers/rutx50"]], "avis": [["Avis clients Verkkokauppa (RUTX50)", "https://www.verkkokauppa.com/en/product/827990/Teltonika-RUTX50-5G-4G-3G-Modem-and-WiFi-Router/reviews"]]}, {"grp": "PC course", "name": "ASUS NUC 14 Pro", "prix": "≈ 800–1 000 €", "role": "Mini-PC du PC course, en deux exemplaires (principal et secours).", "fiche": [["Page produit ASUS", "https://asus.com/displays-desktops/nucs/nuc-kits/asus-nuc-14-pro"]], "avis": [["ServeTheHome", "https://www.servethehome.com/asus-nuc-14-pro-review-intel-core/"], ["Notebookcheck", "https://www.notebookcheck.net/Asus-NUC-14-Pro-review-NUC-mini-PC-with-Intel-Core-Ultra-5-125H-fast-Intel-Arc-iGPU-and-2x-Thunderbolt-4.881404.0.html"]]}, {"grp": "PC course", "name": "EcoFlow River 2 Pro", "prix": "≈ 420–600 €", "role": "Station d’énergie qui sert d’onduleur au PC course : 768 Wh annoncés, ≈ 614 Wh utiles mesurés.", "fiche": [["Fiche technique (PDF, revendeur)", "https://www.cliftoncameras.co.uk/uploads/specifications/EcoFlow%20RIVER%202%20Pro%20UK%20Specifications.pdf"]], "avis": [["OutdoorGearLab (janvier 2026)", "https://www.outdoorgearlab.com/reviews/camping-and-hiking/power-station/ecoflow-river-2-pro"], ["AppleInsider", "https://appleinsider.com/articles/23/05/10/ecoflow-river-2-pro-review-compact-design-with-expansive-power"]]}, {"grp": "PC course", "name": "SIM IoT 1NCE / Things Mobile", "prix": "10–20 € par SIM", "role": "Cartes SIM des balises. 1NCE : forfait unique 10 ans, 500 Mo (suffisant pour la saison, à vérifier). Avis mitigés sur Things Mobile.", "fiche": [["1NCE Connect", "https://1nce.com/en-us/1nce-connect"]], "avis": [["PeerSpot : avis utilisateurs 1NCE", "https://www.peerspot.com/products/1nce-reviews"], ["Trustpilot : Things Mobile (avis mitigés)", "https://au.trustpilot.com/review/thingsmobile.com"]]}, {"grp": "Caméras et météo", "name": "Hikvision DS-2DE4425IW-DE (T5)", "prix": "≈ 500–700 €", "role": "Caméra motorisée, zoom 25×, pour la vidéo en direct. Acheter la version (T5) : le modèle de base est arrêté.", "fiche": [["Page produit Hikvision (T5)", "https://www.hikvision.com/en/products/IP-Products/PTZ-Cameras/Pro-Series/ds-2de4425iw-de-t5-/"]], "avis": [["IPCamTalk : retours sur un modèle proche", "https://ipcamtalk.com/goto/post?id=447372"]]}, {"grp": "Caméras et météo", "name": "NVIDIA Jetson Orin Nano Super", "prix": "≈ 250–300 €", "role": "Petit calculateur pour l’analyse d’image (incrustations, essais sur les risées).", "fiche": [["Page produit NVIDIA", "https://marketplace.nvidia.com/en-us/enterprise/robotics-edge/jetson-orin-nano-super-developer-kit"], ["NVIDIA : mode Super (JetPack 6.2)", "https://developer.nvidia.com/blog/nvidia-jetpack-6-2-brings-super-mode-to-nvidia-jetson-orin-nano-and-jetson-orin-nx-modules"]], "avis": [["StorageReview", "https://www.storagereview.com/review/nvidia-jetson-orin-nano-super-powering-deepseek-r1-70b-inference-at-the-edge"], ["CNX Software", "https://cnx-software.com/2024/12/18/249-nvidia-jetson-orin-nano-super-developer-kit-targets-generative-ai-applications-at-the-edge/"]]}, {"grp": "Caméras et météo", "name": "Blackmagic ATEM Mini Pro", "prix": "≈ 300–350 €", "role": "Mélangeur vidéo et diffusion en direct (1080p maximum).", "fiche": [["Page Blackmagic ATEM Mini", "https://www.blackmagicdesign.com/products/atemmini/workflow"]], "avis": [["TechRadar", "https://www.techradar.com/reviews/atem-mini-pro"], ["Streaming Media", "https://www.streamingmedia.com/Producer/Articles/Editorial/Featured-Articles/Review-Blackmagic-Design-ATEM-Mini-Pro-140958.aspx"]]}, {"grp": "Caméras et météo", "name": "Ecowitt WS90 + GW2000", "prix": "≈ 200–250 €", "role": "Station météo ultrasonique à terre, lue sur le réseau local.", "fiche": [["Page produit Ecowitt", "https://shop.ecowitt.com/products/ws90"], ["Manuel GW2000 (PDF)", "https://osswww.ecowitt.net/uploads/20220803/GW2000%20Manual.pdf"]], "avis": [["Forum Home Assistant : retour sur le vent du WS90", "https://community.home-assistant.io/t/my-weather-station-project/1024863"]]}, {"grp": "Outils", "name": "TinySA Ultra", "prix": "≈ 120–150 €", "role": "Petit analyseur de spectre pour vérifier les fréquences sur le site, le matin de chaque journée.", "fiche": [["Page revendeur Passion Radio", "https://passion-radio.com/meter/tiny-sa-ultra-2543.html"]], "avis": [["RTL-SDR : tour d’horizon des tests", "https://www.rtl-sdr.com/tinysa-ultra-reviews-a-0-1-mhz-6-ghz-spectrum-analyzer-for-120/"], ["W. Reeve : comparaison avec un Rohde & Schwarz", "https://reeve.com/Documents/Articles%20Papers/Reeve_TinySA-FPL_Compare.pdf"]]}, {"grp": "Outils", "name": "ArduPilot Rover, mode voilier", "prix": "gratuit", "role": "Pilote automatique libre que les équipes peuvent utiliser à bord (virements, waypoints). Pour information : l’architecture des bateaux reste libre.", "fiche": [["Documentation ArduPilot voilier", "https://ardupilot.org/rover/docs/sailboat-home.html"]], "avis": [["Forum ArduPilot : fil « Sailboat support »", "https://discuss.ardupilot.org/t/sailboat-support/32060"]]}]</script>
 <script>
 (function(){
 const $=s=>document.querySelector(s);
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
-
-/* ---------- Thème ---------- */
-const root=document.documentElement;
-const saved=store.get('air-theme'); if(saved) root.setAttribute('data-theme',saved);
-function isDark(){const t=root.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
-function themeLabel(){$('#themeBtn').textContent=isDark()?'Thème clair':'Thème sombre'}
-$('#themeBtn').addEventListener('click',()=>{const n=isDark()?'light':'dark';root.setAttribute('data-theme',n);store.set('air-theme',n);themeLabel()});
-themeLabel();
-
-const ST={ok:['s-ok','Éprouvé'],dev:['s-dev','À développer'],test:['s-test','À tester sur l’eau'],opt:['s-opt','En option']};
-const pill=s=>`<span class="pill ${ST[s][0]}">${ST[s][1]}</span>`;
+const ST={ok:'Éprouvé',dev:'À développer',test:'À tester sur l’eau',opt:'En option'};
+const st=s=>`<span class="st ${s}"><i></i>${ST[s]}</span>`;
 const eur=n=>Math.round(n).toLocaleString('fr-FR').replace(/ | /g,' ')+' €';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* ---------- Entités ---------- */
 const ENT={
- balise:{eye:'Sur chaque bateau',name:'Balise officielle',st:'dev',role:'Fournie, fixée et scellée par l’organisation. Seule source des positions pour le suivi, le classement et l’arbitrage. Autonome : sa propre batterie, aucun lien avec l’électronique de l’équipe.',
-  hw:[['ArduSimple simpleRTK2B Lite (ZED-F9P)','≈ 200 €'],['Antenne u-blox ANN-MB-00','≈ 55 €'],['LilyGO T-A7670E-S3 (ESP32-S3 + 4G)','≈ 45 €'],['EByte E22-900M22S (radio 868)','≈ 10 €'],['Adafruit BNO085 (cap, gîte)','≈ 25 €'],['Batterie, boîtier IP67, connecteur','≈ 85 €']],
-  price:'≈ 420 € · 250 g · ~20 h d’autonomie',links:[['→','PC course par 4G, 10 fois/s, via le hub cloud'],['→','Antenne de secours en 868 MHz, 2 fois/s'],['←','Corrections RTK par la 4G']],why:'Les composants sont éprouvés ; le firmware et l’intégration sont à développer, l’autonomie et la réception à tester sur l’eau.'},
- 'bouee-vent':{eye:'Au vent et sous le vent',name:'Bouées instrumentées',st:'test',role:'Donnent leur position en continu (elles bougent sur leur mouillage) et mesurent le vent réel à 2 m au-dessus de l’eau. C’est la base de l’analyse du vent envoyée aux équipes.',
-  hw:[['Balise officielle, profil bouée','≈ 420 €'],['Calypso ULP STD UART (CMI1018)','≈ 500 €'],['Panneau 10 W + batterie LiFePO4','≈ 120 €'],['Espar lesté porte-capteur','150–300 €']],
-  price:'≈ 1 300 € par bouée',links:[['→','PC course : position + vent, 1 à 4 fois/s'],['i','Le compas de la balise corrige la rotation de la bouée']],why:'Le matériel est éprouvé. La correction des mouvements de la bouée doit être réglée avec des mesures réelles.'},
- 'bouee-ligne':{eye:'Départ et arrivée',name:'Bouées de ligne',st:'ok',role:'Matérialisent la ligne. Leur position précise permet de détecter automatiquement les départs anticipés au centimètre.',
-  hw:[['Balise officielle, profil bouée','≈ 420 €']],price:'≈ 420 € par bouée',links:[['→','PC course, 1 fois/s']],why:'Même balise que les bateaux, sans capteur supplémentaire.'},
- pc:{eye:'À terre',name:'PC course',st:'dev',role:'Rassemble les positions de tous les bateaux et des bouées et le vent, fait tourner le moteur de course (départ, passages de bouées, arrivée, classement), enregistre tout, et redistribue au même instant à toutes les équipes.',
-  hw:[['2 mini-PC (principal + secours)','≈ 1 800 €'],['Routeur Teltonika RUTX50 (5G secours)','≈ 500 €'],['Commutateur PoE + borne Wi-Fi','≈ 400 €'],['Station d’énergie (onduleur)','≈ 500 €'],['Écrans consoles','≈ 450 €']],
-  price:'≈ 4 000 € le lot',links:[['←','Balises via le hub cloud (4G) et via l’antenne (radio)'],['→','Toutes les équipes, par câble, 10 fois/s'],['→','Public via le cloud, avec un différé'],['↔','Consoles direction de course et arbitrage']],why:'Briques logicielles connues (MQTT, base de données temporelle) ; le moteur de course et les consoles sont à écrire.'},
- rtk:{eye:'Point fixe à terre',name:'Base RTK',st:'ok',role:'Calcule les corrections qui donnent aux balises une précision de 2 à 5 cm, et fournit l’heure GPS de référence au PC course.',
-  hw:[['ArduSimple simpleRTK2B','≈ 220 €'],['Antenne géodésique tri-bande','≈ 200 €']],price:'≈ 450 €',links:[['→','Corrections vers les balises par le cloud et la 4G'],['i','Secours : réseau public gratuit Centipede']],why:'Technique standard, très documentée.'},
- gw:{eye:'Toit ou petit mât',name:'Antenne radio de secours',st:'test',role:'Reçoit les positions en 868 MHz si la 4G ou Internet tombe. Chaque balise émet dans son créneau, calé sur l’heure GPS : aucune collision.',
-  hw:[['2 × Heltec WiFi LoRa 32 V3','≈ 50 €'],['Antenne colinéaire 868 MHz','≈ 80 €'],['Câble + mât 4–6 m','≈ 120 €']],price:'≈ 250 €',links:[['←','Balises, 2 fois/s'],['→','PC course par USB']],why:'À 500 m, la marge radio dépasse 60 dB. Masquages et reflets sur l’eau à vérifier.'},
- meteo:{eye:'À terre',name:'Station météo',st:'ok',role:'Vent de référence à terre, rafales et tendance. Complète les bouées pour la carte de vent.',
-  hw:[['Ecowitt WS90 + passerelle GW2000','≈ 230 €']],price:'≈ 230 €',links:[['→','PC course par le réseau local']],why:'Produit grand public, API locale.'},
- camera:{eye:'Point haut, 20 m visés',name:'Caméras',st:'test',role:'Vidéo en direct pour le public avec incrustations façon SailGP, et analyse des risées à la surface de l’eau.',
-  hw:[['PTZ Hikvision DS-2DE4425IW-DE','≈ 600 €'],['Caméra 4K fixe grand angle + polarisant','≈ 300 €'],['NVIDIA Jetson Orin Nano Super','≈ 280 €'],['Blackmagic ATEM Mini Pro','≈ 330 €']],price:'≈ 1 500 € le lot',links:[['→','PC course : vidéo et carte des risées'],['→','YouTube Live, intégré à l’application']],why:'La vidéo est éprouvée. La détection des risées est expérimentale : c’est un bonus.'},
- cloud:{eye:'Serveur virtuel',name:'Hub cloud',st:'dev',role:'Point de rendez-vous des balises en 4G, qui renvoie leurs trames au PC course par un tunnel chiffré. Il diffuse aussi le flux public à tous les spectateurs, sans charger la connexion du site.',
-  hw:[['Serveur virtuel + CDN','30–150 €/mois']],price:'Abonnement',links:[['←','Balises par 4G'],['↔','PC course par tunnel WireGuard'],['→','Application publique']],why:'Composants standard (WireGuard, WebSocket, CDN) ; configuration à écrire.'},
- public:{eye:'Téléphones et écrans',name:'Application publique',st:'dev',role:'Carte en direct, classement, écarts, vent, vidéo, replay, commentaire automatique. Diffusée avec quelques secondes de différé.',
-  hw:[['Aucun matériel spécifique','—']],price:'Hébergement compris dans le cloud',links:[['←','Flux public du hub cloud']],why:'Technos web éprouvées (MapLibre, deck.gl) ; l’application est à écrire.'},
- equipes:{eye:'À terre',name:'Zone équipes',st:'ok',role:'Chaque équipe reçoit par câble, au même instant, les positions de tous les bateaux, des bouées, le vent et l’état de la course. Elle calcule sa tactique et envoie ses consignes à son bateau par ses propres moyens.',
-  hw:[['Prise Ethernet par équipe','fourni'],['Radiocommande de sécurité ELRS (par équipe)','70–150 €']],price:'À la charge des équipes : leur bateau et leur liaison',links:[['←','PC course, 10 fois/s, lecture seule'],['→','Leur bateau : liaison libre (4G, télémétrie)'],['→','Sécurité : radiocommande ELRS 2,4 GHz']],why:'Le flux est standard (MQTT, WebSocket, NMEA). Le format exact est à publier tôt avec un simulateur.'}
+ balise:{eye:'Dans chaque bateau',name:'Balise officielle',st:'dev',role:'Fournie, fixée et scellée par l’organisation, à l’intérieur du bateau. Seule source des positions pour le suivi, le classement et l’arbitrage. Autonome : sa propre batterie, aucun lien avec l’électronique de l’équipe.',
+  hw:[['ArduSimple simpleRTK2B Lite (ZED-F9P)','≈ 200 €'],['Antenne u-blox ANN-MB','≈ 55 €'],['LilyGO T-A7670E-S3 (ESP32-S3 + 4G)','≈ 45 €'],['EByte E22-900M22S (radio 868)','≈ 10 €'],['Adafruit BNO085 (cap, gîte)','≈ 25 €'],['Batterie, boîtier, connecteur','≈ 85 €']],
+  price:'≈ 420 € · 250 g · ~20 h d’autonomie',links:[['→','PC course par 4G, 10 fois par seconde, via le hub cloud'],['→','Antenne de secours en 868 MHz, 2 fois par seconde'],['←','Corrections RTK par la 4G']],why:'Composants éprouvés ; firmware et intégration à développer. Point à tester : une coque en carbone bloque le GPS et la 4G, l’antenne devra alors sortir sur le pont.'},
+ bouee:{eye:'Au vent et sous le vent',name:'Bouées instrumentées',st:'test',role:'Ancrées. Elles donnent leur position en continu (elles bougent sur leur mouillage) et mesurent le vent réel à 2 m au-dessus de l’eau. C’est la base des données de vent envoyées aux équipes.',
+  hw:[['Balise officielle, profil bouée','≈ 420 €'],['Calypso ULP STD (UART)','≈ 500 €'],['Panneau 10 W + batterie LiFePO4','≈ 120 €'],['Espar lesté porte-capteur','150–300 €']],
+  price:'≈ 1 300 € par bouée',links:[['→','PC course : position + vent, 1 à 4 fois par seconde'],['i','Le compas de la balise corrige la rotation de la bouée']],why:'Matériel éprouvé ; la correction des mouvements de la bouée se règle avec des mesures réelles.'},
+ ligne:{eye:'Départ et arrivée',name:'Bouées de ligne',st:'ok',role:'Matérialisent la ligne. Leur position précise permet de détecter automatiquement les départs anticipés, au centimètre.',hw:[['Balise officielle, profil bouée','≈ 420 €']],price:'≈ 420 € par bouée',links:[['→','PC course, 1 fois par seconde']],why:'Même balise que les bateaux, sans capteur de plus.'},
+ pc:{eye:'Sur l’esplanade',name:'PC course',st:'dev',role:'Rassemble les positions de tous les bateaux, des bouées et le vent ; fait tourner le moteur de course (départ, passages de bouées, arrivée, classement) ; enregistre tout ; renvoie le tout au même instant à toutes les équipes.',
+  hw:[['2 mini-PC (principal + secours)','≈ 1 800 €'],['Routeur Teltonika RUTC50 (5G secours)','≈ 500 €'],['Commutateur + borne Wi-Fi','≈ 400 €'],['Station d’énergie (onduleur)','≈ 500 €'],['Écrans','≈ 450 €']],
+  price:'≈ 4 000 € le lot',links:[['←','Balises via le hub cloud (4G) et l’antenne (radio)'],['→','Toutes les équipes, par câble, 10 fois par seconde'],['→','Public, via le cloud, avec un léger différé'],['↔','Consoles direction de course et arbitrage']],why:'Briques connues (MQTT, base temporelle) ; moteur de course et consoles à écrire.'},
+ rtk:{eye:'Point fixe',name:'Base RTK',st:'ok',role:'Calcule les corrections qui donnent aux balises une précision de 2 à 5 cm, et fournit l’heure GPS de référence au PC course.',hw:[['ArduSimple simpleRTK2B','≈ 220 €'],['Antenne géodésique tri-bande','≈ 200 €']],price:'≈ 450 €',links:[['→','Corrections vers les balises, par le cloud et la 4G'],['i','Secours : réseau public Centipede']],why:'Technique standard, très documentée.'},
+ gw:{eye:'Au PC course',name:'Antenne radio de secours',st:'test',role:'Reçoit les positions en 868 MHz si la 4G sature ou si Internet tombe. Chaque balise émet dans son créneau, calé sur l’heure GPS : aucune collision.',hw:[['2 × Heltec WiFi LoRa 32 V3','≈ 50 €'],['Antenne 868 MHz + câble','≈ 120 €'],['Petit mât','≈ 50 €']],price:'≈ 250 €',links:[['←','Balises, 2 fois par seconde'],['→','PC course par USB']],why:'À 300 m la portée n’est pas un sujet ; masquages et reflets à vérifier.'},
+ meteo:{eye:'À terre',name:'Station météo',st:'ok',role:'Vent de référence à terre, rafales et tendance. Complète les bouées.',hw:[['Ecowitt WS90 + passerelle GW2000','≈ 230 €']],price:'≈ 230 €',links:[['→','PC course par le réseau local']],why:'Produit grand public, interface locale.'},
+ camera:{eye:'Point haut, 12 m au plus',name:'Caméras',st:'test',role:'Vidéo en direct pour le commentateur et l’application, avec incrustations façon SailGP. L’analyse des risées sera limitée à 12 m de hauteur : l’angle de vue sur l’eau est rasant.',hw:[['PTZ Hikvision DS-2DE4425IW-DE (T5)','≈ 600 €'],['Caméra 4K fixe + polarisant','≈ 300 €'],['NVIDIA Jetson Orin Nano Super','≈ 280 €'],['Blackmagic ATEM Mini Pro','≈ 330 €']],price:'≈ 1 500 € le lot',links:[['→','PC course et commentateur'],['→','Application publique']],why:'Vidéo éprouvée ; détection des risées expérimentale.'},
+ cloud:{eye:'Serveur virtuel',name:'Hub cloud',st:'dev',role:'Point de rendez-vous des balises en 4G, qui renvoie leurs trames au PC course par un tunnel chiffré. Il diffuse aussi le flux public, sans charger la connexion du site.',hw:[['Serveur virtuel + CDN','30–150 €/mois']],price:'Abonnement',links:[['←','Balises par 4G'],['↔','PC course par tunnel chiffré'],['→','Application publique']],why:'Composants standard ; configuration à écrire.'},
+ public:{eye:'iPhone et ordinateur',name:'Application publique',st:'dev',role:'Carte en direct, classement, écarts, vent, vidéo, replay. Installable sur iPhone depuis le navigateur (PWA). Légère, pour passer même quand la 4G est chargée.',hw:[['Aucun matériel spécifique','—']],price:'Hébergement compris dans le cloud',links:[['←','Flux public du hub cloud']],why:'Technologies web éprouvées ; l’application est à écrire.'},
+ equipes:{eye:'Sur place',name:'Zone équipes',st:'ok',role:'Chaque équipe reçoit par câble, au même instant, les positions de tous les bateaux et des bouées, le vent et l’état de la course. Elle gère sa tactique et pilote son bateau par ses propres moyens.',hw:[['Prise Ethernet par équipe','fourni']],price:'Bateau et liaison à la charge des équipes',links:[['←','PC course, 10 fois par seconde, lecture seule'],['→','Leur bateau, depuis leur PC à terre : consignes (virer, empanner, cap), par leur propre liaison']],why:'Flux standard (MQTT, WebSocket, NMEA) ; format à publier tôt avec un simulateur.'}
 };
-let selected='balise';
 function renderPanel(id){
-  const e=ENT[id]; selected=id;
+  const e=ENT[id];
   document.querySelectorAll('.ent').forEach(g=>g.classList.toggle('sel',g.dataset.id===id));
-  $('#panel').innerHTML=`<p class="eyebrow">${e.eye}</p><h3>${e.name}</h3><div style="margin-top:8px">${pill(e.st)}</div>
-   <p class="role">${e.role}</p>
-   <dl><div><dt>Matériel</dt><dd><ul class="hw">${e.hw.map(h=>`<li><span>${h[0]}</span><span>${h[1]}</span></li>`).join('')}</ul></dd></div>
-   <div><dt>Coût</dt><dd class="mono num">${e.price}</dd></div>
-   <div><dt>Liaisons</dt><dd><ul class="links">${e.links.map(l=>`<li><b>${l[0]}</b><span>${l[1]}</span></li>`).join('')}</ul></dd></div>
-   <div><dt>Pourquoi ce statut</dt><dd style="color:var(--muted);font-size:14px">${e.why}</dd></div></dl>`;
+  $('#panel').innerHTML=`<p class="meta">${e.eye}</p><h3>${e.name}</h3><div style="margin-top:12px">${st(e.st)}</div><p class="role">${e.role}</p>
+   <dl><div><dt>Matériel</dt><dd><ul class="lst">${e.hw.map(h=>`<li><span>${h[0]}</span><span>${h[1]}</span></li>`).join('')}</ul></dd></div>
+   <div><dt>Coût</dt><dd class="mono num" style="font-size:13.5px">${e.price}</dd></div>
+   <div><dt>Liaisons</dt><dd><ul class="lk">${e.links.map(l=>`<li><b>${l[0]}</b><span>${l[1]}</span></li>`).join('')}</ul></dd></div>
+   <div><dt>Statut</dt><dd class="muted" style="font-size:14px">${e.why}</dd></div></dl>`;
 }
-document.querySelectorAll('.ent').forEach(g=>{
-  g.addEventListener('click',()=>renderPanel(g.dataset.id));
-  g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();renderPanel(g.dataset.id)}});
-});
-renderPanel('balise');
+function bindEnt(g){g.addEventListener('click',()=>renderPanel(g.dataset.id));g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();renderPanel(g.dataset.id)}})}
 
-/* ---------- Simulation du plan d'eau ---------- */
+/* ---------- Parcours ---------- */
 const NS='http://www.w3.org/2000/svg';
 const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
-const P={pc:[500,586],gw:[592,552],cloud:[905,100],rtk:[410,572],teams:[[192,586],[236,586],[280,586]],pub:[905,276]};
-const W=[500,95];
+const G=[236,124],WM=[930,548];
+const L=Math.hypot(WM[0]-G[0],WM[1]-G[1]);const w=[(WM[0]-G[0])/L,(WM[1]-G[1])/L];const pp=[-w[1],w[0]];
+const T=(u,v)=>[G[0]+u*w[0]+v*pp[0],G[1]+u*w[1]+v*pp[1]];
+const gm=$('#marks'),cl=$('#courseLines');
+// lignes du parcours
+const sA=T(.13*L,-62),sB=T(.13*L,62);
+cl.appendChild(mk('line',{x1:sA[0],y1:sA[1],x2:sB[0],y2:sB[1],stroke:'rgba(238,240,228,.45)','stroke-dasharray':'6 5','stroke-width':1.5}));
+const lA=T(L,0),lB=T(.2*L,0);
+cl.appendChild(mk('line',{x1:G[0],y1:G[1],x2:WM[0],y2:WM[1],stroke:'rgba(199,235,0,.12)','stroke-dasharray':'2 8','stroke-width':1.5}));
+const lay1=T(L-260,-150),lay2=T(L-260,150);
+cl.appendChild(mk('path',{d:`M${WM[0]} ${WM[1]} L${lay1[0]} ${lay1[1]} M${WM[0]} ${WM[1]} L${lay2[0]} ${lay2[1]}`,stroke:'rgba(238,240,228,.10)','stroke-dasharray':'4 6',fill:'none'}));
+const sl=T(.13*L,0);const st1=mk('text',{class:'sub',x:sB[0]+8,y:sB[1]+4});st1.textContent='ligne de départ';cl.appendChild(st1);
+function mark(x,y,id,r,label,sub,dx,dy){const g=mk('g',{class:'ent','data-id':id,tabindex:0,role:'button','aria-label':label});
+ g.appendChild(mk('circle',{cx:x,cy:y,r:r*2.6,fill:'url(#glow)'}));
+ g.appendChild(mk('circle',{class:'hl',cx:x,cy:y,r:r,fill:'var(--lime)',stroke:'var(--nuit)','stroke-width':2.5}));
+ if(label){const t=mk('text',{class:'lbl',x:x+dx,y:y+dy});t.textContent=label;g.appendChild(t)}
+ if(sub){const t=mk('text',{class:'sub',x:x+dx,y:y+dy+15});t.textContent=sub;g.appendChild(t)}
+ gm.appendChild(g);bindEnt(g);return g}
+mark(WM[0],WM[1],'bouee',11,'Bouée au vent','GPS + vent',-150,-6);
+const g1=T(0,-30),g2=T(0,30);
+mark(g1[0],g1[1],'bouee',9,'','',0,0);mark(g2[0],g2[1],'bouee',9,'Porte sous le vent','GPS + vent',14,30);
+const lg=mk('g',{class:'ent','data-id':'ligne',tabindex:0,role:'button','aria-label':'Bouées de ligne'});
+[sA,sB].forEach(p=>lg.appendChild(mk('rect',{class:'hl',x:p[0]-7,y:p[1]-7,width:14,height:14,rx:3,fill:'var(--ivoire)',stroke:'var(--nuit)','stroke-width':2})));
+gm.appendChild(lg);bindEnt(lg);
+
+/* ---------- Bateaux ---------- */
 function route(i){
-  const pts=[]; const x0=420+i*32; let y=425; pts.push([x0,y]);
-  let side=i%2?1:-1, x=x0;
-  const tacks=[[side*150,95],[ -side*140,95],[side*120,90]];
-  for(const [dx,dy] of tacks){x=500+dx+(i-2.5)*6;y-=dy;pts.push([x,y]);}
-  pts.push([W[0]-18,W[1]+16]); pts.push([W[0]+20,W[1]-4]);
-  const gx=i%2?465:535;
-  pts.push([520+(i%3)*30-30,230]); pts.push([gx+(i%2?-60:60),380]); pts.push([gx+(i%2?-14:14),478]); pts.push([gx+(i%2?14:-14),498]);
-  pts.push([x0,440]);
+  const s=i%2?1:-1,j=(i-2.5)*7;
+  const uv=[[.13*L,j*3],[.38*L,s*120+j],[.62*L,-s*112+j],[.86*L,s*70+j],[L+16,-14],[L-4,18],[.62*L,-s*80+j],[.3*L,s*70+j],[26,(i%2?30:-30)+6],[-14,i%2?30:-30],[.05*L,j*2]];
+  const pts=uv.map(([u,v])=>T(u,v));
   const segs=[];let tot=0;
-  for(let k=0;k<pts.length;k++){const a=pts[k],b=pts[(k+1)%pts.length];const len=Math.hypot(b[0]-a[0],b[1]-a[1]);const up=b[1]<a[1];const sp=up?28:44;const dt=len/sp;segs.push({a,b,t0:tot,dt});tot+=dt}
+  for(let k=0;k<pts.length;k++){const a=pts[k],b=pts[(k+1)%pts.length];const ua=uv[k][0],ub=uv[(k+1)%uv.length][0];const len=Math.hypot(b[0]-a[0],b[1]-a[1]);const sp=ub>ua?36:56;const dt=len/sp;segs.push({a,b,t0:tot,dt});tot+=dt}
   return {segs,tot};
 }
-const colors=['--t1','--t2','--t3','--t4','--t6','--t10'];
-const boats=[];const gB=$('#boats'),gT=$('#trails'),gP=$('#packets'),gS=$('#safeLayer');
+const colors=['--b1','--b2','--b3','--b4','--b5','--b6'];
+const boats=[];
 for(let i=0;i<6;i++){
-  const r=route(i);
-  const trail=mk('polyline',{fill:'none',stroke:`var(${colors[i]})`,'stroke-width':1.6,'stroke-opacity':.45});
-  gT.appendChild(trail);
+  const trail=mk('polyline',{fill:'none',stroke:`var(${colors[i]})`,'stroke-width':1.5,'stroke-opacity':.4});$('#trails').appendChild(trail);
   const g=mk('g',{class:'ent','data-id':'balise',tabindex:0,role:'button','aria-label':`Bateau ${i+1}, balise officielle`});
-  g.appendChild(mk('path',{class:'hl',d:'M0 -11 C6 -4 6 6 4 10 H-4 C-6 6 -6 -4 0 -11Z',fill:`var(${colors[i]})`,stroke:'var(--surface)','stroke-width':1.5}));
-  g.appendChild(mk('circle',{r:2.2,fill:'var(--surface)'}));
-  const t=mk('text',{class:'sub',x:10,y:-8});t.textContent='FRA-0'+(i+1);g.appendChild(t);
-  g.addEventListener('click',()=>renderPanel('balise'));
-  g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();renderPanel('balise')}});
-  gB.appendChild(g);
-  boats.push({r,g,trail,hist:[],offset:i*9+ (i%2)*4,pos:[0,0],next4g:i*0.18,nextRadio:i*0.25});
+  g.appendChild(mk('path',{class:'hl',d:'M0 -10 C5 -4 5 5 3.5 9 H-3.5 C-5 5 -5 -4 0 -10Z',fill:`var(${colors[i]})`,stroke:'var(--nuit)','stroke-width':1.5}));
+  const t=mk('text',{class:'sub',x:9,y:-7});t.textContent='FRA-0'+(i+1);g.appendChild(t);
+  $('#boats').appendChild(g);bindEnt(g);
+  boats.push({r:route(i),g,t,trail,hist:[],off:i*7.3,pos:[0,0],n4:i*.19,nr:i*.27});
 }
-// sécurité : liaisons statiques
-function drawSafe(){gS.innerHTML='';if(!layers.safe)return;boats.forEach((b,i)=>{gS.appendChild(mk('line',{x1:P.teams[i%3][0],y1:P.teams[i%3][1]-14,x2:b.pos[0],y2:b.pos[1],stroke:'var(--opt)','stroke-width':1,'stroke-dasharray':'2 4','stroke-opacity':.8}))})}
+document.querySelectorAll('svg .ent[data-id]').forEach(g=>{if(!g.dataset.bound&&g.closest('#marks')==null&&g.closest('#boats')==null){bindEnt(g)}});
 
-const layers={g4:true,radio:false,teams:true,rtk:false,safe:false};
-document.querySelectorAll('[data-layer]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.layer;layers[k]=!layers[k];b.setAttribute('aria-pressed',layers[k]);if(k==='safe')drawSafe()}));
-
+const P={pc:[782,95],gw:[842,110],cloud:[432,44],rtk:[705,82],teams:[[912,104],[944,104],[976,104]],pub:[540,38]};
+const layers={g4:true,radio:false,teams:true,rtk:false,cmd:true};
+document.querySelectorAll('[data-layer]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.layer;layers[k]=!layers[k];b.setAttribute('aria-pressed',layers[k])}));
 const packets=[];
-function spawn(path,color,dur,cb){const c=mk('circle',{r:3.4,fill:`var(${color})`});gP.appendChild(c);packets.push({path,dur,t:0,c,cb})}
-function lerpPath(path,u){const n=path.length-1;const f=Math.min(u*n,n-1e-6);const k=Math.floor(f);const s=f-k;const a=path[k],b=path[k+1];return [a[0]+(b[0]-a[0])*s,a[1]+(b[1]-a[1])*s]}
-
-function boatAt(b,time){const r=b.r;let tt=(time+b.offset)%r.tot;let sg=r.segs[0];for(const s of r.segs){if(tt>=s.t0&&tt<s.t0+s.dt){sg=s;break}}const u=(tt-sg.t0)/sg.dt;return {p:[sg.a[0]+(sg.b[0]-sg.a[0])*u,sg.a[1]+(sg.b[1]-sg.a[1])*u],h:Math.atan2(sg.b[1]-sg.a[1],sg.b[0]-sg.a[0])*180/Math.PI+90}}
-
-let simT=0,last=null,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,nextTeam=0,nextRtk=0.5;
-function place(){boats.forEach(b=>{const s=boatAt(b,simT);b.pos=s.p;b.g.setAttribute('transform',`translate(${s.p[0].toFixed(1)} ${s.p[1].toFixed(1)}) rotate(${s.h.toFixed(1)})`);
-  b.g.querySelector('text').setAttribute('transform',`rotate(${(-s.h).toFixed(1)})`);
-  b.hist.push(s.p);if(b.hist.length>70)b.hist.shift();b.trail.setAttribute('points',b.hist.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' '))})}
+function spawn(path,col,dur){const c=mk('circle',{r:3.2,fill:col});$('#packets').appendChild(c);packets.push({path,dur,t:0,c})}
+function lp(path,u){const n=path.length-1;const f=Math.min(u*n,n-1e-6);const k=Math.floor(f);const s=f-k;const a=path[k],b=path[k+1];return [a[0]+(b[0]-a[0])*s,a[1]+(b[1]-a[1])*s]}
+function at(b,time){const r=b.r;const tt=(time+b.off)%r.tot;let sg=r.segs[0];for(const s of r.segs){if(tt>=s.t0&&tt<s.t0+s.dt){sg=s;break}}const u=(tt-sg.t0)/sg.dt;return {p:[sg.a[0]+(sg.b[0]-sg.a[0])*u,sg.a[1]+(sg.b[1]-sg.a[1])*u],h:Math.atan2(sg.b[1]-sg.a[1],sg.b[0]-sg.a[0])*180/Math.PI+90}}
+let nC=.3,cmdI=0;
+let simT=0,last=null,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,nT=0,nR=.5;
+function place(){boats.forEach(b=>{const s=at(b,simT);b.pos=s.p;b.g.setAttribute('transform',`translate(${s.p[0].toFixed(1)} ${s.p[1].toFixed(1)}) rotate(${s.h.toFixed(1)})`);b.t.setAttribute('transform',`rotate(${(-s.h).toFixed(1)})`);b.hist.push(s.p);if(b.hist.length>45)b.hist.shift();b.trail.setAttribute('points',b.hist.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' '))})}
 function step(dt){
   simT+=dt;place();
   boats.forEach(b=>{
-    if(simT>=b.next4g){b.next4g=simT+1.6;if(layers.g4)spawn([b.pos.slice(),P.cloud,P.pc],'--accent',1.6,()=>{})}
-    if(simT>=b.nextRadio){b.nextRadio=simT+2.4;if(layers.radio)spawn([b.pos.slice(),P.gw,P.pc],'--test',1.1)}
+    if(simT>=b.n4){b.n4=simT+1.6;if(layers.g4)spawn([b.pos.slice(),P.cloud,P.pc],'#C7EB00',1.7)}
+    if(simT>=b.nr){b.nr=simT+2.4;if(layers.radio)spawn([b.pos.slice(),P.gw],'#D9C38A',.9)}
   });
-  if(simT>=nextTeam){nextTeam=simT+0.9;if(layers.teams){P.teams.forEach(t=>spawn([P.pc,[ (P.pc[0]+t[0])/2,560],t],'--ok',0.9));spawn([P.pc,P.cloud,P.pub],'--ok',1.4)}}
-  if(simT>=nextRtk){nextRtk=simT+2;if(layers.rtk){spawn([P.rtk,P.pc,P.cloud],'--dev',1);boats.forEach(b=>spawn([P.cloud,b.pos.slice()],'--dev',1.3))}}
-  for(let i=packets.length-1;i>=0;i--){const k=packets[i];k.t+=dt;const u=k.t/k.dur;if(u>=1){k.c.remove();packets.splice(i,1);continue}const p=lerpPath(k.path,u);k.c.setAttribute('cx',p[0].toFixed(1));k.c.setAttribute('cy',p[1].toFixed(1))}
-  if(layers.safe)drawSafe();
+  if(simT>=nT){nT=simT+.9;if(layers.teams){P.teams.forEach(t=>spawn([P.pc,t],'#8FD18A',.7));spawn([P.pc,P.cloud,P.pub],'#8FD18A',1.4)}}
+  if(simT>=nC){nC=simT+1.3;if(layers.cmd){const b=boats[cmdI%boats.length];cmdI++;const t=P.teams[cmdI%3];spawn([t,[t[0]-40,t[1]+60],b.pos.slice()],'#E39B7B',1.5)}}
+  if(simT>=nR){nR=simT+2;if(layers.rtk){spawn([P.rtk,P.pc,P.cloud],'#43B3A3',1);boats.forEach(b=>spawn([P.cloud,b.pos.slice()],'#43B3A3',1.3))}}
+  for(let i=packets.length-1;i>=0;i--){const k=packets[i];k.t+=dt;const u=k.t/k.dur;if(u>=1){k.c.remove();packets.splice(i,1);continue}const p=lp(k.path,u);k.c.setAttribute('cx',p[0].toFixed(1));k.c.setAttribute('cy',p[1].toFixed(1))}
 }
-// historique initial pour que les traces soient visibles à l'arrêt
-for(let k=0;k<70;k++){simT+=0.25;place()}
+for(let k=0;k<45;k++){simT+=.12;place()}
 function loop(ts){if(last==null)last=ts;const dt=Math.min(.05,(ts-last)/1000);last=ts;if(playing)step(dt*2.2);requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
-const pb=$('#playBtn');function pbl(){pb.textContent=playing?'Pause':'Lecture';pb.setAttribute('aria-pressed',playing)}pbl();
+const pb=$('#playBtn');const pbl=()=>{pb.textContent=playing?'Pause':'Lecture';pb.setAttribute('aria-pressed',String(playing))};pbl();
 pb.addEventListener('click',()=>{playing=!playing;last=null;pbl()});
+renderPanel('balise');
 
 /* ---------- Liaisons ---------- */
 const FLOWS=[
  {k:1,from:'Bateaux et bouées → PC course',h:'Positions officielles',d:'Chaque balise envoie position, vitesse, cap, gîte et qualité RTK. Les bouées ajoutent le vent mesuré.',tags:['4G','10 Hz','50–150 ms','via le hub cloud']},
- {k:1,from:'PC course → toutes les équipes',h:'Redistribution',d:'Positions de tous les bateaux, bouées, vent, carte de vent, état de la course, classement. Même flux, même instant pour tous.',tags:['Ethernet','10 Hz','< 50 ms','MQTT · WebSocket · NMEA']},
- {from:'Bateaux et bouées → antenne',h:'Radio de secours',d:'Si la 4G ou Internet tombe, le suivi continue. Chaque balise a son créneau dans la seconde GPS.',tags:['868 MHz','2 Hz','6 % du temps d’émission']},
+ {k:1,from:'PC course → toutes les équipes',h:'Redistribution',d:'Positions de tous les bateaux, bouées, vent, état de la course, classement. Même flux, même instant pour tous.',tags:['câble Ethernet','10 Hz','< 50 ms','lecture seule']},
+ {from:'Bateaux et bouées → antenne',h:'Radio de secours',d:'Si la 4G sature ou si Internet tombe, le suivi continue. Chaque balise a son créneau dans la seconde GPS.',tags:['868 MHz','2 Hz','insensible à la foule']},
  {from:'Base RTK → balises',h:'Corrections RTK',d:'Donnent la précision centimétrique. Secours : réseau public Centipede, directement depuis les balises.',tags:['4G','1 Hz','RTCM 3']},
- {from:'Équipe → son bateau',h:'Consignes de l’équipe',d:'Virer, empanner, changer de cap. La liaison est libre (4G, télémétrie) dans le respect du plan de fréquences.',tags:['libre','hors système officiel']},
- {from:'Équipe → son bateau',h:'Sécurité',d:'Radiocommande obligatoire pour reprendre la main ou mettre le bateau en sécurité.',tags:['ELRS 2,4 GHz','50–150 Hz']},
- {from:'PC course → public',h:'Flux public',d:'Positions lissées, classement, vent, événements, commentaire automatique, avec quelques secondes de différé.',tags:['Internet','2–4 Hz','2–5 s de différé']},
- {from:'Caméras → PC course',h:'Vidéo et risées',d:'Vidéo en direct vers YouTube et l’application ; carte des risées en bonus.',tags:['RTSP','Ethernet PoE']},
- {from:'Site ↔ Internet',h:'Accès Internet',d:'Fibre ou ligne filaire du site en principal, 5G double SIM en secours automatique.',tags:['filaire + 5G','bascule auto']}
+ {k:1,from:'PC à terre de l’équipe → son bateau',h:'Consignes de l’équipe',d:'Chaque équipe pilote son bateau depuis son PC à terre : virer, empanner, changer de cap. Sa liaison est libre (4G, radio de télémétrie), dans le respect du plan de fréquences.',tags:['liaison de l’équipe','hors système officiel']},
+ {from:'PC course → public',h:'Flux public',d:'Positions lissées, classement, vent, événements, vidéo, avec quelques secondes de différé.',tags:['Internet','2–4 Hz','2–5 s de différé']},
+ {from:'Caméras → PC course',h:'Vidéo',d:'Vidéo en direct pour le commentateur, YouTube et l’application.',tags:['RTSP','câble PoE']},
+ {from:'Station météo → PC course',h:'Vent à terre',d:'Vent de référence, rafales et tendance, qui complètent les bouées.',tags:['réseau local','1 Hz']},
+ {from:'Site ↔ Internet',h:'Accès Internet',d:'Ligne filaire du site en principal, 5G double SIM en secours automatique.',tags:['filaire + 5G','bascule auto']}
 ];
-$('#flows').innerHTML=FLOWS.map(f=>`<article class="flow${f.k?' key':''}"><p class="from">${f.from}</p><h3>${f.h}</h3><p style="font-size:14px">${f.d}</p><div class="meta">${f.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`).join('');
+$('#flows').innerHTML=FLOWS.map(f=>`<article class="${f.k?'flow key':'flow carte'}"><p class="meta">${f.from}</p><h3>${f.h}</h3><p class="d">${f.d}</p><div class="tags">${f.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`).join('');
 
-/* ---------- Tableau d'état ---------- */
+/* ---------- Matériel ---------- */
+const HW=JSON.parse($('#hwdata').textContent);
+const groups=['Tout',...new Set(HW.map(h=>h.grp))];let hg='Tout';
+function renderHW(){
+  $('#hwFilters').innerHTML=groups.map(g=>`<button class="chip${g===hg?' on':''}" type="button" aria-pressed="${g===hg}" data-g="${esc(g)}">${esc(g)}</button>`).join('');
+  $('#hwFilters').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{hg=b.dataset.g;renderHW()}));
+  $('#hwgrid').innerHTML=HW.filter(h=>hg==='Tout'||h.grp===hg).map(h=>`<article class="carte hw"><div class="top"><span class="grp">${esc(h.grp)}</span><span class="prix num">${esc(h.prix)}</span></div><h3>${esc(h.name)}</h3><p class="d">${esc(h.role)}</p>
+   <div class="links">${(h.fiche||[]).map(f=>`<a href="${esc(f[1])}" target="_blank" rel="noopener"><span class="k">Fiche</span><span>${esc(f[0])}</span></a>`).join('')}
+   ${(h.avis&&h.avis.length)?h.avis.map(a=>`<a href="${esc(a[1])}" target="_blank" rel="noopener"><span class="k">Avis</span><span>${esc(a[0])}</span></a>`).join(''):'<span class="none">Pas d’avis indépendant trouvé</span>'}</div></article>`).join('');
+}
+renderHW();
+
+/* ---------- État ---------- */
 const ITEMS=[
- ['ok','Matériel','Positionnement RTK au centimètre','Récepteurs ZED-F9P / UM980, base à terre'],
+ ['ok','Matériel','Positionnement RTK au centimètre','Récepteurs ZED-F9P / UM980 et base à terre'],
  ['ok','Matériel','Transmission 4G','Modems LTE Cat-1, SIM IoT'],
- ['ok','Matériel','Radio longue portée 868 MHz','Modules LoRa SX1262'],
+ ['ok','Matériel','Radio 868 MHz','Modules LoRa SX1262'],
  ['ok','Matériel','Anémomètre ultrasonique','Calypso ULP, sans pièce mobile'],
- ['ok','Logiciel','Bus de données temps réel','MQTT (Mosquitto), WebSocket'],
- ['ok','Logiciel','Pilote automatique de voilier','ArduPilot Rover, kit de référence possible'],
+ ['ok','Logiciel','Bus de données temps réel','MQTT, WebSocket'],
  ['ok','Matériel','Vidéo en direct','Caméras IP, régie, YouTube Live'],
- ['ok','Logiciel','Cartographie web','MapLibre, deck.gl, Three.js'],
+ ['ok','Logiciel','Cartographie web','MapLibre, deck.gl'],
  ['dev','Logiciel','Firmware de la balise','GPS, 4G, radio, carte SD, signature des trames'],
- ['dev','Logiciel','Moteur de course','Départ, OCS, passages de bouées, arrivée, classement'],
- ['dev','Logiciel','Consoles PC course','Direction de course, arbitrage, sécurité'],
+ ['dev','Logiciel','Moteur de course','Départ, départs anticipés, bouées, arrivée, classement'],
+ ['dev','Logiciel','Consoles PC course','Direction de course, arbitrage, bateaux d’assistance'],
  ['dev','Logiciel','Flux équipes + documentation','Format publié tôt, figé mi-mars'],
  ['dev','Logiciel','Simulateur de régate','Pour développer sans bateau, équipes comprises'],
- ['dev','Logiciel','Application publique','Carte live, classement, replay, vidéo'],
+ ['dev','Logiciel','Application publique (PWA)','Carte live, classement, replay, vidéo'],
  ['dev','Logiciel','Moteur vent','Carte de vent et tendance à 5–15 min'],
- ['dev','Logiciel','Arbitrage assisté','Alertes automatiques, décision humaine'],
- ['dev','Logiciel','Commentaire IA','Textes en direct à partir des événements de course'],
- ['test','Terrain','Couverture 4G sur le plan d’eau','Mesure lors de l’essai de janvier'],
- ['test','Terrain','Réception radio et masquages','Voiles, gîte, reflets sur l’eau'],
- ['test','Terrain','Mesure du vent sur bouée','Correction des mouvements de la bouée'],
- ['test','Terrain','Autonomie et étanchéité des balises','Journée complète sur l’eau'],
- ['test','Terrain','Emplacement de la balise à bord','Tête de mât ou pont'],
- ['test','Terrain','Détection des risées par caméra','Expérimental, dépend de la lumière'],
- ['opt','Matériel','Bouées robotisées','Déplaçables quand le vent tourne'],
+ ['dev','Logiciel','Aide au commentateur','Moments forts, fiches, résumés'],
+ ['test','Terrain','Balise à l’intérieur du bateau','Réception à travers la coque ; cas du carbone'],
+ ['test','Terrain','4G avec la foule','Essai un week-end d’avril, plage pleine'],
+ ['test','Terrain','Radio et masquages','Voiles, gîte, reflets'],
+ ['test','Terrain','Mesure du vent sur bouée','Correction des mouvements'],
+ ['test','Terrain','Autonomie et étanchéité','Journée complète sur l’eau'],
+ ['test','Terrain','Wi-Fi longue portée de la balise','Chemin principal possible à 300 m'],
  ['opt','Matériel','Caméras embarquées','Images à bord façon SailGP'],
- ['opt','Logiciel','Incrustations sur la vidéo','Noms, laylines, ligne de départ sur l’image']
+ ['opt','Logiciel','Incrustations sur la vidéo','Noms, laylines, ligne de départ'],
+ ['opt','Logiciel','Détection des risées par caméra','Limitée à 12 m de hauteur'],
+ ['opt','Matériel','Wi-Fi public au village','Soulage la 4G sur place']
 ];
 const COLS=[['ok','Fonctionne déjà ailleurs, à assembler'],['dev','Le travail des agents'],['test','Seul l’essai réel répond'],['opt','Si le temps et le budget le permettent']];
 let dom='Tous';
 function renderBoard(){
-  $('#domFilters').innerHTML=['Tous','Matériel','Logiciel','Terrain'].map(d=>`<button class="chip" type="button" aria-pressed="${d===dom}" data-dom="${d}">${d}</button>`).join('');
+  $('#domFilters').innerHTML=['Tous','Matériel','Logiciel','Terrain'].map(d=>`<button class="chip${d===dom?' on':''}" type="button" aria-pressed="${d===dom}" data-dom="${d}">${d}</button>`).join('');
   $('#domFilters').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{dom=b.dataset.dom;renderBoard()}));
   $('#board').innerHTML=COLS.map(([s,hint])=>{const it=ITEMS.filter(x=>x[0]===s&&(dom==='Tous'||x[1]===dom));
-   return `<div class="col"><div class="col-head" style="color:var(--${s})"><h3>${ST[s][1]}</h3><span class="count">${it.length}</span></div><p class="hint">${hint}</p>${it.map(x=>`<div class="card"><span class="dom">${x[1]}</span><b>${x[2]}</b><span>${x[3]}</span></div>`).join('')}</div>`}).join('');
+   return `<div class="col"><div class="colh">${st(s)}<span class="count">${it.length}</span></div><p class="hint">${hint}</p>${it.map(x=>`<div class="item"><span class="dom">${x[1]}</span><b>${x[2]}</b><span>${x[3]}</span></div>`).join('')}</div>`}).join('');
 }
 renderBoard();
 
 /* ---------- Coûts ---------- */
 function calc(){
-  const n=+$('#nBoats').value,sp=+$('#nSpare').value,w=+$('#nWind').value;
-  $('#nBoatsOut').textContent=n;$('#nSpareOut').textContent=sp;$('#nWindOut').textContent=w;
-  const L=[
-   ['Balises des bateaux ('+(n+sp)+')',(n+sp)*420],
-   ['Bouées qui mesurent le vent ('+w+')',w*1300],
-   ['Balises des bouées de ligne (2)',840],
-   ['PC course (serveurs, réseau, onduleur, écrans)',4000],
-   ['Caméras, vision, régie',1500],
-   ['Prototypes',1200],
-   ['Base RTK',450],
-   ['Antenne radio de secours',250],
-   ['Station météo',230],
-   ['Analyseur de spectre',150]
-  ];
+  const n=+$('#nBoats').value,sp=+$('#nSpare').value,wd=+$('#nWind').value;
+  $('#nBoatsOut').textContent=n;$('#nSpareOut').textContent=sp;$('#nWindOut').textContent=wd;
+  const Lst=[['Balises des bateaux ('+(n+sp)+')',(n+sp)*420],['Bouées qui mesurent le vent ('+wd+')',wd*1300],['Balises des bouées de ligne (2)',840],['PC course (serveurs, réseau, onduleur, écrans)',4000],['Caméras, vision, régie',1500],['Prototypes',1200],['Base RTK',450],['Antenne radio de secours',250],['Station météo',230],['Analyseur de spectre',150]];
   const O=[];
-  if($('#oRobot').checked)O.push(['Bouées robotisées (2)',3500]);
   if($('#oFpv').checked)O.push(['Caméras embarquées ('+n+')',n*100+300]);
   if($('#oPtz').checked)O.push(['2e caméra PTZ',600]);
-  const sub=[...L,...O].reduce((a,b)=>a+b[1],0);const imp=Math.round(sub*0.1/100)*100;const tot=Math.round((sub+imp)/100)*100;
-  const all=[...L.map(x=>[...x,false]),...O.map(x=>[...x,true]),['Imprévus (10 %)',imp,false]].sort((a,b)=>b[1]-a[1]);
-  const max=all[0][1];
-  $('#bars').innerHTML=all.map(([k,v,o])=>`<div class="bar"><span>${k}</span><div class="track"><div class="fill${o?' opt':''}" style="width:${(v/max*100).toFixed(1)}%"></div></div><span class="v num">${eur(v)}</span></div>`).join('');
-  $('#total').textContent=eur(tot);
-  $('#perBoat').textContent='soit '+eur(tot/n)+' par bateau engagé';
+  if($('#oWifi').checked)O.push(['Wi-Fi public au village',800]);
+  const sub=[...Lst,...O].reduce((a,b)=>a+b[1],0);const imp=Math.round(sub*.1/100)*100;const tot=Math.round((sub+imp)/100)*100;
+  const all=[...Lst.map(x=>[...x,0]),...O.map(x=>[...x,1]),['Imprévus (10 %)',imp,0]].sort((a,b)=>b[1]-a[1]);const max=all[0][1];
+  $('#bars').innerHTML=all.map(([k,v,o])=>`<div class="bar"><span>${k}</span><div class="tr"><div class="fi${o?' opt':''}" style="width:${(v/max*100).toFixed(1)}%"></div></div><span class="v num">${eur(v)}</span></div>`).join('');
+  $('#total').textContent=eur(tot);$('#perBoat').textContent='soit '+eur(tot/n)+' par bateau engagé';
   $('#heroCost').textContent='≈ '+(tot/1000).toLocaleString('fr-FR',{maximumFractionDigits:1})+' k€';
 }
-['nBoats','nSpare','nWind','oRobot','oFpv','oPtz'].forEach(id=>$('#'+id).addEventListener('input',calc));
+['nBoats','nSpare','nWind','oFpv','oPtz','oWifi'].forEach(id=>$('#'+id).addEventListener('input',calc));
 calc();
 
-/* ---------- Feuille de route ---------- */
+/* ---------- Calendrier ---------- */
 const START=new Date('2026-11-01'),END=new Date('2027-06-01'),SPAN=END-START;
-const pct=d=>((new Date(d)-START)/SPAN*100);
-const G=[
- ['Cadrage',[
-  ['g-cad','Décisions et commande du prototype','2026-11-20','2026-12-12','Trancher les dernières questions, commander le matériel du prototype (≈ 2 500 €).',['Emplacement de la balise à bord','Point haut caméras','Liste du prototype : 3 GPS, 3 cartes 4G, radios, IMU, 1 anémomètre']]]],
+const pct=d=>(new Date(d)-START)/SPAN*100;
+const GR=[
+ ['Cadrage',[['c1','Décisions et commande du prototype','2026-11-20','2026-12-12','Trancher les dernières questions, commander le prototype (≈ 2 500 €).',['Coque des bateaux : carbone ou non','Emplacement du PC course et des caméras','Prototype : 3 GPS, 3 cartes 4G, radios, 1 anémomètre']]]],
  ['Matériel',[
-  ['g-mat','Prototype balise + base RTK','2026-12-08','2027-01-18','Assembler 3 balises de test et la base RTK, premier firmware écrit avec les agents.',['Banc de test à terre','Comparaison ZED-F9P / UM980','Mesure de la consommation']],
-  ['g-mat','Série de balises','2027-02-01','2027-03-05','Fabriquer toutes les balises (bateaux + rechange + bouées) avec le récepteur retenu.',['Commande groupée','Boîtiers et fixation','Tests de recette un par un']],
-  ['g-mat','Bouées instrumentées','2027-02-01','2027-03-10','Espars lestés, anémomètres, panneaux solaires.',['Montage','Étalonnage du compas','Correction des mouvements']],
-  ['g-mat','Caméras et point haut','2027-03-01','2027-04-05','Installer et calibrer les caméras.',['Calage sur les bouées','Régie et diffusion','Premiers tests risées']]]],
+  ['c2','Prototype balise + base RTK','2026-12-08','2027-01-18','Assembler 3 balises de test et la base RTK ; premier firmware écrit avec les agents.',['Banc de test à terre','Comparaison ZED-F9P / UM980','Test à l’intérieur d’une coque']],
+  ['c2','Série de balises','2027-02-01','2027-03-05','Fabriquer toutes les balises avec le récepteur retenu.',['Commande groupée','Boîtiers et fixation dans les bateaux','Recette une par une']],
+  ['c2','Bouées instrumentées','2027-02-01','2027-03-10','Espars lestés, anémomètres, panneaux solaires, mouillages.',['Montage','Étalonnage du compas','Correction des mouvements']],
+  ['c2','Caméras et point haut','2027-03-01','2027-04-05','Installer et calibrer les caméras (12 m au plus).',['Calage sur les bouées','Régie et diffusion']]]],
  ['Logiciel',[
-  ['g-log','Format des données + simulateur','2026-12-01','2026-12-31','Publier le format du flux équipes et un simulateur de régate. Les équipes et les agents peuvent travailler sans bateau.',['Format v0 publié aux équipes','Simulateur avec vent réaliste','SDK Python et JavaScript']],
-  ['g-log','Moteur de course + consoles','2027-01-05','2027-02-10','Départ, départs anticipés, passages de bouées, arrivée, classement ; consoles direction de course et sécurité.',['Testé sur le simulateur','Puis sur les données des essais']],
-  ['g-log','Application publique','2027-01-10','2027-02-20','Carte live, classement, replay, vidéo intégrée, mode grand écran.',['Test de charge : 5 000 connexions']],
-  ['g-log','Vent, arbitrage, commentaire IA','2027-02-15','2027-04-05','Carte de vent et tendance, arbitrage assisté, commentaire automatique, incrustations vidéo.',['Réglé avec les données réelles des essais']]]],
+  ['c3','Format des données + simulateur','2026-12-01','2026-12-31','Publier le format du flux équipes et un simulateur de régate.',['Format v0 envoyé aux équipes','Simulateur avec vent réaliste','Exemples en Python et JavaScript']],
+  ['c3','Moteur de course + consoles','2027-01-05','2027-02-10','Départ, départs anticipés, passages de bouées, arrivée, classement ; consoles PC course.',['Testé sur le simulateur','Puis sur les données des essais']],
+  ['c3','Application publique','2027-01-10','2027-02-20','Carte live, classement, replay, vidéo, installation sur iPhone.',['Version légère pour la 4G chargée','Test de charge']],
+  ['c3','Vent, arbitrage, aide au commentateur','2027-02-15','2027-04-05','Carte de vent et tendance, arbitrage assisté, fiches et alertes pour le commentateur.',['Réglés avec les données réelles']]]],
  ['Essais',[
-  ['g-ess','Essai n°1','2027-01-20','2027-01-23','2 balises sur l’eau : couverture 4G, radio, précision RTK.',['Critère : RTK fixe > 95 % du temps','Critère : > 99 % des trames reçues']],
-  ['g-ess','Essai n°2','2027-03-10','2027-03-13','Bouées instrumentées + 4 bateaux + PC course complet.',['Mesure du vent sur bouée','Classement automatique']],
-  ['g-ess','Régate blanche','2027-04-10','2027-04-12','Course complète avec les équipes.',['Tout le dispositif en conditions réelles','Retours des équipes']],
-  ['g-ess','Répétition générale','2027-04-30','2027-05-02','Tous les modes dégradés testés.',['Coupure 4G, coupure Internet','Balise morte, redémarrage du PC course']]]],
- ['Événement',[
-  ['g-evt','Régate','2027-05-14','2027-05-17','La régate (dates exactes à confirmer).',['Assistance technique sur place','Replays et rapports ensuite']]]]
+  ['c4','Essai n°1','2027-01-20','2027-01-23','2 balises sur l’eau : 4G, radio, précision RTK, réception dans la coque.',['RTK fixe > 95 % du temps','> 99 % des trames reçues']],
+  ['c4','Essai n°2','2027-03-10','2027-03-13','Bouées instrumentées + 4 bateaux + PC course complet.',['Mesure du vent sur bouée','Classement automatique']],
+  ['c4','Régate blanche + test foule','2027-04-10','2027-04-12','Course complète avec les équipes, un week-end où la plage est pleine.',['4G sous la charge du public','Retours des équipes']],
+  ['c4','Répétition générale','2027-04-30','2027-05-02','Tous les modes dégradés testés.',['Coupure 4G, coupure Internet','Balise morte, redémarrage du PC course']]]],
+ ['Événement',[['c5','Régate','2027-05-12','2027-05-17','La régate, du 12 au 16 mai, sans jour de réserve.',['Assistance technique sur place','Replays et résumés ensuite']]]]
 ];
 const MILES=[['Format figé','2027-03-15','Plus aucune modification incompatible du flux équipes après cette date.']];
-function renderGantt(){
+(function(){
   const months=['Nov','Déc','Janv','Févr','Mars','Avr','Mai'];
-  let h=`<div class="months"><div></div>${months.map(m=>`<div>${m}</div>`).join('')}</div><div style="position:relative">`;
-  let id=0;
-  G.forEach(([grp,rows])=>{h+=`<div class="grp">${grp}</div>`;rows.forEach(r=>{const l=pct(r[2]),w=Math.max(.8,pct(r[3])-l);h+=`<div class="grow"><span class="name">${r[1]}</span><div class="lane"><button type="button" class="gbar ${r[0]}" data-i="${id}" aria-pressed="false" aria-label="${r[1]}" style="left:${l}%;width:${w}%"></button></div></div>`;r.id=id++;})});
-  h+=`<div class="grp">Jalons</div>`;
-  MILES.forEach((m,i)=>{h+=`<div class="grow"><span class="name">${m[0]}</span><div class="lane"><button type="button" class="mile" data-m="${i}" aria-label="${m[0]}" style="left:${pct(m[1])}%"></button></div></div>`});
-  h+=`</div>`;
-  $('#gantt').innerHTML=h;
-  // repère "aujourd'hui" dans la zone des barres
-  const area=$('#gantt').lastElementChild;
-  const td=document.createElement('div');td.className='today';
-  const today=new Date('2026-11-19');td.style.left=`calc(180px + (100% - 180px) * ${pct(today)/100})`;td.innerHTML='<span>19 nov.</span>';area.appendChild(td);
-  const flat=G.flatMap(g=>g[1]);
-  const fmt=d=>new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
-  function show(r){document.querySelectorAll('.gbar').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.i===r.id));
-   $('#gdetail').innerHTML=`<div><p class="eyebrow">${fmt(r[2])} → ${fmt(r[3])}</p><h3 style="margin-top:6px">${r[1]}</h3><p style="margin-top:8px">${r[4]}</p></div><div><p class="eyebrow">Contenu</p><ul style="margin-top:8px">${r[5].map(x=>`<li>${x}</li>`).join('')}</ul></div>`}
-  document.querySelectorAll('.gbar').forEach(b=>b.addEventListener('click',()=>show(flat[+b.dataset.i])));
-  document.querySelectorAll('.mile').forEach(b=>b.addEventListener('click',()=>{const m=MILES[+b.dataset.m];document.querySelectorAll('.gbar').forEach(x=>x.setAttribute('aria-pressed','false'));$('#gdetail').innerHTML=`<div><p class="eyebrow">${fmt(m[1])}</p><h3 style="margin-top:6px">${m[0]}</h3></div><div><p>${m[2]}</p></div>`}));
+  let h=`<div class="months"><div></div>${months.map(m=>`<div>${m}</div>`).join('')}</div><div style="position:relative">`;let id=0;
+  GR.forEach(([g,rows])=>{h+=`<div class="grp">${g}</div>`;rows.forEach(r=>{const l=pct(r[2]),wd=Math.max(.8,pct(r[3])-l);r.id=id;h+=`<div class="grow"><span class="name">${r[1]}</span><div class="lane"><button type="button" class="gb ${r[0]}" data-i="${id++}" aria-pressed="false" aria-label="${r[1]}" style="left:${l}%;width:${wd}%"></button></div></div>`})});
+  h+=`<div class="grp">Jalon</div>`;MILES.forEach((m,i)=>{h+=`<div class="grow"><span class="name">${m[0]}</span><div class="lane"><button type="button" class="mile" data-m="${i}" aria-label="${m[0]}" style="left:${pct(m[1])}%"></button></div></div>`});
+  h+='</div>';$('#gantt').innerHTML=h;
+  const area=$('#gantt').lastElementChild;const td=document.createElement('div');td.className='today';td.style.left=`calc(190px + (100% - 190px) * ${pct('2026-11-20')/100})`;td.innerHTML='<span>20 NOV.</span>';area.appendChild(td);
+  const flat=GR.flatMap(g=>g[1]);const fmt=d=>new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  const show=r=>{document.querySelectorAll('.gb').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.i===r.id)));$('#gd').innerHTML=`<div><p class="meta">${fmt(r[2])} → ${fmt(r[3])}</p><h3>${r[1]}</h3><p class="muted" style="margin-top:10px">${r[4]}</p></div><div><p class="meta">Contenu</p><ul>${r[5].map(x=>`<li>${x}</li>`).join('')}</ul></div>`};
+  document.querySelectorAll('.gb').forEach(b=>b.addEventListener('click',()=>show(flat[+b.dataset.i])));
+  document.querySelectorAll('.mile').forEach(b=>b.addEventListener('click',()=>{const m=MILES[+b.dataset.m];document.querySelectorAll('.gb').forEach(x=>x.setAttribute('aria-pressed','false'));$('#gd').innerHTML=`<div><p class="meta">${fmt(m[1])}</p><h3>${m[0]}</h3></div><div><p class="muted">${m[2]}</p></div>`}));
   show(flat[0]);
-}
-renderGantt();
+})();
 
 /* ---------- Questions ---------- */
 const QS=[
- ['q1','h','Où fixer la balise sur le bateau ?','Tête de mât (meilleure réception, mais en hauteur et soumise à la gîte) ou pont (plus stable, mais la voile masque une partie du ciel). Et quel point de référence commun pour l’arbitrage : étrave ou mât ?',['Matériel','Arbitrage']],
- ['q2','h','Où se trouve le point haut pour les caméras ?','20 m de hauteur suffisent à 500 m. Il faut aussi de l’électricité et un câble ou un faisceau vers le PC course.',['Matériel','Diffusion']],
- ['q3','h','Quelle date exacte pour la régate, et combien de jours de réserve météo ?','Le planning est calé sur mi-mai.',['Organisation']],
- ['q4','h','Quelles règles de course ?','Règles de course à la voile avec l’annexe radiocommande, règles des compétitions de voiliers robots, ou règles maison. Elles fixent la zone de bouée et les pénalités du moteur de course.',['Course']],
- ['q5','h','Un humain peut-il reprendre la main pendant la course ?','En dehors de la sécurité : bateau 100 % autonome, consignes depuis la terre uniquement, ou pilotage manuel autorisé ?',['Course']],
- ['q6','m','Arbitrage : sur l’eau, à terre sur écran, ou les deux ?','L’arbitrage assisté propose des alertes ; qui décide, et d’où ?',['Course']],
- ['q7','m','Partage-t-on les corrections RTK avec les équipes ?','Chaque équipe pourrait avoir son propre GPS au centimètre pour ≈ 200 €, à égalité, sans dépendre de la balise officielle.',['Matériel','Équité']],
- ['q8','m','Des équipes travailleront-elles à distance ?','Si oui, le flux équipes passe aussi par le cloud.',['Communications']],
- ['q9','m','L’organisation fournit-elle un assistant tactique aux équipes ?','Si la compétition porte sur l’IA des équipes, mieux vaut ne fournir que les données et les outils.',['IA']],
- ['q10','m','Quel public et quelle diffusion ?','Nombre de spectateurs en ligne, écrans géants sur place, commentateur humain ou commentaire IA, français et anglais.',['Public']],
- ['q11','m','Bouées robotisées dès 2027 ?','Environ 3 500 € pour deux, plus du temps de mise au point.',['Matériel','Budget']],
- ['q12','m','Le logiciel sera-t-il open source ?','Utile pour attirer des équipes, des contributeurs et des sponsors, et pour les éditions suivantes.',['Organisation']]
+ ['q1','h','Les coques sont-elles en carbone ?','Le carbone bloque le GPS et la 4G. Si oui, l’antenne de la balise devra sortir sur le pont (antenne plate collée). À savoir avant de dessiner le boîtier.',['Matériel']],
+ ['q2','h','Où installer le PC course et les caméras ?','Esplanade de la petite digue, Fort Saint-Louis, toit voisin ? Il faut l’électricité, le câble Internet et un point à 12 m au plus avec vue sur tout le parcours.',['Site']],
+ ['q3','h','Combien de spectateurs attendus sur place ?','C’est ce qui fixe le risque de saturation de la 4G, et l’intérêt d’un Wi-Fi public au village.',['Public','4G']],
+ ['q4','m','Qui déplace les bouées quand le vent tourne ?','Avec des bouées ancrées, un bateau d’assistance les repositionne ; le PC course doit savoir quand une bouée est en cours de déplacement.',['Course']],
+ ['q5','m','Règles de course et pénalités','À fixer plus tard, mais avant de régler le moteur de course (zone de bouée, départs anticipés, pénalités).',['Course']],
+ ['q6','m','Organisation de l’arbitrage à terre','Combien d’arbitres, quels écrans, quelles alertes automatiques souhaitées ?',['Course']],
+ ['q7','m','Aide au commentateur : laquelle garder ?','Souffleur des moments forts, fiches, résumés, sous-titres : voir les idées à droite.',['Public','IA']],
+ ['q8','m','Options : caméras embarquées, 2e caméra, Wi-Fi public ?','À choisir selon le budget ; le simulateur de coûts les chiffre.',['Budget']]
 ];
-let done={};try{done=JSON.parse(store.get('air-q')||'{}')}catch(e){}
+let done={};try{done=JSON.parse(store.get('air-q2')||'{}')}catch(e){}
 function renderQ(){
-  $('#qlist').innerHTML=QS.map(([id,p,t,d,tags])=>`<div class="q${done[id]?' done':''}"><input type="checkbox" id="${id}" ${done[id]?'checked':''} aria-label="Marquer comme tranchée"><div><label for="${id}" class="qt">${t}</label><p class="qd">${d}</p><div class="qm"><span class="prio ${p}">${p==='h'?'Priorité haute':'À voir ensuite'}</span>${tags.map(x=>`<span class="tag">${x}</span>`).join('')}</div></div></div>`).join('');
-  const n=Object.values(done).filter(Boolean).length;
-  $('#qprog').textContent=`${n} question${n>1?'s':''} tranchée${n>1?'s':''} sur ${QS.length}`;
-  QS.forEach(([id])=>$('#'+id).addEventListener('change',e=>{done[id]=e.target.checked;store.set('air-q',JSON.stringify(done));renderQ()}));
+  $('#qlist').innerHTML=QS.map(([id,p,t,d,tags])=>`<div class="q${done[id]?' done':''}"><input type="checkbox" id="${id}" ${done[id]?'checked':''}><div><label for="${id}" class="qt">${t}</label><p class="qd">${d}</p><div class="qm"><span class="prio ${p}">${p==='h'?'Priorité':'Ensuite'}</span>${tags.map(x=>`<span class="tag">${x}</span>`).join('')}</div></div></div>`).join('');
+  const n=Object.values(done).filter(Boolean).length;$('#qprog').textContent=`${n} / ${QS.length} tranchée${n>1?'s':''}`;
+  QS.forEach(([id])=>$('#'+id).addEventListener('change',e=>{done[id]=e.target.checked;store.set('air-q2',JSON.stringify(done));renderQ()}));
 }
 renderQ();
 })();
