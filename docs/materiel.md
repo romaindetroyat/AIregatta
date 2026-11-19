@@ -208,3 +208,27 @@ Un petit analyseur de fréquences : il montre quelles radios émettent sur le si
 - Fiche : [Page revendeur Passion Radio](https://passion-radio.com/meter/tiny-sa-ultra-2543.html)
 - Avis : [RTL-SDR : synthèse des tests](https://www.rtl-sdr.com/tinysa-ultra-reviews-a-0-1-mhz-6-ghz-spectrum-analyzer-for-120/)
 - Avis : [W. Reeve : comparaison avec un appareil professionnel](https://reeve.com/Documents/Articles%20Papers/Reeve_TinySA-FPL_Compare.pdf)
+
+## Signaux de départ
+
+### Relais connecté Shelly 1 Gen3 — ≈ 20–25 €
+
+*Peu d’avis : validé au banc*
+
+Le petit relais qui actionne la corne quand le PC course le lui demande.
+
+**Pourquoi ce choix.** Le relais connecté le plus répandu en domotique, qui parle MQTT nativement et fonctionne sans Internet. Pas de test indépendant trouvé : il sera validé au banc (100 déclenchements) puis chaque matin.
+
+- Fiche : [Documentation Shelly 1 Gen3](https://www.shelly.com/blogs/documentation/shelly-1-gen3)
+- Avis : [Retour d’un utilisateur (SmartThings) : MQTT et relais fiables](https://community.smartthings.com/t/integration-solutions-using-mqtt/245186/624)
+
+### Corne électrique marine 12 V — ≈ 100–150 €
+
+*Peu d’avis : validé au banc*
+
+La corne de départ, alimentée par une batterie, installée sur la digue face à la ligne.
+
+**Pourquoi ce choix.** Le modèle sera choisi après un essai de portée sur place : il faut être entendu à 150 m, vent de face, malgré le bruit de la plage. Les systèmes de départ du commerce (AutoHoot, iStart, SailBot) ont leur propre minuterie ; ici, c’est le PC course qui commande, pour rester calé sur le chrono des équipes.
+
+- Fiche : [Sailing World : l’automatisation du comité de course](https://sailingworld.com/racing/the-automated-race-committee)
+- Avis : [Scuttlebutt : les signaux sonores de la procédure](https://www.sailingscuttlebutt.com/2023/02/20/start-sequence-sound-signals/)

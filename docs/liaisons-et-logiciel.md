@@ -259,6 +259,22 @@
 | Si elle tombe | Si le réseau ralentit, les écrans continuent de compter seuls à partir de l’heure du départ déjà reçue. Si le comité change la procédure, le nouveau message arrive en moins d’une milliseconde sur place. |
 | Modules logiciels | S8, S10, S12, S14, S15 |
 
+### 16. Signaux sonores du départ
+
+**Moteur de course (PC course) → Corne de départ, sur la digue** · Organisation
+
+| | |
+|---|---|
+| Support physique | Réseau local de l’organisation (câble ou Wi-Fi) jusqu’à un relais connecté, puis fil électrique jusqu’à la corne |
+| Protocole et format | MQTT : ordre « son court », « son long » ou « deux sons », avec l’heure GPS prévue |
+| Ce qui circule | Les signaux de la procédure : avertissement, préparatoire, une minute, départ ; rappel individuel ; rappel général |
+| Cadence | À chaque étape de la procédure |
+| Latence | 10 à 50 ms jusqu’à la corne ; le son met ensuite ≈ 0,4 s pour traverser 150 m |
+| Sécurité | Seuls le moteur de course et la console du comité peuvent donner l’ordre |
+| Secours | Bouton manuel sur la console, corne à main ; les pavillons restent hissés à la main |
+| Si elle tombe | Dans les règles de course à la voile (règle 26), les temps sont pris sur les signaux visuels et un signal sonore manquant est ignoré. Les équipes ont de toute façon le chrono GPS exact. |
+| Modules logiciels | S8, S10, S17 |
+
 ## Les modules logiciels
 
 ### S1 — Firmware de la balise
@@ -452,6 +468,17 @@
 - **Entrées → sorties** : Événements, vent → Écran souffleur, résumés
 - **Dépend de** : S8, S9
 - **Charge** : 3 à 5 jours
+
+### S17 — Signaux de départ automatiques
+
+*PC course · Important*
+
+- **Besoin** : Donner les signaux sonores à l’heure exacte, sans erreur humaine, parfaitement calés sur le chrono reçu par les équipes.
+- **Solution** : Le moteur de course envoie, à l’heure GPS prévue, un ordre MQTT à un relais connecté qui actionne la corne : un son à l’avertissement, au préparatoire et au départ, un son long à une minute, un son pour un rappel individuel, deux pour un rappel général. Bouton manuel et corne à main en secours ; les pavillons restent hissés à la main.
+- **But** : Une procédure de départ sonore, juste et identique à chaque manche.
+- **Critère de réussite** : Son déclenché à moins de 50 ms de l’heure prévue, sur 100 essais consécutifs ; test de la corne chaque matin
+- **Dépend de** : S8, S10
+- **Charge** : 2 à 3 jours
 
 ## Méthode (IA agentique)
 
