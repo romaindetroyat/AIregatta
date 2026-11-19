@@ -168,3 +168,17 @@
 - **VHF** : La radio maritime classique, pour parler entre bateaux et avec la terre.
 - **WebSocket** : Connexion permanente entre un navigateur et un serveur, pour recevoir des données en direct.
 - **WireGuard** : Logiciel qui crée un tunnel chiffré entre deux machines par Internet.
+
+## Mosquitto, le cœur du système
+
+Mosquitto est un logiciel libre et gratuit de la fondation Eclipse. Il joue le rôle de « broker » MQTT : le standard central par lequel passent toutes les données. Il tourne sur l’ordinateur du PC course ; les balises (via leurs récepteurs), les bouées, le moteur de course et le chrono y déposent leurs informations, et les équipes, le comité, la régie et le hub cloud s’y abonnent. Il renvoie chaque information au même instant à tous ses abonnés, garde en mémoire le dernier état (chrono, parcours), refuse tout accès anonyme et applique une liste de droits (les équipes lisent seulement). Un second ordinateur est prêt à reprendre à la même adresse. Volume prévu : ≈ 1 500 messages par seconde, très en dessous de ses capacités.
+
+## Quelles chances de réussite ?
+
+Estimation de jugement, pas un calcul :
+
+- **≈ 85 %** : la régate se déroule avec des données justes pour tous, malgré de petits incidents, si le plan d’essais est suivi (prototype sur l’eau en janvier, régate blanche mi-avril, contrôle quotidien, radio de secours, format figé le 15 mars, deux personnes formées). Sans ces mesures : ≈ 35–40 %.
+- **≈ 25 %** : aucun incident visible pendant les cinq jours.
+- **≈ 0 %** : « parfait ». Aucun événement en direct ne l’est.
+
+Les briques prises une à une sont éprouvées ; ce qui échoue sur ce genre d’événement, c’est l’assemblage non testé, l’eau, les batteries, les antennes mal placées et le manque de temps sur l’eau.
