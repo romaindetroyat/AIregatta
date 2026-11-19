@@ -1,5 +1,7 @@
 # AI Regatta — Matériel et communications
 
+> Les références de matériel à jour (uniquement du matériel bien noté) sont dans [materiel.md](materiel.md) et dans la présentation interactive.
+
 > Version 0.1, 19 novembre 2026. Complète l'[étude préalable](etude-prealable.md).
 > Les prix sont des prix publics constatés fin 2026, TTC, en ordre de grandeur. Ils varient selon le revendeur et le pack.
 > **[À TESTER]** signale un choix à confirmer lors des essais sur l'eau.

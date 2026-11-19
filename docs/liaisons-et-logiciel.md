@@ -27,7 +27,7 @@
 
 | | |
 |---|---|
-| Support physique | Radio LoRa 868 MHz, sous-bande 869,4–869,65 MHz (500 mW, 10 % du temps) ; module EByte E22-900M22S vers 2 récepteurs Heltec |
+| Support physique | Radio LoRa 868 MHz, sous-bande 869,4–869,65 MHz (500 mW, 10 % du temps) ; module Adafruit RFM95W vers 2 récepteurs identiques au PC course |
 | Protocole et format | Trame binaire de 24 octets ; chaque balise émet dans son créneau de 35 ms, calé sur la seconde GPS : aucune collision |
 | Ce qui circule | Position compacte (écart au centimètre par rapport à un point de référence du plan d’eau), vitesse, route, qualité RTK, batterie |
 | Cadence | 2 Hz |
@@ -159,12 +159,12 @@
 
 ### 10. Station météo
 
-**Station Ecowitt → PC course** · Organisation
+**Station Davis Vantage Pro2 → PC course** · Organisation
 
 | | |
 |---|---|
-| Support physique | Réseau local (Wi-Fi ou câble de la passerelle GW2000) |
-| Protocole et format | Interface HTTP locale de la passerelle, lue puis convertie en MQTT |
+| Support physique | Réseau local (passerelle WeatherLink Live, en Wi-Fi ou câble) |
+| Protocole et format | Interface locale de la passerelle WeatherLink Live, lue puis convertie en MQTT |
 | Ce qui circule | Vent moyen, rafales, direction, pression, température |
 | Cadence | Une lecture toutes les 5 à 10 s |
 | Débit | Négligeable |
@@ -214,7 +214,7 @@
 
 | | |
 |---|---|
-| Support physique | Ligne filaire du site en principal ; 5G double SIM du routeur Teltonika en secours |
+| Support physique | Ligne filaire du site en principal ; 5G du routeur de poche Netgear Nighthawk M6 Pro en secours, branché sur la passerelle UniFi |
 | Protocole et format | Tunnel chiffré WireGuard ; à l’intérieur, trames des balises relayées et pont MQTT |
 | Ce qui circule | Trames 4G des balises vers le site ; flux public et corrections RTK vers le cloud |
 | Cadence | Continu |
@@ -261,7 +261,7 @@
 *Embarqué · Indispensable*
 
 - **Besoin** : Mesurer le vent réel sur le parcours malgré le mouvement de la bouée.
-- **Solution** : Même base que S1, plus lecture de l’anémomètre Calypso, correction du roulis, du tangage et de la rotation (compas), moyennes glissantes de 5 à 10 s, gestion du panneau solaire.
+- **Solution** : Même base que S1, plus lecture de l’anémomètre Gill WindSonic, correction du roulis, du tangage et de la rotation (compas), moyennes glissantes de 5 à 10 s, gestion du panneau solaire.
 - **But** : Un vent fiable au vent et sous le vent, envoyé à toutes les équipes.
 - **Critère de réussite** : Écart < 5° et < 10 % avec une station de référence, par temps calme
 - **Entrées → sorties** : Anémomètre, centrale inertielle, GPS → Trames avec le vent
@@ -273,7 +273,7 @@
 *Embarqué · Indispensable*
 
 - **Besoin** : Recevoir le chemin de secours sans dépendre d’Internet.
-- **Solution** : Firmware des récepteurs Heltec (écoute, horodatage) et service sur le PC course qui décode, vérifie et publie dans le bus ; suppression des doublons avec la 4G grâce au numéro de séquence.
+- **Solution** : Firmware des récepteurs radio (écoute, horodatage) et service sur le PC course qui décode, vérifie et publie dans le bus ; suppression des doublons avec la 4G grâce au numéro de séquence.
 - **But** : Le suivi continue si la 4G sature.
 - **Critère de réussite** : Bascule sans perte visible au PC course
 - **Entrées → sorties** : Trames radio → Positions dans le bus de données
