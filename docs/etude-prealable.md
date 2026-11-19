@@ -2,7 +2,16 @@
 ## Régate de voiliers drones, Toulon, mai 2027
 
 > Version 0.1, 19 novembre 2026. Document de travail, à relire avec l'organisation et quelques compétiteurs.
-> Les points marqués **[À VÉRIFIER]** sont des hypothèses techniques ou réglementaires à confirmer avant toute décision.
+> Les points marqués **[À VÉRIFIER]** sont des hypothèses techniques à confirmer avant toute décision.
+
+> **Mise à jour du 19 novembre 2026 — décisions actées**
+> - Le plan d'eau est choisi et validé : la partie réglementaire est retirée de cette étude.
+> - Le PC course diffuse à toutes les équipes le vent, les positions des bouées et les positions de tous les bateaux.
+> - Le format de course est défini, avec du près et du portant.
+> - L'architecture des bateaux est libre pour l'instant.
+> - Le logiciel sera développé en IA agentique (GSD) : les durées de développement sont révisées à la baisse.
+>
+> Les références de matériel et l'architecture des communications sont détaillées dans **[Matériel et communications](architecture-materiel-communications.md)**, qui prime sur cette étude en cas d'écart.
 
 ---
 
@@ -14,7 +23,7 @@
 4. [Briques techniques et choix matériels](#4-briques-techniques-et-choix-matériels)
 5. [Logiciels à développer](#5-logiciels-à-développer)
 6. [Où l'IA apporte vraiment quelque chose](#6-où-lia-apporte-vraiment-quelque-chose)
-7. [Réglementation, sécurité, plan d'eau](#7-réglementation-sécurité-plan-deau)
+7. [Sécurité sur l'eau](#7-sécurité-sur-leau)
 8. [Budget indicatif](#8-budget-indicatif)
 9. [Feuille de route (novembre 2026 → mai 2027)](#9-feuille-de-route-novembre-2026--mai-2027)
 10. [Risques et parades](#10-risques-et-parades)
@@ -46,9 +55,9 @@
 1. **Une balise officielle identique sur chaque bateau et chaque bouée**, fournie et scellée par l'organisation, indépendante de l'électronique des équipes. C'est ce qui garantit l'équité, le classement et l'arbitrage, comme les données "one-design" de SailGP.
 2. **Le PC course tourne en local sur le site**, avec une copie dans le cloud pour le public. Si Internet tombe, la course continue.
 3. **Un contrat d'interface publié tôt (janvier)**, avec un **simulateur** qui rejoue des courses : les équipes doivent pouvoir développer leurs logiciels tactiques dès l'hiver, sans attendre d'être sur l'eau.
-4. **Une liaison de sécurité indépendante** (radiocommande classique ou coupe-circuit) sur chaque drone : c'est ce qui rendra le projet acceptable pour la Préfecture maritime.
+4. **Une liaison de sécurité indépendante** (radiocommande classique ou coupe-circuit) sur chaque drone : indispensable pour la sécurité sur l'eau.
 5. **L'IA sert là où elle a une vraie valeur** (vent, vision, arbitrage assisté, commentaire, analyse de performance). Le reste repose sur des algorithmes déterministes, plus fiables.
-6. **Démarches réglementaires dès décembre** : la rade de Toulon est le premier port militaire français, c'est probablement le point le plus long du calendrier.
+6. **Le chemin critique est le cycle matériel → essais sur l'eau → corrections**, plus que l'écriture du logiciel, qui sera accélérée par le développement agentique.
 
 ---
 
@@ -281,7 +290,7 @@ Pour que des équipes moins équipées puissent participer, l'organisation peut 
 | | **Total MVP (L1–L8)** | | | **≈ 105–165 j** |
 | | **Total complet** | | | **≈ 180–310 j** |
 
-Avec 6 mois devant soi, **le MVP demande 2 développeurs à plein temps** (ou 3 à temps partiel). La version complète en demande 3 à 4, ou un périmètre réduit en bonus.
+> **Révisé** : ces durées supposent un développement classique. En IA agentique (GSD), le logiciel pur se réduit à quelques semaines ; le calendrier est alors fixé par le matériel et les essais sur l'eau. Voir la section 11 de [Matériel et communications](architecture-materiel-communications.md#11-développement-en-ia-agentique--ce-qui-change).
 
 ### 5.2 Choix techniques proposés
 
@@ -408,26 +417,9 @@ Un algorithme simple et prévisible est préférable à de l'IA partout où il s
 
 ---
 
-## 7. Réglementation, sécurité, plan d'eau
+## 7. Sécurité sur l'eau
 
-> Cette partie est probablement **le chemin critique** du projet. À lancer dès décembre.
-
-### 7.1 Démarches probables [À VÉRIFIER pour chaque point]
-
-| Démarche | Interlocuteur | Délai indicatif |
-|---|---|---|
-| Déclaration de manifestation nautique en mer | DDTM du Var / Délégation à la mer et au littoral, avis de la **Préfecture maritime de la Méditerranée** | Au moins 2 mois avant ; prévoir plus en rade militaire |
-| Statut juridique des drones de surface (régime des "drones maritimes" introduit en 2021–2022) | DIRM Méditerranée / Affaires maritimes | À clarifier dès le cadrage : taille, vitesse, catégorie |
-| Zone de course compatible avec le trafic (bateaux-bus Toulon–La Seyne–Saint-Mandrier, navires militaires, plaisance) | Capitainerie, Préfecture maritime, Marine nationale | En même temps que la déclaration |
-| Utilisation des fréquences radio | ANFR (bandes libres : 433, 868, 2,4 GHz, 5,8 GHz) ; contraintes éventuelles près d'installations militaires | Vérifier tôt |
-| Installation de caméras et d'antennes sur un point haut | Propriétaire, mairie, éventuellement Architecte des bâtiments de France pour un site classé | 1–2 mois |
-| Drone aérien (si envisagé) | DGAC / DSAC + autorités militaires | Long et incertain : ne pas compter dessus |
-| Occupation du domaine public (village, écrans) | Mairie de Toulon / Métropole TPM | 2–3 mois |
-| Assurance RC organisateur + équipes | Assureur | À intégrer à l'avis de course |
-| Affiliation, arbitres, règles | Fédération Française de Voile / ligue Sud, si la course s'inscrit dans un cadre fédéral | À décider |
-| Données personnelles (comptes PWA, notifications, vidéos) | RGPD | Simple si pas de compte obligatoire |
-
-### 7.2 Sécurité sur l'eau
+> Le plan d'eau est validé ; les démarches réglementaires ne sont pas traitées ici.
 
 - **Bateau(x) de sécurité** à moteur avec le matériel pour récupérer un drone.
 - **Coupe-circuit / reprise en main** obligatoire sur chaque drone, testé au contrôle d'équipement.
@@ -435,10 +427,6 @@ Un algorithme simple et prévisible est préférable à de l'IA partout où il s
 - **Barrière virtuelle (geofence)** imposée par le firmware ou surveillée par le PC course, avec alerte immédiate.
 - **Feux et visibilité** : couleurs vives, pavillon d'identification, numéro lisible.
 - **Contrôle d'équipement** la veille : balise, sécurité, fréquences, batteries.
-
-### 7.3 Choix du plan d'eau [À VÉRIFIER]
-
-Critères : visibilité depuis la terre pour le public, point haut pour les caméras, couverture 4G, éloignement des chenaux, abri relatif de la houle, vent "propre". Pistes à explorer : **Anse du Mourillon / plages du Mourillon** (public sur la plage, Fort Saint-Louis en point haut), **Petite Rade** (spectaculaire, mais trafic important), **Le Lazaret / Tamaris**, ou hors rade (**Le Pradet, Carqueiranne**) si les contraintes militaires sont trop fortes.
 
 ---
 
@@ -477,10 +465,7 @@ Hypothèse de calcul : **12 bateaux, 4 bouées dont 2 instrumentées en vent**, 
 
 ### 8.3 Développement logiciel
 
-| Scénario | Volume | Coût indicatif en prestation (550–750 €/j) |
-|---|---|---|
-| MVP (L1–L8) | 105–165 j | 60 000–120 000 € |
-| Complet (L1–L15) | 180–310 j | 100 000–230 000 € |
+Le développement étant mené en IA agentique, le coût se résume essentiellement au temps des personnes qui pilotent les agents (quelques semaines à 1–2 personnes) et aux abonnements des outils d'IA. L'estimation en prestation classique est abandonnée.
 
 Pistes pour réduire la facture : développement interne ou en partenariat avec une école d'ingénieurs (ISEN Toulon, SeaTech / Université de Toulon) **[À VÉRIFIER]**, mécénat technologique, réutilisation de briques open source (voir section 11), et **publication du logiciel en open source** pour attirer contributeurs et sponsors.
 
@@ -497,7 +482,6 @@ gantt
   axisFormat %b
   section Cadrage
   Décisions structurantes (questions §12)      :a1, 2026-11-20, 25d
-  Démarches réglementaires (dépôt + suivi)      :crit, a2, 2026-12-01, 150d
   Recherche financement / partenaires           :a3, 2026-12-01, 90d
   section Matériel
   Commande échantillons (GNSS, radios, anémo)   :b1, 2026-12-01, 20d
@@ -532,7 +516,7 @@ gantt
 
 | Jalon | Date cible | Critère "go" |
 |---|---|---|
-| J1 — Cadrage validé | mi-décembre 2026 | Questions de la section 12 tranchées pour les blocs A à D ; dossier réglementaire déposé ou rendez-vous obtenu |
+| J1 — Cadrage validé | mi-décembre 2026 | Questions restantes tranchées (voir [Matériel et communications §12](architecture-materiel-communications.md#12-questions-restantes)) ; matériel prototype commandé |
 | J2 — Balise validée sur l'eau | fin janvier 2027 | 2 balises en RTK fixe > 95 % du temps, liaison > 99 % des paquets à la distance maximale du parcours |
 | J3 — API gelée | 15 mars 2027 | Simulateur utilisé par au moins 3 équipes ; aucune demande de modification majeure en attente |
 | J4 — Régate blanche | mi-avril 2027 | Course complète menée de bout en bout, classement automatique juste, PWA tenue en charge (test à 5 000 connexions simulées) |
@@ -544,7 +528,6 @@ gantt
 
 | Risque | Probabilité | Impact | Parade |
 |---|---|---|---|
-| Autorisations refusées ou tardives (zone militaire) | Moyenne | Bloquant | Démarches dès décembre ; plan d'eau de repli hors rade ; dialogue tôt avec la Préfecture maritime |
 | Liaison radio/4G instable sur l'eau | Moyenne | Élevé | Double chemin, campagne de mesure en janvier, carte SD dans chaque balise |
 | Saturation 4G le jour J (public sur la plage) | Moyenne | Moyen | Radio privée de secours ; SIM sur deux opérateurs ; liaison filaire ou 5G pour le PC course |
 | Interférences entre radios des équipes | Moyenne | Élevé | Plan de fréquences imposé, contrôlé à l'inscription |
@@ -579,6 +562,8 @@ gantt
 ## 12. Questions à trancher
 
 Les questions sont classées par bloc. Celles marquées ★ conditionnent l'architecture et sont à trancher **en premier** (avant mi-décembre).
+
+> **Tranchées le 19 novembre 2026** : B2 (format défini, près et portant), D1 (toutes les équipes reçoivent vent, bouées et positions de tous les bateaux), E1 et la partie réglementaire (plan d'eau validé), A1 et A4 provisoirement (architecture des bateaux libre).
 
 ### A. Les bateaux et les équipes
 - **A1 ★** Quel type de voiliers drones : taille (longueur, poids), monotype ou open, catégorie existante (IOM, RC Laser, Microtransat, World Robotic Sailing Championship) ou nouvelle classe ?
@@ -662,7 +647,6 @@ Les questions sont classées par bloc. Celles marquées ★ conditionnent l'arch
 ### 13.3 Prochaines étapes immédiates
 
 1. Répondre aux questions ★ de la section 12 (atelier de 2 heures avec l'organisation).
-2. Prendre contact avec la DDTM du Var / Préfecture maritime pour une première présentation du projet.
 3. Identifier 3 à 5 équipes pilotes et partager ce document avec elles.
 4. Commander le matériel du prototype.
 5. Rédiger la version 0 du contrat d'interface et la publier aux équipes pilotes.
