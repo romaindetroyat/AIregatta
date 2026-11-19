@@ -67,7 +67,7 @@ La radio de secours, sur la balise et dans les deux récepteurs du PC course.
 
 ## Bouées
 
-### Gill WindSonic M (option) — ≈ 1 000–1 300 €, sur devis
+### Gill WindSonic M (bouée au vent ; second sous le vent en option) — ≈ 1 000–1 300 €, sur devis
 
 *Référence professionnelle*
 
