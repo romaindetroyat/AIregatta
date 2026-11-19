@@ -23,6 +23,7 @@ Dernière mise à jour : 20 novembre 2026.
 | P08 | Source des positions | Une balise officielle dans chaque bateau, seule source pour le suivi, le classement et l’arbitrage | Acté |
 | P09 | Balise à bord | ≈ 250 g, à l’intérieur si possible, poids en bas ; aucun lien avec l’électronique des équipes | Acté |
 | P10 | Pilotage des bateaux | Depuis le PC à terre de chaque équipe, par sa propre liaison, dans le respect du plan de fréquences | Acté |
+| P36 | Ordres tactiques des équipes | Vire, empanne, mode VMG, mode haut, mode bas : envoyés en direct par chaque équipe à son bateau | Acté |
 | P11 | Équité des informations | Toutes les équipes reçoivent les mêmes données au même instant : positions des bateaux et des bouées, vent, chrono | Acté |
 | P12 | Assistant tactique | Aucun fourni : la tactique est le travail des équipes | Acté |
 | P13 | Présence des équipes | Toutes sur place | Acté |
