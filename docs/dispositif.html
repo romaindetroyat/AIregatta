@@ -74,7 +74,12 @@ section{padding-block:clamp(64px,8vw,104px)}
 .sec-head p.muted{max-width:60ch}
 
 /* Plan d'eau */
-.plan{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start}
+.plan{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
+#panel{position:static;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 32px}
+#panel>p.meta,#panel>h3,#panel>div:first-of-type,#panel>.role{grid-column:1}
+#panel>dl{grid-column:2;grid-row:1/span 5;margin-top:0}
+#panel>.goto{grid-column:1/-1}
+@media (max-width:820px){#panel{grid-template-columns:minmax(0,1fr)}#panel>dl{grid-column:1;grid-row:auto;margin-top:18px}}
 .map{overflow:hidden;padding:0}
 .tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px}
 .chip{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:8px 14px;font:500 13px var(--f-texte);color:var(--ivoire);cursor:pointer;background:radial-gradient(120% 160% at 50% 0%,rgba(9,11,7,.09),rgba(9,11,7,.03) 70%);box-shadow:inset 0 1px 0 rgba(9,11,7,.1),inset 0 0 0 1px rgba(9,11,7,.07);transition:opacity .3s,background .3s}
@@ -557,6 +562,8 @@ body.simple .tech{display:none}
 .fiab3 span{font-size:12.5px;color:var(--ivoire-2)}
 @media (max-width:1020px){.essl{grid-template-columns:repeat(2,minmax(0,1fr))}.essn{grid-template-columns:repeat(2,minmax(0,1fr))}.mosq,.fiab{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){.essl,.essn,.fiab3{grid-template-columns:minmax(0,1fr)}.modebtn{display:none}}
+#boats text{opacity:0;transition:opacity .3s}
+#boats .ent:hover text,#boats .ent:focus text{opacity:1}
 </style>
 
 <div class="grain" aria-hidden="true"></div>
@@ -623,100 +630,99 @@ body.simple .tech{display:none}
           <button class="chip on" type="button" data-layer="g4" aria-pressed="true"><span class="d" style="background:var(--lime)"></span>Positions 4G</button>
           <button class="chip on" type="button" data-layer="radio" aria-pressed="false"><span class="d" style="background:#B8902F"></span>Radio de secours</button>
           <button class="chip on" type="button" data-layer="teams" aria-pressed="true"><span class="d" style="background:#8FD18A"></span>Redistribution</button>
-          <button class="chip on" type="button" data-layer="cmd" aria-pressed="true"><span class="d" style="background:#D0704A"></span>Consignes des équipes</button>
+          <button class="chip on" type="button" data-layer="cmd" aria-pressed="false"><span class="d" style="background:#D0704A"></span>Consignes des équipes</button>
           <button class="chip on" type="button" data-layer="rtk" aria-pressed="false"><span class="d" style="background:#43B3A3"></span>Corrections RTK</button>
           <button class="chip play" type="button" id="playBtn" aria-pressed="true">Pause</button>
         </div>
-        <svg class="water" id="water" viewBox="0 0 1000 600" role="img" aria-label="Plan de l’anse du Mourillon avec le parcours et les éléments du dispositif">
+        <svg class="water" id="water" viewBox="0 0 1180 400" role="img" aria-label="Plan de l’anse du Mourillon avec le parcours et les éléments du dispositif">
           <defs>
             <pattern id="grid" width="156.25" height="156.25" patternUnits="userSpaceOnUse"><path d="M156.25 0H0V156.25" fill="none" stroke="rgba(9,11,7,.05)"/></pattern>
             <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(199,235,0,.35)"/><stop offset="100%" stop-color="rgba(199,235,0,0)"/></radialGradient>
           </defs>
-          <!-- herbiers (zones sombres de la photo) -->
-          <g fill="var(--herbier)" opacity=".9">
-            <path d="M210 40 C260 30 300 70 330 120 C360 180 300 230 250 250 C210 270 170 240 190 190 C205 150 180 90 210 40Z"/>
-            <path d="M420 170 C470 150 520 190 560 230 C600 270 560 320 500 330 C440 340 400 300 410 250 C415 215 400 185 420 170Z"/>
-            <path d="M600 260 C660 240 740 280 760 330 C780 380 720 420 660 410 C610 400 580 350 590 310Z"/>
-            <path d="M150 330 C210 310 280 350 300 400 C320 450 260 490 200 480 C150 470 120 420 130 380Z"/>
-            <path d="M780 420 C840 400 920 440 940 480 C960 530 900 560 850 550 C800 540 770 500 775 460Z"/>
+          <g fill="var(--herbier)" opacity=".6">
+            <path d="M230 40 C280 30 320 70 345 115 C370 165 320 215 270 230 C225 245 190 215 205 175 C218 140 200 85 230 40Z"/>
+            <path d="M430 210 C480 195 530 225 560 260 C590 300 550 345 495 350 C440 355 405 320 415 280 C420 250 410 222 430 210Z"/>
           </g>
-          <rect width="1000" height="600" fill="url(#grid)"/>
-          <!-- terre : plage et Fort Saint-Louis à gauche, esplanade, digue et anse Mistral à droite -->
+          <rect width="1180" height="400" fill="url(#grid)"/>
+          <!-- terre -->
           <path d="M0 0 H92 C86 30 64 56 0 66 Z" fill="var(--sable)"/>
           <path d="M0 96 C38 98 66 134 62 168 C58 204 38 228 0 232 Z" fill="var(--terre)" stroke="rgba(9,11,7,.18)"/>
           <path d="M128 192 L34 288" stroke="#BDB8A2" stroke-width="12" stroke-linecap="round"/>
-          <path d="M739 0 H1000 V144 C978 132 948 126 912 128 C884 130 856 148 842 200 L636 97 L665 82 L742 65 Z" fill="var(--terre)" stroke="rgba(9,11,7,.18)"/>
-          <path d="M1000 144 C978 132 948 126 912 128 C884 130 868 140 858 160 L874 168 C900 150 950 150 1000 168 Z" fill="var(--sable)"/>
+          <path d="M739 0 H1180 V150 C1100 140 1040 132 1000 144 C978 132 948 126 912 128 C884 130 856 148 842 200 L636 97 L665 82 L742 65 Z" fill="var(--terre)" stroke="rgba(9,11,7,.18)"/>
+          <path d="M1180 150 C1100 140 1040 132 1000 144 C978 132 948 126 912 128 C884 130 868 140 858 160 L874 168 C900 150 950 150 1000 168 C1050 160 1110 162 1180 170 Z" fill="var(--sable)"/>
           <path d="M636 97 L842 202" stroke="#BDB8A2" stroke-width="12" stroke-linecap="round"/>
-          <rect x="765" y="0" width="77" height="53" fill="#D8D4C2" stroke="rgba(9,11,7,.12)"/>
+          <rect x="765" y="0" width="77" height="50" fill="#D8D4C2" stroke="rgba(9,11,7,.12)"/>
           <text class="sub" x="8" y="252">Fort Saint-Louis</text>
-          <text class="sub" x="720" y="160" transform="rotate(27 720 160)">petite digue</text>
-          <text class="sub" x="905" y="190">anse Mistral</text>
+          <text class="sub" x="770" y="186" transform="rotate(27 770 186)">petite digue</text>
+          <text class="sub" x="1000" y="190">anse Mistral · public</text>
           <!-- vent -->
-          <g transform="translate(190,530)">
-            <circle r="40" fill="rgba(255,255,255,.85)" stroke="var(--filet)"/>
-            <g transform="rotate(90)"><path d="M0 26 L0 -22 M-8 -12 L0 -22 L8 -12" stroke="var(--ivoire)" stroke-width="2.5" fill="none" stroke-linecap="round"/></g>
-            <text class="lbl" x="60" y="5">Vent d’ouest</text>
-            <text class="sub" x="60" y="20">bouée au vent côté Fort</text>
+          <g transform="translate(232,340)">
+            <circle r="30" fill="rgba(255,255,255,.9)" stroke="var(--filet)"/>
+            <g transform="rotate(90)"><path d="M0 20 L0 -17 M-7 -9 L0 -17 L7 -9" stroke="var(--ivoire)" stroke-width="2.5" fill="none" stroke-linecap="round"/></g>
+            <text class="lbl" x="44" y="0">Vent d’ouest</text>
+            <text class="sub" x="44" y="15">bouée au vent côté Fort</text>
           </g>
           <!-- échelle -->
-          <g transform="translate(780,560)">
+          <g transform="translate(560,372)">
             <path d="M0 0H156" stroke="var(--ivoire)" stroke-width="2"/><path d="M0 -5V5M156 -5V5M78 -3V3" stroke="var(--ivoire)" stroke-width="2"/>
             <text class="sub" x="78" y="-10" text-anchor="middle">50 m</text>
           </g>
+          <!-- Internet -->
+          <rect x="840" y="262" width="320" height="118" rx="18" fill="rgba(255,255,255,.55)" stroke="var(--ivoire-3)" stroke-dasharray="5 5"/>
+          <text class="sub" x="858" y="284">sur Internet</text>
           <g id="courseLines"></g>
           <g id="trails"></g>
           <g id="packets"></g>
           <g id="boats"></g>
           <g id="marks"></g>
-
-          <g class="ent" data-id="cloud" tabindex="0" role="button" aria-label="Hub cloud" transform="translate(0,420)">
-            <path class="hl" d="M398 62 h66 a17 17 0 0 0 -6 -32 a23 23 0 0 0 -42 -6 a18 18 0 0 0 -18 38z" fill="var(--nuit-3)" stroke="var(--filet)" stroke-width="2"/>
-            <text class="lbl" x="432" y="84" text-anchor="middle">Hub cloud</text>
+          <g class="ent" data-id="cloud" tabindex="0" role="button" aria-label="Hub cloud">
+            <path class="hl" d="M903 336 h66 a17 17 0 0 0 -6 -32 a23 23 0 0 0 -42 -6 a18 18 0 0 0 -18 38z" fill="var(--nuit-3)" stroke="var(--ivoire-3)" stroke-width="2"/>
+            <text class="lbl" x="937" y="360" text-anchor="middle">Hub cloud</text>
           </g>
-          <g class="ent" data-id="public" tabindex="0" role="button" aria-label="Application publique" transform="translate(0,420)">
-            <rect class="hl" x="528" y="18" width="24" height="42" rx="6" fill="var(--nuit-3)" stroke="var(--ivoire-2)" stroke-width="2"/>
-            <rect x="533" y="25" width="14" height="26" rx="2" fill="var(--sarcelle)"/>
-            <text class="lbl" x="540" y="84" text-anchor="middle">Application</text>
+          <g class="ent" data-id="public" tabindex="0" role="button" aria-label="Application publique">
+            <rect class="hl" x="1068" y="296" width="24" height="42" rx="6" fill="var(--nuit-3)" stroke="var(--ivoire-2)" stroke-width="2"/>
+            <rect x="1073" y="303" width="14" height="26" rx="2" fill="var(--sarcelle)"/>
+            <text class="lbl" x="1080" y="360" text-anchor="middle">Application</text>
           </g>
+          <!-- à terre -->
           <g class="ent" data-id="camera" tabindex="0" role="button" aria-label="Caméras en point haut">
-            <rect class="hl" x="788" y="16" width="30" height="16" rx="4" fill="var(--nuit)" stroke="var(--ivoire-2)" stroke-width="2"/>
-            <circle cx="811" cy="24" r="4" fill="var(--lime)"/>
-            <text class="sub" x="803" y="48" text-anchor="middle">caméras · 12 m</text>
-          </g>
-          <g class="ent" data-id="meteo" tabindex="0" role="button" aria-label="Station météo">
-            <path d="M905 78 V52" stroke="var(--ivoire)" stroke-width="2"/>
-            <path class="hl" d="M895 54 h20 M905 46 v14" stroke="var(--ivoire)" stroke-width="2"/>
-            <text class="sub" x="905" y="40" text-anchor="middle">météo</text>
-          </g>
-          <g class="ent" data-id="rtk" tabindex="0" role="button" aria-label="Base RTK">
-            <path class="hl" d="M694 100 l11 -22 l11 22z" fill="var(--nuit-3)" stroke="var(--ivoire)" stroke-width="2"/>
-            <circle cx="705" cy="76" r="4" fill="#43B3A3"/>
-            <text class="sub" x="705" y="116" text-anchor="middle">base RTK</text>
+            <rect class="hl" x="788" y="12" width="30" height="16" rx="4" fill="var(--nuit)" stroke="var(--ivoire-2)" stroke-width="2"/>
+            <circle cx="811" cy="20" r="4" fill="var(--lime)"/>
+            <text class="sub" x="803" y="42" text-anchor="middle">caméras 12 m</text>
           </g>
           <g class="ent" data-id="corne" tabindex="0" role="button" aria-label="Corne de départ">
             <g class="waves" fill="none" stroke="var(--lime-texte)" stroke-width="2"><circle cx="655" cy="106" r="10"/><circle cx="655" cy="106" r="10"/><circle cx="655" cy="106" r="10"/></g>
             <path class="hl" d="M646 100 L655 100 L665 93 L665 119 L655 112 L646 112 Z" fill="var(--nuit)" stroke="var(--fond)" stroke-width="1.5"/>
             <text class="sub" x="640" y="92" text-anchor="end">corne</text>
           </g>
+          <g class="ent" data-id="rtk" tabindex="0" role="button" aria-label="Base RTK">
+            <path class="hl" d="M749 104 l11 -22 l11 22z" fill="var(--nuit-3)" stroke="var(--ivoire)" stroke-width="2"/>
+            <circle cx="760" cy="80" r="4" fill="#43B3A3"/>
+            <text class="sub" x="760" y="122" text-anchor="middle">base RTK</text>
+          </g>
           <g class="ent" data-id="pc" tabindex="0" role="button" aria-label="PC course">
-            <rect class="hl" x="738" y="78" width="88" height="34" rx="8" fill="var(--lime)" stroke="var(--nuit)" stroke-width="2"/>
-            <text x="782" y="100" text-anchor="middle" style="font:600 14px var(--f-titre);fill:var(--nuit)">PC course</text>
+            <rect class="hl" x="800" y="68" width="100" height="38" rx="9" fill="var(--lime)" stroke="var(--nuit)" stroke-width="2"/>
+            <text x="850" y="92" text-anchor="middle" style="font:600 15px var(--f-titre);fill:var(--nuit)">PC course</text>
           </g>
           <g class="ent" data-id="gw" tabindex="0" role="button" aria-label="Antenne radio de secours">
-            <path d="M842 150 V118" stroke="var(--ivoire)" stroke-width="2.5"/>
-            <path class="hl" d="M835 124 l7 -12 l7 12" fill="none" stroke="var(--ivoire)" stroke-width="2"/>
-            <circle cx="842" cy="110" r="9" fill="none" stroke="#B8902F" stroke-width="1.5"/>
-            <text class="sub" x="858" y="140">antenne</text>
+            <path d="M935 110 V72" stroke="var(--ivoire)" stroke-width="2.5"/>
+            <path class="hl" d="M928 78 l7 -12 l7 12" fill="none" stroke="var(--ivoire)" stroke-width="2"/>
+            <circle cx="935" cy="64" r="9" fill="none" stroke="#B8902F" stroke-width="1.5"/>
+            <text class="sub" x="935" y="124" text-anchor="middle">antenne</text>
           </g>
           <g class="ent" data-id="equipes" tabindex="0" role="button" aria-label="Zone équipes">
-            <path class="hl" d="M896 112 l16 -18 l16 18z M928 112 l16 -18 l16 18z M960 112 l16 -18 l16 18z" fill="var(--nuit-3)" stroke="var(--ivoire)" stroke-width="2"/>
-            <text class="sub" x="944" y="84" text-anchor="middle">équipes</text>
+            <path class="hl" d="M985 104 l16 -18 l16 18z M1017 104 l16 -18 l16 18z M1049 104 l16 -18 l16 18z" fill="var(--nuit-3)" stroke="var(--ivoire)" stroke-width="2"/>
+            <text class="sub" x="1033" y="76" text-anchor="middle">zone équipes</text>
+          </g>
+          <g class="ent" data-id="meteo" tabindex="0" role="button" aria-label="Station météo">
+            <path d="M1135 104 V74" stroke="var(--ivoire)" stroke-width="2"/>
+            <path class="hl" d="M1125 76 h20 M1135 68 v14" stroke="var(--ivoire)" stroke-width="2"/>
+            <text class="sub" x="1135" y="60" text-anchor="middle">météo</text>
           </g>
         </svg>
         <div class="mapfoot">
           <span>43,107199 N · 5,941540 E · <a href="https://maps.app.goo.gl/a938BVhtw59Eg2h77" target="_blank" rel="noopener">voir sur Google Maps</a></span>
-          <span>Parcours ≈ 150 m, orienté selon le vent du jour · 1 carreau = 50 m</span>
+          <span>Parcours ≈ 140 m, orienté selon le vent du jour · 1 carreau = 50 m · animation ralentie</span>
         </div>
       </div>
       <aside class="carte panel" id="panel" aria-live="polite"></aside>
@@ -1229,18 +1235,18 @@ function bindEnt(g){g.addEventListener('click',()=>renderPanel(g.dataset.id));g.
 /* ---------- Parcours ---------- */
 const NS='http://www.w3.org/2000/svg';
 const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
-const G=[555,142],WM=[178,150];const K=.6;
+const G=[612,168],WM=[178,176];const K=.5;
 const L=Math.hypot(WM[0]-G[0],WM[1]-G[1]);const w=[(WM[0]-G[0])/L,(WM[1]-G[1])/L];const pp=[-w[1],w[0]];
 const T=(u,v)=>[G[0]+u*w[0]+v*pp[0],G[1]+u*w[1]+v*pp[1]];
 const gm=$('#marks'),cl=$('#courseLines');
 // lignes du parcours
-const sA=T(.13*L,-44),sB=T(.13*L,44);
+const sA=T(.24*L,-40),sB=T(.24*L,40);
 cl.appendChild(mk('line',{x1:sA[0],y1:sA[1],x2:sB[0],y2:sB[1],stroke:'rgba(9,11,7,.45)','stroke-dasharray':'6 5','stroke-width':1.5}));
 const lA=T(L,0),lB=T(.2*L,0);
 cl.appendChild(mk('line',{x1:G[0],y1:G[1],x2:WM[0],y2:WM[1],stroke:'rgba(78,96,0,.3)','stroke-dasharray':'2 8','stroke-width':1.5}));
 const lay1=T(L*.45,-95),lay2=T(L*.45,95);
 cl.appendChild(mk('path',{d:`M${WM[0]} ${WM[1]} L${lay1[0]} ${lay1[1]} M${WM[0]} ${WM[1]} L${lay2[0]} ${lay2[1]}`,stroke:'rgba(9,11,7,.10)','stroke-dasharray':'4 6',fill:'none'}));
-const sl=T(.13*L,0);const st1=mk('text',{class:'sub',x:sB[0]+8,y:sB[1]+4});st1.textContent='ligne de départ';cl.appendChild(st1);
+const sl=T(.24*L,0);const sTop=sA[1]<sB[1]?sA:sB;const st1=mk('text',{class:'sub',x:sTop[0],y:sTop[1]-14,'text-anchor':'middle'});st1.textContent='ligne de départ';cl.appendChild(st1);
 function mark(x,y,id,r,label,sub,dx,dy){const g=mk('g',{class:'ent','data-id':id,tabindex:0,role:'button','aria-label':label});
  g.appendChild(mk('circle',{cx:x,cy:y,r:r*2.6,fill:'url(#glow)'}));
  g.appendChild(mk('circle',{class:'hl',cx:x,cy:y,r:r,fill:'var(--lime)',stroke:'var(--nuit)','stroke-width':2.5}));
@@ -1249,7 +1255,7 @@ function mark(x,y,id,r,label,sub,dx,dy){const g=mk('g',{class:'ent','data-id':id
  gm.appendChild(g);bindEnt(g);return g}
 mark(WM[0],WM[1],'bouee',11,'Bouée au vent','GPS + vent',-30,44);
 const g1=T(0,-22),g2=T(0,22);
-mark(g1[0],g1[1],'bouee',9,'','',0,0);mark(g2[0],g2[1],'bouee',9,'Porte sous le vent','GPS + vent',-150,40);
+mark(g1[0],g1[1],'bouee',9,'','',0,0);mark(g2[0],g2[1],'bouee',9,'Porte sous le vent','GPS + vent',16,46);
 const lg=mk('g',{class:'ent','data-id':'ligne',tabindex:0,role:'button','aria-label':'Bouées de ligne'});
 [sA,sB].forEach(p=>lg.appendChild(mk('rect',{class:'hl',x:p[0]-7,y:p[1]-7,width:14,height:14,rx:3,fill:'var(--ivoire)',stroke:'var(--nuit)','stroke-width':2})));
 gm.appendChild(lg);bindEnt(lg);
@@ -1257,10 +1263,10 @@ gm.appendChild(lg);bindEnt(lg);
 /* ---------- Bateaux ---------- */
 function route(i){
   const s=i%2?1:-1,j=(i-2.5)*7;
-  const uv=[[.13*L,j*3],[.38*L,s*120+j],[.62*L,-s*112+j],[.86*L,s*70+j],[L+16,-14],[L-4,18],[.62*L,-s*80+j],[.3*L,s*70+j],[26,(i%2?30:-30)+6],[-14,i%2?30:-30],[.05*L,j*2]];
+  const uv=[[.24*L,j*3],[.38*L,s*120+j],[.62*L,-s*112+j],[.86*L,s*70+j],[L+16,-14],[L-4,18],[.62*L,-s*80+j],[.3*L,s*70+j],[26,(i%2?30:-30)+6],[-14,i%2?30:-30],[.14*L,j*2]];
   const pts=uv.map(([u,v])=>T(u,v*K));
   const segs=[];let tot=0;
-  for(let k=0;k<pts.length;k++){const a=pts[k],b=pts[(k+1)%pts.length];const ua=uv[k][0],ub=uv[(k+1)%uv.length][0];const len=Math.hypot(b[0]-a[0],b[1]-a[1]);const sp=ub>ua?36:56;const dt=len/sp;segs.push({a,b,t0:tot,dt});tot+=dt}
+  for(let k=0;k<pts.length;k++){const a=pts[k],b=pts[(k+1)%pts.length];const ua=uv[k][0],ub=uv[(k+1)%uv.length][0];const len=Math.hypot(b[0]-a[0],b[1]-a[1]);const sp=ub>ua?20:30;const dt=len/sp;segs.push({a,b,t0:tot,dt});tot+=dt}
   return {segs,tot};
 }
 const colors=['--b1','--b2','--b3','--b4','--b5','--b6'];
@@ -1275,29 +1281,29 @@ for(let i=0;i<6;i++){
 }
 document.querySelectorAll('svg .ent[data-id]').forEach(g=>{if(!g.dataset.bound&&g.closest('#marks')==null&&g.closest('#boats')==null){bindEnt(g)}});
 
-const P={pc:[782,95],gw:[842,110],cloud:[432,464],rtk:[705,82],teams:[[912,104],[944,104],[976,104]],pub:[540,458]};
-const layers={g4:true,radio:false,teams:true,rtk:false,cmd:true};
+const P={pc:[850,87],gw:[935,64],cloud:[937,318],rtk:[760,84],teams:[[1001,96],[1033,96],[1065,96]],pub:[1080,317]};
+const layers={g4:true,radio:false,teams:true,rtk:false,cmd:false};
 document.querySelectorAll('[data-layer]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.layer;layers[k]=!layers[k];b.setAttribute('aria-pressed',layers[k])}));
 const packets=[];
-function spawn(path,col,dur){const c=mk('circle',{r:3.2,fill:col});$('#packets').appendChild(c);packets.push({path,dur,t:0,c})}
+function spawn(path,col,dur){const c=mk('circle',{r:4,fill:col,stroke:'#fff','stroke-width':1});$('#packets').appendChild(c);packets.push({path,dur,t:0,c})}
 function lp(path,u){const n=path.length-1;const f=Math.min(u*n,n-1e-6);const k=Math.floor(f);const s=f-k;const a=path[k],b=path[k+1];return [a[0]+(b[0]-a[0])*s,a[1]+(b[1]-a[1])*s]}
 function at(b,time){const r=b.r;const tt=(time+b.off)%r.tot;let sg=r.segs[0];for(const s of r.segs){if(tt>=s.t0&&tt<s.t0+s.dt){sg=s;break}}const u=(tt-sg.t0)/sg.dt;return {p:[sg.a[0]+(sg.b[0]-sg.a[0])*u,sg.a[1]+(sg.b[1]-sg.a[1])*u],h:Math.atan2(sg.b[1]-sg.a[1],sg.b[0]-sg.a[0])*180/Math.PI+90}}
 let nC=.3,cmdI=0;
 let simT=0,last=null,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,nT=0,nR=.5;
-function place(){boats.forEach(b=>{const s=at(b,simT);b.pos=s.p;b.g.setAttribute('transform',`translate(${s.p[0].toFixed(1)} ${s.p[1].toFixed(1)}) rotate(${s.h.toFixed(1)})`);b.t.setAttribute('transform',`rotate(${(-s.h).toFixed(1)})`);b.hist.push(s.p);if(b.hist.length>45)b.hist.shift();b.trail.setAttribute('points',b.hist.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' '))})}
+function place(){boats.forEach(b=>{const s=at(b,simT);b.pos=s.p;b.g.setAttribute('transform',`translate(${s.p[0].toFixed(1)} ${s.p[1].toFixed(1)}) rotate(${s.h.toFixed(1)})`);b.t.setAttribute('transform',`rotate(${(-s.h).toFixed(1)})`);b.hist.push(s.p);if(b.hist.length>60)b.hist.shift();b.trail.setAttribute('points',b.hist.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' '))})}
 function step(dt){
   simT+=dt;place();
   boats.forEach(b=>{
-    if(simT>=b.n4){b.n4=simT+1.6;if(layers.g4)spawn([b.pos.slice(),P.cloud,P.pc],'#6F8C00',1.7)}
-    if(simT>=b.nr){b.nr=simT+2.4;if(layers.radio)spawn([b.pos.slice(),P.gw],'#B8902F',.9)}
+    if(simT>=b.n4){b.n4=simT+4;if(layers.g4)spawn([b.pos.slice(),P.cloud,P.pc],'#6F8C00',3.2)}
+    if(simT>=b.nr){b.nr=simT+5;if(layers.radio)spawn([b.pos.slice(),P.gw],'#B8902F',2.2)}
   });
-  if(simT>=nT){nT=simT+.9;if(layers.teams){P.teams.forEach(t=>spawn([P.pc,t],'#3E9A63',.7));spawn([P.pc,P.cloud,P.pub],'#3E9A63',1.4)}}
-  if(simT>=nC){nC=simT+1.3;if(layers.cmd){const b=boats[cmdI%boats.length];cmdI++;const t=P.teams[cmdI%3];spawn([t,[t[0]-40,t[1]+60],b.pos.slice()],'#D0704A',1.5)}}
-  if(simT>=nR){nR=simT+2;if(layers.rtk){spawn([P.rtk,P.pc,P.cloud],'#43B3A3',1);boats.forEach(b=>spawn([P.cloud,b.pos.slice()],'#43B3A3',1.3))}}
+  if(simT>=nT){nT=simT+3;if(layers.teams){P.teams.forEach(t=>spawn([P.pc,t],'#3E9A63',1.4));spawn([P.pc,P.cloud,P.pub],'#3E9A63',2.6)}}
+  if(simT>=nC){nC=simT+3.5;if(layers.cmd){const b=boats[cmdI%boats.length];cmdI++;const t=P.teams[cmdI%3];spawn([t,[t[0]-60,t[1]+90],b.pos.slice()],'#D0704A',3)}}
+  if(simT>=nR){nR=simT+5;if(layers.rtk){spawn([P.rtk,P.pc,P.cloud],'#43B3A3',2);boats.forEach(b=>spawn([P.cloud,b.pos.slice()],'#43B3A3',2.6))}}
   for(let i=packets.length-1;i>=0;i--){const k=packets[i];k.t+=dt;const u=k.t/k.dur;if(u>=1){k.c.remove();packets.splice(i,1);continue}const p=lp(k.path,u);k.c.setAttribute('cx',p[0].toFixed(1));k.c.setAttribute('cy',p[1].toFixed(1))}
 }
 for(let k=0;k<45;k++){simT+=.12;place()}
-function loop(ts){if(last==null)last=ts;const dt=Math.min(.05,(ts-last)/1000);last=ts;if(playing)step(dt*2.2);requestAnimationFrame(loop)}
+function loop(ts){if(last==null)last=ts;const dt=Math.min(.05,(ts-last)/1000);last=ts;if(playing)step(dt);requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 const pb=$('#playBtn');const pbl=()=>{pb.textContent=playing?'Pause':'Lecture';pb.setAttribute('aria-pressed',String(playing))};pbl();
 pb.addEventListener('click',()=>{playing=!playing;last=null;pbl()});
