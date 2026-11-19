@@ -11,4 +11,4 @@ Système de suivi, d'arbitrage, d'analyse du vent et de diffusion publique pour 
 - [Matériel retenu](docs/materiel.md) : chaque référence, pourquoi ce choix, fiches techniques et avis.
 - [En clair, succès et risques](docs/en-clair-succes-risques.md) : le principe, nos choix expliqués, les clés du succès, ce qui peut foirer, le glossaire.
 - [Cahier des charges des ordinateurs](docs/ordinateurs.md) : serveurs du PC course, régie, consoles, poste de contrôle, tablette, conseils aux équipes.
-- [Questionnaire de cadrage](docs/questionnaire-cadrage.md) : version texte ; version en ligne avec synthèse des réponses : https://claude.ai/artifact/3Rptt8qEEj8RZNbjrp4K1W
+- [Postulats de départ](docs/postulats.md) : le paramétrage initial du projet, actés ou à confirmer.
