@@ -595,6 +595,9 @@ body.simple .tech{display:none}
 .pr.tbc .pstat{background:#F4E7C8;color:#7A5A12}
 .pstfoot{font-size:13px;color:var(--ivoire-3)}
 @media (max-width:640px){.pr{grid-template-columns:minmax(0,1fr)}.pid{padding:0}}
+.popt{font:600 12px var(--f-titre);fill:#B0532E;paint-order:stroke;stroke:#fff;stroke-width:3px;animation:popf 2.2s var(--ease) forwards}
+@keyframes popf{0%{opacity:0}12%{opacity:1}75%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.popt{animation:none}}
 </style>
 
 <div class="grain" aria-hidden="true"></div>
@@ -676,7 +679,7 @@ body.simple .tech{display:none}
           <button class="chip on" type="button" data-layer="g4" aria-pressed="true"><span class="d" style="background:var(--lime)"></span>Positions 4G</button>
           <button class="chip on" type="button" data-layer="radio" aria-pressed="false"><span class="d" style="background:#B8902F"></span>Radio de secours</button>
           <button class="chip on" type="button" data-layer="teams" aria-pressed="true"><span class="d" style="background:#8FD18A"></span>Redistribution</button>
-          <button class="chip on" type="button" data-layer="cmd" aria-pressed="false"><span class="d" style="background:#D0704A"></span>Consignes des équipes</button>
+          <button class="chip on" type="button" data-layer="cmd" aria-pressed="true"><span class="d" style="background:#D0704A"></span>Décisions tactiques (équipes → bateaux)</button>
           <button class="chip on" type="button" data-layer="rtk" aria-pressed="false"><span class="d" style="background:#43B3A3"></span>Corrections RTK</button>
           <button class="chip play" type="button" id="playBtn" aria-pressed="true">Pause</button>
         </div>
@@ -716,6 +719,7 @@ body.simple .tech{display:none}
           <!-- Internet -->
           <rect x="840" y="262" width="320" height="118" rx="18" fill="rgba(255,255,255,.55)" stroke="var(--ivoire-3)" stroke-dasharray="5 5"/>
           <text class="sub" x="858" y="284">sur Internet</text>
+          <g id="cmdLine" class="cmdline"><path d="M1010 112 C 960 230, 700 260, 430 222" fill="none" stroke="#D0704A" stroke-width="1.6" stroke-dasharray="2 7" stroke-linecap="round"/><text class="sub" x="760" y="252" style="fill:#B0532E">décisions tactiques des équipes</text></g>
           <g id="courseLines"></g>
           <g id="trails"></g>
           <g id="packets"></g>
@@ -1335,10 +1339,12 @@ for(let i=0;i<6;i++){
 document.querySelectorAll('svg .ent[data-id]').forEach(g=>{if(!g.dataset.bound&&g.closest('#marks')==null&&g.closest('#boats')==null){bindEnt(g)}});
 
 const P={pc:[850,87],gw:[935,64],cloud:[937,318],rtk:[760,84],teams:[[1001,96],[1033,96],[1065,96]],pub:[1080,317]};
-const layers={g4:true,radio:false,teams:true,rtk:false,cmd:false};
-document.querySelectorAll('[data-layer]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.layer;layers[k]=!layers[k];b.setAttribute('aria-pressed',layers[k])}));
+const layers={g4:true,radio:false,teams:true,rtk:false,cmd:true};
+document.querySelectorAll('[data-layer]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.layer;layers[k]=!layers[k];b.setAttribute('aria-pressed',layers[k]);if(k==='cmd')$('#cmdLine').style.display=layers.cmd?'':'none'}));
 const packets=[];
-function spawn(path,col,dur){const c=mk('circle',{r:4,fill:col,stroke:'#fff','stroke-width':1});$('#packets').appendChild(c);packets.push({path,dur,t:0,c})}
+function spawn(path,col,dur,tb,lbl){const c=mk('circle',{r:4,fill:col,stroke:'#fff','stroke-width':1});$('#packets').appendChild(c);packets.push({path,dur,t:0,c,tb,lbl})}
+const ORDRES=['vire','empanne','cap 245°','borde','lofe','abat','vise la porte gauche','attends la risée'];
+function pop(b,txt){const g=mk('text',{class:'popt',x:(b.pos[0]+12).toFixed(1),y:(b.pos[1]-14).toFixed(1)});g.textContent=txt;$('#packets').appendChild(g);setTimeout(()=>g.remove(),2200)}
 function lp(path,u){const n=path.length-1;const f=Math.min(u*n,n-1e-6);const k=Math.floor(f);const s=f-k;const a=path[k],b=path[k+1];return [a[0]+(b[0]-a[0])*s,a[1]+(b[1]-a[1])*s]}
 function at(b,time){const r=b.r;const tt=(time+b.off)%r.tot;let sg=r.segs[0];for(const s of r.segs){if(tt>=s.t0&&tt<s.t0+s.dt){sg=s;break}}const u=(tt-sg.t0)/sg.dt;return {p:[sg.a[0]+(sg.b[0]-sg.a[0])*u,sg.a[1]+(sg.b[1]-sg.a[1])*u],h:Math.atan2(sg.b[1]-sg.a[1],sg.b[0]-sg.a[0])*180/Math.PI+90}}
 let nC=.3,cmdI=0;
@@ -1351,9 +1357,9 @@ function step(dt){
     if(simT>=b.nr){b.nr=simT+5;if(layers.radio)spawn([b.pos.slice(),P.gw],'#B8902F',2.2)}
   });
   if(simT>=nT){nT=simT+3;if(layers.teams){P.teams.forEach(t=>spawn([P.pc,t],'#3E9A63',1.4));spawn([P.pc,P.cloud,P.pub],'#3E9A63',2.6)}}
-  if(simT>=nC){nC=simT+3.5;if(layers.cmd){const b=boats[cmdI%boats.length];cmdI++;const t=P.teams[cmdI%3];spawn([t,[t[0]-60,t[1]+90],b.pos.slice()],'#D0704A',3)}}
+  if(simT>=nC){nC=simT+2.2;if(layers.cmd){const b=boats[cmdI%boats.length];cmdI++;const t=P.teams[cmdI%3];spawn([t,[t[0]-80,t[1]+110],b.pos.slice()],'#D0704A',2.6,b,ORDRES[(cmdI*3)%ORDRES.length])}}
   if(simT>=nR){nR=simT+5;if(layers.rtk){spawn([P.rtk,P.pc,P.cloud],'#43B3A3',2);boats.forEach(b=>spawn([P.cloud,b.pos.slice()],'#43B3A3',2.6))}}
-  for(let i=packets.length-1;i>=0;i--){const k=packets[i];k.t+=dt;const u=k.t/k.dur;if(u>=1){k.c.remove();packets.splice(i,1);continue}const p=lp(k.path,u);k.c.setAttribute('cx',p[0].toFixed(1));k.c.setAttribute('cy',p[1].toFixed(1))}
+  for(let i=packets.length-1;i>=0;i--){const k=packets[i];k.t+=dt;const u=k.t/k.dur;if(k.tb)k.path[k.path.length-1]=k.tb.pos.slice();if(u>=1){k.c.remove();if(k.tb&&k.lbl)pop(k.tb,k.lbl);packets.splice(i,1);continue}const p=lp(k.path,u);k.c.setAttribute('cx',p[0].toFixed(1));k.c.setAttribute('cy',p[1].toFixed(1))}
 }
 for(let k=0;k<45;k++){simT+=.12;place()}
 function loop(ts){if(last==null)last=ts;const dt=Math.min(.05,(ts-last)/1000);last=ts;if(playing)step(dt);requestAnimationFrame(loop)}
