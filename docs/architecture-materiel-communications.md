@@ -1,4 +1,4 @@
-# AIregatta — Matériel et communications
+# AI Regatta — Matériel et communications
 
 > Version 0.1, 19 novembre 2026. Complète l'[étude préalable](etude-prealable.md).
 > Les prix sont des prix publics constatés fin 2026, TTC, en ordre de grandeur. Ils varient selon le revendeur et le pack.

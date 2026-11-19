@@ -1,4 +1,4 @@
-# AIregatta — Étude préalable
+# AI Regatta — Étude préalable
 ## Régate de voiliers drones, Toulon, mai 2027
 
 > Version 0.1, 19 novembre 2026. Document de travail, à relire avec l'organisation et quelques compétiteurs.
@@ -65,7 +65,7 @@
 
 SailGP sert de modèle sur la façon de traiter la donnée, pas sur le budget. On en retient ce qu'on peut transposer :
 
-| Chez SailGP | Transposition AIregatta |
+| Chez SailGP | Transposition AI Regatta |
 |---|---|
 | Bateaux monotypes, données centralisées et identiques pour tous | Balise officielle commune, données de course diffusées à l'identique à toutes les équipes |
 | Positionnement très précis, limites de parcours virtuelles | GNSS RTK centimétrique, limites et ligne de départ virtuelles dans le moteur de course |
@@ -477,7 +477,7 @@ Pistes pour réduire la facture : développement interne ou en partenariat avec 
 
 ```mermaid
 gantt
-  title AIregatta — plan de marche
+  title AI Regatta — plan de marche
   dateFormat YYYY-MM-DD
   axisFormat %b
   section Cadrage
