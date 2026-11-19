@@ -17,6 +17,37 @@
 - **La position de chaque bateau est fournie par une balise officielle** identique pour tous, fournie et fixée par l'organisation (option A, décidée le 19 novembre 2026). Les positions envoyées par l'électronique des équipes ne servent ni au suivi, ni au classement, ni à l'arbitrage.
 - **Pas de sortie de données de la balise officielle vers l'électronique des équipes** : chaque équipe a son propre GPS et sa propre liaison avec son bateau. La balise officielle ne sert qu'à l'organisation (suivi, classement, arbitrage).
 
+## Décisions du 20 novembre 2026
+
+- **Lieu** : anse du Mourillon, entre le Fort Saint-Louis et la petite digue de l'anse Mistral (43,107199 N, 5,941540 E). Le parcours fera **environ 300 m** de long.
+- **Dates** : du 12 au 16 mai 2027, sans jour de réserve.
+- **Balise** : à l'intérieur du bateau si possible (voir la note sur les coques en carbone au §4.1).
+- **Caméras** : 12 m de hauteur au maximum.
+- **Bouées** : ancrées (pas de bouées robotisées), avec mesure du vent.
+- **Sécurité** : assurée par des bateaux d'assistance. La reprise en main à distance n'est pas obligatoire.
+- **Équité** : toutes les équipes reçoivent exactement les mêmes informations de positionnement, par le flux officiel. Pas de partage séparé des corrections RTK.
+- **Équipes** : toutes sur place. Pas de miroir cloud du flux équipes.
+- **Pas d'assistant tactique fourni** : la tactique est le rôle des équipes.
+- **Public** : sur place, et application PWA (iPhone, ordinateur). Commentateur humain en français.
+- **Règles de course et arbitrage** : à définir plus tard, arbitrage probablement en temps réel à terre.
+- **Logiciel non open source.**
+
+### La foule peut-elle gêner la 4G ?
+
+Oui, c'est un risque réel. Tous les téléphones du public partagent la même antenne relais que les balises. Quand des centaines de personnes envoient des vidéos ou regardent l'application au même endroit, l'antenne sature, surtout en émission (du téléphone vers l'antenne) : la latence monte de quelques dizaines de millisecondes à plusieurs secondes, et des paquets se perdent.
+
+Ce qui joue en notre faveur : les balises envoient très peu de données (environ 0,4 ko/s chacune) et en petits paquets UDP, qui passent mieux que la vidéo. À quelques centaines de spectateurs, le risque est modéré ; à plusieurs milliers, il devient fort.
+
+Parades prévues ou proposées :
+1. **La radio privée 868 MHz n'est pas touchée par la foule** : elle prend le relais à 2 positions par seconde, sans rien faire.
+2. **SIM multi-opérateurs** : la balise bascule sur un autre réseau si le sien sature.
+3. **Mesure en conditions réelles** : tester les balises un week-end ensoleillé d'avril, plage du Mourillon pleine.
+4. **Option à tester : Wi-Fi longue portée de l'ESP32** (mode « LR » intégré à la puce de la balise, sans surcoût). À 300 m, une borne au PC course pourrait servir de chemin principal privé. La bande 2,4 GHz est elle aussi encombrée par les téléphones, d'où l'intérêt de la tester avant de décider.
+5. **Ne pas faire passer le flux équipes par la 4G** : il passe déjà par câble sur le site.
+6. **Pour le public sur place, prévoir une application légère** (positions seulement, la vidéo à part) et, si le budget le permet, un Wi-Fi public au village.
+
+---
+
 ## Principe central : le flux des positions
 
 ```mermaid
@@ -170,6 +201,8 @@ flowchart TB
 | Boîtier | Boîtier ABS IP67 (gamme Hammond 1554 ou équivalent) + traversées SMA + presse-étoupe + interrupteur magnétique (ILS) | ≈ 25 € | Boîtier imprimé en ASA avec joint torique |
 | Connecteur de charge | Connecteur étanche M8 | ≈ 10 € | — |
 | **Total par balise** | | **≈ 380–450 €** | |
+
+**Balise à l'intérieur du bateau** : le GPS et la 4G traversent sans problème une coque ou un pont en fibre de verre, en bois ou en plastique. **Le carbone bloque les ondes** : sur un bateau en carbone, l'antenne GPS doit sortir sur le pont (antenne plate collée, câble vers la balise) **[À TESTER dès le prototype, sur un vrai bateau]**.
 
 **Consommation estimée** : environ 1,2 W en moyenne (4G active, GNSS, radio en émission 1 % du temps). Avec 25 Wh, cela donne **une vingtaine d'heures**, avec une large marge sur une journée de course **[À TESTER]**.
 
