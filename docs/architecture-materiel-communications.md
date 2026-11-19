@@ -14,6 +14,7 @@
 - **Moins de 10 bateaux.** Une balise de 250 g est acceptable.
 - **Distance maximale PC course ↔ parcours : 500 m.**
 - **Électricité et Internet filaire disponibles** sur le site.
+- **La position de chaque bateau est fournie par une balise officielle** identique pour tous, fournie et fixée par l'organisation (option A, décidée le 19 novembre 2026). Les positions envoyées par l'électronique des équipes ne servent ni au suivi, ni au classement, ni à l'arbitrage.
 - **Pas de sortie de données de la balise officielle vers l'électronique des équipes** : chaque équipe a son propre GPS et sa propre liaison avec son bateau. La balise officielle ne sert qu'à l'organisation (suivi, classement, arbitrage).
 
 ## Principe central : le flux des positions
