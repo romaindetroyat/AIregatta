@@ -68,8 +68,8 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 .mnorth{position:absolute;right:12px;top:12px;z-index:2;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.95);color:var(--texte);font:700 10px var(--f-texte);box-shadow:0 4px 14px -6px rgba(15,23,42,.25)}
 
 /* Spectateur */
-.pub{display:grid;grid-template-columns:minmax(0,1fr) 392px minmax(0,1fr);gap:28px;align-items:start}
-.phone{width:min(392px,100%);margin:0 auto;height:clamp(480px,calc(100vh - 212px),800px);border-radius:54px;padding:10px;background:#fff;box-shadow:0 0 0 1px rgba(15,23,42,.08),0 40px 80px -30px rgba(15,23,42,.35)}
+.pub{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:28px;align-items:start}
+.phone{margin:0 auto;width:392px;height:800px;zoom:var(--pz,1);border-radius:54px;padding:10px;background:#fff;box-shadow:0 0 0 1px rgba(15,23,42,.08),0 40px 80px -30px rgba(15,23,42,.35)}
 .scr{position:relative;height:100%;border-radius:44px;overflow:hidden;background:#F5F8FC;display:flex;flex-direction:column}
 .toast{position:absolute;left:10px;right:10px;top:10px;z-index:5;display:flex;gap:10px;align-items:center;padding:12px 14px;border-radius:20px;background:rgba(255,255,255,.96);color:var(--texte);box-shadow:0 18px 40px -14px rgba(15,23,42,.35);transform:translateY(-140%);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
 .toast.on{transform:none}
@@ -207,10 +207,13 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 .stop.arm{background:var(--alerte);color:#fff;box-shadow:0 10px 24px -10px rgba(244,63,94,.8)}
 .stop:disabled{opacity:.5;cursor:not-allowed}
 
-@media (max-width:1180px){.pub{grid-template-columns:minmax(0,1fr) 392px}.pub .col:last-child{grid-column:1/-1}}
+@media (max-width:1180px){.pub{grid-template-columns:minmax(0,1fr) auto}.pub .col:last-child{grid-column:1/-1}}
 @media (max-width:1100px){.com{grid-template-columns:minmax(0,1fr)}.rvbox{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:820px){.pub{grid-template-columns:minmax(0,1fr)}.pub .phone{order:-1}.notifs{max-height:none}}
-@media (max-width:560px){.phone{height:740px}.roles{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}.roles button{flex:none;padding:0 12px}.phone{height:760px}.stat4{grid-template-columns:repeat(2,minmax(0,1fr))}.top .brand span{display:none}}
+@media (max-width:560px){.roles{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}.roles button{flex:none;padding:0 12px}.stat4{grid-template-columns:repeat(2,minmax(0,1fr))}.top .brand span{display:none}}
+/* Intégré dans le document : téléphone en taille réelle, hauteur du cadre ajustée au contenu */
+.embed .notifs{max-height:760px}
+.embed .com>.map{height:780px!important}
 @media (prefers-reduced-motion:reduce){.toast,.ord.new{transition:none;animation:none}}
 </style>
 
@@ -656,9 +659,9 @@ function openReplay(id){const a=sim.alerts.find(x=>x.id===id);if(!a)return;const
   $('#rvConcl').innerHTML=`<b>Ce que montre le rejeu</b>${esc(info.concl)}<em>Proposition : ${esc(info.prop)}</em>`;
   const B=a.boats[0],dec=a.ocs?[['recall','Rappeler '+B,'Pavillon X, corne, tout le monde prévenu',1],['none','Départ correct','L’alerte est classée']]:[['pen','Pénalité '+B,'Un tour sur lui-même, tout de suite',1],['time','+20 s à '+B,'Pénalité en temps à l’arrivée'],['none','Sans suite','Pas de faute'],['jury','Jury','Décision après la manche']];
   $('#rvDec').innerHTML=dec.map(d=>`<button type="button" class="dec${d[3]?' pri':''}" data-d="${a.id}" data-w="${d[0]}"><b>${esc(d[1])}</b><span>${d[2]}</span></button>`).join('');
-  $('#rv').hidden=false;requestAnimationFrame(()=>{renderRv();$('#rvClose').focus()})}
+  $('#rv').hidden=false;if(EMB)try{parent.postMessage({airProtoFocus:1},'*')}catch(e){}requestAnimationFrame(()=>{renderRv();$('#rvClose').focus()})}
 function closeReplay(){RV=null;$('#rv').hidden=true}
-function renderAll(force){$('#clk').textContent=fmt(T);slow++;
+function renderAll(force){$('#clk').textContent=fmt(T);slow++;if(force&&typeof postH==='function')requestAnimationFrame(postH);
   const el=document.querySelector('#v-'+role+' [data-map]');if(el)drawMap(el);
   if(role==='pub')renderPub(force);else if(role==='com')renderCom(force);else if(role==='tv')renderTv();else renderEq(force)}
 
@@ -671,6 +674,10 @@ function loop(now){const dt=Math.min(.1,(now-last)/1000);last=now;
   requestAnimationFrame(loop)}
 
 /* ================= Interactions ================= */
+const EMB=window.parent!==window;if(EMB)document.documentElement.classList.add('embed');
+function fitPhone(){const el=document.querySelector('.phone');if(!el)return;let z=EMB?1:Math.min(1,Math.max(.6,(innerHeight-212)/800));if(innerWidth<=560)z=Math.min(1,(innerWidth-32)/392);el.style.setProperty('--pz',z.toFixed(3))}
+fitPhone();
+let lastH=0;function postH(){if(!EMB)return;const h=Math.ceil(document.body.offsetHeight);if(Math.abs(h-lastH)>2){lastH=h;try{parent.postMessage({airProtoH:h},'*')}catch(e){}}}
 $$('[data-map]').forEach(setupMap);
 $$('.roles [data-v]').forEach(b=>b.addEventListener('click',()=>{role=b.dataset.v;$$('.roles [data-v]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));['pub','com','tv','eq'].forEach(v=>$('#v-'+v).hidden=v!==role);try{localStorage.setItem('air-role',role)}catch(e){}renderAll(true)}));
 $$('[data-sp]').forEach(b=>b.addEventListener('click',()=>{speed=+b.dataset.sp;$$('[data-sp]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))}));
@@ -695,7 +702,8 @@ $('#rvClose').addEventListener('click',closeReplay);
 $('#rvSteps').addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(!b||!RV)return;RV.play=false;RV.t=Math.max(RV.t0,Math.min(RV.t1,+b.dataset.t));renderRv()});
 $('#rv').addEventListener('click',e=>{if(e.target.id==='rv')closeReplay()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&RV)closeReplay()});
-addEventListener('resize',()=>renderAll(true));
+addEventListener('resize',()=>{fitPhone();renderAll(true)});
+if(document.fonts)document.fonts.ready.then(postH);setInterval(postH,1500);
 
 try{const v=localStorage.getItem('air-role');if(v&&v!=='pub'){const b=document.querySelector('.roles [data-v="'+v+'"]');if(b)b.click()}}catch(e){}
 renderAll(true);requestAnimationFrame(loop);
