@@ -170,7 +170,7 @@ Les équipes développent leur propre logiciel. L’organisation fournit les don
 | Par quels connecteurs ? | MQTT (conseillé), WebSocket, NMEA 0183 / AIS, fichiers de rejeu ; bac à sable cloud dès janvier | [equipes/connecteurs.md](equipes/connecteurs.md) |
 | Comment intégrer les données ? | Abonnement aux sujets, schémas JSON, état de flotte reconstruit à partir des messages conservés, chrono calculé localement | [equipes/contrat-interface.md](equipes/contrat-interface.md), [exemples](equipes/exemples/) |
 | Comment parler à leur bateau ? | Par leur propre liaison (radio 433 MHz conseillée, 868 hors sous-bande réservée, 4G), vers un pilote automatique à bord | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
-| Que peuvent-ils transmettre ? | Les ordres tactiques (acté) : manœuvres (vire, empanne, abats, loffe, face au vent) et modes (près, portant, VMG, haut, bas) ; paramètres, relais des données officielles, barre à distance, mise à jour en course : à trancher | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
+| Que peuvent-ils transmettre ? | Les ordres tactiques (acté) : manœuvres (vire, empanne, abats, loffe, face au vent) et modes (près, portant, VMG, haut, bas) ; paramètres, relais des données officielles, mise à jour en course : à trancher ; barre à distance interdite en course (P38) | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
 
 ### Maquettes côté équipes
 
@@ -197,7 +197,7 @@ Les équipes développent leur propre logiciel. L’organisation fournit les don
 | D8 | Public | Vidéo et commentaire audio en v1 | Audio oui, vidéo en v2 |
 | D9 | Équipes | Paramètres d’ordre | Autoriser |
 | D10 | Équipes | Relais des données officielles vers le bateau | Autoriser |
-| D11 | Équipes | Barre à distance en course | Interdire, sauf sécurité |
+| D11 | Équipes | Barre à distance en course | **Acté le 20 novembre 2026 (P38)** : interdite en course, autorisée pour la sécurité |
 | D14 | Équipes | Radiocommande de sécurité 2,4 GHz obligatoire ? (§9 de l’architecture la dit obligatoire, P16 ne l’impose pas) | Conseillée, non obligatoire |
 | D12 | Équipes | Mise à jour du logiciel du bateau en course | Interdire pendant une manche |
 | D13 | Équipes | Ouverture du bac à sable | Janvier 2027 |
