@@ -44,9 +44,14 @@ Les références entre crochets renvoient aux [postulats](postulats.md) (P) et a
 
 ## 6. Règles de passage
 
-- **6.1** La partie 2 des RCV s’applique : un bateau tribord amures a priorité sur un bateau bâbord amures ; sous le vent sur au vent ; un bateau qui vire ou empanne s’écarte ; chacun évite le contact. [D1]
-- **6.2** Place à la bouée : dans la zone de 4 m, le bateau qui y est entré le premier, ou engagé à l’intérieur au moment où le premier y entre, a droit à la place pour passer la bouée. Le logiciel établit l’ordre d’entrée et l’engagement à partir des positions officielles. [D1]
-- **6.3** Le logiciel signale à l’arbitre tout rapprochement de deux bateaux à moins de 1 m, tout contact présumé et tout contact avec une bouée. Toucher une bouée entraîne une pénalité.
+- **6.1** **Bâbord et tribord** : un bateau bâbord amures (le vent arrive par sa gauche) s’écarte d’un bateau tribord amures (RCV 10). [D1]
+- **6.2** **Au vent et sous le vent** : deux bateaux engagés à la même amure, celui qui est au vent s’écarte de celui qui est sous le vent (RCV 11). [D1]
+- **6.3** **Route libre derrière** : deux bateaux non engagés à la même amure, celui qui est derrière s’écarte de celui qui est devant (RCV 12). Deux bateaux sont engagés quand aucun n’est entièrement derrière l’autre. [D1]
+- **6.4** **En virant** : entre le passage face au vent et sa nouvelle route au près, un bateau qui vire s’écarte des autres (RCV 13). [D1]
+- **6.5** **Éviter le contact** : chaque bateau, même prioritaire, évite le contact s’il le peut raisonnablement (RCV 14). [D1]
+- **6.6** **Place à la bouée** : dans la zone de 4 m, le bateau qui y est entré le premier, ou engagé à l’intérieur au moment où le premier y entre, a droit à la place pour passer la bouée (RCV 18). Le logiciel établit l’ordre d’entrée et l’engagement à partir des positions officielles. [D1]
+- **6.7** **Toucher une bouée** : un bateau qui touche une bouée fait un tour de pénalité (RCV 31). Le logiciel détecte la coque à moins de 0,75 m du centre de la bouée.
+- **6.8** Le logiciel signale à l’arbitre tout rapprochement de deux bateaux à moins de 1,5 m, la règle qui s’applique selon leurs amures, leur position et la zone, et le bateau qui devait s’écarter. L’arbitre décide.
 
 ## 7. Pénalités
 
