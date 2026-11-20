@@ -1,7 +1,7 @@
 <title>AI Regatta en direct</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:ital,wght@0,700;0,800&family=Funnel+Display:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
 /* Une seule course simulée, quatre regards : spectateur (téléphone), comité (console + rejeu d'arbitrage), télévision, équipe (console d'IA autonome). */
 :root{
@@ -10,7 +10,7 @@
   --nuit:#061210; --nuit-2:#0C1F1C; --nuit-3:#13302B; --clair:#EEF2E6; --clair-2:rgba(238,242,230,.74);
   --lime:#C7EB00; --lime-texte:#4A5C00; --sarcelle:#0E5A52;
   --rouge:#C2552A; --rouge-doux:#F7E0D4; --ia:#6E8BD6;
-  --f-titre:"Funnel Display",system-ui,sans-serif; --f-texte:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --f-logo:"Unbounded","Arial Black",system-ui,sans-serif; --f-titre:"Funnel Display",system-ui,sans-serif; --f-texte:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
   --ombre:0 1px 0 rgba(255,255,255,.7) inset,0 0 0 1px var(--filet),0 18px 40px -28px rgba(20,40,20,.35);
 }
 *{box-sizing:border-box}
@@ -26,6 +26,11 @@ button,input{font:inherit;color:inherit}
 .logo{display:flex;align-items:center;gap:10px}
 .logo b{font:600 19px var(--f-titre);letter-spacing:-.01em}
 .logo span{font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
+.airword{font:800 italic 19px/1 var(--f-logo);letter-spacing:-.01em;white-space:nowrap}
+.airword i{color:var(--lime)}
+.logo .airword{font:800 italic 19px/1 var(--f-logo);letter-spacing:-.01em;text-transform:none;color:var(--clair)}
+.logo .airword i{color:var(--lime)}
+.logomark{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:radial-gradient(120% 120% at 30% 10%,#1B4A44,#061210 70%);box-shadow:inset 0 0 0 1px rgba(238,242,230,.14)}
 .roles{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:15px;background:rgba(238,242,230,.07)}
 .roles button{display:flex;align-items:center;gap:8px;border:0;border-radius:11px;padding:8px 14px;min-height:42px;background:transparent;color:var(--clair-2);font-weight:600;cursor:pointer;transition:background .2s,color .2s}
 .roles button[aria-pressed="true"]{background:var(--lime);color:var(--nuit)}
@@ -208,9 +213,10 @@ td.n{font-family:var(--f-mono)}
 @media (prefers-reduced-motion:reduce){.toast{transition:none}.live::before,.act.urg{animation:none}}
 </style>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="airG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DCFF3A"/><stop offset=".55" stop-color="#C7EB00"/><stop offset="1" stop-color="#43B3A3"/></linearGradient><mask id="airCut"><rect width="64" height="64" fill="#fff"/><path d="M0 31 L64 27 L64 30.2 L0 34.2Z" fill="#000"/></mask><symbol id="airMark" viewBox="0 0 64 64"><g transform="skewX(-12) translate(7 0)"><g mask="url(#airCut)"><path d="M31 5 L31 42 L9 42 Z" fill="url(#airG)"/><path d="M34.5 13 L34.5 42 L50 42 Z" fill="#EEF2E6"/></g><path d="M6 45 L56 45 L51 50.5 L10 50.5 Z" fill="#EEF2E6"/><path d="M30 50.5 L30 57 M23 57.5 L38 57.5" stroke="#C7EB00" stroke-width="2.6" stroke-linecap="round"/><circle cx="31" cy="5" r="3.2" fill="#061210" stroke="#C7EB00" stroke-width="2"/></g><path d="M2 61 L20 61 M44 61 L62 61" stroke="#43B3A3" stroke-width="1.6" stroke-linecap="round" opacity=".8"/></symbol></defs></svg>
 <div class="wrap">
 <header class="appbar">
-  <div class="logo"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="10" fill="#C7EB00"/><path d="M17 6 L17 26 M17 7 C22 12 24 18 24 24 L17 24 Z" fill="#061210" stroke="#061210" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 27 C13 29 21 29 26 27" stroke="#061210" stroke-width="2" fill="none" stroke-linecap="round"/></svg><div><b>AI Regatta</b><br><span>prototype en direct</span></div></div>
+  <div class="logo"><span class="logomark"><svg width="32" height="32" aria-hidden="true"><use href="#airMark"/></svg></span><div><span class="airword"><i>AI</i> REGATTA</span><br><span>prototype en direct</span></div></div>
   <nav class="roles" role="group" aria-label="Choisir qui regarde">
     <button type="button" data-v="public" aria-pressed="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>Spectateur</button>
     <button type="button" data-v="comite" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>Comité de course</button>
@@ -232,9 +238,9 @@ td.n{font-family:var(--f-mono)}
 <section class="view" id="v-public">
   <div class="pub">
     <div class="device"><div class="scr">
-      <div class="toast" id="toast" role="status" aria-live="polite"><span class="ap"><svg width="22" height="22" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 6 L17 26 M17 7 C22 12 24 18 24 24 L17 24 Z" fill="#C7EB00" stroke="#C7EB00" stroke-width="1.6" stroke-linejoin="round"/></svg></span><div><b id="toastT"></b><span id="toastB"></span></div><small>maintenant</small></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"><span class="ap"><svg width="28" height="28" aria-hidden="true"><use href="#airMark"/></svg></span><div><b id="toastT"></b><span id="toastB"></span></div><small>maintenant</small></div>
       <div class="ph-top">
-        <div class="ph-row"><span class="ph-brand">AI Regatta</span><span class="live">EN DIRECT</span></div>
+        <div class="ph-row"><span class="ph-brand" style="display:flex;align-items:center;gap:8px"><svg width="24" height="24" aria-hidden="true"><use href="#airMark"/></svg><span class="airword" style="font-size:14px;color:var(--clair)"><i>AI</i> REGATTA</span></span><span class="live">EN DIRECT</span></div>
         <div class="ph-row" style="align-items:flex-end"><div><div class="ph-sub" id="pLeg">MANCHE 3</div><div class="ph-clk" id="pClock">−1:00</div></div>
           <div class="ph-wind"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g transform="rotate(180 12 12)"><path d="M12 3 L16 11 L12 9 L8 11Z" fill="#C7EB00"/><path d="M12 9V21" stroke="#C7EB00" stroke-width="2.4" stroke-linecap="round"/></g></svg>10,4 nds</div></div>
       </div>
@@ -575,7 +581,7 @@ function renderTV(){
   rk.forEach((o,i)=>{const [x,y]=P(o.st.x,o.st.y);s+=boat(x,y,o.st.hdg,34,o.b.c,{ink:'#051312',sw:2});
     const up=y>250;let tx=x+26,ty=up?y-58:y+18;for(let k=0;k<8;k++){const hit=placed.find(q=>Math.abs(q[0]-tx)<152&&Math.abs(q[1]-ty)<46);if(!hit)break;ty=up?hit[1]-48:hit[1]+48}placed.push([tx,ty]);
     s+=`<line x1="${x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${tx.toFixed(1)}" y2="${(up?ty+42:ty).toFixed(1)}" stroke="rgba(238,242,230,.45)" stroke-width="1.5"/><g transform="translate(${tx.toFixed(1)} ${ty.toFixed(1)})"><rect width="146" height="42" rx="10" fill="rgba(5,19,18,.88)" stroke="${o.b.c}" stroke-width="2"/><rect width="36" height="42" rx="10" fill="${o.b.c}"/><text x="18" y="28" text-anchor="middle" style="font:700 19px var(--f-titre)" fill="#051312">${t<0?'·':i+1}</text><text x="46" y="19" style="font:700 16px var(--f-titre)" fill="#EEF2E6">${o.b.id}</text><text x="46" y="35" style="font:500 12px var(--f-mono)" fill="rgba(238,242,230,.8)">${activePen(o.b,t)?'PÉNALITÉ':kn(o.st.sog)+' nds'}</text></g>`});
-  s+=`<g transform="translate(40 36)"><rect width="196" height="68" rx="14" fill="#C7EB00"/><text x="20" y="44" style="font:700 27px var(--f-titre)" fill="#051312">AI Regatta</text><rect x="196" width="270" height="68" fill="rgba(5,19,18,.92)"/><text x="216" y="28" style="font:600 12px var(--f-mono);letter-spacing:.14em" fill="rgba(238,242,230,.65)">MANCHE 3</text><text x="216" y="54" style="font:700 21px var(--f-titre)" fill="#EEF2E6">${LEGN[lead.st.leg]}</text><rect x="466" width="160" height="68" rx="14" fill="#051312"/><rect x="466" width="20" height="68" fill="#051312"/><text x="546" y="46" text-anchor="middle" style="font:700 33px var(--f-mono)" fill="#EEF2E6">${fmt(t)}</text></g>`;
+  s+=`<g transform="translate(40 36)"><rect width="196" height="68" rx="14" fill="#061210"/><use href="#airMark" x="8" y="6" width="56" height="56"/><text x="66" y="40" style="font:800 italic 14px var(--f-logo)" fill="#EEF2E6"><tspan fill="#C7EB00">AI</tspan> REGATTA</text><rect x="196" width="270" height="68" fill="rgba(5,19,18,.92)"/><text x="216" y="28" style="font:600 12px var(--f-mono);letter-spacing:.14em" fill="rgba(238,242,230,.65)">MANCHE 3</text><text x="216" y="54" style="font:700 21px var(--f-titre)" fill="#EEF2E6">${LEGN[lead.st.leg]}</text><rect x="466" width="160" height="68" rx="14" fill="#051312"/><rect x="466" width="20" height="68" fill="#051312"/><text x="546" y="46" text-anchor="middle" style="font:700 33px var(--f-mono)" fill="#EEF2E6">${fmt(t)}</text></g>`;
   s+=`<g transform="translate(1270 36)"><rect width="290" height="68" rx="14" fill="rgba(5,19,18,.9)"/><g transform="translate(38 34) rotate(180)"><circle r="24" fill="none" stroke="rgba(238,242,230,.22)" stroke-width="2"/><path d="M0 -20 L8 -3 L0 -7 L-8 -3Z" fill="#C7EB00"/><line y1="-7" y2="20" stroke="#C7EB00" stroke-width="4" stroke-linecap="round"/></g><text x="78" y="34" style="font:700 27px var(--f-mono)" fill="#EEF2E6">10,4 NDS</text><text x="78" y="55" style="font:500 12px var(--f-mono);letter-spacing:.1em" fill="rgba(238,242,230,.65)">SUD-EST · RAFALE 12,9</text></g>`;
   rk.forEach((o,i)=>{const y=122+i*50,prog=Math.max(0,Math.min(1,1-Math.max(0,o.rem)/TOTAL)),g=i===0||t<0?'':'+'+fr(gapS(o,lead).toFixed(1));
     s+=`<g transform="translate(1270 ${y})"><rect width="290" height="44" rx="10" fill="rgba(5,19,18,.88)"/><text x="24" y="29" text-anchor="middle" style="font:700 19px var(--f-titre)" fill="#EEF2E6">${t<0?'–':i+1}</text><rect x="44" y="9" width="7" height="26" rx="3" fill="${o.b.c}"/><text x="62" y="27" style="font:600 17px var(--f-titre)" fill="#EEF2E6">${o.b.name.length>12?o.b.id:o.b.name}</text><text x="276" y="27" text-anchor="end" style="font:500 15px var(--f-mono)" fill="rgba(238,242,230,.85)">${o.st.fin?'✓':g}</text><rect x="62" y="35" width="200" height="3" rx="1.5" fill="rgba(238,242,230,.1)"/><rect x="62" y="35" width="${(200*prog).toFixed(0)}" height="3" rx="1.5" fill="${o.b.c}"/></g>`});

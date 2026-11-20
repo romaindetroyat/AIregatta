@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AI Regatta">
+  <defs>
+    <linearGradient id="v" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DCFF3A"/><stop offset=".55" stop-color="#C7EB00"/><stop offset="1" stop-color="#43B3A3"/></linearGradient>
+    <mask id="cut"><rect width="64" height="64" fill="#fff"/><path d="M0 31 L64 27 L64 30.2 L0 34.2Z" fill="#000"/></mask>
+  </defs>
+  <g transform="skewX(-12) translate(7 0)">
+    <g mask="url(#cut)">
+      <path d="M31 5 L31 42 L9 42 Z" fill="url(#v)"/>
+      <path d="M34.5 13 L34.5 42 L50 42 Z" fill="#EEF2E6"/>
+    </g>
+    <path d="M6 45 L56 45 L51 50.5 L10 50.5 Z" fill="#EEF2E6"/>
+    <path d="M30 50.5 L30 57 M23 57.5 L38 57.5" stroke="#C7EB00" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="31" cy="5" r="3.2" fill="#061210" stroke="#C7EB00" stroke-width="2"/>
+  </g>
+  <path d="M2 61 L20 61" stroke="#43B3A3" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>
+  <path d="M44 61 L62 61" stroke="#43B3A3" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>
+</svg>
