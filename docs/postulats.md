@@ -25,7 +25,6 @@ Dernière mise à jour : 20 novembre 2026.
 | P10 | Pilotage des bateaux | Depuis le PC à terre de chaque équipe, par sa propre liaison, dans le respect du plan de fréquences | Acté |
 | P36 | Ordres tactiques des équipes | Vire, empanne, abats (bouée au vent passée), loffe (bouée sous le vent passée), face au vent, mode près, mode portant, mode VMG, mode haut, mode bas ; réglages à définir (choque, borde, cap) : envoyés en direct par chaque équipe à son bateau | Acté |
 | P37 | Intelligence tactique | IA tactique de chaque équipe à terre ; le pilote automatique exécute à bord. C’est bien un drone : personne à bord. Tout embarqué : pour 2028 | Acté |
-| P38 | Barre à distance | Barre à distance (commande directe du safran et des voiles) interdite en course ; autorisée seulement pour la sécurité (arrêt, dégagement, retour au ponton), signalée au comité | Acté |
 | P11 | Équité des informations | Toutes les équipes reçoivent les mêmes données au même instant : positions des bateaux et des bouées, vent, chrono | Acté |
 | P12 | Assistant tactique | Aucun fourni : la tactique est le travail des équipes | Acté |
 | P13 | Présence des équipes | Toutes sur place | Acté |
