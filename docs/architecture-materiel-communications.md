@@ -21,7 +21,7 @@
 
 ## Décisions du 20 novembre 2026
 
-- **Lieu** : anse du Mourillon, entre le Fort Saint-Louis et la petite digue de l'anse Mistral (43,107199 N, 5,941540 E). Le parcours fera **environ 300 m** de long.
+- **Lieu** : anse du Mourillon, entre le Fort Saint-Louis et la petite digue de l'anse Mistral (43,107199 N, 5,941540 E). Le parcours fera **environ 200 m** de long (longueur retenue, à valider).
 - **Dates** : du 12 au 16 mai 2027, sans jour de réserve.
 - **Balise** : à l'intérieur du bateau si possible (voir la note sur les coques en carbone au §4.1).
 - **Caméras** : 12 m de hauteur au maximum.

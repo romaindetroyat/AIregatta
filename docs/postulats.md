@@ -11,7 +11,7 @@ Dernière mise à jour : 20 novembre 2026.
 | P01 | Nom de l’événement | AI Regatta | Acté |
 | P02 | Dates | Du 12 au 16 mai 2027, sans jour de réserve | Acté |
 | P03 | Lieu | Anse du Mourillon, Toulon ; zone resserrée près de la côte nord | Acté |
-| P04 | Parcours | ≈ 140 m, avec du près et du portant ; orienté selon le vent du jour | Acté |
+| P04 | Parcours | ≈ 200 m, avec du près et du portant ; orienté selon le vent du jour (longueur retenue pour tous les calculs, à valider) | À confirmer |
 | P05 | Réglementation du plan d’eau | Plan d’eau validé ; démarches hors du périmètre de ce dossier | Acté |
 
 ## Bateaux et équipes
