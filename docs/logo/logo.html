@@ -1,80 +1,103 @@
 <title>Logo AI Regatta</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:ital,wght@0,600;0,700;0,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Unbounded:ital,wght@0,700;0,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Planche de logo, deuxième série : formes abstraites en mouvement. Chaque piste : grand lockup, version claire, icône, mises en situation. */
-:root{color-scheme:dark;--nuit:#061210;--nuit-2:#0D201D;--clair:#EEF2E6;--clair-2:rgba(238,242,230,.7);--lime:#C7EB00;--sarcelle:#43B3A3;--papier:#F4F6EE;--encre:#0F130C;
-  --f-logo:"Unbounded","Arial Black",system-ui,sans-serif;--f-texte:"Instrument Sans",system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace}
+/* Exploration des pistes Aile et Vitesse, libre de la charte : huit variantes, chacune avec sa palette, son grand lockup et son icône. */
+:root{color-scheme:dark;--fond:#0A0C10;--carte:#12151B;--texte:#ECEFF4;--texte-2:rgba(236,239,244,.66);
+  --f-wide:"Syncopate","Unbounded",system-ui,sans-serif;--f-logo:"Unbounded","Arial Black",system-ui,sans-serif;--f-texte:"Instrument Sans",system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace}
 *{box-sizing:border-box}
-body{background:var(--nuit);color:var(--clair);font:400 15px/1.5 var(--f-texte);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
-.wrap{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
-header h1{margin:0;font:700 clamp(26px,3.6vw,42px)/1.05 var(--f-logo);letter-spacing:-.02em}
-header p{margin:8px 0 0;max-width:70ch;color:var(--clair-2)}
-.concept{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px;padding:18px;border-radius:26px;background:var(--nuit-2);box-shadow:inset 0 0 0 1px rgba(238,242,230,.08)}
-.concept.reco{box-shadow:inset 0 0 0 2px var(--lime)}
-.meta{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
-.meta h2{margin:0;font:700 22px var(--f-logo)}
-.meta p{margin:0;flex:1 1 420px;color:var(--clair-2)}
-.badge{font:700 11px var(--f-mono);letter-spacing:.12em;padding:4px 10px;border-radius:99px;background:var(--lime);color:var(--nuit)}
-.hero{display:grid;place-items:center;min-height:300px;border-radius:20px;padding:28px;background:radial-gradient(120% 120% at 15% 0%,#173F3A,var(--nuit) 68%);overflow:hidden}
-.side{display:grid;gap:14px;grid-template-rows:auto auto}
-.light{display:grid;place-items:center;min-height:140px;border-radius:20px;background:var(--papier);padding:18px}
-.ctx{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.ctx figure{margin:0;display:grid;gap:6px}
-.ctx figcaption{font:500 11px var(--f-mono);color:var(--clair-2)}
-.tile{display:grid;place-items:center;aspect-ratio:1;border-radius:16px;background:rgba(238,242,230,.05);overflow:hidden}
-.lockup{width:100%;max-width:640px;height:auto}
-@media (max-width:860px){.concept{grid-template-columns:minmax(0,1fr)}}
+body{background:var(--fond);color:var(--texte);font:400 15px/1.5 var(--f-texte);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+header h1{margin:0;font:700 clamp(26px,3.6vw,42px)/1.05 var(--f-wide);letter-spacing:.02em;text-transform:uppercase}
+header p{margin:10px 0 0;max-width:72ch;color:var(--texte-2)}
+h2{margin:8px 0 0;font:700 15px var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--texte-2)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.v{border-radius:24px;overflow:hidden;background:var(--carte);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);display:flex;flex-direction:column}
+.stage{position:relative;aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden}
+.stage svg.lock{width:88%;height:auto}
+.icon{position:absolute;right:14px;bottom:14px;width:64px;height:64px;border-radius:16px;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.12)}
+.icon svg{width:72%;height:72%}
+.info{padding:14px 18px 18px;display:grid;gap:6px}
+.info .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.info b{font:700 16px var(--f-logo)}
+.info p{margin:0;color:var(--texte-2);font-size:14px}
+.sw{display:flex;gap:4px}
+.sw i{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.pick{font:700 11px var(--f-mono);letter-spacing:.12em;padding:4px 10px;border-radius:99px;background:#ECEFF4;color:#0A0C10}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <linearGradient id="gA" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#43B3A3"/><stop offset=".5" stop-color="#C7EB00"/><stop offset="1" stop-color="#F4FF9A"/></linearGradient>
-  <linearGradient id="gA2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0E5A52"/><stop offset="1" stop-color="#43B3A3"/></linearGradient>
-  <linearGradient id="gW" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#43B3A3" stop-opacity="0"/><stop offset=".6" stop-color="#43B3A3"/><stop offset="1" stop-color="#C7EB00"/></linearGradient>
-  <linearGradient id="gT" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#43B3A3"/><stop offset=".55" stop-color="#C7EB00"/><stop offset="1" stop-color="#F4FF9A"/></linearGradient>
-  <linearGradient id="gTL" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0E5A52"/><stop offset="1" stop-color="#5E7400"/></linearGradient>
-  <symbol id="mAile" viewBox="0 0 64 64"><path d="M14 52 C18 34 28 17 47 5 C41 19 37 34 36 52 Z" fill="url(#gA)"/><path d="M39 52 C42 41 48 32 58 25 C55 34 52 43 51 52 Z" fill="url(#gA2)"/><path d="M4 57 C22 54.5 44 54.5 62 56.2 C44 56 24 57 6 59.5 Z" fill="url(#gW)"/></symbol>
-  <symbol id="mTrace" viewBox="0 0 64 64"><path d="M8 58 L20 42 L13 33 L29 13 C33 8 38 8 41 13 C47 24 52 40 58 58" fill="none" stroke="url(#gT)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="35" cy="6" r="3.4" fill="#061210" stroke="#C7EB00" stroke-width="2"/></symbol>
-  <symbol id="mTraceL" viewBox="0 0 64 64"><path d="M8 58 L20 42 L13 33 L29 13 C33 8 38 8 41 13 C47 24 52 40 58 58" fill="none" stroke="url(#gTL)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="35" cy="6" r="3.4" fill="#F4F6EE" stroke="#4A5C00" stroke-width="2"/></symbol>
-  <mask id="slices"><rect x="-20" y="0" width="200" height="80" fill="#fff"/><rect x="-20" y="22" width="78" height="2.6" fill="#000"/><rect x="-20" y="31" width="52" height="2.6" fill="#000"/><rect x="-20" y="40" width="96" height="2.6" fill="#000"/><rect x="-20" y="49" width="40" height="2.6" fill="#000"/></mask>
-  <symbol id="mVit" viewBox="0 0 64 64"><g transform="translate(4 6)" mask="url(#slices)"><text x="0" y="46" style="font:800 italic 34px Unbounded,'Arial Black',sans-serif" fill="#C7EB00">AI</text></g><path d="M2 30 L12 30 M0 39 L8 39" stroke="#43B3A3" stroke-width="2" stroke-linecap="round"/></symbol>
+  <!-- palettes -->
+  <linearGradient id="cyv" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#7B5CFF"/><stop offset="1" stop-color="#2DE2FF"/></linearGradient>
+  <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".48" stop-color="#C9D2DE"/><stop offset=".52" stop-color="#7E8A9A"/><stop offset="1" stop-color="#E9EEF5"/></linearGradient>
+  <linearGradient id="aqua" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#00A6B4"/><stop offset="1" stop-color="#7CF5E6"/></linearGradient>
+  <linearGradient id="wakeC" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2DE2FF" stop-opacity="0"/><stop offset="1" stop-color="#2DE2FF"/></linearGradient>
+  <linearGradient id="wakeO" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FF4D1A" stop-opacity="0"/><stop offset="1" stop-color="#FF4D1A"/></linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <!-- tranches de vitesse -->
+  <mask id="sliceBlade" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64"><rect width="64" height="64" fill="#fff"/><rect x="0" y="30" width="30" height="2" fill="#000"/><rect x="0" y="37" width="24" height="2" fill="#000"/><rect x="0" y="44" width="34" height="2" fill="#000"/></mask>
+  <mask id="sliceAI" maskUnits="userSpaceOnUse" x="-20" y="-10" width="140" height="90"><rect x="-20" y="-10" width="140" height="90" fill="#fff"/><rect x="-20" y="17" width="58" height="3.2" fill="#000"/><rect x="-20" y="29" width="36" height="3.2" fill="#000"/><rect x="-20" y="41" width="70" height="3.2" fill="#000"/></mask>
+
+  <!-- AILE : marques -->
+  <symbol id="a1" viewBox="0 0 64 64"><path mask="url(#sliceBlade)" d="M8 56 C15 33 29 15 54 3 C45 20 40 37 39 56 Z" fill="url(#cyv)"/><path d="M2 60 C22 57.4 42 57.4 62 59 C42 58.8 22 59.6 4 62 Z" fill="url(#wakeC)"/></symbol>
+  <symbol id="a2" viewBox="0 0 64 64"><g fill="none" stroke-linejoin="round" filter="url(#glow)"><path d="M10 52 C16 33 28 17 48 6 C41 21 37 36 36 52 Z" stroke="#2DE2FF" stroke-width="2.2"/><path d="M40 52 C43 42 48 33 57 26 C54 35 52 44 51 52 Z" stroke="#FF3DCB" stroke-width="2.2"/></g><path d="M6 56.5 H58 M14 60 H50" stroke="#2DE2FF" stroke-width="1.4" stroke-linecap="round" opacity=".7"/></symbol>
+  <symbol id="a3" viewBox="0 0 64 64"><path d="M9 50 C15 31 28 15 50 4 C42 19 38 34 37 50 Z" fill="#FFFFFF"/><path d="M40 50 C43 40 48 31 58 24 C55 33 53 42 52 50 Z" fill="#FF4D1A"/><path d="M0 54 L60 54 L57 59 L4 59 Z" fill="url(#wakeO)"/></symbol>
+  <symbol id="a4" viewBox="0 0 64 64"><circle cx="30" cy="36" r="24" fill="none" stroke="url(#chrome)" stroke-width="2.4" stroke-dasharray="118 32" transform="rotate(-20 30 36)"/><path d="M12 52 C18 34 30 18 54 4 C46 20 41 36 40 52 Z" fill="url(#chrome)"/><path d="M6 56 H56" stroke="#2DE2FF" stroke-width="2" stroke-linecap="round"/></symbol>
+
+  <!-- VITESSE : lettres dessinées -->
+  <symbol id="v1" viewBox="-14 -6 116 76"><g transform="skewX(-14)" mask="url(#sliceAI)"><path d="M0 60 L22 0 L36 0 L58 60 L44 60 L29 17 L14 60 Z" fill="url(#chrome)"/><path d="M66 0 L80 0 L80 60 L66 60 Z" fill="#2DE2FF"/></g></symbol>
+  <symbol id="v2" viewBox="-14 -6 116 76"><g transform="skewX(-12)" mask="url(#sliceAI)"><path d="M0 60 C7 36 18 15 38 0 L44 0 C35 20 30 40 29 60 Z" fill="#FFFFFF"/><path d="M41 12 L48 12 L60 60 L47 60 Z" fill="#FFFFFF"/><path d="M68 0 L81 0 L81 60 L68 60 Z" fill="#FF4D1A"/></g></symbol>
+  <symbol id="v3" viewBox="-6 -6 108 76"><g transform="skewX(-14)"><path d="M0 60 L22 0 L36 0 L58 60 L44 60 L29 17 L14 60 Z" fill="#FFFFFF"/><path d="M66 0 L80 0 L80 60 L66 60 Z" fill="#FFFFFF"/></g><path d="M-6 50 L108 18 L108 28 L-6 60 Z" fill="#FF4D1A"/></symbol>
+  <symbol id="v4" viewBox="-14 -6 116 76"><g transform="skewX(-14)" mask="url(#sliceAI)"><path d="M0 60 L22 0 L36 0 L58 60 L44 60 L29 17 L14 60 Z" fill="url(#aqua)"/><path d="M66 0 L80 0 L80 60 L66 60 Z" fill="url(#aqua)"/></g></symbol>
 </defs></svg>
 
 <div class="wrap">
-<header><h1>AI Regatta · nouvelles pistes de logo</h1><p>Deuxième série : des formes abstraites, des courbes et de la vitesse plutôt qu’un bateau dessiné. La piste « Trace » est appliquée au site et au prototype, pour la juger en situation.</p></header>
+<header><h1>AI Regatta · Aile et Vitesse, plus loin</h1><p>Huit variantes, libres de la charte Meridia : nouvelles couleurs, lettres « AI » dessinées sur mesure, effets de vitesse plus marqués. Rien n’est encore appliqué au site : choisissez une ou deux variantes (A1 à V4) et je les décline partout.</p></header>
 
-<!-- Trace -->
-<section class="concept reco" aria-labelledby="t1">
-  <div class="meta"><h2 id="t1">1 · Trace</h2><span class="badge">RECOMMANDÉ · EN PLACE</span><p>La trajectoire GPS d’un bateau : deux bords de près en zigzag, le contournement de la bouée, puis la grande abattée vers l’arrivée. Ce tracé dessine un « A ». La bouée en haut est aussi le point de l’IA. C’est le sujet même de la course : des positions au centimètre qui racontent une manœuvre.</p></div>
-  <div class="hero"><svg class="lockup" viewBox="0 0 640 220" role="img" aria-label="Logo AI Regatta, piste Trace"><use href="#mTrace" x="10" y="20" width="180" height="180"/><g transform="translate(206 0)"><text x="0" y="122" style="font:800 italic 58px var(--f-logo);letter-spacing:-2px" fill="#EEF2E6"><tspan fill="#C7EB00">AI</tspan> REGATTA</text><text x="4" y="160" style="font:700 15px var(--f-mono);letter-spacing:7px" fill="#43B3A3">TOULON · MAI 2027</text></g></svg></div>
-  <div class="side">
-    <div class="light"><svg viewBox="0 0 420 110" style="width:100%;max-width:380px" role="img" aria-label="Version claire"><use href="#mTraceL" x="0" y="10" width="90" height="90"/><text x="104" y="68" style="font:800 italic 40px var(--f-logo);letter-spacing:-1px" fill="#0F130C"><tspan fill="#4A5C00">AI</tspan> REGATTA</text></svg></div>
-    <div class="ctx">
-      <figure><div class="tile" style="background:radial-gradient(120% 120% at 30% 10%,#1B4A44,#061210 70%);border-radius:22%"><svg width="70%" height="70%" aria-hidden="true"><use href="#mTrace"/></svg></div><figcaption>icône d’app</figcaption></figure>
-      <figure><div class="tile" style="background:linear-gradient(180deg,#A7C7D6,#D7E6E6 55%,#2C6B66 56%,#0E3B37)"><svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><path d="M50 8 L50 62 L22 62 Z" fill="#F4F6EE"/><use href="#mTrace" x="30" y="38" width="20" height="20"/><path d="M14 66 L74 66 L68 72 L20 72 Z" fill="#061210"/></svg></div><figcaption>sur la voile</figcaption></figure>
-      <figure><div class="tile" style="aspect-ratio:auto;height:100%;min-height:90px;background:#0C3530"><svg viewBox="0 0 160 60" width="100%" aria-hidden="true"><rect x="6" y="14" width="148" height="32" rx="8" fill="#061210"/><use href="#mTrace" x="10" y="17" width="26" height="26"/><text x="40" y="35" style="font:800 italic 13px var(--f-logo)" fill="#EEF2E6"><tspan fill="#C7EB00">AI</tspan> REGATTA</text></svg></div><figcaption>bandeau télé</figcaption></figure>
-    </div>
-  </div>
-</section>
+<h2>Piste 2 · Aile</h2>
+<div class="grid">
+  <article class="v"><div class="stage" style="background:radial-gradient(120% 120% at 20% 0%,#1A1F4A,#07091A 70%)">
+    <svg class="lock" viewBox="0 0 600 200" role="img" aria-label="A1 Lame"><use href="#a1" x="0" y="10" width="180" height="180"/><text x="190" y="112" style="font:700 46px var(--f-wide);letter-spacing:4px" fill="#ECEFF4">AI REGATTA</text><text x="194" y="146" style="font:500 13px var(--f-mono);letter-spacing:8px" fill="#2DE2FF">TOULON · 2027</text></svg>
+    <div class="icon" style="background:#07091A"><svg aria-hidden="true"><use href="#a1"/></svg></div></div>
+    <div class="info"><div class="row"><b>A1 · Lame</b><span class="sw"><i style="background:#07091A"></i><i style="background:#7B5CFF"></i><i style="background:#2DE2FF"></i></span></div><p>Une seule voile-lame, tranchée par trois fentes de vitesse, sur un sillage qui s’efface. Violet vers cyan électrique, lettres très larges.</p></div></article>
 
-<!-- Aile -->
-<section class="concept" aria-labelledby="t2">
-  <div class="meta"><h2 id="t2">2 · Aile</h2><p>Deux lames courbes en flèche, comme une aile rigide et son foc lancés à pleine vitesse, posées sur un trait de sillage qui s’efface. Élégant et très lisible ; plus classique, plus « voile », moins « IA ».</p></div>
-  <div class="hero"><svg class="lockup" viewBox="0 0 640 220" role="img" aria-label="Logo AI Regatta, piste Aile"><use href="#mAile" x="10" y="20" width="180" height="180"/><g transform="translate(206 0)"><text x="0" y="122" style="font:800 italic 58px var(--f-logo);letter-spacing:-2px" fill="#EEF2E6"><tspan fill="#C7EB00">AI</tspan> REGATTA</text><text x="4" y="160" style="font:700 15px var(--f-mono);letter-spacing:7px" fill="#43B3A3">TOULON · MAI 2027</text></g></svg></div>
-  <div class="side"><div class="ctx" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-    <figure><div class="tile" style="background:radial-gradient(120% 120% at 30% 10%,#1B4A44,#061210 70%);border-radius:22%"><svg width="70%" height="70%" aria-hidden="true"><use href="#mAile"/></svg></div><figcaption>icône d’app</figcaption></figure>
-    <figure><div class="tile" style="background:var(--papier)"><svg width="70%" height="70%" aria-hidden="true"><use href="#mAile"/></svg></div><figcaption>sur fond clair</figcaption></figure>
-  </div></div>
-</section>
+  <article class="v"><div class="stage" style="background:radial-gradient(120% 120% at 20% 0%,#16123A,#05050F 70%)">
+    <svg class="lock" viewBox="0 0 600 200" role="img" aria-label="A2 Néon"><use href="#a2" x="0" y="10" width="180" height="180"/><text x="190" y="112" style="font:800 italic 50px var(--f-logo);letter-spacing:-1px" fill="#ECEFF4">AI REGATTA</text><text x="194" y="146" style="font:500 13px var(--f-mono);letter-spacing:8px" fill="#FF3DCB">NIGHT RACE · TOULON</text></svg>
+    <div class="icon" style="background:#05050F"><svg aria-hidden="true"><use href="#a2"/></svg></div></div>
+    <div class="info"><div class="row"><b>A2 · Néon</b><span class="sw"><i style="background:#05050F"></i><i style="background:#2DE2FF"></i><i style="background:#FF3DCB"></i></span></div><p>Les deux voiles en traits lumineux, cyan et magenta, comme un tracé de télémétrie la nuit. Très « e-sport ».</p></div></article>
 
-<!-- Vitesse -->
-<section class="concept" aria-labelledby="t3">
-  <div class="meta"><h2 id="t3">3 · Vitesse</h2><p>Un logo typographique : « AI » traversé de fentes horizontales, comme un objet flou de vitesse, prolongé par des traînées. Pas de symbole séparé : le mot fait l’image, à la manière des marques de sport mécanique.</p></div>
-  <div class="hero"><svg class="lockup" viewBox="0 0 640 220" role="img" aria-label="Logo AI Regatta, piste Vitesse"><g transform="translate(36 34)"><g mask="url(#slices2)"><text x="40" y="110" style="font:800 italic 108px var(--f-logo)" fill="#C7EB00">AI</text></g><path d="M0 64 L40 64 M14 82 L44 82 M4 46 L30 46" stroke="#43B3A3" stroke-width="4" stroke-linecap="round"/><text x="196" y="110" style="font:700 italic 54px var(--f-logo);letter-spacing:-1px" fill="#EEF2E6">REGATTA</text><text x="200" y="146" style="font:700 15px var(--f-mono);letter-spacing:7px" fill="#43B3A3">TOULON · MAI 2027</text></g>
-    <defs><mask id="slices2"><rect x="0" y="0" width="200" height="140" fill="#fff"/><rect x="0" y="40" width="120" height="5" fill="#000"/><rect x="0" y="58" width="78" height="5" fill="#000"/><rect x="0" y="76" width="150" height="5" fill="#000"/><rect x="0" y="94" width="60" height="5" fill="#000"/></mask></defs></svg></div>
-  <div class="side"><div class="ctx" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-    <figure><div class="tile" style="background:radial-gradient(120% 120% at 30% 10%,#1B4A44,#061210 70%);border-radius:22%"><svg width="80%" height="80%" aria-hidden="true"><use href="#mVit"/></svg></div><figcaption>icône d’app</figcaption></figure>
-    <figure><div class="tile" style="background:#C7EB00"><svg viewBox="0 0 160 60" width="90%" aria-hidden="true"><text x="6" y="40" style="font:800 italic 30px var(--f-logo)" fill="#061210">AI</text><text x="56" y="40" style="font:700 italic 16px var(--f-logo)" fill="#061210">REGATTA</text></svg></div><figcaption>version monochrome</figcaption></figure>
-  </div></div>
-</section>
+  <article class="v"><div class="stage" style="background:#0B0B0B">
+    <svg class="lock" viewBox="0 0 600 200" role="img" aria-label="A3 Signal"><use href="#a3" x="0" y="10" width="180" height="180"/><text x="190" y="112" style="font:800 italic 52px var(--f-logo);letter-spacing:-1px" fill="#FFFFFF">AI <tspan fill="#FF4D1A">REGATTA</tspan></text><text x="194" y="146" style="font:500 13px var(--f-mono);letter-spacing:8px" fill="rgba(255,255,255,.6)">TOULON · MAI 2027</text></svg>
+    <div class="icon" style="background:#0B0B0B"><svg aria-hidden="true"><use href="#a3"/></svg></div></div>
+    <div class="info"><div class="row"><b>A3 · Signal</b><span class="sw"><i style="background:#0B0B0B"></i><i style="background:#FFFFFF"></i><i style="background:#FF4D1A"></i></span></div><p>Noir, blanc et orange de signalisation, la couleur des bouées. Le plus sportif, très lisible de loin, sur une voile ou un écran géant.</p></div></article>
+
+  <article class="v"><div class="stage" style="background:radial-gradient(120% 120% at 30% 0%,#2A3140,#0E1117 70%)">
+    <svg class="lock" viewBox="0 0 600 200" role="img" aria-label="A4 Emblème"><use href="#a4" x="0" y="10" width="180" height="180"/><text x="190" y="112" style="font:700 46px var(--f-wide);letter-spacing:4px" fill="url(#chrome)">AI REGATTA</text><text x="194" y="146" style="font:500 13px var(--f-mono);letter-spacing:8px" fill="#2DE2FF">TOULON · 2027</text></svg>
+    <div class="icon" style="background:#0E1117"><svg aria-hidden="true"><use href="#a4"/></svg></div></div>
+    <div class="info"><div class="row"><b>A4 · Emblème</b><span class="sw"><i style="background:#0E1117"></i><i style="background:linear-gradient(#fff,#7E8A9A)"></i><i style="background:#2DE2FF"></i></span></div><p>La lame sort d’un cercle ouvert, comme d’un horizon : un emblème chromé, plus institutionnel, qui tient sur une médaille ou un trophée.</p></div></article>
+</div>
+
+<h2>Piste 3 · Vitesse</h2>
+<div class="grid">
+  <article class="v"><div class="stage" style="background:radial-gradient(120% 120% at 20% 0%,#16203A,#070A12 70%)">
+    <svg class="lock" viewBox="0 0 600 200" role="img" aria-label="V1 Chrome"><use href="#v1" x="0" y="30" width="210" height="138"/><text x="226" y="96" style="font:700 40px var(--f-wide);letter-spacing:6px" fill="#ECEFF4">REGATTA</text><path d="M228 116 H560" stroke="#2DE2FF" stroke-width="2"/><text x="228" y="144" style="font:500 13px var(--f-mono);letter-spacing:8px" fill="#2DE2FF">TOULON · MAI 2027</text></svg>
+    <div class="icon" style="background:#070A12"><svg aria-hidden="true"><use href="#v1"/></svg></div></div>
+    <div class="info"><div class="row"><b>V1 · Chrome</b><span class="sw"><i style="background:#070A12"></i><i style="background:linear-gradient(#fff,#7E8A9A)"></i><i style="background:#2DE2FF"></i></span></div><p>Un « A » sans barre, en chrome, et un « I » cyan, tranchés par la vitesse. Lettres dessinées sur mesure, « REGATTA » très espacé.</p></div></article>
+
+  <article class="v"><div class="stage" style="background:#0B0B0B">
+    <svg class="lock" viewBox="0 0 600 200" role="img" aria-label="V2 Voile-lettre"><use href="#v2" x="0" y="30" width="210" height="138"/><text x="226" y="110" style="font:800 italic 50px var(--f-logo);letter-spacing:-1px" fill="#FFFFFF">REGATTA</text><text x="230" y="144" style="font:500 13px var(--f-mono);letter-spacing:8px" fill="#FF4D1A">TOULON · MAI 2027</text></svg>
+    <div class="icon" style="background:#0B0B0B"><svg aria-hidden="true"><use href="#v2"/></svg></div></div>
+    <div class="info"><div class="row"><b>V2 · Voile-lettre</b><span class="sw"><i style="background:#0B0B0B"></i><i style="background:#FFFFFF"></i><i style="background:#FF4D1A"></i></span></div><p>Le mélange des deux pistes : le jambage gauche du « A » est une voile courbe, le « I » orange est le mât. Lettre et bateau à la fois.</p></div></article>
+
+  <article class="v"><div class="stage" style="background:#111111">
+    <svg class="lock" viewBox="0 0 600 200" role="img" aria-label="V3 Livrée"><use href="#v3" x="0" y="30" width="196" height="138"/><text x="216" y="110" style="font:800 italic 50px var(--f-logo);letter-spacing:-1px" fill="#FFFFFF">REGATTA</text><text x="220" y="144" style="font:500 13px var(--f-mono);letter-spacing:8px" fill="rgba(255,255,255,.6)">TOULON · MAI 2027</text></svg>
+    <div class="icon" style="background:#111"><svg aria-hidden="true"><use href="#v3"/></svg></div></div>
+    <div class="info"><div class="row"><b>V3 · Livrée</b><span class="sw"><i style="background:#111"></i><i style="background:#FFFFFF"></i><i style="background:#FF4D1A"></i></span></div><p>Un « AI » blanc barré d’une bande de course orange, comme la livrée d’une voiture ou d’un bateau de compétition.</p></div></article>
+
+  <article class="v"><div class="stage" style="background:radial-gradient(120% 120% at 20% 0%,#0F3A6B,#061A33 70%)">
+    <svg class="lock" viewBox="0 0 600 200" role="img" aria-label="V4 Méditerranée"><use href="#v4" x="0" y="30" width="210" height="138"/><text x="226" y="96" style="font:700 40px var(--f-wide);letter-spacing:6px" fill="#F3E7CF">REGATTA</text><text x="228" y="132" style="font:500 13px var(--f-mono);letter-spacing:8px" fill="#7CF5E6">TOULON · MAI 2027</text></svg>
+    <div class="icon" style="background:#061A33"><svg aria-hidden="true"><use href="#v4"/></svg></div></div>
+    <div class="info"><div class="row"><b>V4 · Méditerranée</b><span class="sw"><i style="background:#061A33"></i><i style="background:#00A6B4"></i><i style="background:#F3E7CF"></i></span></div><p>Les mêmes lettres en bleu profond, turquoise et sable : la rade de Toulon plutôt que la piste de course. Plus solaire, plus local.</p></div></article>
+</div>
 </div>
