@@ -114,7 +114,7 @@
 |---|---|
 | Support physique | Au choix de l’équipe : 4G, radio de télémétrie (433 MHz, ou 868 MHz hors sous-bande réservée), Wi-Fi |
 | Protocole et format | Au choix de l’équipe, par exemple MAVLink avec ArduPilot |
-| Ce qui circule | Consignes tactiques : vire, empanne, mode VMG, mode haut, mode bas |
+| Ce qui circule | Consignes tactiques : vire, empanne, abats (bouée au vent passée), loffe (bouée sous le vent passée), face au vent, mode près, mode portant, mode VMG, mode haut, mode bas |
 | Cadence | Libre |
 | Débit | Faible |
 | Latence | Dépend de l’équipe ; le pilotage fin doit rester à bord |

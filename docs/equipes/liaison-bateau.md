@@ -70,17 +70,31 @@ flowchart LR
 
 ## 4. Les ordres tactiques
 
-### 4.1 Les cinq ordres
+### 4.1 La liste des ordres
 
-Les équipes envoient à leur bateau les ordres tactiques suivants (P36) :
+Les équipes envoient à leur bateau des ordres tactiques simples (P36). Ils se rangent en deux familles : les **manœuvres**, ponctuelles, et les **modes**, qui restent actifs jusqu’à l’ordre suivant. Le pilote automatique à bord exécute ; l’ordre ne fait que le déclencher. Cette liste est la référence commune ; l’organisation pourra la compléter avant le gel du 15 mars 2027.
+
+**Manœuvres**
 
 | Ordre | Code proposé | Effet attendu | Paramètre facultatif |
 |---|---|---|---|
-| Vire | `tack` | Virement de bord (passage du vent par l’avant) | — |
-| Empanne | `gybe` | Empannage (passage du vent par l’arrière) | — |
-| Mode VMG | `mode_vmg` | Le bateau cherche la meilleure vitesse utile vers le vent (au près) ou sous le vent (au portant) | `twa_deg` : angle au vent vrai visé |
+| Vire | `tack` | Virement de bord (l’avant du bateau passe face au vent) | — |
+| Empanne | `gybe` | Empannage (l’arrière du bateau passe face au vent) | — |
+| Abats | `bear_away` | Contournement de la **bouée au vent** : une fois la bouée passée, le bateau s’écarte du vent pour partir au portant | `mark_id`, `side` (côté de passage) |
+| Loffe | `head_up` | Contournement de la **bouée sous le vent** (ou de la porte) : une fois la bouée passée, le bateau remonte vers le vent pour repartir au près | `mark_id`, `side` |
+| Face au vent | `head_to_wind` | Le bateau se met bout au vent et s’arrête, voiles qui faseyent (attente avant le départ, sécurité, ralentir) | `duration_s` |
+
+**Modes**
+
+| Ordre | Code proposé | Effet attendu | Paramètre facultatif |
+|---|---|---|---|
+| Mode près | `mode_upwind` | Navigation vers le vent, au plus près efficace | `twa_deg` : angle au vent vrai visé |
+| Mode portant | `mode_downwind` | Navigation vent arrière ou grand largue | `twa_deg` |
+| Mode VMG | `mode_vmg` | Le bateau cherche la meilleure vitesse utile vers la bouée, au près comme au portant | `twa_deg` |
 | Mode haut | `mode_high` | Le bateau serre le vent (plus près, moins vite) | `twa_deg` |
-| Mode bas | `mode_low` | Le bateau abat (plus loin du vent, plus vite) | `twa_deg` |
+| Mode bas | `mode_low` | Le bateau s’écarte du vent (plus loin, plus vite) | `twa_deg` |
+
+**Contournement d’une bouée, en pratique.** L’ordre « abats » ou « loffe » peut être envoyé à l’approche : le pilote automatique l’exécute au moment où le bateau passe la bouée, du bon côté. C’est l’équipe qui décide quand et comment ; la position officielle de la balise, elle, fait foi pour le passage de la bouée (moteur de course S8).
 
 **VMG** (*velocity made good*) : la vitesse à laquelle on se rapproche réellement de la bouée au vent (ou sous le vent), et non la vitesse sur l’eau. **TWA** (*true wind angle*) : l’angle entre l’axe du bateau et le vent vrai.
 
@@ -139,7 +153,7 @@ Compte rendu d’exécution :
 | `boat_id` | Bateau visé ; le bateau ignore un ordre qui ne lui est pas adressé |
 | `order_id` | Numéro croissant attribué par le PC à terre ; un ordre déjà reçu (même numéro) n’est pas exécuté deux fois |
 | `t_gps_ms` | Instant d’émission, même convention que le contrat d’interface (ms depuis l’époque GPS) ; le GPS de bord donne l’heure exacte |
-| `cmd` | `tack`, `gybe`, `mode_vmg`, `mode_high`, `mode_low` |
+| `cmd` | `tack`, `gybe`, `bear_away`, `head_up`, `head_to_wind`, `mode_upwind`, `mode_downwind`, `mode_vmg`, `mode_high`, `mode_low` |
 | `param` | Facultatif : `twa_deg` (angle au vent visé, en degrés), autres paramètres selon la décision (c) ci-dessous |
 | `ttl_ms` | Durée de validité : un ordre reçu trop tard est refusé (`status: "expired"`), pour ne pas virer au mauvais moment |
 | `status` | Accusé : `accepted`, `rejected`, `expired`. Compte rendu : `started`, `done`, `failed`, `aborted` |

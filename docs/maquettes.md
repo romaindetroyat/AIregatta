@@ -170,7 +170,7 @@ Les équipes développent leur propre logiciel. L’organisation fournit les don
 | Par quels connecteurs ? | MQTT (conseillé), WebSocket, NMEA 0183 / AIS, fichiers de rejeu ; bac à sable cloud dès janvier | [equipes/connecteurs.md](equipes/connecteurs.md) |
 | Comment intégrer les données ? | Abonnement aux sujets, schémas JSON, état de flotte reconstruit à partir des messages conservés, chrono calculé localement | [equipes/contrat-interface.md](equipes/contrat-interface.md), [exemples](equipes/exemples/) |
 | Comment parler à leur bateau ? | Par leur propre liaison (radio 433 MHz conseillée, 868 hors sous-bande réservée, 4G), vers un pilote automatique à bord | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
-| Que peuvent-ils transmettre ? | Les 5 ordres (acté) ; paramètres, relais des données officielles, barre à distance, mise à jour en course : à trancher | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
+| Que peuvent-ils transmettre ? | Les ordres tactiques (acté) : manœuvres (vire, empanne, abats, loffe, face au vent) et modes (près, portant, VMG, haut, bas) ; paramètres, relais des données officielles, barre à distance, mise à jour en course : à trancher | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
 
 ### Maquettes côté équipes
 
