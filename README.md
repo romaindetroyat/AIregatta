@@ -15,5 +15,6 @@ Système de suivi, d'arbitrage, d'analyse du vent et de diffusion publique pour 
 - [Postulats de départ](docs/postulats.md) : le paramétrage initial du projet, actés ou à confirmer.
 - [Maquettes et spécification des applications](docs/maquettes.md) : comité de course, public, équipes ; ce que chaque application reçoit, décide et émet ; décisions à prendre avant le développement.
 - [Prototype en direct](docs/prototype-en-direct.html) : une manche simulée en deux tours, au design clair et ludique, vue par le spectateur (téléphone), le comité de course (avec rejeu d'arbitrage), la télévision et la console d'équipe ; cartes zoomables (molette, boutons, deux doigts, glisser) ; les décisions du comité se propagent aux autres vues.
+- [Logo animé](docs/logo/logo-anime.html) : le symbole se construit, puis le nom et les dates (≈ 4 s), bouton « Rejouer ».
 - [Logo](docs/logo/logo.html) : logo retenu : R3 monochrome ([blanc](docs/logo/ai-regatta-mark.svg), [noir](docs/logo/ai-regatta-mark-noir.svg)) ; la planche garde toutes les pistes explorées ; le symbole seul : [ai-regatta-mark.svg](docs/logo/ai-regatta-mark.svg).
 - [Kit équipes](docs/equipes/README.md) : documentation technique pour les équipes (contrat d'interface, connecteurs, schémas JSON, exemples de code, liaison avec le bateau, règles d'équité).
