@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://[domaine-a-definir]/ai-regatta/contrat/1.0/schemas/clock.schema.json",
+  "title": "race/{raceId}/clock",
+  "description": "Heure du départ et étape de la procédure (message conservé, republié chaque seconde). Le compte à rebours se calcule localement.",
+  "type": "object",
+  "properties": {
+    "t": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+      "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+    },
+    "t_gps_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+    },
+    "race_id": {
+      "type": "string",
+      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-M\\d{1,2}$",
+      "description": "Identifiant de manche : date + numéro de manche, préfixe SIM- dans le bac à sable."
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Compteur croissant par sujet (par bateau pour les positions)."
+    },
+    "step": {
+      "type": "string",
+      "enum": [
+        "none",
+        "warning",
+        "preparatory",
+        "one_minute",
+        "start",
+        "postponed",
+        "general_recall",
+        "abandoned"
+      ]
+    },
+    "start_time": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+      "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+    },
+    "start_t_gps_ms": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+    },
+    "procedure": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "step": {
+            "type": "string",
+            "enum": [
+              "warning",
+              "preparatory",
+              "one_minute",
+              "start"
+            ]
+          },
+          "offset_s": {
+            "type": "integer",
+            "maximum": 0,
+            "description": "Décalage par rapport au départ, en secondes (négatif)."
+          },
+          "time": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+            "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+          },
+          "t_gps_ms": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+          },
+          "sound": {
+            "type": "string",
+            "enum": [
+              "short",
+              "long",
+              "none"
+            ]
+          }
+        },
+        "required": [
+          "step",
+          "offset_s",
+          "time",
+          "t_gps_ms",
+          "sound"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "next_signal": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "step": {
+              "type": "string",
+              "enum": [
+                "warning",
+                "preparatory",
+                "one_minute",
+                "start"
+              ]
+            },
+            "time": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+              "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+            },
+            "t_gps_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+            }
+          },
+          "required": [
+            "step",
+            "time",
+            "t_gps_ms"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "individual_recall": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{3}-\\d{2,3}$",
+        "description": "Numéro de voile, ex. FRA-07."
+      },
+      "uniqueItems": true
+    },
+    "gps_utc_offset_s": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "t",
+    "t_gps_ms",
+    "race_id",
+    "seq",
+    "step",
+    "start_time",
+    "start_t_gps_ms",
+    "procedure",
+    "next_signal",
+    "individual_recall",
+    "gps_utc_offset_s"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://[domaine-a-definir]/ai-regatta/contrat/1.0/schemas/notice.schema.json",
+  "title": "race/{raceId}/notices",
+  "description": "Liste des avis officiels du comité à toutes les équipes (message conservé, liste complète à chaque publication).",
+  "type": "object",
+  "properties": {
+    "t": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+      "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+    },
+    "t_gps_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+    },
+    "race_id": {
+      "type": "string",
+      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-M\\d{1,2}$",
+      "description": "Identifiant de manche : date + numéro de manche, préfixe SIM- dans le bac à sable."
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Compteur croissant par sujet (par bateau pour les positions)."
+    },
+    "notices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "notice_id": {
+            "type": "string",
+            "pattern": "^N-\\d{4}$"
+          },
+          "issued": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+            "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+          },
+          "issued_t_gps_ms": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "event",
+              "day",
+              "race"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "info",
+              "important",
+              "urgent"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "body": {
+            "type": "string"
+          },
+          "requires_ack": {
+            "type": "boolean"
+          },
+          "ack_deadline": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+            "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+          },
+          "supersedes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "attachment_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "notice_id",
+          "issued",
+          "issued_t_gps_ms",
+          "scope",
+          "priority",
+          "title",
+          "body",
+          "requires_ack",
+          "ack_deadline",
+          "supersedes",
+          "attachment_url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "t",
+    "t_gps_ms",
+    "race_id",
+    "seq",
+    "notices"
+  ],
+  "additionalProperties": false
+}

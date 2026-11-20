@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://[domaine-a-definir]/ai-regatta/contrat/1.0/schemas/current.schema.json",
+  "title": "race/current",
+  "description": "Manche en cours (message conservé).",
+  "type": "object",
+  "properties": {
+    "t": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+      "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+    },
+    "t_gps_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+    },
+    "race_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-M\\d{1,2}$",
+      "description": "Manche en cours ou prochaine manche ; null s'il n'y en a plus aujourd'hui."
+    },
+    "day": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "races_today": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-M\\d{1,2}$",
+        "description": "Identifiant de manche : date + numéro de manche, préfixe SIM- dans le bac à sable."
+      }
+    }
+  },
+  "required": [
+    "t",
+    "t_gps_ms",
+    "race_id",
+    "day",
+    "races_today"
+  ],
+  "additionalProperties": false
+}

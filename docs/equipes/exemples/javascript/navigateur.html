@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Regatta — flux équipes (exemple navigateur)</title>
+<!--
+  Exemple minimal d'application dans un navigateur :
+  - connexion au broker MQTT par WebSocket chiffré (mqtt.js 5) ;
+  - liste des bateaux mise à jour en direct ;
+  - compte à rebours calculé LOCALEMENT à partir de l'heure GPS du départ (message clock).
+
+  Ouvrir ce fichier dans un navigateur (double-clic suffit), saisir l'adresse, le compte et le mot de passe.
+  Sur le site : wss://10.20.0.10:8884/mqtt. Le navigateur doit faire confiance au certificat de
+  l'organisation (installer ca-ai-regatta.crt dans le magasin de certificats du système), sinon la
+  connexion WebSocket échoue sans message clair.
+  Le mot de passe n'est jamais enregistré par la page.
+-->
+<script src="https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js"></script>
+<style>
+  :root { --bg: #ffffff; --fg: #1d2430; --muted: #6b7380; --line: #dde2e8; --warn: #b3261e; --accent: #0b5cad; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #14181f; --fg: #e8ecf1; --muted: #9aa3ad; --line: #2b323c; --warn: #ff8a80; --accent: #7fb4ff; }
+  }
+  body { margin: 0; padding: 16px; background: var(--bg); color: var(--fg); font: 15px/1.4 system-ui, sans-serif; }
+  h1 { font-size: 1.2rem; margin: 0 0 12px; }
+  form { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  input, button { font: inherit; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); }
+  input[name=url] { flex: 1 1 260px; }
+  button { cursor: pointer; border-color: var(--accent); color: var(--accent); }
+  #countdown { font: 600 2.4rem/1.1 ui-monospace, monospace; margin: 8px 0; }
+  #status, .muted { color: var(--muted); }
+  table { border-collapse: collapse; width: 100%; max-width: 720px; }
+  th, td { text-align: right; padding: 4px 8px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+  th:first-child, td:first-child { text-align: left; }
+  tr.stale td { color: var(--warn); }
+  tr.mine td { font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>AI Regatta — flux équipes</h1>
+
+<form id="login">
+  <input name="url" value="wss://10.20.0.10:8884/mqtt" aria-label="Adresse du broker">
+  <input name="user" placeholder="equipe-fra07" autocomplete="username" aria-label="Compte">
+  <input name="password" type="password" placeholder="mot de passe" autocomplete="current-password" aria-label="Mot de passe">
+  <input name="boat" value="FRA-07" size="7" aria-label="Votre bateau">
+  <button type="submit">Se connecter</button>
+</form>
+
+<div id="status">Non connecté.</div>
+<div id="race" class="muted"></div>
+<div id="countdown">--:--.-</div>
+
+<table>
+  <thead><tr><th>Bateau</th><th>Rang</th><th>Vitesse (nd)</th><th>Route (°)</th><th>Chemin</th><th>Âge (ms)</th></tr></thead>
+  <tbody id="fleet"></tbody>
+</table>
+
+<script>
+"use strict";
+
+const GPS_EPOCH_UNIX_MS = 315964800000;
+const state = { raceId: null, clock: null, boats: new Map(), lastSeq: new Map(), ranks: new Map(), gpsUtcOffsetS: 18, myBoat: "" };
+let client = null;
+
+// Heure GPS selon l'horloge LOCALE de l'ordinateur (qui doit être synchronisée par NTP, §7 du contrat).
+function nowGpsMs() { return Date.now() - GPS_EPOCH_UNIX_MS + 1000 * state.gpsUtcOffsetS; }
+
+function fmt(ms) {
+  const sign = ms < 0 ? "-" : "";
+  ms = Math.abs(ms);
+  const m = Math.floor(ms / 60000), s = Math.floor(ms / 1000) % 60, d = Math.floor(ms / 100) % 10;
+  return `${sign}${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}.${d}`;
+}
+
+// Écarte doublons et messages en retard (§8.3 du contrat).
+function accept(key, msg) {
+  const last = state.lastSeq.get(key);
+  if (last !== undefined && msg.seq <= last && msg.seq > last - 1000) return false;
+  state.lastSeq.set(key, msg.seq);
+  return true;
+}
+
+function followRace(raceId) {
+  if (!raceId || raceId === state.raceId) return;
+  if (state.raceId) client.unsubscribe(`race/${state.raceId}/#`);
+  state.raceId = raceId; state.clock = null;
+  state.boats.clear(); state.lastSeq.clear(); state.ranks.clear();
+  client.subscribe(`race/${raceId}/#`, { qos: 1 });
+  document.getElementById("race").textContent = `Manche ${raceId}`;
+}
+
+function onMessage(topic, payload) {
+  let msg;
+  try { msg = JSON.parse(new TextDecoder().decode(payload)); } catch { return; }
+  if (topic === "race/current") { followRace(msg.race_id); return; }
+  if (topic === "sys/time") { state.gpsUtcOffsetS = msg.gps_utc_offset_s; return; }
+  const p = topic.split("/");
+  if (p[0] !== "race" || p[1] !== state.raceId) return;
+  if (p[2] === "boats" && p[4] === "pos") {
+    if (accept("pos/" + p[3], msg)) state.boats.set(p[3], msg);
+  } else if (p[2] === "clock") {
+    if (accept("clock", msg)) { state.clock = msg; state.gpsUtcOffsetS = msg.gps_utc_offset_s; }
+  } else if (p[2] === "leaderboard") {
+    if (accept("leaderboard", msg)) for (const e of msg.entries) state.ranks.set(e.boat_id, e.rank);
+  }
+}
+
+// Affichage : compte à rebours toutes les 100 ms, tableau toutes les 250 ms.
+function drawCountdown() {
+  const el = document.getElementById("countdown");
+  const c = state.clock;
+  if (!c || c.start_t_gps_ms === null || ["postponed", "general_recall", "abandoned"].includes(c.step)) {
+    el.textContent = c ? c.step : "--:--.-";
+    return;
+  }
+  const remaining = c.start_t_gps_ms - nowGpsMs();   // calcul local, jamais à l'arrivée du message
+  el.textContent = remaining > 0 ? fmt(remaining) : "+" + fmt(-remaining);
+}
+
+function cell(text) { const td = document.createElement("td"); td.textContent = text; return td; }
+
+function drawFleet() {
+  const body = document.getElementById("fleet");
+  const now = nowGpsMs();
+  const rows = [...state.boats.values()].sort((a, b) =>
+    (state.ranks.get(a.boat_id) ?? 99) - (state.ranks.get(b.boat_id) ?? 99) || a.boat_id.localeCompare(b.boat_id));
+  body.replaceChildren(...rows.map(b => {
+    const tr = document.createElement("tr");
+    if (b.stale) tr.className = "stale";
+    if (b.boat_id === state.myBoat) tr.className += " mine";
+    tr.append(
+      cell(b.boat_id + (b.stale ? " (perdu)" : "")),
+      cell(state.ranks.get(b.boat_id) ?? "—"),
+      cell(b.sog_kn === null ? "—" : b.sog_kn.toFixed(1)),
+      cell(b.cog === null ? "—" : b.cog.toFixed(0)),
+      cell(b.path),
+      cell(String(now - b.t_gps_ms)));
+    return tr;
+  }));
+}
+
+document.getElementById("login").addEventListener("submit", ev => {
+  ev.preventDefault();
+  const f = new FormData(ev.target);
+  const user = f.get("user").trim();
+  state.myBoat = f.get("boat").trim();
+  if (client) client.end(true);
+  state.raceId = null;
+  client = mqtt.connect(f.get("url"), {
+    username: user,
+    password: f.get("password"),
+    clientId: `${user}-web-${Math.random().toString(16).slice(2, 8)}`,
+    clean: true,            // navigateur : session neuve à chaque chargement, on se réabonne nous-mêmes
+    protocolVersion: 4,     // MQTT 3.1.1
+    keepalive: 10,
+    reconnectPeriod: 2000,
+    resubscribe: false,     // on gère les abonnements dans « connect » (règle du §8.4)
+  });
+  const status = document.getElementById("status");
+  client.on("connect", () => {
+    status.textContent = "Connecté.";
+    client.subscribe({ "race/current": { qos: 1 }, "sys/time": { qos: 0 } });
+    if (state.raceId) client.subscribe(`race/${state.raceId}/#`, { qos: 1 });
+  });
+  client.on("reconnect", () => { status.textContent = "Reconnexion…"; });
+  client.on("close", () => { status.textContent = "Déconnecté (le chrono continue localement)."; });
+  client.on("error", err => { status.textContent = "Erreur : " + err.message; });
+  client.on("message", onMessage);
+});
+
+setInterval(drawCountdown, 100);
+setInterval(drawFleet, 250);
+</script>
+</body>
+</html>

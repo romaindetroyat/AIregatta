@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://[domaine-a-definir]/ai-regatta/contrat/1.0/schemas/meta.schema.json",
+  "title": "meta/schema",
+  "description": "Version du contrat d'interface servie par ce broker (message conservé).",
+  "type": "object",
+  "properties": {
+    "t": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+      "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+    },
+    "t_gps_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+    },
+    "contract_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.]+)?$"
+    },
+    "frozen": {
+      "type": "boolean"
+    },
+    "freeze_date": {
+      "type": "string"
+    },
+    "schemas_url": {
+      "type": "string"
+    },
+    "deprecations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "announced": {
+            "type": "string"
+          },
+          "removal": {
+            "type": "string"
+          },
+          "replacement": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "item",
+          "announced",
+          "removal",
+          "replacement"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "t",
+    "t_gps_ms",
+    "contract_version",
+    "frozen",
+    "freeze_date",
+    "schemas_url",
+    "deprecations"
+  ],
+  "additionalProperties": false
+}

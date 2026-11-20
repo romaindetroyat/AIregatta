@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://[domaine-a-definir]/ai-regatta/contrat/1.0/schemas/leaderboard.schema.json",
+  "title": "race/{raceId}/leaderboard",
+  "description": "Classement live (message conservé, 1 Hz et à chaque changement).",
+  "type": "object",
+  "properties": {
+    "t": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+      "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+    },
+    "t_gps_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+    },
+    "race_id": {
+      "type": "string",
+      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-M\\d{1,2}$",
+      "description": "Identifiant de manche : date + numéro de manche, préfixe SIM- dans le bac à sable."
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Compteur croissant par sujet (par bateau pour les positions)."
+    },
+    "provisional": {
+      "type": "boolean"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rank": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "boat_id": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}-\\d{2,3}$",
+            "description": "Numéro de voile, ex. FRA-07."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "racing",
+              "finished",
+              "ocs",
+              "dns",
+              "dnc",
+              "dnf",
+              "ret",
+              "dsq"
+            ]
+          },
+          "legs_completed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "next_leg": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "next_mark_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]{1,5}$",
+              "description": "Identifiant de bouée, ex. WW, LW1, SB."
+            }
+          },
+          "dist_to_next_m": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "gap_to_leader_s": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "penalties_pending": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "finish_time": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+            "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+          },
+          "finish_t_gps_ms": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+          },
+          "elapsed_ms": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          }
+        },
+        "required": [
+          "rank",
+          "boat_id",
+          "status",
+          "legs_completed",
+          "next_leg",
+          "next_mark_ids",
+          "dist_to_next_m",
+          "gap_to_leader_s",
+          "penalties_pending",
+          "finish_time",
+          "finish_t_gps_ms",
+          "elapsed_ms"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "t",
+    "t_gps_ms",
+    "race_id",
+    "seq",
+    "provisional",
+    "entries"
+  ],
+  "additionalProperties": false
+}

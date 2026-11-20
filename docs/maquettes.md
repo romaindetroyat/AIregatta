@@ -198,6 +198,7 @@ Les équipes développent leur propre logiciel. L’organisation fournit les don
 | D9 | Équipes | Paramètres d’ordre | Autoriser |
 | D10 | Équipes | Relais des données officielles vers le bateau | Autoriser |
 | D11 | Équipes | Barre à distance en course | Interdire, sauf sécurité |
+| D14 | Équipes | Radiocommande de sécurité 2,4 GHz obligatoire ? (§9 de l’architecture la dit obligatoire, P16 ne l’impose pas) | Conseillée, non obligatoire |
 | D12 | Équipes | Mise à jour du logiciel du bateau en course | Interdire pendant une manche |
 | D13 | Équipes | Ouverture du bac à sable | Janvier 2027 |
 

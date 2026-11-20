@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://[domaine-a-definir]/ai-regatta/contrat/1.0/schemas/mark.schema.json",
+  "title": "race/{raceId}/marks/{markId}",
+  "description": "Position mesurée d'une bouée et vent si elle est équipée (message conservé).",
+  "type": "object",
+  "properties": {
+    "t": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+      "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+    },
+    "t_gps_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+    },
+    "race_id": {
+      "type": "string",
+      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-M\\d{1,2}$",
+      "description": "Identifiant de manche : date + numéro de manche, préfixe SIM- dans le bac à sable."
+    },
+    "mark_id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9]{1,5}$",
+      "description": "Identifiant de bouée, ex. WW, LW1, SB."
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Compteur croissant par sujet (par bateau pour les positions)."
+    },
+    "lat": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": -90,
+      "maximum": 90,
+      "description": "Latitude WGS84, degrés décimaux."
+    },
+    "lon": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": -180,
+      "maximum": 180,
+      "description": "Longitude WGS84, degrés décimaux."
+    },
+    "fix": {
+      "type": "string",
+      "enum": [
+        "none",
+        "3d",
+        "dgnss",
+        "rtk_float",
+        "rtk_fixed"
+      ]
+    },
+    "h_acc_m": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "drift_m": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Écart entre la position mesurée et la position déclarée dans course."
+    },
+    "stale": {
+      "type": "boolean"
+    },
+    "wind": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tws_kn": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Vitesse en nœuds."
+            },
+            "tws_ms": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Vitesse du vent en m/s."
+            },
+            "twd": {
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMaximum": 360,
+              "description": "Angle en degrés vrais, 0–360."
+            },
+            "gust_kn": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Vitesse en nœuds."
+            },
+            "twd_std": {
+              "type": "number",
+              "minimum": 0
+            },
+            "avg_s": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "tws_kn",
+            "tws_ms",
+            "twd",
+            "gust_kn",
+            "twd_std",
+            "avg_s"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "t",
+    "t_gps_ms",
+    "race_id",
+    "mark_id",
+    "seq",
+    "lat",
+    "lon",
+    "fix",
+    "h_acc_m",
+    "drift_m",
+    "stale",
+    "wind"
+  ],
+  "additionalProperties": false
+}

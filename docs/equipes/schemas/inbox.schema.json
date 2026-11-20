@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://[domaine-a-definir]/ai-regatta/contrat/1.0/schemas/inbox.schema.json",
+  "title": "teams/{teamId}/inbox",
+  "description": "Message du comité à une seule équipe.",
+  "type": "object",
+  "properties": {
+    "t": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+      "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+    },
+    "t_gps_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+    },
+    "msg_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]+$"
+    },
+    "team_id": {
+      "type": "string",
+      "pattern": "^[a-z]{3}\\d{2,3}$",
+      "description": "Code équipe, ex. fra07."
+    },
+    "race_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-M\\d{1,2}$",
+      "description": "Identifiant de manche : date + numéro de manche, préfixe SIM- dans le bac à sable."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "receipt",
+        "message",
+        "reply",
+        "penalty_notice",
+        "protest_notice",
+        "hearing",
+        "decision",
+        "safety",
+        "technical",
+        "error"
+      ]
+    },
+    "in_reply_to": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "info",
+        "important",
+        "urgent"
+      ]
+    },
+    "requires_ack": {
+      "type": "boolean"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "body": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "t",
+    "t_gps_ms",
+    "msg_id",
+    "team_id",
+    "race_id",
+    "type",
+    "in_reply_to",
+    "priority",
+    "requires_ack",
+    "title",
+    "body",
+    "data"
+  ],
+  "additionalProperties": false
+}

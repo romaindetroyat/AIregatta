@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://[domaine-a-definir]/ai-regatta/contrat/1.0/schemas/event.schema.json",
+  "title": "race/{raceId}/events",
+  "description": "Événement de course (départ, passage de bouée, pénalité, arrivée…).",
+  "type": "object",
+  "properties": {
+    "t": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+      "description": "Horodatage UTC ISO 8601, millisecondes, suffixe Z."
+    },
+    "t_gps_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]+$"
+    },
+    "race_id": {
+      "type": "string",
+      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-M\\d{1,2}$",
+      "description": "Identifiant de manche : date + numéro de manche, préfixe SIM- dans le bac à sable."
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Compteur croissant par sujet (par bateau pour les positions)."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "warning",
+        "preparatory",
+        "one_minute",
+        "start",
+        "ocs",
+        "individual_recall",
+        "general_recall",
+        "mark_rounding",
+        "penalty_issued",
+        "penalty_done",
+        "boundary_exit",
+        "finish",
+        "retired",
+        "postponement",
+        "abandonment",
+        "course_change",
+        "shortened_course"
+      ]
+    },
+    "boat_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z]{3}-\\d{2,3}$",
+      "description": "Numéro de voile, ex. FRA-07."
+    },
+    "mark_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z][A-Z0-9]{1,5}$",
+      "description": "Identifiant de bouée, ex. WW, LW1, SB."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "provisional",
+        "confirmed",
+        "cancelled"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "committee"
+      ]
+    },
+    "replaces": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "details": {
+      "type": "object"
+    },
+    "text_fr": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "t",
+    "t_gps_ms",
+    "event_id",
+    "race_id",
+    "seq",
+    "type",
+    "boat_id",
+    "mark_id",
+    "status",
+    "source",
+    "replaces",
+    "details",
+    "text_fr"
+  ],
+  "additionalProperties": false
+}
