@@ -12,3 +12,5 @@ Système de suivi, d'arbitrage, d'analyse du vent et de diffusion publique pour 
 - [En clair, succès et risques](docs/en-clair-succes-risques.md) : le principe, nos choix expliqués, les clés du succès, ce qui peut foirer, le glossaire.
 - [Cahier des charges des ordinateurs](docs/ordinateurs.md) : serveurs du PC course, régie, consoles, poste de contrôle, tablette, conseils aux équipes.
 - [Postulats de départ](docs/postulats.md) : le paramétrage initial du projet, actés ou à confirmer.
+- [Maquettes et spécification des applications](docs/maquettes.md) : comité de course, public, équipes ; ce que chaque application reçoit, décide et émet ; décisions à prendre avant le développement.
+- [Kit équipes](docs/equipes/README.md) : documentation technique pour les équipes (contrat d'interface, connecteurs, schémas JSON, exemples de code, liaison avec le bateau, règles d'équité).
