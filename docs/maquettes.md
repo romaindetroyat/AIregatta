@@ -183,6 +183,19 @@ Les équipes développent leur propre logiciel. L’organisation fournit les don
 
 ---
 
+## 3 bis. Médias et carte tactique du comité
+
+Quatre interfaces complémentaires, au style inspiré des retransmissions de grandes régates et des jeux de voile en ligne (sans reprendre leurs designs) :
+
+| Écran | Pour qui | Contenu |
+|---|---|---|
+| Habillage antenne (1920 × 1080) | Téléspectateurs, flux en ligne | Vue aérienne reconstituée à partir des positions officielles ; étiquettes de bateaux (place, vitesse) ; classement avec écarts et tendance ; vent ; mini-carte ; bas d’écran au choix : duel pour la tête, pénalité expliquée, passage de bouée |
+| Régie graphique | Réalisateur, opérateur graphique | Aperçu et antenne ; 8 graphiques (classement, duel, pénalité, passage, vent, fiche équipe, départ, rejeu) ; moments forts détectés par le logiciel avec le graphique conseillé ; rejeu ; fiche du commentateur |
+| Écran géant de la plage | Public sur place | Lisible à 50 m : classement en très grand et carte « vue de la digue » ; compte à rebours du départ ; décision du comité |
+| Carte tactique du comité | Directeur de course, arbitres | Vent par cases colorées selon sa force, flèches, laylines, traces, zones des trois longueurs ; rejeu à −60, −30, −10 s ; fiche du bateau sélectionné (vitesse, VMG, cap, distance à la layline, qualité GPS) ; alerte de bascule |
+
+Les médias reçoivent le même flux que le comité et les équipes, au même chrono, mais n’affichent que les décisions publiques.
+
 ## 4. Décisions à prendre avant de développer
 
 | N° | Application | Question | Recommandation |
