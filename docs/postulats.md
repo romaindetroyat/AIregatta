@@ -25,6 +25,8 @@ Dernière mise à jour : 20 novembre 2026.
 | P10 | Pilotage des bateaux | Depuis le PC à terre de chaque équipe, par sa propre liaison, dans le respect du plan de fréquences | Acté |
 | P36 | Ordres tactiques des équipes | Vire, empanne, abats (bouée au vent passée), loffe (bouée sous le vent passée), face au vent, mode près, mode portant, mode VMG, mode haut, mode bas ; réglages à définir (choque, borde, cap) : envoyés en direct par chaque équipe à son bateau | Acté |
 | P37 | Intelligence tactique | IA tactique de chaque équipe à terre ; le pilote automatique exécute à bord. C’est bien un drone : personne à bord. Tout embarqué : pour 2028 | Acté |
+| P38 | Commande en course | L’IA de l’équipe barre seule, ordres ou commande directe du safran et des voiles ; aucune intervention humaine, sauf l’arrêt de sécurité | Acté |
+| P39 | Antennes de la balise | Sur le pont, dans l’axe, quelle que soit la matière de la coque | Acté |
 | P11 | Équité des informations | Toutes les équipes reçoivent les mêmes données au même instant : positions des bateaux et des bouées, vent, chrono | Acté |
 | P12 | Assistant tactique | Aucun fourni : la tactique est le travail des équipes | Acté |
 | P13 | Présence des équipes | Toutes sur place | Acté |
@@ -33,7 +35,7 @@ Dernière mise à jour : 20 novembre 2026.
 
 | N° | Paramètre | Valeur | Statut |
 |---|---|---|---|
-| P14 | Règles de course | À définir | À confirmer |
+| P14 | Règles de course | [Règles AI Regatta v0.1](regles-de-course.md) : match racing radiocommandé adapté ; quelques points à trancher | Acté |
 | P15 | Arbitrage | À terre, en temps réel, sur écran : le logiciel signale, un arbitre décide | À confirmer |
 | P16 | Sécurité | Bateaux d’assistance ; pas de reprise en main obligatoire des drones | Acté |
 | P17 | Chrono | Piloté par le PC course, transmis aux équipes, aux médias et au public | Acté |
@@ -59,6 +61,7 @@ Dernière mise à jour : 20 novembre 2026.
 | P27 | Caméras | 12 m de hauteur au maximum | Acté |
 | P28 | Choix du matériel | Uniquement du matériel bien noté ; sinon validé au banc | Acté |
 | P29 | Ordinateurs | Réutilisation d’ordinateurs existants s’ils respectent le cahier des charges | À confirmer |
+| P40 | PC course et caméras | Au premier étage du bâtiment La Plage | Acté |
 
 ## Public et médias
 
@@ -66,6 +69,7 @@ Dernière mise à jour : 20 novembre 2026.
 |---|---|---|---|
 | P30 | Public | Sur place, et sur l’application (iPhone, ordinateur), avec 1 s de différé | Acté |
 | P31 | Commentaire | Commentateur humain, en français | Acté |
+| P41 | Fréquentation | 500 à 2 000 spectateurs en même temps ; Wi-Fi public conseillé au village | Acté |
 
 ## Projet
 

@@ -200,17 +200,17 @@ Les médias reçoivent le même flux que le comité et les équipes, au même ch
 
 | N° | Application | Question | Recommandation |
 |---|---|---|---|
-| D1 | Comité | Adaptation des RCV aux drones (P14) | Partir des règles de match racing radiocommandé, arbitrage en direct |
-| D2 | Comité | Forme de la pénalité | Boucle de 360° détectée automatiquement ; pénalité en temps si non effectuée |
-| D3 | Comité | Arbitrage direct ou réclamations | Direct pour les incidents détectés ; réclamations pour le reste |
-| D4 | Comité | Sortie de zone | Tolérance 5 m ou 5 s ; puis pénalité |
-| D5 | Comité | Temps limite et délai de réclamation | 15 min ; 10 min |
-| D6 | Comité | Balise en panne en course | Réparation (RDG) si la panne est prouvée |
+| D1 | Comité | Adaptation des RCV aux drones (P14) | **Acté le 20 novembre 2026** : Partir des règles de match racing radiocommandé, arbitrage en direct |
+| D2 | Comité | Forme de la pénalité | **Acté le 20 novembre 2026** : Boucle de 360° détectée automatiquement ; pénalité en temps si non effectuée |
+| D3 | Comité | Arbitrage direct ou réclamations | **Acté le 20 novembre 2026** : Direct pour les incidents détectés ; réclamations pour le reste |
+| D4 | Comité | Sortie de zone | **Acté le 20 novembre 2026** : Tolérance 5 m ou 5 s ; puis pénalité |
+| D5 | Comité | Temps limite et délai de réclamation | **Acté le 20 novembre 2026** : 15 min ; 10 min |
+| D6 | Comité | Balise en panne en course | **Acté le 20 novembre 2026** : Réparation (RDG) si la panne est prouvée |
 | D7 | Public | Nom de domaine | À réserver rapidement |
 | D8 | Public | Vidéo et commentaire audio en v1 | Audio oui, vidéo en v2 |
 | D9 | Équipes | Paramètres d’ordre | Autoriser |
 | D10 | Équipes | Relais des données officielles vers le bateau | Autoriser |
-| D11 | Équipes | Barre à distance : la commande directe du safran et des voiles par l’IA à terre, sans intervention humaine, est-elle autorisée en course ? Faut-il interdire seulement l’intervention humaine (joystick), sauf pour la sécurité ? | À trancher. Piste : autoriser la commande directe par l’ia, sans humain dans la boucle ; interdire l’intervention humaine en course, sauf sécurité |
+| D11 | Équipes | Barre à distance : la commande directe du safran et des voiles par l’IA à terre, sans intervention humaine, est-elle autorisée en course ? Faut-il interdire seulement l’intervention humaine (joystick), sauf pour la sécurité ? | **Acté le 20 novembre 2026** : L’IA barre seule, ordres ou commande directe ; aucune intervention humaine, sauf l’arrêt de sécurité |
 | D14 | Équipes | Radiocommande de sécurité 2,4 GHz obligatoire ? (§9 de l’architecture la dit obligatoire, P16 ne l’impose pas) | Conseillée, non obligatoire |
 | D12 | Équipes | Mise à jour du logiciel du bateau en course | Interdire pendant une manche |
 | D13 | Équipes | Ouverture du bac à sable | Janvier 2027 |

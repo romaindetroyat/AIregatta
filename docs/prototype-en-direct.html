@@ -459,7 +459,7 @@ function mapSVG(k,w,h){
   const as=z.z>3?10:30;for(let gx=-60;gx<=60;gx+=as)for(let gy=-15;gy<=225;gy+=as){const [x,y]=P(gx,gy);if(on(x,y,0))g+=`<path transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(4*Math.sin((gx+gy)/50+t/80))})" d="M0 -9 L0 9 M-4 4 L0 9 L4 4" fill="none" stroke="${Th.arrows}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`}
   const [bx1,by1]=P(-60,220),[bx2,by2]=P(60,-22);g+=`<rect x="${f1(bx1)}" y="${f1(by1)}" width="${f1(bx2-bx1)}" height="${f1(by2-by1)}" fill="none" stroke="${Th.bound}" stroke-width="1.5" stroke-dasharray="8 7"/>`;
   if(o.lay){const [wx,wy]=P(0,200);[[-130,70],[130,70]].forEach(q=>{const [x,y]=P(q[0],q[1]);g+=`<line x1="${f1(wx)}" y1="${f1(wy)}" x2="${f1(x)}" y2="${f1(y)}" stroke="${Th.lay}" stroke-width="1.6" stroke-dasharray="10 8"/>`})}
-  if(o.zone)[[SIM.WW,13],[SIM.LW1,10],[SIM.LW2,10]].forEach(q=>{const [x,y]=P(q[0].x,q[0].y);g+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(q[1]*s)}" fill="none" stroke="${Th.zone}" stroke-width="1.5" stroke-dasharray="4 5"/>`});
+  if(o.zone)[[SIM.WW,4],[SIM.LW1,4],[SIM.LW2,4]].forEach(q=>{const [x,y]=P(q[0].x,q[0].y);g+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(q[1]*s)}" fill="none" stroke="${Th.zone}" stroke-width="1.5" stroke-dasharray="4 5"/>`});
   const [px,py]=P(SIM.PIN.x,0),[sx,sy]=P(SIM.SB.x,0);g+=`<line x1="${f1(px)}" y1="${f1(py)}" x2="${f1(sx)}" y2="${f1(sy)}" stroke="${Th.line}" stroke-width="2" stroke-dasharray="9 6"/>`;
   const L=Math.max(10,Math.min(44,(o.bs||11)*Math.sqrt(z.z))),tr=[],bt=[],tg=[],placed=[];
   rk.forEach((q,i)=>{const b=q.b,mine=o.mine===b.id,dim=o.mine&&!mine,inc=o.focus&&o.focus.includes(b.id);
@@ -558,7 +558,7 @@ function renderRv(){if(!RV)return;const a=sim.alerts.find(x=>x.id===RV.id);if(!a
   drawMap(document.querySelector('[data-map="rv"]'));
 }
 function openReplay(id){const a=sim.alerts.find(x=>x.id===id);if(!a)return;RV={id,t:a.ocs?-4:a.t-5,t0:a.ocs?-8:Math.max(-60,a.t-9),t1:a.ocs?3:a.t+3,play:true,rs:.5};Object.assign(ZM.rv,{z:4,f:'inc'});
-  $('#rvRule').innerHTML=a.ocs?'<b>Règle 29.1.</b> Au signal, une partie du bateau était du côté parcours de la ligne : il doit revenir la couper. Placez le curseur à 0,0 s.':'<b>Règle 18, place à la bouée.</b> Le bateau entré le premier dans la zone des trois longueurs a droit à la place. Regardez qui y entre en premier.';
+  $('#rvRule').innerHTML=a.ocs?'<b>Règle 5.2.</b> Au signal, une partie du bateau était du côté parcours de la ligne : il doit revenir la couper. Placez le curseur à 0,0 s.':'<b>Place à la bouée.</b> Dans la zone de 4 m, le bateau entré le premier a droit à la place pour passer la bouée (règle 6.2). Regardez qui y entre en premier.';
   const B=a.boats[0],dec=a.ocs?[['recall','Rappeler '+B,'Pavillon X, corne, tout le monde prévenu',1],['none','Départ correct','L’alerte est classée']]:[['pen','Pénalité '+B,'Un tour sur lui-même, tout de suite',1],['time','+20 s à '+B,'Pénalité en temps à l’arrivée'],['none','Sans suite','Pas de faute'],['jury','Jury','Décision après la manche']];
   $('#rvDec').innerHTML=dec.map(d=>`<button type="button" class="dec${d[3]?' pri':''}" data-d="${a.id}" data-w="${d[0]}"><b>${esc(d[1])}</b><span>${d[2]}</span></button>`).join('');
   $('#rv').hidden=false;requestAnimationFrame(()=>{renderRv();$('#rvClose').focus()})}
