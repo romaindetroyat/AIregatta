@@ -1,6 +1,6 @@
 # AI Regatta — Maquettes et spécification des applications
 
-> Ce document accompagne les maquettes interactives (planche « AI Regatta — Maquettes »). Pour chaque application, il dit ce qu’elle reçoit, ce qu’on y fait, ce qu’elle émet, et ce qui reste à trancher avant le développement. Le détail technique destiné aux équipes est dans [docs/equipes/](equipes/README.md).
+> Ce document accompagne le prototype en direct ([prototype-en-direct.html](prototype-en-direct.html) : une manche simulée, vue par le spectateur, le comité et la télévision) et les maquettes écran par écran (planche « AI Regatta — Maquettes »). Pour chaque application, il dit ce qu’elle reçoit, ce qu’on y fait, ce qu’elle émet, et ce qui reste à trancher avant le développement. Le détail technique destiné aux équipes est dans [docs/equipes/](equipes/README.md).
 
 Dernière mise à jour : 20 novembre 2026. Version des maquettes : 0.1.
 

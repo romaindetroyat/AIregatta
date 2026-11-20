@@ -1,0 +1,470 @@
+<title>AI Regatta en direct</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Mise en page : barre de simulation en haut, puis la vue de l'utilisateur choisi (téléphone, console du comité, télévision). Une seule simulation partagée. */
+:root{
+  color-scheme:light;
+  --fond:#F2F4EA; --carte:#FFFFFF; --encre:#11150D; --encre-2:rgba(17,21,13,.68); --filet:rgba(17,21,13,.12);
+  --lime:#C7EB00; --lime-texte:#4E6000; --mer:#CFE3DC; --mer-2:#BBD7CE; --nuit:#071311; --alerte:#C2552A; --alerte-doux:#F6DDCF;
+  --f-titre:"Funnel Display",system-ui,sans-serif; --f-texte:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--fond);color:var(--encre);font:400 15px/1.5 var(--f-texte);-webkit-font-smoothing:antialiased;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 32px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--lime-texte);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.bar{max-width:1320px;margin:0 auto 14px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:10px 12px;border-radius:18px;background:var(--carte);box-shadow:inset 0 0 0 1px var(--filet)}
+.brand{display:flex;align-items:center;gap:10px;font:600 18px var(--f-titre)}
+.brand i{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--nuit);color:var(--lime);font:700 13px var(--f-titre);font-style:normal}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:14px;background:#E6E9DC}
+.tabs button{border:0;border-radius:11px;padding:9px 14px;min-height:42px;background:transparent;font-weight:600;cursor:pointer;color:var(--encre-2)}
+.tabs button[aria-pressed="true"]{background:var(--carte);color:var(--encre);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.sim{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-left:auto}
+.sim button{border:1px solid var(--filet);background:var(--carte);border-radius:10px;min-height:40px;padding:6px 12px;cursor:pointer;font-weight:600}
+.sim button[aria-pressed="true"]{background:var(--nuit);color:var(--lime);border-color:var(--nuit)}
+.simclock{font:700 15px var(--f-mono);padding:8px 12px;border-radius:10px;background:#E6E9DC}
+.view{max-width:1320px;margin:0 auto}
+.hint{max-width:1320px;margin:0 auto 12px;font-size:14px;color:var(--encre-2)}
+.hint b{color:var(--encre)}
+
+/* ---------- Spectateur ---------- */
+.pubwrap{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:28px;align-items:start}
+.phone{width:100%;max-width:400px;height:800px;margin:0 auto;border-radius:44px;background:var(--nuit);padding:12px;box-shadow:0 30px 60px -30px rgba(7,19,17,.6)}
+.screen{position:relative;height:100%;border-radius:34px;overflow:hidden;background:var(--fond);display:flex;flex-direction:column}
+.p-head{display:flex;justify-content:space-between;align-items:flex-start;padding:18px 18px 8px}
+.p-head .lab{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--encre-2)}
+.p-head .clk{font:700 30px/1 var(--f-mono);letter-spacing:-.03em}
+.live{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:var(--nuit);color:var(--lime);font:600 11px var(--f-mono)}
+.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.p-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin:0 14px;padding:3px;border-radius:12px;background:#E3E6D8}
+.p-tabs button{border:0;border-radius:9px;min-height:40px;background:transparent;font:600 13px var(--f-texte);cursor:pointer;color:var(--encre-2)}
+.p-tabs button[aria-pressed="true"]{background:var(--carte);color:var(--encre)}
+.p-body{flex:1;min-height:0;overflow:auto;padding:12px 14px 16px;display:flex;flex-direction:column;gap:10px}
+.p-map{width:100%;height:auto;border-radius:20px;background:var(--mer);display:block;touch-action:manipulation}
+.p-row{display:grid;grid-template-columns:24px 12px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--carte);border:0;width:100%;text-align:left;cursor:pointer}
+.p-row b{font-weight:600}
+.dot{width:12px;height:12px;border-radius:50%}
+.small{font-size:12px;color:var(--encre-2)}
+.p-card{padding:12px 14px;border-radius:16px;background:var(--carte)}
+.p-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;text-align:center}
+.p-stats div{padding:8px 4px;border-radius:12px;background:#EEF0E4}
+.p-stats b{display:block;font:700 15px var(--f-mono)}
+.p-ev{padding:10px 12px;border-radius:14px;background:var(--carte);font-size:14px}
+.p-ev .t{font:500 11px var(--f-mono);color:var(--encre-2)}
+.p-ev.hot{background:var(--alerte-doux)}
+.toast{position:absolute;left:12px;right:12px;top:12px;z-index:5;display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:18px;background:rgba(7,19,17,.94);color:#F2F4EA;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);transform:translateY(-130%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.toast.on{transform:none}
+.toast i{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--lime);color:var(--nuit);font:700 12px var(--f-titre);font-style:normal}
+.toast b{display:block;font-size:14px}
+.toast span{font-size:13px;color:rgba(242,244,234,.82)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 12px;border-radius:99px;border:1px solid var(--filet);background:var(--carte);cursor:pointer;font-weight:600;font-size:13px}
+.chip[aria-pressed="true"]{border-color:var(--encre);background:rgba(199,235,0,.25)}
+.explain{display:flex;flex-direction:column;gap:14px}
+.explain h1{margin:0;font:600 clamp(28px,4vw,44px)/1.02 var(--f-titre);letter-spacing:-.02em;text-wrap:balance}
+.explain h1 em{font-style:normal;color:var(--lime-texte)}
+.explain p{margin:0;max-width:62ch;color:var(--encre-2)}
+.steps{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.steps li{padding:12px 14px;border-radius:14px;background:var(--carte);box-shadow:inset 0 0 0 1px var(--filet)}
+.steps b{display:block}
+
+/* ---------- Comité ---------- */
+.com{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px}
+.panel{background:var(--carte);border-radius:20px;box-shadow:inset 0 0 0 1px var(--filet);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.panel h2{margin:0;font:600 20px var(--f-titre)}
+.c-map{width:100%;height:auto;border-radius:14px;background:var(--mer);display:block}
+.proc{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px;border-radius:16px;background:var(--nuit);color:#F2F4EA}
+.proc .ph{font:600 11px var(--f-mono);letter-spacing:.14em;color:var(--lime);text-transform:uppercase}
+.proc .big{font:700 56px/1 var(--f-mono);letter-spacing:-.04em}
+.btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.cbtn{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;min-height:56px;padding:10px 12px;border-radius:14px;border:1px solid var(--filet);background:var(--carte);cursor:pointer}
+.cbtn b{font-size:14px}
+.cbtn span{font-size:12px;color:var(--encre-2)}
+.cbtn.urg{background:var(--alerte-doux);border-color:var(--alerte)}
+.cbtn:disabled{opacity:.45;cursor:not-allowed}
+.alert{padding:12px;border-radius:14px;border:1px solid var(--alerte);background:var(--alerte-doux);display:flex;flex-direction:column;gap:8px}
+.alert .row{display:flex;flex-wrap:wrap;gap:6px}
+.alert button{min-height:40px;padding:6px 12px;border-radius:10px;border:1px solid var(--filet);background:var(--carte);cursor:pointer;font-weight:600;font-size:13px}
+.alert button.pri{background:var(--nuit);color:var(--lime);border-color:var(--nuit)}
+.journal{font:500 12.5px/1.6 var(--f-mono);max-height:180px;overflow:auto;padding:10px 12px;border-radius:12px;background:#EEF0E4}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 8px;border-top:1px solid var(--filet);white-space:nowrap}
+thead th{border-top:0;font:500 11px var(--f-mono);text-transform:uppercase;color:var(--encre-2)}
+td.n{font-family:var(--f-mono)}
+.pill{display:inline-block;padding:2px 8px;border-radius:99px;font:600 11px var(--f-mono);background:rgba(199,235,0,.35)}
+.pill.w{background:var(--alerte-doux);color:#7A3412}
+.layers{display:flex;flex-wrap:wrap;gap:6px}
+
+/* ---------- Télévision ---------- */
+.tvwrap{display:flex;flex-direction:column;gap:12px}
+.tv{width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:var(--nuit);box-shadow:0 30px 60px -30px rgba(7,19,17,.6)}
+.tv svg{width:100%;height:100%;display:block}
+.regie{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.regie span{font:600 12px var(--f-mono);color:var(--encre-2);margin-right:6px}
+
+@media (max-width:900px){.pubwrap,.com{grid-template-columns:minmax(0,1fr)}.phone{height:760px}.explain{order:-1}}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}.live::before{animation:none}}
+</style>
+
+<div class="bar">
+  <div class="brand"><i>AI</i>AI Regatta <span class="small" style="font:500 13px var(--f-texte)">prototype en direct</span></div>
+  <div class="tabs" role="group" aria-label="Choisir l’utilisateur">
+    <button type="button" data-v="public" aria-pressed="true">Spectateur</button>
+    <button type="button" data-v="comite" aria-pressed="false">Comité de course</button>
+    <button type="button" data-v="tv" aria-pressed="false">Télévision</button>
+  </div>
+  <div class="sim" role="group" aria-label="Simulation">
+    <span class="simclock" id="simClock">−1:00</span>
+    <button type="button" id="play" aria-pressed="false">Pause</button>
+    <button type="button" data-sp="1" aria-pressed="false">×1</button>
+    <button type="button" data-sp="3" aria-pressed="true">×3</button>
+    <button type="button" data-sp="8" aria-pressed="false">×8</button>
+    <button type="button" id="restart">Recommencer</button>
+  </div>
+</div>
+<p class="hint" id="hint"></p>
+
+<!-- Spectateur -->
+<section class="view" id="v-public">
+  <div class="pubwrap">
+    <div class="phone"><div class="screen" id="screen">
+      <div class="toast" id="toast" role="status" aria-live="polite"><i>AI</i><div><b id="toastT"></b><span id="toastB"></span></div></div>
+      <div class="p-head">
+        <div><div class="lab" id="pLeg">Manche 3</div><div class="clk mono" id="pClock">−1:00</div></div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><span class="live">DIRECT</span><span class="small mono" id="pWind">vent 10 nds</span></div>
+      </div>
+      <div class="p-tabs" role="group" aria-label="Rubriques">
+        <button type="button" data-pt="map" aria-pressed="true">Carte</button>
+        <button type="button" data-pt="rank" aria-pressed="false">Classement</button>
+        <button type="button" data-pt="feed" aria-pressed="false">Fil</button>
+        <button type="button" data-pt="team" aria-pressed="false">Mon équipe</button>
+      </div>
+      <div class="p-body" id="pBody"></div>
+    </div></div>
+    <div class="explain">
+      <h1>L’application du <em>spectateur</em>, en vrai</h1>
+      <p>Une manche simulée se déroule en direct. Touchez un bateau sur la carte, ouvrez le classement, choisissez votre équipe : les alertes arrivent comme sur un téléphone. Le spectateur voit tout avec 1 seconde de retard sur les équipes et le comité.</p>
+      <ol class="steps">
+        <li><b>Regardez le départ</b>Compte à rebours, puis les bateaux coupent la ligne. Un bateau part trop tôt : si le comité le rappelle, l’alerte arrive ici.</li>
+        <li><b>Passez dans le rôle du comité</b>Onglet « Comité de course » : rappelez le bateau, jugez l’incident à la bouée. Revenez ici : la décision s’affiche, en une phrase.</li>
+        <li><b>Allumez la télévision</b>Même course, même chrono, en habillage d’antenne.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Comité -->
+<section class="view" id="v-comite" hidden>
+  <div class="com">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h2>Plan d’eau</h2>
+        <div class="layers" role="group" aria-label="Calques">
+          <button type="button" class="chip" data-ly="lay" aria-pressed="true">Laylines</button>
+          <button type="button" class="chip" data-ly="zone" aria-pressed="true">Zones</button>
+          <button type="button" class="chip" data-ly="trail" aria-pressed="true">Traces</button>
+        </div></div>
+      <svg class="c-map" id="cMap" viewBox="0 0 700 640" role="img" aria-label="Carte du comité : bouées, ligne de départ, bateaux et leurs traces"></svg>
+      <div class="tbl"><table><thead><tr><th>Place</th><th>Bateau</th><th>Balise</th><th>Liaison</th><th>Vitesse</th><th>Reste</th><th>État</th></tr></thead><tbody id="cFleet"></tbody></table></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <div class="panel">
+        <h2>Procédure de départ</h2>
+        <div class="proc"><span class="ph" id="cPhase">Avertissement</span><span class="big mono" id="cClock">−1:00</span><span class="small" style="color:rgba(242,244,234,.75)">procédure abrégée à 1 minute pour la démonstration</span></div>
+        <div class="btns">
+          <button type="button" class="cbtn" id="bX" disabled><b>Rappel individuel</b><span>pavillon X · 1 son</span></button>
+          <button type="button" class="cbtn" id="bGen"><b>Rappel général</b><span>tout le monde recommence</span></button>
+          <button type="button" class="cbtn" id="bAP"><b>Retarder</b><span>Aperçu · le départ est reporté</span></button>
+          <button type="button" class="cbtn" id="bS"><b>Réduire le parcours</b><span>arrivée à la porte · S</span></button>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Alertes à juger</h2>
+        <div id="cAlerts" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+      <div class="panel">
+        <h2>Journal</h2>
+        <div class="journal" id="cLog" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Télévision -->
+<section class="view" id="v-tv" hidden>
+  <div class="tvwrap">
+    <div class="tv"><svg id="tv" viewBox="0 0 1600 900" role="img" aria-label="Habillage télévision : vue aérienne, étiquettes des bateaux, classement et graphique du bas d’écran"></svg></div>
+    <div class="regie" role="group" aria-label="Régie">
+      <span>RÉGIE · GRAPHIQUE</span>
+      <button type="button" class="chip" data-g="auto" aria-pressed="true">Automatique</button>
+      <button type="button" class="chip" data-g="rank" aria-pressed="false">Classement</button>
+      <button type="button" class="chip" data-g="duel" aria-pressed="false">Duel</button>
+      <button type="button" class="chip" data-g="wind" aria-pressed="false">Vent</button>
+      <button type="button" class="chip" data-g="none" aria-pressed="false">Aucun</button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+'use strict';
+/* ---------------- Données ---------------- */
+const TEAMS=[
+ {id:'FRA',name:'France',c:'#C7EB00',f:1.04},{id:'ITA',name:'Italie',c:'#43B3A3',f:1.03},{id:'GBR',name:'Grande-Bretagne',c:'#B8902F',f:1.02},
+ {id:'NED',name:'Pays-Bas',c:'#C98BD6',f:1.0},{id:'SUI',name:'Suisse',c:'#D0704A',f:1.01},{id:'MON',name:'Monaco',c:'#6E8BD6',f:0.98},{id:'GER',name:'Allemagne',c:'#3C4A2E',f:0.97}];
+const WW={x:0,y:200},LW1={x:-11,y:18},LW2={x:11,y:18},PIN={x:-42,y:0},SB={x:42,y:0};
+const WIND_KN=10.4, WIND_DIR=135;
+const START=-60, RACE_END=520;
+const $=s=>document.querySelector(s);
+const fmt=t=>{const s=Math.abs(t),m=Math.floor(s/60),r=Math.floor(s%60);return (t<0?'−':'')+m+':'+String(r).padStart(2,'0')};
+const fmtC=t=>{const s=Math.abs(t),m=Math.floor(s/60),r=(s%60).toFixed(1).padStart(4,'0');return (t<0?'−':'+')+String(m).padStart(2,'0')+':'+r.replace('.',',')};
+
+/* ---------------- Simulation ---------------- */
+let seed=7,sim;
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function build(){
+  const r=mulberry(seed);
+  const ocsI=Math.floor(r()*TEAMS.length);
+  const boats=TEAMS.map((tm,i)=>{
+    const sx=-32+i*10.5+(r()-.5)*3, t0=(i===ocsI?-1.2:0.3+r()*3.2), f=tm.f*(0.94+r()*0.1), tackLen=14+r()*34;
+    const vUp=1.32*f, vDn=1.72*f, segs=[]; let t=t0, x=sx, y=0;
+    const add=(x1,y1,v,leg,kind)=>{const d=Math.hypot(x1-x,y1-y),mx=(x+x1)/2,lift=kind==='up'?1+0.06*Math.max(-1,Math.min(1,mx/40)):1,dt=d/(v*lift);segs.push({x0:x,y0:y,x1,y1,t0:t,t1:t+dt,leg,kind});t+=dt;x=x1;y=y1};
+    const dwell=(dt,leg,kind)=>{segs.push({x0:x,y0:y,x1:x,y1:y,t0:t,t1:t+dt,leg,kind});t+=dt};
+    // près : bords à 45°, virements
+    let s=r()<.5?1:-1, guard=0;
+    const xl=-48+r()*10, xr=48-r()*10;
+    while(guard++<12){
+      const tx=Math.max(xl,Math.min(xr,x+s*tackLen)); let px=x,py=y,hit=false;
+      for(let k=0;k<200;k++){const nx=px+s,ny=py+1; if(Math.sign(nx)===s && (200-ny)<=Math.abs(nx)){px=nx;py=ny;hit=true;break} if((s>0&&nx>=tx)||(s<0&&nx<=tx)){px=nx;py=ny;break} px=nx;py=ny}
+      add(px,py,vUp,1,'up'); dwell(2.4,1,'tack');
+      if(hit){add(WW.x,WW.y,vUp,1,'up');break}
+      s=-s;
+    }
+    dwell(2,1,'mark');
+    // portant : deux empannages
+    const g1=(r()<.5?-1:1)*(18+r()*14);
+    add(g1,135+r()*15,vDn,2,'dn'); dwell(1.6,2,'gybe');
+    add(-g1*.8,70+r()*14,vDn,2,'dn'); dwell(1.6,2,'gybe');
+    const gate=r()<.5?LW1:LW2; add(gate.x*.6,gate.y+2,vDn,2,'dn');
+    add(gate.x*.4+(r()-.5)*4,10,vDn*0.9,2,'fin');
+    return {...tm,i,sx,t0,segs,pens:[],ocs:i===ocsI,recalled:false,events:{},fin:null};
+  });
+  return {t:START,boats,events:[],alerts:[],log:[],flags:{},shortened:false,started:false};
+}
+function effT(b,t){let e=t;for(const p of b.pens){if(t>p.at)e-=Math.min(t-p.at,p.dur)}return e}
+function activePen(b,t){return b.pens.find(p=>t>=p.at&&t<p.at+p.dur)}
+function segAt(b,te){const S=b.segs;if(te>=S[S.length-1].t1)return S.length-1;for(let k=0;k<S.length;k++){if(te<S[k].t1)return k}return S.length-1}
+function state(b,t){
+  if(t<b.t0-12){const h=Math.sin(t/7+b.i)*3;return {x:b.sx+h,y:-15+Math.sin(t/5+b.i*2),hdg:h>0?60:-60,leg:0,sog:0.6,fin:false}}
+  if(t<b.t0){const k=(t-(b.t0-12))/12;return {x:b.sx,y:-15+15*k,hdg:0,leg:0,sog:1.2,fin:false}}
+  const te=effT(b,t), S=b.segs, last=S[S.length-1];
+  if(te>=last.t1) return {x:last.x1,y:last.y1,hdg:180,leg:3,sog:0,fin:true};
+  const k=segAt(b,te), sg=S[k], u=(te-sg.t0)/Math.max(.001,sg.t1-sg.t0);
+  let x=sg.x0+(sg.x1-sg.x0)*u, y=sg.y0+(sg.y1-sg.y0)*u, hdg;
+  const h=g=>Math.atan2(g.x1-g.x0,g.y1-g.y0)*180/Math.PI;
+  if(sg.x0===sg.x1&&sg.y0===sg.y1){const a=S[k-1]?h(S[k-1]):0,b2=S[k+1]?h(S[k+1]):a;let d=((b2-a+540)%360)-180;hdg=a+d*u}else hdg=h(sg);
+  const p=activePen(b,t); if(p) hdg+=360*(t-p.at)/p.dur;
+  const sog=(sg.x0===sg.x1&&sg.y0===sg.y1)||p?0.4:Math.hypot(sg.x1-sg.x0,sg.y1-sg.y0)/(sg.t1-sg.t0);
+  return {x,y,hdg,leg:sg.leg,sog,fin:false,kind:sg.kind};
+}
+function remaining(b,t,st){ if(st.fin) return -1e6+ (b.fin||0); if(t<b.t0) return 400; return st.leg<=1?(200-st.y)+190:(st.y-10)}
+function ranking(t){
+  return sim.boats.map(b=>{const st=state(b,t);return {b,st,rem:remaining(b,t,st)}})
+    .sort((a,c)=>{if(a.st.fin&&c.st.fin)return a.b.fin-c.b.fin; if(a.st.fin)return -1; if(c.st.fin)return 1; return a.rem-c.rem});
+}
+function trail(b,t,n,step){const p=[];for(let k=n;k>=0;k--){const tt=t-k*step;if(tt<START)continue;const s=state(b,tt);p.push([s.x,s.y])}return p}
+
+/* ---------------- Événements ---------------- */
+function emit(type,o){const e={type,t:sim.t,...o};sim.events.push(e);return e}
+function log(txt){sim.log.unshift(fmtC(sim.t)+'  '+txt)}
+function tick(){
+  const t=sim.t;
+  if(!sim.flags.warn&&t>=-60){sim.flags.warn=1;emit('proc',{title:'Avertissement',body:'Départ de la manche 3 dans 1 minute.'});log('Avertissement · 1 son (automatique)')}
+  if(!sim.flags.prep&&t>=-40){sim.flags.prep=1;log('Préparatoire · pavillon P · 1 son')}
+  if(!sim.flags.one&&t>=-20){sim.flags.one=1;emit('proc',{title:'Départ dans 20 secondes',body:'Les bateaux se placent sur la ligne.'});log('Une minute (abrégée) · 1 son long')}
+  if(!sim.flags.go&&t>=0){sim.flags.go=1;sim.started=true;emit('start',{title:'C’est parti !',body:'Manche 3 lancée, 7 bateaux.'});log('Départ · 1 son')}
+  for(const b of sim.boats){
+    const st=state(b,t);
+    if(b.ocs&&!b.events.ocs&&t>=0.2){b.events.ocs=1;sim.alerts.push({id:'ocs',kind:'Départ anticipé',title:b.name+' ('+b.id+') était au-delà de la ligne au signal',boats:[b.id],t,ocs:true});log('Alerte : '+b.id+' au-delà de la ligne (détection balise)')}
+    if(!b.events.ww&&st.leg===2){b.events.ww=1;const rk=ranking(t).findIndex(x=>x.b===b)+1;emit('mark',{boat:b.id,title:b.name+' passe la bouée au vent',body:rk+(rk===1?'re':'e')+' place',rk});log(b.id+' passe la bouée au vent ('+rk+')')}
+    if(!b.fin&&st.fin){const tr=b.segs[b.segs.length-1].t1+b.pens.reduce((a,p)=>a+p.dur,0);b.fin=tr;const rk=sim.boats.filter(x=>x.fin).length;emit('finish',{boat:b.id,title:rk===1?b.name+' gagne la manche 3 !':b.name+' arrive '+rk+'e',body:'Temps '+fmt(tr),rk});log(b.id+' arrive ('+rk+') en '+fmt(tr))}
+  }
+  // contacts près de la bouée au vent
+  const near=sim.boats.map(b=>({b,s:state(b,t)})).filter(o=>!o.s.fin&&Math.hypot(o.s.x-WW.x,o.s.y-WW.y)<22);
+  for(let a=0;a<near.length;a++)for(let c=a+1;c<near.length;c++){
+    const A=near[a],C=near[c],d=Math.hypot(A.s.x-C.s.x,A.s.y-C.s.y),key='c'+A.b.id+C.b.id;
+    if(d<5&&!sim.flags[key]&&!sim.flags['c'+C.b.id+A.b.id]){sim.flags[key]=1;
+      const late=A.s.y<C.s.y?A:C, right=late===A?C:A;
+      sim.alerts.push({id:key,kind:'Contact possible',title:late.b.id+' et '+right.b.id+' à la bouée au vent',boats:[late.b.id,right.b.id],t,gap:d.toFixed(2).replace('.',',')});
+      log('Alerte : contact possible '+late.b.id+' / '+right.b.id+' (écart '+d.toFixed(2)+' m)')}
+  }
+}
+
+/* ---------------- Actions du comité ---------------- */
+function decide(id,what){
+  const al=sim.alerts.find(a=>a.id===id); if(!al||al.done) return; al.done=what;
+  const b=sim.boats.find(x=>x.id===al.boats[0]);
+  if(what==='recall'){b.pens.push({at:sim.t,dur:9,kind:'recall'});b.recalled=true;emit('recall',{boat:b.id,title:'Rappel : '+b.name,body:b.id+' est parti trop tôt. Il doit revenir couper la ligne.',hot:true});log('Rappel individuel X pour '+b.id+' · corne · équipes et public prévenus')}
+  else if(what==='pen'){b.pens.push({at:sim.t,dur:7,kind:'turn'});emit('penalty',{boat:b.id,title:'Pénalité pour '+b.name,body:'N’a pas laissé la place à '+al.boats[1]+' à la bouée. Il fait un tour sur lui-même.',hot:true});log('Pénalité '+b.id+' (tour de 360°) · décision signée')}
+  else if(what==='jury'){emit('info',{title:'Incident à l’étude',body:al.title+' : le jury tranchera après la manche.'});log('Incident '+al.boats.join('/')+' renvoyé au jury')}
+  else {log('Alerte '+al.boats.join('/')+' classée sans suite')}
+  render(true);
+}
+function restart(reason){seed=(seed*31+11)%9973;sim=build();if(reason){emit('proc',{title:reason,body:'Nouvelle procédure de départ.'});log(reason+' · nouvelle procédure')}render(true)}
+
+/* ---------------- Boucle ---------------- */
+let speed=3,playing=true,last=performance.now(),acc=0,view='public',pTab='map',fav='SUI',selBoat=null,gfx='auto',ly={lay:true,zone:true,trail:true},seenPub=0,toastTimer=0;
+function loop(now){
+  const dt=Math.min(.1,(now-last)/1000);last=now;
+  if(playing&&sim.t<RACE_END){sim.t+=dt*speed;tick()}
+  acc+=dt; if(acc>1/20){acc=0;render(false)}
+  requestAnimationFrame(loop);
+}
+
+/* ---------------- Rendu commun ---------------- */
+function proj(x,y,w,h,pad){const X0=-62,X1=62,Y0=-24,Y1=222;const sx=(w-2*pad)/(X1-X0),sy=(h-2*pad)/(Y1-Y0),s=Math.min(sx,sy);const ox=(w-(X1-X0)*s)/2,oy=(h-(Y1-Y0)*s)/2;return [ox+(x-X0)*s, h-oy-(y-Y0)*s, s]}
+function boatShape(cx,cy,hdg,sz,fill,stroke,sw){return `<g transform="translate(${cx.toFixed(1)} ${cy.toFixed(1)}) rotate(${hdg.toFixed(1)})"><path d="M0 ${-sz} L${sz*.5} ${sz*.6} L0 ${sz*.35} L${-sz*.5} ${sz*.6}Z" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/></g>`}
+function courseSVG(w,h,pad,opt){
+  const P=(x,y)=>proj(x,y,w,h,pad);let o='';
+  const [ax,ay]=P(-60,-22),[bx,by]=P(60,220);
+  o+=`<rect x="${ax}" y="${by}" width="${bx-ax}" height="${ay-by}" rx="12" fill="none" stroke="${opt.dark?'rgba(242,244,234,.25)':'rgba(14,90,82,.4)'}" stroke-dasharray="6 7"/>`;
+  if(opt.lay){const [wx,wy]=P(WW.x,WW.y),[l1x,l1y]=P(-120,80),[l2x,l2y]=P(120,80);o+=`<line x1="${wx}" y1="${wy}" x2="${l1x}" y2="${l1y}" stroke="${opt.dark?'rgba(199,235,0,.35)':'rgba(17,21,13,.25)'}" stroke-dasharray="8 7"/><line x1="${wx}" y1="${wy}" x2="${l2x}" y2="${l2y}" stroke="${opt.dark?'rgba(199,235,0,.35)':'rgba(17,21,13,.25)'}" stroke-dasharray="8 7"/>`}
+  if(opt.zone){const [wx,wy,s]=P(WW.x,WW.y);o+=`<circle cx="${wx}" cy="${wy}" r="${(12*s).toFixed(1)}" fill="rgba(199,235,0,.12)" stroke="rgba(78,96,0,.5)" stroke-dasharray="4 5"/>`}
+  const [px,py]=P(PIN.x,PIN.y),[sx,sy]=P(SB.x,SB.y);
+  o+=`<line x1="${px}" y1="${py}" x2="${sx}" y2="${sy}" stroke="${opt.dark?'#F2F4EA':'#11150D'}" stroke-width="2" stroke-dasharray="7 6"/>`;
+  const mk=(m,lab)=>{const [mx,my]=P(m.x,m.y);return `<circle cx="${mx}" cy="${my}" r="${opt.mr}" fill="#D0704A" stroke="${opt.dark?'#F2F4EA':'#11150D'}" stroke-width="2"/>`+(lab?`<text x="${mx+opt.mr+5}" y="${my+4}" style="font:600 ${opt.fs}px var(--f-mono)" fill="${opt.dark?'#F2F4EA':'#11150D'}">${lab}</text>`:'')};
+  o+=mk(WW,opt.labels?'Bouée au vent':'')+mk(LW1,'')+mk(LW2,opt.labels?'Porte':'')+mk(PIN,'')+mk(SB,'');
+  return o;
+}
+function setHint(){
+  const H={public:'<b>Spectateur.</b> Ce que voit le public sur son téléphone, avec 1 s de retard. Touchez les bateaux, les onglets, choisissez votre équipe.',
+    comite:'<b>Comité de course.</b> Les décisions sont réelles dans la simulation : un rappel ou une pénalité ralentit vraiment le bateau, et part chez les équipes, le public et la télévision.',
+    tv:'<b>Télévision.</b> L’habillage d’antenne se met à jour seul. La régie peut imposer un graphique.'};
+  $('#hint').innerHTML=H[view];
+}
+
+/* ---------------- Spectateur ---------------- */
+function showToast(e){$('#toastT').textContent=e.title;$('#toastB').textContent=e.body||'';const T=$('#toast');T.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>T.classList.remove('on'),3800)}
+function pubEvents(){return sim.events.filter(e=>e.t<=sim.t-1)}
+function wantToast(e){if(['start','recall','penalty','proc','info'].includes(e.type))return true;if(e.type==='mark')return e.rk<=1||e.boat===fav;if(e.type==='finish')return e.rk===1||e.boat===fav;return false}
+function renderPublic(force){
+  const t=sim.t-1, evs=pubEvents();
+  while(seenPub<evs.length){const e=evs[seenPub++];if(wantToast(e))showToast(e)}
+  $('#pClock').textContent=fmt(t);
+  const rk=ranking(t), leader=rk[0];
+  $('#pLeg').textContent=t<0?'Manche 3 · départ':leader.st.fin?'Manche 3 · terminée':leader.st.leg<=1?'Manche 3 · bord de près':'Manche 3 · bord de portant';
+  $('#pWind').textContent='vent '+WIND_KN.toFixed(1).replace('.',',')+' nds · SE';
+  const B=$('#pBody');
+  if(pTab==='map'){
+    const w=360,h=420;let s=courseSVG(w,h,16,{mr:6,fs:10,labels:true,lay:false,zone:false});
+    rk.forEach((o,i)=>{const [x,y]=proj(o.st.x,o.st.y,w,h,16),on=selBoat===o.b.id||o.b.id===fav;
+      s+=boatShape(x,y,o.st.hdg,on?11:9,o.b.c,on?'#11150D':'rgba(17,21,13,.5)',on?2:1);
+      s+=`<text x="${x+10}" y="${y-8}" style="font:700 11px var(--f-texte)" fill="#11150D">${o.st.fin||t<0?'':i+1+' · '}${o.b.id}</text>`;
+      s+=`<circle cx="${x}" cy="${y}" r="18" fill="transparent" data-b="${o.b.id}" style="cursor:pointer"/>`});
+    const sel=selBoat?rk.find(o=>o.b.id===selBoat):null;
+    const banner=evs.filter(e=>e.hot).slice(-1)[0];
+    let html=`<svg class="p-map" viewBox="0 0 ${w} ${h}" role="img" aria-label="Carte en direct">${s}</svg>`;
+    if(banner&&t-banner.t<40) html+=`<div class="p-ev hot"><b>${banner.title}</b><br>${banner.body}</div>`;
+    if(sel){const pos=rk.indexOf(sel)+1;html+=`<div class="p-card"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 18px var(--f-titre)">${sel.b.name} · ${sel.b.id}</b><span class="dot" style="background:${sel.b.c}"></span></div><div class="p-stats" style="margin-top:8px"><div><b>${t<0?'—':pos+(pos===1?'er':'e')}</b><span class="small">place</span></div><div><b>${(sel.st.sog*1.944).toFixed(1).replace('.',',')}</b><span class="small">nœuds</span></div><div><b>${sel.st.fin?'arrivé':sel.st.leg<=1?'au vent':'porte'}</b><span class="small">prochaine bouée</span></div></div></div>`}
+    else html+=`<p class="small" style="text-align:center;margin:0">Touchez un bateau pour le suivre</p>`;
+    B.innerHTML=html;
+  } else if(pTab==='rank'){
+    const lead=rk[0];
+    B.innerHTML=rk.map((o,i)=>{const gap=i===0||t<0?'':o.st.fin&&lead.st.fin?'+'+(o.b.fin-lead.b.fin).toFixed(1).replace('.',',')+' s':'+'+Math.max(0,(o.rem-lead.rem)/1.5).toFixed(1).replace('.',',')+' s';
+      const pen=o.b.pens.length?(o.b.pens.some(p=>p.kind==='recall')?'rappelé au départ':'pénalité'):o.st.fin?'arrivé':'';
+      return `<button type="button" class="p-row" data-b="${o.b.id}"><b class="mono">${t<0?'–':i+1}</b><span class="dot" style="background:${o.b.c}"></span><span><b>${o.b.name}</b><br><span class="small">${pen||(o.st.sog*1.944).toFixed(1).replace('.',',')+' nds'}</span></span><span class="mono small">${gap}</span></button>`}).join('')+`<p class="small" style="margin:0">Provisoire, calculé chaque seconde sur la distance restante.</p>`;
+  } else if(pTab==='feed'){
+    B.innerHTML=evs.slice().reverse().map(e=>`<div class="p-ev${e.hot?' hot':''}"><span class="t">${fmt(e.t)}</span><br><b>${e.title}</b>${e.body?'<br>'+e.body:''}</div>`).join('')||'<p class="small">Les événements de la course arriveront ici.</p>';
+  } else {
+    const me=rk.find(o=>o.b.id===fav),pos=rk.indexOf(me)+1;
+    B.innerHTML=`<div class="p-card"><span class="small">Vous suivez</span><div style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 22px var(--f-titre)">${me.b.name}</b><span class="dot" style="width:16px;height:16px;background:${me.b.c}"></span></div><div class="p-stats" style="margin-top:8px"><div><b>${t<0?'—':pos+(pos===1?'er':'e')}</b><span class="small">place</span></div><div><b>${(me.st.sog*1.944).toFixed(1).replace('.',',')}</b><span class="small">nœuds</span></div><div><b>${me.b.pens.length}</b><span class="small">pénalités</span></div></div></div>
+    <b style="font-size:14px">Changer d’équipe</b><div class="chips">${TEAMS.map(x=>`<button type="button" class="chip" data-fav="${x.id}" aria-pressed="${x.id===fav}"><span class="dot" style="background:${x.c}"></span>${x.id}</button>`).join('')}</div>
+    <p class="small" style="margin:0">Vous recevez en plus ses passages de bouée, son arrivée et ses pénalités.</p>`;
+  }
+}
+
+/* ---------------- Comité ---------------- */
+function renderComite(force){
+  const t=sim.t, rk=ranking(t), w=700,h=640;
+  let s=courseSVG(w,h,22,{mr:7,fs:12,labels:true,lay:ly.lay,zone:ly.zone});
+  rk.forEach(o=>{
+    if(ly.trail){const tr=trail(o.b,t,24,1.2).map(p=>proj(p[0],p[1],w,h,22));if(tr.length>1)s+=`<polyline points="${tr.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="${o.b.c}" stroke-width="2.5" stroke-opacity=".7"/>`}
+    const [x,y]=proj(o.st.x,o.st.y,w,h,22);s+=boatShape(x,y,o.st.hdg,11,o.b.c,'#11150D',1.5);
+    s+=`<text x="${x+12}" y="${y-8}" style="font:700 12px var(--f-mono)" fill="#11150D">${o.b.id}</text>`});
+  sim.alerts.filter(a=>!a.done).forEach(a=>{const b=sim.boats.find(x=>x.id===a.boats[0]),st=state(b,t),[x,y]=proj(st.x,st.y,w,h,22);s+=`<circle cx="${x}" cy="${y}" r="22" fill="none" stroke="#C2552A" stroke-width="3"/>`});
+  $('#cMap').innerHTML=s;
+  $('#cClock').textContent=fmtC(t).slice(0,-2);
+  $('#cPhase').textContent=t<-40?'Avertissement':t<-20?'Préparatoire · P':t<0?'Une minute':rk[0].st.fin?'Arrivées':'Course lancée';
+  const ocs=sim.alerts.find(a=>a.ocs&&!a.done);$('#bX').disabled=!ocs;$('#bX').classList.toggle('urg',!!ocs);
+  $('#cFleet').innerHTML=rk.map((o,i)=>{const fix=o.b.id==='GER'?'<span class="pill w">RTK flottant</span>':'<span class="pill">RTK fixe</span>';const path=o.b.id==='GER'?'radio 2 Hz':'4G';
+    const etat=o.b.pens.some(p=>t>=p.at&&t<p.at+p.dur)?'<span class="pill w">pénalité en cours</span>':o.st.fin?'arrivé':o.b.ocs&&!o.b.recalled&&t>0?'<span class="pill w">OCS</span>':'';
+    return `<tr><td class="n">${t<0?'–':i+1}</td><td><span class="dot" style="display:inline-block;background:${o.b.c};margin-right:6px"></span>${o.b.id}</td><td>${fix}</td><td>${path}</td><td class="n">${(o.st.sog*1.944).toFixed(1)} nds</td><td class="n">${o.st.fin?'—':Math.max(0,o.rem).toFixed(0)+' m'}</td><td>${etat}</td></tr>`}).join('');
+  if(force||$('#cAlerts').dataset.n!==String(sim.alerts.filter(a=>!a.done).length)){
+    const open=sim.alerts.filter(a=>!a.done);$('#cAlerts').dataset.n=open.length;
+    $('#cAlerts').innerHTML=open.length?open.map(a=>`<div class="alert"><span class="small mono">${a.kind.toUpperCase()} · ${fmtC(a.t)}</span><b>${a.title}</b>${a.gap?`<span class="small">Écart minimal ${a.gap} m, positions RTK ± 2 cm</span>`:''}<div class="row">${a.ocs?`<button type="button" class="pri" data-d="${a.id}" data-w="recall">Rappeler ${a.boats[0]}</button><button type="button" data-d="${a.id}" data-w="none">Ignorer</button>`:`<button type="button" class="pri" data-d="${a.id}" data-w="pen">Pénalité ${a.boats[0]}</button><button type="button" data-d="${a.id}" data-w="none">Sans suite</button><button type="button" data-d="${a.id}" data-w="jury">Jury</button>`}</div></div>`).join(''):'<p class="small" style="margin:0">Aucune alerte en attente. Le moteur de course surveille le départ, les bouées et les contacts.</p>';
+  }
+  $('#cLog').innerHTML=sim.log.slice(0,40).map(l=>`<div>${l}</div>`).join('');
+}
+
+/* ---------------- Télévision ---------------- */
+function renderTV(){
+  const t=sim.t-1, rk=ranking(t), W=1600,H=900; const evs=pubEvents();
+  let s=`<defs><radialGradient id="sea" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#155A52"/><stop offset=".6" stop-color="#0C3530"/><stop offset="1" stop-color="#051312"/></radialGradient></defs><rect width="${W}" height="${H}" fill="url(#sea)"/>`;
+  for(let k=0;k<6;k++)s+=`<path d="M-20 ${120+k*140} Q400 ${90+k*140} 800 ${125+k*140} T1620 ${110+k*140}" stroke="rgba(214,230,224,.07)" stroke-width="2" fill="none"/>`;
+  const mapW=1100, off=180; const P=(x,y)=>{const [a,b,sc]=proj(x,y,mapW,H,40);return [a+off,b,sc]};
+  const course=courseSVG(mapW,H,40,{mr:12,fs:16,labels:true,lay:true,zone:false,dark:true});
+  s+=`<g transform="translate(${off} 0)">${course}</g>`;
+  const placed=[];rk.slice().sort((a,c)=>c.st.y-a.st.y).forEach(o=>{o._i=rk.indexOf(o)});rk.forEach((o,i)=>{const tr=trail(o.b,t,18,1).map(p=>P(p[0],p[1]));if(tr.length>1)s+=`<polyline points="${tr.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="4" stroke-linecap="round"/>`;
+    const [x,y]=P(o.st.x,o.st.y);s+=boatShape(x,y,o.st.hdg,16,o.b.c,'#051312',2.5);
+    let tx=x+22,up=y>260,ty=up?y-48:y+14;for(let k=0;k<8;k++){const hit=placed.find(q=>Math.abs(q[0]-tx)<136&&Math.abs(q[1]-ty)<44);if(!hit)break;ty=up?hit[1]-46:hit[1]+46}placed.push([tx,ty]);s+=`<line x1="${x}" y1="${y}" x2="${tx}" y2="${up?ty+40:ty}" stroke="rgba(242,244,234,.5)"/><g transform="translate(${tx} ${ty})"><rect width="132" height="40" rx="8" fill="rgba(5,19,18,.85)" stroke="${o.b.c}" stroke-width="2"/><rect width="32" height="40" rx="8" fill="${o.b.c}"/><text x="16" y="27" text-anchor="middle" style="font:700 17px var(--f-titre)" fill="#051312">${t<0?'·':i+1}</text><text x="42" y="18" style="font:700 15px var(--f-titre)" fill="#F2F4EA">${o.b.id}</text><text x="42" y="33" style="font:500 12px var(--f-mono)" fill="rgba(242,244,234,.8)">${(o.st.sog*1.944).toFixed(1).replace('.',',')} nds</text></g>`});
+  // bandeau
+  const leg=t<0?'Procédure de départ':rk[0].st.fin?'Arrivées':rk[0].st.leg<=1?'Bord de près':'Bord de portant';
+  s+=`<g transform="translate(40 36)"><rect width="200" height="64" rx="12" fill="#C7EB00"/><text x="20" y="42" style="font:700 26px var(--f-titre)" fill="#051312">AI Regatta</text><rect x="200" width="250" height="64" fill="rgba(5,19,18,.9)"/><text x="218" y="26" style="font:500 12px var(--f-mono);letter-spacing:.14em" fill="rgba(242,244,234,.7)">MANCHE 3</text><text x="218" y="50" style="font:700 20px var(--f-titre)" fill="#F2F4EA">${leg}</text><rect x="450" width="150" height="64" rx="0" fill="#051312"/><text x="525" y="44" text-anchor="middle" style="font:700 32px var(--f-mono)" fill="#F2F4EA">${fmt(t)}</text></g>`;
+  // vent
+  s+=`<g transform="translate(1290 36)"><rect width="270" height="64" rx="12" fill="rgba(5,19,18,.88)"/><g transform="translate(36 32) rotate(180)"><circle r="22" fill="none" stroke="rgba(242,244,234,.25)" stroke-width="2"/><path d="M0 -18 L7 -2 L0 -6 L-7 -2Z" fill="#C7EB00"/><line x1="0" y1="-6" x2="0" y2="18" stroke="#C7EB00" stroke-width="4"/></g><text x="72" y="32" style="font:700 26px var(--f-mono)" fill="#F2F4EA">10,4 NDS</text><text x="72" y="52" style="font:500 12px var(--f-mono);letter-spacing:.1em" fill="rgba(242,244,234,.7)">SUD-EST · RAFALE 12,9</text></g>`;
+  // classement
+  const lead=rk[0];
+  rk.forEach((o,i)=>{const y=120+i*48;const gap=i===0||t<0?'':'+'+(o.st.fin&&lead.st.fin?(o.b.fin-lead.b.fin):Math.max(0,(o.rem-lead.rem)/1.5)).toFixed(1).replace('.',',');
+    s+=`<g transform="translate(1290 ${y})"><rect width="270" height="42" rx="9" fill="rgba(5,19,18,.86)"/><text x="22" y="28" text-anchor="middle" style="font:700 19px var(--f-titre)" fill="#F2F4EA">${t<0?'–':i+1}</text><rect x="40" y="8" width="7" height="26" rx="3" fill="${o.b.c}"/><text x="58" y="28" style="font:600 17px var(--f-titre)" fill="#F2F4EA">${o.b.name.length>13?o.b.id:o.b.name}</text><text x="256" y="28" text-anchor="end" style="font:500 15px var(--f-mono)" fill="rgba(242,244,234,.85)">${o.b.pens.some(p=>t>=p.at&&t<p.at+p.dur)?'PÉN.':gap}</text></g>`});
+  // graphique du bas
+  let mode=gfx; const lastHot=evs.filter(e=>['penalty','recall','mark','finish','start'].includes(e.type)).slice(-1)[0];
+  if(mode==='auto'){mode= t<0?'count': lastHot&&t-lastHot.t<6?'event': (rk.length>1&&!rk[1].st.fin&&Math.abs(rk[1].rem-rk[0].rem)/1.5<4)?'duel':'rank'}
+  const L=(inner,wd)=>`<g transform="translate(${(W-wd)/2} ${H-150})"><rect width="${wd}" height="110" rx="16" fill="rgba(5,19,18,.92)" stroke="rgba(242,244,234,.12)"/>${inner}</g>`;
+  if(mode==='count') s+=L(`<text x="30" y="40" style="font:600 14px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">DÉPART DANS</text><text x="30" y="92" style="font:700 54px var(--f-mono)" fill="#F2F4EA">${fmt(t).replace('−','')}</text><text x="300" y="82" style="font:500 20px var(--f-texte)" fill="rgba(242,244,234,.85)">Pavillon P · 7 bateaux sur la ligne</text>`,760);
+  else if(mode==='event'&&lastHot) s+=L(`<rect width="16" height="110" rx="8" fill="${lastHot.type==='penalty'||lastHot.type==='recall'?'#D0704A':'#C7EB00'}"/><text x="40" y="48" style="font:700 30px var(--f-titre)" fill="#F2F4EA">${lastHot.title}</text><text x="40" y="84" style="font:500 19px var(--f-texte)" fill="rgba(242,244,234,.85)">${lastHot.body||''}</text>`,900);
+  else if(mode==='duel'&&rk.length>1){const a=rk[0],b=rk[1],g=Math.max(0,(b.rem-a.rem)/1.5);const pct=Math.min(.92,.5+g/10);
+    s+=L(`<text x="30" y="34" style="font:600 13px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">DUEL POUR LA TÊTE</text><text x="30" y="84" style="font:700 36px var(--f-titre)" fill="${a.b.c}">${a.b.id}</text><text x="870" y="84" text-anchor="end" style="font:700 36px var(--f-titre)" fill="${b.b.c}">${b.b.id}</text><rect x="150" y="62" width="600" height="14" rx="7" fill="rgba(242,244,234,.12)"/><rect x="150" y="62" width="${(600*pct).toFixed(0)}" height="14" rx="7" fill="#C7EB00"/><text x="${150+600*pct}" y="50" text-anchor="middle" style="font:700 20px var(--f-mono)" fill="#F2F4EA">+${g.toFixed(1).replace('.',',')} s</text>`,900)}
+  else if(mode==='wind') s+=L(`<text x="30" y="40" style="font:600 14px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">LE VENT</text><text x="30" y="88" style="font:700 40px var(--f-mono)" fill="#F2F4EA">10,4 nds · 135°</text><text x="430" y="82" style="font:500 20px var(--f-texte)" fill="rgba(242,244,234,.85)">Bascule de +6° à droite attendue dans 10 min</text>`,900);
+  else if(mode==='rank'&&!lead.st.fin&&t>=0) s+=L(`<text x="30" y="40" style="font:600 14px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">EN TÊTE</text><text x="30" y="88" style="font:700 40px var(--f-titre)" fill="#F2F4EA">${lead.b.name}</text><text x="470" y="82" style="font:500 20px var(--f-mono)" fill="rgba(242,244,234,.85)">${(lead.st.sog*1.944).toFixed(1).replace('.',',')} nds · ${Math.max(0,lead.rem).toFixed(0)} m restants</text>`,900);
+  $('#tv').innerHTML=s;
+}
+
+/* ---------------- Rendu ---------------- */
+function render(force){
+  $('#simClock').textContent=fmtC(sim.t).slice(0,-2);
+  if(view==='public')renderPublic(force);else if(view==='comite')renderComite(force);else renderTV();
+}
+
+/* ---------------- Interactions ---------------- */
+document.querySelectorAll('.tabs [data-v]').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.v;document.querySelectorAll('.tabs [data-v]').forEach(x=>x.setAttribute('aria-pressed',x===b));['public','comite','tv'].forEach(v=>$('#v-'+v).hidden=v!==view);setHint();try{localStorage.setItem('air-view',view)}catch(e){}render(true)}));
+document.querySelectorAll('[data-sp]').forEach(b=>b.addEventListener('click',()=>{speed=+b.dataset.sp;document.querySelectorAll('[data-sp]').forEach(x=>x.setAttribute('aria-pressed',x===b))}));
+$('#play').addEventListener('click',()=>{playing=!playing;$('#play').textContent=playing?'Pause':'Lecture';$('#play').setAttribute('aria-pressed',!playing)});
+$('#restart').addEventListener('click',()=>{seenPub=0;restart('')});
+document.querySelectorAll('[data-pt]').forEach(b=>b.addEventListener('click',()=>{pTab=b.dataset.pt;document.querySelectorAll('[data-pt]').forEach(x=>x.setAttribute('aria-pressed',x===b));render(true)}));
+$('#pBody').addEventListener('click',e=>{const f=e.target.closest('[data-fav]');if(f){fav=f.dataset.fav;render(true);return}const b=e.target.closest('[data-b]');if(b){selBoat=b.dataset.b;if(pTab!=='map'){pTab='map';document.querySelectorAll('[data-pt]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.pt==='map'))}render(true)}});
+$('#cAlerts').addEventListener('click',e=>{const b=e.target.closest('[data-d]');if(b)decide(b.dataset.d,b.dataset.w)});
+$('#bX').addEventListener('click',()=>{const a=sim.alerts.find(a=>a.ocs&&!a.done);if(a)decide(a.id,'recall')});
+$('#bGen').addEventListener('click',()=>{seenPub=0;restart('Rappel général')});
+$('#bAP').addEventListener('click',()=>{seenPub=0;restart('Départ retardé')});
+$('#bS').addEventListener('click',()=>{if(sim.shortened||sim.t<0)return;sim.shortened=true;emit('info',{title:'Parcours réduit',body:'Le comité réduit le parcours : la porte devient l’arrivée.'});log('Parcours réduit · pavillon S · 2 sons');render(true)});
+document.querySelectorAll('[data-ly]').forEach(b=>b.addEventListener('click',()=>{ly[b.dataset.ly]=!ly[b.dataset.ly];b.setAttribute('aria-pressed',ly[b.dataset.ly]);render(true)}));
+document.querySelectorAll('[data-g]').forEach(b=>b.addEventListener('click',()=>{gfx=b.dataset.g;document.querySelectorAll('[data-g]').forEach(x=>x.setAttribute('aria-pressed',x===b));render(true)}));
+
+sim=build();
+try{const v=localStorage.getItem('air-view');if(v&&v!=='public'){const b=document.querySelector('.tabs [data-v="'+v+'"]');if(b)b.click()}}catch(e){}
+setHint();render(true);requestAnimationFrame(loop);
+})();
+</script>
