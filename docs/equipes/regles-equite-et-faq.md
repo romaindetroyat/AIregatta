@@ -82,7 +82,7 @@ Oui, pour votre propre pilotage et votre tactique. Mais elles ne servent ni au s
 C’est la recommandation de l’organisation (point (b) de [liaison-bateau.md](liaison-bateau.md#43-ce-qui-reste-à-trancher-par-lorganisation)), à confirmer. Les données sont les mêmes pour tous, donc cela ne crée pas d’inégalité.
 
 **7. Pouvons-nous barrer notre bateau au joystick ?**
-La recommandation est : **non en course**, **oui pour la sécurité** (point (a), à trancher par l’organisation). En course, vous envoyez des ordres tactiques (vire, empanne, mode VMG, haut, bas), éventuellement avec un angle visé.
+C’est encore à trancher (point (a)). La piste : **un humain ne barre pas en course**, sauf pour la sécurité ; **une IA qui barre seule, sans intervention humaine**, pourrait être autorisée, même depuis la terre. En course, vous envoyez des ordres tactiques (vire, empanne, mode VMG, haut, bas), éventuellement avec un angle visé.
 
 **8. Notre liaison avec le bateau est tombée en pleine manche. Que se passe-t-il ?**
 Votre bateau applique le comportement que vous avez déclaré (par exemple : garder le mode, puis rejoindre un point de sécurité, puis se mettre bout au vent). Il reste suivi et classé par sa balise. Prévenez le comité (`technical_issue`), et demandez de l’aide si le bateau devient dangereux (`assistance_request`, plus appel direct).
