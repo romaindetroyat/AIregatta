@@ -1,470 +1,647 @@
 <title>AI Regatta en direct</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
-/* Mise en page : barre de simulation en haut, puis la vue de l'utilisateur choisi (téléphone, console du comité, télévision). Une seule simulation partagée. */
+/* Une seule course simulée, quatre regards : spectateur (téléphone), comité (console + rejeu d'arbitrage), télévision, équipe (console d'IA autonome). */
 :root{
   color-scheme:light;
-  --fond:#F2F4EA; --carte:#FFFFFF; --encre:#11150D; --encre-2:rgba(17,21,13,.68); --filet:rgba(17,21,13,.12);
-  --lime:#C7EB00; --lime-texte:#4E6000; --mer:#CFE3DC; --mer-2:#BBD7CE; --nuit:#071311; --alerte:#C2552A; --alerte-doux:#F6DDCF;
+  --sol:#E9EDE0; --papier:#FBFCF7; --blanc:#FFFFFF; --encre:#0F130C; --encre-2:#4C5444; --encre-3:#6E7563; --filet:rgba(15,19,12,.10);
+  --nuit:#061210; --nuit-2:#0C1F1C; --nuit-3:#13302B; --clair:#EEF2E6; --clair-2:rgba(238,242,230,.74);
+  --lime:#C7EB00; --lime-texte:#4A5C00; --sarcelle:#0E5A52;
+  --rouge:#C2552A; --rouge-doux:#F7E0D4; --ia:#6E8BD6;
   --f-titre:"Funnel Display",system-ui,sans-serif; --f-texte:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ombre:0 1px 0 rgba(255,255,255,.7) inset,0 0 0 1px var(--filet),0 18px 40px -28px rgba(20,40,20,.35);
 }
 *{box-sizing:border-box}
-body{background:var(--fond);color:var(--encre);font:400 15px/1.5 var(--f-texte);-webkit-font-smoothing:antialiased;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 32px}
-button{font:inherit;color:inherit}
+html,body{background:var(--sol)}
+body{color:var(--encre);font:400 15px/1.5 var(--f-texte);-webkit-font-smoothing:antialiased;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 40px}
+button,input{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--lime-texte);outline-offset:2px}
 .mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
-.bar{max-width:1320px;margin:0 auto 14px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:10px 12px;border-radius:18px;background:var(--carte);box-shadow:inset 0 0 0 1px var(--filet)}
-.brand{display:flex;align-items:center;gap:10px;font:600 18px var(--f-titre)}
-.brand i{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--nuit);color:var(--lime);font:700 13px var(--f-titre);font-style:normal}
-.tabs{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:14px;background:#E6E9DC}
-.tabs button{border:0;border-radius:11px;padding:9px 14px;min-height:42px;background:transparent;font-weight:600;cursor:pointer;color:var(--encre-2)}
-.tabs button[aria-pressed="true"]{background:var(--carte);color:var(--encre);box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.sim{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-left:auto}
-.sim button{border:1px solid var(--filet);background:var(--carte);border-radius:10px;min-height:40px;padding:6px 12px;cursor:pointer;font-weight:600}
-.sim button[aria-pressed="true"]{background:var(--nuit);color:var(--lime);border-color:var(--nuit)}
-.simclock{font:700 15px var(--f-mono);padding:8px 12px;border-radius:10px;background:#E6E9DC}
-.view{max-width:1320px;margin:0 auto}
-.hint{max-width:1320px;margin:0 auto 12px;font-size:14px;color:var(--encre-2)}
-.hint b{color:var(--encre)}
+.wrap{max-width:1360px;margin:0 auto}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
 
-/* ---------- Spectateur ---------- */
-.pubwrap{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:28px;align-items:start}
-.phone{width:100%;max-width:400px;height:800px;margin:0 auto;border-radius:44px;background:var(--nuit);padding:12px;box-shadow:0 30px 60px -30px rgba(7,19,17,.6)}
-.screen{position:relative;height:100%;border-radius:34px;overflow:hidden;background:var(--fond);display:flex;flex-direction:column}
-.p-head{display:flex;justify-content:space-between;align-items:flex-start;padding:18px 18px 8px}
-.p-head .lab{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--encre-2)}
-.p-head .clk{font:700 30px/1 var(--f-mono);letter-spacing:-.03em}
-.live{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:var(--nuit);color:var(--lime);font:600 11px var(--f-mono)}
+.appbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:10px 12px 10px 14px;border-radius:22px;background:var(--nuit);color:var(--clair);box-shadow:0 20px 40px -26px rgba(6,18,16,.8)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo b{font:600 19px var(--f-titre);letter-spacing:-.01em}
+.logo span{font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
+.roles{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:15px;background:rgba(238,242,230,.07)}
+.roles button{display:flex;align-items:center;gap:8px;border:0;border-radius:11px;padding:8px 14px;min-height:42px;background:transparent;color:var(--clair-2);font-weight:600;cursor:pointer;transition:background .2s,color .2s}
+.roles button[aria-pressed="true"]{background:var(--lime);color:var(--nuit)}
+.simctl{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-left:auto}
+.simctl .clk{font:700 16px var(--f-mono);padding:9px 12px;border-radius:11px;background:rgba(238,242,230,.08);color:var(--lime);min-width:96px;text-align:center}
+.simctl button{border:1px solid rgba(238,242,230,.16);background:transparent;color:var(--clair);border-radius:11px;min-height:40px;min-width:42px;padding:6px 11px;cursor:pointer;font-weight:600}
+.simctl button[aria-pressed="true"]{background:var(--clair);color:var(--nuit);border-color:var(--clair)}
+.lead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px 30px;margin:22px 4px 16px}
+.lead h1{margin:0;font:600 clamp(26px,3.4vw,40px)/1.02 var(--f-titre);letter-spacing:-.025em;text-wrap:balance}
+.lead h1 em{font-style:normal;color:var(--lime-texte)}
+.lead p{margin:0;max-width:60ch;color:var(--encre-2)}
+
+.card{background:var(--papier);border-radius:24px;box-shadow:var(--ombre);padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card h2{margin:0;font:600 19px var(--f-titre);letter-spacing:-.01em}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.eyebrow{font:600 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--encre-3)}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:99px;font:600 11px var(--f-mono);background:rgba(199,235,0,.32);color:var(--encre);white-space:nowrap}
+.pill.warn{background:var(--rouge-doux);color:#6E2A0E}
+.pill.dark{background:var(--nuit);color:var(--lime)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:3px;padding:3px;border-radius:12px;background:var(--clair)}
+.seg button{border:0;border-radius:9px;min-height:36px;padding:5px 11px;background:transparent;font:600 13px var(--f-texte);color:var(--encre-2);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--blanc);color:var(--encre);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:7px 13px;border-radius:12px;border:1px solid var(--filet);background:var(--blanc);font-weight:600;cursor:pointer}
+.btn.pri{background:var(--nuit);border-color:var(--nuit);color:var(--lime)}
+.map{display:block;width:100%;height:auto;border-radius:18px}
+
+/* Spectateur */
+.pub{display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:start}
+.device{width:min(392px,100%);height:812px;border-radius:52px;padding:11px;background:linear-gradient(160deg,#2A332B,#0A0F0C);box-shadow:0 40px 70px -40px rgba(6,18,16,.75),inset 0 0 0 1.5px rgba(255,255,255,.08)}
+.scr{position:relative;height:100%;border-radius:42px;overflow:hidden;background:var(--papier);display:flex;flex-direction:column}
+.ph-top{padding:20px 20px 14px;background:linear-gradient(180deg,var(--nuit) 0%,var(--nuit-2) 100%);color:var(--clair);display:flex;flex-direction:column;gap:10px}
+.ph-row{display:flex;justify-content:space-between;align-items:center}
+.ph-brand{font:600 15px var(--f-titre)}
+.live{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:rgba(199,235,0,.14);color:var(--lime);font:700 10.5px var(--f-mono);letter-spacing:.1em}
 .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 1.4s infinite}
-@keyframes pulse{50%{opacity:.3}}
-.p-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin:0 14px;padding:3px;border-radius:12px;background:#E3E6D8}
-.p-tabs button{border:0;border-radius:9px;min-height:40px;background:transparent;font:600 13px var(--f-texte);cursor:pointer;color:var(--encre-2)}
-.p-tabs button[aria-pressed="true"]{background:var(--carte);color:var(--encre)}
-.p-body{flex:1;min-height:0;overflow:auto;padding:12px 14px 16px;display:flex;flex-direction:column;gap:10px}
-.p-map{width:100%;height:auto;border-radius:20px;background:var(--mer);display:block;touch-action:manipulation}
-.p-row{display:grid;grid-template-columns:24px 12px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--carte);border:0;width:100%;text-align:left;cursor:pointer}
-.p-row b{font-weight:600}
-.dot{width:12px;height:12px;border-radius:50%}
-.small{font-size:12px;color:var(--encre-2)}
-.p-card{padding:12px 14px;border-radius:16px;background:var(--carte)}
-.p-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;text-align:center}
-.p-stats div{padding:8px 4px;border-radius:12px;background:#EEF0E4}
-.p-stats b{display:block;font:700 15px var(--f-mono)}
-.p-ev{padding:10px 12px;border-radius:14px;background:var(--carte);font-size:14px}
-.p-ev .t{font:500 11px var(--f-mono);color:var(--encre-2)}
-.p-ev.hot{background:var(--alerte-doux)}
-.toast{position:absolute;left:12px;right:12px;top:12px;z-index:5;display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:18px;background:rgba(7,19,17,.94);color:#F2F4EA;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);transform:translateY(-130%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+@keyframes pulse{50%{opacity:.25}}
+.ph-clk{font:700 40px/1 var(--f-mono);letter-spacing:-.04em}
+.ph-sub{font:500 11.5px var(--f-mono);color:var(--clair-2);letter-spacing:.04em}
+.ph-wind{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:12px;background:rgba(238,242,230,.08);font:600 13px var(--f-mono)}
+.ph-body{flex:1;min-height:0;overflow:auto;padding:14px 14px 18px;display:flex;flex-direction:column;gap:10px;scrollbar-width:none}
+.ph-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:8px 8px 18px;background:var(--blanc);box-shadow:0 -1px 0 var(--filet)}
+.ph-nav button{display:flex;flex-direction:column;align-items:center;gap:3px;border:0;background:transparent;min-height:50px;font:600 11px var(--f-texte);color:var(--encre-3);cursor:pointer}
+.ph-nav button[aria-pressed="true"]{color:var(--encre)}
+.ph-nav button[aria-pressed="true"] .ico{background:var(--lime)}
+.ph-nav .ico{display:grid;place-items:center;width:44px;height:28px;border-radius:99px;transition:background .2s}
+.toast{position:absolute;left:10px;right:10px;top:10px;z-index:6;display:flex;gap:11px;align-items:center;padding:12px 14px;border-radius:22px;background:rgba(251,252,247,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 18px 40px -16px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.6);transform:translateY(-140%);transition:transform .5s cubic-bezier(.16,1,.3,1)}
 .toast.on{transform:none}
-.toast i{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--lime);color:var(--nuit);font:700 12px var(--f-titre);font-style:normal}
-.toast b{display:block;font-size:14px}
-.toast span{font-size:13px;color:rgba(242,244,234,.82)}
+.toast .ap{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--nuit)}
+.toast b{display:block;font-size:14px;line-height:1.25}
+.toast span{display:block;font-size:13px;color:var(--encre-2);line-height:1.3}
+.toast small{margin-left:auto;align-self:flex-start;font:500 11px var(--f-mono);color:var(--encre-3)}
+.sheet{padding:14px;border-radius:20px;background:var(--blanc);box-shadow:0 0 0 1px var(--filet)}
+.sheet-h{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sheet-h b{font:600 18px var(--f-titre)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:10px}
+.stats div{padding:9px 6px;border-radius:13px;background:var(--clair);text-align:center}
+.stats b{display:block;font:700 16px var(--f-mono)}
+.stats span{font-size:11px;color:var(--encre-2)}
+.rk{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;padding:10px 12px;border:0;border-radius:16px;background:var(--blanc);box-shadow:0 0 0 1px var(--filet);text-align:left;cursor:pointer}
+.rk .pos{font:700 18px var(--f-titre);text-align:center}
+.rk .nm{display:flex;align-items:center;gap:8px;font-weight:600}
+.rk .bar{display:block;height:4px;border-radius:2px;background:var(--clair);margin-top:6px;overflow:hidden}
+.rk .bar i{display:block;height:100%;border-radius:2px}
+.rk .sub{display:block;font-size:12px;color:var(--encre-2)}
+.rk .gap{font:600 13px var(--f-mono)}
+.rk.me{box-shadow:0 0 0 2px var(--encre)}
+.ev{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:start}
+.ic{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:var(--clair);flex:none}
+.ic.hot{background:var(--rouge-doux);color:#6E2A0E}
+.ic.ok{background:rgba(199,235,0,.4)}
+.ev b{display:block;font-size:14px;line-height:1.3}
+.ev span{font-size:13px;color:var(--encre-2)}
+.ev .t{display:block;font:500 11px var(--f-mono);color:var(--encre-3)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 12px;border-radius:99px;border:1px solid var(--filet);background:var(--carte);cursor:pointer;font-weight:600;font-size:13px}
-.chip[aria-pressed="true"]{border-color:var(--encre);background:rgba(199,235,0,.25)}
-.explain{display:flex;flex-direction:column;gap:14px}
-.explain h1{margin:0;font:600 clamp(28px,4vw,44px)/1.02 var(--f-titre);letter-spacing:-.02em;text-wrap:balance}
-.explain h1 em{font-style:normal;color:var(--lime-texte)}
-.explain p{margin:0;max-width:62ch;color:var(--encre-2)}
-.steps{display:grid;gap:8px;margin:0;padding:0;list-style:none}
-.steps li{padding:12px 14px;border-radius:14px;background:var(--carte);box-shadow:inset 0 0 0 1px var(--filet)}
-.steps b{display:block}
+.chip{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 12px;border-radius:99px;border:1px solid var(--filet);background:var(--blanc);cursor:pointer;font:600 13px var(--f-texte)}
+.chip[aria-pressed="true"]{background:var(--nuit);color:var(--clair);border-color:var(--nuit)}
+.banner{display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:16px;background:var(--rouge-doux);color:#4B1D08;font-size:13.5px;line-height:1.4}
+.banner b{display:block;font-size:14px}
+.side{display:flex;flex-direction:column;gap:14px;padding-top:6px}
+.side ol{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+.side li{display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;padding:14px;border-radius:18px;background:var(--papier);box-shadow:var(--ombre);counter-increment:s}
+.side li::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--nuit);color:var(--lime);font:700 15px var(--f-mono)}
+.side li span{color:var(--encre-2);font-size:14px}
+.side li b{color:var(--encre)}
 
-/* ---------- Comité ---------- */
-.com{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px}
-.panel{background:var(--carte);border-radius:20px;box-shadow:inset 0 0 0 1px var(--filet);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.panel h2{margin:0;font:600 20px var(--f-titre)}
-.c-map{width:100%;height:auto;border-radius:14px;background:var(--mer);display:block}
-.proc{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px;border-radius:16px;background:var(--nuit);color:#F2F4EA}
+/* Comité */
+.com{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(330px,1fr);gap:16px;align-items:start}
+.proc{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:18px;border-radius:20px;background:radial-gradient(120% 140% at 0% 0%,var(--nuit-3),var(--nuit) 60%);color:var(--clair)}
+.proc .big{font:700 52px/1 var(--f-mono);letter-spacing:-.04em}
 .proc .ph{font:600 11px var(--f-mono);letter-spacing:.14em;color:var(--lime);text-transform:uppercase}
-.proc .big{font:700 56px/1 var(--f-mono);letter-spacing:-.04em}
-.btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.cbtn{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;min-height:56px;padding:10px 12px;border-radius:14px;border:1px solid var(--filet);background:var(--carte);cursor:pointer}
-.cbtn b{font-size:14px}
-.cbtn span{font-size:12px;color:var(--encre-2)}
-.cbtn.urg{background:var(--alerte-doux);border-color:var(--alerte)}
-.cbtn:disabled{opacity:.45;cursor:not-allowed}
-.alert{padding:12px;border-radius:14px;border:1px solid var(--alerte);background:var(--alerte-doux);display:flex;flex-direction:column;gap:8px}
-.alert .row{display:flex;flex-wrap:wrap;gap:6px}
-.alert button{min-height:40px;padding:6px 12px;border-radius:10px;border:1px solid var(--filet);background:var(--carte);cursor:pointer;font-weight:600;font-size:13px}
-.alert button.pri{background:var(--nuit);color:var(--lime);border-color:var(--nuit)}
-.journal{font:500 12.5px/1.6 var(--f-mono);max-height:180px;overflow:auto;padding:10px 12px;border-radius:12px;background:#EEF0E4}
+.flag{display:grid;place-items:center;width:64px;height:46px;border-radius:6px;font:700 22px var(--f-titre);box-shadow:inset 0 0 0 2px rgba(255,255,255,.25)}
+.steps{display:flex;gap:6px;grid-column:1/-1}
+.steps i{flex:1;height:5px;border-radius:3px;background:rgba(238,242,230,.15)}
+.steps i.on{background:var(--lime)}
+.acts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.act{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-height:58px;padding:10px 12px;border-radius:14px;border:1px solid var(--filet);background:var(--blanc);text-align:left;cursor:pointer}
+.act b{font-size:14px}
+.act span{font:500 11.5px var(--f-mono);color:var(--encre-3)}
+.act.urg{border-color:var(--rouge);background:var(--rouge-doux);animation:urg 1.2s infinite}
+@keyframes urg{50%{box-shadow:0 0 0 4px rgba(194,85,42,.18)}}
+.act:disabled{opacity:.42;cursor:not-allowed;animation:none}
+.alert{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 12px;padding:12px;border-radius:16px;background:var(--rouge-doux);box-shadow:inset 0 0 0 1px rgba(194,85,42,.35)}
+.alert .ic{background:var(--rouge);color:#fff}
+.alert b{display:block;font-size:14px}
+.alert .row{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px}
+.journal{display:flex;flex-direction:column;gap:2px;max-height:210px;overflow:auto;padding:8px;border-radius:14px;background:var(--nuit);color:var(--clair-2);font:500 12px/1.5 var(--f-mono)}
+.journal div{padding:2px 6px;border-radius:6px}
+.journal div:first-child{background:rgba(199,235,0,.1);color:var(--clair)}
+.journal b{color:var(--lime);font-weight:500}
 .tbl{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{text-align:left;padding:7px 8px;border-top:1px solid var(--filet);white-space:nowrap}
-thead th{border-top:0;font:500 11px var(--f-mono);text-transform:uppercase;color:var(--encre-2)}
+th,td{text-align:left;padding:8px;border-top:1px solid var(--filet);white-space:nowrap}
+thead th{border-top:0;font:600 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--encre-3)}
 td.n{font-family:var(--f-mono)}
-.pill{display:inline-block;padding:2px 8px;border-radius:99px;font:600 11px var(--f-mono);background:rgba(199,235,0,.35)}
-.pill.w{background:var(--alerte-doux);color:#7A3412}
-.layers{display:flex;flex-wrap:wrap;gap:6px}
+.empty{padding:16px;border-radius:14px;background:var(--clair);color:var(--encre-2);font-size:14px;text-align:center}
 
-/* ---------- Télévision ---------- */
-.tvwrap{display:flex;flex-direction:column;gap:12px}
-.tv{width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:var(--nuit);box-shadow:0 30px 60px -30px rgba(7,19,17,.6)}
-.tv svg{width:100%;height:100%;display:block}
-.regie{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.regie span{font:600 12px var(--f-mono);color:var(--encre-2);margin-right:6px}
+/* Rejeu */
+.rv{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(6,18,16,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.rv[hidden]{display:none}
+.rv-box{position:relative;width:min(1180px,100%);max-height:100%;overflow:auto;border-radius:26px;background:var(--nuit);color:var(--clair);box-shadow:0 40px 80px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr)}
+.rv-stage{padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.rv-side{padding:58px 18px 18px;background:var(--nuit-2);display:flex;flex-direction:column;gap:12px;min-width:0}
+.rv h2{margin:0;font:600 22px var(--f-titre)}
+.rv .eyebrow{color:var(--lime)}
+.rv-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.rv-ctl button{min-height:40px;min-width:44px;padding:6px 12px;border-radius:11px;border:1px solid rgba(238,242,230,.18);background:transparent;color:var(--clair);font-weight:600;cursor:pointer}
+.rv-ctl button[aria-pressed="true"]{background:var(--clair);color:var(--nuit)}
+.rv-ctl input[type=range]{flex:1;min-width:160px;accent-color:var(--lime)}
+.rv-t{font:700 15px var(--f-mono);color:var(--lime);min-width:84px}
+.rv-data{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.rv-data div{padding:10px;border-radius:12px;background:rgba(238,242,230,.06)}
+.rv-data span{display:block;font:500 11px var(--f-mono);color:var(--clair-2)}
+.rv-data b{font:700 17px var(--f-mono)}
+.rv-rule{padding:12px;border-radius:14px;background:rgba(199,235,0,.1);font-size:13.5px;line-height:1.45}
+.rv-rule b{color:var(--lime)}
+.rv-dec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.rv-dec button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:58px;padding:10px 12px;border-radius:14px;border:1px solid rgba(238,242,230,.16);background:rgba(238,242,230,.04);color:var(--clair);text-align:left;cursor:pointer}
+.rv-dec button b{font-size:14px}
+.rv-dec button span{font-size:12px;color:var(--clair-2)}
+.rv-dec button.pri{background:var(--lime);color:var(--nuit);border-color:var(--lime)}
+.rv-dec button.pri span{color:rgba(6,18,16,.72)}
+.rv-close{position:absolute;top:14px;right:14px;z-index:2;min-height:40px;padding:6px 12px;border-radius:11px;border:1px solid rgba(238,242,230,.2);background:rgba(6,18,16,.6);color:var(--clair);cursor:pointer;font-weight:600}
+.cam{position:relative;aspect-ratio:16/6;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#9DB9C9 0%,#C9DCDF 44%,#2F6E69 45%,#123F3B 100%)}
+.cam>span{position:absolute;left:10px;top:8px;font:600 11px var(--f-mono);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.cam svg{position:absolute;inset:0;width:100%;height:100%}
 
-@media (max-width:900px){.pubwrap,.com{grid-template-columns:minmax(0,1fr)}.phone{height:760px}.explain{order:-1}}
-@media (prefers-reduced-motion:reduce){.toast{transition:none}.live::before{animation:none}}
+/* Télévision */
+.tv{width:100%;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:var(--nuit);box-shadow:0 40px 70px -40px rgba(6,18,16,.8)}
+.tv svg{display:block;width:100%;height:100%}
+.regie{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+
+/* Équipe */
+.eq{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,1fr);gap:16px;align-items:start;padding:16px;border-radius:28px;background:radial-gradient(120% 90% at 0% 0%,var(--nuit-3),var(--nuit) 55%);color:var(--clair)}
+.eq .card{background:rgba(238,242,230,.05);box-shadow:inset 0 0 0 1px rgba(238,242,230,.1);color:var(--clair)}
+.eq .eyebrow{color:var(--clair-2)}
+.lock{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;padding:14px;border-radius:18px;background:linear-gradient(90deg,rgba(199,235,0,.18),rgba(199,235,0,.04));box-shadow:inset 0 0 0 1px rgba(199,235,0,.35)}
+.lock i{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:var(--lime);color:var(--nuit);font-style:normal}
+.lock b{display:block;font:600 16px var(--f-titre)}
+.lock span{font-size:13px;color:var(--clair-2)}
+.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.kpi div{padding:10px 12px;border-radius:14px;background:rgba(238,242,230,.06);min-width:0}
+.kpi span{display:block;font:500 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--clair-2)}
+.kpi b{font:700 17px var(--f-mono)}
+.ord{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px 12px;border-radius:14px;background:rgba(238,242,230,.05)}
+.ord.new{background:rgba(110,139,214,.2);box-shadow:inset 0 0 0 1px rgba(110,139,214,.5)}
+.ord b{font-weight:600}
+.ord code{font:500 11.5px var(--f-mono);color:#A9BCF0;margin-left:6px}
+.ord .why{display:block;font-size:12.5px;color:var(--clair-2);margin-top:2px}
+.ord .st{font:600 11px var(--f-mono);color:var(--lime);white-space:nowrap}
+.conf{display:block;height:4px;border-radius:2px;background:rgba(238,242,230,.12);margin-top:6px;overflow:hidden}
+.conf i{display:block;height:100%;background:var(--ia)}
+.eq .chip{background:transparent;color:var(--clair);border-color:rgba(238,242,230,.2)}
+.eq .chip[aria-pressed="true"]{background:var(--lime);color:var(--nuit);border-color:var(--lime)}
+.stop{min-height:50px;border-radius:14px;border:1px solid rgba(194,85,42,.7);background:rgba(194,85,42,.14);color:#FFB596;font-weight:700;cursor:pointer;padding:8px 14px}
+.stop.arm{background:var(--rouge);color:#fff}
+.stop:disabled{opacity:.45;cursor:not-allowed}
+
+@media (max-width:1000px){.pub,.com,.eq{grid-template-columns:minmax(0,1fr)}.device{margin:0 auto}.rv-box{grid-template-columns:minmax(0,1fr)}.rv-side{padding-top:18px}.kpi{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.device{height:760px}.simctl{margin-left:0}}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}.live::before,.act.urg{animation:none}}
 </style>
 
-<div class="bar">
-  <div class="brand"><i>AI</i>AI Regatta <span class="small" style="font:500 13px var(--f-texte)">prototype en direct</span></div>
-  <div class="tabs" role="group" aria-label="Choisir l’utilisateur">
-    <button type="button" data-v="public" aria-pressed="true">Spectateur</button>
-    <button type="button" data-v="comite" aria-pressed="false">Comité de course</button>
-    <button type="button" data-v="tv" aria-pressed="false">Télévision</button>
-  </div>
-  <div class="sim" role="group" aria-label="Simulation">
-    <span class="simclock" id="simClock">−1:00</span>
-    <button type="button" id="play" aria-pressed="false">Pause</button>
+<div class="wrap">
+<header class="appbar">
+  <div class="logo"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="10" fill="#C7EB00"/><path d="M17 6 L17 26 M17 7 C22 12 24 18 24 24 L17 24 Z" fill="#061210" stroke="#061210" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 27 C13 29 21 29 26 27" stroke="#061210" stroke-width="2" fill="none" stroke-linecap="round"/></svg><div><b>AI Regatta</b><br><span>prototype en direct</span></div></div>
+  <nav class="roles" role="group" aria-label="Choisir qui regarde">
+    <button type="button" data-v="public" aria-pressed="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>Spectateur</button>
+    <button type="button" data-v="comite" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>Comité de course</button>
+    <button type="button" data-v="tv" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="13" rx="2"/><path d="M8 21h8"/></svg>Télévision</button>
+    <button type="button" data-v="equipe" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6"/></svg>Équipe</button>
+  </nav>
+  <div class="simctl" role="group" aria-label="Simulation">
+    <span class="clk" id="simClock">−1:00</span>
+    <button type="button" id="play" aria-label="Pause">❚❚</button>
     <button type="button" data-sp="1" aria-pressed="false">×1</button>
-    <button type="button" data-sp="3" aria-pressed="true">×3</button>
-    <button type="button" data-sp="8" aria-pressed="false">×8</button>
+    <button type="button" data-sp="4" aria-pressed="true">×4</button>
+    <button type="button" data-sp="10" aria-pressed="false">×10</button>
     <button type="button" id="restart">Recommencer</button>
   </div>
-</div>
-<p class="hint" id="hint"></p>
+</header>
 
-<!-- Spectateur -->
+<div class="lead"><h1 id="leadT"></h1><p id="leadP"></p></div>
+
 <section class="view" id="v-public">
-  <div class="pubwrap">
-    <div class="phone"><div class="screen" id="screen">
-      <div class="toast" id="toast" role="status" aria-live="polite"><i>AI</i><div><b id="toastT"></b><span id="toastB"></span></div></div>
-      <div class="p-head">
-        <div><div class="lab" id="pLeg">Manche 3</div><div class="clk mono" id="pClock">−1:00</div></div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><span class="live">DIRECT</span><span class="small mono" id="pWind">vent 10 nds</span></div>
+  <div class="pub">
+    <div class="device"><div class="scr">
+      <div class="toast" id="toast" role="status" aria-live="polite"><span class="ap"><svg width="22" height="22" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 6 L17 26 M17 7 C22 12 24 18 24 24 L17 24 Z" fill="#C7EB00" stroke="#C7EB00" stroke-width="1.6" stroke-linejoin="round"/></svg></span><div><b id="toastT"></b><span id="toastB"></span></div><small>maintenant</small></div>
+      <div class="ph-top">
+        <div class="ph-row"><span class="ph-brand">AI Regatta</span><span class="live">EN DIRECT</span></div>
+        <div class="ph-row" style="align-items:flex-end"><div><div class="ph-sub" id="pLeg">MANCHE 3</div><div class="ph-clk" id="pClock">−1:00</div></div>
+          <div class="ph-wind"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g transform="rotate(180 12 12)"><path d="M12 3 L16 11 L12 9 L8 11Z" fill="#C7EB00"/><path d="M12 9V21" stroke="#C7EB00" stroke-width="2.4" stroke-linecap="round"/></g></svg>10,4 nds</div></div>
       </div>
-      <div class="p-tabs" role="group" aria-label="Rubriques">
-        <button type="button" data-pt="map" aria-pressed="true">Carte</button>
-        <button type="button" data-pt="rank" aria-pressed="false">Classement</button>
-        <button type="button" data-pt="feed" aria-pressed="false">Fil</button>
-        <button type="button" data-pt="team" aria-pressed="false">Mon équipe</button>
-      </div>
-      <div class="p-body" id="pBody"></div>
+      <div class="ph-body" id="pBody"></div>
+      <nav class="ph-nav" aria-label="Rubriques">
+        <button type="button" data-pt="map" aria-pressed="true"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M4.5 12a7.5 7.5 0 0 1 15 0M7.5 12a4.5 4.5 0 0 1 9 0"/></svg></span>Direct</button>
+        <button type="button" data-pt="rank" aria-pressed="false"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 21V11M16 21V6M12 21v-6M4 21h16"/></svg></span>Classement</button>
+        <button type="button" data-pt="feed" aria-pressed="false"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span>Fil</button>
+        <button type="button" data-pt="team" aria-pressed="false"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span>Mon équipe</button>
+      </nav>
     </div></div>
-    <div class="explain">
-      <h1>L’application du <em>spectateur</em>, en vrai</h1>
-      <p>Une manche simulée se déroule en direct. Touchez un bateau sur la carte, ouvrez le classement, choisissez votre équipe : les alertes arrivent comme sur un téléphone. Le spectateur voit tout avec 1 seconde de retard sur les équipes et le comité.</p>
-      <ol class="steps">
-        <li><b>Regardez le départ</b>Compte à rebours, puis les bateaux coupent la ligne. Un bateau part trop tôt : si le comité le rappelle, l’alerte arrive ici.</li>
-        <li><b>Passez dans le rôle du comité</b>Onglet « Comité de course » : rappelez le bateau, jugez l’incident à la bouée. Revenez ici : la décision s’affiche, en une phrase.</li>
-        <li><b>Allumez la télévision</b>Même course, même chrono, en habillage d’antenne.</li>
+    <div class="side">
+      <ol>
+        <li><span><b>Regardez le départ.</b> Compte à rebours, puis la flotte coupe la ligne. Un bateau part toujours un peu trop tôt.</span></li>
+        <li><span><b>Passez au comité.</b> Rappelez le bateau ; plus tard, ouvrez le rejeu d’un contact à une bouée et décidez. Revenez ici : la décision s’affiche en une phrase.</span></li>
+        <li><span><b>Allumez la télévision</b>, puis la console d’une équipe : son IA décide seule, personne ne touche aux commandes.</span></li>
       </ol>
+      <p style="margin:0;color:var(--encre-2);font-size:14px">Deux tours : près, portant, près, portant. Le spectateur voit tout avec 1 seconde de retard sur le comité et les équipes.</p>
     </div>
   </div>
 </section>
 
-<!-- Comité -->
 <section class="view" id="v-comite" hidden>
   <div class="com">
-    <div class="panel">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h2>Plan d’eau</h2>
-        <div class="layers" role="group" aria-label="Calques">
-          <button type="button" class="chip" data-ly="lay" aria-pressed="true">Laylines</button>
-          <button type="button" class="chip" data-ly="zone" aria-pressed="true">Zones</button>
-          <button type="button" class="chip" data-ly="trail" aria-pressed="true">Traces</button>
-        </div></div>
-      <svg class="c-map" id="cMap" viewBox="0 0 700 640" role="img" aria-label="Carte du comité : bouées, ligne de départ, bateaux et leurs traces"></svg>
-      <div class="tbl"><table><thead><tr><th>Place</th><th>Bateau</th><th>Balise</th><th>Liaison</th><th>Vitesse</th><th>Reste</th><th>État</th></tr></thead><tbody id="cFleet"></tbody></table></div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <div class="card">
+        <div class="card-h"><h2>Plan d’eau</h2>
+          <div class="chips" role="group" aria-label="Calques"><button type="button" class="chip" data-ly="lay" aria-pressed="true">Laylines</button><button type="button" class="chip" data-ly="zone" aria-pressed="true">Zones</button><button type="button" class="chip" data-ly="trail" aria-pressed="true">Traces</button></div></div>
+        <svg class="map" id="cMap" viewBox="0 0 760 640" role="img" aria-label="Carte du comité : parcours, bateaux, traces et alertes"></svg>
+      </div>
+      <div class="card"><div class="card-h"><h2>Flotte</h2><span class="eyebrow" id="cLap"></span></div>
+        <div class="tbl"><table><thead><tr><th>Place</th><th>Bateau</th><th>Tour</th><th>Balise</th><th>Liaison</th><th>Vitesse</th><th>Reste</th><th>État</th></tr></thead><tbody id="cFleet"></tbody></table></div></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
-      <div class="panel">
-        <h2>Procédure de départ</h2>
-        <div class="proc"><span class="ph" id="cPhase">Avertissement</span><span class="big mono" id="cClock">−1:00</span><span class="small" style="color:rgba(242,244,234,.75)">procédure abrégée à 1 minute pour la démonstration</span></div>
-        <div class="btns">
-          <button type="button" class="cbtn" id="bX" disabled><b>Rappel individuel</b><span>pavillon X · 1 son</span></button>
-          <button type="button" class="cbtn" id="bGen"><b>Rappel général</b><span>tout le monde recommence</span></button>
-          <button type="button" class="cbtn" id="bAP"><b>Retarder</b><span>Aperçu · le départ est reporté</span></button>
-          <button type="button" class="cbtn" id="bS"><b>Réduire le parcours</b><span>arrivée à la porte · S</span></button>
+      <div class="card">
+        <div class="proc"><div><div class="ph" id="cPhase">Avertissement</div><div class="big mono" id="cClock">−1:00</div><div style="font-size:12px;color:var(--clair-2)">procédure abrégée à 1 min pour la démonstration</div></div><div class="flag" id="cFlag">AI</div><div class="steps" id="cSteps"><i></i><i></i><i></i><i></i></div></div>
+        <div class="acts">
+          <button type="button" class="act" id="bX" disabled><b>Rappel individuel</b><span>X · 1 son</span></button>
+          <button type="button" class="act" id="bGen"><b>Rappel général</b><span>1er substitut · 2 sons</span></button>
+          <button type="button" class="act" id="bAP"><b>Retarder</b><span>Aperçu · 2 sons</span></button>
+          <button type="button" class="act" id="bN"><b>Annuler la manche</b><span>N · 3 sons</span></button>
         </div>
       </div>
-      <div class="panel">
-        <h2>Alertes à juger</h2>
-        <div id="cAlerts" style="display:flex;flex-direction:column;gap:8px"></div>
-      </div>
-      <div class="panel">
-        <h2>Journal</h2>
-        <div class="journal" id="cLog" aria-live="polite"></div>
-      </div>
+      <div class="card"><div class="card-h"><h2>À juger</h2><span class="eyebrow">moteur de course</span></div><div id="cAlerts" style="display:flex;flex-direction:column;gap:8px"></div></div>
+      <div class="card"><div class="card-h"><h2>Décisions prises</h2><span class="eyebrow">rejouables</span></div><div id="cDone" style="display:flex;flex-direction:column;gap:6px"></div></div>
+      <div class="card"><div class="card-h"><h2>Journal</h2><span class="eyebrow">horodaté GPS</span></div><div class="journal" id="cLog" aria-live="polite"></div></div>
     </div>
   </div>
 </section>
 
-<!-- Télévision -->
 <section class="view" id="v-tv" hidden>
-  <div class="tvwrap">
-    <div class="tv"><svg id="tv" viewBox="0 0 1600 900" role="img" aria-label="Habillage télévision : vue aérienne, étiquettes des bateaux, classement et graphique du bas d’écran"></svg></div>
-    <div class="regie" role="group" aria-label="Régie">
-      <span>RÉGIE · GRAPHIQUE</span>
-      <button type="button" class="chip" data-g="auto" aria-pressed="true">Automatique</button>
-      <button type="button" class="chip" data-g="rank" aria-pressed="false">Classement</button>
-      <button type="button" class="chip" data-g="duel" aria-pressed="false">Duel</button>
-      <button type="button" class="chip" data-g="wind" aria-pressed="false">Vent</button>
-      <button type="button" class="chip" data-g="none" aria-pressed="false">Aucun</button>
+  <div class="tv"><svg id="tv" viewBox="0 0 1600 900" role="img" aria-label="Habillage télévision"></svg></div>
+  <div class="regie"><span class="eyebrow">Régie · graphique du bas</span>
+    <div class="seg" role="group" aria-label="Graphique"><button type="button" data-g="auto" aria-pressed="true">Automatique</button><button type="button" data-g="rank" aria-pressed="false">Leader</button><button type="button" data-g="duel" aria-pressed="false">Duel</button><button type="button" data-g="wind" aria-pressed="false">Vent</button><button type="button" data-g="none" aria-pressed="false">Aucun</button></div></div>
+</section>
+
+<section class="view" id="v-equipe" hidden>
+  <div class="eq">
+    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+      <div class="chips" role="group" aria-label="Choisir l’équipe" id="eqPick"></div>
+      <div class="card">
+        <div class="card-h"><h2 id="eqTitle">Console</h2><span class="pill dark mono" id="eqClock"></span></div>
+        <svg class="map" id="eqMap" viewBox="0 0 760 600" role="img" aria-label="Carte tactique de l’équipe"></svg>
+        <div class="kpi" id="eqKpi"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--clair-2)"><span><span class="dot" style="background:var(--lime)"></span> flux officiel du PC course</span><span><span class="dot" style="background:var(--ia)"></span> calculs de l’IA de l’équipe</span><span><span class="dot" style="background:#E8915F"></span> liaison radio de l’équipe</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+      <div class="lock"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></i><div><b>IA autonome · commandes verrouillées</b><span>Les ordres partent seuls vers le pilote automatique. Aucun humain ne peut les donner ni les modifier pendant la manche.</span></div></div>
+      <div class="card"><div class="card-h"><h2>Décisions de l’IA</h2><span class="eyebrow">vers le bateau</span></div><div id="eqOrders" style="display:flex;flex-direction:column;gap:6px" aria-live="polite"></div></div>
+      <div class="card"><div class="card-h"><h2>Comité</h2><span class="eyebrow">accusés automatiques</span></div><div id="eqInbox" style="display:flex;flex-direction:column;gap:6px"></div></div>
+      <div class="card"><div class="card-h"><h2>Sécurité</h2><span class="eyebrow">seule action humaine</span></div><p style="margin:0;font-size:13px;color:var(--clair-2)">Arrêter le bateau : il se met face au vent. L’arrêt est signalé au comité et journalisé.</p><button type="button" class="stop" id="eqStop">Arrêt de sécurité</button></div>
     </div>
   </div>
 </section>
+</div>
+
+<div class="rv" id="rv" hidden role="dialog" aria-modal="true" aria-labelledby="rvT">
+  <div class="rv-box">
+    <div class="rv-stage">
+      <span class="eyebrow" id="rvK">Rejeu</span>
+      <h2 id="rvT">Incident</h2>
+      <svg class="map" id="rvMap" viewBox="0 0 640 440" role="img" aria-label="Rejeu vu de dessus des bateaux impliqués"></svg>
+      <div class="rv-ctl">
+        <button type="button" id="rvPlay" aria-label="Lire ou mettre en pause">▶</button>
+        <button type="button" id="rvBack">−0,5 s</button>
+        <button type="button" id="rvFwd">+0,5 s</button>
+        <input type="range" id="rvRange" min="0" max="1000" value="0" aria-label="Moment du rejeu">
+        <span class="rv-t" id="rvTime">0,0 s</span>
+        <div class="seg" role="group" aria-label="Vitesse du rejeu" style="background:rgba(238,242,230,.08)"><button type="button" data-rs="0.25" aria-pressed="false" style="color:var(--clair)">¼</button><button type="button" data-rs="0.5" aria-pressed="true">½</button><button type="button" data-rs="1" aria-pressed="false" style="color:var(--clair)">×1</button></div>
+      </div>
+      <div class="cam" aria-hidden="true"><svg viewBox="0 0 600 225" preserveAspectRatio="none" id="rvCam"></svg><span>CAMÉRA DIGUE · même heure GPS</span></div>
+    </div>
+    <div class="rv-side">
+      <div class="rv-data" id="rvData"></div>
+      <div class="rv-rule" id="rvRule"></div>
+      <div class="rv-dec" id="rvDec"></div>
+      <p style="margin:0;font-size:12px;color:var(--clair-2)">Positions officielles RTK (± 2 cm), étrave calculée. Chaque décision est signée, horodatée et rejouable.</p>
+    </div>
+    <button type="button" class="rv-close" id="rvClose">Fermer</button>
+  </div>
+</div>
 
 <script>
 (function(){
 'use strict';
-/* ---------------- Données ---------------- */
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 const TEAMS=[
- {id:'FRA',name:'France',c:'#C7EB00',f:1.04},{id:'ITA',name:'Italie',c:'#43B3A3',f:1.03},{id:'GBR',name:'Grande-Bretagne',c:'#B8902F',f:1.02},
- {id:'NED',name:'Pays-Bas',c:'#C98BD6',f:1.0},{id:'SUI',name:'Suisse',c:'#D0704A',f:1.01},{id:'MON',name:'Monaco',c:'#6E8BD6',f:0.98},{id:'GER',name:'Allemagne',c:'#3C4A2E',f:0.97}];
+ {id:'FRA',name:'France',c:'#C7EB00',f:1.04},{id:'ITA',name:'Italie',c:'#3FB3A1',f:1.035},{id:'GBR',name:'Grande-Bretagne',c:'#C8962E',f:1.02},
+ {id:'NED',name:'Pays-Bas',c:'#C98BD6',f:1.0},{id:'SUI',name:'Suisse',c:'#E0703F',f:1.015},{id:'MON',name:'Monaco',c:'#6E8BD6',f:0.985},{id:'GER',name:'Allemagne',c:'#9AA48A',f:0.975}];
 const WW={x:0,y:200},LW1={x:-11,y:18},LW2={x:11,y:18},PIN={x:-42,y:0},SB={x:42,y:0};
-const WIND_KN=10.4, WIND_DIR=135;
-const START=-60, RACE_END=520;
-const $=s=>document.querySelector(s);
+const DN1=182,UP2=182,DN2=200,TOTAL=200+DN1+UP2+DN2;
+const START=-60,END=1500;
+const LEGN={0:'Procédure de départ',1:'Tour 1 · près',2:'Tour 1 · portant',3:'Tour 2 · près',4:'Tour 2 · portant',5:'Arrivée'};
+const fr=n=>String(n).replace('.',',');
 const fmt=t=>{const s=Math.abs(t),m=Math.floor(s/60),r=Math.floor(s%60);return (t<0?'−':'')+m+':'+String(r).padStart(2,'0')};
-const fmtC=t=>{const s=Math.abs(t),m=Math.floor(s/60),r=(s%60).toFixed(1).padStart(4,'0');return (t<0?'−':'+')+String(m).padStart(2,'0')+':'+r.replace('.',',')};
+const fmtC=t=>{const s=Math.abs(t),m=Math.floor(s/60),r=(s%60).toFixed(1).padStart(4,'0');return (t<0?'−':'+')+String(m).padStart(2,'0')+':'+fr(r)};
+const kn=v=>fr((v*1.944).toFixed(1));
 
-/* ---------------- Simulation ---------------- */
-let seed=7,sim;
-function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let seed=11,sim;
+function rnd(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function build(){
-  const r=mulberry(seed);
-  const ocsI=Math.floor(r()*TEAMS.length);
+  const r=rnd(seed),ocsI=Math.floor(r()*TEAMS.length);
   const boats=TEAMS.map((tm,i)=>{
-    const sx=-32+i*10.5+(r()-.5)*3, t0=(i===ocsI?-1.2:0.3+r()*3.2), f=tm.f*(0.94+r()*0.1), tackLen=14+r()*34;
-    const vUp=1.32*f, vDn=1.72*f, segs=[]; let t=t0, x=sx, y=0;
+    const sx=-33+i*11+(r()-.5)*3,t0=(i===ocsI?-1.3:0.3+r()*3.2),f=tm.f*(0.95+r()*0.08),tackLen=14+r()*32;
+    const vUp=1.36*f,vDn=1.78*f,segs=[];let t=t0,x=sx,y=0;
     const add=(x1,y1,v,leg,kind)=>{const d=Math.hypot(x1-x,y1-y),mx=(x+x1)/2,lift=kind==='up'?1+0.06*Math.max(-1,Math.min(1,mx/40)):1,dt=d/(v*lift);segs.push({x0:x,y0:y,x1,y1,t0:t,t1:t+dt,leg,kind});t+=dt;x=x1;y=y1};
     const dwell=(dt,leg,kind)=>{segs.push({x0:x,y0:y,x1:x,y1:y,t0:t,t1:t+dt,leg,kind});t+=dt};
-    // près : bords à 45°, virements
-    let s=r()<.5?1:-1, guard=0;
-    const xl=-48+r()*10, xr=48-r()*10;
-    while(guard++<12){
-      const tx=Math.max(xl,Math.min(xr,x+s*tackLen)); let px=x,py=y,hit=false;
-      for(let k=0;k<200;k++){const nx=px+s,ny=py+1; if(Math.sign(nx)===s && (200-ny)<=Math.abs(nx)){px=nx;py=ny;hit=true;break} if((s>0&&nx>=tx)||(s<0&&nx<=tx)){px=nx;py=ny;break} px=nx;py=ny}
-      add(px,py,vUp,1,'up'); dwell(2.4,1,'tack');
-      if(hit){add(WW.x,WW.y,vUp,1,'up');break}
-      s=-s;
-    }
-    dwell(2,1,'mark');
-    // portant : deux empannages
-    const g1=(r()<.5?-1:1)*(18+r()*14);
-    add(g1,135+r()*15,vDn,2,'dn'); dwell(1.6,2,'gybe');
-    add(-g1*.8,70+r()*14,vDn,2,'dn'); dwell(1.6,2,'gybe');
-    const gate=r()<.5?LW1:LW2; add(gate.x*.6,gate.y+2,vDn,2,'dn');
-    add(gate.x*.4+(r()-.5)*4,10,vDn*0.9,2,'fin');
-    return {...tm,i,sx,t0,segs,pens:[],ocs:i===ocsI,recalled:false,events:{},fin:null};
+    const beat=leg=>{let s=x>0?-1:(r()<.5?1:-1),g=0;const xl=-48+r()*10,xr=48-r()*10;
+      while(g++<14){const tx=Math.max(xl,Math.min(xr,x+s*(tackLen*(.7+r()*.6))));let px=x,py=y,hit=false;
+        for(let k=0;k<260;k++){const nx=px+s,ny=py+1;if(Math.sign(nx)===s&&(WW.y-ny)<=Math.abs(nx)){px=nx;py=ny;hit=true;break}if((s>0&&nx>=tx)||(s<0&&nx<=tx)){px=nx;py=ny;break}px=nx;py=ny}
+        add(px,py,vUp,leg,'up');if(hit){dwell(2.3,leg,'tack');add(WW.x,WW.y,vUp,leg,'up');break}dwell(2.3,leg,'tack');s=-s}
+      dwell(2,leg,'mark')};
+    const run=(leg,final)=>{const g1=(r()<.5?-1:1)*(16+r()*16);add(g1,135+r()*15,vDn,leg,'dn');dwell(1.6,leg,'gybe');add(-g1*.8,70+r()*14,vDn,leg,'dn');dwell(1.6,leg,'gybe');
+      const gate=r()<.5?LW1:LW2;if(!final){add(gate.x*.62,gate.y+3,vDn,leg,'dn');dwell(2.2,leg,'gate')}else add((r()-.5)*30,-3,vDn,leg,'fin')};
+    beat(1);run(2,false);beat(3);run(4,true);
+    const orders=[{te:t0,cmd:'Mode près',code:'mode_upwind',why:'Départ : cap sur la bouée au vent',conf:.92}];
+    let nt=0;segs.forEach((g,k)=>{const nx=segs[k+1];
+      if(g.kind==='tack'){nt++;const lay=nx&&nx.x1===WW.x&&nx.y1===WW.y;orders.push({te:g.t0,cmd:'Vire',code:'tack',why:lay?'Layline atteinte : la bouée sera droit devant':(g.x0>0?'Le vent a tourné à droite : l’autre bord fait gagner':'Bord gauche épuisé, retour vers la droite favorisée'),conf:lay?.97:.7+r()*.2});
+        if(lay)orders.push({te:g.t1+.5,cmd:'Mode haut',code:'mode_high',why:'Approche de la bouée : serrer le vent pour la passer',conf:.88});else if(nt%3===1)orders.push({te:g.t1+3,cmd:'Mode VMG',code:'mode_vmg',why:'Meilleure vitesse utile vers la bouée',conf:.81})}
+      if(g.kind==='mark'){orders.push({te:g.t0,cmd:'Abats',code:'bear_away',why:'Bouée au vent passée par bâbord',conf:.99});orders.push({te:g.t1+.3,cmd:'Mode portant',code:'mode_downwind',why:'Descente vers la porte',conf:.93})}
+      if(g.kind==='gybe')orders.push({te:g.t0,cmd:'Empanne',code:'gybe',why:'Meilleur angle de descente sur l’autre bord',conf:.76+r()*.15});
+      if(g.kind==='gate'){orders.push({te:g.t0,cmd:'Loffe',code:'head_up',why:'Porte passée : on repart au près',conf:.99});orders.push({te:g.t1+.3,cmd:'Mode près',code:'mode_upwind',why:'Deuxième tour',conf:.94})}
+      if(g.kind==='fin'&&segs[k-1].kind!=='fin')orders.push({te:g.t0,cmd:'Mode VMG',code:'mode_vmg',why:'Dernière descente : ligne d’arrivée',conf:.9})});
+    return {...tm,i,sx,t0,segs,orders,pens:[],ocs:i===ocsI,recalled:false,ev:{},fin:null};
   });
-  return {t:START,boats,events:[],alerts:[],log:[],flags:{},shortened:false,started:false};
+  return {t:START,boats,events:[],alerts:[],done:[],log:[],flags:{}};
 }
-function effT(b,t){let e=t;for(const p of b.pens){if(t>p.at)e-=Math.min(t-p.at,p.dur)}return e}
-function activePen(b,t){return b.pens.find(p=>t>=p.at&&t<p.at+p.dur)}
-function segAt(b,te){const S=b.segs;if(te>=S[S.length-1].t1)return S.length-1;for(let k=0;k<S.length;k++){if(te<S[k].t1)return k}return S.length-1}
+function effT(b,t){let e=t;for(const p of b.pens)if(t>p.at)e-=Math.min(t-p.at,p.dur);return e}
+function activePen(b,t){return b.pens.find(p=>p.dur>0.5&&t>=p.at&&t<p.at+p.dur)}
 function state(b,t){
-  if(t<b.t0-12){const h=Math.sin(t/7+b.i)*3;return {x:b.sx+h,y:-15+Math.sin(t/5+b.i*2),hdg:h>0?60:-60,leg:0,sog:0.6,fin:false}}
-  if(t<b.t0){const k=(t-(b.t0-12))/12;return {x:b.sx,y:-15+15*k,hdg:0,leg:0,sog:1.2,fin:false}}
-  const te=effT(b,t), S=b.segs, last=S[S.length-1];
-  if(te>=last.t1) return {x:last.x1,y:last.y1,hdg:180,leg:3,sog:0,fin:true};
-  const k=segAt(b,te), sg=S[k], u=(te-sg.t0)/Math.max(.001,sg.t1-sg.t0);
-  let x=sg.x0+(sg.x1-sg.x0)*u, y=sg.y0+(sg.y1-sg.y0)*u, hdg;
-  const h=g=>Math.atan2(g.x1-g.x0,g.y1-g.y0)*180/Math.PI;
-  if(sg.x0===sg.x1&&sg.y0===sg.y1){const a=S[k-1]?h(S[k-1]):0,b2=S[k+1]?h(S[k+1]):a;let d=((b2-a+540)%360)-180;hdg=a+d*u}else hdg=h(sg);
-  const p=activePen(b,t); if(p) hdg+=360*(t-p.at)/p.dur;
-  const sog=(sg.x0===sg.x1&&sg.y0===sg.y1)||p?0.4:Math.hypot(sg.x1-sg.x0,sg.y1-sg.y0)/(sg.t1-sg.t0);
-  return {x,y,hdg,leg:sg.leg,sog,fin:false,kind:sg.kind};
+  if(t<b.t0-12){const h=Math.sin(t/7+b.i)*3;return {x:b.sx+h,y:-16+Math.sin(t/5+b.i*2),hdg:h>0?70:-70,leg:0,sog:.5,fin:false}}
+  if(t<b.t0){const k=(t-(b.t0-12))/12;return {x:b.sx,y:-16+16*k,hdg:0,leg:0,sog:1.3,fin:false}}
+  const S=b.segs,last=S[S.length-1],te=effT(b,t);
+  if(te>=last.t1)return {x:last.x1,y:last.y1,hdg:180,leg:5,sog:0,fin:true};
+  let k=0;while(k<S.length-1&&te>=S[k].t1)k++;
+  const g=S[k],u=(te-g.t0)/Math.max(.001,g.t1-g.t0),still=g.x0===g.x1&&g.y0===g.y1;
+  const H=s=>Math.atan2(s.x1-s.x0,s.y1-s.y0)*180/Math.PI;
+  let hdg;if(still){const a=S[k-1]?H(S[k-1]):0,c=S[k+1]?H(S[k+1]):a,d=((c-a+540)%360)-180;hdg=a+d*u}else hdg=H(g);
+  const p=activePen(b,t);if(p&&p.kind==='turn')hdg+=360*(t-p.at)/p.dur;else if(p&&p.kind==='stop')hdg=0;else if(p&&p.kind==='recall')hdg=180;
+  const sog=still||p?.4:Math.hypot(g.x1-g.x0,g.y1-g.y0)/(g.t1-g.t0);
+  return {x:g.x0+(g.x1-g.x0)*u,y:g.y0+(g.y1-g.y0)*u,hdg,leg:g.leg,sog,fin:false};
 }
-function remaining(b,t,st){ if(st.fin) return -1e6+ (b.fin||0); if(t<b.t0) return 400; return st.leg<=1?(200-st.y)+190:(st.y-10)}
-function ranking(t){
-  return sim.boats.map(b=>{const st=state(b,t);return {b,st,rem:remaining(b,t,st)}})
-    .sort((a,c)=>{if(a.st.fin&&c.st.fin)return a.b.fin-c.b.fin; if(a.st.fin)return -1; if(c.st.fin)return 1; return a.rem-c.rem});
-}
-function trail(b,t,n,step){const p=[];for(let k=n;k>=0;k--){const tt=t-k*step;if(tt<START)continue;const s=state(b,tt);p.push([s.x,s.y])}return p}
+function remain(s){if(s.fin)return -1;if(s.leg===0)return TOTAL+20;if(s.leg===1)return (WW.y-s.y)+DN1+UP2+DN2;if(s.leg===2)return (s.y-18)+UP2+DN2;if(s.leg===3)return (WW.y-s.y)+DN2;return Math.max(0,s.y)}
+function ranking(t){return sim.boats.map(b=>{const st=state(b,t);return {b,st,rem:remain(st)}}).sort((a,c)=>{if(a.st.fin&&c.st.fin)return a.b.fin-c.b.fin;if(a.st.fin)return -1;if(c.st.fin)return 1;return a.rem-c.rem})}
+const gapS=(o,lead)=>o.st.fin&&lead.st.fin&&o.b.fin!=null?(o.b.fin-lead.b.fin):Math.max(0,(o.rem-lead.rem)/1.55);
 
-/* ---------------- Événements ---------------- */
 function emit(type,o){const e={type,t:sim.t,...o};sim.events.push(e);return e}
-function log(txt){sim.log.unshift(fmtC(sim.t)+'  '+txt)}
+function log(txt){sim.log.unshift({t:sim.t,txt})}
 function tick(){
-  const t=sim.t;
-  if(!sim.flags.warn&&t>=-60){sim.flags.warn=1;emit('proc',{title:'Avertissement',body:'Départ de la manche 3 dans 1 minute.'});log('Avertissement · 1 son (automatique)')}
-  if(!sim.flags.prep&&t>=-40){sim.flags.prep=1;log('Préparatoire · pavillon P · 1 son')}
-  if(!sim.flags.one&&t>=-20){sim.flags.one=1;emit('proc',{title:'Départ dans 20 secondes',body:'Les bateaux se placent sur la ligne.'});log('Une minute (abrégée) · 1 son long')}
-  if(!sim.flags.go&&t>=0){sim.flags.go=1;sim.started=true;emit('start',{title:'C’est parti !',body:'Manche 3 lancée, 7 bateaux.'});log('Départ · 1 son')}
-  for(const b of sim.boats){
-    const st=state(b,t);
-    if(b.ocs&&!b.events.ocs&&t>=0.2){b.events.ocs=1;sim.alerts.push({id:'ocs',kind:'Départ anticipé',title:b.name+' ('+b.id+') était au-delà de la ligne au signal',boats:[b.id],t,ocs:true});log('Alerte : '+b.id+' au-delà de la ligne (détection balise)')}
-    if(!b.events.ww&&st.leg===2){b.events.ww=1;const rk=ranking(t).findIndex(x=>x.b===b)+1;emit('mark',{boat:b.id,title:b.name+' passe la bouée au vent',body:rk+(rk===1?'re':'e')+' place',rk});log(b.id+' passe la bouée au vent ('+rk+')')}
-    if(!b.fin&&st.fin){const tr=b.segs[b.segs.length-1].t1+b.pens.reduce((a,p)=>a+p.dur,0);b.fin=tr;const rk=sim.boats.filter(x=>x.fin).length;emit('finish',{boat:b.id,title:rk===1?b.name+' gagne la manche 3 !':b.name+' arrive '+rk+'e',body:'Temps '+fmt(tr),rk});log(b.id+' arrive ('+rk+') en '+fmt(tr))}
+  const t=sim.t,F=sim.flags;
+  if(!F.w&&t>=-60){F.w=1;emit('proc',{title:'Départ dans 1 minute',body:'Manche 3 : avertissement donné, 7 bateaux.'});log('Avertissement · pavillon de série · 1 son')}
+  if(!F.p&&t>=-40){F.p=1;log('Préparatoire · pavillon P · 1 son')}
+  if(!F.o&&t>=-20){F.o=1;emit('proc',{title:'Départ dans 20 secondes',body:'Les bateaux se placent sur la ligne.'});log('Dernière étape · P affalé · 1 son long')}
+  if(!F.g&&t>=0){F.g=1;emit('start',{title:'C’est parti !',body:'Manche 3 lancée : deux tours, 7 bateaux.'});log('Départ · 1 son')}
+  for(const b of sim.boats){const s=state(b,t);
+    if(b.ocs&&!b.ev.ocs&&t>=.2){b.ev.ocs=1;sim.alerts.push({id:'ocs'+b.id,kind:'Départ anticipé',title:b.name+' au-delà de la ligne au signal',boats:[b.id],t:0,ocs:true});log('Alerte · '+b.id+' au-delà de la ligne (balise)')}
+    const rk=()=>ranking(t).findIndex(x=>x.b===b)+1,pl=k=>k+(k===1?'re':'e')+' place';
+    if(!b.ev.w1&&s.leg>=2){b.ev.w1=1;const k=rk();emit('mark',{boat:b.id,title:b.name+' passe la bouée au vent',body:'Tour 1 · '+pl(k),rk:k});log(b.id+' bouée au vent, tour 1 ('+k+')')}
+    if(!b.ev.g1&&s.leg>=3){b.ev.g1=1;const k=rk();emit('gate',{boat:b.id,title:b.name+' passe la porte',body:'Début du tour 2 · '+pl(k),rk:k});log(b.id+' porte, tour 1 ('+k+')')}
+    if(!b.ev.w2&&s.leg>=4){b.ev.w2=1;const k=rk();emit('mark',{boat:b.id,title:b.name+' passe la bouée au vent',body:'Tour 2 · '+pl(k),rk:k});log(b.id+' bouée au vent, tour 2 ('+k+')')}
+    if(b.fin==null&&s.fin){b.fin=b.segs[b.segs.length-1].t1+b.pens.reduce((a,p)=>a+p.dur,0)+(b.timePen||0);const k=sim.boats.filter(x=>x.fin!=null).length;emit('finish',{boat:b.id,title:k===1?b.name+' gagne la manche !':b.name+' termine '+k+'e',body:'Temps : '+fmt(b.fin)+(b.timePen?' (dont +'+b.timePen+' s de pénalité)':''),rk:k});log(b.id+' arrive '+k+'e en '+fmt(b.fin))}
   }
-  // contacts près de la bouée au vent
-  const near=sim.boats.map(b=>({b,s:state(b,t)})).filter(o=>!o.s.fin&&Math.hypot(o.s.x-WW.x,o.s.y-WW.y)<22);
-  for(let a=0;a<near.length;a++)for(let c=a+1;c<near.length;c++){
-    const A=near[a],C=near[c],d=Math.hypot(A.s.x-C.s.x,A.s.y-C.s.y),key='c'+A.b.id+C.b.id;
-    if(d<5&&!sim.flags[key]&&!sim.flags['c'+C.b.id+A.b.id]){sim.flags[key]=1;
-      const late=A.s.y<C.s.y?A:C, right=late===A?C:A;
-      sim.alerts.push({id:key,kind:'Contact possible',title:late.b.id+' et '+right.b.id+' à la bouée au vent',boats:[late.b.id,right.b.id],t,gap:d.toFixed(2).replace('.',',')});
-      log('Alerte : contact possible '+late.b.id+' / '+right.b.id+' (écart '+d.toFixed(2)+' m)')}
-  }
+  const near=sim.boats.map(b=>({b,s:state(b,t)})).filter(o=>!o.s.fin&&o.s.leg>0&&(Math.hypot(o.s.x-WW.x,o.s.y-WW.y)<24||(o.s.leg===2&&Math.abs(o.s.y-18)<14&&Math.abs(o.s.x)<26)));
+  for(let a=0;a<near.length;a++)for(let c=a+1;c<near.length;c++){const A=near[a],C=near[c],d=Math.hypot(A.s.x-C.s.x,A.s.y-C.s.y),k=[A.b.id,C.b.id].sort().join('-')+(A.s.leg>2?'2':'1')+(A.s.y>100?'w':'g');
+    const zk='n'+(A.s.y>100?'w':'g')+A.s.leg;if(d<2.6&&!F[k]&&(F[zk]||0)<2){F[k]=1;F[zk]=(F[zk]||0)+1;const atWW=A.s.y>100,late=atWW?(A.s.y<C.s.y?A:C):(A.s.y>C.s.y?A:C),other=late===A?C:A;
+      sim.alerts.push({id:k,kind:'Contact possible',where:atWW?'à la bouée au vent':'à la porte',title:late.b.id+' / '+other.b.id+(atWW?' à la bouée au vent':' à la porte'),boats:[late.b.id,other.b.id],t,gap:d});log('Alerte · contact possible '+late.b.id+' / '+other.b.id+' ('+fr(d.toFixed(2))+' m)')}}
 }
-
-/* ---------------- Actions du comité ---------------- */
 function decide(id,what){
-  const al=sim.alerts.find(a=>a.id===id); if(!al||al.done) return; al.done=what;
+  const al=sim.alerts.find(a=>a.id===id);if(!al||al.done)return;al.done=what;al.at=sim.t;sim.done.unshift(al);
   const b=sim.boats.find(x=>x.id===al.boats[0]);
-  if(what==='recall'){b.pens.push({at:sim.t,dur:9,kind:'recall'});b.recalled=true;emit('recall',{boat:b.id,title:'Rappel : '+b.name,body:b.id+' est parti trop tôt. Il doit revenir couper la ligne.',hot:true});log('Rappel individuel X pour '+b.id+' · corne · équipes et public prévenus')}
-  else if(what==='pen'){b.pens.push({at:sim.t,dur:7,kind:'turn'});emit('penalty',{boat:b.id,title:'Pénalité pour '+b.name,body:'N’a pas laissé la place à '+al.boats[1]+' à la bouée. Il fait un tour sur lui-même.',hot:true});log('Pénalité '+b.id+' (tour de 360°) · décision signée')}
-  else if(what==='jury'){emit('info',{title:'Incident à l’étude',body:al.title+' : le jury tranchera après la manche.'});log('Incident '+al.boats.join('/')+' renvoyé au jury')}
-  else {log('Alerte '+al.boats.join('/')+' classée sans suite')}
-  render(true);
+  if(what==='recall'){b.pens.push({at:sim.t,dur:9,kind:'recall'});b.recalled=true;emit('recall',{boat:b.id,title:'Rappel : '+b.name,body:'Parti trop tôt, il doit revenir couper la ligne.',hot:true});log('Rappel individuel X · '+b.id+' · corne, équipes, public')}
+  else if(what==='pen'){b.pens.push({at:sim.t,dur:7,kind:'turn'});emit('penalty',{boat:b.id,title:'Pénalité pour '+b.name,body:'N’a pas laissé la place '+al.where+'. Il fait un tour sur lui-même.',hot:true});log('Pénalité '+b.id+' · tour de 360° · décision signée')}
+  else if(what==='time'){b.timePen=(b.timePen||0)+20;emit('penalty',{boat:b.id,title:'Pénalité en temps pour '+b.name,body:'20 secondes seront ajoutées à son arrivée.',hot:true});log('Pénalité '+b.id+' · +20 s à l’arrivée')}
+  else if(what==='jury'){emit('info',{title:'Incident à l’étude',body:al.title+' : le jury décidera après la manche.'});log('Incident '+al.boats.join('/')+' renvoyé au jury')}
+  else log('Alerte '+al.boats.join('/')+' classée sans suite');
+  closeReplay();render(true);
 }
-function restart(reason){seed=(seed*31+11)%9973;sim=build();if(reason){emit('proc',{title:reason,body:'Nouvelle procédure de départ.'});log(reason+' · nouvelle procédure')}render(true)}
+function restart(reason){seed=(seed*31+7)%9973;sim=build();seen=0;closeReplay();if(reason){emit('proc',{title:reason,body:'Nouvelle procédure de départ.'});log(reason)}render(true)}
 
-/* ---------------- Boucle ---------------- */
-let speed=3,playing=true,last=performance.now(),acc=0,view='public',pTab='map',fav='SUI',selBoat=null,gfx='auto',ly={lay:true,zone:true,trail:true},seenPub=0,toastTimer=0;
-function loop(now){
-  const dt=Math.min(.1,(now-last)/1000);last=now;
-  if(playing&&sim.t<RACE_END){sim.t+=dt*speed;tick()}
-  acc+=dt; if(acc>1/20){acc=0;render(false)}
-  requestAnimationFrame(loop);
-}
-
-/* ---------------- Rendu commun ---------------- */
-function proj(x,y,w,h,pad){const X0=-62,X1=62,Y0=-24,Y1=222;const sx=(w-2*pad)/(X1-X0),sy=(h-2*pad)/(Y1-Y0),s=Math.min(sx,sy);const ox=(w-(X1-X0)*s)/2,oy=(h-(Y1-Y0)*s)/2;return [ox+(x-X0)*s, h-oy-(y-Y0)*s, s]}
-function boatShape(cx,cy,hdg,sz,fill,stroke,sw){return `<g transform="translate(${cx.toFixed(1)} ${cy.toFixed(1)}) rotate(${hdg.toFixed(1)})"><path d="M0 ${-sz} L${sz*.5} ${sz*.6} L0 ${sz*.35} L${-sz*.5} ${sz*.6}Z" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/></g>`}
-function courseSVG(w,h,pad,opt){
-  const P=(x,y)=>proj(x,y,w,h,pad);let o='';
+let uid=0;
+function proj(x,y,w,h,pad,vb){const X0=vb?vb[0]:-62,X1=vb?vb[1]:62,Y0=vb?vb[2]:-24,Y1=vb?vb[3]:222;const s=Math.min((w-2*pad)/(X1-X0),(h-2*pad)/(Y1-Y0));const ox=(w-(X1-X0)*s)/2,oy=(h-(Y1-Y0)*s)/2;return [ox+(x-X0)*s,h-oy-(y-Y0)*s,s]}
+function sea(w,h,dark){const id='s'+(uid++%1000);
+  return `<defs><linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${dark?'#123D38':'#D9EBE4'}"/><stop offset="1" stop-color="${dark?'#061614':'#B4D3C9'}"/></linearGradient><pattern id="${id}p" width="46" height="22" patternUnits="userSpaceOnUse"><path d="M0 11 Q11.5 5 23 11 T46 11" fill="none" stroke="${dark?'rgba(214,236,228,.07)':'rgba(255,255,255,.55)'}" stroke-width="1.4"/></pattern></defs><rect width="${w}" height="${h}" fill="url(#${id}g)"/><rect width="${w}" height="${h}" fill="url(#${id}p)"/>`}
+function course(P,o){let s='';const ink=o.dark?'#EEF2E6':'#0F130C';
   const [ax,ay]=P(-60,-22),[bx,by]=P(60,220);
-  o+=`<rect x="${ax}" y="${by}" width="${bx-ax}" height="${ay-by}" rx="12" fill="none" stroke="${opt.dark?'rgba(242,244,234,.25)':'rgba(14,90,82,.4)'}" stroke-dasharray="6 7"/>`;
-  if(opt.lay){const [wx,wy]=P(WW.x,WW.y),[l1x,l1y]=P(-120,80),[l2x,l2y]=P(120,80);o+=`<line x1="${wx}" y1="${wy}" x2="${l1x}" y2="${l1y}" stroke="${opt.dark?'rgba(199,235,0,.35)':'rgba(17,21,13,.25)'}" stroke-dasharray="8 7"/><line x1="${wx}" y1="${wy}" x2="${l2x}" y2="${l2y}" stroke="${opt.dark?'rgba(199,235,0,.35)':'rgba(17,21,13,.25)'}" stroke-dasharray="8 7"/>`}
-  if(opt.zone){const [wx,wy,s]=P(WW.x,WW.y);o+=`<circle cx="${wx}" cy="${wy}" r="${(12*s).toFixed(1)}" fill="rgba(199,235,0,.12)" stroke="rgba(78,96,0,.5)" stroke-dasharray="4 5"/>`}
+  s+=`<rect x="${ax}" y="${by}" width="${bx-ax}" height="${ay-by}" rx="14" fill="none" stroke="${o.dark?'rgba(238,242,230,.22)':'rgba(14,90,82,.35)'}" stroke-dasharray="6 7"/>`;
+  if(o.lay){const [wx,wy]=P(WW.x,WW.y);[[-130,70],[130,70]].forEach(q=>{const [x,y]=P(q[0],q[1]);s+=`<line x1="${wx}" y1="${wy}" x2="${x}" y2="${y}" stroke="${o.ia?'#6E8BD6':o.dark?'rgba(199,235,0,.4)':'rgba(15,19,12,.28)'}" stroke-width="${o.ia?2.5:1.5}" stroke-dasharray="9 7"/>`})}
+  if(o.zone){[[WW,13],[LW1,10],[LW2,10]].forEach(q=>{const [x,y,sc]=P(q[0].x,q[0].y);s+=`<circle cx="${x}" cy="${y}" r="${(q[1]*sc).toFixed(1)}" fill="rgba(199,235,0,.12)" stroke="${o.dark?'rgba(199,235,0,.5)':'rgba(74,92,0,.45)'}" stroke-dasharray="4 5"/>`})}
   const [px,py]=P(PIN.x,PIN.y),[sx,sy]=P(SB.x,SB.y);
-  o+=`<line x1="${px}" y1="${py}" x2="${sx}" y2="${sy}" stroke="${opt.dark?'#F2F4EA':'#11150D'}" stroke-width="2" stroke-dasharray="7 6"/>`;
-  const mk=(m,lab)=>{const [mx,my]=P(m.x,m.y);return `<circle cx="${mx}" cy="${my}" r="${opt.mr}" fill="#D0704A" stroke="${opt.dark?'#F2F4EA':'#11150D'}" stroke-width="2"/>`+(lab?`<text x="${mx+opt.mr+5}" y="${my+4}" style="font:600 ${opt.fs}px var(--f-mono)" fill="${opt.dark?'#F2F4EA':'#11150D'}">${lab}</text>`:'')};
-  o+=mk(WW,opt.labels?'Bouée au vent':'')+mk(LW1,'')+mk(LW2,opt.labels?'Porte':'')+mk(PIN,'')+mk(SB,'');
-  return o;
-}
-function setHint(){
-  const H={public:'<b>Spectateur.</b> Ce que voit le public sur son téléphone, avec 1 s de retard. Touchez les bateaux, les onglets, choisissez votre équipe.',
-    comite:'<b>Comité de course.</b> Les décisions sont réelles dans la simulation : un rappel ou une pénalité ralentit vraiment le bateau, et part chez les équipes, le public et la télévision.',
-    tv:'<b>Télévision.</b> L’habillage d’antenne se met à jour seul. La régie peut imposer un graphique.'};
-  $('#hint').innerHTML=H[view];
-}
+  s+=`<line x1="${px}" y1="${py}" x2="${sx}" y2="${sy}" stroke="${ink}" stroke-width="2" stroke-dasharray="8 6" opacity=".75"/>`;
+  if(o.labels){const [lx,ly]=P(0,-13);s+=`<text x="${lx}" y="${ly}" text-anchor="middle" style="font:600 ${o.fs-1}px var(--f-mono);letter-spacing:.08em" fill="${ink}" opacity=".7">DÉPART · ARRIVÉE</text>`}
+  const buoy=(m,lab)=>{const [x,y]=P(m.x,m.y);return `<circle cx="${x}" cy="${y+2}" r="${o.mr}" fill="rgba(0,0,0,.18)"/><circle cx="${x}" cy="${y}" r="${o.mr}" fill="#E0703F" stroke="${o.dark?'#EEF2E6':'#fff'}" stroke-width="2.2"/>`+(lab&&o.labels?`<text x="${x+o.mr+6}" y="${y+4}" style="font:600 ${o.fs}px var(--f-mono)" fill="${ink}">${lab}</text>`:'')};
+  s+=buoy(WW,'Bouée au vent')+buoy(LW1,'')+buoy(LW2,'Porte')+buoy(PIN,'')+buoy(SB,'');
+  return s}
+function boat(x,y,hdg,L,c,o={}){
+  const twa=Math.abs(((hdg%360)+540)%360-180),side=Math.sin(hdg*Math.PI/180)>=0?1:-1,a=Math.max(8,Math.min(85,(180-twa)/2+(twa<90?0:20)))*Math.PI/180;
+  const bx=side*Math.sin(a)*L*.62,by=-L*.18+Math.cos(a)*L*.62;
+  return `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${hdg.toFixed(1)})">${o.halo?`<circle r="${L*1.1}" fill="none" stroke="${o.halo}" stroke-width="2.5"/>`:''}<path d="M0 ${-L*.62} C${L*.26} ${-L*.28} ${L*.24} ${L*.3} ${L*.16} ${L*.45} L${-L*.16} ${L*.45} C${-L*.24} ${L*.3} ${-L*.26} ${-L*.28} 0 ${-L*.62}Z" fill="${c}" stroke="${o.ink||'#0F130C'}" stroke-width="${o.sw||1.4}"/><path d="M0 ${-L*.18} Q${(bx*.5+side*L*.14).toFixed(1)} ${((-L*.18+by)/2).toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}" fill="none" stroke="${o.sail||'#fff'}" stroke-width="${Math.max(1.6,L*.1).toFixed(1)}" stroke-linecap="round"/></g>`}
+function wake(pts,c,wd){if(pts.length<2)return '';let s='';const n=pts.length;for(let k=1;k<n;k++)s+=`<line x1="${pts[k-1][0].toFixed(1)}" y1="${pts[k-1][1].toFixed(1)}" x2="${pts[k][0].toFixed(1)}" y2="${pts[k][1].toFixed(1)}" stroke="${c}" stroke-opacity="${((k/n)*.75).toFixed(2)}" stroke-width="${wd}" stroke-linecap="round"/>`;return s}
+function trail(b,t,n,step,P){const p=[];for(let k=n;k>=0;k--){const tt=t-k*step;if(tt<START)continue;const s=state(b,tt);p.push(P(s.x,s.y))}return p}
+function tag(x,y,txt,c,fs,dark){const w=txt.length*fs*.62+14;return `<g transform="translate(${(x+10).toFixed(1)} ${(y-26).toFixed(1)})"><rect width="${w.toFixed(0)}" height="${fs+9}" rx="${(fs+9)/2}" fill="${dark?'rgba(6,18,16,.82)':'rgba(255,255,255,.93)'}" stroke="${c}" stroke-width="1.6"/><text x="${(w/2).toFixed(1)}" y="${fs+2}" text-anchor="middle" style="font:700 ${fs}px var(--f-mono)" fill="${dark?'#EEF2E6':'#0F130C'}">${txt}</text></g>`}
 
-/* ---------------- Spectateur ---------------- */
-function showToast(e){$('#toastT').textContent=e.title;$('#toastB').textContent=e.body||'';const T=$('#toast');T.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>T.classList.remove('on'),3800)}
-function pubEvents(){return sim.events.filter(e=>e.t<=sim.t-1)}
-function wantToast(e){if(['start','recall','penalty','proc','info'].includes(e.type))return true;if(e.type==='mark')return e.rk<=1||e.boat===fav;if(e.type==='finish')return e.rk===1||e.boat===fav;return false}
-function renderPublic(force){
-  const t=sim.t-1, evs=pubEvents();
-  while(seenPub<evs.length){const e=evs[seenPub++];if(wantToast(e))showToast(e)}
-  $('#pClock').textContent=fmt(t);
-  const rk=ranking(t), leader=rk[0];
-  $('#pLeg').textContent=t<0?'Manche 3 · départ':leader.st.fin?'Manche 3 · terminée':leader.st.leg<=1?'Manche 3 · bord de près':'Manche 3 · bord de portant';
-  $('#pWind').textContent='vent '+WIND_KN.toFixed(1).replace('.',',')+' nds · SE';
-  const B=$('#pBody');
+let speed=4,playing=true,last=performance.now(),acc=0,view='public',pTab='map',fav='SUI',sel=null,gfx='auto',ly={lay:true,zone:true,trail:true},seen=0,toastT=0,eqTeam='SUI',stopArm=false,RV=null;
+
+const ICON={start:'<path d="M5 21V4h11l-2 4 2 4H5"/>',proc:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>',mark:'<circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4"/>',gate:'<circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/>',finish:'<path d="M5 21V4h14v8H5"/><path d="M9 4v8M13 4v8M5 8h14"/>',recall:'<path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/>',penalty:'<path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/>',alert:'<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>'};
+const ic=(k,cls)=>`<span class="ic ${cls||''}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]||ICON.info}</svg></span>`;
+function toast(e){$('#toastT').textContent=e.title;$('#toastB').textContent=e.body||'';const T=$('#toast');T.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>T.classList.remove('on'),4200)}
+function wantToast(e){if(['start','recall','penalty','info','proc'].includes(e.type))return true;if(['mark','gate','finish'].includes(e.type))return e.rk===1||e.boat===fav;return false}
+
+function renderPublic(){
+  const t=sim.t-1,evs=sim.events.filter(e=>e.t<=t);
+  while(seen<evs.length){const e=evs[seen++];if(wantToast(e))toast(e)}
+  const rk=ranking(t),lead=rk[0];
+  $('#pClock').textContent=fmt(t);$('#pLeg').textContent=('Manche 3 · '+LEGN[lead.st.leg]).toUpperCase();
+  let h='';
   if(pTab==='map'){
-    const w=360,h=420;let s=courseSVG(w,h,16,{mr:6,fs:10,labels:true,lay:false,zone:false});
-    rk.forEach((o,i)=>{const [x,y]=proj(o.st.x,o.st.y,w,h,16),on=selBoat===o.b.id||o.b.id===fav;
-      s+=boatShape(x,y,o.st.hdg,on?11:9,o.b.c,on?'#11150D':'rgba(17,21,13,.5)',on?2:1);
-      s+=`<text x="${x+10}" y="${y-8}" style="font:700 11px var(--f-texte)" fill="#11150D">${o.st.fin||t<0?'':i+1+' · '}${o.b.id}</text>`;
-      s+=`<circle cx="${x}" cy="${y}" r="18" fill="transparent" data-b="${o.b.id}" style="cursor:pointer"/>`});
-    const sel=selBoat?rk.find(o=>o.b.id===selBoat):null;
-    const banner=evs.filter(e=>e.hot).slice(-1)[0];
-    let html=`<svg class="p-map" viewBox="0 0 ${w} ${h}" role="img" aria-label="Carte en direct">${s}</svg>`;
-    if(banner&&t-banner.t<40) html+=`<div class="p-ev hot"><b>${banner.title}</b><br>${banner.body}</div>`;
-    if(sel){const pos=rk.indexOf(sel)+1;html+=`<div class="p-card"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 18px var(--f-titre)">${sel.b.name} · ${sel.b.id}</b><span class="dot" style="background:${sel.b.c}"></span></div><div class="p-stats" style="margin-top:8px"><div><b>${t<0?'—':pos+(pos===1?'er':'e')}</b><span class="small">place</span></div><div><b>${(sel.st.sog*1.944).toFixed(1).replace('.',',')}</b><span class="small">nœuds</span></div><div><b>${sel.st.fin?'arrivé':sel.st.leg<=1?'au vent':'porte'}</b><span class="small">prochaine bouée</span></div></div></div>`}
-    else html+=`<p class="small" style="text-align:center;margin:0">Touchez un bateau pour le suivre</p>`;
-    B.innerHTML=html;
+    const w=364,ht=470,P=(x,y)=>proj(x,y,w,ht,14);let s=sea(w,ht)+course(P,{mr:6.5,fs:10,labels:true});
+    rk.forEach(o=>{s+=wake(trail(o.b,t,10,1.4,P),'#fff',3)});
+    rk.forEach((o,i)=>{const [x,y]=P(o.st.x,o.st.y),on=sel===o.b.id||o.b.id===fav;s+=boat(x,y,o.st.hdg,on?17:14,o.b.c,{halo:sel===o.b.id?'#0F130C':null});
+      if(t>=0&&(i<3||on))s+=tag(x,y,(i+1)+' '+o.b.id,o.b.c,10);
+      s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="20" fill="transparent" data-b="${o.b.id}" style="cursor:pointer"/>`});
+    h+=`<svg class="map" viewBox="0 0 ${w} ${ht}" role="img" aria-label="Carte en direct, touchez un bateau">${s}</svg>`;
+    const hot=evs.filter(e=>e.hot).slice(-1)[0];
+    if(hot&&t-hot.t<45)h+=`<div class="banner">${ic(hot.type,'hot')}<div><b>${hot.title}</b>${hot.body}</div></div>`;
+    const so=sel?rk.find(o=>o.b.id===sel):null;
+    if(so){const p=rk.indexOf(so)+1;h+=`<div class="sheet"><div class="sheet-h"><b><span class="dot" style="background:${so.b.c};margin-right:8px"></span>${so.b.name}</b><span class="pill">${t<0?'au départ':LEGN[so.st.leg]}</span></div><div class="stats"><div><b>${t<0?'—':p+(p===1?'er':'e')}</b><span>place</span></div><div><b>${kn(so.st.sog)}</b><span>nœuds</span></div><div><b>${p===1||t<0?'—':'+'+fr(gapS(so,lead).toFixed(1))+' s'}</b><span>écart</span></div></div></div>`}
+    else h+=`<p style="margin:0;text-align:center;font-size:12.5px;color:var(--encre-3)">Touchez un bateau pour le suivre</p>`;
   } else if(pTab==='rank'){
-    const lead=rk[0];
-    B.innerHTML=rk.map((o,i)=>{const gap=i===0||t<0?'':o.st.fin&&lead.st.fin?'+'+(o.b.fin-lead.b.fin).toFixed(1).replace('.',',')+' s':'+'+Math.max(0,(o.rem-lead.rem)/1.5).toFixed(1).replace('.',',')+' s';
-      const pen=o.b.pens.length?(o.b.pens.some(p=>p.kind==='recall')?'rappelé au départ':'pénalité'):o.st.fin?'arrivé':'';
-      return `<button type="button" class="p-row" data-b="${o.b.id}"><b class="mono">${t<0?'–':i+1}</b><span class="dot" style="background:${o.b.c}"></span><span><b>${o.b.name}</b><br><span class="small">${pen||(o.st.sog*1.944).toFixed(1).replace('.',',')+' nds'}</span></span><span class="mono small">${gap}</span></button>`}).join('')+`<p class="small" style="margin:0">Provisoire, calculé chaque seconde sur la distance restante.</p>`;
+    h+=rk.map((o,i)=>{const prog=Math.max(0,Math.min(1,1-Math.max(0,o.rem)/TOTAL)),ap=activePen(o.b,t);
+      const sub=o.st.fin?'arrivé · '+fmt(o.b.fin):ap?(ap.kind==='turn'?'fait sa pénalité':ap.kind==='recall'?'revient à la ligne':'arrêté'):LEGN[o.st.leg]+' · '+kn(o.st.sog)+' nds';
+      return `<button type="button" class="rk${o.b.id===fav?' me':''}" data-b="${o.b.id}"><span class="pos">${t<0?'–':i+1}</span><span><span class="nm"><span class="dot" style="background:${o.b.c}"></span>${o.b.name}</span><span class="sub">${sub}</span><span class="bar"><i style="width:${(prog*100).toFixed(1)}%;background:${o.b.c}"></i></span></span><span class="gap">${i===0||t<0?'':'+'+fr(gapS(o,lead).toFixed(1))+' s'}</span></button>`}).join('');
+    h+=`<p style="margin:0;font-size:12px;color:var(--encre-3)">Classement provisoire, calculé chaque seconde sur la distance qui reste. La barre montre la part de la course déjà faite.</p>`;
   } else if(pTab==='feed'){
-    B.innerHTML=evs.slice().reverse().map(e=>`<div class="p-ev${e.hot?' hot':''}"><span class="t">${fmt(e.t)}</span><br><b>${e.title}</b>${e.body?'<br>'+e.body:''}</div>`).join('')||'<p class="small">Les événements de la course arriveront ici.</p>';
+    const L=evs.slice().reverse();
+    h+=L.length?L.map(e=>`<div class="ev">${ic(e.type,e.hot?'hot':e.type==='finish'||e.type==='start'?'ok':'')}<div><span class="t">${fmt(e.t)}</span><b>${e.title}</b><span>${e.body||''}</span></div></div>`).join(''):'<p style="color:var(--encre-3);font-size:14px">Les moments de la course arriveront ici.</p>';
   } else {
-    const me=rk.find(o=>o.b.id===fav),pos=rk.indexOf(me)+1;
-    B.innerHTML=`<div class="p-card"><span class="small">Vous suivez</span><div style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 22px var(--f-titre)">${me.b.name}</b><span class="dot" style="width:16px;height:16px;background:${me.b.c}"></span></div><div class="p-stats" style="margin-top:8px"><div><b>${t<0?'—':pos+(pos===1?'er':'e')}</b><span class="small">place</span></div><div><b>${(me.st.sog*1.944).toFixed(1).replace('.',',')}</b><span class="small">nœuds</span></div><div><b>${me.b.pens.length}</b><span class="small">pénalités</span></div></div></div>
+    const me=rk.find(o=>o.b.id===fav),p=rk.indexOf(me)+1;
+    h+=`<div class="sheet" style="background:var(--nuit);color:var(--clair);box-shadow:none"><span style="font:600 11px var(--f-mono);letter-spacing:.12em;color:var(--lime)">VOUS SUIVEZ</span><div class="sheet-h" style="margin-top:4px"><b style="font-size:24px">${me.b.name}</b><span class="dot" style="width:16px;height:16px;background:${me.b.c}"></span></div><div class="stats">${[[t<0?'—':p+(p===1?'er':'e'),'place'],[kn(me.st.sog),'nœuds'],[String(me.b.pens.filter(x=>x.kind==='turn').length+(me.b.timePen?1:0)),'pénalités']].map(s=>`<div style="background:rgba(238,242,230,.08)"><b>${s[0]}</b><span style="color:var(--clair-2)">${s[1]}</span></div>`).join('')}</div></div>
     <b style="font-size:14px">Changer d’équipe</b><div class="chips">${TEAMS.map(x=>`<button type="button" class="chip" data-fav="${x.id}" aria-pressed="${x.id===fav}"><span class="dot" style="background:${x.c}"></span>${x.id}</button>`).join('')}</div>
-    <p class="small" style="margin:0">Vous recevez en plus ses passages de bouée, son arrivée et ses pénalités.</p>`;
+    <p style="margin:0;font-size:12.5px;color:var(--encre-3)">Vous recevez en plus ses passages de bouée, son arrivée et ses pénalités.</p>`;
   }
+  $('#pBody').innerHTML=h;
 }
 
-/* ---------------- Comité ---------------- */
+const FLAGS=[{t:-60,l:'AI',bg:'#C7EB00',fg:'#061210',n:'Avertissement'},{t:-40,l:'P',bg:'#3C5BD8',fg:'#fff',n:'Préparatoire · P'},{t:-20,l:'1′',bg:'#EEF2E6',fg:'#061210',n:'Dernière minute'},{t:0,l:'GO',bg:'#C7EB00',fg:'#061210',n:'Course lancée'}];
 function renderComite(force){
-  const t=sim.t, rk=ranking(t), w=700,h=640;
-  let s=courseSVG(w,h,22,{mr:7,fs:12,labels:true,lay:ly.lay,zone:ly.zone});
-  rk.forEach(o=>{
-    if(ly.trail){const tr=trail(o.b,t,24,1.2).map(p=>proj(p[0],p[1],w,h,22));if(tr.length>1)s+=`<polyline points="${tr.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="${o.b.c}" stroke-width="2.5" stroke-opacity=".7"/>`}
-    const [x,y]=proj(o.st.x,o.st.y,w,h,22);s+=boatShape(x,y,o.st.hdg,11,o.b.c,'#11150D',1.5);
-    s+=`<text x="${x+12}" y="${y-8}" style="font:700 12px var(--f-mono)" fill="#11150D">${o.b.id}</text>`});
-  sim.alerts.filter(a=>!a.done).forEach(a=>{const b=sim.boats.find(x=>x.id===a.boats[0]),st=state(b,t),[x,y]=proj(st.x,st.y,w,h,22);s+=`<circle cx="${x}" cy="${y}" r="22" fill="none" stroke="#C2552A" stroke-width="3"/>`});
+  const t=sim.t,rk=ranking(t),w=760,h=640,P=(x,y)=>proj(x,y,w,h,24);
+  let s=sea(w,h)+course(P,{mr:8,fs:12,labels:true,lay:ly.lay,zone:ly.zone});
+  s+=`<g transform="translate(${w-58} 58)"><circle r="30" fill="rgba(255,255,255,.8)"/><g transform="rotate(180)"><path d="M0 -24 L7 -6 L0 -10 L-7 -6Z" fill="#0E5A52"/><line y1="-10" y2="20" stroke="#0E5A52" stroke-width="3"/></g><text y="46" text-anchor="middle" style="font:600 11px var(--f-mono)" fill="#0F130C">10,4 nds · 135°</text></g>`;
+  const [s0,sy]=P(-56,-20),[s1]=P(-36,-20);s+=`<line x1="${s0}" y1="${sy}" x2="${s1}" y2="${sy}" stroke="#0F130C" stroke-width="2"/><text x="${s0}" y="${sy-6}" style="font:600 10px var(--f-mono)" fill="#0F130C">20 m</text>`;
+  if(ly.trail)rk.forEach(o=>{s+=wake(trail(o.b,t,26,1.2,P),o.b.c,3)});
+  rk.forEach(o=>{const [x,y]=P(o.st.x,o.st.y);s+=boat(x,y,o.st.hdg,20,o.b.c);s+=tag(x,y,o.b.id,o.b.c,10)});
+  sim.alerts.filter(a=>!a.done).forEach(a=>{const b=sim.boats.find(x=>x.id===a.boats[0]),st=state(b,t),[x,y]=P(st.x,st.y);s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="26" fill="none" stroke="#C2552A" stroke-width="3"/>`});
   $('#cMap').innerHTML=s;
   $('#cClock').textContent=fmtC(t).slice(0,-2);
-  $('#cPhase').textContent=t<-40?'Avertissement':t<-20?'Préparatoire · P':t<0?'Une minute':rk[0].st.fin?'Arrivées':'Course lancée';
+  const fl=FLAGS.filter(f=>t>=f.t).slice(-1)[0]||FLAGS[0];const F=$('#cFlag');F.textContent=fl.l;F.style.background=fl.bg;F.style.color=fl.fg;
+  $('#cPhase').textContent=rk[0].st.fin?'Arrivées':fl.n;
+  $$('#cSteps i').forEach((el,k)=>el.classList.toggle('on',t>=FLAGS[k].t));
+  $('#cLap').textContent=LEGN[rk[0].st.leg];
   const ocs=sim.alerts.find(a=>a.ocs&&!a.done);$('#bX').disabled=!ocs;$('#bX').classList.toggle('urg',!!ocs);
-  $('#cFleet').innerHTML=rk.map((o,i)=>{const fix=o.b.id==='GER'?'<span class="pill w">RTK flottant</span>':'<span class="pill">RTK fixe</span>';const path=o.b.id==='GER'?'radio 2 Hz':'4G';
-    const etat=o.b.pens.some(p=>t>=p.at&&t<p.at+p.dur)?'<span class="pill w">pénalité en cours</span>':o.st.fin?'arrivé':o.b.ocs&&!o.b.recalled&&t>0?'<span class="pill w">OCS</span>':'';
-    return `<tr><td class="n">${t<0?'–':i+1}</td><td><span class="dot" style="display:inline-block;background:${o.b.c};margin-right:6px"></span>${o.b.id}</td><td>${fix}</td><td>${path}</td><td class="n">${(o.st.sog*1.944).toFixed(1)} nds</td><td class="n">${o.st.fin?'—':Math.max(0,o.rem).toFixed(0)+' m'}</td><td>${etat}</td></tr>`}).join('');
-  if(force||$('#cAlerts').dataset.n!==String(sim.alerts.filter(a=>!a.done).length)){
-    const open=sim.alerts.filter(a=>!a.done);$('#cAlerts').dataset.n=open.length;
-    $('#cAlerts').innerHTML=open.length?open.map(a=>`<div class="alert"><span class="small mono">${a.kind.toUpperCase()} · ${fmtC(a.t)}</span><b>${a.title}</b>${a.gap?`<span class="small">Écart minimal ${a.gap} m, positions RTK ± 2 cm</span>`:''}<div class="row">${a.ocs?`<button type="button" class="pri" data-d="${a.id}" data-w="recall">Rappeler ${a.boats[0]}</button><button type="button" data-d="${a.id}" data-w="none">Ignorer</button>`:`<button type="button" class="pri" data-d="${a.id}" data-w="pen">Pénalité ${a.boats[0]}</button><button type="button" data-d="${a.id}" data-w="none">Sans suite</button><button type="button" data-d="${a.id}" data-w="jury">Jury</button>`}</div></div>`).join(''):'<p class="small" style="margin:0">Aucune alerte en attente. Le moteur de course surveille le départ, les bouées et les contacts.</p>';
+  $('#cFleet').innerHTML=rk.map((o,i)=>{const ap=activePen(o.b,t);const etat=ap?`<span class="pill warn">${ap.kind==='stop'?'arrêt de sécurité':ap.kind==='recall'?'retour à la ligne':'tour de pénalité'}</span>`:o.st.fin?'<span class="pill">arrivé</span>':(o.b.ocs&&!o.b.recalled&&t>0&&o.st.leg===1)?'<span class="pill warn">OCS</span>':o.b.timePen?'<span class="pill warn">+'+o.b.timePen+' s</span>':'';
+    return `<tr><td class="n">${t<0?'–':i+1}</td><td><span class="dot" style="background:${o.b.c};margin-right:7px"></span>${o.b.id}</td><td class="n">${o.st.leg===0?'–':o.st.leg<=2?'1/2':o.st.leg<=4?'2/2':'✓'}</td><td>${o.b.id==='GER'?'<span class="pill warn">RTK flottant</span>':'<span class="pill">RTK fixe</span>'}</td><td>${o.b.id==='GER'?'radio · 2 Hz':'4G · 10 Hz'}</td><td class="n">${kn(o.st.sog)} nds</td><td class="n">${o.st.fin?'—':Math.max(0,o.rem).toFixed(0)+' m'}</td><td>${etat}</td></tr>`}).join('');
+  const open=sim.alerts.filter(a=>!a.done),key=open.map(a=>a.id).join()+'|'+sim.done.length;
+  if(force||$('#cAlerts').dataset.k!==key){$('#cAlerts').dataset.k=key;
+    $('#cAlerts').innerHTML=open.length?open.map(a=>`<div class="alert">${ic('alert')}<div><span class="eyebrow" style="color:#7A3412">${a.kind} · ${fmtC(a.t)}</span><b>${a.title}</b>${a.gap!=null?`<span style="font-size:12.5px;color:#6E2A0E">écart minimal ${fr(a.gap.toFixed(2))} m</span>`:''}</div><div class="row">${a.ocs?`<button type="button" class="btn pri" data-d="${a.id}" data-w="recall">Rappeler ${a.boats[0]}</button><button type="button" class="btn" data-rv="${a.id}">Revoir le départ</button><button type="button" class="btn" data-d="${a.id}" data-w="none">Ignorer</button>`:`<button type="button" class="btn pri" data-rv="${a.id}">Ouvrir le rejeu</button><button type="button" class="btn" data-d="${a.id}" data-w="none">Sans suite</button>`}</div></div>`).join(''):'<div class="empty">Rien à juger. Le moteur de course surveille la ligne, les bouées et les contacts.</div>';
+    const D={recall:'rappel',pen:'pénalité, un tour',time:'pénalité de 20 s',jury:'renvoyé au jury',none:'sans suite'};
+    $('#cDone').innerHTML=sim.done.length?sim.done.map(a=>`<div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 10px;border-radius:12px;background:var(--clair)"><span style="font-size:13px"><b>${a.title}</b><br><span style="color:var(--encre-2)">${D[a.done]} · ${fmtC(a.at)}</span></span><button type="button" class="btn" data-rv="${a.id}">Revoir</button></div>`).join(''):'<div class="empty">Aucune décision pour l’instant.</div>';
   }
-  $('#cLog').innerHTML=sim.log.slice(0,40).map(l=>`<div>${l}</div>`).join('');
+  $('#cLog').innerHTML=sim.log.slice(0,40).map(l=>`<div><b>${fmtC(l.t)}</b>  ${l.txt}</div>`).join('');
 }
 
-/* ---------------- Télévision ---------------- */
+function openReplay(id){const a=sim.alerts.find(x=>x.id===id);if(!a)return;
+  const t0=a.ocs?-8:Math.max(START,a.t-9),t1=a.ocs?3:a.t+3;
+  RV={a,t0,t1,t:a.ocs?-4:a.t-5,play:true,rs:.5};$('#rv').hidden=false;$('#rvClose').focus();drawReplay()}
+function closeReplay(){RV=null;$('#rv').hidden=true}
+function drawReplay(){if(!RV)return;const a=RV.a,t=RV.t,bs=a.boats.map(id=>sim.boats.find(b=>b.id===id)),S=bs.map(b=>state(b,t));
+  const ref=a.ocs?{x:state(bs[0],0).x,y:0}:(a.where==='à la porte'?{x:0,y:18}:WW);
+  const span=a.ocs?34:28,vb=[ref.x-span,ref.x+span,ref.y-span*.7,ref.y+span*.7],w=640,h=440,P=(x,y)=>proj(x,y,w,h,10,vb);
+  let s=sea(w,h,true);
+  for(let gx=Math.ceil(vb[0]/5)*5;gx<=vb[1];gx+=5){const [x]=P(gx,0);s+=`<line x1="${x.toFixed(1)}" y1="0" x2="${x.toFixed(1)}" y2="${h}" stroke="rgba(238,242,230,.05)"/>`}
+  for(let gy=Math.ceil(vb[2]/5)*5;gy<=vb[3];gy+=5){const [,y]=P(0,gy);s+=`<line x1="0" y1="${y.toFixed(1)}" x2="${w}" y2="${y.toFixed(1)}" stroke="rgba(238,242,230,.05)"/>`}
+  s+=course(P,{mr:10,fs:12,labels:false,lay:false,zone:!a.ocs,dark:true});
+  if(a.ocs){const [px,py]=P(PIN.x,PIN.y),[sx,sy]=P(SB.x,SB.y);s+=`<line x1="${px}" y1="${py}" x2="${sx}" y2="${sy}" stroke="#C7EB00" stroke-width="3"/><text x="16" y="${(py-10).toFixed(1)}" style="font:600 12px var(--f-mono)" fill="#C7EB00">LIGNE DE DÉPART</text>`}
+  sim.boats.forEach(b=>{if(bs.includes(b))return;const st=state(b,t),[x,y]=P(st.x,st.y);s+=boat(x,y,st.hdg,22,'rgba(238,242,230,.22)',{ink:'rgba(0,0,0,.3)',sail:'rgba(255,255,255,.35)'})});
+  bs.forEach((b,k)=>{const pts=[];for(let tt=RV.t0;tt<=t;tt+=.25){const q=state(b,tt);pts.push(P(q.x,q.y))}if(pts.length>1)s+=`<polyline points="${pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="${b.c}" stroke-width="3" stroke-dasharray="2 5" stroke-linecap="round"/>`;
+    const [x,y]=P(S[k].x,S[k].y);s+=boat(x,y,S[k].hdg,40,b.c,{sw:2,ink:'#051312'});s+=tag(x+16,y-12,b.id+' · '+kn(S[k].sog)+' nds',b.c,13,true)});
+  let gap=null;if(S[1]){gap=Math.hypot(S[0].x-S[1].x,S[0].y-S[1].y);const [x1,y1]=P(S[0].x,S[0].y),[x2,y2]=P(S[1].x,S[1].y),col=gap<1?'#FF8A5B':'#EEF2E6';s+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${col}" stroke-width="2"/><text x="${((x1+x2)/2+10).toFixed(1)}" y="${((y1+y2)/2+22).toFixed(1)}" style="font:700 15px var(--f-mono)" fill="${col}">${fr(gap.toFixed(2))} m</text>`}
+  const [bx,byy]=P(vb[0]+3,vb[2]+3),[bx2]=P(vb[0]+8,0);s+=`<line x1="${bx}" y1="${byy}" x2="${bx2}" y2="${byy}" stroke="#EEF2E6" stroke-width="2"/><text x="${bx}" y="${byy-6}" style="font:600 11px var(--f-mono)" fill="#EEF2E6">5 m</text>`;
+  $('#rvMap').innerHTML=s;
+  const rel=t-a.t;$('#rvTime').textContent=(rel<0?'−':'+')+fr(Math.abs(rel).toFixed(1))+' s';
+  $('#rvRange').value=Math.round((t-RV.t0)/(RV.t1-RV.t0)*1000);
+  $('#rvK').textContent=(a.ocs?'DÉPART ANTICIPÉ':'CONTACT POSSIBLE')+' · '+fmtC(a.t)+(a.done?' · DÉCIDÉ':'');$('#rvT').textContent=a.title;
+  const amures=q=>{const hh=((q.hdg%360)+360)%360;return hh<180?'bâbord':'tribord'};
+  $('#rvData').innerHTML=bs.map((b,k)=>`<div><span>${b.id} · vitesse</span><b>${kn(S[k].sog)} nds</b></div><div><span>${b.id} · amures</span><b style="font-size:15px">${S[k].leg===0?'—':amures(S[k])}</b></div>`).join('')+(gap!=null?`<div><span>écart maintenant</span><b>${fr(gap.toFixed(2))} m</b></div><div><span>écart minimal</span><b>${fr(a.gap.toFixed(2))} m</b></div>`:`<div><span>par rapport à la ligne</span><b>${S[0].y>0?'+':''}${fr(S[0].y.toFixed(1))} m</b></div><div><span>au signal (0,0 s)</span><b>+${fr(Math.max(0,state(bs[0],0).y).toFixed(1))} m</b></div>`);
+  $('#rvRule').innerHTML=a.ocs?'<b>Règle 29.1.</b> Au signal, une partie du bateau était du côté parcours de la ligne. Il doit revenir la couper. Glissez le curseur jusqu’à 0,0 s pour voir sa position exacte au signal.':`<b>Règle 18, place à la bouée.</b> Le bateau qui entre le premier dans la zone des trois longueurs (cercle) a droit à la place. Regardez qui y entre en premier, puis si ${bs[0].id} laisse assez de place à ${bs[1].id}.`;
+  $('#rvDec').innerHTML=a.done?`<div style="grid-column:1/-1;padding:12px;border-radius:12px;background:rgba(199,235,0,.12)">Décision prise à ${fmtC(a.at)} : <b>${{recall:'rappel',pen:'pénalité, un tour',time:'pénalité de 20 s',jury:'renvoi au jury',none:'sans suite'}[a.done]}</b></div>`:
+    (a.ocs?`<button type="button" class="pri" data-d="${a.id}" data-w="recall"><b>Rappeler ${bs[0].id}</b><span>pavillon X, corne, tout le monde prévenu</span></button><button type="button" data-d="${a.id}" data-w="none"><b>Départ correct</b><span>l’alerte est classée</span></button>`:
+    `<button type="button" class="pri" data-d="${a.id}" data-w="pen"><b>Pénalité ${bs[0].id}</b><span>un tour sur lui-même, tout de suite</span></button><button type="button" data-d="${a.id}" data-w="time"><b>+20 s à ${bs[0].id}</b><span>pénalité en temps à l’arrivée</span></button><button type="button" data-d="${a.id}" data-w="none"><b>Sans suite</b><span>pas de faute</span></button><button type="button" data-d="${a.id}" data-w="jury"><b>Jury</b><span>décision après la manche</span></button>`);
+  let cam='';bs.forEach((b,k)=>{const X=300+(S[k].x-ref.x)*8,Z=Math.max(.45,1.35-(S[k].y-(ref.y-20))/45),H=70*Z,base=150+30*Z;cam+=`<path d="M${X.toFixed(0)} ${(base-H).toFixed(0)} L${X.toFixed(0)} ${base.toFixed(0)} L${(X+H*.5).toFixed(0)} ${base.toFixed(0)}Z" fill="#fff" opacity=".92"/><rect x="${(X-H*.3).toFixed(0)}" y="${base.toFixed(0)}" width="${(H*.85).toFixed(0)}" height="${(9*Z).toFixed(0)}" rx="4" fill="${b.c}"/>`});$('#rvCam').innerHTML=cam;
+  $('#rvPlay').textContent=RV.play?'❚❚':'▶';
+}
+$('#rvRange').addEventListener('input',e=>{if(!RV)return;RV.play=false;RV.t=RV.t0+(RV.t1-RV.t0)*e.target.value/1000;drawReplay()});
+$('#rvPlay').addEventListener('click',()=>{if(!RV)return;if(RV.t>=RV.t1-.01)RV.t=RV.t0;RV.play=!RV.play;drawReplay()});
+$('#rvBack').addEventListener('click',()=>{if(!RV)return;RV.play=false;RV.t=Math.max(RV.t0,RV.t-.5);drawReplay()});
+$('#rvFwd').addEventListener('click',()=>{if(!RV)return;RV.play=false;RV.t=Math.min(RV.t1,RV.t+.5);drawReplay()});
+$$('[data-rs]').forEach(b=>b.addEventListener('click',()=>{if(!RV)return;RV.rs=+b.dataset.rs;$$('[data-rs]').forEach(x=>{x.setAttribute('aria-pressed',x===b);x.style.color=x===b?'':'var(--clair)'})}));
+$('#rvClose').addEventListener('click',closeReplay);
+$('#rv').addEventListener('click',e=>{if(e.target.id==='rv'){closeReplay();return}const d=e.target.closest('[data-d]');if(d)decide(d.dataset.d,d.dataset.w)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&RV)closeReplay()});
+
 function renderTV(){
-  const t=sim.t-1, rk=ranking(t), W=1600,H=900; const evs=pubEvents();
-  let s=`<defs><radialGradient id="sea" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#155A52"/><stop offset=".6" stop-color="#0C3530"/><stop offset="1" stop-color="#051312"/></radialGradient></defs><rect width="${W}" height="${H}" fill="url(#sea)"/>`;
-  for(let k=0;k<6;k++)s+=`<path d="M-20 ${120+k*140} Q400 ${90+k*140} 800 ${125+k*140} T1620 ${110+k*140}" stroke="rgba(214,230,224,.07)" stroke-width="2" fill="none"/>`;
-  const mapW=1100, off=180; const P=(x,y)=>{const [a,b,sc]=proj(x,y,mapW,H,40);return [a+off,b,sc]};
-  const course=courseSVG(mapW,H,40,{mr:12,fs:16,labels:true,lay:true,zone:false,dark:true});
-  s+=`<g transform="translate(${off} 0)">${course}</g>`;
-  const placed=[];rk.slice().sort((a,c)=>c.st.y-a.st.y).forEach(o=>{o._i=rk.indexOf(o)});rk.forEach((o,i)=>{const tr=trail(o.b,t,18,1).map(p=>P(p[0],p[1]));if(tr.length>1)s+=`<polyline points="${tr.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="4" stroke-linecap="round"/>`;
-    const [x,y]=P(o.st.x,o.st.y);s+=boatShape(x,y,o.st.hdg,16,o.b.c,'#051312',2.5);
-    let tx=x+22,up=y>260,ty=up?y-48:y+14;for(let k=0;k<8;k++){const hit=placed.find(q=>Math.abs(q[0]-tx)<136&&Math.abs(q[1]-ty)<44);if(!hit)break;ty=up?hit[1]-46:hit[1]+46}placed.push([tx,ty]);s+=`<line x1="${x}" y1="${y}" x2="${tx}" y2="${up?ty+40:ty}" stroke="rgba(242,244,234,.5)"/><g transform="translate(${tx} ${ty})"><rect width="132" height="40" rx="8" fill="rgba(5,19,18,.85)" stroke="${o.b.c}" stroke-width="2"/><rect width="32" height="40" rx="8" fill="${o.b.c}"/><text x="16" y="27" text-anchor="middle" style="font:700 17px var(--f-titre)" fill="#051312">${t<0?'·':i+1}</text><text x="42" y="18" style="font:700 15px var(--f-titre)" fill="#F2F4EA">${o.b.id}</text><text x="42" y="33" style="font:500 12px var(--f-mono)" fill="rgba(242,244,234,.8)">${(o.st.sog*1.944).toFixed(1).replace('.',',')} nds</text></g>`});
-  // bandeau
-  const leg=t<0?'Procédure de départ':rk[0].st.fin?'Arrivées':rk[0].st.leg<=1?'Bord de près':'Bord de portant';
-  s+=`<g transform="translate(40 36)"><rect width="200" height="64" rx="12" fill="#C7EB00"/><text x="20" y="42" style="font:700 26px var(--f-titre)" fill="#051312">AI Regatta</text><rect x="200" width="250" height="64" fill="rgba(5,19,18,.9)"/><text x="218" y="26" style="font:500 12px var(--f-mono);letter-spacing:.14em" fill="rgba(242,244,234,.7)">MANCHE 3</text><text x="218" y="50" style="font:700 20px var(--f-titre)" fill="#F2F4EA">${leg}</text><rect x="450" width="150" height="64" rx="0" fill="#051312"/><text x="525" y="44" text-anchor="middle" style="font:700 32px var(--f-mono)" fill="#F2F4EA">${fmt(t)}</text></g>`;
-  // vent
-  s+=`<g transform="translate(1290 36)"><rect width="270" height="64" rx="12" fill="rgba(5,19,18,.88)"/><g transform="translate(36 32) rotate(180)"><circle r="22" fill="none" stroke="rgba(242,244,234,.25)" stroke-width="2"/><path d="M0 -18 L7 -2 L0 -6 L-7 -2Z" fill="#C7EB00"/><line x1="0" y1="-6" x2="0" y2="18" stroke="#C7EB00" stroke-width="4"/></g><text x="72" y="32" style="font:700 26px var(--f-mono)" fill="#F2F4EA">10,4 NDS</text><text x="72" y="52" style="font:500 12px var(--f-mono);letter-spacing:.1em" fill="rgba(242,244,234,.7)">SUD-EST · RAFALE 12,9</text></g>`;
-  // classement
-  const lead=rk[0];
-  rk.forEach((o,i)=>{const y=120+i*48;const gap=i===0||t<0?'':'+'+(o.st.fin&&lead.st.fin?(o.b.fin-lead.b.fin):Math.max(0,(o.rem-lead.rem)/1.5)).toFixed(1).replace('.',',');
-    s+=`<g transform="translate(1290 ${y})"><rect width="270" height="42" rx="9" fill="rgba(5,19,18,.86)"/><text x="22" y="28" text-anchor="middle" style="font:700 19px var(--f-titre)" fill="#F2F4EA">${t<0?'–':i+1}</text><rect x="40" y="8" width="7" height="26" rx="3" fill="${o.b.c}"/><text x="58" y="28" style="font:600 17px var(--f-titre)" fill="#F2F4EA">${o.b.name.length>13?o.b.id:o.b.name}</text><text x="256" y="28" text-anchor="end" style="font:500 15px var(--f-mono)" fill="rgba(242,244,234,.85)">${o.b.pens.some(p=>t>=p.at&&t<p.at+p.dur)?'PÉN.':gap}</text></g>`});
-  // graphique du bas
-  let mode=gfx; const lastHot=evs.filter(e=>['penalty','recall','mark','finish','start'].includes(e.type)).slice(-1)[0];
-  if(mode==='auto'){mode= t<0?'count': lastHot&&t-lastHot.t<6?'event': (rk.length>1&&!rk[1].st.fin&&Math.abs(rk[1].rem-rk[0].rem)/1.5<4)?'duel':'rank'}
-  const L=(inner,wd)=>`<g transform="translate(${(W-wd)/2} ${H-150})"><rect width="${wd}" height="110" rx="16" fill="rgba(5,19,18,.92)" stroke="rgba(242,244,234,.12)"/>${inner}</g>`;
-  if(mode==='count') s+=L(`<text x="30" y="40" style="font:600 14px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">DÉPART DANS</text><text x="30" y="92" style="font:700 54px var(--f-mono)" fill="#F2F4EA">${fmt(t).replace('−','')}</text><text x="300" y="82" style="font:500 20px var(--f-texte)" fill="rgba(242,244,234,.85)">Pavillon P · 7 bateaux sur la ligne</text>`,760);
-  else if(mode==='event'&&lastHot) s+=L(`<rect width="16" height="110" rx="8" fill="${lastHot.type==='penalty'||lastHot.type==='recall'?'#D0704A':'#C7EB00'}"/><text x="40" y="48" style="font:700 30px var(--f-titre)" fill="#F2F4EA">${lastHot.title}</text><text x="40" y="84" style="font:500 19px var(--f-texte)" fill="rgba(242,244,234,.85)">${lastHot.body||''}</text>`,900);
-  else if(mode==='duel'&&rk.length>1){const a=rk[0],b=rk[1],g=Math.max(0,(b.rem-a.rem)/1.5);const pct=Math.min(.92,.5+g/10);
-    s+=L(`<text x="30" y="34" style="font:600 13px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">DUEL POUR LA TÊTE</text><text x="30" y="84" style="font:700 36px var(--f-titre)" fill="${a.b.c}">${a.b.id}</text><text x="870" y="84" text-anchor="end" style="font:700 36px var(--f-titre)" fill="${b.b.c}">${b.b.id}</text><rect x="150" y="62" width="600" height="14" rx="7" fill="rgba(242,244,234,.12)"/><rect x="150" y="62" width="${(600*pct).toFixed(0)}" height="14" rx="7" fill="#C7EB00"/><text x="${150+600*pct}" y="50" text-anchor="middle" style="font:700 20px var(--f-mono)" fill="#F2F4EA">+${g.toFixed(1).replace('.',',')} s</text>`,900)}
-  else if(mode==='wind') s+=L(`<text x="30" y="40" style="font:600 14px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">LE VENT</text><text x="30" y="88" style="font:700 40px var(--f-mono)" fill="#F2F4EA">10,4 nds · 135°</text><text x="430" y="82" style="font:500 20px var(--f-texte)" fill="rgba(242,244,234,.85)">Bascule de +6° à droite attendue dans 10 min</text>`,900);
-  else if(mode==='rank'&&!lead.st.fin&&t>=0) s+=L(`<text x="30" y="40" style="font:600 14px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">EN TÊTE</text><text x="30" y="88" style="font:700 40px var(--f-titre)" fill="#F2F4EA">${lead.b.name}</text><text x="470" y="82" style="font:500 20px var(--f-mono)" fill="rgba(242,244,234,.85)">${(lead.st.sog*1.944).toFixed(1).replace('.',',')} nds · ${Math.max(0,lead.rem).toFixed(0)} m restants</text>`,900);
+  const t=sim.t-1,rk=ranking(t),W=1600,H=900,evs=sim.events.filter(e=>e.t<=t),lead=rk[0];
+  const P=(x,y)=>{const p=proj(x,y,1060,H-150,30);return [p[0]+190,p[1]+20,p[2]]};
+  let s=sea(W,H,true)+course(P,{mr:13,fs:16,labels:true,lay:true,dark:true});
+  rk.forEach(o=>{s+=wake(trail(o.b,t,16,1,P),'#ffffff',5)});
+  const placed=[];
+  rk.forEach((o,i)=>{const [x,y]=P(o.st.x,o.st.y);s+=boat(x,y,o.st.hdg,34,o.b.c,{ink:'#051312',sw:2});
+    const up=y>250;let tx=x+26,ty=up?y-58:y+18;for(let k=0;k<8;k++){const hit=placed.find(q=>Math.abs(q[0]-tx)<152&&Math.abs(q[1]-ty)<46);if(!hit)break;ty=up?hit[1]-48:hit[1]+48}placed.push([tx,ty]);
+    s+=`<line x1="${x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${tx.toFixed(1)}" y2="${(up?ty+42:ty).toFixed(1)}" stroke="rgba(238,242,230,.45)" stroke-width="1.5"/><g transform="translate(${tx.toFixed(1)} ${ty.toFixed(1)})"><rect width="146" height="42" rx="10" fill="rgba(5,19,18,.88)" stroke="${o.b.c}" stroke-width="2"/><rect width="36" height="42" rx="10" fill="${o.b.c}"/><text x="18" y="28" text-anchor="middle" style="font:700 19px var(--f-titre)" fill="#051312">${t<0?'·':i+1}</text><text x="46" y="19" style="font:700 16px var(--f-titre)" fill="#EEF2E6">${o.b.id}</text><text x="46" y="35" style="font:500 12px var(--f-mono)" fill="rgba(238,242,230,.8)">${activePen(o.b,t)?'PÉNALITÉ':kn(o.st.sog)+' nds'}</text></g>`});
+  s+=`<g transform="translate(40 36)"><rect width="196" height="68" rx="14" fill="#C7EB00"/><text x="20" y="44" style="font:700 27px var(--f-titre)" fill="#051312">AI Regatta</text><rect x="196" width="270" height="68" fill="rgba(5,19,18,.92)"/><text x="216" y="28" style="font:600 12px var(--f-mono);letter-spacing:.14em" fill="rgba(238,242,230,.65)">MANCHE 3</text><text x="216" y="54" style="font:700 21px var(--f-titre)" fill="#EEF2E6">${LEGN[lead.st.leg]}</text><rect x="466" width="160" height="68" rx="14" fill="#051312"/><rect x="466" width="20" height="68" fill="#051312"/><text x="546" y="46" text-anchor="middle" style="font:700 33px var(--f-mono)" fill="#EEF2E6">${fmt(t)}</text></g>`;
+  s+=`<g transform="translate(1270 36)"><rect width="290" height="68" rx="14" fill="rgba(5,19,18,.9)"/><g transform="translate(38 34) rotate(180)"><circle r="24" fill="none" stroke="rgba(238,242,230,.22)" stroke-width="2"/><path d="M0 -20 L8 -3 L0 -7 L-8 -3Z" fill="#C7EB00"/><line y1="-7" y2="20" stroke="#C7EB00" stroke-width="4" stroke-linecap="round"/></g><text x="78" y="34" style="font:700 27px var(--f-mono)" fill="#EEF2E6">10,4 NDS</text><text x="78" y="55" style="font:500 12px var(--f-mono);letter-spacing:.1em" fill="rgba(238,242,230,.65)">SUD-EST · RAFALE 12,9</text></g>`;
+  rk.forEach((o,i)=>{const y=122+i*50,prog=Math.max(0,Math.min(1,1-Math.max(0,o.rem)/TOTAL)),g=i===0||t<0?'':'+'+fr(gapS(o,lead).toFixed(1));
+    s+=`<g transform="translate(1270 ${y})"><rect width="290" height="44" rx="10" fill="rgba(5,19,18,.88)"/><text x="24" y="29" text-anchor="middle" style="font:700 19px var(--f-titre)" fill="#EEF2E6">${t<0?'–':i+1}</text><rect x="44" y="9" width="7" height="26" rx="3" fill="${o.b.c}"/><text x="62" y="27" style="font:600 17px var(--f-titre)" fill="#EEF2E6">${o.b.name.length>12?o.b.id:o.b.name}</text><text x="276" y="27" text-anchor="end" style="font:500 15px var(--f-mono)" fill="rgba(238,242,230,.85)">${o.st.fin?'✓':g}</text><rect x="62" y="35" width="200" height="3" rx="1.5" fill="rgba(238,242,230,.1)"/><rect x="62" y="35" width="${(200*prog).toFixed(0)}" height="3" rx="1.5" fill="${o.b.c}"/></g>`});
+  let mode=gfx;const hot=evs.filter(e=>['penalty','recall','mark','gate','finish','start'].includes(e.type)).slice(-1)[0];
+  if(mode==='auto')mode=t<0?'count':hot&&t-hot.t<6?'event':rk[1]&&!rk[1].st.fin&&gapS(rk[1],lead)<4?'duel':'rank';
+  const L=(inner,wd)=>`<g transform="translate(${(W-wd)/2} ${H-152})"><rect width="${wd}" height="112" rx="18" fill="rgba(5,19,18,.93)" stroke="rgba(238,242,230,.12)"/>${inner}</g>`;
+  if(mode==='count')s+=L(`<text x="32" y="42" style="font:600 14px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">DÉPART DANS</text><text x="32" y="94" style="font:700 56px var(--f-mono)" fill="#EEF2E6">${fmt(t).replace('−','')}</text><text x="300" y="84" style="font:500 21px var(--f-texte)" fill="rgba(238,242,230,.85)">Pavillon P · 7 bateaux · deux tours</text>`,800);
+  else if(mode==='event'&&hot)s+=L(`<rect width="16" height="112" rx="8" fill="${hot.hot?'#E0703F':'#C7EB00'}"/><text x="42" y="50" style="font:700 31px var(--f-titre)" fill="#EEF2E6">${hot.title}</text><text x="42" y="86" style="font:500 20px var(--f-texte)" fill="rgba(238,242,230,.85)">${hot.body||''}</text>`,940);
+  else if(mode==='duel'&&rk[1]){const a=rk[0],b=rk[1],g=gapS(b,a),pc=Math.min(.92,.5+g/10);s+=L(`<text x="32" y="36" style="font:600 13px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">DUEL POUR LA TÊTE</text><text x="32" y="88" style="font:700 38px var(--f-titre)" fill="${a.b.c}">${a.b.id}</text><text x="908" y="88" text-anchor="end" style="font:700 38px var(--f-titre)" fill="${b.b.c}">${b.b.id}</text><rect x="160" y="66" width="620" height="14" rx="7" fill="rgba(238,242,230,.12)"/><rect x="160" y="66" width="${(620*pc).toFixed(0)}" height="14" rx="7" fill="#C7EB00"/><text x="${(160+620*pc).toFixed(0)}" y="54" text-anchor="middle" style="font:700 21px var(--f-mono)" fill="#EEF2E6">+${fr(g.toFixed(1))} s</text>`,940)}
+  else if(mode==='wind')s+=L(`<text x="32" y="42" style="font:600 14px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">LE VENT</text><text x="32" y="92" style="font:700 42px var(--f-mono)" fill="#EEF2E6">10,4 nds · 135°</text><text x="440" y="86" style="font:500 21px var(--f-texte)" fill="rgba(238,242,230,.85)">La droite du parcours est favorisée</text>`,940);
+  else if(mode==='rank'&&t>=0)s+=L(`<text x="32" y="42" style="font:600 14px var(--f-mono);letter-spacing:.16em" fill="#C7EB00">${lead.st.fin?'VAINQUEUR':'EN TÊTE · '+LEGN[lead.st.leg].toUpperCase()}</text><text x="32" y="92" style="font:700 42px var(--f-titre)" fill="#EEF2E6">${lead.b.name}</text><text x="480" y="86" style="font:500 21px var(--f-mono)" fill="rgba(238,242,230,.85)">${lead.st.fin?'en '+fmt(lead.b.fin):kn(lead.st.sog)+' nds · '+Math.max(0,lead.rem).toFixed(0)+' m restants'}</text>`,940);
   $('#tv').innerHTML=s;
 }
 
-/* ---------------- Rendu ---------------- */
-function render(force){
-  $('#simClock').textContent=fmtC(sim.t).slice(0,-2);
-  if(view==='public')renderPublic(force);else if(view==='comite')renderComite(force);else renderTV();
+function renderTeam(force){
+  const t=sim.t,b=sim.boats.find(x=>x.id===eqTeam),rk=ranking(t),me=rk.find(o=>o.b===b),p=rk.indexOf(me)+1,w=760,h=600,P=(x,y)=>proj(x,y,w,h,22);
+  if(force)$('#eqPick').innerHTML=TEAMS.map(x=>`<button type="button" class="chip" data-eq="${x.id}" aria-pressed="${x.id===eqTeam}"><span class="dot" style="background:${x.c}"></span>${x.name}</button>`).join('');
+  $('#eqTitle').textContent='Console · '+b.name;$('#eqClock').textContent=fmtC(t).slice(0,-2);
+  const beating=me.st.leg===1||me.st.leg===3;
+  let s=sea(w,h,true)+course(P,{mr:8,fs:12,labels:true,lay:beating,ia:true,dark:true});
+  if(!me.st.fin&&t>=0){const nx=beating?WW:me.st.leg===2?{x:0,y:18}:{x:0,y:0},[a,c]=P(me.st.x,me.st.y),[d,e]=P(nx.x,nx.y);s+=`<line x1="${a.toFixed(1)}" y1="${c.toFixed(1)}" x2="${d.toFixed(1)}" y2="${e.toFixed(1)}" stroke="#6E8BD6" stroke-width="2" stroke-dasharray="3 6"/>`}
+  s+=wake(trail(b,t,40,1.2,P),b.c,3.5);
+  rk.forEach((o,i)=>{const [x,y]=P(o.st.x,o.st.y),mine=o.b===b;s+=boat(x,y,o.st.hdg,mine?28:18,mine?o.b.c:'rgba(238,242,230,.3)',{ink:'#051312',sw:mine?2:1,sail:mine?'#fff':'rgba(255,255,255,.45)',halo:mine?'rgba(199,235,0,.5)':null});if(mine||i<3)s+=tag(x,y,o.b.id,mine?o.b.c:'rgba(238,242,230,.4)',mine?12:10,true)});
+  $('#eqMap').innerHTML=s;
+  const ap=activePen(b,t);
+  $('#eqKpi').innerHTML=[['place',t<0?'—':p+(p===1?'er':'e')],['vitesse',kn(me.st.sog)+' nds'],['étape',me.st.fin?'arrivé':me.st.leg===0?'départ':LEGN[me.st.leg].replace('Tour ','T')],['liaison',ap&&ap.kind==='stop'?'ARRÊT':'433 MHz · 46 ms']].map(k=>`<div><span>${k[0]}</span><b>${k[1]}</b></div>`).join('');
+  const te=effT(b,t),rows=b.orders.filter(o=>t>=0&&te>=o.te).map(o=>({t:o.te,o}));
+  b.pens.filter(q=>t>=q.at).forEach(q=>rows.push({t:effT(b,q.at)+1e-3,o:{cmd:q.kind==='stop'?'Face au vent':q.kind==='turn'?'Tour de pénalité':'Retour vers la ligne',code:q.kind==='stop'?'head_to_wind':'penalty',why:q.kind==='stop'?'Arrêt de sécurité demandé par un humain de l’équipe, signalé au comité':q.kind==='turn'?'Décision du comité reçue : l’IA exécute le tour':'Rappel du comité reçu : l’IA ramène le bateau',conf:1,human:q.kind==='stop'}}));
+  rows.sort((x,y)=>y.t-x.t);
+  $('#eqOrders').innerHTML=rows.slice(0,7).map((r,k)=>{const o=r.o,age=te-r.t;return `<div class="ord${k===0&&age<6?' new':''}"><span class="mono" style="font-size:12px;color:var(--clair-2)">${fmtC(r.t).slice(0,-2)}</span><span><b>${o.cmd}</b><code>${o.code}</code><span class="why">${o.why}</span><span class="conf"><i style="width:${Math.round(o.conf*100)}%"></i></span></span><span class="st">${o.human?'HUMAIN':age<.05?'envoyé':age<1.5?'reçu':'exécuté'}</span></div>`}).join('')||'<div class="empty" style="background:rgba(238,242,230,.06);color:var(--clair-2)">L’IA attend le départ. Premier ordre au signal : mode près.</div>';
+  const inbox=sim.events.filter(e=>['proc','start','recall','penalty','info'].includes(e.type)).slice(-4).reverse();
+  $('#eqInbox').innerHTML=inbox.map(e=>`<div class="ord"><span class="mono" style="font-size:12px;color:var(--clair-2)">${fmtC(e.t).slice(0,-2)}</span><span><b>${e.title}</b><span class="why">${e.body||''}</span></span><span class="st">lu · auto</span></div>`).join('')||'<div class="empty" style="background:rgba(238,242,230,.06);color:var(--clair-2)">Aucun avis pour l’instant.</div>';
+  const stopping=ap&&ap.kind==='stop',S=$('#eqStop');S.textContent=stopping?'Bateau arrêté, face au vent':stopArm?'Confirmer l’arrêt de sécurité':'Arrêt de sécurité';S.classList.toggle('arm',stopArm);S.disabled=!!stopping||t<0||me.st.fin;
 }
 
-/* ---------------- Interactions ---------------- */
-document.querySelectorAll('.tabs [data-v]').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.v;document.querySelectorAll('.tabs [data-v]').forEach(x=>x.setAttribute('aria-pressed',x===b));['public','comite','tv'].forEach(v=>$('#v-'+v).hidden=v!==view);setHint();try{localStorage.setItem('air-view',view)}catch(e){}render(true)}));
-document.querySelectorAll('[data-sp]').forEach(b=>b.addEventListener('click',()=>{speed=+b.dataset.sp;document.querySelectorAll('[data-sp]').forEach(x=>x.setAttribute('aria-pressed',x===b))}));
-$('#play').addEventListener('click',()=>{playing=!playing;$('#play').textContent=playing?'Pause':'Lecture';$('#play').setAttribute('aria-pressed',!playing)});
-$('#restart').addEventListener('click',()=>{seenPub=0;restart('')});
-document.querySelectorAll('[data-pt]').forEach(b=>b.addEventListener('click',()=>{pTab=b.dataset.pt;document.querySelectorAll('[data-pt]').forEach(x=>x.setAttribute('aria-pressed',x===b));render(true)}));
-$('#pBody').addEventListener('click',e=>{const f=e.target.closest('[data-fav]');if(f){fav=f.dataset.fav;render(true);return}const b=e.target.closest('[data-b]');if(b){selBoat=b.dataset.b;if(pTab!=='map'){pTab='map';document.querySelectorAll('[data-pt]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.pt==='map'))}render(true)}});
-$('#cAlerts').addEventListener('click',e=>{const b=e.target.closest('[data-d]');if(b)decide(b.dataset.d,b.dataset.w)});
+const LEAD={public:['L’application du <em>spectateur</em>','Une vraie manche simulée, en deux tours. Touchez les bateaux, ouvrez le classement, choisissez votre équipe : les alertes arrivent comme sur un téléphone.'],
+  comite:['La console du <em>comité de course</em>','Procédure de départ, alertes du moteur de course, rejeu d’arbitrage seconde par seconde. Vos décisions changent vraiment la course et partent chez tout le monde.'],
+  tv:['La course à la <em>télévision</em>','Même chrono, même course, en habillage d’antenne. Le graphique du bas suit l’action ; la régie peut en imposer un.'],
+  equipe:['La console d’une <em>équipe</em>','L’IA de l’équipe décide et envoie seule ses ordres au bateau. Les commandes sont verrouillées : l’humain regarde. Seul l’arrêt de sécurité reste possible.']};
+function setLead(){$('#leadT').innerHTML=LEAD[view][0];$('#leadP').textContent=LEAD[view][1]}
+function render(force){$('#simClock').textContent=fmtC(sim.t).slice(0,-2);
+  if(view==='public')renderPublic();else if(view==='comite')renderComite(force);else if(view==='tv')renderTV();else renderTeam(force)}
+function loop(now){const dt=Math.min(.1,(now-last)/1000);last=now;
+  if(playing&&sim.t<END){sim.t+=dt*speed;tick()}
+  if(RV&&RV.play){RV.t+=dt*RV.rs;if(RV.t>=RV.t1){RV.t=RV.t1;RV.play=false}drawReplay()}
+  acc+=dt;if(acc>1/24){acc=0;render(false)}
+  requestAnimationFrame(loop)}
+
+$$('.roles [data-v]').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.v;$$('.roles [data-v]').forEach(x=>x.setAttribute('aria-pressed',x===b));['public','comite','tv','equipe'].forEach(v=>$('#v-'+v).hidden=v!==view);setLead();try{localStorage.setItem('air-view',view)}catch(e){}render(true)}));
+$$('[data-sp]').forEach(b=>b.addEventListener('click',()=>{speed=+b.dataset.sp;$$('[data-sp]').forEach(x=>x.setAttribute('aria-pressed',x===b))}));
+$('#play').addEventListener('click',()=>{playing=!playing;$('#play').textContent=playing?'❚❚':'▶';$('#play').setAttribute('aria-label',playing?'Pause':'Lecture')});
+$('#restart').addEventListener('click',()=>restart(''));
+$$('[data-pt]').forEach(b=>b.addEventListener('click',()=>{pTab=b.dataset.pt;$$('[data-pt]').forEach(x=>x.setAttribute('aria-pressed',x===b));render(true)}));
+$('#pBody').addEventListener('click',e=>{const f=e.target.closest('[data-fav]');if(f){fav=f.dataset.fav;render(true);return}const b=e.target.closest('[data-b]');if(b){sel=b.dataset.b;if(pTab!=='map'){pTab='map';$$('[data-pt]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.pt==='map'))}render(true)}});
+$('#v-comite').addEventListener('click',e=>{const r=e.target.closest('[data-rv]');if(r){openReplay(r.dataset.rv);return}const d=e.target.closest('[data-d]');if(d)decide(d.dataset.d,d.dataset.w)});
 $('#bX').addEventListener('click',()=>{const a=sim.alerts.find(a=>a.ocs&&!a.done);if(a)decide(a.id,'recall')});
-$('#bGen').addEventListener('click',()=>{seenPub=0;restart('Rappel général')});
-$('#bAP').addEventListener('click',()=>{seenPub=0;restart('Départ retardé')});
-$('#bS').addEventListener('click',()=>{if(sim.shortened||sim.t<0)return;sim.shortened=true;emit('info',{title:'Parcours réduit',body:'Le comité réduit le parcours : la porte devient l’arrivée.'});log('Parcours réduit · pavillon S · 2 sons');render(true)});
-document.querySelectorAll('[data-ly]').forEach(b=>b.addEventListener('click',()=>{ly[b.dataset.ly]=!ly[b.dataset.ly];b.setAttribute('aria-pressed',ly[b.dataset.ly]);render(true)}));
-document.querySelectorAll('[data-g]').forEach(b=>b.addEventListener('click',()=>{gfx=b.dataset.g;document.querySelectorAll('[data-g]').forEach(x=>x.setAttribute('aria-pressed',x===b));render(true)}));
+$('#bGen').addEventListener('click',()=>restart('Rappel général'));
+$('#bAP').addEventListener('click',()=>restart('Départ retardé'));
+$('#bN').addEventListener('click',()=>restart('Manche annulée, nouvelle procédure'));
+$$('[data-ly]').forEach(b=>b.addEventListener('click',()=>{ly[b.dataset.ly]=!ly[b.dataset.ly];b.setAttribute('aria-pressed',ly[b.dataset.ly]);render(true)}));
+$$('[data-g]').forEach(b=>b.addEventListener('click',()=>{gfx=b.dataset.g;$$('[data-g]').forEach(x=>x.setAttribute('aria-pressed',x===b));render(true)}));
+$('#eqPick').addEventListener('click',e=>{const c=e.target.closest('[data-eq]');if(c){eqTeam=c.dataset.eq;stopArm=false;render(true)}});
+$('#eqStop').addEventListener('click',()=>{if(!stopArm){stopArm=true;render(true);setTimeout(()=>{stopArm=false},4000);return}stopArm=false;const b=sim.boats.find(x=>x.id===eqTeam);b.pens.push({at:sim.t,dur:15,kind:'stop'});log('ARRÊT DE SÉCURITÉ · '+b.id+' · demandé par l’équipe, seule intervention humaine autorisée');render(true)});
 
 sim=build();
-try{const v=localStorage.getItem('air-view');if(v&&v!=='public'){const b=document.querySelector('.tabs [data-v="'+v+'"]');if(b)b.click()}}catch(e){}
-setHint();render(true);requestAnimationFrame(loop);
+try{const v=localStorage.getItem('air-view');if(v&&v!=='public'){const b=document.querySelector('.roles [data-v="'+v+'"]');if(b)b.click()}}catch(e){}
+setLead();render(true);requestAnimationFrame(loop);
 })();
 </script>
