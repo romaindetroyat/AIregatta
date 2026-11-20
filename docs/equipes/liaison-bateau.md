@@ -64,6 +64,8 @@ flowchart LR
   CAPT["Capteurs de l'équipe<br/>GPS, girouette, centrale"] --> AP
 ```
 
+> **Acté (P37)** : pour 2027, l’intelligence tactique de chaque équipe reste à terre ; le bateau, sans personne à bord, est bien un drone. Le tout embarqué est envisagé pour 2028.
+
 - **À terre** : le PC de l’équipe reçoit le flux officiel, décide de la tactique et envoie des **ordres simples**.
 - **À bord** : un autopilote **exécute** ces ordres de façon autonome (barre, réglage de voile, virement). Le pilotage fin doit rester à bord : la latence de la liaison (et ses coupures) ne doit jamais faire perdre le contrôle du bateau.
 - Exemple éprouvé, cité dans le kit de référence (architecture §4.12) : **ArduPilot Rover en mode voilier**, sur un contrôleur de vol de type Matek H743, avec une girouette, piloté par **MAVLink** (le protocole de messages d’ArduPilot) sur une radio de télémétrie. ArduPilot sait déjà virer sur commande et tirer des bords seul vers un point au vent. Une architecture maison (Raspberry Pi, microcontrôleur, protocole propre) est tout aussi acceptable.

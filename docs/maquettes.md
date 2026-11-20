@@ -201,7 +201,7 @@ Les équipes développent leur propre logiciel. L’organisation fournit les don
 | D14 | Équipes | Radiocommande de sécurité 2,4 GHz obligatoire ? (§9 de l’architecture la dit obligatoire, P16 ne l’impose pas) | Conseillée, non obligatoire |
 | D12 | Équipes | Mise à jour du logiciel du bateau en course | Interdire pendant une manche |
 | D13 | Équipes | Ouverture du bac à sable | Janvier 2027 |
-| D15 | Équipes | Intelligence à terre ou embarquée | À terre pour 2027 ; l’embarqué complet en option ou pour 2028 (voir section 5) |
+| D15 | Équipes | Intelligence à terre ou embarquée | **Acté le 20 novembre 2026 (P37)** : IA à terre pour 2027 ; tout embarqué pour 2028 (voir section 5) |
 | D16 | Équipes | Réglages fins : choque, borde, cap | À définir avec les équipes avant le gel du 15 mars |
 
 Une fois tranchées, ces décisions passent dans les [postulats](postulats.md).
@@ -224,6 +224,6 @@ Oui. Un drone est un bateau **sans personne à bord**. Ici, personne n’est à 
 | Mise au point | Facile : logs et correctifs à terre | Plus dure : pas de modification pendant une manche, journal récupéré après |
 | Spectacle et récit | « L’IA pilote depuis la terre » | « Le bateau pense seul » : plus fort, mais moins d’équipes capables |
 
-### Recommandation
+### Décision (P37, actée le 20 novembre 2026)
 
-Garder l’IA à terre pour 2027 (c’est déjà un drone, et c’est réaliste en 6 mois). Prévoir, si l’on veut, une **catégorie ou un bonus « tout embarqué »** sans relais des données officielles (le bateau ne voit que ses propres capteurs), ce qui évite de construire la liaison descendante. Viser le tout embarqué avec données officielles pour une édition 2028.
+L’IA reste à terre pour 2027 (c’est déjà un drone, et c’est réaliste en 6 mois). Prévoir, si l’on veut, une **catégorie ou un bonus « tout embarqué »** sans relais des données officielles (le bateau ne voit que ses propres capteurs), ce qui évite de construire la liaison descendante. Viser le tout embarqué avec données officielles pour une édition 2028.
