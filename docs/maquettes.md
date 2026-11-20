@@ -201,5 +201,29 @@ Les équipes développent leur propre logiciel. L’organisation fournit les don
 | D14 | Équipes | Radiocommande de sécurité 2,4 GHz obligatoire ? (§9 de l’architecture la dit obligatoire, P16 ne l’impose pas) | Conseillée, non obligatoire |
 | D12 | Équipes | Mise à jour du logiciel du bateau en course | Interdire pendant une manche |
 | D13 | Équipes | Ouverture du bac à sable | Janvier 2027 |
+| D15 | Équipes | Intelligence à terre ou embarquée | À terre pour 2027 ; l’embarqué complet en option ou pour 2028 (voir section 5) |
+| D16 | Équipes | Réglages fins : choque, borde, cap | À définir avec les équipes avant le gel du 15 mars |
 
 Une fois tranchées, ces décisions passent dans les [postulats](postulats.md).
+
+---
+
+## 5. Est-ce encore un drone si l’IA est à terre ?
+
+Oui. Un drone est un bateau **sans personne à bord**. Ici, personne n’est à bord et personne ne barre : l’IA de l’équipe décide à terre, le pilote automatique exécute à bord. Le système complet (bateau + IA à terre) est autonome ; seule l’intelligence tactique est déportée, comme pour beaucoup de drones commandés depuis une station au sol. Pour 2027, rien n’oblige à l’embarquer.
+
+### Si tout doit être embarqué, ce qui change
+
+| Sujet | IA à terre (2027) | Tout embarqué |
+|---|---|---|
+| Données officielles | Reçues à terre par câble, 10 Hz, < 1 ms d’écart entre équipes | Il faut les **envoyer aux bateaux** : une nouvelle liaison descendante officielle, diffusée à tous en même temps (4G chargée par la foule, ou radio de diffusion à concevoir). C’est le plus gros chantier |
+| Équité | Garantie par le câble identique | À garantir sur l’eau : même liaison, même latence, même débit pour tous |
+| Liaison équipe → bateau | Ordres tactiques en continu | **Interdite en course**, sauf arrêt de sécurité ; contrôle du spectre radio pour le vérifier |
+| Calcul | PC puissant à terre | Ordinateur embarqué (type Raspberry Pi 5 ou Jetson) : 5 à 15 W, + 150 à 400 g de batterie et de boîtier étanche sur un bateau de 4 kg |
+| Capteurs | Flux officiel + capteurs de l’équipe | Girouette et anémomètre à bord, GPS propre ; la balise officielle reste séparée (P09), sauf à prévoir une sortie de données à sens unique |
+| Mise au point | Facile : logs et correctifs à terre | Plus dure : pas de modification pendant une manche, journal récupéré après |
+| Spectacle et récit | « L’IA pilote depuis la terre » | « Le bateau pense seul » : plus fort, mais moins d’équipes capables |
+
+### Recommandation
+
+Garder l’IA à terre pour 2027 (c’est déjà un drone, et c’est réaliste en 6 mois). Prévoir, si l’on veut, une **catégorie ou un bonus « tout embarqué »** sans relais des données officielles (le bateau ne voit que ses propres capteurs), ce qui évite de construire la liaison descendante. Viser le tout embarqué avec données officielles pour une édition 2028.

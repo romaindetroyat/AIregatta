@@ -94,6 +94,16 @@ Les équipes envoient à leur bateau des ordres tactiques simples (P36). Ils se 
 | Mode haut | `mode_high` | Le bateau serre le vent (plus près, moins vite) | `twa_deg` |
 | Mode bas | `mode_low` | Le bateau s’écarte du vent (plus loin, plus vite) | `twa_deg` |
 
+**Réglages (à définir)**
+
+Des ordres plus fins sont envisagés. Leur nom, leur effet exact et leurs paramètres restent à choisir avec les équipes avant le gel du contrat.
+
+| Ordre | Code proposé | Effet envisagé | Paramètre envisagé |
+|---|---|---|---|
+| Choque | `ease` | Relâcher une écoute (grand-voile ou foc) | `sheet` (`main`, `jib`), `amount_pct` |
+| Borde | `trim` | Reprendre une écoute | `sheet`, `amount_pct` |
+| Cap | `heading` | Tenir un cap fixe, sans tenir compte du vent | `heading_deg` (degrés vrais) |
+
 **Contournement d’une bouée, en pratique.** L’ordre « abats » ou « loffe » peut être envoyé à l’approche : le pilote automatique l’exécute au moment où le bateau passe la bouée, du bon côté. C’est l’équipe qui décide quand et comment ; la position officielle de la balise, elle, fait foi pour le passage de la bouée (moteur de course S8).
 
 **VMG** (*velocity made good*) : la vitesse à laquelle on se rapproche réellement de la bouée au vent (ou sous le vent), et non la vitesse sur l’eau. **TWA** (*true wind angle*) : l’angle entre l’axe du bateau et le vent vrai.
@@ -153,7 +163,7 @@ Compte rendu d’exécution :
 | `boat_id` | Bateau visé ; le bateau ignore un ordre qui ne lui est pas adressé |
 | `order_id` | Numéro croissant attribué par le PC à terre ; un ordre déjà reçu (même numéro) n’est pas exécuté deux fois |
 | `t_gps_ms` | Instant d’émission, même convention que le contrat d’interface (ms depuis l’époque GPS) ; le GPS de bord donne l’heure exacte |
-| `cmd` | `tack`, `gybe`, `bear_away`, `head_up`, `head_to_wind`, `mode_upwind`, `mode_downwind`, `mode_vmg`, `mode_high`, `mode_low` |
+| `cmd` | `tack`, `gybe`, `bear_away`, `head_up`, `head_to_wind`, `mode_upwind`, `mode_downwind`, `mode_vmg`, `mode_high`, `mode_low` ; à définir : `ease`, `trim`, `heading` |
 | `param` | Facultatif : `twa_deg` (angle au vent visé, en degrés), autres paramètres selon la décision (c) ci-dessous |
 | `ttl_ms` | Durée de validité : un ordre reçu trop tard est refusé (`status: "expired"`), pour ne pas virer au mauvais moment |
 | `status` | Accusé : `accepted`, `rejected`, `expired`. Compte rendu : `started`, `done`, `failed`, `aborted` |
