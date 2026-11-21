@@ -73,7 +73,7 @@ L’organisation, elle, fournit et pose la **balise officielle** (scellée, sans
 
 ## Les règles d’équité, en bref
 
-Même câble, même broker, mêmes données au même instant ; lecture seule ; aucun accès aux données internes de l’organisation ; une seule source de position officielle ; pas d’autre source de données sur l’eau que les capteurs de votre bateau ; réponses du comité utiles à tous publiées à tous. Le détail est dans [regles-equite-et-faq.md](regles-equite-et-faq.md).
+Même câble, même broker, mêmes données au même instant ; lecture du flux, écriture dans votre seule boîte d’envoi ; aucun accès aux données internes de l’organisation ; une seule source de position officielle ; pas d’autre source de données sur l’eau que les capteurs de votre bateau ; réponses du comité utiles à tous publiées à tous. Le détail est dans [regles-equite-et-faq.md](regles-equite-et-faq.md).
 
 ## Contact
 

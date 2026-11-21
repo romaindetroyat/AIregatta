@@ -79,16 +79,16 @@ Sa balise est passée sur la **radio de secours** 868 MHz (`path: "radio"`), en 
 Oui, pour votre propre pilotage et votre tactique. Mais elles ne servent ni au suivi, ni au classement, ni à l’arbitrage (P08), et vous ne pouvez pas les publier sur le broker.
 
 **6. Pouvons-nous renvoyer à notre bateau les positions des autres bateaux ?**
-C’est la recommandation de l’organisation (point (b) de [liaison-bateau.md](liaison-bateau.md#43-ce-qui-reste-à-trancher-par-lorganisation)), à confirmer. Les données sont les mêmes pour tous, donc cela ne crée pas d’inégalité.
+C’est acté depuis le 21 novembre 2026 (P36). Les données sont les mêmes pour tous, donc cela ne crée pas d’inégalité.
 
 **7. Pouvons-nous barrer notre bateau au joystick ?**
-C’est encore à trancher (point (a)). La piste : **un humain ne barre pas en course**, sauf pour la sécurité ; **une IA qui barre seule, sans intervention humaine**, pourrait être autorisée, même depuis la terre. En course, vous envoyez des ordres tactiques (vire, empanne, mode VMG, haut, bas), éventuellement avec un angle visé.
+C’est acté depuis le 20 novembre 2026 (règles 3.2 à 3.4) : **un humain ne barre pas en course**, sauf l’arrêt de sécurité ; **une IA qui barre seule, sans intervention humaine**, est autorisée, même depuis la terre. En course, vous envoyez des ordres tactiques (vire, empanne, mode VMG, haut, bas), éventuellement avec un angle visé.
 
 **8. Notre liaison avec le bateau est tombée en pleine manche. Que se passe-t-il ?**
 Votre bateau applique le comportement que vous avez déclaré (par exemple : garder le mode, puis rejoindre un point de sécurité, puis se mettre bout au vent). Il reste suivi et classé par sa balise. Prévenez le comité (`technical_issue`), et demandez de l’aide si le bateau devient dangereux (`assistance_request`, plus appel direct).
 
 **9. Comment faire une réclamation ?**
-Par un message `protest` dans votre `outbox`, en précisant le ou les bateaux, l’instant de l’incident et ce qui s’est passé ; vous recevez un `receipt` avec un numéro de réclamation. Délais et forme exacte : instructions de course (à définir, P14). Le jury dispose des traces officielles et de la vidéo.
+Par un message `protest` dans votre `outbox`, en précisant le ou les bateaux, l’instant de l’incident et ce qui s’est passé ; vous recevez un `receipt` avec un numéro de réclamation. Délais et forme exacte : règle 9.3 : dans les 10 minutes qui suivent l’arrivée du dernier bateau. Le jury dispose des traces officielles et de la vidéo.
 
 **10. Que faire si nous voyons une donnée officielle manifestement fausse (bouée mal placée, bateau absent) ?**
 Envoyez un `technical_issue` avec `component: "data_feed"` et l’heure UTC. Si cela vous a fait perdre des places, une `redress_request` (demande de réparation) est possible, selon les instructions de course.

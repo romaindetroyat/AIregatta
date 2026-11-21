@@ -4,7 +4,7 @@
 
 | À fabriquer | Coût par balise | Masse visée | Autonomie | Temps de montage |
 |---|---|---|---|---|
-| **16** — 10 bateaux, 4 bouées, 2 de rechange | **≈ 445 €** — pièces seules | **≤ 250 g** — boîtier ≈ 170 g + antennes | **≈ 20 h** — 2 accus, ≈ 25 Wh | **≈ 4 h** — par balise, essais compris |
+| **16** — 10 bateaux, 4 bouées, 2 de rechange | **≈ 455 €** — pièces seules | **≤ 250 g** — boîtier ≈ 170 g + antennes | **≈ 20 h** — 2 accus, ≈ 25 Wh | **≈ 4 h** — par balise, essais compris |
 
 ## 1. Ce qu’on fabrique
 
@@ -17,22 +17,22 @@ Un boîtier étanche, scellé, avec ses accus, qui donne la position officielle 
 | | **Électronique** | | | |
 | 1 | Récepteur GPS RTK | ArduSimple simpleRTK2B Lite (puce u-blox ZED-F9P) | La position au centimètre, 10 fois par seconde | 199 € |
 | 1 | Antenne GPS | u-blox ANN-MB-00, avec un disque métallique de 10 cm dessous | Deux fréquences, étanche, connecteur SMA | 60 € |
-| 1 | Carte calcul et 4G | ESP32-S3 + modem SIMCom A7670E (Waveshare ou LilyGO : choisie au prototype), avec son antenne 4G souple | Le cerveau de la balise, l’envoi en 4G, la carte microSD | 49 € |
+| 1 | Carte calcul et 4G | ESP32-S3 + modem SIMCom A7670E (Waveshare ou LilyGO : choisie au prototype) | Le cerveau de la balise, l’envoi en 4G, la carte microSD | 49 € |
 | 1 | Radio de secours | Adafruit RFM95W 868 MHz | Positions de secours si la 4G tombe | 21 € |
 | 1 | Centrale inertielle | Adafruit BNO085 | Cap, gîte et tangage | 30 € |
 | | **Boîtier, énergie et petites pièces** | | | |
-| 1 | Boîtier étanche IP67 | Couvercle transparent (gamme Hammond 1554 ou équivalent), ≈ 120 × 80 × 60 mm, à valider avec les cartes | Protège tout ; la LED se voit à travers | 20 € |
+| 1 | Boîtier étanche IP67 | Couvercle transparent (gamme Hammond 1554 ou équivalent), ≈ 120 × 65 × 40 mm, à valider avec les cartes et la trappe du pont | Protège tout ; la LED se voit à travers | 20 € |
 | 1 | Accus et support | 2 accus 18650 protégés de 3 500 mAh, en parallèle, sur support 2 places | ≈ 25 Wh, ≈ 20 h | 18 € |
 | 1 | Convertisseur 3,3 V | Pololu S7V8F3 (abaisseur-élévateur, 1 A) | Alimente proprement GPS, centrale et radio, même quand la 4G tire 2 A | 8 € |
 | 1 | Interrupteur | Interrupteur électronique Pololu (Mini Pushbutton Power Switch LV) commandé par un interrupteur à aimant (ILS) | On allume et on éteint avec un aimant, sans percer le boîtier | 8 € |
 | 1 | Prise étanche | Embase M8 4 points + câble USB-C court à l’intérieur | Charge et programmation sans ouvrir | 10 € |
-| 1 | Antenne radio | Antenne 868 MHz souple + connecteur uFL à souder sur la radio | Collée à l’intérieur du couvercle | 6 € |
+| 1 | Antennes 4G et radio | Antennes 4G et 868 MHz courtes et étanches, câbles d’antenne, 3 traversées SMA, connecteur uFL pour la radio | Sur le pont, dans l’axe (P39), comme l’antenne GPS | 15 € |
 | 1 | Voyant | LED RGB adressable (type NeoPixel) | Montre l’état : GPS, RTK, 4G, radio | 1 € |
-| 1 | Petites pièces | Traversée SMA, presse-étoupe, visserie, sachet déshydratant, étiquettes de scellé |  | 6 € |
+| 1 | Petites pièces | Presse-étoupe, visserie, sachet déshydratant, étiquettes de scellé |  | 6 € |
 | 1 | Carte SIM | Carte SIM IoT multi-opérateurs, ≈ 500 Mo pour la saison | Passe seule d’Orange à SFR ou Bouygues | 10 € |
-| | **Total** | | | **≈ 446 €** |
+| | **Total** | | | **≈ 455 €** |
 
-La liste d’achats compte 440 € par balise ; l’écart vient du détail des petites pièces. Liens d’achat : `achats.md` et `materiel.md`.
+C’est le montant compté dans la liste d’achats. Liens d’achat : `achats.md` et `materiel.md`.
 
 ## 3. Outils
 
@@ -97,12 +97,12 @@ Schéma : voir le document général, page Matériel, « Fabriquer la balise ».
 
 - BNO085 : souder la barrette, relier P0 au 3,3 V (mode UART-RVC).
 - RFM95W : souder le connecteur uFL et la barrette.
-- Carte ESP32-S3 + 4G : insérer la carte SIM et la carte microSD, brancher l’antenne 4G.
+- Carte ESP32-S3 + 4G : insérer la carte SIM et la carte microSD, relier le modem à sa traversée SMA.
 
 ### 4. Préparer le boîtier — 30 min
 
-- Percer avec le gabarit commun (imprimé une fois pour toutes) : traversée SMA de l’antenne GPS, embase M8.
-- Coller l’antenne 868 MHz et l’antenne 4G à l’intérieur du couvercle, à 10 cm l’une de l’autre si possible.
+- Percer avec le gabarit commun (imprimé une fois pour toutes) : 3 traversées SMA (GPS, 4G, radio), embase M8.
+- Les trois antennes vont sur le pont, dans l’axe (P39) ; dans le boîtier, seulement les câbles et les traversées.
 - Coller l’ILS contre la paroi et marquer « aimant ici » à l’extérieur.
 - Les 16 boîtiers se percent à la suite : c’est plus rapide et plus régulier.
 
@@ -215,16 +215,16 @@ Une fiche par balise, signée, rangée dans le registre.
 ## 9. La variante bouée
 
 - Même électronique, même firmware, profil « bouée » : 1 position par seconde en 4G, 1 trame radio toutes les 5 s.
-- Boîtier plus grand, en pied d’espar. La batterie LiFePO4 12,8 V de la bouée remplace les accus : un convertisseur 12 V → 5 V alimente la carte par son entrée USB.
-- Bouée au vent : l’anémomètre Gill WindSonic M passe par un convertisseur RS-232 → 3,3 V (module MAX3232, alimenté en 3,3 V). Sa sortie va sur une broche libre de l’ESP32, lue en liaison série logicielle à 9 600 bauds, la vitesse d’usine. L’anémomètre est alimenté directement en 12,8 V.
+- Bouée au vent : boîtier plus grand, en pied d’espar ; sa batterie LiFePO4 12,8 V remplace les accus, et un convertisseur 12 V → 5 V alimente la carte par son entrée USB.
+- Les bouées de parcours et de ligne gardent les accus de la balise. Bouée au vent : l’anémomètre Gill WindSonic M passe par un convertisseur RS-232 → 3,3 V (module MAX3232, alimenté en 3,3 V). Sa sortie va sur une broche libre de l’ESP32, lue en liaison série logicielle à 9 600 bauds, la vitesse d’usine. L’anémomètre est alimenté directement en 12,8 V.
 - La bouée tourne sur son mouillage : il faut son cap absolu pour corriger la direction du vent. À vérifier au banc dès décembre : si le cap du mode UART-RVC n’est pas magnétique, la centrale de la bouée passe en liaison série complète (mode SHTP), qui donne le cap magnétique.
-- Antenne GPS en tête d’espar, au-dessus de l’anémomètre ou à côté, jamais en dessous.
+- Antenne GPS à côté de l’anémomètre, à la même hauteur ; rien au-dessus de l’anémomètre.
 
 ## 10. La pose à bord
 
 - Boîtier au fond, près de la quille, sanglé : le poids en bas.
 - Antennes au-dessus de la flottaison et dans l’axe du bateau : à la gîte, une antenne sur le côté sous le vent passe sous l’eau.
-- Coque en fibre de verre ou en bois : antennes collées sous le pont. Coque en carbone : antenne GPS sur le pont, ou fenêtre en fibre de verre dans le pont.
+- Les trois antennes sur le pont, dans l’axe, quelle que soit la matière de la coque (P39) ; câbles par passe-coque étanche.
 - Rien au-dessus de l’antenne GPS ; 10 à 15 cm d’un mât en carbone ; 20 cm au moins des antennes de l’équipe.
 - La distance de l’antenne à l’étrave est mesurée au contrôle : le PC course en déduit la position de l’étrave.
 
@@ -237,7 +237,7 @@ Détail pour les équipes : `equipes/bateau-de-reference.md`.
 - Les constellations que le GPS tient à 10 positions par seconde.
 - Le courant de pointe du modem (2 A) : pas de redémarrage quand la 4G émet, accus à moitié vides.
 - La chaleur : boîtier fermé, couvercle transparent, plein soleil de mai.
-- La réception 4G et GPS à travers la coque, sur un vrai IOM.
+- La réception et la tenue des antennes sur le pont mouillé, sur un vrai IOM.
 - La masse réelle de l’antenne GPS et de son câble : si elle pèse trop, essayer une antenne hélicoïdale légère.
 
 ## 12. Organiser la série
@@ -246,9 +246,9 @@ Détail pour les équipes : `equipes/bateau-de-reference.md`.
 |---|---|
 | Décembre | Commander les pièces de 2 prototypes (une carte Waveshare, une LilyGO) ; monter, écrire le firmware de base, tester au banc. |
 | Janvier | Essai sur l’eau ; choisir la carte ; figer le brochage, le gabarit de perçage et le fichier de réglages GPS. |
-| Février, semaine 1 | Commande de série reçue ; perçage des 16 boîtiers ; réglage des 16 GPS. |
-| Février, semaines 2 et 3 | Montage par lots de 4 : ≈ 4 h par balise, soit ≈ 16 h par lot ; essais d’autonomie la nuit. |
-| Février, semaine 4 | Recette complète des 16, étanchéité, scellés ; registre des balises à jour. |
+| 1er – 12 février | Commande de la série (C4) ; perçage des boîtiers et réglage des GPS dès réception. |
+| 15 février – 5 mars | Montage par lots de 4 (C5) : ≈ 4 h par balise, soit ≈ 16 h par lot ; essais d’autonomie la nuit. |
+| Début mars | Recette complète des 16, étanchéité, scellés ; registre des balises à jour avant l’essai du 10 mars. |
 | Mars | Essai à 4 bateaux ; corrections du firmware ; recharge et contrôle avant la régate blanche d’avril. |
 
-Le montage de série se fait à deux : l’un perce et câble, l’autre règle, programme et essaie. Le suppléant technique apprend sur les deux prototypes de décembre.
+Le montage de série se fait à deux : l’un perce et câble, l’autre règle, programme et essaie. Le suppléant technique apprend dès janvier, sur les deux prototypes.

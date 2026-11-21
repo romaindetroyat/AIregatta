@@ -38,7 +38,7 @@ Chaque écran calcule le chrono sur sa propre horloge, synchronisée sur le GPS,
 
 | Écran | Rôle | Éléments clés |
 |---|---|---|
-| Départ | Piloter la procédure | Carte de la ligne avec position prévue à 0:00, biais de ligne, compte à rebours GPS, étapes (avertissement, préparatoire, une minute, départ), choix du pavillon préparatoire (P, I, Z, U, noir), boutons rappel individuel, rappel général, report, annulation, corne manuelle ; état de chaque balise |
+| Départ | Piloter la procédure | Carte de la ligne avec position prévue à 0:00, biais de ligne, compte à rebours GPS, étapes (avertissement à −1:00, préparatoire à −0:40, dernière étape à −0:20, départ), choix du pavillon préparatoire (P, I, Z, U, noir), boutons rappel individuel, rappel général, report, annulation, corne manuelle ; état de chaque balise |
 | Course et arbitrage | Suivre et juger | Carte du parcours, file d’alertes, rejeu instantané vu de dessus avec écart minimal et priorités, décision en un clic (pas de suite, pénalité à effectuer, pénalité en temps, renvoi au jury), aperçu du message envoyé aux équipes et du libellé public, classement provisoire, actions de parcours (déplacer une bouée, réduire, annuler, arrêt sécurité) |
 | Décisions | Référentiel | Les 21 décisions d’un comité, classées par moment, avec signal, règle, qui décide, effet sur le moteur de course, message aux équipes, libellé public |
 | Messages | Communiquer | Rédaction d’avis (toutes les équipes, une équipe, ou équipes + public), suivi des accusés de lecture, boîte des demandes des équipes avec réponses types, règle de visibilité publique |
@@ -59,14 +59,14 @@ Chaque écran calcule le chrono sur sa propre horloge, synchronisée sur le GPS,
 | Pendant | Changer le parcours | C, sons répétés | nouvelle bouée publiée, contrôle des passages mis à jour | Acté |
 | Pendant | Réduire le parcours | S, 2 sons | arrivée déplacée | Acté |
 | Pendant | Annuler la manche | N, 3 sons | résultats effacés, enregistrement conservé | Acté |
-| Pendant | Pénaliser en course | message | pénalité enregistrée, exécution vérifiée | **À trancher** : boucle ou temps ; direct ou après la manche |
-| Pendant | Sortie de zone | message | détection sur l’étrave | **À trancher** : tolérance et sanction |
+| Pendant | Pénaliser en course | message | pénalité enregistrée, exécution vérifiée | Acté : tour de 360°, pénalité de 20 s s’il n’est pas fait ; en direct (règles 7.1 – 7.3, 9.2) |
+| Pendant | Sortie de zone | message | détection sur l’étrave | Acté : 5 m ou 5 s de tolérance, puis un tour (règle 8.1) |
 | Sécurité | Retirer un bateau | message + assistance | statut RET/DNF | Acté (P16) |
 | Sécurité | Interrompre | N sur H, 3 sons | tout arrêté | Acté |
 | Après | Valider les arrivées | son court (option) | temps au millième | Acté |
-| Après | Temps limite | DNF | manche close | **À trancher** : durée (proposé 15 min) |
-| Après | Recevoir une réclamation | numérique | rien tant que le jury n’a pas jugé | **À trancher** : délai (proposé 10 min) |
-| Après | Accorder une réparation | RDG | points recalculés | **À trancher** : cas de la balise en panne |
+| Après | Temps limite | DNF | manche close | Acté : 15 min (règle 10.2) |
+| Après | Recevoir une réclamation | numérique | rien tant que le jury n’a pas jugé | Acté : 10 min (règle 9.3) |
+| Après | Accorder une réparation | RDG | points recalculés | Acté : réparation si la panne est prouvée (règle 4.3) |
 | Après | Classement définitif | avis officiel | résultats figés et archivés | Acté |
 
 Statuts au classement : DNC, DNS, OCS, UFD, BFD, DNF, RET, DSQ, DNE, RDG.
@@ -167,10 +167,10 @@ Les équipes développent leur propre logiciel. L’organisation fournit les don
 | Question | Réponse courte | Détail |
 |---|---|---|
 | Que leur fournit-on ? | Flux officiel en lecture (positions, bouées, vent, parcours, chrono, pavillons, événements, classement), canal comité, horloge GPS, simulateur, rejeux, schémas, exemples | [equipes/README.md](equipes/README.md) |
-| Par quels connecteurs ? | MQTT (conseillé), WebSocket, NMEA 0183 / AIS, fichiers de rejeu ; bac à sable cloud dès janvier | [equipes/connecteurs.md](equipes/connecteurs.md) |
+| Par quels connecteurs ? | MQTT (conseillé), WebSocket, NMEA 0183 / AIS, fichiers de rejeu ; bac à sable cloud dès février | [equipes/connecteurs.md](equipes/connecteurs.md) |
 | Comment intégrer les données ? | Abonnement aux sujets, schémas JSON, état de flotte reconstruit à partir des messages conservés, chrono calculé localement | [equipes/contrat-interface.md](equipes/contrat-interface.md), [exemples](equipes/exemples/) |
 | Comment parler à leur bateau ? | Par leur propre liaison (radio 433 MHz conseillée, 868 hors sous-bande réservée, 4G), vers un pilote automatique à bord | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
-| Que peuvent-ils transmettre ? | Les ordres tactiques (acté) : manœuvres (vire, empanne, abats, loffe, face au vent) et modes (près, portant, VMG, haut, bas) ; paramètres, relais des données officielles, barre à distance, mise à jour en course : à trancher | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
+| Que peuvent-ils transmettre ? | Les ordres tactiques (acté) : manœuvres (vire, empanne, abats, loffe, face au vent) et modes (près, portant, VMG, haut, bas) ; paramètres et relais des données officielles libres, l’IA peut barrer seule, mise à jour interdite pendant une manche (actés les 20 et 21 novembre) | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
 
 ### Maquettes côté équipes
 
@@ -179,7 +179,7 @@ Les équipes développent leur propre logiciel. L’organisation fournit les don
 | Le kit | Les 12 éléments fournis, leur accès, leur format, leur date ; calendrier ; partage des responsabilités |
 | Explorateur de flux | Chaque sujet : sens, cadence, QoS, message conservé, exemple JSON, code d’abonnement Python, JavaScript, NMEA ; budget de latence |
 | Exemple de console | Ce qu’une équipe pourrait construire : distinction donnée officielle / calcul de l’équipe / liaison de l’équipe, ordres avec suivi (envoyé, reçu, en cours, confirmé par la position officielle), canal comité, télémétrie |
-| Liaison bateau | Les deux chaînes séparées, choix du support, règles de transmission à trancher, format d’ordre proposé, perte de liaison |
+| Liaison bateau | Les deux chaînes séparées, choix du support, règles de transmission actées, format d’ordre proposé, perte de liaison |
 
 ---
 

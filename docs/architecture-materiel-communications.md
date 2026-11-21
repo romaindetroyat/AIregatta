@@ -171,17 +171,17 @@ flowchart TB
 | ⑤ | MET → SRV | Wi-Fi / Ethernet local | API HTTP locale de la station, convertie en MQTT | 0,1–1 Hz | — | Vent, rafales, pression, température |
 | ⑥ | CAM → SRV | Ethernet (PoE) ou faisceau Wi-Fi 5 GHz | RTSP (H.264/H.265) pour la vidéo ; MQTT/JSON pour les résultats de vision | 25–30 i/s ; 1 Hz pour les risées | — | Vidéo live ; carte des risées ; position/orientation PTZ (ONVIF) |
 | ⑦ | SRV ↔ CON | Réseau local orga | WebSocket (JSON) + API HTTP | Temps réel | < 100 ms | Toutes les données ; commandes de direction de course (séquence, parcours, pénalités) |
-| ⑧ | SRV → EQT | Réseau local équipes (Ethernet, même longueur de câble pour tous), et miroir cloud pour les équipes à distance | MQTT en lecture seule (un compte par équipe) ; WebSocket JSON ; flux NMEA 0183 / Signal K en option | 10 Hz bateaux, 1 Hz vent | < 50 ms en local | Positions de tous les bateaux, bouées, vent mesuré et carte de vent, état de la course, événements, classement |
+| ⑧ | SRV → EQT | Réseau local équipes (Ethernet, même longueur de câble pour tous) ; toutes les équipes sont sur place (P13) | MQTT : lecture du flux, écriture dans la seule boîte d’envoi (un compte par équipe) ; WebSocket JSON ; flux NMEA 0183 / Signal K en option | 10 Hz bateaux, 1 Hz vent | < 50 ms en local | Positions de tous les bateaux, bouées, vent mesuré et carte de vent, état de la course, événements, classement |
 | ⑨ | EQT → EQB | **Au choix de l'équipe** (4G, radio de télémétrie) | Au choix (MAVLink, MQTT, propriétaire) | — | — | Consignes de l'équipe. L'organisation n'intervient pas, sauf plan de fréquences |
 | ⑪ | SEC → EQB | 2,4 GHz, saut de fréquence | ExpressLRS (ELRS) | 50–150 Hz | < 20 ms | Reprise en main manuelle, mode sécurité |
-| ⑫ | SRV → HUB → PWA | Internet | WebSocket diffusé par le cloud (CDN) ; fichiers de replay sur stockage objet | 2–4 Hz, différé de quelques secondes | 2–5 s | Flux public agrégé : positions lissées, classement, vent, événements, commentaire IA |
+| ⑫ | SRV → HUB → PWA | Internet | WebSocket diffusé par le cloud (CDN) ; fichiers de replay sur stockage objet | 1–2 Hz, différé de 1 s (P30) | ≈ 1 s | Flux public agrégé : positions lissées, classement, vent, événements |
 
 ### Pourquoi ce découpage
 
 - **La 4G est le chemin principal** : elle est simple, offre un gros débit (10 Hz) et transporte nativement les corrections RTK et les mises à jour à distance des balises. En rade de Toulon, à quelques kilomètres du rivage, la couverture est bonne **[À TESTER sur le plan d'eau]**.
-- **La radio 868 MHz est le chemin de secours** : à 1 Hz, sans dépendre d'Internet ni des opérateurs, elle suffit pour que le classement et la sécurité continuent si la 4G ou Internet tombe.
+- **La radio 868 MHz est le chemin de secours** : à 2 Hz pour les bateaux, sans dépendre d'Internet ni des opérateurs, elle suffit pour que le classement et la sécurité continuent si la 4G ou Internet tombe.
 - **Un hub cloud sert de point de rendez-vous** : les balises en 4G ne peuvent pas joindre directement un PC derrière un routeur 5G. Le VPS reçoit les trames et les renvoie au site par un tunnel chiffré. C'est aussi lui qui sert le public, ce qui évite que des milliers de spectateurs chargent la connexion du site.
-- **Les équipes reçoivent le flux en local, par câble** : même latence pour tous, aucune dépendance à Internet. Le miroir cloud sert aux équipes à distance ou en secours.
+- **Les équipes reçoivent le flux en local, par câble** : même latence pour tous, aucune dépendance à Internet. Toutes les équipes sont sur place (P13) : pas de miroir cloud.
 - **Le canal de consignes reste à la main des équipes** (architecture libre). La balise officielle n'a aucun lien électrique avec l'électronique de l'équipe : elle est autonome (sa propre batterie) et se fixe simplement sur le bateau.
 
 ---
@@ -216,16 +216,15 @@ flowchart TB
 
 **Consommation estimée** : environ 1,2 W en moyenne (4G active, GNSS, radio en émission 1 % du temps). Avec 25 Wh, cela donne **une vingtaine d'heures**, avec une large marge sur une journée de course **[À TESTER]**.
 
-**Pourquoi le ZED-F9P plutôt que l'UM980 ?** Les deux conviennent. Le F9P a l'écosystème le plus riche (documentation, bibliothèques ESP32, retours de terrain). L'UM980 capte une bande de plus et coûte à peu près autant. **Recommandation : commander les deux pour le prototype, choisir après l'essai de janvier.** Ce qui compte, c'est d'avoir **le même récepteur sur toutes les balises**, pour l'équité.
+**Pourquoi le ZED-F9P plutôt que l'UM980 ?** Les deux conviennent. Le F9P a l'écosystème le plus riche (documentation, bibliothèques ESP32, retours de terrain). L'UM980 capte une bande de plus et coûte à peu près autant. **Retenu : le ZED-F9P** (simpleRTK2B Lite), sur toutes les balises ; le prototype compare deux cartes 4G (Waveshare et LilyGO). Ce qui compte, c'est d'avoir **le même récepteur sur toutes les balises**, pour l'équité.
 
 ### 4.2 Bouées instrumentées (BOU)
 
 | Fonction | Référence recommandée | Prix indicatif | Remarque |
 |---|---|---|---|
 | Balise | Balise officielle (4.1), en boîtier plus grand | ≈ 400 € | Même firmware, profil "bouée" |
-| Anémomètre | **Calypso ULP STD, version UART/I²C (CMI1018)** | ≈ 500 € | Ultrasonique, sans pièce mobile, 0,1 à 10 Hz, consommation très faible, se branche directement sur l'ESP32 |
-| Variante anémomètre | Calypso ULP STD RS485 / NMEA 0183 (CMI1017) | ≈ 500 € | Si le câble entre l'anémomètre et le boîtier dépasse 2–3 m |
-| Compas de la bouée | BNO085 de la balise | inclus | **Indispensable** : la Calypso donne la direction du vent par rapport à son propre axe, et la bouée tourne sur son mouillage |
+| Anémomètre | **Gill WindSonic M** | ≈ 1 300 € (sur devis) | Ultrasonique, sans pièce mobile, éprouvé en mer ; sortie RS-232, convertisseur 3,3 V vers la balise ; alimentation 12,8 V |
+| Compas de la bouée | BNO085 de la balise | inclus | **Indispensable** : l’anémomètre donne la direction du vent par rapport à son propre axe, et la bouée tourne sur son mouillage |
 | Énergie | Batterie LiFePO4 12,8 V 6 Ah étanche + une de rechange ; pas de panneau solaire (la bouée tourne sur son mouillage) | ≈ 120 € | Une journée de course avec une large marge ; recharge chaque soir |
 | Structure | Espar lesté porte-capteur, anémomètre à 2 m de hauteur, sur bouée de régate gonflable ou flotteur dédié | 150–300 € | Un espar lesté bouge beaucoup moins qu'une bouée gonflable seule |
 | **Total par bouée instrumentée** | | **≈ 1 200–1 400 €** | |
@@ -369,7 +368,7 @@ Seconde GNSS (1 000 ms)
 - **Capacité : 33 créneaux par seconde.** Les 10 bateaux émettent 2 fois par seconde (2 Hz), les bouées une fois toutes les 5 s : le canal est occupé à ≈ 45 %.
 - Temps d'émission par bateau à 2 Hz : ≈ 42 ms par seconde, soit **≈ 4 %** (sous la limite de 10 %).
 - Créneau 0 : la passerelle diffuse l'état de la course (chrono, rappels) et un accusé de réception groupé. Ce message court peut servir à faire clignoter une LED sur la balise au moment d'un rappel.
-- **Les corrections RTK ne passent pas par cette radio** : le débit et la limite de 10 % ne le permettent pas à 1 Hz. Si la 4G tombe, la balise garde la précision RTK pendant 10 à 30 s, puis passe progressivement en précision métrique. C'est acceptable en secours.
+- **Les corrections RTK ne passent pas par cette radio** : le débit et la limite de 10 % ne le permettent pas à 1 Hz. Si la 4G tombe, la balise garde la précision RTK pendant 10 à 60 s environ, puis passe progressivement en précision métrique. C'est acceptable en secours.
 
 ### 5.3 Bilan de liaison (ordre de grandeur)
 
@@ -387,7 +386,7 @@ flowchart LR
   INET2["5G double SIM (secours)"] --> RTR
   RTR["Routeur Teltonika RUTX50<br/>pare-feu, tunnel WireGuard vers le HUB"] --> SW["Commutateur PoE administrable"]
   SW -- "VLAN 10 ORGA" --> SRV1["SRV principal"] & SRV2["SRV secours"] & CONS["Consoles"] & GWs["Passerelles radio (USB sur SRV)"]
-  SW -- "VLAN 20 CAMÉRAS" --> CAMS["Caméras PoE"] & JET["Jetson vision"] & ATEM["Régie vidéo"]
+  SW -- "VLAN 20 CAMÉRAS" --> CAMS["Caméras PoE"] & JET["Jetson vision"] & REG["Régie vidéo (OBS)"]
   SW -- "VLAN 30 ÉQUIPES" --> TEAMSW["Prises Ethernet équipes<br/>+ borne Wi-Fi"]
   SW -- "VLAN 40 PUBLIC" --> SCR["Écrans grand public"]
 ```
@@ -500,14 +499,14 @@ Le flux NMEA proposé en option reprend les mêmes données en phrases standard 
 
 | Panne | Effet | Ce qui continue | Parade |
 |---|---|---|---|
-| 4G perdue sur un bateau | Plus de trames 10 Hz ni de corrections RTK pour ce bateau | Radio 868 à 2 Hz ; précision RTK conservée 10–30 s puis métrique | Carte SD complète récupérée après la course |
+| 4G perdue sur un bateau | Plus de trames 10 Hz ni de corrections RTK pour ce bateau | Radio 868 à 2 Hz ; précision RTK conservée 10 à 60 s environ, puis ≈ 1 m | Carte SD complète récupérée après la course |
 | Internet filaire du site coupé | Aucun, si la 5G prend le relais | Tout | Bascule automatique du routeur sur la 5G (double SIM) |
 | Internet totalement coupé (filaire + 5G) | Plus de trames 4G au SRV, plus de flux public | Radio 868 pour toutes les balises ; flux local aux équipes ; RTK via la base Centipede directement depuis les balises | Rare : il faut perdre les deux accès à la fois |
 | HUB cloud indisponible | Idem coupure Internet pour le chemin 4G | Idem | 2e VPS de secours (adresse configurée dans les balises) |
 | Serveur PC course en panne | Consoles et flux équipes interrompus quelques secondes | Le HUB et les balises enregistrent tout | Serveur de secours chaud + adresse IP virtuelle |
 | Passerelle radio en panne | Plus de chemin de secours | 4G | 2e passerelle |
 | Base RTK en panne | Plus de corrections | Base Centipede via le HUB ou les balises | Basculement automatique du point de montage NTRIP |
-| Balise d'un bateau morte | Bateau absent du suivi | Le reste de la flotte | 3 balises de rechange, remplacement entre deux manches ; reconstitution par la vidéo si besoin |
+| Balise d'un bateau morte | Bateau absent du suivi | Le reste de la flotte | 2 balises de rechange, remplacement entre deux manches ; reconstitution par la vidéo si besoin |
 | Panne électrique au PC course | — | Station d'énergie (onduleur) pendant 1 à 2 h | Groupe électrogène ou second circuit |
 
 ---
@@ -518,7 +517,7 @@ Le flux NMEA proposé en option reprend les mêmes données en phrases standard 
 |---|---|---|---|
 | Radio de secours officielle | 869,4–869,65 MHz | Organisation | **Réservée** : interdite aux équipes |
 | Télémétrie / consignes des équipes | 433 MHz, 863–869,2 MHz, ou 4G | Équipes | Canal déclaré à l'inscription, puissance maximale fixée |
-| Radiocommandes de sécurité | 2,4 GHz, ExpressLRS en saut de fréquence | Équipes | Obligatoire, homologuée au contrôle |
+| Radiocommandes de sécurité | 2,4 GHz, ExpressLRS en saut de fréquence | Équipes | Conseillée (P16) ; déclarée et homologuée au contrôle si installée |
 | Vidéo embarquée | 5,8 GHz | Équipes ou orga | Canaux attribués par l'organisation |
 | Faisceau caméra et Wi-Fi local | 5 GHz | Organisation | Canaux choisis après un relevé du spectre sur le site |
 
@@ -555,12 +554,12 @@ Options : bouées robotisées (+ 1 500–2 000 € chacune), caméras embarquée
 - 3 × LilyGO T-A7670E-S3
 - 4 × EByte E22-900M22S + 2 × Heltec WiFi LoRa 32 V3
 - 3 × Adafruit BNO085
-- 1 × Calypso ULP STD UART (CMI1018)
+- L’anémomètre Gill WindSonic M est commandé sur devis avec la série, en février
 - 3 × SIM IoT (2 opérateurs différents)
 - Boîtiers IP67, accus 18650, connecteurs M8
 - 1 × TinySA Ultra
 
-Le budget est d'environ 2 500 €. Il faut compter 1 à 3 semaines de délai selon les fournisseurs.
+Le budget est d’environ 1 900 € (commande de décembre). Il faut compter 1 à 3 semaines de délai selon les fournisseurs.
 
 ---
 
@@ -573,7 +572,7 @@ Le développement agentique comprime fortement l'écriture du code. **Les estima
 | Socle : broker, formats, enregistreur, simulateur, SDK | 1 à 2 semaines |
 | Moteur de course + consoles | 2 à 3 semaines |
 | PWA publique (carte live, classement, replay) | 1 à 2 semaines |
-| Moteur vent, arbitrage assisté, commentaire IA | 2 à 3 semaines |
+| Moteur vent, arbitrage assisté, aides au commentateur | 2 à 3 semaines |
 
 **Ce que les agents n'accélèrent pas, et qui fixe donc le vrai calendrier :**
 1. **Les délais de livraison du matériel.**
@@ -595,7 +594,7 @@ Questions encore ouvertes :
 
 1. **Où fixer la balise sur le bateau** : en tête de mât (meilleure réception GPS, mais en hauteur et soumise à la gîte) ou sur le pont (plus stable, mais la voile masque une partie du ciel) ? Il faut aussi définir un point de référence commun (étrave, mât) pour l'arbitrage.
 2. **Hauteur et emplacement du point haut** pour les caméras. À 500 m, 20 m de hauteur suffisent pour bien voir le parcours.
-3. **Équipes à distance** : certaines équipes travailleront-elles depuis un autre lieu que le site ? Cela conditionne le miroir cloud du flux équipes.
+3. **Équipes à distance** : réglé, toutes les équipes sont sur place (P13) ; pas de miroir cloud.
 4. **Corrections RTK pour les équipes** : met-on le flux de corrections de la base officielle à disposition de toutes les équipes sur le réseau ? Cela leur permet d'avoir leur propre GPS centimétrique à moindre coût, à égalité.
 5. **Bouées robotisées** : à inclure dès 2027 ou à garder pour une édition suivante ?
 

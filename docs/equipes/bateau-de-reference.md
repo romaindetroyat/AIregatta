@@ -119,7 +119,7 @@ Les cinq premiers font boucler un parcours ; les trois derniers évitent les pé
 - Boucler seul le parcours, deux tours
 - Faire un tour de pénalité à la notification du comité
 - S’arrêter sur ordre de l’équipe
-- Montrer le comportement déclaré en cas de perte de liaison
+- Au contrôle d’équipement (pas à la qualification) : montrer le comportement déclaré en cas de perte de liaison
 
 ## Ce qui reste à valider
 

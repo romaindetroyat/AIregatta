@@ -9,7 +9,7 @@ Les références entre crochets renvoient aux [postulats](postulats.md) (P) et a
 - **1.1** **Bateau** : voilier drone engagé, sans personne à bord, équipé de la balise officielle.
 - **1.2** **IA tactique** : le logiciel de l’équipe, à terre, qui décide de la conduite du bateau. **Pilote automatique** : l’électronique à bord qui exécute. [P37]
 - **1.3** **Manche** : du signal d’avertissement jusqu’à l’arrivée du bateau, son abandon ou la fin du temps limite.
-- **1.4** **Position officielle** : la position donnée par la balise RTK (précision ± 2 cm). Elle seule fait foi pour le départ, les bouées, la zone de course, l’arrivée et l’arbitrage. [P08]
+- **1.4** **Position officielle** : la position donnée par la balise RTK (précision de 2 à 5 cm). Elle seule fait foi pour le départ, les bouées, la zone de course, l’arrivée et l’arbitrage. [P08]
 - **1.5** **Zone de bouée** : le cercle de 4 m de rayon autour de chaque bouée (quatre longueurs d’un bateau de la classe 1 m, valeur unique pour tous).
 - **1.6** **Zone de course** : le rectangle délimité par le comité, matérialisé dans le logiciel (géorepérage) et sur les écrans des équipes.
 
@@ -34,7 +34,7 @@ Les références entre crochets renvoient aux [postulats](postulats.md) (P) et a
 ## 4. Balise officielle et équipement
 
 - **4.1** Chaque bateau porte la balise fournie par l’organisation, scellée, sans lien avec l’électronique de l’équipe. [P09]
-- **4.2** Les antennes de la balise sont sur le pont, dans l’axe du bateau, quelle que soit la matière de la coque. Le comité contrôle l’installation avant la première manche. [Q1]
+- **4.2** Les antennes de la balise sont sur le pont, dans l’axe du bateau, quelle que soit la matière de la coque. Le comité contrôle l’installation avant la première manche. [P39]
 - **4.3** Balise en panne pendant une manche : le bateau reçoit une réparation (RDG) si la panne vient du matériel officiel et qu’elle est prouvée par les journaux du PC course. Aucune réparation si la panne vient de l’installation de l’équipe. [D6]
 - **4.4** Une radiocommande de sécurité 2,4 GHz est conseillée, non obligatoire. L’équipe qui en installe une la déclare avec ses autres émetteurs. [P16]
 - **4.5** **Jauge** : coque, appendices, gréements et poids respectent la jauge IOM (classe internationale 1 m). L’électronique est libre : pilote automatique, capteurs et balise officielle sont admis par dérogation à cette jauge. [P07]
@@ -73,7 +73,7 @@ Les références entre crochets renvoient aux [postulats](postulats.md) (P) et a
 
 - **9.1** Deux arbitres à terre, chacun devant son écran : le premier suit le départ et les bouées, le second ouvre les rejeux et propose les décisions. Le logiciel signale, un arbitre confirme toujours, y compris pour les fautes mesurées (départ anticipé, bouée touchée, sortie de zone). [P15]
 - **9.2** Incidents signalés par le logiciel : jugés en direct, avec le rejeu vu de dessus. Décisions possibles : pénalité d’un tour, pénalité en temps, sans suite, renvoi au jury. [D3]
-- **9.3** Les autres incidents passent par une réclamation, déposée sur l’application des équipes dans les 10 minutes qui suivent l’arrivée du dernier bateau. Une demande de réparation suit le même délai. [D3, D5]
+- **9.3** Les autres incidents passent par une réclamation, envoyée par un message `protest` dans la boîte d’envoi de l’équipe (outbox) dans les 10 minutes qui suivent l’arrivée du dernier bateau. Une demande de réparation suit le même délai. [D3, D5]
 - **9.4** Une décision prise en direct par l’arbitre ne peut pas faire l’objet d’une réclamation, sauf erreur de procédure.
 - **9.5** Le jury, formé du directeur de course et des deux arbitres, juge les réclamations après la manche, avec les rejeux et les journaux du PC course. [P15]
 
@@ -85,5 +85,5 @@ Les références entre crochets renvoient aux [postulats](postulats.md) (P) et a
 
 ## 11. Sécurité
 
-- **11.1** Des bateaux d’assistance surveillent le plan d’eau. Un bateau désemparé est récupéré par l’assistance et abandonne la manche. [P16]
+- **11.1** Un bateau d’assistance surveille le plan d’eau. Un bateau désemparé est récupéré par l’assistance et abandonne la manche. [P16]
 - **11.2** Le comité peut interrompre ou annuler une manche à tout moment pour la sécurité ; chaque équipe arrête alors son bateau.

@@ -1,14 +1,14 @@
 # AI Regatta — Achats
 
-> Tout le matériel à acheter pour 10 bateaux : quantité, rôle, prix, où l’acheter (livraison France). Total : **20 900 €**, imprévus de 10 % compris. Seul le matériel coûte : tout le monde est bénévole.
+> Tout le matériel à acheter pour 10 bateaux : quantité, rôle, prix, où l’acheter (livraison France). Total : **21 600 €**, imprévus de 10 % compris. Seul le matériel coûte : tout le monde est bénévole.
 
 | Commande | Montant |
 |---|---|
 | Décembre · Commande du prototype (C1) | 1 900 € |
-| Février · Série et bouées (C4, D2, D3) | 9 510 € |
-| Mars · PC course, caméras, signaux (H3) | 7 540 € |
-| Imprévus (10 %) | 1 900 € |
-| **Total** | **20 900 €** |
+| Février · Série, bouées, 2 caméras d’essai (C4, D2, D3, C7) | 10 390 € |
+| Mars · PC course, caméras, signaux (H3) | 7 320 € |
+| Imprévus (10 %) | 2 000 € |
+| **Total** | **21 600 €** |
 
 ## Balise officielle · 16 exemplaires
 
@@ -19,20 +19,21 @@
 | 16 | Carte ESP32-S3 + modem 4G A7670E | Calcul de la balise et envoi des positions par la 4G | Février | 49 € | 784 € | [OpenELab (France), Waveshare ESP32-S3-A7670E-4G](https://openelab.io/fr/products/waveshare-esp32-s3-a7670e-4g) · [RobotShop Europe](https://eu.robotshop.com/products/waveshare-esp32-s3-a7670e-4g-development-board-lte-cat-1-2g-wifi-bluetooth-telephone-call-sms-gnss) |
 | 16 | Module radio LoRa RFM95W 868 MHz | Chemin de secours si la 4G tombe | Février | 21 € | 336 € | [DigiKey (UE, livre en France)](https://www.digikey.es/en/products/detail/adafruit-industries-llc/3072/6005357) |
 | 16 | Centrale inertielle BNO085 | Cap, gîte et mouvements du bateau ou de la bouée | Février | 30 € | 480 € | [Anodas (UE)](https://anodas.lt/en/bno085-9-dof-imu-fusion-breakout-3-axis-accelerometer-gyroscope-and-magnetometer-adafruit-4754) · [Go Tronic (France), réf. 37262](https://gotronic.fr/download-product-page/33477) |
-| 16 | Boîtier IP67, batterie, connecteurs, carte SIM multi-opérateurs | Étanchéité, ≈ 20 h d’autonomie, montage ; la carte SIM passe seule d’un opérateur à l’autre | Février | 81 € | 1 296 € | — |
+| 16 | Boîtier IP67, accus, alimentation, antennes de pont, carte SIM multi-opérateurs | Étanchéité, ≈ 20 h d’autonomie ; détail dans le manuel de fabrication | Février | 96 € | 1 536 € | — |
 
 ## Bouée au vent
 
 | Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
 |---|---|---|---|---|---|---|
 | 1 | Anémomètre Gill WindSonic M | Vitesse et direction du vent, par ultrasons | Février | 1 300 € | 1 300 € | [NauticExpo, demande de devis](https://www.nauticexpo.com/prod/gill-instruments-ltd/product-39900-485171.html) · [Campbell Scientific France, brochure et devis](https://s.campbellsci.com/documents/fr/product-brochures/b_windsonic_fr.pdf) |
-| 1 | Support, câble et interface de l’anémomètre | Fixation en tête de mât ; convertisseur RS-232 → 3,3 V vers la balise | Février | 170 € | 170 € | — |
+| 1 | Support, câble et interface de l’anémomètre | Fixation en tête d’espar ; convertisseur RS-232 → 3,3 V vers la balise | Février | 170 € | 170 € | — |
+| 2 | Batterie LiFePO4 12,8 V 6 Ah étanche | Alimente l’anémomètre et la balise de la bouée au vent ; une de rechange, rechargée chaque soir | Février | 60 € | 120 € | — |
 
 ## Base RTK et radio de secours
 
 | Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
 |---|---|---|---|---|---|---|
-| 1 | Base RTK (simpleRTK2B Lite + antenne géodésique, mât) | Station fixe au PC course : corrige le GPS de toutes les balises | Décembre | 300 € | 300 € | [ArduSimple, boutique officielle (UE)](https://www.ardusimple.com/product/simplertk2blite/) |
+| 1 | Base RTK (simpleRTK2B Budget + antenne ANN-MB-00 sur plan de masse, mât) | Station fixe au PC course : corrige le GPS de toutes les balises | Décembre | 300 € | 300 € | [ArduSimple, boutique officielle (UE)](https://www.ardusimple.com/product/simplertk2blite/) |
 | 1 | Récepteurs radio 868 MHz du PC course (lot) | Reçoivent les positions de secours | Décembre | 250 € | 250 € | [DigiKey (UE, livre en France)](https://www.digikey.es/en/products/detail/adafruit-industries-llc/3072/6005357) |
 
 ## PC course
@@ -41,10 +42,10 @@
 |---|---|---|---|---|---|---|
 | 2 | Mini-PC ASUS NUC 14 Pro | Serveur principal et serveur de secours : bus de données, moteur de course | Mars | 900 € | 1 800 € | [LDLC (barebone Core 3)](https://www.ldlc.com/en/product/PB00624811.html) · [ASUS France, page officielle](https://www.asus.com/fr/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-14-pro/) |
 | 1 | Routeur Ubiquiti UniFi Cloud Gateway Ultra | Réseau du PC course, bascule fibre ↔ 4G | Mars | 100 € | 100 € | [Ubiquiti Store Europe (officiel)](https://eu.store.ui.com/eu/en/products/ucg-ultra) |
-| 1 | Routeur 5G Netgear Nighthawk M6 Pro | Internet de secours si la fibre tombe | Mars | 500 € | 500 € | [LDLC](https://ldlc.com/en/product/PB00540606.html) · [Galaxus.fr](https://www.galaxus.fr/fr/s1/product/netgear-nighthawk-m6-pro-routeur-mobile-routeur-23545594) |
+| 1 | Routeur 5G Netgear Nighthawk M6 Pro | Internet de secours si la fibre tombe | Mars | 800 € | 800 € | [LDLC](https://ldlc.com/en/product/PB00540606.html) · [Galaxus.fr](https://www.galaxus.fr/fr/s1/product/netgear-nighthawk-m6-pro-routeur-mobile-routeur-23545594) |
 | 1 | Batterie EcoFlow River 2 Pro | Le PC course tient sans secteur | Mars | 600 € | 600 € | [Castorama](https://www.castorama.fr/station-electrique-portable-ecoflow-river-2-pro-720wh/4895251601559_CAFR.prd) · [Boulanger](https://www.boulanger.com/ref/1187283) |
 | 1 | Onduleur APC Back-UPS 950 VA | Entre la batterie et les serveurs : aucune coupure pendant une bascule | Mars | 110 € | 110 € | — |
-| 1 | Écrans (2), commutateur PoE, câbles, rallonges | Consoles du comité et de l’arbitre, alimentation des caméras | Mars | 1 100 € | 1 100 € | — |
+| 1 | Écrans (3), commutateur PoE, borne Wi-Fi, câbles, rallonges | Consoles du directeur de course et des deux arbitres ; Wi-Fi du PC course ; alimentation de la caméra | Mars | 1 100 € | 1 100 € | — |
 
 ## Caméras et régie
 
@@ -66,7 +67,7 @@
 
 | Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
 |---|---|---|---|---|---|---|
-| 2 | Relais connecté Shelly 1 Gen3 | Le PC course déclenche la corne à la seconde | Mars | 25 € | 50 € | [Domadoo (France)](https://www.domadoo.fr/de/smarte-beleuchtung/7507-shelly-intelligentes-universalmodul-w-lan-shelly-1-gen3-3800235261767.html) · [Shelly, boutique officielle (UE)](https://www.shelly.com/it/products/shelly-1-gen3) |
+| 2 | Relais connecté Shelly 1 Gen3 | Le PC course déclenche la corne, à moins de 50 ms près | Mars | 25 € | 50 € | [Domadoo (France)](https://www.domadoo.fr/de/smarte-beleuchtung/7507-shelly-intelligentes-universalmodul-w-lan-shelly-1-gen3-3800235261767.html) · [Shelly, boutique officielle (UE)](https://www.shelly.com/it/products/shelly-1-gen3) |
 | 2 | Corne électrique marine 12 V | Signaux sonores du départ | Mars | 45 € | 90 € | [Poseidon Marine, klaxon Marco 12 V](https://www.poseidonmarine.eu/fr/products/electric-horn-12v-chrome-1) · [H2R Équipements (France), avertisseur Osculati 12 V](https://www.h2r-equipements.com/avertisseur-sonore-pour-bateau/2985-osculati-avertisseur-encastrable-12v.html) |
 | 1 | Batterie 12 V et câblage | Alimentation des cornes | Mars | 160 € | 160 € | — |
 
@@ -74,15 +75,16 @@
 
 | Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
 |---|---|---|---|---|---|---|
-| 10 | Caméra embarquée légère | Images à bord ; 2 achetées pour l’essai de mars, les 8 autres seulement si l’essai est concluant | Mars | 100 € | 1 000 € | — |
-| 1 | Récepteur vidéo au PC course | Reçoit l’image d’un bateau à la fois, choisi par la régie | Mars | 300 € | 300 € | — |
-| 1 | Convertisseur vidéo analogique → HDMI | Sort l’image du récepteur vers la régie | Mars | 20 € | 20 € | — |
+| 2 | Caméra embarquée légère, pour l’essai | Commandées avec la série, essayées en mars | Février | 100 € | 200 € | — |
+| 1 | Récepteur vidéo au PC course | Reçoit l’image d’un bateau à la fois, choisi par la régie | Février | 300 € | 300 € | — |
+| 1 | Convertisseur vidéo analogique → HDMI | Sort l’image du récepteur vers la régie | Février | 20 € | 20 € | — |
+| 8 | Caméra embarquée légère | Les 8 autres, seulement si l’essai de mars est concluant | Mars | 100 € | 800 € | — |
 
 ## Prototypes
 
 | Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
 |---|---|---|---|---|---|---|
-| 1 | Lot prototype | 2 récepteurs de chaque famille, cartes 4G, radios, centrales, 1 anémomètre de test, pour l’essai de janvier | Décembre | 1 200 € | 1 200 € | — |
+| 1 | Lot prototype | 2 balises complètes (une carte 4G Waveshare, une LilyGO) et leurs rechanges, pour l’essai de janvier ; l’anémomètre est commandé sur devis avec la série | Décembre | 1 200 € | 1 200 € | — |
 
 ## Options non retenues
 

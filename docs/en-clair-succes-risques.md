@@ -175,7 +175,7 @@ Mosquitto est un logiciel libre et gratuit de la fondation Eclipse. Il joue le r
 
 ## Quelles chances de réussite ?
 
-> Cette estimation ne porte que sur **la technique**, en supposant le plan d’essais suivi et les moyens réunis. Les chances du projet entier (équipes, cadre juridique, financement, bénévoles, public) sont analysées dans [analyse-projet.md](analyse-projet.md).
+> Cette estimation ne porte que sur **la technique**, en supposant le plan d’essais suivi et les moyens réunis. Les chances de notre part (dispositif technique et sportif) sont analysées dans [analyse-projet.md](analyse-projet.md).
 
 Estimation de jugement, pas un calcul :
 

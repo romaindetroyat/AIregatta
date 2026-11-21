@@ -195,7 +195,7 @@ Indique quelle manche suivre : la manche en cours, ou la prochaine entre deux ma
   "day": "2027-05-14",
   "entries": ["FRA-03", "FRA-07", "FRA-12", "ITA-05", "MON-01", "ESP-21"],
   "course_version": 2,
-  "time_limit_s": 1200,
+  "time_limit_s": 900,
   "results_status": "none",
   "message_fr": "Procédure de départ lancée"
 }
@@ -203,13 +203,13 @@ Indique quelle manche suivre : la manche en cours, ou la prochaine entre deux ma
 
 ### 6.3 `race/{raceId}/clock` — le chrono officiel
 
-Le chrono est piloté par le PC course (P17). La procédure prévue est : **avertissement à −3 min, préparatoire à −2 min, une minute à −1 min, départ**. **Les durées sont fixées par les instructions de course** et transmises dans le champ `procedure` : votre logiciel ne doit pas les coder en dur.
+Le chrono est piloté par le PC course (P17). La procédure prévue est celle de la règle 5.1 : **avertissement à −1:00, préparatoire à −0:40, dernière étape à −0:20, départ**. **Les durées sont fixées par les instructions de course** et transmises dans le champ `procedure` : votre logiciel ne doit pas les coder en dur.
 
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms`, `seq` | | | Instant de publication, compteur |
 | `race_id` | texte | — | Manche |
-| `step` | texte | — | Dernière étape franchie : `none` (procédure pas encore lancée), `warning` (avertissement), `preparatory` (préparatoire), `one_minute`, `start` (départ donné), `postponed` (retard), `general_recall` (rappel général : un nouveau départ sera publié), `abandoned` (annulation) |
+| `step` | texte | — | Dernière étape franchie : `none` (procédure pas encore lancée), `warning` (avertissement), `preparatory` (préparatoire), `last_step` (dernière étape, −0:20), `start` (départ donné), `postponed` (retard), `general_recall` (rappel général : un nouveau départ sera publié), `abandoned` (annulation) |
 | `start_time`, `start_t_gps_ms` | texte, entier, ou null | — | **Heure GPS exacte du départ.** `null` tant qu’elle n’est pas fixée |
 | `procedure` | liste | — | Les étapes prévues : `step`, `offset_s` (décalage par rapport au départ, négatif), `time` et `t_gps_ms` (heure de l’étape), `sound` (`short`, `long`, `none`) |
 | `next_signal` | objet ou null | — | Prochaine étape : `step`, `time`, `t_gps_ms` ; `null` après le départ |
@@ -218,8 +218,8 @@ Le chrono est piloté par le PC course (P17). La procédure prévue est : **aver
 
 ```json
 {
-  "t": "2027-05-14T12:58:30.000Z",
-  "t_gps_ms": 1494334728000,
+  "t": "2027-05-14T12:59:30.000Z",
+  "t_gps_ms": 1494334788000,
   "race_id": "2027-05-14-M3",
   "seq": 91,
   "step": "preparatory",
@@ -228,24 +228,24 @@ Le chrono est piloté par le PC course (P17). La procédure prévue est : **aver
   "procedure": [
     {
       "step": "warning",
-      "offset_s": -180,
-      "time": "2027-05-14T12:57:00.000Z",
-      "t_gps_ms": 1494334638000,
+      "offset_s": -60,
+      "time": "2027-05-14T12:59:00.000Z",
+      "t_gps_ms": 1494334758000,
       "sound": "short"
     },
     {
       "step": "preparatory",
-      "offset_s": -120,
-      "time": "2027-05-14T12:58:00.000Z",
-      "t_gps_ms": 1494334698000,
+      "offset_s": -40,
+      "time": "2027-05-14T12:59:20.000Z",
+      "t_gps_ms": 1494334778000,
       "sound": "short"
     },
     {
-      "step": "one_minute",
-      "offset_s": -60,
-      "time": "2027-05-14T12:59:00.000Z",
-      "t_gps_ms": 1494334758000,
-      "sound": "long"
+      "step": "last_step",
+      "offset_s": -20,
+      "time": "2027-05-14T12:59:40.000Z",
+      "t_gps_ms": 1494334798000,
+      "sound": "short"
     },
     {
       "step": "start",
@@ -256,9 +256,9 @@ Le chrono est piloté par le PC course (P17). La procédure prévue est : **aver
     }
   ],
   "next_signal": {
-    "step": "one_minute",
-    "time": "2027-05-14T12:59:00.000Z",
-    "t_gps_ms": 1494334758000
+    "step": "last_step",
+    "time": "2027-05-14T12:59:40.000Z",
+    "t_gps_ms": 1494334798000
   },
   "individual_recall": [],
   "gps_utc_offset_s": 18
@@ -716,13 +716,13 @@ Un message par événement. Le logiciel du PC course **signale**, un arbitre **d
 |---|---|---|
 | `warning` | Signal d’avertissement | `start_time`, `start_t_gps_ms` |
 | `preparatory` | Signal préparatoire | `start_time`, `start_t_gps_ms` |
-| `one_minute` | Signal d’une minute | `start_time`, `start_t_gps_ms` |
+| `last_step` | Dernière étape (−0:20) | `start_time`, `start_t_gps_ms` |
 | `start` | Départ donné | `start_time`, `start_t_gps_ms` |
 | `ocs` | Bateau du mauvais côté de la ligne au départ (*on course side*) | `dist_over_line_m` |
 | `individual_recall` | Rappel individuel | `boat_ids` |
 | `general_recall` | Rappel général | `new_warning_time` (ou `null`) |
 | `mark_rounding` | Passage de bouée ou de porte | `leg_completed`, `rank_at_mark`, `elapsed_ms` |
-| `penalty_issued` | Pénalité infligée | `penalty` (`one_turn`, `two_turns`, `scoring`, `dsq`), `rule`, `deadline_s`, `reason_fr` |
+| `penalty_issued` | Pénalité infligée | `penalty` (`one_turn`, `time_penalty` (20 s, règle 7.3), `dsq`), `rule`, `deadline_s`, `reason_fr` |
 | `penalty_done` | Pénalité effectuée | `penalty` |
 | `boundary_exit` | Sortie des limites du parcours | `dist_outside_m` |
 | `finish` | Arrivée | `rank`, `finish_time`, `finish_t_gps_ms`, `elapsed_ms` |
@@ -812,8 +812,8 @@ Le contenu de `details` sera figé au gel du contrat ; d’ici là, il peut s’
   "replaces": null,
   "details": {
     "penalty": "one_turn",
-    "rule": "[règle à préciser]",
-    "deadline_s": 60,
+    "rule": "6.1",
+    "deadline_s": 20,
     "reason_fr": "Contact avec ITA-05 au croisement"
   },
   "text_fr": "Pénalité d'un tour pour FRA-03"
@@ -897,7 +897,7 @@ Les pavillons sont hissés à la main (P18) ; le comité saisit en même temps d
 | `entries` | liste | — | Un élément par bateau, dans l’ordre du classement |
 | `entries[].rank` | entier ou null | — | Rang ; `null` si non classé |
 | `entries[].boat_id` | texte | — | Bateau |
-| `entries[].status` | texte | — | `not_started`, `racing`, `finished`, `ocs`, `dns` (pas parti), `dnc` (pas venu), `dnf` (pas fini), `ret` (abandon), `dsq` (disqualifié) |
+| `entries[].status` | texte | — | `not_started`, `racing`, `finished`, `ocs`, `dns` (pas parti), `dnc` (pas venu), `dnf` (pas fini), `ret` (abandon), `dsq` (disqualifié), `ufd` et `bfd` (départ anticipé sous pavillon U ou noir), `dne` (disqualification non retirable), `rdg` (réparation accordée) |
 | `entries[].legs_completed` | entier | — | Bords terminés |
 | `entries[].next_leg`, `next_mark_ids` | entier ou null, liste | — | Prochain bord et sa ou ses bouées |
 | `entries[].dist_to_next_m` | nombre ou null | m | Distance de l’étrave à la prochaine bouée (la plus proche des deux pour une porte) |
@@ -1127,7 +1127,7 @@ Enveloppe commune :
 | `type` | texte | — | `ack`, `protest`, `redress_request`, `retire`, `technical_issue`, `assistance_request`, `question` |
 | `payload` | objet | — | Contenu propre au type (tableaux ci-dessous) |
 
-Les règles de fond (délais pour réclamer, forme, recevabilité) relèvent des **règles de course et des instructions de course** (P14, à définir). Ce contrat ne fixe que la forme du message.
+Les règles de fond (délais pour réclamer, forme, recevabilité) relèvent des **règles de course et des instructions de course** (règles 9.3 et 9.5 : réclamation dans les 10 minutes qui suivent l’arrivée du dernier bateau). Ce contrat ne fixe que la forme du message.
 
 #### `ack` — accusé de réception
 
@@ -1158,12 +1158,12 @@ Les règles de fond (délais pour réclamer, forme, recevabilité) relèvent des
 |---|---|---|
 | `against` | liste de `boat_id` | Bateau(x) réclamé(s) |
 | `incident_time`, `incident_t_gps_ms` | texte, entier | Instant de l’incident (le jury retrouvera les traces et la vidéo à partir de là) |
-| `rule` | texte | Règle invoquée (texte libre, en attendant les règles de course) |
+| `rule` | texte | Numéro de la règle invoquée, dans nos règles de course (par exemple `6.1`) |
 | `location` | `{lat, lon}` ou null | Lieu de l’incident |
 | `description` | texte | Ce qui s’est passé (2 000 caractères au plus) |
 | `witnesses` | liste de `boat_id` | Témoins éventuels |
 
-Une réclamation envoyée ici **sert de « héler »** (le cri « Protest ! » des régates habitables) et en garde la trace horodatée. Délai et éventuel formulaire complémentaire : à confirmer dans les instructions de course.
+Une réclamation envoyée ici **sert de « héler »** (le cri « Protest ! » des régates habitables) et en garde la trace horodatée. Délai : 10 minutes après l’arrivée du dernier bateau (règle 9.3) ; formulaire complémentaire éventuel dans les instructions de course.
 
 ```json
 {
@@ -1178,7 +1178,7 @@ Une réclamation envoyée ici **sert de « héler »** (le cri « Protest ! » d
     "against": ["FRA-03"],
     "incident_time": "2027-05-14T13:03:02.000Z",
     "incident_t_gps_ms": 1494335000000,
-    "rule": "[règle à préciser]",
+    "rule": "6.2",
     "location": {
       "lat": 43.107201,
       "lon": 5.941883
@@ -1327,7 +1327,7 @@ Publié chaque seconde, au début de la seconde, par le serveur synchronisé sur
 |---|---|---|---|
 | `t`, `t_gps_ms`, `seq` | | | Heure du serveur à l’envoi, compteur |
 | `gps_utc_offset_s` | entier | s | Écart GPS − UTC |
-| `source` | texte | — | `gnss_pps` (normal), `ntp_fallback`, `free_running` (le serveur a perdu sa référence : alerte) |
+| `source` | texte | — | `gnss` (normal : heure tirée des messages GPS de la base), `gnss_pps` (si la carte de la base sort l’impulsion), `ntp_fallback`, `free_running` (le serveur a perdu sa référence : alerte) |
 | `server` | texte | — | Serveur qui publie (`srv1` principal, `srv2` secours) |
 | `ntp_server` | texte | — | Serveur NTP à utiliser |
 | `sync_ok` | booléen | — | `true` si le serveur est calé sur sa référence |
@@ -1339,11 +1339,11 @@ Publié chaque seconde, au début de la seconde, par le serveur synchronisé sur
   "t_gps_ms": 1494335065000,
   "seq": 3847,
   "gps_utc_offset_s": 18,
-  "source": "gnss_pps",
+  "source": "gnss",
   "server": "srv1",
   "ntp_server": "10.20.0.1",
   "sync_ok": true,
-  "est_error_us": 40
+  "est_error_us": 2000
 }
 ```
 

@@ -14,7 +14,7 @@ Toutes les équipes reçoivent **les mêmes données, au même instant** (P11), 
 | **(d) Pont Signal K** (option, à décider) | `ws://10.20.0.10:3000/signalk/v1/stream` (à confirmer) | + quelques dizaines de ms (à mesurer) | Faible si votre outil parle Signal K | Outils de l’écosystème Signal K | Positions, bouées, vent |
 | **(e) Fichiers de rejeu et simulateur** | Bac à sable cloud, et fichiers téléchargeables | Hors ligne | Faible | Développement, tests, analyse après course | Toutes |
 
-Conseil : **développez sur MQTT** (a), ajoutez le NMEA (c) si vous voulez un affichage cartographique sans effort, et testez tout dans le **bac à sable** (e) dès janvier.
+Conseil : **développez sur MQTT** (a), ajoutez le NMEA (c) si vous voulez un affichage cartographique sans effort, et testez tout dans le **bac à sable** (e) dès février.
 
 ---
 
@@ -131,7 +131,7 @@ Exemple de lecture sans logiciel de navigation : [exemples/nmea/lire-nmea.py](ex
 
 ## (e) Fichiers de rejeu, simulateur et bac à sable
 
-### Le bac à sable cloud (dès janvier 2027)
+### Le bac à sable cloud (dès février 2027)
 
 Un broker dans le cloud, **identique à celui du site** (mêmes sujets, mêmes formats, mêmes droits), alimenté en continu par le **simulateur de régate** (S13) : bateaux simulés, vent qui bascule, bouées, procédure de départ, événements, classement. C’est là que vous développez et testez votre logiciel tout l’hiver.
 

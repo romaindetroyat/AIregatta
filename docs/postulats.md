@@ -85,8 +85,8 @@ Dernière mise à jour : 21 novembre 2026.
 | P32 | Développement logiciel | Meridia, avec des agents IA (GSD) ; 2 à 3 mois de travail | Acté |
 | P51 | Technique | Une personne fiable porte la technique : balises, bouées, réseau, caméras ; un suppléant à former | Acté |
 | P33 | Licence du logiciel | Non open source | Acté |
-| P34 | Budget matériel | ≈ 20 000 €, caméras embarquées comprises ; ordinateurs neufs ou existants à trancher. Le financement est géré par une autre instance | À confirmer |
+| P34 | Budget matériel | ≈ 21 600 €, imprévus compris, caméras embarquées comprises ; ordinateurs neufs ou existants à trancher. Le financement est géré par une autre instance | À confirmer |
 | P35 | Présentation | Charte Meridia, version claire | Acté |
-| P49 | Hors de notre périmètre | Réglementation et autorisations, porteur juridique et assurance, sécurité du public et secours, financement du matériel, accueil du public et communication, recrutement des équipes, tracé du parcours : gérés par d’autres instances | Acté |
+| P49 | Hors de notre périmètre | Réglementation et autorisations, porteur juridique et assurance, sécurité du public et secours, financement du matériel, accueil du public et communication, recrutement des équipes, tracé et longueur du parcours : gérés par d’autres instances | Acté |
 | P50 | Niveaux de repli | Quatre niveaux (complet, régate suivie, régate simple, démonstration) et trois revues de feu vert : fin janvier, mi-mars, mi-avril | Acté |
 

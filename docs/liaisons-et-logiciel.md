@@ -18,7 +18,7 @@
 | Latence | 50 à 150 ms ; plusieurs secondes si la 4G sature |
 | Sécurité | Clé propre à chaque balise ; trame modifiée ou rejouée rejetée |
 | Secours | Radio 868 MHz (liaison suivante) ; tout est aussi enregistré sur la carte SD de la balise |
-| Si elle tombe | Le PC course bascule seul sur la radio, à 2 Hz. La précision RTK tient 10 à 30 s, puis devient métrique jusqu’au retour de la 4G. |
+| Si elle tombe | Le PC course bascule seul sur la radio, à 2 Hz. La précision RTK tient 10 à 60 s environ, puis passe à ≈ 1 m jusqu’au retour de la 4G. |
 | Modules logiciels | S1, S4, S5 |
 
 ### 2. Positions des bateaux, chemin de secours
@@ -28,12 +28,12 @@
 | | |
 |---|---|
 | Support physique | Radio LoRa 868 MHz, sous-bande 869,4–869,65 MHz (500 mW, 10 % du temps) ; module Adafruit RFM95W vers 2 récepteurs identiques au PC course |
-| Protocole et format | Trame binaire de 24 octets ; chaque balise émet dans son créneau de 35 ms, calé sur la seconde GPS : aucune collision |
+| Protocole et format | Trame binaire de 12 octets (LoRa SF7, 250 kHz, ≈ 21 ms) ; chaque balise émet dans son créneau fixe de 30 ms, calé sur l’heure GPS : aucune collision |
 | Ce qui circule | Position compacte (écart au centimètre par rapport à un point de référence du plan d’eau), vitesse, route, qualité RTK, batterie |
 | Cadence | 2 Hz |
-| Débit | ≈ 50 octets/s par balise ; 6 % du temps d’émission |
+| Débit | ≈ 24 octets/s par bateau ; ≈ 4 % du temps d’émission par bateau |
 | Latence | < 1 s |
-| Sécurité | CRC et signature courte |
+| Sécurité | Contrôle d’erreur LoRa, sans signature : une trame n’est acceptée que dans le créneau de sa balise, et comparée à la dernière position 4G |
 | Secours | 4G (liaison principale) |
 | Si elle tombe | Si un récepteur tombe, le second continue. Si les deux tombent, la 4G suffit. |
 | Modules logiciels | S1, S3, S5 |
@@ -57,7 +57,7 @@
 
 ### 4. Corrections RTK
 
-**Base RTK, sur l’esplanade → Toutes les balises** · Données officielles
+**Base RTK, sur le toit de La Plage, au-dessus du PC course → Toutes les balises** · Données officielles
 
 | | |
 |---|---|
@@ -69,7 +69,7 @@
 | Latence | < 1 s ; les corrections restent valables quelques secondes |
 | Sécurité | Accès au caster par identifiant |
 | Secours | Réseau public Centipede (caster.centipede.fr, port 2101), directement depuis la balise |
-| Si elle tombe | Sans corrections, la précision passe de 2 cm à environ 1 m en 30 s. Le PC course le sait grâce à la qualité RTK de chaque trame, et l’arbitrage automatique se met en retrait. |
+| Si elle tombe | Sans corrections, la précision passe de 2 cm à environ 1 m en 10 à 60 s. Le PC course le sait grâce à la qualité RTK de chaque trame, et l’arbitrage automatique se met en retrait. |
 | Modules logiciels | S1, S4 |
 
 ### 5. Heure de référence
@@ -96,12 +96,12 @@
 | | |
 |---|---|
 | Support physique | Câble Ethernet, même longueur pour toutes les équipes, sur un réseau séparé « équipes » |
-| Protocole et format | MQTT en lecture seule (un compte par équipe) ; WebSocket JSON pour les navigateurs ; en option, flux NMEA 0183 (AIS) pour les logiciels de navigation |
+| Protocole et format | MQTT : lecture du flux, écriture dans la seule boîte d’envoi (un compte par équipe) ; WebSocket JSON pour les navigateurs ; en option, flux NMEA 0183 (AIS) pour les logiciels de navigation |
 | Ce qui circule | Positions de tous les bateaux et des bouées, vent mesuré et carte de vent, état de la course (chrono, séquence), événements (départs, passages, pénalités), classement |
 | Cadence | Positions 10 Hz ; vent 1 Hz ; événements à la volée |
 | Débit | ≈ 10 à 20 ko/s par équipe |
 | Latence | < 50 ms |
-| Sécurité | Comptes individuels en lecture seule ; réseau isolé de celui de l’organisation |
+| Sécurité | Comptes individuels : lecture du flux, écriture dans la seule boîte d’envoi de l’équipe ; réseau isolé de celui de l’organisation |
 | Secours | Borne Wi-Fi de la zone équipes |
 | Si elle tombe | Si le serveur principal tombe, le serveur de secours reprend en quelques secondes, à la même adresse. |
 | Modules logiciels | S5, S12 |
@@ -200,7 +200,7 @@
 | Support physique | Internet par le tunnel, puis un CDN vers les téléphones et ordinateurs |
 | Protocole et format | WebSocket JSON, flux agrégé et lissé ; replays en fichiers sur un stockage en ligne |
 | Ce qui circule | Positions lissées, classement, écarts, vent, événements, lien vidéo |
-| Cadence | 2 à 4 Hz |
+| Cadence | 1 à 2 Hz |
 | Débit | ≈ 1 à 2 ko/s par spectateur |
 | Latence | Différé volontaire de 2 à 5 s |
 | Sécurité | Lecture seule, aucun accès au réseau du site |
@@ -249,7 +249,7 @@
 | | |
 |---|---|
 | Support physique | Réseau local par câble pour les équipes et la régie ; Internet via le hub cloud pour le public |
-| Protocole et format | MQTT, message conservé par le broker : heure GPS du départ, étape de la procédure (avertissement, préparatoire, une minute, départ), rappels, temps de passage et d’arrivée |
+| Protocole et format | MQTT, message conservé par le broker : heure GPS du départ, étape de la procédure (avertissement à −1:00, préparatoire à −0:40, dernière étape à −0:20, départ), rappels, temps de passage et d’arrivée |
 | Ce qui circule | Heure exacte du prochain départ, étape en cours, chrono de course, rappels individuels ou généraux, temps de passage aux bouées, temps d’arrivée |
 | Cadence | À chaque changement, plus un rappel chaque seconde |
 | Débit | Négligeable |
@@ -267,12 +267,12 @@
 |---|---|
 | Support physique | Réseau local de l’organisation (câble ou Wi-Fi) jusqu’à un relais connecté, puis fil électrique jusqu’à la corne |
 | Protocole et format | MQTT : ordre « son court », « son long » ou « deux sons », avec l’heure GPS prévue |
-| Ce qui circule | Les signaux de la procédure : avertissement, préparatoire, une minute, départ ; rappel individuel ; rappel général |
+| Ce qui circule | Les signaux de la procédure : avertissement à −1:00, préparatoire à −0:40, dernière étape à −0:20, départ ; rappel individuel ; rappel général |
 | Cadence | À chaque étape de la procédure |
 | Latence | 10 à 50 ms jusqu’à la corne ; le son met ensuite ≈ 0,4 s pour traverser 150 m |
 | Sécurité | Seuls le moteur de course et la console du comité peuvent donner l’ordre |
 | Secours | Bouton manuel sur la console, corne à main ; les pavillons restent hissés à la main |
-| Si elle tombe | Dans les règles de course à la voile (règle 26), les temps sont pris sur les signaux visuels et un signal sonore manquant est ignoré. Les équipes ont de toute façon le chrono GPS exact. |
+| Si elle tombe | Comme dans les règles de course à la voile, dont notre procédure d’une minute (règle 5.1) adapte la règle 26, les temps sont pris sur les signaux visuels et un signal sonore manquant est ignoré. Les équipes ont de toute façon le chrono GPS exact. |
 | Modules logiciels | S8, S10, S17 |
 
 ## Les modules logiciels
@@ -417,7 +417,7 @@
 - **Solution** : Contrat d’interface publié (sujets MQTT, formats JSON, unités, cadences), documentation, exemples en Python et JavaScript, flux NMEA en option. Gel le 15 mars.
 - **But** : Toutes les équipes branchées le jour J, à égalité.
 - **Critère de réussite** : Au moins 3 équipes connectées au simulateur en février
-- **Entrées → sorties** : Bus de données → Flux en lecture seule
+- **Entrées → sorties** : Bus de données → Flux en lecture, plus la boîte d’envoi de chaque équipe
 - **Dépend de** : S5
 - **Charge** : 1 semaine
 
