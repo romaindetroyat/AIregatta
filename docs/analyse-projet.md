@@ -25,24 +25,24 @@
 
 ## Les chances de succès de notre part
 
-À condition que les autres instances tiennent la leur.
+À condition que les autres instances tiennent la leur. **Révision du 21 novembre** : la première version multipliait les conditions comme si elles étaient indépendantes, alors qu’elles dépendent toutes de la même petite équipe ; et le minimum ne dépend pas du système complet, puisque le repli C se passe des balises RTK. Les conditions sont maintenant combinées avec une corrélation (exposant 0,75).
 
 | Niveau | Aujourd’hui | Avec toutes les mesures |
 |---|---|---|
-| **Le suivi tient, même réduit** — Les bateaux sont suivis et classés toute la semaine, quitte à descendre au niveau de repli B ou C. | ≈ 55 % | ≈ 85 % |
-| **Le dispositif complet fonctionne** — Suivi au centimètre, arbitrage assisté, flux aux équipes, application et vidéo : le niveau A. | ≈ 35 % | ≈ 70 % |
-| **… et les manches sont réussies** — En plus : des manches lisibles, un arbitrage qui suit, au moins trois jours courus. | ≈ 20 % | ≈ 55 % |
+| **La régate a lieu et classe** — Les bateaux courent et sont classés toute la semaine, quitte à descendre au niveau de repli B ou C (GPS ordinaire, départs jugés par le comité). | ≈ 85 % | ≈ 95 % |
+| **Le dispositif complet fonctionne** — Suivi au centimètre, arbitrage assisté, flux aux équipes, application et vidéo : le niveau A. | ≈ 55 % | ≈ 80 % |
+| **… et les manches sont réussies** — En plus : des manches lisibles, un arbitrage qui suit, au moins trois jours courus. | ≈ 40 % | ≈ 65 % |
 
-« Aujourd’hui » tient compte des décisions prises. Les conditions sont multipliées entre elles comme si elles étaient indépendantes : c’est une estimation prudente.
+« Aujourd’hui » tient compte des décisions prises.
 
 | Condition | Aujourd’hui | Avec les mesures | Pourquoi | Mesures |
 |---|---|---|---|---|
-| Les bénévoles du logiciel et du matériel sont trouvés, et tiennent | 70 % | 92 % | Personne n’est encore identifié sur ces deux pôles, qui tiennent tout le calendrier. | 2 développeurs et 1 intégrateur matériel nommés avant le 11 décembre (+14) ; Un suppléant par poste (+5) ; Liste écrite de ce qu’on abandonne en premier (+3) |
-| Le suivi officiel fonctionne : balises, PC course, classement | 82 % | 91 % | Les briques sont éprouvées et les niveaux de repli sont adoptés. Reste l’assemblage : 16 balises à fabriquer en trois semaines, des essais qui dépendent de la météo. | Un second intégrateur formé dès janvier (+5) ; Devis de l’anémomètre en décembre, pièces communes commandées en janvier (+4) |
-| Des bateaux pour les essais de janvier et de mars | 75 % | 94 % | Le dossier ne dit pas quels bateaux porteront les balises. Les équipes n’auront pas les leurs en janvier. | 2 IOM achetés ou prêtés par un club avant le 15 janvier (+15) ; 4 bateaux assurés pour l’essai de mars (+4) |
-| Pas d’accident sur l’eau | 96 % | 98 % | La radiocommande de sécurité n’est que conseillée : un bateau qui perd sa liaison dépend de son comportement déclaré et du bateau d’assistance. | Perte de liaison et arrêt testés à la qualification du premier jour (+2) |
-| Les équipes ont de quoi se préparer | 80 % | 93 % | Le kit existe en version provisoire. Restent le bateau de référence, la version anglaise et les règles relues ; le bac à sable n’ouvre qu’en février, six semaines avant le gel du format. | Bateau de référence documenté avant Noël (+6) ; Règles v1 relues par un arbitre et publiées mi-janvier (+4) ; Simulateur et fichiers de rejeu fournis dès décembre (+3) |
-| Des manches lisibles, un arbitrage tenable | 72 % | 86 % | Notre simulation donne 12 alertes pour 7 bateaux, et l’arbitre confirme chaque pénalité. La qualification n’a lieu que le premier jour. | Poules de 4 à 5 bateaux (+8) ; Participation à la régate blanche d’avril demandée à chaque équipe (+6) |
+| Les bénévoles du logiciel et du matériel sont trouvés, et tiennent | 75 % | 92 % | Personne n’est encore nommé sur ces deux pôles, qui tiennent le calendrier. Mais six mois et des agents IA laissent de la marge au logiciel ; c’est surtout l’intégrateur matériel qui manque. | 2 développeurs et 1 intégrateur matériel nommés avant le 11 décembre (+12) ; Un suppléant par poste (+3) ; Liste écrite de ce qu’on abandonne en premier (+2) |
+| Le suivi officiel fonctionne : balises, PC course, classement | 85 % | 93 % | Des briques éprouvées (GPS RTK, 4G, MQTT), un prototype qui tourne déjà en simulation, des niveaux de repli adoptés. Le point dur : 16 balises à fabriquer en trois semaines en février. | Un second intégrateur formé dès janvier (+5) ; Devis de l’anémomètre en décembre, pièces communes commandées en janvier (+3) |
+| Des bateaux pour les essais de janvier et de mars | 85 % | 95 % | L’IOM est la classe radiocommandée la plus pratiquée : un club peut en prêter deux. Rien n’est encore demandé. | 2 IOM prêtés par un club, ou achetés d’occasion, avant le 15 janvier (+8) ; 4 bateaux assurés pour l’essai de mars (+2) |
+| Pas d’accident sur l’eau | 96 % | 98 % | Des bateaux de 1 m et 4 kg, un bateau d’assistance. La radiocommande de sécurité n’est que conseillée : un bateau qui perd sa liaison dépend de son comportement déclaré. | Perte de liaison et arrêt testés à la qualification du premier jour (+2) |
+| Les équipes ont de quoi se préparer | 85 % | 93 % | Contrat d’interface, schémas, exemples et fiche du bateau de référence sont écrits. Manquent l’exemple de code de l’IA minimale, le simulateur distribuable et les règles relues ; le bac à sable n’ouvre qu’en février. | Exemple d’IA minimale et simulateur fournis dès décembre (+4) ; Règles v1 relues par un arbitre et publiées mi-janvier (+4) |
+| Des manches lisibles, un arbitrage tenable | 75 % | 85 % | Notre simulation donne 12 alertes pour 7 bateaux, et l’arbitre confirme chaque pénalité : en flotte entière, deux arbitres seront débordés. | Poules de 4 à 5 bateaux (+6) ; Participation à la régate blanche d’avril demandée à chaque équipe (+4) |
 | Au moins 3 jours navigables sur 5 | 90 % | 93 % | Limites fixées de 4 à 20 nœuds. Mi-mai : brise l’après-midi, mais des épisodes de mistral ; pas de jour de réserve. | Un jour de marge dans le programme (+3) |
 
 ## Ce qui reste vraiment
