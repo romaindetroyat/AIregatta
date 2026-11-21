@@ -195,9 +195,9 @@ flowchart TB
 | GNSS RTK | **ArduSimple simpleRTK2B Lite** (u-blox ZED-F9P, bi-bande L1/L2) | ≈ 190–210 € | **ArduSimple simpleRTK3B Budget** (Unicore UM980, tri-bande, ≈ 250 €) ; SparkFun GPS-RTK-SMA (ZED-F9P) |
 | Antenne GNSS | **u-blox ANN-MB-00** (L1/L2, magnétique, IP67), sur plan de masse de 10 cm | ≈ 50–60 € | Antenne hélicoïdale L1/L2 légère si la place manque en tête de mât **[À TESTER]** |
 | Microcontrôleur + 4G | **LilyGO T-A7670E-S3** (ESP32-S3 + modem SIMCom A7670E LTE Cat-1, lecteur de carte microSD) | ≈ 35–50 € | LilyGO T-SIM7600E (Cat-4) ; ESP32-S3 + modem séparé |
-| Radio de secours 868 MHz | **EByte E22-900M22S** (Semtech SX1262, 22 dBm) | ≈ 8–12 € | Module SX1262 de Heltec ou RAK |
+| Radio de secours 868 MHz | **Adafruit RFM95W** (Semtech SX1276, 20 dBm), le même module dans les récepteurs du PC course | ≈ 20 € | EByte E22-900M22S (SX1262) |
 | Antenne 868 | Antenne fouet 868 MHz ½ onde, connecteur SMA | ≈ 5–10 € | — |
-| Cap / gîte / tangage | **Adafruit BNO085** (fusion IMU + magnétomètre) | ≈ 25 € | ICM-20948 ; double antenne GNSS (ArduSimple simpleRTK2B + F9H) si le cap magnétique est perturbé (+ 250 €) |
+| Cap / gîte / tangage | **Adafruit BNO085** (fusion IMU + magnétomètre), en liaison série, mode UART-RVC (l’I2C pose problème sur ESP32) | ≈ 25 € | ICM-20948 ; double antenne GNSS (ArduSimple simpleRTK2B + F9H) si le cap magnétique est perturbé (+ 250 €) |
 | SIM | SIM IoT multi-opérateurs (1NCE, Things Mobile) | 10–20 € pour la saison | Une SIM d'un autre opérateur sur quelques balises de rechange |
 | Énergie | 2 × accus 18650 de 3 500 mAh (≈ 25 Wh) + carte de charge/protection | ≈ 20 € | Batterie LiPo 1S 5 000 mAh |
 | Boîtier | Boîtier ABS IP67 (gamme Hammond 1554 ou équivalent) + traversées SMA + presse-étoupe + interrupteur magnétique (ILS) | ≈ 25 € | Boîtier imprimé en ASA avec joint torique |
@@ -361,19 +361,19 @@ Toutes les balises connaissent l'heure GNSS à une ou deux millisecondes près :
 
 ```
 Seconde GNSS (1 000 ms)
-| 0–40 ms   | 40–80 ms | 80–120 ms | ... | 920–960 ms | 960–1000 ms |
+| 0–30 ms   | 30–60 ms | 60–90 ms  | ... | 930–960 ms | 960–990 ms  |
 | GW balise | BAL 01   | BAL 02    | ... | BOU / BAS  | réserve     |
 ```
 
-- Réglage radio proposé : LoRa SF7, largeur de bande 250 kHz. Une trame de 24 octets dure environ 30 ms ; un créneau de 40 ms laisse une marge de garde.
-- **Capacité : 24 créneaux par seconde.** Avec moins de 10 bateaux et 4 bouées (14 balises), **chaque balise peut émettre 2 fois par seconde (2 Hz)** : 28 émissions × 35 ms ≈ 1 s. Il est aussi possible de rester à 1 Hz avec beaucoup de marge.
-- Temps d'émission par balise à 2 Hz : 60 ms par seconde, soit **6 %** (sous la limite de 10 %).
+- Réglage radio : 869,525 MHz, LoRa SF7, largeur de bande 250 kHz. Une trame de 12 octets dure environ 21 ms ; un créneau de 30 ms laisse la marge de garde.
+- **Capacité : 33 créneaux par seconde.** Les 10 bateaux émettent 2 fois par seconde (2 Hz), les bouées une fois toutes les 5 s : le canal est occupé à ≈ 45 %.
+- Temps d'émission par bateau à 2 Hz : ≈ 42 ms par seconde, soit **≈ 4 %** (sous la limite de 10 %).
 - Créneau 0 : la passerelle diffuse l'état de la course (chrono, rappels) et un accusé de réception groupé. Ce message court peut servir à faire clignoter une LED sur la balise au moment d'un rappel.
 - **Les corrections RTK ne passent pas par cette radio** : le débit et la limite de 10 % ne le permettent pas à 1 Hz. Si la 4G tombe, la balise garde la précision RTK pendant 10 à 30 s, puis passe progressivement en précision métrique. C'est acceptable en secours.
 
 ### 5.3 Bilan de liaison (ordre de grandeur)
 
-Distance maximale de 500 m, 868 MHz : affaiblissement en espace libre ≈ 85 dB. Émission 22 dBm + antenne bateau 2 dBi + antenne à terre 5 dBi − 85 dB − 3 dB de pertes de câble ≈ **−59 dBm reçus**. La sensibilité en SF7 / 250 kHz étant d'environ −121 dBm, **la marge dépasse 60 dB**. La portée n'est pas un sujet à cette distance ; il reste à vérifier les masquages (coques, voiles) et les réflexions sur l'eau **[À TESTER]**.
+Distance maximale de 500 m, 868 MHz : affaiblissement en espace libre ≈ 85 dB. Émission 20 dBm + antenne bateau 2 dBi + antenne à terre 5 dBi − 85 dB − 3 dB de pertes de câble ≈ **−61 dBm reçus**. La sensibilité en SF7 / 250 kHz étant d'environ −121 dBm, **la marge est d’environ 60 dB**. La portée n'est pas un sujet à cette distance ; il reste à vérifier les masquages (coques, voiles) et les réflexions sur l'eau **[À TESTER]**.
 
 À 500 m, on pourrait aussi faire de la radio privée le chemin principal. On garde la 4G en principal parce qu'elle transporte en plus les corrections RTK et les mises à jour à distance des balises.
 
@@ -440,9 +440,9 @@ Règles :
 
 La signature empêche qu'une trame soit falsifiée ou rejouée par un tiers.
 
-### 7.2 Trame radio 868 MHz (24 octets)
+### 7.2 Trame radio 868 MHz (12 octets)
 
-Identifiant (1 octet), séquence (1), temps en dixièmes de seconde dans la minute (2), latitude et longitude en écart par rapport à un point de référence du plan d'eau (2 × 3 octets, au centimètre près), vitesse (1), route (1), type de solution (1), batterie et drapeaux (1), vent pour les bouées (3), CRC + signature courte (4), réserve (3).
+Identifiant (1 octet), temps en dixièmes de seconde dans la minute et drapeaux (2), latitude et longitude en écart par rapport à un point de référence du plan d'eau (2 × 3 octets, au centimètre près), vitesse (1), route (1), type de solution, batterie et réserve (1). Le contrôle d’erreur est celui de LoRa ; il n’y a pas de signature : le récepteur n’accepte une trame que dans le créneau de sa balise et la compare à la dernière position 4G. Détail : `fabrication-balise.md`.
 
 ### 7.3 Flux interne et flux équipes (MQTT, JSON)
 
