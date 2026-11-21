@@ -18,6 +18,7 @@ Le récepteur GPS de la balise. Il utilise la puce u-blox ZED-F9P, la référenc
 - Avis : [Test de terrain, université de Caroline du Sud : ≈ 2,2 cm](https://www.ardusimple.com/field-test-evaluation-of-the-ardusimple-simplertk2blite-zed-f9p-operating-in-rtk-mode-on-the-south-carolina-virtual-reference-network/)
 - Avis : [Premières impressions d’un roboticien : « a great piece of kit »](https://msadowski.github.io/ardusimple-rtk-first-impressions)
 - Avis : [Forum ArduPilot : ZED-F9P comparé à l’ancienne génération](https://discuss.ardupilot.org/t/comparing-a-ublox-f9p-with-a-m8p-with-rtk/43493)
+- Acheter : [ArduSimple, boutique officielle (UE)](https://www.ardusimple.com/product/simplertk2blite/) · ≈ 199 €
 
 ### Antenne u-blox ANN-MB — ≈ 50–70 €
 
@@ -30,6 +31,8 @@ L’antenne GPS, étanche, captant deux bandes de fréquences. Elle sert sur les
 - Fiche : [Fiche technique ANN-MB (PDF)](https://www.mouser.com/datasheet/2/813/ANN-MB_DataSheet__UBX-18049862_-1532371.pdf)
 - Fiche : [Version récente ANN-MB2 (PDF)](https://content.u-blox.com/sites/default/files/documents/ANN-MB2_ProductSummary_UBXDOC-963802114-12691.pdf)
 - Avis : [Université de Birmingham : évaluation de l’ANN-MB](https://research.birmingham.ac.uk/en/publications/assessment-of-the-performance-of-the-topgnss-and-ann-mb-antennas-/)
+- Acheter : [ArduSimple, ANN-MB-00 (L1/L2, adaptée au ZED-F9P)](https://www.ardusimple.com/product/ann-mb-00-ip67)
+- Acheter : [Future Electronics (page FR)](https://futureelectronics.com/fr/p/semiconductors--wireless-rf--antennas--gps-antennas/ann-mb-00-u-blox-6120194)
 
 ### Adafruit BNO085 — ≈ 25–30 €
 
@@ -41,6 +44,8 @@ La centrale inertielle : elle mesure la gîte, le tangage et les rotations du ba
 
 - Fiche : [Page produit Adafruit](https://www.adafruit.com/products/4754)
 - Avis : [Forum SparkFun : réserves sur le cap magnétique (non utilisé ici)](https://community.sparkfun.com/t/inaccurate-heading-and-calibration-issues-with-bno085-imu/47544)
+- Acheter : [Anodas (UE)](https://anodas.lt/en/bno085-9-dof-imu-fusion-breakout-3-axis-accelerometer-gyroscope-and-magnetometer-adafruit-4754) · ≈ 37 € HT
+- Acheter : [Go Tronic (France), réf. 37262](https://gotronic.fr/download-product-page/33477)
 
 ### Carte ESP32-S3 avec modem 4G SIMCom A7670E — ≈ 40–50 €
 
@@ -53,6 +58,8 @@ Le cerveau de la balise et sa liaison 4G : un microcontrôleur ESP32-S3 et un mo
 - Fiche : [LilyGO T-A7670E-S3 : documentation officielle](https://github.com/Xinyuan-LilyGO/LilyGO-T-A76XX)
 - Fiche : [Waveshare ESP32-S3-A7670E-4G](https://www.waveshare.com/product/esp32-related/boards-kits/esp32-s3/esp32-s3-a7670e-4g.htm)
 - Avis : [CNX Software : présentation des cartes Waveshare 4G](https://www.cnx-software.com/2024/02/20/waveshare-esp32-s3-4g-dev-boards-feature-lte-cat-1-2g-and-camera-support/)
+- Acheter : [OpenELab (France), Waveshare ESP32-S3-A7670E-4G](https://openelab.io/fr/products/waveshare-esp32-s3-a7670e-4g) · ≈ 49 €
+- Acheter : [RobotShop Europe](https://eu.robotshop.com/products/waveshare-esp32-s3-a7670e-4g-development-board-lte-cat-1-2g-wifi-bluetooth-telephone-call-sms-gnss) · ≈ 47 €
 
 ### Adafruit LoRa RFM95W (868 MHz) — ≈ 20 €
 
@@ -64,6 +71,7 @@ La radio de secours, sur la balise et dans les deux récepteurs du PC course.
 
 - Fiche : [Page produit Adafruit (version 868/915 MHz)](https://www.adafruit.com/products/3231)
 - Avis : [Avis clients Pimoroni](https://reviews.co.uk/product-reviews/store/shop-pimoroni-com/ADA3231)
+- Acheter : [DigiKey (UE, livre en France)](https://www.digikey.es/en/products/detail/adafruit-industries-llc/3072/6005357) · ≈ 21 € TTC
 
 ## Bouées
 
@@ -79,6 +87,8 @@ L’anémomètre des bouées : il mesure la vitesse et la direction du vent par 
 - Fiche : [Fiche produit (NauticExpo)](https://www.nauticexpo.com/prod/gill-instruments-ltd/product-39900-485171.html)
 - Avis : [Utilisé sur le navire de recherche britannique RRS James Cook (NOC)](https://NOC.ac.uk/files/documents/facilities/james_cook/Gill_WindSonic.pdf)
 - Avis : [Utilisé sur le navire de recherche américain Sally Ride (NOAA)](https://downloads.psl.noaa.gov/psd3/cruises/PISTON_2019/Sally_Ride/SCS/Sally_Met_Manual/Wind/WindSonicWebDatasheet.pdf)
+- Acheter : [NauticExpo, demande de devis](https://www.nauticexpo.com/prod/gill-instruments-ltd/product-39900-485171.html) · sur devis
+- Acheter : [Campbell Scientific France, brochure et devis](https://s.campbellsci.com/documents/fr/product-brochures/b_windsonic_fr.pdf) · sur devis
 
 ## Base RTK
 
@@ -108,6 +118,8 @@ Le mini-ordinateur du PC course, en deux exemplaires : un principal et un de sec
 - Fiche : [Page produit ASUS](https://asus.com/displays-desktops/nucs/nuc-kits/asus-nuc-14-pro)
 - Avis : [ServeTheHome](https://www.servethehome.com/asus-nuc-14-pro-review-intel-core/)
 - Avis : [Notebookcheck](https://www.notebookcheck.net/Asus-NUC-14-Pro-review-NUC-mini-PC-with-Intel-Core-Ultra-5-125H-fast-Intel-Arc-iGPU-and-2x-Thunderbolt-4.881404.0.html)
+- Acheter : [LDLC (barebone Core 3)](https://www.ldlc.com/en/product/PB00624811.html) · ≈ 470 €
+- Acheter : [ASUS France, page officielle](https://www.asus.com/fr/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-14-pro/)
 
 ### Ubiquiti UniFi Cloud Gateway Ultra — ≈ 130 €
 
@@ -120,6 +132,7 @@ Le routeur du PC course : il gère le réseau local, les réseaux séparés (org
 - Fiche : [Fiche technique Ubiquiti](https://techspecs.ui.com/unifi/cloud-gateways/ucg-ultra)
 - Avis : [iFeelTech : « the best $129 gateway »](https://ifeeltech.com/blog/unifi-cloud-gateway-ultra-review)
 - Avis : [LazyAdmin : test détaillé](https://lazyadmin.nl/network/unifi-cloud-gateway-ultra/)
+- Acheter : [Ubiquiti Store Europe (officiel)](https://eu.store.ui.com/eu/en/products/ucg-ultra) · ≈ 95 €
 
 ### Netgear Nighthawk M6 Pro — ≈ 700–900 €
 
@@ -132,6 +145,8 @@ Le routeur 5G de poche qui prend le relais si la ligne filaire du site tombe.
 - Fiche : [Page produit Netgear](https://www.netgear.com/mobile-wifi/hotspots/mr6550/)
 - Avis : [TechRadar](https://www.techradar.com/reviews/netgear-nighthawk-m6-pro-wi-fi-router-review)
 - Avis : [T3](https://t3.com/reviews/netgear-nighthawk-m6-pro-review)
+- Acheter : [LDLC](https://ldlc.com/en/product/PB00540606.html)
+- Acheter : [Galaxus.fr](https://www.galaxus.fr/fr/s1/product/netgear-nighthawk-m6-pro-routeur-mobile-routeur-23545594)
 
 ### EcoFlow River 2 Pro — ≈ 420–600 €
 
@@ -144,6 +159,8 @@ La batterie de secours du PC course : elle prend le relais en cas de coupure de 
 - Fiche : [Fiche technique (PDF)](https://www.cliftoncameras.co.uk/uploads/specifications/EcoFlow%20RIVER%202%20Pro%20UK%20Specifications.pdf)
 - Avis : [OutdoorGearLab (janvier 2026)](https://www.outdoorgearlab.com/reviews/camping-and-hiking/power-station/ecoflow-river-2-pro)
 - Avis : [AppleInsider](https://appleinsider.com/articles/23/05/10/ecoflow-river-2-pro-review-compact-design-with-expansive-power)
+- Acheter : [Castorama](https://www.castorama.fr/station-electrique-portable-ecoflow-river-2-pro-720wh/4895251601559_CAFR.prd) · ≈ 600 €
+- Acheter : [Boulanger](https://www.boulanger.com/ref/1187283)
 
 ## Caméras et météo
 
@@ -158,6 +175,7 @@ La caméra motorisée du point haut, avec un zoom optique 16× pour suivre les b
 - Fiche : [Page produit Reolink](https://reolink.com/product/rlc-823s2/)
 - Avis : [Mighty Gadget : test du modèle 16× précédent](https://mightygadget.co.uk/?p=682276)
 - Avis : [Modern Castle : test du RLC-823A](https://moderncastle.com/reolink-rlc-823a-review/)
+- Acheter : [Reolink France, boutique officielle](https://reolink.com/fr/product/rlc-823s2/)
 
 ### Blackmagic ATEM Mini Pro — ≈ 300–350 €
 
@@ -170,6 +188,8 @@ Le mélangeur vidéo : il passe d’une caméra à l’autre, ajoute les incrust
 - Fiche : [Page Blackmagic ATEM Mini](https://www.blackmagicdesign.com/products/atemmini/workflow)
 - Avis : [TechRadar](https://www.techradar.com/reviews/atem-mini-pro)
 - Avis : [Streaming Media](https://www.streamingmedia.com/Producer/Articles/Editorial/Featured-Articles/Review-Blackmagic-Design-ATEM-Mini-Pro-140958.aspx)
+- Acheter : [Thomann (France)](https://www.thomann.fr/blackmagic_design_atem_mini_pro.htm) · ≈ 319 €
+- Acheter : [Woodbrass (France)](https://www.woodbrass.com/tables-de-mixage-video-blackmagic-design-atem-mini-pro-p358901.html)
 
 ### Davis Vantage Pro2 + WeatherLink Live — ≈ 900–1 100 €
 
@@ -182,6 +202,8 @@ La station météo à terre : vent de référence, rafales, pression.
 - Fiche : [Page produit Davis](https://davisinstruments.com/products/vantage-pro2-weatherlink-live-bundle-with-airlink)
 - Avis : [The Weather Station Experts : test du Vantage Pro2](https://theweatherstationexperts.com/davis-instruments-vantage-pro2-review/)
 - Avis : [The Weather Station Experts : test de la WeatherLink Live](https://theweatherstationexperts.com/davis-weatherlink-live/)
+- Acheter : [Conrad, Vantage Pro2 6252EU](https://www.conrad.com/en/p/davis-instruments-vantage-pro2-with-console-eu-6252eu-wireless-digital-weather-station-max-number-of-sensors-80-3123434.html)
+- Acheter : [Conrad, WeatherLink Live 6100EU](https://www.conrad.com/en/p/davis-instruments-6100eu-6100eu-wi-fi-weather-station-3448772.html)
 
 ### NVIDIA Jetson Orin Nano Super (option) — ≈ 250–300 €
 
@@ -194,6 +216,8 @@ Un petit ordinateur pour l’analyse d’image : incrustations calées sur la vi
 - Fiche : [Page produit NVIDIA](https://marketplace.nvidia.com/en-us/enterprise/robotics-edge/jetson-orin-nano-super-developer-kit)
 - Avis : [StorageReview](https://www.storagereview.com/review/nvidia-jetson-orin-nano-super-powering-deepseek-r1-70b-inference-at-the-edge)
 - Avis : [CNX Software](https://cnx-software.com/2024/12/18/249-nvidia-jetson-orin-nano-super-developer-kit-targets-generative-ai-applications-at-the-edge/)
+- Acheter : [Generation Robots (France)](https://www.generationrobots.com/en/404303-nvidia-jetson-orin-nano-super-developer-kit.html) · ≈ 387 €
+- Acheter : [RS Online France](https://fr.rs-online.com/web/p/modules-de-developpement-pour-processeurs/2647384) · ≈ 340 €
 
 ## Outils
 
@@ -208,6 +232,8 @@ Un petit analyseur de fréquences : il montre quelles radios émettent sur le si
 - Fiche : [Page revendeur Passion Radio](https://passion-radio.com/meter/tiny-sa-ultra-2543.html)
 - Avis : [RTL-SDR : synthèse des tests](https://www.rtl-sdr.com/tinysa-ultra-reviews-a-0-1-mhz-6-ghz-spectrum-analyzer-for-120/)
 - Avis : [W. Reeve : comparaison avec un appareil professionnel](https://reeve.com/Documents/Articles%20Papers/Reeve_TinySA-FPL_Compare.pdf)
+- Acheter : [Lab401 (France)](https://lab401.com/products/tinysa-ultra) · ≈ 150–165 €
+- Acheter : [Passion Radio (France)](https://www.passion-radio.com/meter/tiny-sa-ultra-2543.html) · ≈ 169 €
 
 ## Signaux de départ
 
@@ -221,6 +247,8 @@ Le petit relais qui actionne la corne quand le PC course le lui demande.
 
 - Fiche : [Documentation Shelly 1 Gen3](https://www.shelly.com/blogs/documentation/shelly-1-gen3)
 - Avis : [Retour d’un utilisateur (SmartThings) : MQTT et relais fiables](https://community.smartthings.com/t/integration-solutions-using-mqtt/245186/624)
+- Acheter : [Domadoo (France)](https://www.domadoo.fr/de/smarte-beleuchtung/7507-shelly-intelligentes-universalmodul-w-lan-shelly-1-gen3-3800235261767.html)
+- Acheter : [Shelly, boutique officielle (UE)](https://www.shelly.com/it/products/shelly-1-gen3)
 
 ### Corne électrique marine 12 V — ≈ 100–150 €
 
@@ -232,3 +260,5 @@ La corne de départ, alimentée par une batterie, installée sur la digue face �
 
 - Fiche : [Sailing World : l’automatisation du comité de course](https://sailingworld.com/racing/the-automated-race-committee)
 - Avis : [Scuttlebutt : les signaux sonores de la procédure](https://www.sailingscuttlebutt.com/2023/02/20/start-sequence-sound-signals/)
+- Acheter : [Poseidon Marine, klaxon Marco 12 V](https://www.poseidonmarine.eu/fr/products/electric-horn-12v-chrome-1) · ≈ 43 €
+- Acheter : [H2R Équipements (France), avertisseur Osculati 12 V](https://www.h2r-equipements.com/avertisseur-sonore-pour-bateau/2985-osculati-avertisseur-encastrable-12v.html) · ≈ 19 €
