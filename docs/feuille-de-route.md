@@ -6,7 +6,7 @@
 
 Ces actions s’enchaînent sans marge : un retard sur l’une décale la régate.
 
-**A3** Trouver les 2 développeurs et l’intégrateur matériel → **C1** Commander le prototype (≈ 1 900 €) → **C2** Monter 3 balises et la base RTK, banc à terre → **J1** Essai n°1 : 2 balises sur l’eau → **A4** Revue n°1 : choix du récepteur → **C4** Commander la série → **C5** Fabriquer et recetter la série → **J2** Essai n°2 : système complet, 4 bateaux → **A5** Revue n°2 : bascule en préparation → **G5** Tests à quai des équipes → **J3** Régate blanche → **A6** Revue n°3 : feu vert de la régate → **J4** Répétition générale → **H6** Montage du PC course et des bouées → **J5** AI Regatta
+**A3** Formaliser l’équipe : Meridia au logiciel, le responsable technique → **C1** Commander le prototype (≈ 1 900 €) → **C2** Monter 3 balises et la base RTK, banc à terre → **J1** Essai n°1 : 2 balises sur l’eau → **A4** Revue n°1 : choix du récepteur → **C4** Commander la série → **C5** Fabriquer et recetter la série → **J2** Essai n°2 : système complet, 4 bateaux → **A5** Revue n°2 : bascule en préparation → **G5** Tests à quai des équipes → **J3** Régate blanche → **A6** Revue n°3 : feu vert de la régate → **J4** Répétition générale → **H6** Montage du PC course et des bouées → **J5** AI Regatta
 
 Le rythme est donné par le matériel et les sorties sur l’eau, pas par le logiciel : grâce aux agents IA, le logiciel a de la marge.
 
@@ -16,7 +16,7 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 |---|---|---|---|---|---|
 | A1 | Trancher les dernières questions | 23/11/2026 | 04/12/2026 | Direction de projet | — |
 | A2 | Transmettre la liste d’achats aux financeurs | 23/11/2026 | 27/11/2026 | Direction de projet | — |
-| A3 ★ | Trouver les 2 développeurs et l’intégrateur matériel | 23/11/2026 | 11/12/2026 | Direction de projet | — |
+| A3 ★ | Formaliser l’équipe : Meridia au logiciel, le responsable technique | 23/11/2026 | 04/12/2026 | Direction de projet | — |
 | C1 ★ | Commander le prototype (≈ 1 900 €) | 30/11/2026 | 11/12/2026 | Matériel et terrain | A2, A3 |
 | E1 | Format du flux équipes v0 et simulateur | 30/11/2026 | 18/12/2026 | Logiciel | A3 |
 | H1 | Installation à La Plage : repérage | 30/11/2026 | 15/01/2027 | Site et logistique sur l’eau | — |
@@ -72,14 +72,14 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 
 ### Novembre 2026
 
-- **Direction de projet** : A1 Trancher les dernières questions ; A2 Transmettre la liste d’achats aux financeurs ; A3 Trouver les 2 développeurs et l’intégrateur matériel
+- **Direction de projet** : A1 Trancher les dernières questions ; A2 Transmettre la liste d’achats aux financeurs ; A3 Formaliser l’équipe : Meridia au logiciel, le responsable technique
 - **Logiciel** : E1 Format du flux équipes v0 et simulateur
 - **Matériel et terrain** : C1 Commander le prototype (≈ 1 900 €)
 - **Site et logistique sur l’eau** : H1 Installation à La Plage : repérage
 
 ### Décembre 2026
 
-- **Direction de projet** : A1 Trancher les dernières questions ; A3 Trouver les 2 développeurs et l’intégrateur matériel
+- **Direction de projet** : A1 Trancher les dernières questions ; A3 Formaliser l’équipe : Meridia au logiciel, le responsable technique
 - **Logiciel** : C3 Firmware de la balise v1 ; E1 Format du flux équipes v0 et simulateur ; E2 Bus de données, serveur et secours
 - **Matériel et terrain** : C1 Commander le prototype (≈ 1 900 €) ; C2 Monter 3 balises et la base RTK, banc à terre ; D1 Concevoir les bouées instrumentées ; J0 Bateaux pour les essais
 - **Course et arbitrage** : B1 Relecture des règles par un arbitre agréé ; B6 Dérogations à la jauge IOM et épreuve de qualification
@@ -134,8 +134,8 @@ Tous les participants sont bénévoles : la charge sert à savoir quelle disponi
 | Pôle | Rôle | Qui | Nov. | Déc. | Janv. | Févr. | Mars | Avr. | Mai | Semaine de course |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Direction de projet | Pilote l’ensemble, tranche, anime les revues, fait le lien avec les autres instances (autorisations, financement, équipes, public). | Romain (Meridia), appuyé par un agent IA de suivi | 0,4 | 0,5 | 0,5 | 0,5 | 0,5 | 0,6 | 0,8 | 1 pers. |
-| Logiciel | Flux de données, moteur de course, consoles, applications, aides au commentateur ; développe avec des agents IA (P32). | 2 développeurs à trouver, + agents IA ; un seul à plein temps au plus fort | 0,2 | 1 | 1,2 | 1,2 | 0,8 | 0,5 | 0,6 | 1 pers. |
-| Matériel et terrain | Balises, base RTK, radio, bouées instrumentées, réseau et caméras du PC course, caméras embarquées. | 1 intégrateur électronique à trouver : à mi-temps, à plein temps en février pour la série et les bouées | 0,2 | 0,6 | 0,6 | 1 | 0,8 | 0,5 | 0,5 | 1 pers. |
+| Logiciel | Flux de données, moteur de course, consoles, applications, aides au commentateur ; développe avec des agents IA (P32). | Meridia, avec ses agents IA ; un plein temps au plus fort | 0,2 | 1 | 1,2 | 1,2 | 0,8 | 0,5 | 0,6 | 1 pers. |
+| Matériel et terrain | Balises, base RTK, radio, bouées instrumentées, réseau et caméras du PC course, caméras embarquées. | Une personne fiable, identifiée ; à mi-temps, à plein temps en février pour la série et les bouées ; un suppléant à former | 0,2 | 0,6 | 0,6 | 1 | 0,8 | 0,5 | 0,5 | 1 pers. |
 | Course et arbitrage | Règles, dérogations à la jauge IOM, qualification, procédures du comité, formation des arbitres, jury. | Directeur de course et 2 arbitres (club de voile partenaire), qui forment aussi le jury | 0 | 0,1 | 0,1 | 0,1 | 0,2 | 0,3 | 0,5 | 3 pers. |
 | Relations équipes | Kit en français et en anglais, bateau de référence, bac à sable, support, contrôle des installations. | 1 référent technique à temps partiel, qui protège les développeurs des sollicitations | 0 | 0,1 | 0,2 | 0,2 | 0,2 | 0,3 | 0,4 | 1 pers. |
 | Site et logistique sur l’eau | PC course à La Plage, mouillages, bateau d’assistance, montage. | 1 coordinateur ; sur l’eau, 1 bateau d’assistance (club partenaire) | 0 | 0,1 | 0,1 | 0,2 | 0,2 | 0,3 | 0,5 | 2 pers. |

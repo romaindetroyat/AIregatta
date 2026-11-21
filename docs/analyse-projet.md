@@ -6,6 +6,7 @@
 
 | Sujet | Décision |
 |---|---|
+| Équipe | Meridia porte le logiciel ; une personne fiable porte la technique (balises, bouées, réseau, caméras). |
 | Jauge | Jauge IOM (classe 1 m) pour la coque, les appendices, les gréements et le poids ; électronique libre par dérogation. |
 | Bateau de référence | Un IOM du commerce documenté dans le kit : conseillé, non imposé. |
 | Qualification | Sur place, le premier jour : parcours seul, tour de pénalité, arrêt sur ordre. |
@@ -29,15 +30,15 @@
 
 | Niveau | Aujourd’hui | Avec toutes les mesures |
 |---|---|---|
-| **La régate a lieu et classe** — Les bateaux courent et sont classés toute la semaine, quitte à descendre au niveau de repli B ou C (GPS ordinaire, départs jugés par le comité). | ≈ 85 % | ≈ 95 % |
-| **Le dispositif complet fonctionne** — Suivi au centimètre, arbitrage assisté, flux aux équipes, application et vidéo : le niveau A. | ≈ 55 % | ≈ 80 % |
-| **… et les manches sont réussies** — En plus : des manches lisibles, un arbitrage qui suit, au moins trois jours courus. | ≈ 40 % | ≈ 65 % |
+| **La régate a lieu et classe** — Les bateaux courent et sont classés toute la semaine, quitte à descendre au niveau de repli B ou C (GPS ordinaire, départs jugés par le comité). | ≈ 90 % | ≈ 95 % |
+| **Le dispositif complet fonctionne** — Suivi au centimètre, arbitrage assisté, flux aux équipes, application et vidéo : le niveau A. | ≈ 60 % | ≈ 80 % |
+| **… et les manches sont réussies** — En plus : des manches lisibles, un arbitrage qui suit, au moins trois jours courus. | ≈ 45 % | ≈ 70 % |
 
 « Aujourd’hui » tient compte des décisions prises.
 
 | Condition | Aujourd’hui | Avec les mesures | Pourquoi | Mesures |
 |---|---|---|---|---|
-| Les bénévoles du logiciel et du matériel sont trouvés, et tiennent | 75 % | 92 % | Personne n’est encore nommé sur ces deux pôles, qui tiennent le calendrier. Mais six mois et des agents IA laissent de la marge au logiciel ; c’est surtout l’intégrateur matériel qui manque. | 2 développeurs et 1 intégrateur matériel nommés avant le 11 décembre (+12) ; Un suppléant par poste (+3) ; Liste écrite de ce qu’on abandonne en premier (+2) |
+| L’équipe tient jusqu’en mai | 90 % | 95 % | Meridia porte le logiciel, avec ses agents IA ; une personne fiable porte la technique. Reste le risque d’une seule personne au matériel : maladie, indisponibilité en février. | Un suppléant formé à la technique dès janvier (+3) ; Liste écrite de ce qu’on abandonne en premier (+2) |
 | Le suivi officiel fonctionne : balises, PC course, classement | 85 % | 93 % | Des briques éprouvées (GPS RTK, 4G, MQTT), un prototype qui tourne déjà en simulation, des niveaux de repli adoptés. Le point dur : 16 balises à fabriquer en trois semaines en février. | Un second intégrateur formé dès janvier (+5) ; Devis de l’anémomètre en décembre, pièces communes commandées en janvier (+3) |
 | Des bateaux pour les essais de janvier et de mars | 85 % | 95 % | L’IOM est la classe radiocommandée la plus pratiquée : un club peut en prêter deux. Rien n’est encore demandé. | 2 IOM prêtés par un club, ou achetés d’occasion, avant le 15 janvier (+8) ; 4 bateaux assurés pour l’essai de mars (+2) |
 | Pas d’accident sur l’eau | 96 % | 98 % | Des bateaux de 1 m et 4 kg, un bateau d’assistance. La radiocommande de sécurité n’est que conseillée : un bateau qui perd sa liaison dépend de son comportement déclaré. | Perte de liaison et arrêt testés à la qualification du premier jour (+2) |
@@ -49,11 +50,11 @@
 
 14 points.
 
-### À trouver
+### À formaliser
 
 | Niveau | Point | Constat | Quoi faire |
 |---|---|---|---|
-| Bloquant | **Les deux développeurs et l’intégrateur matériel** | Personne n’est encore identifié. Sans eux, ni commande du prototype, ni firmware, ni format des données : le chemin critique ne démarre pas. | Les nommer avant le 11 décembre, avec un suppléant par poste. L’intégrateur doit pouvoir donner un mi-temps dès décembre et un plein temps en février. |
+| Important | **L’équipe logiciel et technique** | Meridia porte le logiciel ; une personne fiable porte la technique. Reste à l’écrire : qui décide de quoi, quelles disponibilités en février (plein temps pour la fabrication), et qui la remplace en cas d’absence. | Une page « qui fait quoi » avant le 11 décembre ; un suppléant technique formé dès janvier, en montant le prototype avec elle. |
 
 ### À trancher
 
@@ -93,11 +94,11 @@ Probabilité et gravité notées sur 5 ; le poids est leur produit.
 
 | Risque | Probabilité | Gravité | Poids | Parade |
 |---|---|---|---|---|
-| Développeurs et intégrateur introuvables ou débordés | 4 | 5 | **20** | Les nommer avant le 11 décembre, un suppléant par poste, liste de ce qu’on abandonne en premier. |
 | Chaîne des balises en retard | 3 | 5 | **15** | Second intégrateur, commandes avancées, niveaux de repli B et C. |
 | Pas de bateau pour l’essai de janvier | 3 | 4 | **12** | Deux IOM achetés ou prêtés avant le 15 janvier. |
 | Équipes pas prêtes malgré le kit | 3 | 4 | **12** | Bateau de référence avant Noël, simulateur dès décembre, support, régate blanche. |
 | IA indisciplinées, arbitres débordés | 4 | 3 | **12** | Poules réduites, seuils d’alerte réglés aux essais, régate blanche. |
+| Responsable technique indisponible ou débordé en février | 2 | 5 | **10** | Un suppléant formé dès janvier, commandes avancées, liste de ce qu’on abandonne en premier. |
 | 4G saturée le week-end de la Pentecôte | 3 | 3 | **9** | Déjà prévu : radio de secours, seconde carte SIM, régate blanche un jour de plage pleine. |
 | Règles contestées, soupçon d’intervention humaine | 3 | 3 | **9** | Relecture par un arbitre agréé ; journal des commandes exigé en cas de réclamation. |
 | Bateau à la dérive ou incontrôlable | 2 | 4 | **8** | Comportement en perte de liaison testé à la qualification ; bateau d’assistance. |
@@ -111,7 +112,7 @@ Les risques techniques détaillés restent dans [en-clair-succes-risques.md](en-
 
 | Quand | Revue | Feu vert si |
 |---|---|---|
-| Fin janvier | Revue n°1 | Position RTK fixe plus de 95 % du temps à l’essai n°1 ; Développeurs et intégrateur en place ; Bateau de référence et règles v1 publiés |
+| Fin janvier | Revue n°1 | Position RTK fixe plus de 95 % du temps à l’essai n°1 ; Responsable technique et son suppléant en place ; Bateau de référence et règles v1 publiés |
 | Mi-mars | Revue n°2 | Le système complet a tourné à l’essai n°2 ; 16 balises recettées ; Format des données gelé |
 | Mi-avril | Revue n°3 | Régate blanche courue ; Modes dégradés testés ; Les personnes du PC course pour la semaine sont nommées |
 

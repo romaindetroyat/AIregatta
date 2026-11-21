@@ -82,7 +82,8 @@ Dernière mise à jour : 21 novembre 2026.
 
 | N° | Paramètre | Valeur | Statut |
 |---|---|---|---|
-| P32 | Développement logiciel | IA agentique (GSD), 2 à 3 mois à deux personnes | Acté |
+| P32 | Développement logiciel | Meridia, avec des agents IA (GSD) ; 2 à 3 mois de travail | Acté |
+| P51 | Technique | Une personne fiable porte la technique : balises, bouées, réseau, caméras ; un suppléant à former | Acté |
 | P33 | Licence du logiciel | Non open source | Acté |
 | P34 | Budget matériel | ≈ 20 000 €, caméras embarquées comprises ; ordinateurs neufs ou existants à trancher. Le financement est géré par une autre instance | À confirmer |
 | P35 | Présentation | Charte Meridia, version claire | Acté |
