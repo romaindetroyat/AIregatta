@@ -175,6 +175,8 @@ Mosquitto est un logiciel libre et gratuit de la fondation Eclipse. Il joue le r
 
 ## Quelles chances de réussite ?
 
+> Cette estimation ne porte que sur **la technique**, en supposant le plan d’essais suivi et les moyens réunis. Les chances du projet entier (équipes, cadre juridique, financement, bénévoles, public) sont analysées dans [analyse-projet.md](analyse-projet.md).
+
 Estimation de jugement, pas un calcul :
 
 - **≈ 85 %** : la régate se déroule avec des données justes pour tous, malgré de petits incidents, si le plan d’essais est suivi (prototype sur l’eau en janvier, régate blanche mi-avril, contrôle quotidien, radio de secours, format figé le 15 mars, deux personnes formées). Sans ces mesures : ≈ 35–40 %.
