@@ -227,6 +227,34 @@ p{margin:0}
 .anrevg b{font:500 1.05rem var(--f-titre)}
 .anrevg ul{margin:8px 0 0;padding-left:18px;display:grid;gap:6px;font-size:14px;color:var(--ivoire-2)}
 @media (max-width:900px){.anrev,.anrevg{grid-template-columns:minmax(0,1fr)}}
+.chsum{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.chsum .kpi b{font-size:1.7rem;letter-spacing:-.03em}
+.chf{margin-top:14px;padding:22px}
+.chlk{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.chlk li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start;font-size:14px}
+.chlk .ic{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 12px var(--f-mono);color:#fff}
+.chlk li.v-ok .ic{background:#2F7F74}.chlk li.v-warn .ic{background:#D9A13A}.chlk li.v-bad .ic{background:#C2410C}
+.chlk b{font-weight:600}.chlk small{display:block;font:500 12px var(--f-mono);color:var(--ivoire-3);margin-top:1px}
+.chlk em{display:block;font-style:normal;font-size:13.5px;color:var(--ivoire-2);margin-top:3px}
+.chhead{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;margin:22px 0 8px;padding:0 4px}
+.chain{display:grid;gap:0;position:relative}
+.chst{margin:18px 0 8px}.chst span{display:inline-block;padding:6px 14px;border-radius:999px;background:var(--nuit);color:#EEF0E4;font:500 13px var(--f-titre)}
+.chr{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;position:relative;padding-bottom:12px}
+.chr::before{content:"";position:absolute;left:22px;top:0;bottom:0;width:2px;background:repeating-linear-gradient(to bottom,var(--lime-texte) 0 6px,transparent 6px 12px);z-index:0}
+.chl{position:relative;z-index:1;padding:16px 18px 16px 18px;border-radius:18px;background:var(--surface);box-shadow:var(--arete),var(--portee)}
+.chdev{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
+.chdev b{font:500 1.08rem/1.25 var(--f-titre)}
+.chdev .q{font:500 12px var(--f-mono);color:var(--lime-texte);padding:2px 8px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(78,96,0,.3);align-self:start;white-space:nowrap}
+.chdev p{grid-column:1/-1;font-size:13.5px;color:var(--ivoire-2)}
+.chl .chlk{padding-top:10px;border-top:1px dashed var(--filet)}
+.chi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-content:start}
+.chm{padding:12px 14px;border-radius:14px;background:var(--surface);box-shadow:var(--arete);display:grid;gap:4px;align-content:start}
+.chm b{font:500 1.25rem/1.1 var(--f-titre);letter-spacing:-.02em}
+.chm small{font-size:12px;color:var(--ivoire-2);line-height:1.35}
+.chm .tr{height:6px;border-radius:999px;background:rgba(9,11,7,.07);overflow:hidden}.chm .tr i{display:block;height:100%;border-radius:999px}
+.dv{font-size:1rem!important}.dv0{color:var(--ivoire-3)}.dv1{color:#2F7F74}.dv2{color:#B8902F}.dv3{color:#C2410C}
+@media (max-width:1020px){.chsum{grid-template-columns:repeat(3,minmax(0,1fr))}.chr{grid-template-columns:minmax(0,1fr);gap:8px;padding-bottom:18px}.chhead{display:none}.chr::before{display:none}}
+@media (max-width:560px){.chsum{grid-template-columns:repeat(2,minmax(0,1fr))}.chi{grid-template-columns:minmax(0,1fr)}}
 .protobox{max-width:1600px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
 .protobox iframe{display:block;width:100%;height:max(720px,calc(100vh - 140px));border:0;border-radius:20px;background:#EEF3F9;box-shadow:0 30px 60px -30px rgba(9,11,7,.5)}
 @media (max-width:640px){.protobox iframe{height:calc(100vh - 100px);min-height:640px;border-radius:12px}}
@@ -2008,6 +2036,149 @@ topic write signals/#</code></pre></details>
   </div>
 </section>
 
+<section id="chaine">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="meta">De la position des bateaux aux écrans</p><h2>La chaîne <em>matérielle</em></h2></div>
+      <p class="muted">À gauche, les appareils dans l’ordre où circulent les données, et leurs liaisons. À droite, la fiabilité estimée, le logiciel à développer et le coût. Chaque liaison est contrôlée : compatible, compatible sous condition, ou incompatible.</p>
+    </div>
+    <div class="chsum"><div class="kpi"><span class="meta">Liaisons contrôlées</span><b>26</b></div><div class="kpi"><span class="meta">Compatibles</span><b style="color:#2F7F74">18</b></div><div class="kpi"><span class="meta">Sous condition</span><b style="color:#B8902F">7</b></div><div class="kpi"><span class="meta">Incompatible</span><b style="color:#C2410C">1</b></div><div class="kpi"><span class="meta">Coût des appareils</span><b>≈ 17 280 €</b></div></div>
+    <div class="carte chf"><p class="meta">Ce que le contrôle a trouvé</p><ul class="chlk"><li class="v-bad"><span class="ic">✗</span><span><b>Caméra motorisée Reolink RLC-823S2 → Mélangeur Blackmagic ATEM Mini Pro</b><em>Incompatible : l’ATEM Mini Pro n’a que des entrées HDMI et n’accepte pas la vidéo par le réseau. Correction : un logiciel de régie (OBS, gratuit) sur un ordinateur lit le flux de la caméra, ajoute l’habillage et diffuse. L’ATEM devient inutile (− 320 €) ; on peut le garder pour une caméra HDMI.</em></span></li><li class="v-warn"><span class="ic">!</span><span><b>Récepteur RTK simpleRTK2B Lite (u-blox ZED-F9P) → Carte ESP32-S3 avec modem 4G SIMCom A7670E</b><em>La liaison série est bien sortie sur le connecteur XBee de la carte. L’impulsion de seconde, utile à l’horodatage précis, n’apparaît pas dans le brochage public de la version Lite : à vérifier sur le prototype, sinon prendre une carte qui la sort.</em></span></li><li class="v-warn"><span class="ic">!</span><span><b>Centrale inertielle Adafruit BNO085 → Carte ESP32-S3 avec modem 4G SIMCom A7670E</b><em>Le BNO085 « étire l’horloge » du bus I2C, ce qui provoque des erreurs de lecture signalées sur ESP32. Le brancher en liaison série (mode UART ou UART-RVC) plutôt qu’en I2C.</em></span></li><li class="v-warn"><span class="ic">!</span><span><b>Radio LoRa Adafruit RFM95W (868 MHz) → Récepteurs LoRa du PC course</b><em>Le calcul ne passe que serré. Un message de 20 octets dure ≈ 33 ms ; 16 balises à 2 messages par seconde occuperaient plus que le canal. Il faut des messages de 12 octets, une largeur de 250 kHz, des créneaux calés sur l’heure GPS, et les bouées à 1 message toutes les 5 s : ≈ 75 % d’occupation, chaque balise restant sous sa limite de 10 % du temps. Sinon, le secours passe à 1 position par seconde.</em></span></li><li class="v-warn"><span class="ic">!</span><span><b>Base RTK (simpleRTK2B + antenne géodésique), secours Centipede → Réseau 4G des opérateurs (cartes SIM de deux opérateurs)</b><em>Les corrections n’arrivent que par la 4G : la radio de secours est trop lente pour elles. Si la 4G tombe, une balise perd le centimètre en une minute environ et retombe à ≈ 1 m, ce qui suffit pour suivre mais plus pour juger un départ. Parade : deux opérateurs, et le niveau de repli B.</em></span></li><li class="v-warn"><span class="ic">!</span><span><b>Anémomètre Gill WindSonic M → Carte ESP32-S3 avec modem 4G SIMCom A7670E</b><em>La balise attend du 3,3 V : il faut un petit convertisseur RS-232 → 3,3 V (prévu dans « support, câble et interface »). L’alimentation 12,8 V de la batterie de la bouée convient.</em></span></li><li class="v-warn"><span class="ic">!</span><span><b>Batterie EcoFlow River 2 Pro → 2 mini-PC ASUS NUC 14 Pro (principal et secours)</b><em>La bascule annoncée est de l’ordre de 30 ms, chiffre non vérifié : la tester avec les deux mini-PC branchés. Sinon, ajouter un petit onduleur.</em></span></li><li class="v-warn"><span class="ic">!</span><span><b>Caméras embarquées et récepteur 5,8 GHz → Mélangeur Blackmagic ATEM Mini Pro</b><em>Trois réserves : la puissance est limitée à 25 mW, avec des antennes au ras de l’eau, donc une portée incertaine à 150 m ; le récepteur sort de la vidéo analogique, il faut un convertisseur vers HDMI ou vers l’ordinateur de régie ; un récepteur ne montre qu’un bateau à la fois. À tester à l’essai de mars avant d’en acheter dix.</em></span></li></ul></div>
+    <div class="chhead"><span class="meta">Appareil et liaisons</span><span class="meta">Fiabilité · logiciel · coût</span></div>
+    <div class="chain"><div class="chst"><span>À bord · la balise officielle, 16 exemplaires</span></div><div class="chr" id="ch-ant">
+  <div class="chl"><div class="chdev"><b>Antenne u-blox ANN-MB-00</b><span class="q">×16</span><p>Capte les satellites GPS, Galileo et les autres, sur deux fréquences.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Récepteur RTK simpleRTK2B Lite (u-blox ZED-F9P)</b> <small>câble SMA, bandes L1 et L2</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">98 %</b><div class="tr"><i style="width:98%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv0">Aucun</b><small>Rien à développer</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 960 €</b><small></small></div></div>
+</div><div class="chr" id="ch-rtk">
+  <div class="chl"><div class="chdev"><b>Récepteur RTK simpleRTK2B Lite (u-blox ZED-F9P)</b><span class="q">×16</span><p>Calcule la position au centimètre, 10 fois par seconde, avec les corrections de la base.</p></div><ul class="chlk"><li class="v-warn"><span class="ic">!</span><span><b>→ Carte ESP32-S3 avec modem 4G SIMCom A7670E</b> <small>liaison série 3,3 V et impulsion de seconde (PPS)</small><em>La liaison série est bien sortie sur le connecteur XBee de la carte. L’impulsion de seconde, utile à l’horodatage précis, n’apparaît pas dans le brochage public de la version Lite : à vérifier sur le prototype, sinon prendre une carte qui la sort.</em></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">95 %</b><div class="tr"><i style="width:95%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv1">Réglage</b><small>Réglage du récepteur (cadence, messages, corrections) ; pas de code.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 3 184 €</b><small></small></div></div>
+</div><div class="chr" id="ch-imu">
+  <div class="chl"><div class="chdev"><b>Centrale inertielle Adafruit BNO085</b><span class="q">×16</span><p>Mesure cap, gîte et tangage du bateau.</p></div><ul class="chlk"><li class="v-warn"><span class="ic">!</span><span><b>→ Carte ESP32-S3 avec modem 4G SIMCom A7670E</b> <small>bus I2C</small><em>Le BNO085 « étire l’horloge » du bus I2C, ce qui provoque des erreurs de lecture signalées sur ESP32. Le brancher en liaison série (mode UART ou UART-RVC) plutôt qu’en I2C.</em></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#D9B24A">90 %</b><div class="tr"><i style="width:90%;background:#D9B24A"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv2">Petit logiciel</b><small>Lecture et filtrage dans le firmware de la balise.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 480 €</b><small></small></div></div>
+</div><div class="chr" id="ch-esp">
+  <div class="chl"><div class="chdev"><b>Carte ESP32-S3 avec modem 4G SIMCom A7670E</b><span class="q">×16</span><p>Le cerveau de la balise : rassemble les mesures, horodate, envoie en 4G et par radio.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Réseau 4G des opérateurs (cartes SIM de deux opérateurs)</b> <small>4G LTE Cat-1, petits paquets UDP signés</small></span></li><li class="v-ok"><span class="ic">✓</span><span><b>→ Radio LoRa Adafruit RFM95W (868 MHz)</b> <small>bus SPI</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#D0704A">85 %</b><div class="tr"><i style="width:85%;background:#D0704A"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv3">Gros logiciel</b><small>Firmware de la balise (S1) : lecture GPS et centrale, envoi 10 Hz signé, client NTRIP pour les corrections, radio de secours en créneaux, carte SD.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 784 €</b><small></small></div></div>
+</div><div class="chr" id="ch-lora">
+  <div class="chl"><div class="chdev"><b>Radio LoRa Adafruit RFM95W (868 MHz)</b><span class="q">×16</span><p>Chemin de secours si la 4G tombe.</p></div><ul class="chlk"><li class="v-warn"><span class="ic">!</span><span><b>→ Récepteurs LoRa du PC course</b> <small>869,4 – 869,65 MHz, un seul canal pour 16 émetteurs</small><em>Le calcul ne passe que serré. Un message de 20 octets dure ≈ 33 ms ; 16 balises à 2 messages par seconde occuperaient plus que le canal. Il faut des messages de 12 octets, une largeur de 250 kHz, des créneaux calés sur l’heure GPS, et les bouées à 1 message toutes les 5 s : ≈ 75 % d’occupation, chaque balise restant sous sa limite de 10 % du temps. Sinon, le secours passe à 1 position par seconde.</em></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#8FB000">92 %</b><div class="tr"><i style="width:92%;background:#8FB000"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv3">Gros logiciel</b><small>Dans le firmware : créneaux de parole calés sur l’heure GPS.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 336 €</b><small></small></div></div>
+</div><div class="chr" id="ch-box">
+  <div class="chl"><div class="chdev"><b>Boîtier IP67, batterie, connecteurs, carte SIM</b><span class="q">×16</span><p>Étanchéité et ≈ 20 h d’autonomie.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Carte ESP32-S3 avec modem 4G SIMCom A7670E</b> <small>alimentation 3,7 V et 5 V</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#D9B24A">90 %</b><div class="tr"><i style="width:90%;background:#D9B24A"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv0">Aucun</b><small>Rien à développer</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 1 296 €</b><small></small></div></div>
+</div><div class="chst"><span>Les liaisons</span></div><div class="chr" id="ch-net4g">
+  <div class="chl"><div class="chdev"><b>Réseau 4G des opérateurs (cartes SIM de deux opérateurs)</b><span class="q">—</span><p>Transporte les positions vers le serveur en ligne, et les corrections vers les balises.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Serveur en ligne (hub)</b> <small>Internet</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#D9B24A">90 %</b><div class="tr"><i style="width:90%;background:#D9B24A"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv0">Aucun</b><small>Rien à développer</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>—</b><small>fourni ou hors budget</small></div></div>
+</div><div class="chr" id="ch-base">
+  <div class="chl"><div class="chdev"><b>Base RTK (simpleRTK2B + antenne géodésique), secours Centipede</b><span class="q">×1</span><p>Station fixe au PC course : donne à toutes les balises la correction qui les rend précises au centimètre.</p></div><ul class="chlk"><li class="v-warn"><span class="ic">!</span><span><b>→ Réseau 4G des opérateurs (cartes SIM de deux opérateurs)</b> <small>corrections RTCM par Internet (NTRIP), puis 4G</small><em>Les corrections n’arrivent que par la 4G : la radio de secours est trop lente pour elles. Si la 4G tombe, une balise perd le centimètre en une minute environ et retombe à ≈ 1 m, ce qui suffit pour suivre mais plus pour juger un départ. Parade : deux opérateurs, et le niveau de repli B.</em></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">96 %</b><div class="tr"><i style="width:96%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv1">Réglage</b><small>Serveur de corrections existant (RTKLIB) ; réglage seulement.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 300 €</b><small></small></div></div>
+</div><div class="chr" id="ch-rxlora">
+  <div class="chl"><div class="chdev"><b>Récepteurs LoRa du PC course</b><span class="q">×2</span><p>Reçoivent les positions de secours.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ 2 mini-PC ASUS NUC 14 Pro (principal et secours)</b> <small>USB série</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#8FB000">93 %</b><div class="tr"><i style="width:93%;background:#8FB000"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv2">Petit logiciel</b><small>Passerelle : décode les messages radio et les publie sur le bus de données.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 250 €</b><small></small></div></div>
+</div><div class="chr" id="ch-cloud">
+  <div class="chl"><div class="chdev"><b>Serveur en ligne (hub)</b><span class="q">×1</span><p>Reçoit les positions par la 4G, les renvoie au PC course et sert le public.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Routeur Ubiquiti UniFi Cloud Gateway Ultra</b> <small>tunnel chiffré WireGuard</small></span></li><li class="v-ok"><span class="ic">✓</span><span><b>→ Téléphones du public</b> <small>WebSocket et réseau de diffusion</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">98 %</b><div class="tr"><i style="width:98%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv3">Gros logiciel</b><small>Relais des positions et diffusion au public (S3, S11).</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 300 €</b><small></small></div></div>
+</div><div class="chst"><span>Sur l’eau · la bouée au vent</span></div><div class="chr" id="ch-ws">
+  <div class="chl"><div class="chdev"><b>Anémomètre Gill WindSonic M</b><span class="q">×1</span><p>Vitesse et direction du vent, par ultrasons, sans pièce mobile.</p></div><ul class="chlk"><li class="v-warn"><span class="ic">!</span><span><b>→ Carte ESP32-S3 avec modem 4G SIMCom A7670E</b> <small>liaison série RS-232 ou RS-422 ; alimentation 9 – 30 V</small><em>La balise attend du 3,3 V : il faut un petit convertisseur RS-232 → 3,3 V (prévu dans « support, câble et interface »). L’alimentation 12,8 V de la batterie de la bouée convient.</em></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">96 %</b><div class="tr"><i style="width:96%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv2">Petit logiciel</b><small>Lecture du vent et correction des mouvements de la bouée (S2).</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 1 470 €</b><small></small></div></div>
+</div><div class="chr" id="ch-wbat">
+  <div class="chl"><div class="chdev"><b>Batterie LiFePO4 de la bouée, et sa rechange</b><span class="q">×2</span><p>Alimente l’anémomètre et la balise de la bouée ; rechargée chaque soir.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Anémomètre Gill WindSonic M</b> <small>12,8 V</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">96 %</b><div class="tr"><i style="width:96%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv0">Aucun</b><small>Rien à développer</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 120 €</b><small></small></div></div>
+</div><div class="chst"><span>Au PC course</span></div><div class="chr" id="ch-fibre">
+  <div class="chl"><div class="chdev"><b>Internet par fibre du site</b><span class="q">—</span><p>Accès principal à Internet.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Routeur Ubiquiti UniFi Cloud Gateway Ultra</b> <small>port WAN 1</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">97 %</b><div class="tr"><i style="width:97%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv0">Aucun</b><small>Rien à développer</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>—</b><small>fourni ou hors budget</small></div></div>
+</div><div class="chr" id="ch-5g">
+  <div class="chl"><div class="chdev"><b>Routeur 5G Netgear Nighthawk M6 Pro</b><span class="q">×1</span><p>Internet de secours si la fibre tombe.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Routeur Ubiquiti UniFi Cloud Gateway Ultra</b> <small>port Ethernet, WAN 2</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#8FB000">93 %</b><div class="tr"><i style="width:93%;background:#8FB000"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv1">Réglage</b><small>Réglage de la bascule.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 500 €</b><small></small></div></div>
+</div><div class="chr" id="ch-ucg">
+  <div class="chl"><div class="chdev"><b>Routeur Ubiquiti UniFi Cloud Gateway Ultra</b><span class="q">×1</span><p>Réseau du PC course et de la zone équipes.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ 2 mini-PC ASUS NUC 14 Pro (principal et secours)</b> <small>Ethernet</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">98 %</b><div class="tr"><i style="width:98%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv1">Réglage</b><small>Réglage : réseaux séparés, bascule, tunnel.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 100 €</b><small></small></div></div>
+</div><div class="chr" id="ch-nuc">
+  <div class="chl"><div class="chdev"><b>2 mini-PC ASUS NUC 14 Pro (principal et secours)</b><span class="q">×2</span><p>Font tourner le bus de données, le moteur de course et les consoles.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ PC des équipes</b> <small>câble Ethernet, MQTT chiffré</small></span></li><li class="v-ok"><span class="ic">✓</span><span><b>→ Consoles du comité et de l’arbitrage (2 écrans)</b> <small>réseau local</small></span></li><li class="v-ok"><span class="ic">✓</span><span><b>→ Relais Shelly 1 Gen3 et cornes 12 V</b> <small>Wi-Fi local, commande HTTP</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">99 %</b><div class="tr"><i style="width:99%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv3">Gros logiciel</b><small>Bus de données Mosquitto (existant) ; moteur de course, consoles du comité et de l’arbitrage, carte de vent (S8, S9, S10) à développer.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 1 800 €</b><small></small></div></div>
+</div><div class="chr" id="ch-eco">
+  <div class="chl"><div class="chdev"><b>Batterie EcoFlow River 2 Pro</b><span class="q">×1</span><p>Le PC course tient sans secteur.</p></div><ul class="chlk"><li class="v-warn"><span class="ic">!</span><span><b>→ 2 mini-PC ASUS NUC 14 Pro (principal et secours)</b> <small>prises 230 V, bascule automatique</small><em>La bascule annoncée est de l’ordre de 30 ms, chiffre non vérifié : la tester avec les deux mini-PC branchés. Sinon, ajouter un petit onduleur.</em></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">97 %</b><div class="tr"><i style="width:97%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv0">Aucun</b><small>Rien à développer</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 600 €</b><small></small></div></div>
+</div><div class="chr" id="ch-davis">
+  <div class="chl"><div class="chdev"><b>Station météo Davis Vantage Pro2 + WeatherLink Live</b><span class="q">×1</span><p>Vent de référence à terre.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Routeur Ubiquiti UniFi Cloud Gateway Ultra</b> <small>Ethernet ou Wi-Fi, interface HTTP locale</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">95 %</b><div class="tr"><i style="width:95%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv2">Petit logiciel</b><small>Petit adaptateur : lit la station et publie sur le bus.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 1 000 €</b><small></small></div></div>
+</div><div class="chr" id="ch-shelly">
+  <div class="chl"><div class="chdev"><b>Relais Shelly 1 Gen3 et cornes 12 V</b><span class="q">×2</span><p>Déclenchent les signaux sonores du départ.</p></div></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#8FB000">93 %</b><div class="tr"><i style="width:93%;background:#8FB000"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv2">Petit logiciel</b><small>Commande des cornes depuis le chrono officiel.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 300 €</b><small></small></div></div>
+</div><div class="chst"><span>La vidéo</span></div><div class="chr" id="ch-cam">
+  <div class="chl"><div class="chdev"><b>Caméra motorisée Reolink RLC-823S2</b><span class="q">×1</span><p>Filme le parcours depuis le point haut.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Routeur Ubiquiti UniFi Cloud Gateway Ultra</b> <small>câble réseau avec alimentation (PoE), flux RTSP</small></span></li><li class="v-bad"><span class="ic">✗</span><span><b>→ Mélangeur Blackmagic ATEM Mini Pro</b> <small>flux vidéo sur réseau → mélangeur à entrées HDMI</small><em>Incompatible : l’ATEM Mini Pro n’a que des entrées HDMI et n’accepte pas la vidéo par le réseau. Correction : un logiciel de régie (OBS, gratuit) sur un ordinateur lit le flux de la caméra, ajoute l’habillage et diffuse. L’ATEM devient inutile (− 320 €) ; on peut le garder pour une caméra HDMI.</em></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#8FB000">92 %</b><div class="tr"><i style="width:92%;background:#8FB000"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv1">Réglage</b><small>Réglage ; orientation par ONVIF.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 780 €</b><small></small></div></div>
+</div><div class="chr" id="ch-atem">
+  <div class="chl"><div class="chdev"><b>Mélangeur Blackmagic ATEM Mini Pro</b><span class="q">×1</span><p>Régie : caméras, habillage, diffusion.</p></div><ul class="chlk"><li class="v-ok"><span class="ic">✓</span><span><b>→ Diffusion vidéo</b> <small>diffusion en direct (RTMP)</small></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">97 %</b><div class="tr"><i style="width:97%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv0">Aucun</b><small>Habillage télé à développer (S11), quelle que soit la régie.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 320 €</b><small></small></div></div>
+</div><div class="chr" id="ch-fpv">
+  <div class="chl"><div class="chdev"><b>Caméras embarquées et récepteur 5,8 GHz</b><span class="q">×10 + 1</span><p>Images à bord des bateaux.</p></div><ul class="chlk"><li class="v-warn"><span class="ic">!</span><span><b>→ Mélangeur Blackmagic ATEM Mini Pro</b> <small>vidéo analogique 5,8 GHz → récepteur → entrée HDMI</small><em>Trois réserves : la puissance est limitée à 25 mW, avec des antennes au ras de l’eau, donc une portée incertaine à 150 m ; le récepteur sort de la vidéo analogique, il faut un convertisseur vers HDMI ou vers l’ordinateur de régie ; un récepteur ne montre qu’un bateau à la fois. À tester à l’essai de mars avant d’en acheter dix.</em></span></li></ul></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#D0704A">70 %</b><div class="tr"><i style="width:70%;background:#D0704A"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv1">Réglage</b><small>Réglage des canaux.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 1 300 €</b><small></small></div></div>
+</div><div class="chst"><span>Les destinataires</span></div><div class="chr" id="ch-teams">
+  <div class="chl"><div class="chdev"><b>PC des équipes</b><span class="q">—</span><p>Reçoivent le flux officiel, décident, commandent leur bateau par leur propre liaison.</p></div></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">98 %</b><div class="tr"><i style="width:98%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv0">Aucun</b><small>Côté organisation : contrat d’interface et exemples, déjà écrits.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>—</b><small>fourni ou hors budget</small></div></div>
+</div><div class="chr" id="ch-comite">
+  <div class="chl"><div class="chdev"><b>Consoles du comité et de l’arbitrage (2 écrans)</b><span class="q">×2</span><p>Procédure, alertes, rejeux, décisions.</p></div></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">98 %</b><div class="tr"><i style="width:98%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv3">Gros logiciel</b><small>Consoles (S10) : comptées avec les mini-PC.</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>≈ 1 100 €</b><small></small></div></div>
+</div><div class="chr" id="ch-public">
+  <div class="chl"><div class="chdev"><b>Téléphones du public</b><span class="q">—</span><p>L’application, avec 1 s de différé.</p></div></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#2F7F74">95 %</b><div class="tr"><i style="width:95%;background:#2F7F74"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv3">Gros logiciel</b><small>Application spectateur (S11).</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>—</b><small>fourni ou hors budget</small></div></div>
+</div><div class="chr" id="ch-tv">
+  <div class="chl"><div class="chdev"><b>Diffusion vidéo</b><span class="q">—</span><p>La course en direct, avec l’habillage.</p></div></div>
+  <div class="chi"><div class="chm"><span class="meta">Fiabilité</span><b style="color:#D9B24A">90 %</b><div class="tr"><i style="width:90%;background:#D9B24A"></i></div></div>
+    <div class="chm"><span class="meta">Logiciel</span><b class="dv dv3">Gros logiciel</b><small>Habillage télé (S11).</small></div>
+    <div class="chm"><span class="meta">Coût</span><b>—</b><small>fourni ou hors budget</small></div></div>
+</div></div>
+    <p class="muted" style="font-size:13px;margin-top:14px">Fiabilité : estimation de jugement, la chance que l’appareil tienne la semaine sans incident bloquant, une fois validé aux essais. Avec deux balises de rechange, le secours radio et les niveaux de repli, une panne d’appareil coûte une manche, pas la régate. Détail et sources : <code>docs/chaine-materiel.md</code>.</p>
+  </div>
+</section>
 <section id="materiel" data-detail>
   <div class="wrap">
     <div class="sec-head">
@@ -3802,7 +3973,7 @@ renderPst();
 
 
 /* ---------- Site à plusieurs pages ---------- */
-const VIEWS=[["accueil", "Accueil", ["top", "essentiel"]], ["postulats-page", "Postulats", ["postulats"]], ["dispositif", "Le dispositif", ["plan", "enclair"]], ["a-bord", "À bord et sur site", ["bord", "bouee", "ensemble"]], ["donnees", "Données et synchro", ["trajet", "liaisons", "foule"]], ["logiciel-page", "Logiciel", ["logiciel"]], ["applications", "Applications", ["apps", "decisions"]], ["prototype-page", "Prototype en direct", ["proto"]], ["materiel-page", "Matériel et coûts", ["materiel", "couts", "achats"]], ["projet", "Risques et calendrier", ["analyse", "risques", "etat"]], ["feuille-de-route", "Feuille de route", ["route", "forces"]], ["regles-page", "Règles de course", ["regles"]], ["kit-equipes", "Kit équipes", ["kit", "refboat"]], ["questions-page", "Questions", ["questions"]], ["glossaire-page", "Glossaire", ["glossaire"]]];
+const VIEWS=[["accueil", "Accueil", ["top", "essentiel"]], ["postulats-page", "Postulats", ["postulats"]], ["dispositif", "Le dispositif", ["plan", "enclair"]], ["a-bord", "À bord et sur site", ["bord", "bouee", "ensemble"]], ["donnees", "Données et synchro", ["trajet", "liaisons", "foule"]], ["logiciel-page", "Logiciel", ["logiciel"]], ["applications", "Applications", ["apps", "decisions"]], ["prototype-page", "Prototype en direct", ["proto"]], ["materiel-page", "Matériel et coûts", ["chaine", "materiel", "couts", "achats"]], ["projet", "Risques et calendrier", ["analyse", "risques", "etat"]], ["feuille-de-route", "Feuille de route", ["route", "forces"]], ["regles-page", "Règles de course", ["regles"]], ["kit-equipes", "Kit équipes", ["kit", "refboat"]], ["questions-page", "Questions", ["questions"]], ["glossaire-page", "Glossaire", ["glossaire"]]];
 const secView={};VIEWS.forEach(v=>v[2].forEach(id=>secView[id]=v[0]));
 let curView=null;
 function viewOf(el){let n=el;while(n&&n!==document.body){if(n.id&&secView[n.id])return secView[n.id];n=n.parentElement}return null}

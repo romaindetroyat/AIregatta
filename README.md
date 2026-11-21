@@ -9,6 +9,7 @@ Système de suivi, d'arbitrage, d'analyse du vent et de diffusion publique pour 
 - [Matériel et communications](docs/architecture-materiel-communications.md) : entités, liaisons entre elles, références de matériel, conception radio, réseau à terre, formats de messages, modes dégradés, nomenclature chiffrée.
 - [Liaisons et logiciel](docs/liaisons-et-logiciel.md) : chaque liaison en détail (support, protocole, cadence, débit, latence, sécurité, secours, panne) et chaque module logiciel (besoin, solution, but, critère).
 - [Matériel retenu](docs/materiel.md) : chaque référence, pourquoi ce choix, fiches techniques et avis.
+- [Chaîne matérielle](docs/chaine-materiel.md) : les appareils de la position des bateaux jusqu’aux écrans, avec la fiabilité, le logiciel à développer, le coût, et le contrôle de compatibilité de chaque liaison.
 - [En clair, succès et risques](docs/en-clair-succes-risques.md) : le principe, nos choix expliqués, les clés du succès, ce qui peut foirer, le glossaire.
 - [Cahier des charges des ordinateurs](docs/ordinateurs.md) : serveurs du PC course, régie, consoles, poste de contrôle, tablette, conseils aux équipes.
 - [Règles de course](docs/regles-de-course.md) : version 0.2, adaptée du match racing radiocommandé ; jauge IOM, qualification le premier jour ; commande des bateaux par l’IA seule, départ, place à la bouée, pénalités, zone de course, arbitrage, classement.
