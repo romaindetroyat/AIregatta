@@ -22,7 +22,7 @@
 ## Décisions du 20 novembre 2026
 
 - **Lieu** : anse du Mourillon, entre le Fort Saint-Louis et la petite digue de l'anse Mistral (43,107199 N, 5,941540 E). Le parcours fera **environ 200 m** de long (longueur retenue, à valider).
-- **Dates** : du 12 au 16 mai 2027, sans jour de réserve.
+- **Dates** : inscriptions et homologation du 12 au 14 mai 2027 ; régates le samedi 15 mai ; report possible le dimanche 16 jusqu’à 14 h 30 (règlement de l’organisateur).
 - **Balise** : à l'intérieur du bateau si possible (voir la note sur les coques en carbone au §4.1).
 - **Caméras** : 12 m de hauteur au maximum.
 - **Bouées** : ancrées (pas de bouées robotisées), avec mesure du vent.

@@ -98,10 +98,10 @@
 | Risque | Probabilité | Gravité | Signal d’alerte | Parade |
 |---|---|---|---|---|
 | Une antenne mal placée | moyenne | forte | Bateau qui « saute » ou disparaît à la gîte ; précision RTK qui chute. | Contrôle d’équipement : antennes dans l’axe, au-dessus de la flottaison, rien de carbone au-dessus. |
-| Une balise qui s’éteint en course | moyenne | forte | Plus aucune trame d’un bateau, sur les deux chemins. | 20 h d’autonomie pour 8 h de course, charge vérifiée le matin, balises de rechange, enregistrement sur carte SD. |
+| Une balise qui s’éteint en course | moyenne | forte | Plus aucune trame d’un bateau, sur les deux chemins. | ≈ 12 h d’autonomie pour 8 h de course, charge vérifiée le matin, balises de rechange, enregistrement sur carte SD. |
 | De l’eau dans le boîtier | moyenne | forte | Coupures aléatoires, puis panne. | Boîtier étanche testé en immersion, sachet déshydratant, contrôle à chaque retour à terre. |
 | Une erreur du moteur de course | moyenne | forte | Un départ anticipé ou un passage de bouée mal détecté, classement contesté. | Tests sur toutes les manches enregistrées, décision humaine, rejeu possible grâce à la boîte noire. |
-| Pas de vent, ou trop, sans jour de réserve | moyenne | forte | Manches annulées sur cinq jours sans rattrapage. | Format court et souple, plusieurs manches par jour, programme de repli pour le public (replays, démonstrations). |
+| Pas de vent, ou trop, le jour de course | moyenne | forte | Une seule journée de course, le samedi ; le dimanche ne sert que de report, jusqu’à 14 h 30. | Format court et souple, plusieurs manches par jour, programme de repli pour le public (replays, démonstrations). |
 | Du code écrit par les agents mal vérifié | moyenne | forte | Erreurs discrètes qui apparaissent le jour J. | Spécifications précises, tests automatiques sur données réelles, revue humaine de tout ce qui touche au classement. |
 | Tout repose sur une seule personne | moyenne | forte | Blocage si elle est absente ou débordée. | Documentation à jour dans le dépôt, deux personnes formées sur chaque poste. |
 | La 4G saturée par la foule | moyenne | moyenne | Latence qui grimpe, trames 4G qui manquent au PC course. | La radio privée prend le relais seule ; SIM d’un autre opérateur ; essai un week-end de plage pleine en avril. |
@@ -180,7 +180,7 @@ Mosquitto est un logiciel libre et gratuit de la fondation Eclipse. Il joue le r
 Estimation de jugement, pas un calcul :
 
 - **≈ 85 %** : la régate se déroule avec des données justes pour tous, malgré de petits incidents, si le plan d’essais est suivi (prototype sur l’eau en janvier, régate blanche mi-avril, contrôle quotidien, radio de secours, format figé le 15 mars, deux personnes formées). Sans ces mesures : ≈ 35–40 %.
-- **≈ 25 %** : aucun incident visible pendant les cinq jours.
+- **≈ 25 %** : aucun incident visible pendant la journée de course.
 - **≈ 0 %** : « parfait ». Aucun événement en direct ne l’est.
 
 Les briques prises une à une sont éprouvées ; ce qui échoue sur ce genre d’événement, c’est l’assemblage non testé, l’eau, les batteries, les antennes mal placées et le manque de temps sur l’eau.

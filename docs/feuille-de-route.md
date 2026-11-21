@@ -1,6 +1,6 @@
 # Feuille de route AI Regatta
 
-> Du 21/11/2026 à la régate (12 – 16 mai 2027) et au bilan. 51 actions, 7 pôles, pour ce qui relève de notre périmètre : le dispositif technique et sportif. Les actions d’un même mois qui ne dépendent pas l’une de l’autre avancent en parallèle.
+> Du 21/11/2026 à la régate (régates le 15 mai 2027, report le 16) et au bilan. 52 actions, 7 pôles, pour ce qui relève de notre périmètre : le dispositif technique et sportif. Les actions d’un même mois qui ne dépendent pas l’une de l’autre avancent en parallèle.
 
 ## Chemin critique
 
@@ -19,11 +19,12 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 | A1 | Trancher les bateaux d’essai | 23/11/2026 | 27/11/2026 | Direction de projet | — |
 | A2 | Transmettre la liste d’achats aux financeurs | 23/11/2026 | 27/11/2026 | Direction de projet | — |
 | A3 ★ | Formaliser l’équipe : Meridia au logiciel, le responsable technique | 23/11/2026 | 27/11/2026 | Direction de projet | — |
+| A7 | Présenter le dispositif au comité d’organisation | 23/11/2026 | 11/12/2026 | Direction de projet | — |
 | C1 ★ | Commander le prototype (≈ 1 900 €) | 30/11/2026 | 11/12/2026 | Matériel et terrain | A2, A3 |
 | E1 | Format du flux équipes v0 et simulateur | 30/11/2026 | 18/12/2026 | Logiciel | A3 |
 | H1 | Installation à La Plage : repérage | 30/11/2026 | 15/01/2027 | Site et logistique sur l’eau | — |
-| B1 | Relecture des règles par un arbitre agréé | 01/12/2026 | 08/01/2027 | Course et arbitrage | A1 |
-| B6 | Dérogations à la jauge IOM et épreuve de qualification | 01/12/2026 | 08/01/2027 | Course et arbitrage | A1 |
+| B1 | Faire retenir nos propositions par le comité d’organisation | 01/12/2026 | 08/01/2027 | Course et arbitrage | A7 |
+| B6 | Pose des balises et homologation | 01/12/2026 | 08/01/2027 | Course et arbitrage | A1 |
 | G6 | Bateau de référence documenté | 01/12/2026 | 23/12/2026 | Relations équipes | A1 |
 | J0 | Bateaux pour les essais | 01/12/2026 | 15/01/2027 | Matériel et terrain | A1 |
 | C3 | Firmware de la balise v1 | 07/12/2026 | 15/01/2027 | Logiciel | E1, A3 |
@@ -34,11 +35,11 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 | E3 | Synchronisation des horloges (< 5 ms) | 04/01/2027 | 29/01/2027 | Logiciel | E2 |
 | E4 | Moteur de course et consoles du comité | 04/01/2027 | 26/02/2027 | Logiciel | E2, B1 |
 | H2 | Plan d’eau : mouillages et assistance | 04/01/2027 | 26/03/2027 | Site et logistique sur l’eau | H1 |
-| B2 | Règles v1 publiées aux équipes (jalon) | 11/01/2027 | 11/01/2027 | Course et arbitrage | B1, B6 |
+| B2 | Règlement complété publié aux équipes (jalon) | 11/01/2027 | 11/01/2027 | Course et arbitrage | B1, B6 |
 | B3 | Avis de course et instructions de course | 11/01/2027 | 12/03/2027 | Course et arbitrage | B2 |
 | F1 | Application publique | 11/01/2027 | 26/02/2027 | Logiciel | E2 |
 | G4 | Support et ateliers en ligne | 11/01/2027 | 07/05/2027 | Relations équipes | G2 |
-| G7 | Kit et règles traduits en anglais | 11/01/2027 | 29/01/2027 | Relations équipes | G2, B2 |
+| G7 | Kit et règlement traduits en anglais | 11/01/2027 | 29/01/2027 | Relations équipes | G2, B2 |
 | H7 | Équipe vidéo et diffusion | 11/01/2027 | 12/03/2027 | Vidéo | — |
 | B4 | Procédures du comité et modes dégradés | 18/01/2027 | 05/03/2027 | Course et arbitrage | B2 |
 | F2 | Exemple de console équipe (code d’exemple, S12) | 18/01/2027 | 19/02/2027 | Logiciel | E1, B2 |
@@ -74,16 +75,17 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 
 ### Novembre 2026
 
-- **Direction de projet** : A1 Trancher les bateaux d’essai ; A2 Transmettre la liste d’achats aux financeurs ; A3 Formaliser l’équipe : Meridia au logiciel, le responsable technique
+- **Direction de projet** : A1 Trancher les bateaux d’essai ; A2 Transmettre la liste d’achats aux financeurs ; A3 Formaliser l’équipe : Meridia au logiciel, le responsable technique ; A7 Présenter le dispositif au comité d’organisation
 - **Logiciel** : E1 Format du flux équipes v0 et simulateur
 - **Matériel et terrain** : C1 Commander le prototype (≈ 1 900 €)
 - **Site et logistique sur l’eau** : H1 Installation à La Plage : repérage
 
 ### Décembre 2026
 
+- **Direction de projet** : A7 Présenter le dispositif au comité d’organisation
 - **Logiciel** : C3 Firmware de la balise v1 ; E1 Format du flux équipes v0 et simulateur ; E2 Bus de données, serveur et secours
 - **Matériel et terrain** : C1 Commander le prototype (≈ 1 900 €) ; C2 Monter 2 balises et la base RTK, banc à terre ; D1 Concevoir les bouées instrumentées ; J0 Bateaux pour les essais
-- **Course et arbitrage** : B1 Relecture des règles par un arbitre agréé ; B6 Dérogations à la jauge IOM et épreuve de qualification
+- **Course et arbitrage** : B1 Faire retenir nos propositions par le comité d’organisation ; B6 Pose des balises et homologation
 - **Relations équipes** : G6 Bateau de référence documenté
 - **Site et logistique sur l’eau** : H1 Installation à La Plage : repérage
 
@@ -91,8 +93,8 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 
 - **Logiciel** : C3 Firmware de la balise v1 ; E2 Bus de données, serveur et secours ; E3 Synchronisation des horloges (< 5 ms) ; E4 Moteur de course et consoles du comité ; F1 Application publique ; F2 Exemple de console équipe (code d’exemple, S12)
 - **Matériel et terrain** : C2 Monter 2 balises et la base RTK, banc à terre ; D1 Concevoir les bouées instrumentées ; J0 Bateaux pour les essais ; J1 Essai n°1 : 2 balises sur l’eau
-- **Course et arbitrage** : B1 Relecture des règles par un arbitre agréé ; B6 Dérogations à la jauge IOM et épreuve de qualification ; B3 Avis de course et instructions de course ; B4 Procédures du comité et modes dégradés
-- **Relations équipes** : G7 Kit et règles traduits en anglais ; G4 Support et ateliers en ligne
+- **Course et arbitrage** : B1 Faire retenir nos propositions par le comité d’organisation ; B6 Pose des balises et homologation ; B3 Avis de course et instructions de course ; B4 Procédures du comité et modes dégradés
+- **Relations équipes** : G7 Kit et règlement traduits en anglais ; G4 Support et ateliers en ligne
 - **Site et logistique sur l’eau** : H1 Installation à La Plage : repérage ; H2 Plan d’eau : mouillages et assistance
 - **Vidéo** : H7 Équipe vidéo et diffusion
 
@@ -137,7 +139,7 @@ Tous les participants sont bénévoles : la charge sert à savoir quelle disponi
 | Direction de projet | Pilote l’ensemble, tranche, anime les revues, fait le lien avec les autres instances (autorisations, financement, équipes, public). | Romain (Meridia), appuyé par un agent IA de suivi | 0,4 | 0,5 | 0,5 | 0,5 | 0,5 | 0,6 | 0,8 | 1 pers. |
 | Logiciel | Flux de données, moteur de course, consoles, applications, aides au commentateur ; développe avec des agents IA (P32). | Meridia, avec ses agents IA ; un plein temps au plus fort | 0,2 | 1 | 1,2 | 1,2 | 0,8 | 0,5 | 0,6 | 1 pers. |
 | Matériel et terrain | Balises, base RTK, radio, bouées instrumentées, réseau et caméras du PC course, caméras embarquées. | Une personne fiable, identifiée ; à mi-temps, à plein temps en février pour la série et les bouées ; un suppléant à former | 0,2 | 0,6 | 0,6 | 1 | 0,8 | 0,5 | 0,5 | 1 pers. |
-| Course et arbitrage | Règles, dérogations à la jauge IOM, qualification, procédures du comité, formation des arbitres, jury. | Directeur de course et 2 arbitres (club de voile partenaire), qui forment aussi le jury | 0 | 0,1 | 0,1 | 0,1 | 0,2 | 0,3 | 0,5 | 3 pers. |
+| Course et arbitrage | Nos propositions au comité d’organisation, pose des balises à l’homologation, procédures du comité, formation des arbitres. | Directeur de course et 2 arbitres (club de voile partenaire), qui forment aussi le jury | 0 | 0,1 | 0,1 | 0,1 | 0,2 | 0,3 | 0,5 | 3 pers. |
 | Relations équipes | Kit en français et en anglais, bateau de référence, bac à sable, support, contrôle des installations. | 1 référent technique à temps partiel, qui protège l’équipe logiciel des sollicitations | 0 | 0,1 | 0,2 | 0,2 | 0,2 | 0,3 | 0,4 | 1 pers. |
 | Site et logistique sur l’eau | PC course à La Plage, mouillages, bateau d’assistance, montage. | 1 coordinateur ; sur l’eau, 1 bateau d’assistance (club partenaire) | 0 | 0,1 | 0,1 | 0,2 | 0,2 | 0,3 | 0,5 | 2 pers. |
 | Vidéo | Caméras, régie et diffusion sur l’application. | 1 personne à la régie, bénévole ou partenaire | 0 | 0,1 | 0,1 | 0,2 | 0,2 | 0,2 | 0,4 | 1 pers. |

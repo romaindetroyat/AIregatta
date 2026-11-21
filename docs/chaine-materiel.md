@@ -24,7 +24,7 @@ Le premier contrôle avait trouvé 1 liaison incompatible (caméra → mélangeu
 - **Caméras embarquées, récepteur 5,8 GHz et convertisseur** : 70 %
 - **Carte ESP32-S3 avec modem 4G SIMCom A7670E** : 85 %
 - **Centrale inertielle Adafruit BNO085** : 90 %
-- **Boîtier IP67, accus, alimentation, antennes de pont, carte SIM multi-opérateurs** : 90 %
+- **Boîtier IP67, batterie USB, alimentation, antennes de pont, carte SIM multi-opérateurs** : 90 %
 - **Réseau 4G (cartes SIM multi-opérateurs)** : 90 %
 - **Diffusion vidéo** : 90 %
 
@@ -39,7 +39,7 @@ Avec deux balises de rechange, le secours radio et les niveaux de repli, une pan
 | **Centrale inertielle Adafruit BNO085** ×16 — Mesure cap, gîte et tangage du bateau. | 90 % | Petit logiciel : Lecture du mode UART-RVC et filtrage dans le firmware de la balise. | ≈ 480 € | ✓ Carte ESP32-S3 avec modem 4G SIMCom A7670E (liaison série, mode UART-RVC (100 mesures par seconde)) |
 | **Carte ESP32-S3 avec modem 4G SIMCom A7670E** ×16 — Le cerveau de la balise : rassemble les mesures, horodate, envoie en 4G et par radio. | 85 % | Gros logiciel : Firmware de la balise (S1) : lecture GPS et centrale, envoi 10 Hz signé, client NTRIP pour les corrections, radio de secours en créneaux, carte SD. | ≈ 784 € | ✓ Réseau 4G (cartes SIM multi-opérateurs) (4G LTE Cat-1, petits paquets UDP signés)<br>✓ Radio LoRa Adafruit RFM95W (868 MHz) (bus SPI) |
 | **Radio LoRa Adafruit RFM95W (868 MHz)** ×16 — Chemin de secours si la 4G tombe. | 92 % | Gros logiciel : Dans le firmware : messages de 12 octets, créneaux calés sur l’heure GPS. | ≈ 336 € | ! Récepteurs LoRa du PC course (869,4 – 869,65 MHz, un canal partagé en créneaux) |
-| **Boîtier IP67, accus, alimentation, antennes de pont, carte SIM multi-opérateurs** ×16 — Étanchéité et ≈ 20 h d’autonomie. | 90 % | Aucun | ≈ 1 536 € | ✓ Carte ESP32-S3 avec modem 4G SIMCom A7670E (alimentation 3,7 V et 5 V) |
+| **Boîtier IP67, batterie USB, alimentation, antennes de pont, carte SIM multi-opérateurs** ×16 — Étanchéité et ≈ 12 h d’autonomie ; batterie du commerce admise par le règlement (§ 12). | 90 % | Aucun | ≈ 1 536 € | ✓ Carte ESP32-S3 avec modem 4G SIMCom A7670E (5 V USB) |
 
 ## Les liaisons
 

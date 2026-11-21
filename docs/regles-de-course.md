@@ -1,89 +1,72 @@
 # Règles de course AI Regatta
 
-> Ces règles s’appliquent à AI Regatta (Toulon, 12 – 16 mai 2027). Elles partent des Règles de course à la voile (RCV) 2025 – 2028 de World Sailing, de leur annexe E (bateaux radiocommandés) et de l’arbitrage en direct du match racing radiocommandé. Elles les remplacent là où elles diffèrent. Version 0.2 du 21 novembre 2026, à faire relire par un arbitre agréé avant publication aux équipes.
+> Le règlement du comité d’organisation fait foi. Ces règles en reprennent ce qui touche le dispositif, avec le paragraphe d’origine, et y ajoutent nos propositions, à soumettre au comité. Elles visent les régates de voiliers sous intelligence artificielle, sur parcours construit. Version 0.3 du 22 novembre 2026.
 
-Les références entre crochets renvoient aux [postulats](postulats.md) (P) et aux décisions de la [spécification des applications](maquettes.md) (D). Les points marqués « à trancher » restent ouverts.
+Source : Règlement de course AI Regatta 2027, V1.4 du 15/10/2026, de l’association Twelve Med Events (autorité organisatrice), reçu le 21 novembre 2026 de Xavier Caux.
 
-## 1. Définitions
+« **Comité** » : repris du règlement de l’organisateur (paragraphe indiqué), il fait foi. « **Proposition** » : ajout de notre part, à soumettre au comité. Les P renvoient aux [postulats](postulats.md).
 
-- **1.1** **Bateau** : voilier drone engagé, sans personne à bord, équipé de la balise officielle.
-- **1.2** **IA tactique** : le logiciel de l’équipe, à terre, qui décide de la conduite du bateau. **Pilote automatique** : l’électronique à bord qui exécute. [P37]
-- **1.3** **Manche** : du signal d’avertissement jusqu’à l’arrivée du bateau, son abandon ou la fin du temps limite.
-- **1.4** **Position officielle** : la position donnée par la balise RTK (précision de 2 à 5 cm). Elle seule fait foi pour le départ, les bouées, la zone de course, l’arrivée et l’arbitrage. [P08]
-- **1.5** **Zone de bouée** : le cercle de 4 m de rayon autour de chaque bouée (quatre longueurs d’un bateau de la classe 1 m, valeur unique pour tous).
-- **1.6** **Zone de course** : le rectangle délimité par le comité, matérialisé dans le logiciel (géorepérage) et sur les écrans des équipes.
+## 1. Cadre
 
-## 2. Parcours et format
+- **1.1** **[Comité, § intro, 2d]** Le règlement de l’organisateur fait foi. Les Règles de course à la voile (RCV) de World Sailing s’appliquent au parcours construit. (P14)
+- **1.2** **[Comité, § 1]** Épreuve concernée : les régates de voiliers sous intelligence artificielle (drones voiliers autonomes). Les slaloms, les Battleboats et les régates télécommandées ne relèvent pas de ce dossier.
+- **1.3** **[Proposition]** **Position officielle** : la position donnée par la balise RTK (précision de 2 à 5 cm) fait foi pour le départ, les passages de bouées, la pénalité et l’arrivée. (P08)
+- **1.4** **[Proposition]** **Zone de bouée** : 4 m autour de chaque bouée pour les bateaux de moins de 1,30 m ; à fixer avec le comité si des bateaux de 2,70 m courent ensemble.
+- **1.5** **[Comité, § 5]** La zone de régate, sur les plages du Mourillon, est matérialisée par des bouées. **Proposition** : elle est aussi tracée dans le logiciel et sur les écrans des équipes.
 
-- **2.1** Parcours aller-retour d’environ 200 m (longueur et emplacement fixés avec le plan d’eau), orienté selon le vent du jour : départ, bouée au vent laissée à bâbord, porte sous le vent (deux bouées, au choix), deux tours, arrivée sous le vent. [P04]
-- **2.2** Le comité peut changer le parcours entre deux manches. Une bouée est déplacée par un bateau d’assistance ; le comité l’annonce sur le flux de course, à toutes les équipes en même temps, avant que la nouvelle position ne serve. [P19]
-- **2.3** Toutes les équipes reçoivent les mêmes données officielles au même instant : positions des bateaux et des bouées, vent, chrono. [P11]
-- **2.4** **Qualification** : le premier jour, chaque bateau boucle seul un parcours, fait un tour de pénalité sur ordre du comité et s’arrête sur ordre de son équipe. Tant qu’il n’est pas qualifié, un bateau ne court pas en manche classée ; il peut se représenter. [P42]
-- **2.5** **Vent** : pas de départ en dessous de 4 nœuds ni au-dessus de 20 nœuds, mesurés à la bouée au vent. Ces valeurs seront validées aux essais ; le directeur de course décide. [P43]
-- **2.6** Format des manches (poules, flotte entière ou duels) et programme des cinq jours : à trancher.
+## 2. Bateaux et homologation
+
+- **2.1** **[Comité, § 3]** Propulsion vélique seule. Longueur hors tout, mesurée au départ : type 1 (moins de 1 m), type 1.3 (moins de 1,30 m), type 2.7 (moins de 2,70 m). Monocoques et multicoques, avec ou sans foils. Le bateau reste toujours en contact avec la mer ; le comité peut faire courir deux types ensemble. (P07)
+- **2.2** **[Comité, § 2b, 11]** Homologation statique par un arbitre avant les régates ; toute modification significative ensuite lui est déclarée. Aucune pièce ne doit être larguée sur le plan d’eau. (P42)
+- **2.3** **[Comité, § 12]** Batteries : LiFePO4, ou lithium avec circuit de protection (BMS) intégré et enveloppe solide du commerce, non démontée ; sinon sacs ignifuges et chargeur présenté à l’homologation. 48 V au plus. Un jeu de rechange chargé ; de quoi courir trois courses de suite. (P54)
+- **2.4** **[Comité, § 10]** Numéro fourni à l’inscription, sur chaque côté de la voile, chiffres de 10 cm.
+- **2.5** **[Proposition]** **Balise officielle** fournie et scellée par l’organisation dans chaque bateau, sans lien avec l’électronique de l’équipe, antennes sur le pont dans l’axe ; contrôlée à l’homologation. (P08, P09, P39)
+- **2.6** **[Proposition]** Balise en panne pendant une course : réparation (RDG) si la panne vient du matériel officiel et qu’elle est prouvée par les journaux du PC course.
+- **2.7** **[Proposition]** La sous-bande 869,4 – 869,65 MHz est réservée aux balises ; les équipes déclarent leurs émetteurs. Le règlement conseille déjà le Wi-Fi en 5 GHz (§ 13).
+- **2.8** **[Proposition]** Bateau de référence : un IOM du commerce documenté dans le kit, conseillé, non imposé. (P47)
 
 ## 3. Commande des bateaux
 
-- **3.1** Pendant une manche, un bateau n’est commandé que par l’IA tactique de son équipe, sans aucune intervention humaine : ni manette, ni ordre saisi à la main, ni réglage manuel. [D11]
-- **3.2** L’IA peut envoyer des ordres tactiques au pilote automatique (vire, empanne, abats, loffe, face au vent ; modes près, portant, VMG, haut, bas) ou commander directement le safran et les voiles. [P36, D11]
-- **3.3** Seule action humaine permise : l’arrêt de sécurité, en cas de danger. Il met le bateau face au vent et prévient le comité. Le bateau abandonne la manche ; le comité peut accorder une réparation si le danger ne venait pas de l’équipe. [D11]
-- **3.4** L’absence d’intervention humaine repose sur l’engagement sur l’honneur de chaque équipe. Chaque équipe enregistre, avec l’heure, les commandes envoyées à son bateau et fournit ce journal au jury en cas de réclamation. Une intervention humaine hors arrêt de sécurité entraîne la disqualification de la manche (DSQ). [P44]
-- **3.5** Le logiciel du bateau et de l’IA ne change pas pendant une manche. Les mises à jour sont libres entre les manches. [P45]
-- **3.6** Par sa propre liaison, une équipe envoie ce qu’elle veut à son bateau : ordres, paramètres, réglages, données officielles relayées. [P36]
+- **3.1** **[Comité, § 2c]** Mode autonome obligatoire du passage de la ligne de départ jusqu’à l’arrivée. L’IA peut être embarquée ou à terre ; à terre, la télécommande est actionnée par programme, sans intervention humaine. (P10, P37)
+- **3.2** **[Comité, § 2c]** Mode manuel à la télécommande permis pour rallier la ligne de départ, après l’arrivée, et pour reprendre la main en cas de défaillance, de sortie de la zone ou pour faire la pénalité. (P16, P38)
+- **3.3** **[Comité, § 2c, 7]** Chaque reprise de la télécommande en course dure au plus Y secondes (30 s par défaut, annoncé avant chaque régate) et coûte un tour de pénalité, sauf pour faire la pénalité. (P38)
+- **3.4** **[Proposition]** L’équipe déclare chaque reprise par un message `manual_control` (début, fin) dans sa boîte d’envoi ; le logiciel la chronomètre et l’affiche à l’arbitre. Chaque équipe garde le journal horodaté de ses commandes, fourni en cas de réclamation. (P44)
+- **3.5** **[Proposition]** Le logiciel du bateau et de l’IA ne change pas pendant une course ; les mises à jour sont libres entre les courses. (P45)
+- **3.6** **[Proposition]** Par sa propre liaison, une équipe envoie ce qu’elle veut à son bateau : ordres, paramètres, réglages, données officielles relayées. (P36)
 
-## 4. Balise officielle et équipement
+## 4. Parcours et départ
 
-- **4.1** Chaque bateau porte la balise fournie par l’organisation, scellée, sans lien avec l’électronique de l’équipe. [P09]
-- **4.2** Les antennes de la balise sont sur le pont, dans l’axe du bateau, quelle que soit la matière de la coque. Le comité contrôle l’installation avant la première manche. [P39]
-- **4.3** Balise en panne pendant une manche : le bateau reçoit une réparation (RDG) si la panne vient du matériel officiel et qu’elle est prouvée par les journaux du PC course. Aucune réparation si la panne vient de l’installation de l’équipe. [D6]
-- **4.4** Une radiocommande de sécurité 2,4 GHz est conseillée, non obligatoire. L’équipe qui en installe une la déclare avec ses autres émetteurs. [P16]
-- **4.5** **Jauge** : coque, appendices, gréements et poids respectent la jauge IOM (classe internationale 1 m). L’électronique est libre : pilote automatique, capteurs et balise officielle sont admis par dérogation à cette jauge. [P07]
+- **4.1** **[Comité, § 5, parcours n°3]** Parcours construit : la porte 1-2 sert de départ, de porte et d’arrivée ; la bouée au vent est la 3, l’axe 1-3 perpendiculaire à la porte. Deux tours : départ par la porte 1-2, bouée 3 à bâbord, porte 1-2 (en contournant 1 ou 2, au choix), bouée 3 à bâbord, arrivée par la porte 1-2. (P04)
+- **4.2** **[Comité, § 5]** Procédure de départ de la RCV 26 : signaux à 5 minutes, 4 minutes, 1 minute, puis départ. Par dérogation, une procédure d’une minute peut être courue. (P18)
+- **4.3** **[Proposition]** Les signaux sonores sont déclenchés par le PC course à l’heure GPS, pour l’une ou l’autre procédure ; les pavillons restent hissés à la main. (P18)
+- **4.4** **[Comité, § 5]** Chacun relève les coordonnées des bouées avant les courses ; l’organisateur cherche des partenaires pour les transmettre en temps réel (GPS RTK) avec la direction et la vitesse du vent. (P19)
+- **4.5** **[Proposition]** **Réponse à cette demande** : la position RTK des bouées 1, 2, 3, P1 et P2 et le vent mesuré à la bouée 3 sont transmis en temps réel, au même instant, à toutes les équipes. (P52)
+- **4.6** **[Proposition]** Pas de départ sous 4 nœuds ni au-dessus de 20 nœuds, mesurés à la bouée 3 ; valeurs à valider avec le directeur de course. (P43)
+- **4.7** **[Comité, § 4]** Briefing chaque jour à 9 h 30 près de la zone de régate. Le tableau officiel est sur battleboats.fr ; les nouvelles publications sont annoncées sur WhatsApp. (P55)
 
-## 5. Départ
+## 5. Passages, pénalités et disqualifications
 
-- **5.1** Procédure d’une minute, signaux sonores déclenchés par le PC course : avertissement à −1:00, préparatoire (pavillon P) à −0:40, dernière étape à −0:20, départ à 0:00. [P18]
-- **5.2** Départ anticipé : si, au signal, une partie de la coque est du côté parcours de la ligne, le logiciel le signale et l’arbitre ordonne un rappel individuel (pavillon X). Le bateau doit revenir couper la ligne du côté départ ; sinon il est classé OCS.
-- **5.3** Le comité peut ordonner un rappel général, retarder le départ (Aperçu) ou annuler la manche (N). Chaque décision part sur le flux vers les équipes, la télévision et le public.
-- **5.4** Un bateau qui n’a pas coupé la ligne 2 minutes après le signal de départ est classé non parti (DNS).
+- **5.1** **[Comité, § 2d]** Les RCV s’appliquent : bâbord-tribord (10), au vent (11), route libre derrière (12), en virant (13), éviter le contact (14), place à la bouée (18), toucher une bouée (31). (P14)
+- **5.2** **[Proposition]** Le logiciel signale à l’arbitre tout rapprochement de deux bateaux à moins de 1,5 m, la règle qui s’applique et la zone de bouée ; l’arbitre confirme toujours. (P15)
+- **5.3** **[Comité, § 7]** Toute pénalité est un tour, fait à la fin, avant de franchir l’arrivée : passer entre la bouée 2 et P1, contourner P2 puis P1 en les laissant à bâbord. Le tour se fait en mode automatique ou à la télécommande. (P53)
+- **5.4** **[Proposition]** Le logiciel suit le tour dans la zone P1-P2 et le valide pour l’arbitre. (P53)
+- **5.5** **[Comité, § 7]** Disqualification : départ anticipé non réparé dans les 2 minutes ; bouée ou porte non franchie ou mal franchie ; ligne d’arrivée non franchie 5 minutes après le premier. (P46)
+- **5.6** **[Proposition]** Le logiciel détecte au centimètre les départs anticipés, les passages de bouées et de portes et les arrivées, et ouvre la fenêtre des 5 minutes ; l’arbitre confirme.
+- **5.7** **[Proposition]** Une sortie de la zone de régate de plus de 5 m ou de plus de 5 s est signalée à l’arbitre et à l’équipe.
+- **5.8** **[Comité, § 7]** Une organisation présente sur l’eau récupère les bateaux en difficulté ; le bateau de sécurité peut dérouter un bateau en course. (P16)
 
-## 6. Règles de passage
+## 6. Arbitrage, réclamations et classement
 
-- **6.1** **Bâbord et tribord** : un bateau bâbord amures (le vent arrive par sa gauche) s’écarte d’un bateau tribord amures (RCV 10). [D1]
-- **6.2** **Au vent et sous le vent** : deux bateaux engagés à la même amure, celui qui est au vent s’écarte de celui qui est sous le vent (RCV 11). [D1]
-- **6.3** **Route libre derrière** : deux bateaux non engagés à la même amure, celui qui est derrière s’écarte de celui qui est devant (RCV 12). Deux bateaux sont engagés quand aucun n’est entièrement derrière l’autre. [D1]
-- **6.4** **En virant** : entre le passage face au vent et sa nouvelle route au près, un bateau qui vire s’écarte des autres (RCV 13). [D1]
-- **6.5** **Éviter le contact** : chaque bateau, même prioritaire, évite le contact s’il le peut raisonnablement (RCV 14). [D1]
-- **6.6** **Place à la bouée** : dans la zone de 4 m, le bateau qui y est entré le premier, ou engagé à l’intérieur au moment où le premier y entre, a droit à la place pour passer la bouée (RCV 18). Le logiciel établit l’ordre d’entrée et l’engagement à partir des positions officielles. [D1]
-- **6.7** **Toucher une bouée** : un bateau qui touche une bouée fait un tour de pénalité (RCV 31). Le logiciel détecte la coque à moins de 0,75 m du centre de la bouée.
-- **6.8** Le logiciel signale à l’arbitre tout rapprochement de deux bateaux à moins de 1,5 m, la règle qui s’applique selon leurs amures, leur position et la zone, et le bateau qui devait s’écarter. L’arbitre décide.
+- **6.1** **[Proposition]** Deux arbitres à terre, chacun devant son écran : le premier suit le départ et les bouées, le second ouvre les rejeux et propose les décisions. (P15)
+- **6.2** **[Proposition]** Les autres incidents passent par une réclamation, envoyée par un message `protest` dans la boîte d’envoi de l’équipe, dans les 10 minutes qui suivent l’arrivée du dernier bateau.
+- **6.3** **[Comité, § 8]** Un classement par type de régate, sur les résultats des différentes courses. (P46)
+- **6.4** **[Proposition]** Points : 1 au premier, 2 au deuxième, etc. ; une course retirée à partir de 5 courues. (P46)
+- **6.5** **[Comité, § 17]** Un prix au premier de chaque type de régate ; des prix spéciaux.
 
-## 7. Pénalités
+## 7. Programme et équipes
 
-- **7.1** La pénalité est un tour de 360°, comprenant un virement et un empannage, fait à l’écart des autres bateaux. Le logiciel détecte le tour automatiquement. [D2]
-- **7.2** La pénalité est notifiée à l’IA de l’équipe par le flux de course, en même temps qu’au comité, à la télévision et au public. L’IA doit savoir l’exécuter seule. [D2, D11]
-- **7.3** Si le tour n’est pas fait dans les 20 secondes qui suivent la notification, le bateau reçoit une pénalité en temps de 20 secondes à l’arrivée. [D2]
-- **7.4** Une faute grave, dangereuse ou répétée peut être sanctionnée par la disqualification de la manche (DSQ).
-
-## 8. Zone de course
-
-- **8.1** Un bateau qui sort de la zone de course de plus de 5 m, ou qui y reste dehors plus de 5 secondes, reçoit une pénalité d’un tour, à faire après être rentré. [D4]
-- **8.2** Le logiciel signale la sortie, la distance et la durée ; l’équipe voit la limite sur son écran.
-
-## 9. Arbitrage, réclamations et réparations
-
-- **9.1** Deux arbitres à terre, chacun devant son écran : le premier suit le départ et les bouées, le second ouvre les rejeux et propose les décisions. Le logiciel signale, un arbitre confirme toujours, y compris pour les fautes mesurées (départ anticipé, bouée touchée, sortie de zone). [P15]
-- **9.2** Incidents signalés par le logiciel : jugés en direct, avec le rejeu vu de dessus. Décisions possibles : pénalité d’un tour, pénalité en temps, sans suite, renvoi au jury. [D3]
-- **9.3** Les autres incidents passent par une réclamation, envoyée par un message `protest` dans la boîte d’envoi de l’équipe (outbox) dans les 10 minutes qui suivent l’arrivée du dernier bateau. Une demande de réparation suit le même délai. [D3, D5]
-- **9.4** Une décision prise en direct par l’arbitre ne peut pas faire l’objet d’une réclamation, sauf erreur de procédure.
-- **9.5** Le jury, formé du directeur de course et des deux arbitres, juge les réclamations après la manche, avec les rejeux et les journaux du PC course. [P15]
-
-## 10. Arrivée, temps limite et classement
-
-- **10.1** Un bateau arrive quand une partie de sa coque coupe la ligne d’arrivée, après avoir fait le parcours, d’après la position officielle.
-- **10.2** Temps limite : 15 minutes après le signal de départ. Un bateau qui n’est pas arrivé est classé non arrivé (DNF). [D5]
-- **10.3** Points : 1 au premier, 2 au deuxième, etc. ; un bateau DNS, DNF, OCS ou DSQ reçoit le nombre d’inscrits plus un. Le plus petit total gagne. La plus mauvaise manche est retirée à partir de 5 manches courues, les deux plus mauvaises à partir de 10. [P46]
-
-## 11. Sécurité
-
-- **11.1** Un bateau d’assistance surveille le plan d’eau. Un bateau désemparé est récupéré par l’assistance et abandonne la manche. [P16]
-- **11.2** Le comité peut interrompre ou annuler une manche à tout moment pour la sécurité ; chaque équipe arrête alors son bateau.
+- **7.1** **[Comité, § 6]** Du mercredi 12 au vendredi 14 mai, de 9 h à 18 h : chaîne d’inscription ; un parcours d’entraînement est mis à disposition. (P02)
+- **7.2** **[Comité, § 6]** Samedi 15 mai : régates officielles, mise à disposition à 10 h. En cas de report au dimanche 16, les courses finissent au plus tard à 14 h 30 ; remise des prix le 16 à 16 h 30. (P02)
+- **7.3** **[Comité, § 6]** Une régate de préchauffage au premier trimestre 2027 ; un bâtiment près du plan d’eau pendant un mois ; arrivée des équipes une semaine avant. (P56)
+- **7.4** **[Comité, § 14]** Chaque équipe envoie avant le 1er mai une vidéo de moins de 30 s et une fiche A4 de présentation. (P55)
+- **7.5** **[Proposition]** Les balises sont installées et contrôlées pendant la chaîne d’inscription, du 12 au 14 mai ; les équipes testent leur liaison au flux officiel dans le bâtiment prêté.

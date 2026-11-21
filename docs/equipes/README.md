@@ -1,6 +1,6 @@
 # Kit équipes : ce que l’organisation vous fournit
 
-> AI Regatta — Anse du Mourillon, Toulon, du 12 au 16 mai 2027.
+> AI Regatta — Anse du Mourillon, Toulon, du 12 au 14 mai (inscriptions et homologation), régates le 15 mai, report le 16 2027.
 > Version 1.0-draft du 21 novembre 2026. Tout ce qui est marqué « à confirmer » peut encore changer.
 
 ## Le principe en une phrase

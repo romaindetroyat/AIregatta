@@ -4,11 +4,11 @@
 
 | À fabriquer | Coût par balise | Masse visée | Autonomie | Temps de montage |
 |---|---|---|---|---|
-| **16** — 10 bateaux, 4 bouées, 2 de rechange | **≈ 455 €** — pièces seules | **≤ 250 g** — boîtier ≈ 170 g + antennes | **≈ 20 h** — 2 accus, ≈ 25 Wh | **≈ 4 h** — par balise, essais compris |
+| **16** — 10 bateaux, 3 bouées, 3 de rechange | **≈ 455 €** — pièces seules | **≤ 250 g** — boîtier ≈ 170 g + antennes | **≈ 12 h** — batterie USB, ≈ 18 Wh | **≈ 4 h** — par balise, essais compris |
 
 ## 1. Ce qu’on fabrique
 
-Un boîtier étanche, scellé, avec ses accus, qui donne la position officielle du bateau ou de la bouée au centimètre, 10 fois par seconde. Il envoie par la 4G, garde une radio de secours, enregistre tout sur carte microSD, et n’a aucun lien avec l’électronique de l’équipe.
+Un boîtier étanche, scellé, avec sa batterie USB du commerce (admise par le règlement, § 12), qui donne la position officielle du bateau ou de la bouée au centimètre, 10 fois par seconde. Il envoie par la 4G, garde une radio de secours, enregistre tout sur carte microSD, et n’a aucun lien avec l’électronique de l’équipe.
 
 ## 2. Les pièces, pour une balise
 
@@ -22,7 +22,7 @@ Un boîtier étanche, scellé, avec ses accus, qui donne la position officielle 
 | 1 | Centrale inertielle | Adafruit BNO085 | Cap, gîte et tangage | 30 € |
 | | **Boîtier, énergie et petites pièces** | | | |
 | 1 | Boîtier étanche IP67 | Couvercle transparent (gamme Hammond 1554 ou équivalent), ≈ 120 × 65 × 40 mm, à valider avec les cartes et la trappe du pont | Protège tout ; la LED se voit à travers | 20 € |
-| 1 | Accus et support | 2 accus 18650 protégés de 3 500 mAh, en parallèle, sur support 2 places | ≈ 25 Wh, ≈ 20 h | 18 € |
+| 1 | Batterie | Batterie USB du commerce de 5 000 mAh, BMS intégré, enveloppe solide, sortie 2 A sans veille à faible courant | Admise par le règlement (§ 12) ; ≈ 18 Wh, ≈ 12 h | 18 € |
 | 1 | Convertisseur 3,3 V | Pololu S7V8F3 (abaisseur-élévateur, 1 A) | Alimente proprement GPS, centrale et radio, même quand la 4G tire 2 A | 8 € |
 | 1 | Interrupteur | Interrupteur électronique Pololu (Mini Pushbutton Power Switch LV) commandé par un interrupteur à aimant (ILS) | On allume et on éteint avec un aimant, sans percer le boîtier | 8 € |
 | 1 | Prise étanche | Embase M8 4 points + câble USB-C court à l’intérieur | Charge et programmation sans ouvrir | 10 € |
@@ -53,8 +53,8 @@ Schéma : voir le document général, page Matériel, « Fabriquer la balise ».
 
 | De | Broche | Vers | Broche | Signal | Remarque |
 |---|---|---|---|---|---|
-| Accus 18650 (+) | — | Interrupteur électronique | VIN | 3,0 – 4,2 V | Fil 0,5 mm² ; un fusible réarmable de 3 A en série |
-| Interrupteur électronique | VOUT | Carte ESP32-S3 + 4G | BAT+ | Batterie commutée | La carte alimente elle-même son modem, qui tire des pointes de 2 A |
+| Batterie USB | sortie 5 V | Interrupteur électronique | VIN | 5 V | Câble USB coupé et soudé ; un fusible réarmable de 3 A en série |
+| Interrupteur électronique | VOUT | Carte ESP32-S3 + 4G | 5 V (VBUS) | 5 V commuté | La carte alimente elle-même son modem, qui tire des pointes de 2 A |
 | Interrupteur électronique | VOUT | Convertisseur 3,3 V | VIN | Batterie commutée |  |
 | ILS (interrupteur à aimant) | — | Interrupteur électronique | A / B | Marche / arrêt | À la place du bouton-poussoir ; repère « aimant ici » sur le couvercle |
 | Convertisseur 3,3 V | VOUT | GPS Lite | broche 1 du connecteur XBee (VCC) | 3,3 V | Le GPS alimente aussi son antenne active |
@@ -62,7 +62,7 @@ Schéma : voir le document général, page Matériel, « Fabriquer la balise ».
 | Convertisseur 3,3 V | VOUT | RFM95W | VIN | 3,3 V |  |
 | Convertisseur 3,3 V | VOUT | LED RGB | VDD | 3,3 V |  |
 | Toutes les masses | GND | Point de masse unique | — | Masse | En étoile, près du convertisseur |
-| Embase M8 | 1 : 5 V · 2 : D− · 3 : D+ · 4 : GND | Carte ESP32-S3 + 4G | USB-C | Charge et programmation | La carte charge les accus ; balise allumée, le firmware passe en veille dès qu’il voit le 5 V |
+| Embase M8 | 1 : 5 V · 2 : D− · 3 : D+ · 4 : GND | Batterie USB (entrée de charge) et carte (données USB) | — | Charge et programmation | Le 5 V charge la batterie ; les données vont à la carte. Le firmware passe en veille quand il voit le 5 V de charge |
 
 ### Signaux
 
@@ -75,7 +75,7 @@ Schéma : voir le document général, page Matériel, « Fabriquer la balise ».
 | RFM95W | SCK · MISO · MOSI | ESP32-S3 | bus SPI | Radio | Si la carte microSD est sur le même bus, une broche CS chacune |
 | RFM95W | CS · RST · G0 | ESP32-S3 | 3 GPIO | Sélection, remise à zéro, interruption | G0 signale la fin d’émission |
 | LED RGB | DIN | ESP32-S3 | GPIO « LED » | Voyant |  |
-| Accus | + (avant l’interrupteur), par pont 100 k / 100 k | ESP32-S3 | GPIO « VBAT » (entrée analogique) | Niveau de batterie | Inutile si la carte mesure déjà sa batterie |
+| 5 V commuté | par pont 100 k / 100 k | ESP32-S3 | GPIO « VBAT » (entrée analogique) | Tension d’alimentation | La batterie USB ne donne pas son niveau : le firmware compte l’énergie consommée depuis la charge |
 
 **Les numéros de GPIO.** Les numéros de GPIO se fixent sur la carte retenue au prototype (Waveshare ou LilyGO), d’après sa documentation : le modem, la carte microSD et l’USB y prennent déjà des broches. Éviter les broches de démarrage (GPIO 0, 3, 45, 46), l’USB (19, 20) et celles de la mémoire (26 à 32, et 33 à 37 si la carte a une mémoire PSRAM « octale »). Une fois fixés, les numéros sont écrits dans le firmware et sur cette fiche, et ne changent plus d’une balise à l’autre.
 
@@ -108,7 +108,7 @@ Schéma : voir le document général, page Matériel, « Fabriquer la balise ».
 
 ### 5. Monter l’alimentation — 30 min
 
-- Support d’accus au fond du boîtier, sur adhésif double face épais.
+- Batterie USB au fond du boîtier, sanglée sur adhésif double face épais.
 - Fusible réarmable, interrupteur électronique, convertisseur 3,3 V, point de masse.
 - Avant de brancher une carte : mesurer 3,3 V en sortie du convertisseur, et vérifier que l’aimant allume et éteint.
 
@@ -208,15 +208,15 @@ Une fiche par balise, signée, rangée dans le registre.
 | Radio de secours | récepteur du PC course, 10 min | Trames dans le bon créneau, 2 par seconde (bateau) |
 | Centrale | balise posée sur un plan incliné de 20° | Gîte lue : 20° ± 1° |
 | Carte microSD | après 30 min | Fichier du jour complet, lisible |
-| Autonomie | une nuit, sur accus | Au moins 18 h |
+| Autonomie | une nuit, sur la batterie | Au moins 10 h |
 | Étanchéité | 30 min sous 50 cm | Papier sec |
 | Masse | balance de cuisine | Boîtier ≤ 180 g ; avec antennes ≤ 250 g |
 
 ## 9. La variante bouée
 
 - Même électronique, même firmware, profil « bouée » : 1 position par seconde en 4G, 1 trame radio toutes les 5 s.
-- Bouée au vent : boîtier plus grand, en pied d’espar ; sa batterie LiFePO4 12,8 V remplace les accus, et un convertisseur 12 V → 5 V alimente la carte par son entrée USB.
-- Les bouées de parcours et de ligne gardent les accus de la balise. Bouée au vent : l’anémomètre Gill WindSonic M passe par un convertisseur RS-232 → 3,3 V (module MAX3232, alimenté en 3,3 V). Sa sortie va sur une broche libre de l’ESP32, lue en liaison série logicielle à 9 600 bauds, la vitesse d’usine. L’anémomètre est alimenté directement en 12,8 V.
+- Bouée au vent : boîtier plus grand, en pied d’espar ; sa batterie LiFePO4 12,8 V, admise par le règlement, remplace la batterie USB, et un convertisseur 12 V → 5 V alimente la carte par son entrée USB.
+- Les bouées 1 et 2 gardent la batterie USB de la balise ; P1 et P2 sont relevées au centimètre chaque matin avec une balise de rechange. Bouée au vent : l’anémomètre Gill WindSonic M passe par un convertisseur RS-232 → 3,3 V (module MAX3232, alimenté en 3,3 V). Sa sortie va sur une broche libre de l’ESP32, lue en liaison série logicielle à 9 600 bauds, la vitesse d’usine. L’anémomètre est alimenté directement en 12,8 V.
 - La bouée tourne sur son mouillage : il faut son cap absolu pour corriger la direction du vent. À vérifier au banc dès décembre : si le cap du mode UART-RVC n’est pas magnétique, la centrale de la bouée passe en liaison série complète (mode SHTP), qui donne le cap magnétique.
 - Antenne GPS à côté de l’anémomètre, à la même hauteur ; rien au-dessus de l’anémomètre.
 
@@ -235,7 +235,7 @@ Détail pour les équipes : `equipes/bateau-de-reference.md`.
 - La carte ESP32-S3 + 4G : Waveshare ou LilyGO, la plus stable sur l’eau.
 - Le cap du mode UART-RVC : magnétique ou relatif au démarrage (important pour les bouées).
 - Les constellations que le GPS tient à 10 positions par seconde.
-- Le courant de pointe du modem (2 A) : pas de redémarrage quand la 4G émet, accus à moitié vides.
+- Le courant de pointe du modem (2 A) : pas de coupure de la batterie USB quand la 4G émet, ni de mise en veille à faible courant.
 - La chaleur : boîtier fermé, couvercle transparent, plein soleil de mai.
 - La réception et la tenue des antennes sur le pont mouillé, sur un vrai IOM.
 - La masse réelle de l’antenne GPS et de son câble : si elle pèse trop, essayer une antenne hélicoïdale légère.

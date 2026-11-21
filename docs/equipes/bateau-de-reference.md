@@ -26,7 +26,7 @@ L’installation de la balise est détaillée dans le document général, page �
 
 ## La jauge
 
-**Reste dans la jauge IOM** (P07) :
+Le règlement de l’organisateur n’impose pas de jauge de classe : voile seule, moins de 1 m, 1,30 m ou 2,70 m, multicoques et foils admis. L’IOM reste le bateau de référence conseillé ; en IOM, on garde :
 
 - Coque : 1 000 mm de long au plus ; pas de fibre plus raide que le verre, donc pas de carbone dans la coque
 - Tirant d’eau : 420 mm au plus
@@ -114,11 +114,11 @@ Les cinq premiers font boucler un parcours ; les trois derniers évitent les pé
 | Semaine 7 | Tour de pénalité sur ordre ; perte de liaison. |
 | Semaine 8 | Branchement sur le flux officiel du bac à sable. |
 
-## Ce que demande la qualification du premier jour
+## Ce que le bateau doit savoir faire
 
-- Boucler seul le parcours, deux tours
-- Faire un tour de pénalité à la notification du comité
-- S’arrêter sur ordre de l’équipe
+- Boucler seul le parcours n°3, deux tours, en mode autonome
+- Faire le tour de pénalité par la zone P1-P2, avant l’arrivée
+- Reprendre la main à la télécommande et la rendre à l’IA en moins de 30 s
 - Au contrôle d’équipement (pas à la qualification) : montrer le comportement déclaré en cas de perte de liaison
 
 ## Ce qui reste à valider

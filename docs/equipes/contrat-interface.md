@@ -203,13 +203,13 @@ Indique quelle manche suivre : la manche en cours, ou la prochaine entre deux ma
 
 ### 6.3 `race/{raceId}/clock` — le chrono officiel
 
-Le chrono est piloté par le PC course (P17). La procédure prévue est celle de la règle 5.1 : **avertissement à −1:00, préparatoire à −0:40, dernière étape à −0:20, départ**. **Les durées sont fixées par les instructions de course** et transmises dans le champ `procedure` : votre logiciel ne doit pas les coder en dur.
+Le chrono est piloté par le PC course (P17). La procédure prévue est celle du règlement de l’organisateur : **RCV 26, signaux à −5:00, −4:00, −1:00 et départ** ; par dérogation, **une minute : −1:00, −0:40, −0:20, départ** (l’exemple ci-dessous). **Les durées sont fixées par les instructions de course** et transmises dans le champ `procedure` : votre logiciel ne doit pas les coder en dur.
 
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms`, `seq` | | | Instant de publication, compteur |
 | `race_id` | texte | — | Manche |
-| `step` | texte | — | Dernière étape franchie : `none` (procédure pas encore lancée), `warning` (avertissement), `preparatory` (préparatoire), `last_step` (dernière étape, −0:20), `start` (départ donné), `postponed` (retard), `general_recall` (rappel général : un nouveau départ sera publié), `abandoned` (annulation) |
+| `step` | texte | — | Dernière étape franchie : `none` (procédure pas encore lancée), `warning` (avertissement), `preparatory` (préparatoire), `one_minute` (−1:00, procédure de 5 minutes), `last_step` (−0:20, procédure d’une minute), `start` (départ donné), `postponed` (retard), `general_recall` (rappel général : un nouveau départ sera publié), `abandoned` (annulation) |
 | `start_time`, `start_t_gps_ms` | texte, entier, ou null | — | **Heure GPS exacte du départ.** `null` tant qu’elle n’est pas fixée |
 | `procedure` | liste | — | Les étapes prévues : `step`, `offset_s` (décalage par rapport au départ, négatif), `time` et `t_gps_ms` (heure de l’étape), `sound` (`short`, `long`, `none`) |
 | `next_signal` | objet ou null | — | Prochaine étape : `step`, `time`, `t_gps_ms` ; `null` après le départ |
@@ -722,7 +722,7 @@ Un message par événement. Le logiciel du PC course **signale**, un arbitre **d
 | `individual_recall` | Rappel individuel | `boat_ids` |
 | `general_recall` | Rappel général | `new_warning_time` (ou `null`) |
 | `mark_rounding` | Passage de bouée ou de porte | `leg_completed`, `rank_at_mark`, `elapsed_ms` |
-| `penalty_issued` | Pénalité infligée | `penalty` (`one_turn`, `time_penalty` (20 s, règle 7.3), `dsq`), `rule`, `deadline_s`, `reason_fr` |
+| `penalty_issued` | Pénalité infligée | `penalty` (`one_turn` : tour par la zone P1-P2, à faire avant l’arrivée ; `dsq`), `rule`, `deadline_s`, `reason_fr` |
 | `penalty_done` | Pénalité effectuée | `penalty` |
 | `boundary_exit` | Sortie des limites du parcours | `dist_outside_m` |
 | `finish` | Arrivée | `rank`, `finish_time`, `finish_t_gps_ms`, `elapsed_ms` |
@@ -813,7 +813,7 @@ Le contenu de `details` sera figé au gel du contrat ; d’ici là, il peut s’
   "details": {
     "penalty": "one_turn",
     "rule": "6.1",
-    "deadline_s": 20,
+    "deadline_s": null,
     "reason_fr": "Contact avec ITA-05 au croisement"
   },
   "text_fr": "Pénalité d'un tour pour FRA-03"
@@ -1453,3 +1453,15 @@ Si le serveur principal tombe, le serveur de secours reprend l’adresse `10.20.
 | Liste exacte des pavillons utilisés | Instructions de course |
 | Réenvoi de `seq` après bascule | À observer lors des tests de bascule |
 | Adresse fixe par équipe | Sur demande |
+
+## Annexe — Reprise de télécommande (proposition au comité d’organisation)
+
+Le règlement de l’organisateur permet de reprendre la main à la télécommande pendant une course, 30 s au plus, contre un tour de pénalité (§ 2c, § 7). Nous proposons que chaque reprise soit déclarée dans `teams/{équipe}/outbox` :
+
+| Champ | Type | Description |
+|---|---|---|
+| `type` | texte | `manual_control` |
+| `payload.state` | texte | `start` (reprise) ou `end` (retour à l’IA) |
+| `payload.reason` | texte | `start_line`, `after_finish`, `failure`, `zone_exit`, `penalty` |
+
+Le PC course chronomètre la reprise, la montre à l’arbitre et signale tout dépassement des 30 s. Une reprise pour rallier le départ, après l’arrivée ou pour faire la pénalité n’est pas pénalisée.

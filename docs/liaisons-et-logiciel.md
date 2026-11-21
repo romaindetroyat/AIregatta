@@ -40,7 +40,7 @@
 
 ### 3. Positions et vent des bouées
 
-**Bouées instrumentées et bouées de ligne → PC course** · Données officielles
+**Bouée au vent (3) et bouées 1 et 2 → PC course** · Données officielles
 
 | | |
 |---|---|

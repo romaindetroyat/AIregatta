@@ -19,7 +19,7 @@
 | 16 | Carte ESP32-S3 + modem 4G A7670E | Calcul de la balise et envoi des positions par la 4G | Février | 49 € | 784 € | [OpenELab (France), Waveshare ESP32-S3-A7670E-4G](https://openelab.io/fr/products/waveshare-esp32-s3-a7670e-4g) · [RobotShop Europe](https://eu.robotshop.com/products/waveshare-esp32-s3-a7670e-4g-development-board-lte-cat-1-2g-wifi-bluetooth-telephone-call-sms-gnss) |
 | 16 | Module radio LoRa RFM95W 868 MHz | Chemin de secours si la 4G tombe | Février | 21 € | 336 € | [DigiKey (UE, livre en France)](https://www.digikey.es/en/products/detail/adafruit-industries-llc/3072/6005357) |
 | 16 | Centrale inertielle BNO085 | Cap, gîte et mouvements du bateau ou de la bouée | Février | 30 € | 480 € | [Anodas (UE)](https://anodas.lt/en/bno085-9-dof-imu-fusion-breakout-3-axis-accelerometer-gyroscope-and-magnetometer-adafruit-4754) · [Go Tronic (France), réf. 37262](https://gotronic.fr/download-product-page/33477) |
-| 16 | Boîtier IP67, accus, alimentation, antennes de pont, carte SIM multi-opérateurs | Étanchéité, ≈ 20 h d’autonomie ; détail dans le manuel de fabrication | Février | 96 € | 1 536 € | — |
+| 16 | Boîtier IP67, batterie USB, alimentation, antennes de pont, carte SIM multi-opérateurs | Étanchéité, ≈ 12 h d’autonomie ; batterie admise par le règlement (§ 12) ; détail dans le manuel de fabrication | Février | 96 € | 1 536 € | — |
 
 ## Bouée au vent
 
