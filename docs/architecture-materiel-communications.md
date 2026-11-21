@@ -226,7 +226,7 @@ flowchart TB
 | Anémomètre | **Calypso ULP STD, version UART/I²C (CMI1018)** | ≈ 500 € | Ultrasonique, sans pièce mobile, 0,1 à 10 Hz, consommation très faible, se branche directement sur l'ESP32 |
 | Variante anémomètre | Calypso ULP STD RS485 / NMEA 0183 (CMI1017) | ≈ 500 € | Si le câble entre l'anémomètre et le boîtier dépasse 2–3 m |
 | Compas de la bouée | BNO085 de la balise | inclus | **Indispensable** : la Calypso donne la direction du vent par rapport à son propre axe, et la bouée tourne sur son mouillage |
-| Énergie | Panneau solaire 10 W + batterie LiFePO4 12,8 V 6 Ah + régulateur | ≈ 120 € | Plusieurs jours d'autonomie sans soleil |
+| Énergie | Batterie LiFePO4 12,8 V 6 Ah étanche + une de rechange ; pas de panneau solaire (la bouée tourne sur son mouillage) | ≈ 120 € | Une journée de course avec une large marge ; recharge chaque soir |
 | Structure | Espar lesté porte-capteur, anémomètre à 2 m de hauteur, sur bouée de régate gonflable ou flotteur dédié | 150–300 € | Un espar lesté bouge beaucoup moins qu'une bouée gonflable seule |
 | **Total par bouée instrumentée** | | **≈ 1 200–1 400 €** | |
 

@@ -176,7 +176,7 @@ Fonction : position, vitesse, cap, gîte, horodatage GNSS, état de santé (batt
 | Balise officielle (4.1) | identique aux bateaux | 300–550 € |
 | Anémomètre | Ultrasonique (Calypso Ultrasonic Portable/Wired, ou Gill WindSonic) | 400–1 000 € |
 | Compas / IMU | Indispensable : la bouée tourne sur son mouillage | inclus ou 30 € |
-| Énergie | Panneau solaire 10–20 W + batterie LiFePO4 | 80–150 € |
+| Énergie | Batterie LiFePO4 étanche + une de rechange, rechargées chaque soir (pas de panneau solaire : la bouée tourne) | 80–150 € |
 | Mât + flotteur | Bouée gonflable de régate + espar porte-capteur à 1,5–2 m | 150–400 € |
 | **Total par bouée instrumentée** | | **≈ 1 000–2 000 €** |
 

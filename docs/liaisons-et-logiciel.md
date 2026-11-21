@@ -294,7 +294,7 @@
 *Embarqué · Indispensable*
 
 - **Besoin** : Mesurer le vent réel sur le parcours malgré le mouvement de la bouée.
-- **Solution** : Même base que S1, plus lecture de l’anémomètre Gill WindSonic, correction du roulis, du tangage et de la rotation (compas), moyennes glissantes de 5 à 10 s, gestion du panneau solaire.
+- **Solution** : Même base que S1, plus lecture de l’anémomètre Gill WindSonic, correction du roulis, du tangage et de la rotation (compas), moyennes glissantes de 5 à 10 s, surveillance de la batterie.
 - **But** : Un vent fiable au vent et sous le vent, envoyé à toutes les équipes.
 - **Critère de réussite** : Écart < 5° et < 10 % avec une station de référence, par temps calme
 - **Entrées → sorties** : Anémomètre, centrale inertielle, GPS → Trames avec le vent
