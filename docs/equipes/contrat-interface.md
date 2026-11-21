@@ -1321,7 +1321,7 @@ La réponse arrive dans votre `inbox` (`type: reply`). Si elle intéresse tout l
 
 ### 6.15 `sys/time` — balise de temps
 
-Publié chaque seconde, au début de la seconde, par le serveur synchronisé sur le signal PPS de la base RTK (une impulsion électrique par seconde, alignée sur le temps GPS à la microseconde près).
+Publié chaque seconde, au début de la seconde, par le serveur synchronisé sur l’heure GPS de la base RTK, à quelques millisecondes près. Les positions, elles, portent l’heure GPS exacte de leur mesure.
 
 | Champ | Type | Unité | Description |
 |---|---|---|---|

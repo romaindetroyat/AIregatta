@@ -25,7 +25,7 @@ Font tourner Mosquitto, le moteur de course, le moteur vent, l’enregistreur et
 - Mise en veille et économies d’énergie désactivées
 - Mises à jour automatiques suspendues pendant l’événement
 - Démarrage automatique des services après une coupure de courant
-- Heure calée sur la base RTK (signal PPS) pour le principal, sur le principal pour le secours
+- Heure calée sur la base RTK (heure GPS) pour le principal, sur le principal pour le secours
 - Aucun autre logiciel ouvert, session dédiée à la régate
 
 **Recette avant l’événement**
@@ -38,7 +38,7 @@ Font tourner Mosquitto, le moteur de course, le moteur vent, l’enregistreur et
 
 **Quantité :** 1
 
-Fait tourner OBS, les incrustations et la diffusion vers YouTube.
+Fait tourner OBS, qui lit la caméra par le réseau, les incrustations et la diffusion vers YouTube. Prévu : un mini-PC ASUS NUC 14 Pro, comme les serveurs. Il remplace le mélangeur ATEM, qui n’accepte pas la vidéo par le réseau.
 
 | Critère | Exigence |
 |---|---|
@@ -46,7 +46,7 @@ Fait tourner OBS, les incrustations et la diffusion vers YouTube.
 | Processeur | 6 cœurs ou plus, ou Apple M1 Pro, M2 et plus récents |
 | Carte graphique | Avec encodage vidéo matériel : NVIDIA GTX 1660 ou plus récente, puce Apple Silicon, Intel Quick Sync récent |
 | Mémoire | 16 Go |
-| Ports | HDMI ou USB-C vidéo, USB 3 pour l’ATEM Mini Pro, Ethernet |
+| Ports | HDMI ou USB-C vidéo, USB 3 pour le boîtier d’acquisition vidéo, Ethernet |
 | Écrans | 2 conseillés : régie et contrôle |
 
 **Réglages obligatoires**

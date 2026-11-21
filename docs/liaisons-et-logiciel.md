@@ -74,13 +74,13 @@
 
 ### 5. Heure de référence
 
-**Base RTK (signal PPS) → PC course, puis tout le réseau local** · Données officielles
+**Base RTK (heure GPS) → PC course, puis tout le réseau local** · Données officielles
 
 | | |
 |---|---|
-| Support physique | Fil PPS et USB vers le PC course, puis réseau local |
-| Protocole et format | chrony calé sur le PPS ; le PC course donne l’heure (NTP) à tous, équipes comprises. Les balises ont leur propre heure GPS. |
-| Ce qui circule | Heure GPS à la microseconde |
+| Support physique | USB vers le PC course, puis réseau local |
+| Protocole et format | chrony calé sur l’heure GPS de la base (impulsion de seconde si la carte la sort, sinon messages GPS, à quelques millisecondes près) ; le PC course donne l’heure (NTP) à tous, équipes comprises. Les balises ont leur propre heure GPS. |
+| Ce qui circule | Heure GPS, à quelques millisecondes près au plus |
 | Cadence | Continu |
 | Débit | Négligeable |
 | Latence | — |

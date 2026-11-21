@@ -177,19 +177,17 @@ La caméra motorisée du point haut, avec un zoom optique 16× pour suivre les b
 - Avis : [Modern Castle : test du RLC-823A](https://moderncastle.com/reolink-rlc-823a-review/)
 - Acheter : [Reolink France, boutique officielle](https://reolink.com/fr/product/rlc-823s2/)
 
-### Blackmagic ATEM Mini Pro — ≈ 300–350 €
+### Mini-PC de régie ASUS NUC 14 Pro + OBS Studio — ≈ 900 €
 
 *Très bons avis*
 
-Le mélangeur vidéo : il passe d’une caméra à l’autre, ajoute les incrustations et diffuse en direct.
+La régie vidéo : OBS lit la caméra motorisée par le réseau, ajoute l’habillage télé comme une page web, passe d’une image à l’autre et diffuse en direct.
 
-**Pourquoi ce choix.** La référence des petites régies de diffusion, saluée par toute la presse.
+**Pourquoi ce choix.** Il remplace le mélangeur Blackmagic ATEM Mini Pro, qui n’a que des entrées HDMI et n’accepte pas la vidéo par le réseau ([forum Blackmagic](https://forum.blackmagicdesign.com/viewtopic.php?p=1108216)). Même modèle que les deux serveurs : les trois machines sont interchangeables. OBS est gratuit. Les caméras embarquées entrent par un convertisseur analogique → HDMI puis un boîtier d’acquisition USB.
 
-- Fiche : [Page Blackmagic ATEM Mini](https://www.blackmagicdesign.com/products/atemmini/workflow)
-- Avis : [TechRadar](https://www.techradar.com/reviews/atem-mini-pro)
-- Avis : [Streaming Media](https://www.streamingmedia.com/Producer/Articles/Editorial/Featured-Articles/Review-Blackmagic-Design-ATEM-Mini-Pro-140958.aspx)
-- Acheter : [Thomann (France)](https://www.thomann.fr/blackmagic_design_atem_mini_pro.htm) · ≈ 319 €
-- Acheter : [Woodbrass (France)](https://www.woodbrass.com/tables-de-mixage-video-blackmagic-design-atem-mini-pro-p358901.html)
+- Fiche : [OBS Studio](https://obsproject.com/)
+- Fiche : [Page produit ASUS](https://asus.com/displays-desktops/nucs/nuc-kits/asus-nuc-14-pro)
+- Acheter : [LDLC (barebone Core 3)](https://www.ldlc.com/en/product/PB00624811.html) · ≈ 470 €, sans mémoire ni disque
 
 ### Davis Vantage Pro2 + WeatherLink Live — ≈ 900–1 100 €
 

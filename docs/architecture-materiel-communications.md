@@ -256,7 +256,7 @@ La direction de course déplace la bouée au vent depuis sa console quand le ven
 | Récepteur | **ArduSimple simpleRTK2B** (même famille que les balises) ou simpleRTK3B | ≈ 200–250 € |
 | Antenne | Antenne géodésique tri-bande ArduSimple (type "survey"), fixée sur un support rigide dégagé | ≈ 150–250 € |
 | Liaison | USB vers le serveur ; le serveur publie le flux RTCM vers le caster NTRIP du hub | — |
-| Temps | Le récepteur fournit aussi le signal PPS au serveur (synchronisation par chrony) | — |
+| Temps | Le récepteur donne l’heure GPS au serveur (chrony) : impulsion de seconde si la carte la sort, sinon messages GPS, à quelques millisecondes près | — |
 | **Total** | | **≈ 400–500 €** |
 
 Le point d'installation de l'antenne est relevé une fois pour toutes (relevé de plusieurs heures, ou rattachement au réseau Centipede).
@@ -296,7 +296,7 @@ Deux passerelles en parallèle : si l'une tombe, l'autre continue. Le serveur su
 | Caméra large fixe | Caméra IP 4K à objectif fixe grand angle, pour l'analyse des risées (image stable) | ≈ 200–400 € |
 | Filtre | Filtre polarisant circulaire adapté (réduit les reflets, augmente le contraste des risées) | ≈ 30–60 € |
 | Calcul vision | **NVIDIA Jetson Orin Nano Super Developer Kit** au point haut, ou PC avec carte RTX au PC course | ≈ 250–300 € |
-| Réalisation vidéo | **Blackmagic ATEM Mini Pro** + OBS Studio sur un PC, diffusion RTMP/SRT vers YouTube Live | ≈ 300–350 € |
+| Réalisation vidéo | **OBS Studio** sur un mini-PC de régie (le même que les serveurs), qui lit la caméra par le réseau ; diffusion RTMP/SRT vers YouTube Live. L’ATEM Mini Pro est écarté : il n’accepte pas la vidéo par le réseau | ≈ 930 € |
 | **Total** | | **≈ 1 300–1 800 €** |
 
 Hauteur visée pour l'analyse des risées : **20 m minimum, 40 m idéalement**.
@@ -357,7 +357,7 @@ ArduPilot gère nativement les voiliers : un virement peut être déclenché par
 
 ### 5.2 Multiplexage temporel calé sur le temps GNSS
 
-Toutes les balises connaissent l'heure GNSS à la microseconde près (signal PPS). Chaque seconde est découpée en créneaux, et chaque balise émet dans **son** créneau. Il n'y a donc pas de collisions, sans aucune coordination.
+Toutes les balises connaissent l'heure GNSS à une ou deux millisecondes près : chaque position du récepteur porte son heure GPS, et la balise cale son horloge sur l'arrivée de ces messages (la carte Lite ne sort pas l'impulsion de seconde). Avec des messages de 12 octets (≈ 21 ms d'antenne, largeur 250 kHz) et 5 ms de garde, c'est assez. Chaque seconde est découpée en créneaux, et chaque balise émet dans **son** créneau. Il n'y a donc pas de collisions, sans aucune coordination.
 
 ```
 Seconde GNSS (1 000 ms)
@@ -396,7 +396,7 @@ Règles :
 - **Les équipes (VLAN 30) n'atteignent que le broker du SRV, en lecture seule.** Elles ont aussi accès à Internet (pour leurs propres liaisons 4G ou cloud), avec un débit garanti par équipe.
 - **Les caméras (VLAN 20) sont isolées**, car la vidéo est gourmande.
 - **Les deux serveurs partagent une adresse IP virtuelle** (keepalived) : en cas de panne du principal, les consoles et les équipes basculent sans rien reconfigurer.
-- **Temps** : le SRV est synchronisé sur le signal PPS de la base RTK et sert de serveur NTP pour tout le réseau local, équipes comprises.
+- **Temps** : le SRV est synchronisé sur l’heure GPS de la base RTK et sert de serveur NTP pour tout le réseau local, équipes comprises.
 
 ### Logiciels de la chaîne (tous open source)
 
@@ -407,7 +407,7 @@ Règles :
 | Tunnel | **WireGuard** |
 | Relais public | Serveur WebSocket (Node.js uWebSockets, ou Centrifugo) derrière **Cloudflare** |
 | Hébergement PWA et replays | Cloudflare Pages + R2 (ou Vercel + stockage S3) |
-| Temps | **chrony** + PPS |
+| Temps | **chrony** + heure GPS de la base |
 | Vidéo | **OBS Studio**, flux RTSP des caméras, diffusion vers YouTube Live |
 | Vision | OpenCV, éventuellement un réseau de segmentation sur le Jetson |
 | Compatibilité équipes | Pont vers **Signal K** et NMEA 0183 sur TCP/UDP, pour brancher des logiciels de navigation existants (OpenCPN, logiciels tactiques compatibles NMEA) |

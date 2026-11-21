@@ -1,14 +1,14 @@
 # AI Regatta — Achats
 
-> Tout le matériel à acheter pour 10 bateaux : quantité, rôle, prix, où l’acheter (livraison France). Total : **20 000 €**, imprévus de 10 % compris. Seul le matériel coûte : tout le monde est bénévole.
+> Tout le matériel à acheter pour 10 bateaux : quantité, rôle, prix, où l’acheter (livraison France). Total : **20 900 €**, imprévus de 10 % compris. Seul le matériel coûte : tout le monde est bénévole.
 
 | Commande | Montant |
 |---|---|
 | Décembre · Commande du prototype (C1) | 1 900 € |
 | Février · Série et bouées (C4, D2, D3) | 9 510 € |
-| Mars · PC course, caméras, signaux (H3) | 6 800 € |
-| Imprévus (10 %) | 1 800 € |
-| **Total** | **20 000 €** |
+| Mars · PC course, caméras, signaux (H3) | 7 540 € |
+| Imprévus (10 %) | 1 900 € |
+| **Total** | **20 900 €** |
 
 ## Balise officielle · 16 exemplaires
 
@@ -19,14 +19,14 @@
 | 16 | Carte ESP32-S3 + modem 4G A7670E | Calcul de la balise et envoi des positions par la 4G | Février | 49 € | 784 € | [OpenELab (France), Waveshare ESP32-S3-A7670E-4G](https://openelab.io/fr/products/waveshare-esp32-s3-a7670e-4g) · [RobotShop Europe](https://eu.robotshop.com/products/waveshare-esp32-s3-a7670e-4g-development-board-lte-cat-1-2g-wifi-bluetooth-telephone-call-sms-gnss) |
 | 16 | Module radio LoRa RFM95W 868 MHz | Chemin de secours si la 4G tombe | Février | 21 € | 336 € | [DigiKey (UE, livre en France)](https://www.digikey.es/en/products/detail/adafruit-industries-llc/3072/6005357) |
 | 16 | Centrale inertielle BNO085 | Cap, gîte et mouvements du bateau ou de la bouée | Février | 30 € | 480 € | [Anodas (UE)](https://anodas.lt/en/bno085-9-dof-imu-fusion-breakout-3-axis-accelerometer-gyroscope-and-magnetometer-adafruit-4754) · [Go Tronic (France), réf. 37262](https://gotronic.fr/download-product-page/33477) |
-| 16 | Boîtier IP67, batterie, connecteurs, carte SIM | Étanchéité, ≈ 20 h d’autonomie, montage | Février | 81 € | 1 296 € | — |
+| 16 | Boîtier IP67, batterie, connecteurs, carte SIM multi-opérateurs | Étanchéité, ≈ 20 h d’autonomie, montage ; la carte SIM passe seule d’un opérateur à l’autre | Février | 81 € | 1 296 € | — |
 
 ## Bouée au vent
 
 | Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
 |---|---|---|---|---|---|---|
 | 1 | Anémomètre Gill WindSonic M | Vitesse et direction du vent, par ultrasons | Février | 1 300 € | 1 300 € | [NauticExpo, demande de devis](https://www.nauticexpo.com/prod/gill-instruments-ltd/product-39900-485171.html) · [Campbell Scientific France, brochure et devis](https://s.campbellsci.com/documents/fr/product-brochures/b_windsonic_fr.pdf) |
-| 1 | Support, câble et interface de l’anémomètre | Fixation en tête de mât, liaison avec la balise | Février | 170 € | 170 € | — |
+| 1 | Support, câble et interface de l’anémomètre | Fixation en tête de mât ; convertisseur RS-232 → 3,3 V vers la balise | Février | 170 € | 170 € | — |
 
 ## Base RTK et radio de secours
 
@@ -43,6 +43,7 @@
 | 1 | Routeur Ubiquiti UniFi Cloud Gateway Ultra | Réseau du PC course, bascule fibre ↔ 4G | Mars | 100 € | 100 € | [Ubiquiti Store Europe (officiel)](https://eu.store.ui.com/eu/en/products/ucg-ultra) |
 | 1 | Routeur 5G Netgear Nighthawk M6 Pro | Internet de secours si la fibre tombe | Mars | 500 € | 500 € | [LDLC](https://ldlc.com/en/product/PB00540606.html) · [Galaxus.fr](https://www.galaxus.fr/fr/s1/product/netgear-nighthawk-m6-pro-routeur-mobile-routeur-23545594) |
 | 1 | Batterie EcoFlow River 2 Pro | Le PC course tient sans secteur | Mars | 600 € | 600 € | [Castorama](https://www.castorama.fr/station-electrique-portable-ecoflow-river-2-pro-720wh/4895251601559_CAFR.prd) · [Boulanger](https://www.boulanger.com/ref/1187283) |
+| 1 | Onduleur APC Back-UPS 950 VA | Entre la batterie et les serveurs : aucune coupure pendant une bascule | Mars | 110 € | 110 € | — |
 | 1 | Écrans (2), commutateur PoE, câbles, rallonges | Consoles du comité et de l’arbitre, alimentation des caméras | Mars | 1 100 € | 1 100 € | — |
 
 ## Caméras et régie
@@ -50,7 +51,8 @@
 | Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
 |---|---|---|---|---|---|---|
 | 1 | Caméra motorisée Reolink RLC-823S2 (zoom 16×) | Image du parcours depuis le point haut | Mars | 480 € | 480 € | [Reolink France, boutique officielle](https://reolink.com/fr/product/rlc-823s2/) |
-| 1 | Mélangeur Blackmagic ATEM Mini Pro | Régie : caméra, graphismes, diffusion | Mars | 320 € | 320 € | [Thomann (France)](https://www.thomann.fr/blackmagic_design_atem_mini_pro.htm) · [Woodbrass (France)](https://www.woodbrass.com/tables-de-mixage-video-blackmagic-design-atem-mini-pro-p358901.html) |
+| 1 | Mini-PC de régie ASUS NUC 14 Pro, avec OBS Studio | Régie : lit la caméra par le réseau, ajoute l’habillage, diffuse ; même modèle que les serveurs, donc interchangeable | Mars | 900 € | 900 € | [LDLC (barebone Core 3)](https://www.ldlc.com/en/product/PB00624811.html) · [ASUS France, page officielle](https://www.asus.com/fr/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-14-pro/) |
+| 1 | Boîtier d’acquisition HDMI → USB | Fait entrer l’image des caméras embarquées dans la régie | Mars | 30 € | 30 € | — |
 | 1 | Mât, fixations, câbles réseau | Caméra à 12 m au plus | Mars | 300 € | 300 € | — |
 
 ## Météo et outils
@@ -72,8 +74,9 @@
 
 | Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
 |---|---|---|---|---|---|---|
-| 10 | Caméra embarquée légère | Images à bord de chaque bateau, pour la vidéo et l’habillage télé ; modèle à choisir en février | Mars | 100 € | 1 000 € | — |
-| 1 | Récepteur vidéo au PC course | Reçoit les images des dix bateaux | Mars | 300 € | 300 € | — |
+| 10 | Caméra embarquée légère | Images à bord ; 2 achetées pour l’essai de mars, les 8 autres seulement si l’essai est concluant | Mars | 100 € | 1 000 € | — |
+| 1 | Récepteur vidéo au PC course | Reçoit l’image d’un bateau à la fois, choisi par la régie | Mars | 300 € | 300 € | — |
+| 1 | Convertisseur vidéo analogique → HDMI | Sort l’image du récepteur vers la régie | Mars | 20 € | 20 € | — |
 
 ## Prototypes
 
