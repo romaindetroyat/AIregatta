@@ -156,3 +156,21 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 - **Un responsable par pôle**, une revue mensuelle et trois revues de décision (fin janvier, mi-mars, mi-avril). Plusieurs pôles peuvent être tenus par la même personne : seuls le logiciel et le matériel demandent un vrai temps de travail continu.
 - **Le club de voile partenaire** fournit le directeur de course, les arbitres et le bateau d’assistance.
 - **Semaine de course** : 10 personnes sur place (direction, 1 développeur, 1 technicien matériel, directeur de course et 2 arbitres, référent équipes, 2 personnes sur le bateau d’assistance, 1 commentateur), plus le second développeur d’astreinte à distance et le prestataire vidéo. La sécurité du public relève du site et de la commune.
+
+## Budget du temps humain
+
+Hypothèse : 400 € par jour (coût complet), 20 jours par mois ; course et arbitrage assurés bénévolement par le club partenaire ; prestataire vidéo ≈ 6 000 € pour la semaine de course.
+
+| Pôle | Mois-personnes | Coût |
+|---|---|---|
+| Direction de projet | 3,8 | 30 400 € |
+| Logiciel | 5,5 | 44 000 € |
+| Matériel et terrain | 4,2 | 33 600 € |
+| Course et arbitrage | 1,3 | bénévole |
+| Relations équipes | 1,4 | 11 200 € |
+| Site, logistique et sécurité | 1,4 | 11 200 € |
+| Communication et médias | 2,1 | 16 800 € |
+| Prestataire vidéo | — | 6 000 € |
+| **Total** | **18,4 payés** | **153 200 €** |
+
+Budget total du projet : ≈ 18 600 € de matériel + 153 200 € de temps humain + ≈ 750 € de fonctionnement, soit **≈ 173 k€**. Le simulateur de la page Budget du document permet de changer le coût d’une journée.
