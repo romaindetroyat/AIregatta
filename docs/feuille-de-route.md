@@ -140,19 +140,19 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 
 | Pôle | Rôle | Qui | Nov. | Déc. | Janv. | Févr. | Mars | Avr. | Mai | Semaine de course |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Direction de projet | Pilote l’ensemble, tranche, tient le budget, signe les partenaires, anime la revue mensuelle. | Romain (Meridia), appuyé par un agent IA de suivi | 0,6 | 0,8 | 0,8 | 0,8 | 0,8 | 0,9 | 1 | 1 pers. |
-| Logiciel | Flux de données, moteur de course, consoles, applications ; développe avec des agents IA (P32). | 2 développeurs (Meridia) + agents IA | 0,3 | 2 | 2 | 2 | 2 | 2 | 2 | 1 pers. |
-| Matériel et terrain | Balises, base RTK, radio, bouées instrumentées, réseau et caméras du PC course. | 1 intégrateur électronique à plein temps, + 1 renfort en février pour la série et les bouées | 0,3 | 1 | 1 | 1,8 | 1,8 | 1,2 | 1 | 1 pers. |
-| Course et arbitrage | Règles, instructions de course, procédures du comité, formation des arbitres, jury. | Directeur de course et 2 arbitres (club de voile partenaire), qui forment aussi le jury après les manches | 0,1 | 0,3 | 0,3 | 0,3 | 0,5 | 0,8 | 1 | 3 pers. |
-| Relations équipes | Appel à équipes, kit et bac à sable, support, contrôle des installations. | 1 référent technique, qui protège les développeurs des sollicitations | 0,1 | 0,3 | 0,6 | 0,6 | 0,7 | 0,8 | 1 | 1 pers. |
-| Site, logistique et sécurité | PC course à La Plage, plan d’eau, bateaux d’assistance, Wi-Fi public, sécurité, montage. | 1 coordinateur ; sur l’eau, 1 bateau d’assistance (club partenaire) | 0,1 | 0,3 | 0,4 | 0,5 | 0,6 | 0,9 | 1 | 2 pers. |
-| Communication et médias | Site public, partenaires, presse, réseaux, régie vidéo et commentateur. | 1 chargé de communication (Meridia), qui commente ; la vidéo est confiée à un prestataire | 0,2 | 0,4 | 0,5 | 0,6 | 0,7 | 0,9 | 1 | 1 pers. |
-| **Total (ETP)** | | | 1,7 | 5,1 | 5,6 | 6,6 | 7,1 | 7,5 | 8 | 10 pers. |
+| Direction de projet | Pilote l’ensemble, tranche, tient le budget, signe les partenaires, anime la revue mensuelle. | Romain (Meridia), appuyé par un agent IA de suivi | 0,4 | 0,5 | 0,5 | 0,5 | 0,5 | 0,6 | 0,8 | 1 pers. |
+| Logiciel | Flux de données, moteur de course, consoles, applications ; développe avec des agents IA (P32). | 2 développeurs (Meridia) + agents IA, dont un seul à plein temps au plus fort | 0,2 | 1 | 1,2 | 1,2 | 0,8 | 0,5 | 0,6 | 1 pers. |
+| Matériel et terrain | Balises, base RTK, radio, bouées instrumentées, réseau et caméras du PC course. | 1 intégrateur électronique, à mi-temps, à plein temps en février pour la série et les bouées | 0,2 | 0,6 | 0,6 | 1 | 0,8 | 0,5 | 0,5 | 1 pers. |
+| Course et arbitrage | Règles, instructions de course, procédures du comité, formation des arbitres, jury. | Directeur de course et 2 arbitres (club de voile partenaire), qui forment aussi le jury après les manches | 0 | 0,1 | 0,1 | 0,1 | 0,2 | 0,3 | 0,5 | 3 pers. |
+| Relations équipes | Appel à équipes, kit et bac à sable, support, contrôle des installations. | 1 référent technique à temps partiel, qui protège les développeurs des sollicitations | 0 | 0,1 | 0,2 | 0,2 | 0,2 | 0,3 | 0,4 | 1 pers. |
+| Site, logistique et sécurité | PC course à La Plage, plan d’eau, bateaux d’assistance, Wi-Fi public, sécurité, montage. | 1 coordinateur ; sur l’eau, 1 bateau d’assistance (club partenaire) | 0 | 0,1 | 0,1 | 0,2 | 0,2 | 0,3 | 0,5 | 2 pers. |
+| Communication et médias | Site public, partenaires, presse, réseaux, régie vidéo et commentateur. | 1 chargé de communication (Meridia), qui commente ; la vidéo est confiée à un prestataire | 0,1 | 0,2 | 0,2 | 0,3 | 0,3 | 0,4 | 0,6 | 1 pers. |
+| **Total (ETP)** | | | 0,9 | 2,6 | 2,9 | 3,5 | 3,0 | 2,9 | 3,9 | 10 pers. |
 
 ### Principes
 
-- **Le matériel est sur le chemin critique** : l’intégrateur doit être à plein temps dès décembre, avec un renfort en février pour fabriquer la série et les bouées en même temps.
-- **Les développeurs ne font pas le support** : le référent équipes répond aux équipes dès l’ouverture du bac à sable, sinon le logiciel prend du retard.
-- **Un responsable par pôle**, une revue mensuelle et trois revues de décision (fin janvier, mi-mars, mi-avril).
+- **Le matériel est sur le chemin critique** : l’intégrateur est disponible dès décembre, à mi-temps, et à plein temps en février pour fabriquer la série et les bouées.
+- **Les développeurs ne font pas le support** : le référent équipes, à temps partiel, répond aux équipes dès l’ouverture du bac à sable.
+- **Un responsable par pôle**, une revue mensuelle et trois revues de décision (fin janvier, mi-mars, mi-avril). Plusieurs pôles peuvent être tenus par la même personne : seuls le logiciel et le matériel demandent un vrai temps de travail continu.
 - **Le club de voile partenaire** fournit le directeur de course, les arbitres et le bateau d’assistance.
 - **Semaine de course** : 10 personnes sur place (direction, 1 développeur, 1 technicien matériel, directeur de course et 2 arbitres, référent équipes, 2 personnes sur le bateau d’assistance, 1 commentateur), plus le second développeur d’astreinte à distance et le prestataire vidéo. La sécurité du public relève du site et de la commune.
