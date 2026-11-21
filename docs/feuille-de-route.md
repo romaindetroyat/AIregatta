@@ -15,7 +15,7 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 | N° | Action | Début | Fin | Pôle | Dépend de |
 |---|---|---|---|---|---|
 | A1 ★ | Trancher les questions ouvertes | 23/11/2026 | 04/12/2026 | Direction de projet | — |
-| A2 | Budget et plan de financement | 23/11/2026 | 11/12/2026 | Direction de projet | — |
+| A2 | Budget matériel et financement | 23/11/2026 | 11/12/2026 | Direction de projet | — |
 | A3 | Constituer l’équipe | 23/11/2026 | 18/12/2026 | Direction de projet | A2 |
 | C1 ★ | Commander le prototype (≈ 2 500 €) | 30/11/2026 | 11/12/2026 | Matériel et terrain | A1, A2 |
 | E1 | Format du flux équipes v0 et simulateur | 30/11/2026 | 18/12/2026 | Logiciel | A1 |
@@ -37,7 +37,7 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 | F1 | Application spectateur | 11/01/2027 | 26/02/2027 | Logiciel | E2 |
 | G3 | Ouverture du bac à sable (jalon) | 11/01/2027 | 11/01/2027 | Relations équipes | E2, G2 |
 | G4 | Support et ateliers en ligne | 11/01/2027 | 07/05/2027 | Relations équipes | G3 |
-| I4 | Prestataire vidéo et diffusion | 11/01/2027 | 12/03/2027 | Communication et médias | A2 |
+| I4 | Équipe vidéo et diffusion | 11/01/2027 | 12/03/2027 | Communication et médias | A2 |
 | B4 | Procédures du comité et modes dégradés | 18/01/2027 | 05/03/2027 | Course et arbitrage | B2 |
 | F2 | Console équipe | 18/01/2027 | 19/02/2027 | Logiciel | E1, B2 |
 | J1 ★ | Essai n°1 : 2 balises sur l’eau | 20/01/2027 | 23/01/2027 | Matériel et terrain | C2, C3 |
@@ -73,7 +73,7 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 
 ### Novembre 2026
 
-- **Direction de projet** : A1 Trancher les questions ouvertes ; A2 Budget et plan de financement ; A3 Constituer l’équipe
+- **Direction de projet** : A1 Trancher les questions ouvertes ; A2 Budget matériel et financement ; A3 Constituer l’équipe
 - **Logiciel** : E1 Format du flux équipes v0 et simulateur
 - **Matériel et terrain** : C1 Commander le prototype (≈ 2 500 €)
 - **Relations équipes** : G1 Appel à équipes et inscriptions
@@ -81,7 +81,7 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 
 ### Décembre 2026
 
-- **Direction de projet** : A1 Trancher les questions ouvertes ; A2 Budget et plan de financement ; A3 Constituer l’équipe ; I2 Partenaires et sponsors
+- **Direction de projet** : A1 Trancher les questions ouvertes ; A2 Budget matériel et financement ; A3 Constituer l’équipe ; I2 Partenaires et sponsors
 - **Logiciel** : C3 Firmware de la balise v1 ; E1 Format du flux équipes v0 et simulateur ; E2 Bus de données, serveur et secours
 - **Matériel et terrain** : C1 Commander le prototype (≈ 2 500 €) ; C2 Monter 3 balises et la base RTK, banc à terre ; D1 Concevoir les bouées instrumentées
 - **Course et arbitrage** : B1 Relecture des règles par un arbitre agréé
@@ -97,7 +97,7 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 - **Course et arbitrage** : B1 Relecture des règles par un arbitre agréé ; B3 Avis de course et instructions de course ; B4 Procédures du comité et modes dégradés
 - **Relations équipes** : G1 Appel à équipes et inscriptions ; G4 Support et ateliers en ligne
 - **Site, logistique et sécurité** : H1 Convention avec La Plage (PC course) ; H2 Plan d’eau : mouillages et assistance
-- **Communication et médias** : I1 Site public et réseaux ; I4 Prestataire vidéo et diffusion
+- **Communication et médias** : I1 Site public et réseaux ; I4 Équipe vidéo et diffusion
 
 ### Février 2027
 
@@ -107,7 +107,7 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 - **Course et arbitrage** : B3 Avis de course et instructions de course ; B4 Procédures du comité et modes dégradés
 - **Relations équipes** : G4 Support et ateliers en ligne
 - **Site, logistique et sécurité** : H2 Plan d’eau : mouillages et assistance ; H4 Wi-Fi public au village ; H5 Plan de sécurité et bénévoles
-- **Communication et médias** : I3 Presse, commentateur, promotion ; I4 Prestataire vidéo et diffusion
+- **Communication et médias** : I3 Presse, commentateur, promotion ; I4 Équipe vidéo et diffusion
 
 ### Mars 2027
 
@@ -117,7 +117,7 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 - **Course et arbitrage** : B3 Avis de course et instructions de course ; B4 Procédures du comité et modes dégradés ; B5 Former les arbitres sur les consoles
 - **Relations équipes** : G4 Support et ateliers en ligne
 - **Site, logistique et sécurité** : H2 Plan d’eau : mouillages et assistance ; H4 Wi-Fi public au village ; H5 Plan de sécurité et bénévoles
-- **Communication et médias** : F4 Aide au commentateur ; I3 Presse, commentateur, promotion ; I4 Prestataire vidéo et diffusion
+- **Communication et médias** : F4 Aide au commentateur ; I3 Presse, commentateur, promotion ; I4 Équipe vidéo et diffusion
 
 ### Avril 2027
 
@@ -138,6 +138,8 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 
 ## Répartition des forces vives
 
+Tous les participants sont bénévoles : la charge sert à savoir quelle disponibilité demander à chacun, pas à chiffrer un coût. Seul le matériel coûte.
+
 | Pôle | Rôle | Qui | Nov. | Déc. | Janv. | Févr. | Mars | Avr. | Mai | Semaine de course |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Direction de projet | Pilote l’ensemble, tranche, tient le budget, signe les partenaires, anime la revue mensuelle. | Romain (Meridia), appuyé par un agent IA de suivi | 0,4 | 0,5 | 0,5 | 0,5 | 0,5 | 0,6 | 0,8 | 1 pers. |
@@ -146,7 +148,7 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 | Course et arbitrage | Règles, instructions de course, procédures du comité, formation des arbitres, jury. | Directeur de course et 2 arbitres (club de voile partenaire), qui forment aussi le jury après les manches | 0 | 0,1 | 0,1 | 0,1 | 0,2 | 0,3 | 0,5 | 3 pers. |
 | Relations équipes | Appel à équipes, kit et bac à sable, support, contrôle des installations. | 1 référent technique à temps partiel, qui protège les développeurs des sollicitations | 0 | 0,1 | 0,2 | 0,2 | 0,2 | 0,3 | 0,4 | 1 pers. |
 | Site, logistique et sécurité | PC course à La Plage, plan d’eau, bateaux d’assistance, Wi-Fi public, sécurité, montage. | 1 coordinateur ; sur l’eau, 1 bateau d’assistance (club partenaire) | 0 | 0,1 | 0,1 | 0,2 | 0,2 | 0,3 | 0,5 | 2 pers. |
-| Communication et médias | Site public, partenaires, presse, réseaux, régie vidéo et commentateur. | 1 chargé de communication (Meridia), qui commente ; la vidéo est confiée à un prestataire | 0,1 | 0,2 | 0,2 | 0,3 | 0,3 | 0,4 | 0,6 | 1 pers. |
+| Communication et médias | Site public, partenaires, presse, réseaux, régie vidéo et commentateur. | 1 chargé de communication, qui commente ; la vidéo par des bénévoles ou un partenaire | 0,1 | 0,2 | 0,2 | 0,3 | 0,3 | 0,4 | 0,6 | 1 pers. |
 | **Total (ETP)** | | | 0,9 | 2,6 | 2,9 | 3,5 | 3,0 | 2,9 | 3,9 | 10 pers. |
 
 ### Principes
@@ -155,22 +157,4 @@ Le rythme est donné par le matériel et les sorties sur l’eau, pas par le log
 - **Les développeurs ne font pas le support** : le référent équipes, à temps partiel, répond aux équipes dès l’ouverture du bac à sable.
 - **Un responsable par pôle**, une revue mensuelle et trois revues de décision (fin janvier, mi-mars, mi-avril). Plusieurs pôles peuvent être tenus par la même personne : seuls le logiciel et le matériel demandent un vrai temps de travail continu.
 - **Le club de voile partenaire** fournit le directeur de course, les arbitres et le bateau d’assistance.
-- **Semaine de course** : 10 personnes sur place (direction, 1 développeur, 1 technicien matériel, directeur de course et 2 arbitres, référent équipes, 2 personnes sur le bateau d’assistance, 1 commentateur), plus le second développeur d’astreinte à distance et le prestataire vidéo. La sécurité du public relève du site et de la commune.
-
-## Budget du temps humain
-
-Hypothèse : 400 € par jour (coût complet), 20 jours par mois ; course et arbitrage assurés bénévolement par le club partenaire ; prestataire vidéo ≈ 6 000 € pour la semaine de course.
-
-| Pôle | Mois-personnes | Coût |
-|---|---|---|
-| Direction de projet | 3,8 | 30 400 € |
-| Logiciel | 5,5 | 44 000 € |
-| Matériel et terrain | 4,2 | 33 600 € |
-| Course et arbitrage | 1,3 | bénévole |
-| Relations équipes | 1,4 | 11 200 € |
-| Site, logistique et sécurité | 1,4 | 11 200 € |
-| Communication et médias | 2,1 | 16 800 € |
-| Prestataire vidéo | — | 6 000 € |
-| **Total** | **18,4 payés** | **153 200 €** |
-
-Budget total du projet : ≈ 18 600 € de matériel + 153 200 € de temps humain + ≈ 750 € de fonctionnement, soit **≈ 173 k€**. Le simulateur de la page Budget du document permet de changer le coût d’une journée.
+- **Semaine de course** : 10 personnes sur place (direction, 1 développeur, 1 technicien matériel, directeur de course et 2 arbitres, référent équipes, 2 personnes sur le bateau d’assistance, 1 commentateur), plus le second développeur d’astreinte à distance et l’équipe vidéo. La sécurité du public relève du site et de la commune.
