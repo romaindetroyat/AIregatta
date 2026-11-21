@@ -1,142 +1,125 @@
 # AI Regatta — Analyse du projet
 
-> Analyse du 21 novembre 2026. A-t-on pensé à tout ? Non, pas encore. Le dossier technique est solide ; les angles morts sont ailleurs : les équipes, le cadre juridique, l’argent, les bénévoles et le public. Les chiffres sont une estimation de jugement, pas un calcul.
+> Analyse du 21 novembre 2026, après arbitrages. Elle ne porte que sur notre périmètre : le dispositif technique et sportif. Sont gérés par d’autres instances, et donc sortis de l’analyse : la réglementation et les autorisations ; le porteur juridique et l’assurance ; la sécurité du public et les secours ; le financement du matériel ; l’accueil du public et la communication ; le recrutement des équipes ; le tracé et la longueur du parcours. Les chiffres sont une estimation de jugement, pas un calcul.
 
-## Les chances de succès
+## Tranché le 21 novembre 2026
+
+| Sujet | Décision |
+|---|---|
+| Jauge | Jauge IOM (classe 1 m) pour la coque, les appendices, les gréements et le poids ; électronique libre par dérogation. |
+| Bateau de référence | Un IOM du commerce documenté dans le kit : conseillé, non imposé. |
+| Qualification | Sur place, le premier jour : parcours seul, tour de pénalité, arrêt sur ordre. |
+| Limites de vent | De 4 à 20 nœuds, à valider aux essais. |
+| Intervention humaine | Engagement sur l’honneur ; journal fourni en cas de réclamation. |
+| Mise à jour du logiciel | Interdite pendant une manche, libre entre les manches. |
+| Radiocommande de sécurité | Conseillée, non obligatoire. |
+| Liaison équipe → bateau | Tout est libre : ordres, paramètres, réglages, données officielles relayées. |
+| Pénalités | Le logiciel signale, l’arbitre confirme toujours. |
+| Jury | Le directeur de course et les deux arbitres. |
+| Classement | Une manche retirée à partir de 5 courues, deux à partir de 10. |
+| Bac à sable | Ouverture en février 2027. |
+| Kit équipes | En français et en anglais. |
+| Aides au commentateur | Lignes de vent et laylines, souffleur des moments forts, fiches prêtes à lire, résumé automatique. |
+| Options de matériel | Caméras embarquées ajoutées (≈ 1 300 €) : la liste d’achats passe à ≈ 20 000 €. |
+| Niveaux de repli et revues | Quatre niveaux de repli et critères de feu vert adoptés. |
+
+## Les chances de succès de notre part
+
+À condition que les autres instances tiennent la leur.
 
 | Niveau | Aujourd’hui | Avec toutes les mesures |
 |---|---|---|
-| **L’événement a lieu, même réduit** — Deux ou trois bateaux, dont ceux de l’organisation, naviguent seuls devant du public. Une démonstration commentée. | ≈ 60 % | ≈ 80 % |
-| **Une vraie régate** — Au moins 4 équipes, des manches classées sur 3 jours au moins, les positions suivies au centimètre. | ≈ 20 % | ≈ 60 % |
-| **Le projet complet, tel que décrit** — 6 équipes ou plus, arbitrage assisté fiable toute la semaine, public nombreux qui suit sur l’application, aucun incident grave. | ≈ 5 % | ≈ 35 % |
+| **Le suivi tient, même réduit** — Les bateaux sont suivis et classés toute la semaine, quitte à descendre au niveau de repli B ou C. | ≈ 55 % | ≈ 85 % |
+| **Le dispositif complet fonctionne** — Suivi au centimètre, arbitrage assisté, flux aux équipes, application et vidéo : le niveau A. | ≈ 35 % | ≈ 70 % |
+| **… et les manches sont réussies** — En plus : des manches lisibles, un arbitrage qui suit, au moins trois jours courus. | ≈ 20 % | ≈ 55 % |
 
-« Aujourd’hui » veut dire : en appliquant la feuille de route telle qu’elle est écrite, sans rien y ajouter. L’estimation de 85 % donnée plus tôt ne portait que sur la technique, en supposant le plan d’essais suivi et les moyens réunis ; elle reste valable pour cette question-là.
-
-### Les neuf conditions
-
-Les sept premières conditionnent « une vraie régate » ; les deux dernières, le projet complet. Elles sont multipliées entre elles comme si elles étaient indépendantes : c’est une estimation prudente, car un projet bien mené les améliore toutes à la fois.
+« Aujourd’hui » tient compte des décisions prises. Les conditions sont multipliées entre elles comme si elles étaient indépendantes : c’est une estimation prudente.
 
 | Condition | Aujourd’hui | Avec les mesures | Pourquoi | Mesures |
 |---|---|---|---|---|
-| Autorisations, assurance et site | 85 % | 95 % | P05 dit le plan d’eau validé, mais rien n’est écrit sur le porteur, l’assurance, ni le statut des bateaux sans équipage. | Porteur désigné, assurance souscrite, cadre réglementaire confirmé par écrit avant Noël (+7) ; Convention signée avec La Plage en décembre (+3) |
-| Au moins 4 équipes avec un bateau qui navigue seul | 55 % | 88 % | Aucune équipe n’est nommée dans le dossier. Avec un appel clos fin janvier, il reste trois mois pour construire un bateau et son IA. | 6 équipes pré-engagées avant Noël, sur invitation (+13) ; Bateau de référence documenté : coque du commerce, pilote automatique libre, IA minimale (+10) ; 2 bateaux de l’organisation, engagés d’office (+10) |
-| Le suivi officiel fonctionne : balises, PC course, classement | 78 % | 91 % | Les briques sont éprouvées. Le risque est l’assemblage : 16 balises à fabriquer en trois semaines, des essais qui dépendent de la météo. | Un second intégrateur matériel formé dès janvier (+5) ; Série de balises et anémomètre commandés plus tôt (+4) ; Niveaux de repli décidés d’avance (+4) |
-| L’équipe bénévole tient jusqu’en mai | 80 % | 92 % | ≈ 20 mois-personnes bénévoles, un chemin critique sans marge, une seule personne nommée. | Un responsable et un suppléant par pôle, engagement écrit de disponibilité (+7) ; Liste écrite de ce qu’on abandonne en premier (+5) |
-| Le matériel est financé à temps | 85 % | 95 % | 18 600 € sans financeur identifié ; 1 900 € à engager en décembre, 9 500 € en février. | Prototype avancé tout de suite, financeurs trouvés avant fin janvier (+8) ; Budget complété des postes oubliés (+2) |
-| Au moins 3 jours navigables sur 5 | 88 % | 92 % | Mi-mai à Toulon : brise l’après-midi, mais des épisodes de mistral et des matinées sans vent. Pas de jour de réserve. | Programme souple : mercredi et jeudi en marge, limites de vent écrites (+4) |
-| Ni accident ni arrêt de dernière minute | 96 % | 98 % | Des bateaux de 1 m sont peu dangereux, mais la zone côtoie les baigneurs et les batteries sont au lithium. | Plan de sécurité, perte de liaison testée, zone balisée (+2) |
-| Les IA régatent proprement (projet complet) | 70 % | 85 % | Notre simulation donne 12 alertes en une manche de 7 bateaux. De vraies IA débutantes feront pire. | Poules de 4 à 5 bateaux, manches de 8 à 10 minutes (+8) ; Qualification en trois étapes avant la régate (+7) |
-| Le public vient et comprend ce qu’il voit (projet complet) | 70 % | 90 % | Depuis la plage, un bateau de 1 m à 150 m est un point. Ni écran, ni sonorisation, ni plan de communication. | Grand écran, sonorisation et commentateur au village (+12) ; Communication locale six semaines avant, un partenaire média (+8) |
+| Les bénévoles du logiciel et du matériel sont trouvés, et tiennent | 70 % | 92 % | Personne n’est encore identifié sur ces deux pôles, qui tiennent tout le calendrier. | 2 développeurs et 1 intégrateur matériel nommés avant le 11 décembre (+14) ; Un suppléant par poste (+5) ; Liste écrite de ce qu’on abandonne en premier (+3) |
+| Le suivi officiel fonctionne : balises, PC course, classement | 82 % | 91 % | Les briques sont éprouvées et les niveaux de repli sont adoptés. Reste l’assemblage : 16 balises à fabriquer en trois semaines, des essais qui dépendent de la météo. | Un second intégrateur formé dès janvier (+5) ; Devis de l’anémomètre en décembre, pièces communes commandées en janvier (+4) |
+| Des bateaux pour les essais de janvier et de mars | 75 % | 94 % | Le dossier ne dit pas quels bateaux porteront les balises. Les équipes n’auront pas les leurs en janvier. | 2 IOM achetés ou prêtés par un club avant le 15 janvier (+15) ; 4 bateaux assurés pour l’essai de mars (+4) |
+| Pas d’accident sur l’eau | 96 % | 98 % | La radiocommande de sécurité n’est que conseillée : un bateau qui perd sa liaison dépend de son comportement déclaré et du bateau d’assistance. | Perte de liaison et arrêt testés à la qualification du premier jour (+2) |
+| Les équipes ont de quoi se préparer | 80 % | 93 % | Le kit existe en version provisoire. Restent le bateau de référence, la version anglaise et les règles relues ; le bac à sable n’ouvre qu’en février, six semaines avant le gel du format. | Bateau de référence documenté avant Noël (+6) ; Règles v1 relues par un arbitre et publiées mi-janvier (+4) ; Simulateur et fichiers de rejeu fournis dès décembre (+3) |
+| Des manches lisibles, un arbitrage tenable | 72 % | 86 % | Notre simulation donne 12 alertes pour 7 bateaux, et l’arbitre confirme chaque pénalité. La qualification n’a lieu que le premier jour. | Poules de 4 à 5 bateaux (+8) ; Participation à la régate blanche d’avril demandée à chaque équipe (+6) |
+| Au moins 3 jours navigables sur 5 | 90 % | 93 % | Limites fixées de 4 à 20 nœuds. Mi-mai : brise l’après-midi, mais des épisodes de mistral ; pas de jour de réserve. | Un jour de marge dans le programme (+3) |
 
-## Ce qui manque au dossier
+## Ce qui reste vraiment
 
-24 manques relevés, dont 7 bloquants.
+14 points.
 
-### Équipes et bateaux
+### À trouver
 
-| Niveau | Manque | Constat | Quoi faire |
+| Niveau | Point | Constat | Quoi faire |
 |---|---|---|---|
-| Bloquant | **Aucune équipe n’est identifiée** | Le dossier ne nomme aucune équipe et ne fixe ni date limite d’inscription, ni conditions (frais, dotation, déplacement). L’appel court jusqu’à fin janvier : il resterait trois mois à une équipe pour construire son bateau et son IA. Les projets étudiants de l’année sont déjà attribués. | Publier l’appel début décembre. Viser 6 équipes pré-engagées avant Noël : écoles et laboratoires de robotique marine, clubs de voile radiocommandée associés à des développeurs, entreprises du naval et de l’IA. Dire ce qu’elles y gagnent. |
-| Bloquant | **Pas de bateau de référence** | Chaque équipe doit tout inventer : coque, pilote automatique, liaison, IA. | Documenter un bateau type : voilier radiocommandé du commerce de 95 cm (≈ 400 à 520 €), pilote automatique libre qui sait déjà piloter un voilier (ArduPilot), exemple d’IA minimale. Une équipe navigue alors en quelques semaines. |
-| Bloquant | **L’organisation n’a pas de bateau** | Les essais de janvier et de mars demandent 2 puis 4 bateaux : le dossier ne dit pas lesquels. | Acheter et équiper 2 bateaux de l’organisation (≈ 1 500 à 2 000 € les deux). Ils servent aux essais, garantissent une flotte minimale et valident le bateau de référence. |
-| Important | **Pas de jauge** | « Architecture libre », sans longueur maximale. Les règles supposent pourtant des bateaux de 1 m (zone de 4 m). Et la réglementation française des drones maritimes vise les engins de plus de 1 m. | Fixer une jauge simple : 1 m hors tout au plus, poids et tirant d’eau maximum, emplacement de la balise et de ses antennes. |
-| Important | **Pas d’épreuve de qualification** | Rien ne garantit qu’un bateau inscrit sait boucler un parcours, faire son tour de pénalité, rester dans la zone et s’arrêter sur ordre. | Trois étapes : février sur le simulateur, mars seul sur l’eau, avril en régate blanche. Un bateau non qualifié court hors classement. |
-| À prévoir | **Kit équipes en français seulement** | Des équipes étrangères ne pourront pas l’utiliser. | Traduire le contrat d’interface et les règles en anglais si l’appel dépasse la France. |
+| Bloquant | **Les deux développeurs et l’intégrateur matériel** | Personne n’est encore identifié. Sans eux, ni commande du prototype, ni firmware, ni format des données : le chemin critique ne démarre pas. | Les nommer avant le 11 décembre, avec un suppléant par poste. L’intégrateur doit pouvoir donner un mi-temps dès décembre et un plein temps en février. |
 
-### Cadre juridique et argent
+### À trancher
 
-| Niveau | Manque | Constat | Quoi faire |
+| Niveau | Point | Constat | Quoi faire |
 |---|---|---|---|
-| Bloquant | **Qui porte l’événement ?** | L’étude préalable posait la question (association, club, collectivité, entreprise) : elle n’a pas de réponse dans le dossier. Sans porteur, pas d’assurance, pas de convention, pas de subvention. | Désigner la structure avant Noël, avec le club de voile partenaire. |
-| Bloquant | **Aucune assurance n’est mentionnée** | Ni responsabilité civile de l’organisateur, ni dommages entre bateaux, ni matériel, ni bénévoles. | Demander un devis dès que le porteur est connu ; faire signer une décharge aux équipes pour les collisions. |
-| Bloquant | **Le matériel n’est pas financé** | 18 600 € sans financeur identifié. 1 900 € sont à engager en décembre et 9 500 € en février. | Avancer le prototype tout de suite. Boucler le financement avant fin janvier : collectivités, entreprises du naval et du numérique, opérateur mobile, dons en nature. |
-| Important | **Le cadre réglementaire n’a pas de trace écrite** | P05 le dit « validé, hors périmètre ». Quatre points méritent une confirmation écrite : la déclaration de manifestation nautique (15 jours à 2 mois avant, selon les cas) ; le statut de voiliers sans équipage de 1 m ; le mouillage des bouées, notre plan montrant un herbier ; la déclaration en mairie au-delà de 1 500 personnes présentes en même temps, avec un dispositif de secours. | Écrire à la délégation à la mer de la DDTM du Var et à la mairie avant Noël ; déposer la déclaration nautique début mars au plus tard. |
-| Important | **Des postes absents du budget** | Corps de bouées et mouillages, sonorisation, écran pour le public, tentes, tables et électricité de la zone équipes, assurance, secours, signalétique, carburant du bateau d’assistance, lots. | Les chiffrer. Ordre de grandeur : 5 000 à 10 000 € de plus, moins ce qui sera prêté ou offert. |
-| À prévoir | **Nom de domaine et marque** | Le nom de domaine n’est toujours pas réservé ; la disponibilité de « AI Regatta » comme marque n’a pas été vérifiée. | Dix minutes pour le domaine ; une recherche à l’INPI. |
+| Important | **Quels bateaux pour les essais ?** | L’essai du 20 janvier demande 2 bateaux, celui du 10 mars en demande 4. Les équipes n’auront pas les leurs à temps. | Choisir avant le 4 décembre : acheter deux IOM, les emprunter à un club de voile radiocommandée, ou attendre les bateaux des équipes (risqué pour janvier). |
+| Important | **Le format des manches** | Poules de 4 à 5 bateaux, flotte entière ou duels. Le choix règle la charge des arbitres, qui confirment chaque pénalité. | Trancher avant la relecture des règles (8 janvier) ; à défaut, après la régate blanche. |
+| À prévoir | **Le programme des cinq jours** | Seul le mercredi est fixé : contrôles et qualification. | À fixer avec le directeur de course dans l’avis de course (mi-mars au plus tard). |
+| À prévoir | **Ordinateurs neufs ou existants** | Deux mini-PC neufs (≈ 1 800 €) ou deux machines prêtées, conformes au cahier des charges (≈ 2 250 € de moins avec les écrans). | À décider avant la commande de mars. |
 
-### Organisation
+### Décidé, reste à produire
 
-| Niveau | Manque | Constat | Quoi faire |
+| Niveau | Point | Constat | Quoi faire |
 |---|---|---|---|
-| Bloquant | **Une équipe entièrement bénévole, sans marge** | ≈ 20 mois-personnes bénévoles sur un chemin critique sans marge. L’intégrateur matériel doit être à plein temps en février. Une seule personne est nommée dans le dossier. | Nommer un responsable et un suppléant par pôle, avec un engagement écrit de disponibilité. Point hebdomadaire de 30 minutes. |
-| Important | **Ni critères de décision, ni plan de repli** | Trois revues sont prévues, sans critère de feu vert. Rien ne dit ce qu’on abandonne en premier si le temps manque. | Adopter les critères et les quatre niveaux de repli proposés plus bas. |
-| Important | **Des commandes à délai long passées tard** | L’anémomètre se vend sur devis. La série de balises est commandée début février pour un essai le 10 mars. | Demander le devis de l’anémomètre en décembre. Commander les pièces communes aux deux récepteurs dès janvier. |
+| Important | **Le bateau de référence** | Décidé : un IOM du commerce, conseillé. Reste à choisir lequel, avec quel pilote automatique, et à le documenter. Un IOM coûte nettement plus cher que le voilier de 95 cm d’abord envisagé. | Fiche dans le kit avant Noël : modèle, prix, pilote automatique libre, exemple d’IA minimale. |
+| Important | **Les dérogations à la jauge IOM** | La jauge IOM limite l’électronique à deux commandes radio. Il faut écrire ce qui est admis : pilote automatique, capteurs, balise. Et dire si les 250 g de la balise comptent dans le poids minimum de 4 kg. | À écrire avec un jaugeur de la classe avant le 8 janvier. |
+| Important | **Le contenu de la qualification** | Décidée pour le premier jour : parcours seul, tour de pénalité, arrêt sur ordre. Restent les critères précis et ce que devient un bateau recalé. | Proposé : il peut se représenter et ne court en manche classée qu’une fois qualifié. |
+| Important | **La relecture des règles** | La version 0.2 intègre vos décisions. Elle n’a été relue par aucun arbitre. | Relecture par un arbitre agréé avant le 8 janvier, publication le 11. |
+| Important | **Les commandes à délai long** | L’anémomètre se vend sur devis ; la série de balises est commandée début février pour un essai le 10 mars. | Devis de l’anémomètre en décembre ; pièces communes aux deux récepteurs dès janvier. |
+| À prévoir | **La version anglaise du kit** | Décidée. Contrat d’interface, règles et bateau de référence à traduire. | Fin janvier, après la publication des règles v1. |
+| À prévoir | **Les seuils d’alerte de l’arbitrage** | Trop d’alertes noient les arbitres, trop peu laissent passer des fautes. | À régler sur les données des essais de mars et de la régate blanche. |
+| À prévoir | **Un seul anémomètre sur l’eau** | Le second n’est pas retenu. La donnée la plus attendue des équipes repose sur un capteur. | Écrire le repli sur la station à terre et le dire aux équipes. |
+| À prévoir | **Batteries et bateau qui coule** | Charge et transport des batteries au lithium ne sont pas décrits. Un bateau qui coule emporte une balise de 440 €. | Consignes de charge ; flotteur ou longe de récupération sur chaque balise. |
 
-### Sport et sécurité
+## Ce que nous attendons des autres instances
 
-| Niveau | Manque | Constat | Quoi faire |
-|---|---|---|---|
-| Important | **Le format sportif n’est pas écrit** | Nombre de manches par jour, poules ou flotte entière, manches retirées, programme des cinq jours. | Poules de 4 à 5 bateaux, manches de 8 à 10 minutes. Mercredi et jeudi : contrôles, essais, qualifications (c’est la marge cachée). Vendredi à dimanche : courses et finales. |
-| Important | **Des IA en flotte : beaucoup d’incidents** | Notre propre simulation produit 12 alertes en une manche de 7 bateaux, dont 7 croisements au premier bord. Deux arbitres ne suivront pas. | Poules réduites, seuils d’alerte réglés aux essais, pénalité automatique pour les cas évidents (départ anticipé, bouée touchée). |
-| Important | **Impossible de prouver qu’aucun humain n’intervient** | La règle 3.1 repose sur le journal tenu par l’équipe elle-même. | Zone équipes visible du comité, mains hors clavier pendant la manche, journal horodaté remis après chaque manche, contrôles au hasard. |
-| Important | **Pas de limites de vent écrites** | Un voilier de 1 m ne court ni sans vent ni par mistral fort. | Fixer une plage, par exemple 4 à 20 nœuds, à valider aux essais, et dire qui décide. |
-| À prévoir | **Batteries et bateau qui coule** | Charge, stockage et transport des batteries au lithium ne sont pas traités. Un bateau qui coule emporte une balise de 440 €. | Consignes de charge ; flotteur ou longe de récupération sur chaque balise. |
-| À prévoir | **Un seul anémomètre sur l’eau** | C’est la donnée la plus attendue des équipes, sur un seul capteur. | Prendre le second en option (1 470 €), ou écrire le repli sur la station à terre. |
+| Quand | Quoi | Pour quoi faire |
+|---|---|---|
+| Avant le 20 janvier | Le tracé et la longueur du parcours | pour placer les bouées de l’essai n°1 et régler le moteur de course |
+| Fin janvier | Le nombre d’équipes inscrites | pour commander la bonne quantité de balises début février |
+| Décembre, février, mars | Le financement des trois commandes | ≈ 1 900 €, 9 510 € et 6 800 €, plus les imprévus |
+| Mars | Le dispositif d’accueil du public | écran, sonorisation et commentateur : notre logiciel fournit le mode grand écran et les aides au commentateur |
 
-### Public
-
-| Niveau | Manque | Constat | Quoi faire |
-|---|---|---|---|
-| Important | **Depuis la plage, on ne voit presque rien** | Un bateau de 1 m à 150 m est un point. Le spectacle est sur les écrans : or ni grand écran ni sonorisation ne sont au budget. | Écran, sonorisation et commentateur au village ; médiation pour expliquer ce que fait l’IA. |
-| Important | **Rien ne dit comment faire venir le public** | Pas de plan de communication ni de partenaire média pour 500 à 2 000 personnes. Les dates vont du mercredi 12 au dimanche 16 mai : c’est le week-end de la Pentecôte. Foule probable samedi et dimanche, peu de monde en semaine, plages pleines et 4G chargée. | Concentrer le spectacle sur le week-end. Communication locale six semaines avant. |
-| À prévoir | **Droit à l’image et données personnelles** | La vidéo filme le public ; l’application collecte peu, mais doit le dire. | Affichage sur place, mentions dans l’application. |
-
-## Les douze risques qui pèsent le plus
+## Les risques qui pèsent le plus
 
 Probabilité et gravité notées sur 5 ; le poids est leur produit.
 
 | Risque | Probabilité | Gravité | Poids | Parade |
 |---|---|---|---|---|
-| Moins de 4 équipes prêtes | 4 | 5 | **20** | Pré-engagement avant Noël, bateau de référence, bateaux de l’organisation, qualification. |
-| Bénévoles débordés, personne clé absente | 4 | 4 | **16** | Binômes, engagement écrit, liste de ce qu’on abandonne en premier. |
-| Chaîne des balises en retard | 3 | 5 | **15** | Second intégrateur, commandes avancées, repli sans arbitrage automatique. |
-| Matériel non financé à temps | 3 | 4 | **12** | Prototype avancé, financeurs avant fin janvier, dons en nature. |
-| IA indisciplinées, manches illisibles | 4 | 3 | **12** | Poules réduites, manches courtes, qualification, pénalités automatiques évidentes. |
-| Blocage réglementaire ou d’assurance tardif | 2 | 5 | **10** | Confirmations écrites avant Noël, déclaration nautique début mars. |
-| Public absent, ou qui ne comprend pas | 3 | 3 | **9** | Écran, sonorisation, commentateur, communication, week-end de la Pentecôte. |
-| 4G saturée le week-end | 3 | 3 | **9** | Déjà prévu : radio de secours, seconde carte SIM, test un jour de plage pleine. |
-| Règles contestées, soupçon d’intervention humaine | 3 | 3 | **9** | Relecture par un arbitre agréé, contrôle visible des équipes, journaux remis. |
-| Moins de 3 jours navigables sur 5 | 2 | 4 | **8** | Programme souple, limites de vent écrites, repli pour le public. |
+| Développeurs et intégrateur introuvables ou débordés | 4 | 5 | **20** | Les nommer avant le 11 décembre, un suppléant par poste, liste de ce qu’on abandonne en premier. |
+| Chaîne des balises en retard | 3 | 5 | **15** | Second intégrateur, commandes avancées, niveaux de repli B et C. |
+| Pas de bateau pour l’essai de janvier | 3 | 4 | **12** | Deux IOM achetés ou prêtés avant le 15 janvier. |
+| Équipes pas prêtes malgré le kit | 3 | 4 | **12** | Bateau de référence avant Noël, simulateur dès décembre, support, régate blanche. |
+| IA indisciplinées, arbitres débordés | 4 | 3 | **12** | Poules réduites, seuils d’alerte réglés aux essais, régate blanche. |
+| 4G saturée le week-end de la Pentecôte | 3 | 3 | **9** | Déjà prévu : radio de secours, seconde carte SIM, régate blanche un jour de plage pleine. |
+| Règles contestées, soupçon d’intervention humaine | 3 | 3 | **9** | Relecture par un arbitre agréé ; journal des commandes exigé en cas de réclamation. |
+| Bateau à la dérive ou incontrôlable | 2 | 4 | **8** | Comportement en perte de liaison testé à la qualification ; bateau d’assistance. |
+| Moins de 3 jours navigables sur 5 | 2 | 4 | **8** | Limites de vent écrites ; un jour de marge si le programme le permet. |
 | Panne au PC course | 2 | 4 | **8** | Déjà prévu : second serveur, batterie, 5G, radio. |
-| Accident : baigneur, batterie, bateau à la dérive | 1 | 5 | **5** | Zone balisée, perte de liaison testée, bateau d’assistance, consignes de charge. |
+| Mesure du vent indisponible | 2 | 3 | **6** | Repli écrit sur la station à terre. |
 
-Les risques techniques détaillés (antennes, étanchéité, moteur de course, radio…) restent dans [en-clair-succes-risques.md](en-clair-succes-risques.md) : ils sont bien couverts.
+Les risques techniques détaillés restent dans [en-clair-succes-risques.md](en-clair-succes-risques.md).
 
-## Décider à temps
-
-### Critères des trois revues
+## Décider à temps (adopté)
 
 | Quand | Revue | Feu vert si |
 |---|---|---|
-| Fin janvier | Revue n°1 | 4 équipes au moins inscrites, bateau en construction ; Position RTK fixe plus de 95 % du temps à l’essai n°1 ; Financement de la série acquis ; Porteur désigné, assurance souscrite |
-| Mi-mars | Revue n°2 | 4 bateaux au moins qualifiés seuls sur l’eau ; Le système complet a tourné à l’essai n°2 ; 12 balises recettées, déclaration nautique déposée |
-| Mi-avril | Revue n°3 | Régate blanche courue avec 4 équipes au moins ; Modes dégradés testés ; Les 10 personnes de la semaine de course sont nommées |
+| Fin janvier | Revue n°1 | Position RTK fixe plus de 95 % du temps à l’essai n°1 ; Développeurs et intégrateur en place ; Bateau de référence et règles v1 publiés |
+| Mi-mars | Revue n°2 | Le système complet a tourné à l’essai n°2 ; 16 balises recettées ; Format des données gelé |
+| Mi-avril | Revue n°3 | Régate blanche courue ; Modes dégradés testés ; Les personnes du PC course pour la semaine sont nommées |
 
 Si un critère manque, on descend d’un niveau de repli et on le dit aux équipes le jour même.
-
-### Niveaux de repli
 
 | Niveau | Nom | Contenu |
 |---|---|---|
 | A | Complet | Suivi au centimètre, arbitrage assisté, application publique, vidéo. |
 | B | Régate suivie | Suivi au centimètre et classement automatique ; arbitrage à vue, sans alertes automatiques ; ni carte de vent, ni habillage télé. |
 | C | Régate simple | Départs et arrivées jugés par le comité, GPS ordinaire pour l’affichage. L’IA barre toujours. |
-| D | Démonstration | Deux ou trois bateaux, dont ceux de l’organisation, sur un parcours commenté. |
-
-## Ce que cette analyse ne sait pas
-
-- Des équipes sont-elles déjà approchées ? Si quatre sont engagées, la condition « équipes » passe de 55 à 80 % et « une vraie régate » à environ 30 %.
-- Où en est le dossier réglementaire, et qui porte l’événement ?
-- Y a-t-il déjà un financeur pour le matériel ?
-- Qui sont les bénévoles, et combien de temps peuvent-ils réellement donner en février et mars ?
-
-## Sources des points vérifiés
-
-- [Drones maritimes, réglementation mise à jour (Weblex)](https://www.weblex.fr/weblex-actualite/drones-maritimes-une-reglementation-mise-a-jour)
-- [La France pionnière dans l’exploitation des drones maritimes (ministère de la Mer)](https://www.mer.gouv.fr/la-france-pionniere-dans-lexploitation-des-drones-maritimes)
-- [Déclaration de manifestation nautique, formulaire de la préfecture du Var](https://www.var.gouv.fr/contenu/telechargement/25679/177774/file/declaration_de_manifestation_nautique_cle2d7aa9.pdf)
-- [Déclaration de manifestation nautique en mer (démarche en ligne)](https://demarche.numerique.gouv.fr/commencer/declaration-de-manifestation-nautique-en-mer)
-- [Déclaration des manifestations de 1 500 à 5 000 personnes (exemple de dossier préfectoral)](https://tarn-et-garonne.gouv.fr/contenu/telechargement/33893/226435/file/Dossier%20de%20déclaration%20de%201500%20à%205000%20personnes.pdf)
-- [Prix d’un DragonFlite 95 V2 prêt à naviguer (Aviotiger, France)](https://www.aviotiger.com/en/voilier/131-dragon-flite-95-rtr.html)
-
-Ces sources sont des résumés et des formulaires, pas les textes officiels : les seuils et les délais sont à confirmer auprès de la DDTM du Var et de la mairie.
+| D | Démonstration | Deux ou trois bateaux sur un parcours commenté. |

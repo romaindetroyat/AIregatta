@@ -1,7 +1,7 @@
 # Kit équipes : ce que l’organisation vous fournit
 
 > AI Regatta — Anse du Mourillon, Toulon, du 12 au 16 mai 2027.
-> Version 1.0-draft du 20 novembre 2026. Tout ce qui est marqué « à confirmer » peut encore changer.
+> Version 1.0-draft du 21 novembre 2026. Tout ce qui est marqué « à confirmer » peut encore changer.
 
 ## Le principe en une phrase
 
@@ -50,19 +50,21 @@ Sur le site, chaque équipe a une **prise Ethernet** dans la zone équipes : câ
 | Date | Étape |
 |---|---|
 | Novembre 2026 | Publication de ce kit en version 1.0-draft |
-| **Janvier 2027** | **Ouverture du bac à sable cloud** : broker identique à celui du site, alimenté par le simulateur ; comptes équipes distribués |
-| Février 2027 | Objectif : au moins 3 équipes connectées au simulateur (critère de réussite de S12) |
+| Décembre 2026 | Simulateur, fichiers de rejeu et fiche du bateau de référence (un IOM du commerce, conseillé, non imposé) |
+| Janvier 2027 | Règles v1 publiées ; version anglaise du kit |
+| **Février 2027** | **Ouverture du bac à sable cloud** : broker identique à celui du site, alimenté par le simulateur ; comptes équipes distribués |
+| Mars 2027 | Objectif : au moins 3 équipes connectées au bac à sable (critère de réussite de S12) |
 | **15 mars 2027** | **Gel du contrat d’interface** (version `1.0.0`) ; ensuite, seulement des ajouts compatibles annoncés 30 jours à l’avance |
 | **Avril 2027** | **Régate blanche et essais sur l’eau** : premières données réelles, publiées en fichiers de rejeu |
 | [date à définir] | Date limite d’inscription et de déclaration des fréquences |
-| [date à définir], avant la première manche | Contrôle des bateaux, pose des balises, test de connexion sur le site |
-| **12 mai 2027** | **Jour J** : première journée de course (l’épreuve dure jusqu’au 16 mai, sans jour de réserve) |
+| Début avril 2027 | Tests à quai : pose des balises, contrôle de la jauge IOM, test de connexion |
+| **12 mai 2027** | **Premier jour** : contrôles et qualification (parcours seul, tour de pénalité, arrêt sur ordre). L’épreuve dure jusqu’au 16 mai, sans jour de réserve |
 
 ## Ce qui est de votre responsabilité
 
 - **Votre logiciel** : réception du flux, tactique, affichage, envoi de vos messages au comité. L’organisation fournit le flux, la documentation et des exemples, **pas d’assistant tactique** (P12).
-- **Votre liaison avec votre bateau** (P10, P36) : matériel, protocole, fiabilité, dans le respect du plan de fréquences, avec des émetteurs déclarés à l’inscription.
-- **Votre bateau** : architecture libre (P07), autopilote, capteurs, et comportement en cas de perte de liaison, déclaré à l’avance.
+- **Votre liaison avec votre bateau** (P10, P36) : matériel, protocole, fiabilité, dans le respect du plan de fréquences, avec des émetteurs déclarés à l’inscription. Vous y envoyez ce que vous voulez, données officielles comprises. Aucun humain ne commande le bateau pendant une manche ; le logiciel ne change pas pendant une manche.
+- **Votre bateau** : jauge IOM (classe 1 m) pour la coque, les appendices, les gréements et le poids ; électronique libre (P07). À vous l’autopilote, les capteurs, et le comportement en cas de perte de liaison, déclaré à l’avance. Un bateau de référence est documenté dans le kit : conseillé, non imposé.
 - **Votre tactique** : c’est le cœur de l’épreuve.
 - **L’heure de vos PC** : synchronisée sur le serveur de temps du site (écart < 5 ms, P26).
 
@@ -70,7 +72,7 @@ L’organisation, elle, fournit et pose la **balise officielle** (scellée, sans
 
 ## Les règles d’équité, en bref
 
-Même câble, même broker, mêmes données au même instant ; lecture seule ; aucun accès aux données internes de l’organisation ; une seule source de position officielle ; pas d’autre source de données sur l’eau que les capteurs de votre bateau (à confirmer) ; réponses du comité utiles à tous publiées à tous. Le détail est dans [regles-equite-et-faq.md](regles-equite-et-faq.md).
+Même câble, même broker, mêmes données au même instant ; lecture seule ; aucun accès aux données internes de l’organisation ; une seule source de position officielle ; pas d’autre source de données sur l’eau que les capteurs de votre bateau ; réponses du comité utiles à tous publiées à tous. Le détail est dans [regles-equite-et-faq.md](regles-equite-et-faq.md).
 
 ## Contact
 

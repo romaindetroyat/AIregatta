@@ -11,10 +11,10 @@ Système de suivi, d'arbitrage, d'analyse du vent et de diffusion publique pour 
 - [Matériel retenu](docs/materiel.md) : chaque référence, pourquoi ce choix, fiches techniques et avis.
 - [En clair, succès et risques](docs/en-clair-succes-risques.md) : le principe, nos choix expliqués, les clés du succès, ce qui peut foirer, le glossaire.
 - [Cahier des charges des ordinateurs](docs/ordinateurs.md) : serveurs du PC course, régie, consoles, poste de contrôle, tablette, conseils aux équipes.
-- [Règles de course](docs/regles-de-course.md) : version 0.1, adaptée du match racing radiocommandé ; commande des bateaux par l’IA seule, départ, place à la bouée, pénalités, zone de course, arbitrage, classement.
-- [Analyse du projet](docs/analyse-projet.md) : a-t-on pensé à tout ? Les 24 manques relevés, les chances de succès à trois niveaux, les douze risques qui pèsent le plus, les mesures qui changent la donne, les critères des revues et les niveaux de repli.
-- [Feuille de route](docs/feuille-de-route.md) : 52 actions dans l’ordre, dépendances, chemin critique, ce qui avance en parallèle mois par mois, répartition des forces vives en 7 pôles.
-- [Achats](docs/achats.md) : la liste de courses complète, quantités, rôle, prix, mois de commande et liens d’achat avec livraison en France (≈ 18 600 €).
+- [Règles de course](docs/regles-de-course.md) : version 0.2, adaptée du match racing radiocommandé ; jauge IOM, qualification le premier jour ; commande des bateaux par l’IA seule, départ, place à la bouée, pénalités, zone de course, arbitrage, classement.
+- [Analyse du projet](docs/analyse-projet.md) : après les arbitrages du 21 novembre : ce qui est tranché, ce qui reste à trouver, à trancher et à produire, les chances de succès de notre part, les risques, ce que nous attendons des autres instances, les revues et les niveaux de repli.
+- [Feuille de route](docs/feuille-de-route.md) : 51 actions dans l’ordre, dépendances, chemin critique, ce qui avance en parallèle mois par mois, répartition des forces vives en 7 pôles.
+- [Achats](docs/achats.md) : la liste de courses complète, quantités, rôle, prix, mois de commande et liens d’achat avec livraison en France (≈ 20 000 €, caméras embarquées comprises).
 - [Postulats de départ](docs/postulats.md) : le paramétrage initial du projet, actés ou à confirmer.
 - [Maquettes et spécification des applications](docs/maquettes.md) : comité de course, public, équipes ; ce que chaque application reçoit, décide et émet ; décisions à prendre avant le développement.
 - [Prototype en direct](docs/prototype-en-direct.html) : une manche simulée en deux tours, au design clair et ludique, vue par le spectateur (téléphone), le comité de course (avec rejeu d'arbitrage), la télévision et la console d'équipe ; cartes zoomables (molette, boutons, deux doigts, glisser) ; les décisions du comité se propagent aux autres vues.

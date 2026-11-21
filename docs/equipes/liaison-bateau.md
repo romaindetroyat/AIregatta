@@ -175,7 +175,9 @@ Ajoutez une **authentification** (au minimum un code d’intégrité avec une cl
 
 **Variante MAVLink** (si vous utilisez ArduPilot) : un message MAVLink propre à votre équipe (dialecte personnalisé) reprenant les mêmes champs (`order_id`, `t_gps_ms`, `cmd`, `param`, `ttl_ms`), et le message d’accusé de réception standard de MAVLink pour l’`ack`. Une partie des ordres peut aussi passer par des fonctions existantes d’ArduPilot (virement sur commande, changement de mode) : vérifiez dans la documentation de la version d’ArduPilot que vous utilisez.
 
-### 4.3 Ce qui reste à trancher par l’organisation
+### 4.3 Ce qui a été tranché par l’organisation
+
+> Décisions du 20 et du 21 novembre 2026 : **(a)** l’IA peut commander directement le safran et les voiles, aucun humain ne barre en course, sauf arrêt de sécurité ; **(b)**, **(c)**, **(d)** tout est libre sur votre liaison, données officielles relayées comprises ; **(e)** le journal des ordres est tenu par l’équipe et fourni au jury en cas de réclamation. Le tableau ci-dessous garde, pour mémoire, les options qui étaient étudiées.
 
 | | Question | Options | Recommandation |
 |---|---|---|---|

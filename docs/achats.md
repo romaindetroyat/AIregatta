@@ -1,14 +1,14 @@
 # AI Regatta — Achats
 
-> Tout le matériel à acheter pour 10 bateaux : quantité, rôle, prix, où l’acheter (livraison France). Total : **18 600 €**, imprévus de 10 % compris. Seul le matériel coûte : tout le monde est bénévole.
+> Tout le matériel à acheter pour 10 bateaux : quantité, rôle, prix, où l’acheter (livraison France). Total : **20 000 €**, imprévus de 10 % compris. Seul le matériel coûte : tout le monde est bénévole.
 
 | Commande | Montant |
 |---|---|
 | Décembre · Commande du prototype (C1) | 1 900 € |
 | Février · Série et bouées (C4, D2, D3) | 9 510 € |
-| Mars · PC course, caméras, signaux (H3) | 5 500 € |
-| Imprévus (10 %) | 1 700 € |
-| **Total** | **18 600 €** |
+| Mars · PC course, caméras, signaux (H3) | 6 800 € |
+| Imprévus (10 %) | 1 800 € |
+| **Total** | **20 000 €** |
 
 ## Balise officielle · 16 exemplaires
 
@@ -68,20 +68,25 @@
 | 2 | Corne électrique marine 12 V | Signaux sonores du départ | Mars | 45 € | 90 € | [Poseidon Marine, klaxon Marco 12 V](https://www.poseidonmarine.eu/fr/products/electric-horn-12v-chrome-1) · [H2R Équipements (France), avertisseur Osculati 12 V](https://www.h2r-equipements.com/avertisseur-sonore-pour-bateau/2985-osculati-avertisseur-encastrable-12v.html) |
 | 1 | Batterie 12 V et câblage | Alimentation des cornes | Mars | 160 € | 160 € | — |
 
+## Caméras embarquées
+
+| Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
+|---|---|---|---|---|---|---|
+| 10 | Caméra embarquée légère | Images à bord de chaque bateau, pour la vidéo et l’habillage télé ; modèle à choisir en février | Mars | 100 € | 1 000 € | — |
+| 1 | Récepteur vidéo au PC course | Reçoit les images des dix bateaux | Mars | 300 € | 300 € | — |
+
 ## Prototypes
 
 | Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
 |---|---|---|---|---|---|---|
 | 1 | Lot prototype | 2 récepteurs de chaque famille, cartes 4G, radios, centrales, 1 anémomètre de test, pour l’essai de janvier | Décembre | 1 200 € | 1 200 € | — |
 
-## Options
+## Options non retenues
 
 | Option | Coût | Où acheter |
 |---|---|---|
 | Second anémomètre, bouée sous le vent | 1 470 € | [NauticExpo, demande de devis](https://www.nauticexpo.com/prod/gill-instruments-ltd/product-39900-485171.html) · [Campbell Scientific France, brochure et devis](https://s.campbellsci.com/documents/fr/product-brochures/b_windsonic_fr.pdf) |
-| Wi-Fi public au village | 800 € | — |
 | Seconde caméra motorisée | 480 € | [Reolink France, boutique officielle](https://reolink.com/fr/product/rlc-823s2/) |
 | Analyse d’image (Jetson Orin Nano Super) | 280 € | [Generation Robots (France)](https://www.generationrobots.com/en/404303-nvidia-jetson-orin-nano-super-developer-kit.html) · [RS Online France](https://fr.rs-online.com/web/p/modules-de-developpement-pour-processeurs/2647384) |
-| Caméras embarquées (10 bateaux + récepteur) | 1 300 € | — |
 
 **Avant de commander :** les liens viennent d’une recherche et n’ont pas pu être ouverts depuis notre outil ; vérifiez la page et le prix. L’anémomètre Gill se vend sur devis. Les corps de bouées et les mouillages ne sont pas comptés : à voir avec le club partenaire.

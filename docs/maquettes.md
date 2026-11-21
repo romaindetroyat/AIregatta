@@ -206,16 +206,16 @@ Les médias reçoivent le même flux que le comité et les équipes, au même ch
 | D4 | Comité | Sortie de zone | **Acté le 20 novembre 2026** : Tolérance 5 m ou 5 s ; puis pénalité |
 | D5 | Comité | Temps limite et délai de réclamation | **Acté le 20 novembre 2026** : 15 min ; 10 min |
 | D6 | Comité | Balise en panne en course | **Acté le 20 novembre 2026** : Réparation (RDG) si la panne est prouvée |
-| D7 | Public | Nom de domaine | À réserver rapidement |
+| D7 | Public | Nom de domaine | **Hors périmètre** : géré par une autre instance (communication) |
 | D8 | Public | Vidéo et commentaire audio en v1 | Audio oui, vidéo en v2 |
-| D9 | Équipes | Paramètres d’ordre | Autoriser |
-| D10 | Équipes | Relais des données officielles vers le bateau | Autoriser |
+| D9 | Équipes | Paramètres d’ordre | **Acté le 21 novembre 2026** : libre |
+| D10 | Équipes | Relais des données officielles vers le bateau | **Acté le 21 novembre 2026** : libre |
 | D11 | Équipes | Barre à distance : la commande directe du safran et des voiles par l’IA à terre, sans intervention humaine, est-elle autorisée en course ? Faut-il interdire seulement l’intervention humaine (joystick), sauf pour la sécurité ? | **Acté le 20 novembre 2026** : L’IA barre seule, ordres ou commande directe ; aucune intervention humaine, sauf l’arrêt de sécurité |
-| D14 | Équipes | Radiocommande de sécurité 2,4 GHz obligatoire ? (§9 de l’architecture la dit obligatoire, P16 ne l’impose pas) | Conseillée, non obligatoire |
-| D12 | Équipes | Mise à jour du logiciel du bateau en course | Interdire pendant une manche |
-| D13 | Équipes | Ouverture du bac à sable | Janvier 2027 |
+| D14 | Équipes | Radiocommande de sécurité 2,4 GHz obligatoire ? (§9 de l’architecture la dit obligatoire, P16 ne l’impose pas) | **Acté le 21 novembre 2026** : conseillée, non obligatoire |
+| D12 | Équipes | Mise à jour du logiciel du bateau en course | **Acté le 21 novembre 2026** : interdite pendant une manche, libre entre les manches |
+| D13 | Équipes | Ouverture du bac à sable | **Acté le 21 novembre 2026** : février 2027 |
 | D15 | Équipes | Intelligence à terre ou embarquée | **Acté le 20 novembre 2026 (P37)** : IA à terre pour 2027 ; tout embarqué pour 2028 (voir section 5) |
-| D16 | Équipes | Réglages fins : choque, borde, cap | À définir avec les équipes avant le gel du 15 mars |
+| D16 | Équipes | Réglages fins : choque, borde, cap | **Acté le 21 novembre 2026** : libres, chaque équipe envoie ce qu’elle veut à son bateau |
 
 Une fois tranchées, ces décisions passent dans les [postulats](postulats.md).
 
