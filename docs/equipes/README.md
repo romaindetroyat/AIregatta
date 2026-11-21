@@ -40,7 +40,8 @@ Sur le site, chaque équipe a une **prise Ethernet** dans la zone équipes : câ
 |---|---|
 | [contrat-interface.md](contrat-interface.md) | Le contrat d’interface : conventions, connexion, tous les sujets MQTT avec leurs champs et un exemple, horloge, pannes, versions |
 | [connecteurs.md](connecteurs.md) | Les connecteurs proposés et quand utiliser chacun |
-| [liaison-bateau.md](liaison-bateau.md) | Communiquer avec votre bateau : fréquences, puissances, architecture conseillée, ordres tactiques, points à trancher |
+| [bateau-de-reference.md](bateau-de-reference.md) | Le bateau de référence, conseillé : un IOM du commerce, un pilote automatique libre, une IA minimale ; jauge, budget, poids, réglages de départ, huit semaines pour naviguer |
+| [liaison-bateau.md](liaison-bateau.md) | Communiquer avec votre bateau : fréquences, puissances, architecture conseillée, ordres tactiques |
 | [regles-equite-et-faq.md](regles-equite-et-faq.md) | Règles d’équité, liste de contrôle avant le jour J, questions fréquentes |
 | [schemas/](schemas/) | Les schémas JSON (JSON Schema 2020-12) de chaque type de message |
 | [exemples/](exemples/) | Code prêt à lancer en Python, JavaScript (navigateur et Node.js) et NMEA |

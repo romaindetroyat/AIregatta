@@ -68,7 +68,7 @@
 
 | Niveau | Point | Constat | Quoi faire |
 |---|---|---|---|
-| Important | **Le bateau de référence** | Décidé : un IOM du commerce, conseillé. Reste à choisir lequel, avec quel pilote automatique, et à le documenter. Un IOM coûte nettement plus cher que le voilier de 95 cm d’abord envisagé. | Fiche dans le kit avant Noël : modèle, prix, pilote automatique libre, exemple d’IA minimale. |
+| Important | **Éprouver le bateau de référence** | La fiche est écrite (version 0.1) : un IOM d’occasion à 450 – 1 500 €, ArduPilot, huit comportements d’IA. Mais aucun bateau n’a encore été monté ainsi, et il manque l’exemple de code de l’IA minimale. | Monter un bateau selon la fiche dès qu’un IOM est disponible ; écrire l’exemple de code ; corriger la fiche après l’essai de janvier. |
 | Important | **Les dérogations à la jauge IOM** | La jauge IOM limite l’électronique à deux commandes radio. Il faut écrire ce qui est admis : pilote automatique, capteurs, balise. Et dire si les 250 g de la balise comptent dans le poids minimum de 4 kg. | À écrire avec un jaugeur de la classe avant le 8 janvier. |
 | Important | **Le contenu de la qualification** | Décidée pour le premier jour : parcours seul, tour de pénalité, arrêt sur ordre. Restent les critères précis et ce que devient un bateau recalé. | Proposé : il peut se représenter et ne court en manche classée qu’une fois qualifié. |
 | Important | **La relecture des règles** | La version 0.2 intègre vos décisions. Elle n’a été relue par aucun arbitre. | Relecture par un arbitre agréé avant le 8 janvier, publication le 11. |
