@@ -1634,7 +1634,7 @@ body.moving .words{opacity:0;transition:opacity .4s}
   <div class="wrap">
     <div class="sec-head">
       <div><p class="meta">03 · Sur l’eau</p><h2>La bouée <em>qui mesure le vent</em></h2></div>
-      <p class="muted">La bouée au vent porte la même balise que les bateaux et un anémomètre à ultrasons. Un espar lesté la garde droite : la mesure reste juste malgré le clapot, et le compas corrige ce qui bouge encore. Les autres bouées n’ont que la balise.</p>
+      <p class="muted">La bouée au vent porte la même balise que les bateaux et un anémomètre à ultrasons. Un espar lesté la garde droite : la mesure reste juste malgré le clapot, et le compas corrige ce qui bouge encore. Les bouées de départ n’ont que la balise, en tête de mât : elles fixent les deux bouts de la ligne.</p>
     </div>
     <div class="bord">
       <div class="carte views"><p class="cap">Vue de profil · bouée au vent instrumentée (espar lesté)</p><svg class="buoy" viewBox="0 0 600 900" role="img" aria-label="Bouée au vent instrumentée : anémomètre à ultrasons, antenne GPS RTK, antennes 4G et radio, panneau solaire, boîtier électronique, flotteur, lest et mouillage">
@@ -1710,6 +1710,72 @@ body.moving .words{opacity:0;transition:opacity .4s}
           <li><span class="n">8</span><span><b>Mouillage</b> : chaîne, émerillon et corps-mort ; le bateau d’assistance la déplace quand le vent tourne.</span></li>
         </ol>
         <div class="wt"><div><span>Balise (comme les bateaux)</span><span>≈ 440 €</span></div><div><span>Anémomètre et intégration</span><span>≈ 1 470 €</span></div><div><span>Données envoyées</span><span>vent 4 Hz, position 10 Hz</span></div></div>
+      </aside>
+    </div>
+    <h3 class="subh">La bouée de départ</h3>
+    <div class="bord">
+      <div class="carte views"><p class="cap">Vue de profil · bouée de ligne (départ et arrivée), deux identiques : une à chaque bout</p><svg class="buoy" viewBox="0 0 600 820" role="img" aria-label="Bouée de départ : antenne GPS RTK en tête de mât, antennes 4G et radio, pavillon, boîtier étanche avec balise et batterie, bouée gonflable, lest et mouillage">
+  <defs><linearGradient id="eauC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(14,90,82,.42)"/><stop offset="1" stop-color="rgba(14,90,82,.05)"/></linearGradient>
+  <linearGradient id="jaune" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E0B400"/><stop offset=".5" stop-color="#FFD43B"/><stop offset="1" stop-color="#D3A800"/></linearGradient></defs>
+  <rect x="0" y="520" width="600" height="300" fill="url(#eauC)"/>
+  <path d="M0 520 Q40 512 80 520 T160 520 T240 520 T320 520 T400 520 T480 520 T560 520 T640 520" fill="none" stroke="#43B3A3" stroke-width="1.5"/>
+  <text class="sub" x="470" y="512">flottaison</text>
+  <!-- ligne de départ -->
+  <line x1="300" y1="96" x2="590" y2="96" stroke="rgba(9,11,7,.55)" stroke-width="2" stroke-dasharray="10 7"/>
+  <text class="sub" x="440" y="86">ligne de départ</text>
+  <!-- mouillage -->
+  <path d="M300 640 Q306 700 330 780" fill="none" stroke="rgba(9,11,7,.55)" stroke-width="3" stroke-dasharray="7 5"/>
+  <rect x="304" y="776" width="56" height="20" rx="3" fill="#9EA391" stroke="rgba(9,11,7,.5)"/>
+  <!-- lest -->
+  <rect x="294" y="570" width="12" height="54" fill="#3A3D30"/>
+  <rect x="282" y="620" width="36" height="22" rx="4" fill="#3A3D30" stroke="rgba(9,11,7,.7)"/>
+  <circle cx="300" cy="642" r="5" fill="#fff" stroke="rgba(9,11,7,.6)" stroke-width="2"/>
+  <!-- bouée gonflable -->
+  <path d="M206 380 Q300 360 394 380 L394 548 Q300 576 206 548 Z" fill="url(#jaune)" stroke="rgba(9,11,7,.45)"/>
+  <ellipse cx="300" cy="380" rx="94" ry="18" fill="#FFE277" stroke="rgba(9,11,7,.35)"/>
+  <path d="M206 430 Q300 450 394 430 M206 490 Q300 510 394 490" fill="none" stroke="rgba(9,11,7,.18)" stroke-width="3"/>
+  <text x="300" y="470" text-anchor="middle" style="font:800 30px var(--f-titre);letter-spacing:-.02em" fill="rgba(9,11,7,.75)">AI</text>
+  <!-- boîtier -->
+  <rect x="250" y="336" width="100" height="44" rx="8" fill="#F4F6EC" stroke="rgba(9,11,7,.55)" stroke-width="2"/>
+  <rect x="262" y="346" width="34" height="24" rx="3" fill="#C7EB00" stroke="rgba(9,11,7,.4)"/>
+  <rect x="302" y="346" width="36" height="24" rx="3" fill="#43B3A3" stroke="rgba(9,11,7,.4)"/>
+  <!-- mât -->
+  <line x1="300" y1="336" x2="300" y2="104" stroke="rgba(9,11,7,.6)" stroke-width="6" stroke-linecap="round"/>
+  <!-- pavillon -->
+  <path d="M300 150 L392 166 L300 196 Z" fill="#FF7A1A" stroke="rgba(9,11,7,.5)"/>
+  <!-- antennes -->
+  <line x1="300" y1="250" x2="244" y2="250" stroke="rgba(9,11,7,.5)" stroke-width="3"/>
+  <line x1="244" y1="250" x2="244" y2="178" stroke="#11150D" stroke-width="4" stroke-linecap="round"/>
+  <line x1="258" y1="250" x2="258" y2="204" stroke="#11150D" stroke-width="3" stroke-linecap="round"/>
+  <!-- GPS en tête de mât -->
+  <path d="M280 104 Q300 72 320 104 Z" fill="#F4F6EC" stroke="rgba(9,11,7,.6)" stroke-width="2"/>
+  <circle cx="300" cy="96" r="5" fill="#E11D48"/>
+  <!-- cotes -->
+  <g stroke="rgba(9,11,7,.4)" stroke-width="1"><line x1="140" y1="80" x2="140" y2="520"/><line x1="134" y1="80" x2="146" y2="80"/><line x1="134" y1="520" x2="146" y2="520"/></g>
+  <text class="sub" x="150" y="380" transform="rotate(-90 150 380)">≈ 1,5 m au-dessus de l’eau</text>
+  <g stroke="rgba(9,11,7,.4)" stroke-width="1"><line x1="440" y1="380" x2="440" y2="548"/><line x1="434" y1="380" x2="446" y2="380"/><line x1="434" y1="548" x2="446" y2="548"/></g>
+  <text class="sub" x="450" y="468">≈ 0,6 × 1 m</text>
+  <!-- repères -->
+  <g class="callout"><circle cx="210" cy="96" r="13"/><text x="210" y="100" text-anchor="middle">1</text><line x1="223" y1="96" x2="280" y2="96" stroke="var(--lime)"/></g>
+  <g class="callout"><circle cx="196" cy="190" r="13"/><text x="196" y="194" text-anchor="middle">2</text><line x1="209" y1="190" x2="240" y2="192" stroke="var(--lime)"/></g>
+  <g class="callout"><circle cx="430" cy="166" r="13"/><text x="430" y="170" text-anchor="middle">3</text><line x1="417" y1="166" x2="394" y2="166" stroke="var(--lime)"/></g>
+  <g class="callout"><circle cx="420" cy="330" r="13"/><text x="420" y="334" text-anchor="middle">4</text><line x1="407" y1="333" x2="352" y2="350" stroke="var(--lime)"/></g>
+  <g class="callout"><circle cx="176" cy="446" r="13"/><text x="176" y="450" text-anchor="middle">5</text><line x1="189" y1="446" x2="206" y2="446" stroke="var(--lime)"/></g>
+  <g class="callout"><circle cx="220" cy="630" r="13"/><text x="220" y="634" text-anchor="middle">6</text><line x1="233" y1="630" x2="282" y2="630" stroke="var(--lime)"/></g>
+  <g class="callout"><circle cx="440" cy="786" r="13"/><text x="440" y="790" text-anchor="middle">7</text><line x1="427" y1="786" x2="362" y2="786" stroke="var(--lime)"/></g>
+</svg></div>
+      <aside class="carte kv">
+        <p class="meta">Ce qu’elle porte</p>
+        <ol>
+          <li><span class="n">1</span><span><b>Antenne GPS RTK en tête de mât</b> : c’est elle qui fixe l’extrémité de la ligne. Le moteur de course trace la ligne entre les deux antennes, au centimètre, 10 fois par seconde.</span></li>
+          <li><span class="n">2</span><span><b>Antennes 4G et radio 868 MHz</b>, sous le GPS pour ne pas le masquer.</span></li>
+          <li><span class="n">3</span><span><b>Pavillon orange</b> : la bouée se voit de loin, pour le public, le comité et les caméras.</span></li>
+          <li><span class="n">4</span><span><b>Boîtier étanche</b> : la même balise que les bateaux, avec sa batterie (≈ 20 h, rechargée chaque soir) et son compas.</span></li>
+          <li><span class="n">5</span><span><b>Bouée gonflable</b> jaune, cylindrique, ≈ 0,6 × 1 m : elle se distingue des bouées de parcours orange.</span></li>
+          <li><span class="n">6</span><span><b>Lest court</b> sous la bouée : le mât reste droit, le GPS reste au-dessus du mouillage.</span></li>
+          <li><span class="n">7</span><span><b>Mouillage court</b> : la bouée tourne peu autour de son corps-mort ; si elle bouge, la ligne bouge avec elle, puisque le logiciel suit sa position réelle.</span></li>
+        </ol>
+        <div class="wt"><div><span>Balise (comme les bateaux)</span><span>≈ 440 €</span></div><div><span>Bouées de ligne</span><span>2, identiques</span></div><div><span>Données envoyées</span><span>position 10 Hz</span></div></div>
       </aside>
     </div>
   </div>
