@@ -2820,7 +2820,11 @@ const RULES={
 const KIND={r18:'PLACE À LA BOUÉE',r10:'BÂBORD / TRIBORD',r11:'AU VENT / SOUS LE VENT',r12:'ROUTE LIBRE DERRIÈRE',r13:'EN VIRANT',r31:'BOUÉE TOUCHÉE',ocs:'DÉPART ANTICIPÉ'};
 const markName=M=>M===SIM.WW?'à la bouée au vent':'à la porte';
 function classify(A,C,t){const D=Math.PI/180;
-  for(const M of [SIM.WW,SIM.LW1,SIM.LW2]){if(Math.hypot(A.s.x-M.x,A.s.y-M.y)>9||Math.hypot(C.s.x-M.x,C.s.y-M.y)>9)continue;
+  // Place à la bouée (RCV 18) : seulement pour deux bateaux du même bord de parcours, à la bouée qu'ils vont contourner,
+  // et jamais entre deux bateaux d'amures opposées au près (RCV 18.1 a) : c'est alors bâbord/tribord qui s'applique.
+  const ta0=SIM.tack(A.s.hdg),tc0=SIM.tack(C.s.hdg),beat=A.s.leg===1||A.s.leg===3;
+  const marks=A.s.leg!==C.s.leg?[]:beat?(ta0!==tc0?[]:[SIM.WW]):A.s.leg===2?[SIM.LW1,SIM.LW2]:[];
+  for(const M of marks){if(Math.hypot(A.s.x-M.x,A.s.y-M.y)>9||Math.hypot(C.s.x-M.x,C.s.y-M.y)>9)continue;
     const ea=SIM.zoneEntry(A.b,M,t),ec=SIM.zoneEntry(C.b,M,t);if(ea==null&&ec==null)continue;
     const prio=(ec==null||(ea!=null&&ea<=ec))?A:C;return {rule:'r18',give:prio===A?C:A,prio,M,ent:{[A.b.id]:ea,[C.b.id]:ec}}}
   if(A.s.seg==='tack'||C.s.seg==='tack'){const give=A.s.seg==='tack'?A:C;return {rule:'r13',give,prio:give===A?C:A}}
@@ -2833,7 +2837,7 @@ function pushAlert(c){const G=c.give,Q=c.prio,g=G.b.id,q=Q&&Q.b.id,tk=x=>SIM.tac
   const T2={r18:g+' / '+q+' '+markName(c.M),r10:g+' bâbord, '+q+' tribord',r11:g+' au vent de '+q,r12:g+' derrière '+q,r13:g+' vire près de '+q,r31:g+' touche la bouée '+(c.M===SIM.WW?'au vent':'de la porte')}[c.rule];
   const why={r18:'N’a pas laissé la place à '+(Q&&Q.b.name)+' '+(c.M?markName(c.M):'')+'.',r10:'Bâbord amures, ne s’est pas écarté de '+(Q&&Q.b.name)+', tribord amures.',r11:'Au vent, ne s’est pas écarté de '+(Q&&Q.b.name)+'.',r12:'Derrière, ne s’est pas écarté de '+(Q&&Q.b.name)+'.',r13:'A viré trop près de '+(Q&&Q.b.name)+'.',r31:'A touché la bouée.'}[c.rule];
   const x=Q?(G.s.x+Q.s.x)/2:c.M.x,y=Q?(G.s.y+Q.s.y)/2:c.M.y;
-  sim.alerts.push({id:c.rule+g+(q||'')+G.s.leg,rule:c.rule,kind:KIND[c.rule],title:T2,boats:q?[g,q]:[g],t:c.t,x,y,gap:c.d,M:c.M,ent:c.ent,why,leg:G.s.leg});
+  sim.alerts.push({id:c.rule+g+(q||'')+G.s.leg,tk:Q?{[g]:tk(G),[q]:tk(Q)}:null,rule:c.rule,kind:KIND[c.rule],title:T2,boats:q?[g,q]:[g],t:c.t,x,y,gap:c.d,M:c.M,ent:c.ent,why,leg:G.s.leg});
   log(c.t,'Alerte · '+KIND[c.rule].toLowerCase()+' · '+T2)}
 function decide(id,what){const al=sim.alerts.find(a=>a.id===id);if(!al||al.done)return;al.done=what;const b=sim.boats.find(x=>x.id===al.boats[0]),t=T;
   if(what==='recall'){b.pens.push({at:t,dur:9,kind:'recall'});b.recalled=true;emit('recall',t,{hot:true,boat:b.id,title:'Rappel : '+b.name,body:'Parti trop tôt, il doit revenir couper la ligne.'});log(t,'Rappel individuel X · '+b.id)}
@@ -2853,7 +2857,7 @@ const MAPOPT={
   com:()=>({th:'chart',bs:14,tags:'all',trail:20,labels:true,lay:true,zone:true,rings:sim.alerts.filter(a=>!a.done),followTarget:'lead',followLabel:'Leader'}),
   tv:()=>({th:'dark',bs:18,tags:'all',trail:14,labels:true,lay:true,speed:true,followTarget:'pack',followLabel:'Caméra auto',tp:true}),
   eq:()=>({th:'cockpit',bs:14,tags:'mine',mine:eqTeam,trail:30,labels:true,lay:true,followTarget:'me',followLabel:'Mon bateau'}),
-  rv:()=>{const a=RV&&sim.alerts.find(x=>x.id===RV.id);return {th:'dark',bs:16,trueScale:true,tags:'focus',focus:a?a.boats:[],roles:a&&a.boats.length>1?{[a.boats[0]]:'G',[a.boats[1]]:'P'}:(a&&a.rule==='r31'?{[a.boats[0]]:'G'}:null),trail:6,path:RV?{t0:RV.t0,t1:RV.t1}:null,zoneHL:a&&a.M,marks2:RV&&RV.marks,inc:a?{x:a.x,y:a.y}:null,noPos:true,gap:a&&a.boats.length>1?a.boats:null,markGap:a&&a.rule==='r31'?{b:a.boats[0],M:a.M}:null,followTarget:'inc',followLabel:'Centrer',time:RV?RV.t:T}}
+  rv:()=>{const a=RV&&sim.alerts.find(x=>x.id===RV.id);return {th:'dark',bs:16,trueScale:true,tags:'focus',focus:a?a.boats:[],roles:a&&a.boats.length>1?{[a.boats[0]]:'G',[a.boats[1]]:'P'}:(a&&a.rule==='r31'?{[a.boats[0]]:'G'}:null),rtk:a&&a.tk,trail:6,path:RV?{t0:RV.t0,t1:RV.t1}:null,zoneHL:a&&a.M,marks2:RV&&RV.marks,inc:a?{x:a.x,y:a.y}:null,noPos:true,gap:a&&a.boats.length>1?a.boats:null,markGap:a&&a.rule==='r31'?{b:a.boats[0],M:a.M}:null,followTarget:'inc',followLabel:'Centrer',time:RV?RV.t:T}}
 };
 function mapSVG(k,w,h){
   const o=MAPOPT[k](),Th=THEMES[o.th],z=ZM[k],t=o.time!=null?o.time:(o.tp?T-1:T),rk=SIM.ranking(sim,t);
@@ -2881,7 +2885,7 @@ function mapSVG(k,w,h){
     if(o.trail){const pts=[];for(let j=o.trail;j>=0;j--){const tt=t-j*1.2;if(tt<-60)continue;const ss=SIM.state(b,tt),[x,y]=P(ss.x,ss.y);pts.push(f1(x)+','+f1(y))}tr.push(`<polyline points="${pts.join(' ')}" fill="none" stroke="${dim?'rgba(15,23,42,.25)':b.c}" stroke-opacity="${dim?.4:Th.trail}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`)}
     const [x,y]=P(q.st.x,q.st.y);if(!on(x,y,40))return;const LL=(mine||inc)?L*1.25:L;
     bt.push(`<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(q.st.hdg)})">${(mine||inc||o.sel===b.id)?`<circle r="${f1(LL*.95)}" fill="none" stroke="#2563EB" stroke-width="2"/>`:''}${boatPaths(q.st.hdg,LL).replace('FILL',`fill="${dim?'#94A3B8':b.c}"`)}</g>`);
-    const show=o.tags==='all'||(o.tags==='top'&&(i<3||o.sel===b.id))||mine||inc||(o.tags==='mine'&&i<3);const role=o.roles&&o.roles[b.id];
+    const show=o.tags==='all'||(o.tags==='top'&&(i<3||o.sel===b.id))||mine||inc||(o.tags==='mine'&&i<3);let role=o.roles&&o.roles[b.id];if(role&&o.rtk&&Object.keys(o.rtk).some(id=>SIM.tack(SIM.state(sim.boats.find(x=>x.id===id),t).hdg)!==o.rtk[id]))role=null;
     if(show){const txt=role?b.id+' · '+SIM.tack(q.st.hdg)+' · '+(role==='P'?'prioritaire':'doit s’écarter'):(T>=0&&!o.noPos?(i+1)+' ':'')+b.id+(o.speed?' · '+kn(q.st.sog):''),tw=txt.length*7.2+30,tbg=role==='P'?'#DCFCE7':role==='G'?'#FFE4E6':Th.tagBg,tfg=role==='P'?'#166534':role==='G'?'#9F1239':Th.tagFg;let tx=x+12,ty=y-30;for(let n=0;n<6;n++){const hit=placed.find(p=>Math.abs(p[0]-tx)<tw&&Math.abs(p[1]-ty)<22);if(!hit)break;ty=hit[1]-24}placed.push([tx,ty]);
       tg.push(`<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(tx)}" y2="${f1(ty+11)}" stroke="${b.c}" stroke-opacity=".5" stroke-width="1.5"/><g transform="translate(${f1(tx)} ${f1(ty)})"><rect width="${tw}" height="24" rx="12" fill="${tbg}" style="filter:drop-shadow(0 2px 4px rgba(15,23,42,.18))"/><circle cx="12" cy="12" r="5" fill="${b.c}"/><text x="22" y="16.5" fill="${tfg}" style="font:700 12.5px 'Plus Jakarta Sans',sans-serif">${esc(txt)}</text></g>`)}});
   g+=tr.join('');
@@ -2973,7 +2977,7 @@ function rvInfo(a){const B=id=>sim.boats.find(b=>b.id===id),g=a.boats[0],q=a.boa
   else if(a.rule==='r18'){const e=a.ent||{},o=[g,q].filter(id=>e[id]!=null).sort((x,y)=>e[x]-e[y]);
     o.forEach((id,i)=>{const p=st(id,e[id]);S.push({t:e[id],txt:id+' entre '+(i?'en second':'le premier')+' dans la zone de 4 m'});marks.push({x:p.x,y:p.y,c:B(id).c,label:'entrée '+(i+1)+' · '+id})});
     if(o.length<2)S.push({t:a.t-1,txt:g+' n’est pas encore dans la zone quand '+q+' y est'});
-    concl=q+' est entré le premier dans la zone'+(o.length===2?' ('+fr(Math.abs(e[g]-e[q]).toFixed(1))+' s avant '+g+')':'')+' : '+g+' devait lui laisser la place pour passer la bouée.'}
+    concl=q+' est entré le premier dans la zone'+(o.length===2?' ('+fr(Math.abs(e[g]-e[q]).toFixed(1))+' s avant '+g+')':'')+' : '+g+' devait lui laisser la place pour passer la bouée.'+(SIM.tack(st(g,a.t).hdg)!==SIM.tack(st(q,a.t).hdg)?' Dans la zone, la place à la bouée l’emporte sur bâbord/tribord (RCV 18), même si '+q+' est bâbord amures.':'')}
   else if(a.rule==='r13'){const sg=B(g).segs.find(x=>x.kind==='tack'&&x.t0<=a.t+.5&&x.t1>=a.t-3);if(sg)S.push({t:sg.t0,txt:g+' commence à virer, '+q+' est à '+fr(dist(sg.t0).toFixed(1))+' m'});
     concl=g+' vire de bord trop près de '+q+' et le gêne : il devait s’écarter.'}
   else if(a.rule==='r31'){concl=g+' passe à '+fr(dmin.toFixed(2))+' m du centre de la bouée : la coque l’a touchée.'}
