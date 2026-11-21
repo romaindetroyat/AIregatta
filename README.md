@@ -12,6 +12,7 @@ Système de suivi, d'arbitrage, d'analyse du vent et de diffusion publique pour 
 - [En clair, succès et risques](docs/en-clair-succes-risques.md) : le principe, nos choix expliqués, les clés du succès, ce qui peut foirer, le glossaire.
 - [Cahier des charges des ordinateurs](docs/ordinateurs.md) : serveurs du PC course, régie, consoles, poste de contrôle, tablette, conseils aux équipes.
 - [Règles de course](docs/regles-de-course.md) : version 0.1, adaptée du match racing radiocommandé ; commande des bateaux par l’IA seule, départ, place à la bouée, pénalités, zone de course, arbitrage, classement.
+- [Feuille de route](docs/feuille-de-route.md) : 52 actions dans l’ordre, dépendances, chemin critique, ce qui avance en parallèle mois par mois, répartition des forces vives en 7 pôles.
 - [Postulats de départ](docs/postulats.md) : le paramétrage initial du projet, actés ou à confirmer.
 - [Maquettes et spécification des applications](docs/maquettes.md) : comité de course, public, équipes ; ce que chaque application reçoit, décide et émet ; décisions à prendre avant le développement.
 - [Prototype en direct](docs/prototype-en-direct.html) : une manche simulée en deux tours, au design clair et ludique, vue par le spectateur (téléphone), le comité de course (avec rejeu d'arbitrage), la télévision et la console d'équipe ; cartes zoomables (molette, boutons, deux doigts, glisser) ; les décisions du comité se propagent aux autres vues.

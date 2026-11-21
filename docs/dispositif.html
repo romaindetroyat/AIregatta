@@ -74,6 +74,61 @@ p{margin:0}
 #intro iframe{display:block;width:100%;height:100%;border:0;background:transparent;transform-origin:0 0}
 #intro.out{opacity:0;pointer-events:none}
 #intro button{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));border:0;border-radius:999px;padding:8px 14px;background:rgba(238,240,228,.08);color:rgba(238,240,228,.6);font:500 12px var(--f-texte);cursor:pointer}
+.rmbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.rmchips{display:flex;flex-wrap:wrap;gap:6px}
+.rmchips .chip i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.rmg{min-width:1040px;padding:8px 18px 18px;position:relative}
+.rmm{display:grid;grid-template-columns:300px 1fr;border-bottom:1px solid var(--filet);position:sticky;top:0}
+.rmm div{display:grid;grid-template-columns:repeat(var(--n),1fr)}
+.rmm span{font:500 .68rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ivoire-3);padding:12px 6px;border-left:1px solid var(--filet)}
+.rmch{font:500 1rem var(--f-titre);padding:14px 0 4px;color:var(--ivoire-2)}
+.rmr{display:grid;grid-template-columns:300px 1fr;align-items:center;min-height:28px;transition:opacity .25s}
+.rmr .n{font-size:13px;padding-right:10px;display:flex;gap:8px;align-items:baseline;cursor:pointer;border:0;background:none;text-align:left;color:var(--ivoire);font-family:inherit}
+.rmr .n b{font:500 11px var(--f-mono);color:var(--ivoire-3);min-width:24px}
+.rmr .ln{position:relative;height:24px}
+.rmb{position:absolute;top:5px;height:14px;border-radius:999px;border:0;padding:0;cursor:pointer;opacity:.9}
+.rmb.crit{box-shadow:0 0 0 2px #fff,0 0 0 4px #E11D48}
+.rmms{position:absolute;top:4px;width:15px;height:15px;transform:translateX(-7px) rotate(45deg);border:0;padding:0;cursor:pointer}
+.rmms.crit{box-shadow:0 0 0 2px #fff,0 0 0 4px #E11D48}
+.rmr.dim{opacity:.18}
+.rmr.sel .n{font-weight:700}.rmr.sel .rmb,.rmr.sel .rmms{outline:2px solid var(--ivoire);outline-offset:2px}
+.rmr.pre .n,.rmr.suc .n{font-weight:600}
+.rmr.pre .n::after{content:"avant";font:500 10px var(--f-mono);color:#2F7F74;padding:1px 6px;border-radius:999px;box-shadow:inset 0 0 0 1px #2F7F74;margin-left:auto}
+.rmr.suc .n::after{content:"ensuite";font:500 10px var(--f-mono);color:#B8902F;padding:1px 6px;border-radius:999px;box-shadow:inset 0 0 0 1px #B8902F;margin-left:auto}
+.rmtoday{position:absolute;top:0;bottom:0;border-left:1.5px dashed var(--lime-texte);pointer-events:none}
+.rmtoday span{position:absolute;top:2px;left:6px;font:500 10.5px var(--f-mono);color:var(--lime-texte);white-space:nowrap}
+.rmmonth{position:absolute;top:0;bottom:0;border-left:1px solid var(--filet);pointer-events:none}
+.rmd{margin-top:14px;padding:22px 24px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px 28px}
+.rmd h3{font-size:1.6rem;margin-top:8px}
+.rmd .lk2{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.rmd .lk2 button{border:0;border-radius:999px;padding:6px 12px;font:500 12.5px var(--f-texte);cursor:pointer;background:rgba(9,11,7,.05);box-shadow:inset 0 0 0 1px var(--filet);color:var(--ivoire)}
+.rmd .lk2 button b{font:500 11px var(--f-mono);color:var(--ivoire-3);margin-right:4px}
+.rmd .grpk{margin-top:14px}
+.rmtag{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--f-texte);padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--filet)}
+.rmtag i{width:9px;height:9px;border-radius:50%}
+.rmcrit{color:#E11D48;font:600 12px var(--f-texte)}
+#rmMois{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.rmmc{padding:18px;display:grid;gap:10px;align-content:start}
+.rmmc h3{font-size:1.35rem}
+.rmmc .pl{display:grid;gap:4px;padding-top:8px;border-top:1px solid var(--filet)}
+.rmmc .pl p{font-size:13px;color:var(--ivoire-2)}
+.rmmc .pl p b{font:500 11px var(--f-mono);color:var(--ivoire-3);margin-right:4px}
+.rmh{width:100%;border-collapse:separate;border-spacing:4px;font-size:13.5px;min-width:760px}
+.rmh th{text-align:left;font:500 .66rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ivoire-3);padding:6px 8px}
+.rmh td{padding:8px 6px;border-radius:10px;text-align:center;font:500 13px var(--f-mono)}
+.rmh td.pn{text-align:left;font:500 14px var(--f-texte);white-space:nowrap}
+.rmh td.pn i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.rmh tr.tot td{font-weight:700;background:rgba(9,11,7,.04)}
+.rmpg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-top:14px}
+.rmpc{padding:18px;display:grid;gap:8px;align-content:start;border-top:5px solid var(--c)}
+.rmpc h3{font-size:1.2rem}
+.rmpc p{font-size:13.5px;color:var(--ivoire-2)}
+.rmpc .qui{color:var(--ivoire);font-weight:500}
+.rmpc .st{display:flex;gap:10px;flex-wrap:wrap;font:500 12px var(--f-mono);color:var(--ivoire-3)}
+.rmprin{margin-top:14px;padding:24px}
+.rmprin ul{margin:12px 0 0;padding-left:18px;display:grid;gap:10px;color:var(--ivoire-2)}
+.rmprin b{color:var(--ivoire)}
+@media (max-width:820px){.rmd{grid-template-columns:minmax(0,1fr)}}
 .protobox{max-width:1600px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
 .protobox iframe{display:block;width:100%;height:max(720px,calc(100vh - 140px));border:0;border-radius:20px;background:#EEF3F9;box-shadow:0 30px 60px -30px rgba(9,11,7,.5)}
 @media (max-width:640px){.protobox iframe{height:calc(100vh - 100px);min-height:640px;border-radius:12px}}
@@ -722,6 +777,7 @@ main>section:first-child,main>section.ess{padding-top:clamp(40px,5vw,64px)}
       <li><a class="l" href="#prototype-page">Prototype</a></li>
       <li><a class="l" href="#materiel-page">Matériel</a></li>
       <li><a class="l" href="#projet">Projet</a></li>
+      <li><a class="l" href="#feuille-de-route">Feuille de route</a></li>
       <li><a class="l" href="#regles-page">Règles</a></li>
       <li><a class="l" href="#kit-equipes">Équipes</a></li>
       <li><a class="l" href="#questions-page">Questions</a></li>
@@ -1790,14 +1846,36 @@ topic write signals/#</code></pre></details>
 <section id="route">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="meta">11 · Novembre 2026 → mai 2027</p><h2>Le <em>calendrier</em></h2></div>
-      <p class="muted">Le logiciel avance vite grâce aux agents. Le rythme est donné par les livraisons de matériel et les sorties sur l’eau. Cliquez sur une barre ou un jalon pour le détail.</p>
+      <div><p class="meta">Novembre 2026 → mai 2027</p><h2>La <em>feuille de route</em></h2></div>
+      <div style="display:grid;gap:14px"><p class="muted">Toutes les actions dans l’ordre, avec ce dont elles dépendent. Cliquez sur une action : ce qu’il faut avant, ce qu’elle débloque et ce qui avance en même temps. Le chemin critique est le matériel, pas le logiciel.</p>
+      <div class="seg" id="rmView" role="group" aria-label="Affichage"><button type="button" data-v="cal" aria-pressed="true">Calendrier</button><button type="button" data-v="mois" aria-pressed="false">En parallèle, mois par mois</button></div></div>
     </div>
-    <div class="carte gscroll"><div class="gantt" id="gantt"></div></div>
-    <div class="legend"><span><i style="background:var(--ivoire-3)"></i>Cadrage</span><span><i style="background:#8FD18A"></i>Matériel</span><span><i style="background:var(--lime)"></i>Logiciel</span><span><i style="background:#43B3A3"></i>Essais sur l’eau</span><span><i style="background:var(--degrade)"></i>Régate</span></div>
-    <div class="carte gd" id="gd"></div>
+    <div class="rmbar"><div class="rmchips" id="rmPoles" role="group" aria-label="Filtrer par pôle"></div><button type="button" class="chip" id="rmCrit" aria-pressed="false">Chemin critique seul</button></div>
+    <div id="rmCal"><div class="carte gscroll"><div class="rmg" id="rmGantt"></div></div><div class="carte rmd" id="rmDet" aria-live="polite"></div></div>
+    <div id="rmMois" hidden></div>
   </div>
 </section>
+<section id="forces">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="meta">Qui fait quoi</p><h2>Les <em>forces vives</em></h2></div>
+      <p class="muted">Sept pôles, un responsable chacun. La charge est en équivalents temps plein (ETP) par mois ; la dernière colonne compte les personnes présentes pendant la semaine de course.</p>
+    </div>
+    <div class="carte tscroll" style="padding:8px 4px"><table class="rmh" id="rmHeat"></table></div>
+    <div class="rmpg" id="rmPoleCards"></div>
+    <div class="carte rmprin">
+      <p class="meta">Principes de répartition</p>
+      <ul>
+        <li><b>Le matériel est sur le chemin critique.</b> L’intégrateur électronique est à plein temps dès décembre, avec un renfort en février pour fabriquer la série de balises et les bouées en même temps.</li>
+        <li><b>Les développeurs ne font pas le support.</b> Le référent équipes répond aux équipes dès l’ouverture du bac à sable ; sinon le logiciel prend du retard.</li>
+        <li><b>Un responsable par pôle</b>, un point hebdomadaire court, une revue mensuelle et trois revues de décision : fin janvier (récepteur), mi-mars (bascule en préparation), mi-avril (feu vert).</li>
+        <li><b>Le club de voile partenaire</b> apporte directeur de course, arbitres et bateaux d’assistance ; les bénévoles sont recrutés en février et briefés en avril.</li>
+        <li><b>Les agents IA</b> écrivent le logiciel et le firmware, tiennent ce dossier à jour et préparent les revues ; les humains décident, testent sur l’eau et parlent aux équipes.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<script id="rmdata" type="application/json">{"today": "2026-11-23", "poles": [{"id": "DIR", "nom": "Direction de projet", "c": "#11150D", "role": "Pilote l’ensemble, tranche, tient le budget, signe les partenaires, anime la revue mensuelle.", "qui": "Romain (Meridia), appuyé par un agent IA de suivi", "etp": [0.6, 0.8, 0.8, 0.8, 0.8, 0.9, 1], "course": 1}, {"id": "LOG", "nom": "Logiciel", "c": "#C7EB00", "role": "Flux de données, moteur de course, consoles, applications ; développe avec des agents IA (P32).", "qui": "2 développeurs (Meridia) + agents IA", "etp": [0.3, 2, 2, 2, 2, 2, 2], "course": 2}, {"id": "MAT", "nom": "Matériel et terrain", "c": "#43B3A3", "role": "Balises, base RTK, radio, bouées instrumentées, réseau et caméras du PC course.", "qui": "1 intégrateur électronique à plein temps, + 1 renfort en février pour la série et les bouées", "etp": [0.3, 1, 1, 1.8, 1.8, 1.2, 1], "course": 2}, {"id": "COU", "nom": "Course et arbitrage", "c": "#B8902F", "role": "Règles, instructions de course, procédures du comité, formation des arbitres, jury.", "qui": "Directeur de course et 2 arbitres (club de voile partenaire), jury de 3", "etp": [0.1, 0.3, 0.3, 0.3, 0.5, 0.8, 1], "course": 6}, {"id": "EQU", "nom": "Relations équipes", "c": "#2F7F74", "role": "Appel à équipes, kit et bac à sable, support, contrôle des installations.", "qui": "1 référent technique, qui protège les développeurs des sollicitations", "etp": [0.1, 0.3, 0.6, 0.6, 0.7, 0.8, 1], "course": 1}, {"id": "SIT", "nom": "Site, logistique et sécurité", "c": "#D0704A", "role": "PC course à La Plage, plan d’eau, bateaux d’assistance, Wi-Fi public, sécurité, montage.", "qui": "1 coordinateur, puis bénévoles", "etp": [0.1, 0.3, 0.4, 0.5, 0.6, 0.9, 1], "course": 10}, {"id": "COM", "nom": "Communication et médias", "c": "#8FB000", "role": "Site public, partenaires, presse, réseaux, régie vidéo et commentateur.", "qui": "1 chargé de communication (Meridia) + prestataire vidéo", "etp": [0.2, 0.4, 0.5, 0.6, 0.7, 0.9, 1], "course": 4}], "months": ["Nov.", "Déc.", "Janv.", "Févr.", "Mars", "Avr.", "Mai"], "ch": [{"id": "A", "nom": "Pilotage et décisions"}, {"id": "B", "nom": "Règles et arbitrage"}, {"id": "C", "nom": "Balises et RTK"}, {"id": "D", "nom": "Bouées et vent"}, {"id": "E", "nom": "Logiciel central"}, {"id": "F", "nom": "Applications"}, {"id": "G", "nom": "Équipes"}, {"id": "H", "nom": "Site et logistique"}, {"id": "I", "nom": "Communication"}, {"id": "J", "nom": "Essais et événement"}], "a": [{"id": "A1", "ch": "A", "t": "Trancher les questions ouvertes", "s": "2026-11-23", "e": "2026-12-04", "p": "DIR", "dep": [], "d": "Mise à jour en course (D12), radiocommande de sécurité (D14), paramètres d’ordre et relais (D9, D10), jury, réglages fins (D16).", "m": false, "crit": true}, {"id": "A2", "ch": "A", "t": "Budget et plan de financement", "s": "2026-11-23", "e": "2026-12-11", "p": "DIR", "dep": [], "d": "Valider ≈ 18 600 € de matériel, la part logiciel et les prestataires ; identifier les financeurs.", "m": false, "crit": false}, {"id": "A3", "ch": "A", "t": "Constituer l’équipe", "s": "2026-11-23", "e": "2026-12-18", "p": "DIR", "dep": ["A2"], "d": "Nommer un responsable par pôle, recruter l’intégrateur matériel et le référent équipes.", "m": false, "crit": false}, {"id": "A4", "ch": "A", "t": "Revue n°1 : choix du récepteur", "s": "2027-01-29", "e": "2027-01-29", "p": "DIR", "dep": ["J1"], "d": "Go ou no-go sur la chaîne balise ; choix ZED-F9P ou UM980.", "m": true, "crit": true}, {"id": "A5", "ch": "A", "t": "Revue n°2 : bascule en préparation", "s": "2027-03-19", "e": "2027-03-19", "p": "DIR", "dep": ["J2"], "d": "Le système complet a tourné sur l’eau : on fige, on ne fait plus que fiabiliser.", "m": true, "crit": true}, {"id": "A6", "ch": "A", "t": "Revue n°3 : feu vert de la régate", "s": "2027-04-16", "e": "2027-04-16", "p": "DIR", "dep": ["J3"], "d": "Liste des corrections à faire avant la répétition générale.", "m": true, "crit": true}, {"id": "B1", "ch": "B", "t": "Relecture des règles par un arbitre agréé", "s": "2026-12-01", "e": "2027-01-08", "p": "COU", "dep": ["A1"], "d": "Règles v0.1 → v1 : article 6 (passage), pénalités, arbitrage en direct.", "m": false, "crit": false}, {"id": "B2", "ch": "B", "t": "Règles v1 publiées aux équipes", "s": "2027-01-11", "e": "2027-01-11", "p": "COU", "dep": ["B1"], "d": "Jalon : les équipes savent sous quelles règles leur IA naviguera.", "m": true, "crit": false}, {"id": "B3", "ch": "B", "t": "Avis de course et instructions de course", "s": "2027-01-11", "e": "2027-03-12", "p": "COU", "dep": ["B2"], "d": "Format, parcours, signaux, programme des manches, classement.", "m": false, "crit": false}, {"id": "B4", "ch": "B", "t": "Procédures du comité et modes dégradés", "s": "2027-01-18", "e": "2027-03-05", "p": "COU", "dep": ["B2"], "d": "Départ, rappels, changement de parcours, coupure 4G, balise morte.", "m": false, "crit": false}, {"id": "B5", "ch": "B", "t": "Former les arbitres sur les consoles", "s": "2027-03-01", "e": "2027-04-09", "p": "COU", "dep": ["E4", "B4"], "d": "Rejeux, alertes, décisions ; entraînement sur les données des essais.", "m": false, "crit": false}, {"id": "C1", "ch": "C", "t": "Commander le prototype (≈ 2 500 €)", "s": "2026-11-30", "e": "2026-12-11", "p": "MAT", "dep": ["A1", "A2"], "d": "3 GPS RTK, 3 cartes 4G, radios 868 MHz, 1 anémomètre, base RTK.", "m": false, "crit": true}, {"id": "C2", "ch": "C", "t": "Monter 3 balises et la base RTK, banc à terre", "s": "2026-12-14", "e": "2027-01-15", "p": "MAT", "dep": ["C1"], "d": "Tests à terre, dans une coque, comparaison des deux récepteurs.", "m": false, "crit": true}, {"id": "C3", "ch": "C", "t": "Firmware de la balise v1", "s": "2026-12-07", "e": "2027-01-15", "p": "LOG", "dep": ["E1"], "d": "Écrit avec les agents : RTK, envoi 10 Hz en 4G, secours radio, horodatage.", "m": false, "crit": false}, {"id": "C4", "ch": "C", "t": "Commander la série", "s": "2027-02-01", "e": "2027-02-12", "p": "MAT", "dep": ["A4"], "d": "12 balises (10 + 2 de rechange) avec le récepteur retenu.", "m": false, "crit": true}, {"id": "C5", "ch": "C", "t": "Fabriquer et recetter la série", "s": "2027-02-15", "e": "2027-03-05", "p": "MAT", "dep": ["C4"], "d": "Boîtiers, fixation, recette une par une sur banc.", "m": false, "crit": true}, {"id": "C6", "ch": "C", "t": "Installer et contrôler les balises dans les bateaux", "s": "2027-04-05", "e": "2027-04-09", "p": "EQU", "dep": ["C5", "G5"], "d": "Antennes sur le pont, dans l’axe (P39) ; contrôle signé par l’équipe.", "m": false, "crit": false}, {"id": "D1", "ch": "D", "t": "Concevoir les bouées instrumentées", "s": "2026-12-07", "e": "2027-01-29", "p": "MAT", "dep": ["C1"], "d": "Espar lesté, mouillage, anémomètre, panneau solaire, transmission.", "m": false, "crit": false}, {"id": "D2", "ch": "D", "t": "Fabriquer et étalonner les bouées", "s": "2027-02-01", "e": "2027-03-05", "p": "MAT", "dep": ["D1"], "d": "Étalonnage du compas, correction des mouvements de la bouée.", "m": false, "crit": false}, {"id": "D3", "ch": "D", "t": "Station météo du PC course", "s": "2027-02-15", "e": "2027-02-26", "p": "MAT", "dep": ["H1"], "d": "Vent à terre (P21), référence pour la carte de vent.", "m": false, "crit": false}, {"id": "E1", "ch": "E", "t": "Format du flux équipes v0 et simulateur", "s": "2026-11-30", "e": "2026-12-18", "p": "LOG", "dep": ["A1"], "d": "Schémas JSON, simulateur de régate avec vent réaliste, exemples Python et JavaScript.", "m": false, "crit": false}, {"id": "E2", "ch": "E", "t": "Bus de données, serveur et secours", "s": "2026-12-07", "e": "2027-01-08", "p": "LOG", "dep": ["E1"], "d": "Mosquitto au PC course, serveur de secours, sécurité des accès.", "m": false, "crit": false}, {"id": "E3", "ch": "E", "t": "Synchronisation des horloges (< 5 ms)", "s": "2027-01-04", "e": "2027-01-29", "p": "LOG", "dep": ["E2"], "d": "Horodatage GPS de bout en bout ; mesure de l’écart entre équipes, comité et médias.", "m": false, "crit": false}, {"id": "E4", "ch": "E", "t": "Moteur de course et consoles du comité", "s": "2027-01-04", "e": "2027-02-26", "p": "LOG", "dep": ["E2", "B1"], "d": "Départ, bouées, arrivée, classement, détection des règles 6.x, rejeu d’arbitrage.", "m": false, "crit": false}, {"id": "E5", "ch": "E", "t": "Jalon : format du flux gelé", "s": "2027-03-15", "e": "2027-03-15", "p": "LOG", "dep": ["E4", "G4"], "d": "Plus aucune modification incompatible pour les équipes.", "m": true, "crit": false}, {"id": "E6", "ch": "E", "t": "Carte de vent et tendance", "s": "2027-02-15", "e": "2027-03-26", "p": "LOG", "dep": ["D2", "E2"], "d": "Fusion bouées et station ; réglée avec les données de l’essai n°2.", "m": false, "crit": false}, {"id": "E7", "ch": "E", "t": "Tests de charge et modes dégradés", "s": "2027-03-15", "e": "2027-04-23", "p": "LOG", "dep": ["E5"], "d": "Coupure 4G, coupure Internet, balise morte, redémarrage du PC course.", "m": false, "crit": false}, {"id": "F1", "ch": "F", "t": "Application spectateur", "s": "2027-01-11", "e": "2027-02-26", "p": "LOG", "dep": ["E2"], "d": "Carte live zoomable, classement, fil, notifications, installation sur iPhone.", "m": false, "crit": false}, {"id": "F2", "ch": "F", "t": "Console équipe", "s": "2027-01-18", "e": "2027-02-19", "p": "LOG", "dep": ["E1", "B2"], "d": "Décisions de l’IA, arrêt de sécurité seul, aucune commande humaine.", "m": false, "crit": false}, {"id": "F3", "ch": "F", "t": "Habillage télévision et régie", "s": "2027-02-01", "e": "2027-03-19", "p": "LOG", "dep": ["F1", "I4"], "d": "Bandeaux, classement, caméra automatique, graphiques à la demande.", "m": false, "crit": false}, {"id": "F4", "ch": "F", "t": "Aide au commentateur", "s": "2027-03-01", "e": "2027-04-02", "p": "COM", "dep": ["F3"], "d": "Souffleur des moments forts, fiches, résumés automatiques.", "m": false, "crit": false}, {"id": "G1", "ch": "G", "t": "Appel à équipes et inscriptions", "s": "2026-11-30", "e": "2027-01-29", "p": "EQU", "dep": ["B1"], "d": "Dossier, critères, calendrier, frais ; cible : moins de 10 équipes.", "m": false, "crit": false}, {"id": "G2", "ch": "G", "t": "Kit équipes v0 publié", "s": "2026-12-21", "e": "2026-12-21", "p": "EQU", "dep": ["E1"], "d": "Format, exemples de code, simulateur : les équipes peuvent commencer.", "m": true, "crit": false}, {"id": "G3", "ch": "G", "t": "Ouverture du bac à sable", "s": "2027-01-11", "e": "2027-01-11", "p": "EQU", "dep": ["E2", "G2"], "d": "Flux de test en ligne, données d’essai rejouées (D13 : janvier).", "m": true, "crit": false}, {"id": "G4", "ch": "G", "t": "Support et ateliers en ligne", "s": "2027-01-11", "e": "2027-05-07", "p": "EQU", "dep": ["G3"], "d": "Questions, ateliers mensuels, retours sur le format avant le gel.", "m": false, "crit": false}, {"id": "G5", "ch": "G", "t": "Tests à quai des équipes", "s": "2027-04-05", "e": "2027-04-09", "p": "EQU", "dep": ["E5", "C5"], "d": "Chaque bateau reçoit le flux officiel et répond à l’arrêt de sécurité.", "m": false, "crit": true}, {"id": "H1", "ch": "H", "t": "Convention avec La Plage (PC course)", "s": "2026-11-30", "e": "2027-01-15", "p": "SIT", "dep": ["A2"], "d": "Premier étage, électricité, Internet filaire, accès, point haut pour les caméras (P40).", "m": false, "crit": false}, {"id": "H2", "ch": "H", "t": "Plan d’eau : mouillages et assistance", "s": "2027-01-04", "e": "2027-03-26", "p": "SIT", "dep": ["H1"], "d": "Bateaux d’assistance, mouillages des bouées, balisage de la zone.", "m": false, "crit": false}, {"id": "H3", "ch": "H", "t": "Réseau et caméras du PC course", "s": "2027-03-01", "e": "2027-04-02", "p": "MAT", "dep": ["H1", "D2"], "d": "Fibre et secours 4G, réseau local, caméras à 12 m au plus, régie.", "m": false, "crit": false}, {"id": "H4", "ch": "H", "t": "Wi-Fi public au village", "s": "2027-02-15", "e": "2027-04-09", "p": "SIT", "dep": ["H1"], "d": "500 à 2 000 spectateurs (P41) : délester la 4G.", "m": false, "crit": false}, {"id": "H5", "ch": "H", "t": "Plan de sécurité et bénévoles", "s": "2027-02-01", "e": "2027-04-23", "p": "SIT", "dep": ["H2"], "d": "Sécurité du public et sur l’eau, recrutement et briefing des bénévoles.", "m": false, "crit": false}, {"id": "H6", "ch": "H", "t": "Montage du site", "s": "2027-05-07", "e": "2027-05-11", "p": "SIT", "dep": ["J4"], "d": "PC course, village, Wi-Fi, mouillages définitifs.", "m": false, "crit": true}, {"id": "I1", "ch": "I", "t": "Site public et réseaux", "s": "2026-12-01", "e": "2027-01-29", "p": "COM", "dep": ["A1"], "d": "Site de l’événement, identité (logo R3), réseaux sociaux.", "m": false, "crit": false}, {"id": "I2", "ch": "I", "t": "Partenaires et sponsors", "s": "2026-12-01", "e": "2027-03-31", "p": "DIR", "dep": ["A2"], "d": "Collectivités, entreprises du numérique et de la mer, opérateur mobile.", "m": false, "crit": false}, {"id": "I3", "ch": "I", "t": "Presse, commentateur, promotion", "s": "2027-02-01", "e": "2027-05-11", "p": "COM", "dep": ["I1"], "d": "Dossier de presse, commentateur français (P31), annonces.", "m": false, "crit": false}, {"id": "I4", "ch": "I", "t": "Prestataire vidéo et diffusion", "s": "2027-01-11", "e": "2027-03-12", "p": "COM", "dep": ["A2"], "d": "Captation, régie, diffusion sur l’application et en ligne.", "m": false, "crit": false}, {"id": "J1", "ch": "J", "t": "Essai n°1 : 2 balises sur l’eau", "s": "2027-01-20", "e": "2027-01-23", "p": "MAT", "dep": ["C2", "C3"], "d": "4G, radio, précision RTK, réception dans la coque.", "m": false, "crit": true}, {"id": "J2", "ch": "J", "t": "Essai n°2 : système complet, 4 bateaux", "s": "2027-03-10", "e": "2027-03-13", "p": "MAT", "dep": ["C5", "D2", "E4", "F1"], "d": "Bouées instrumentées, PC course complet, classement automatique.", "m": false, "crit": true}, {"id": "J3", "ch": "J", "t": "Régate blanche et test foule", "s": "2027-04-10", "e": "2027-04-12", "p": "COU", "dep": ["J2", "G5", "B5", "H3", "H4"], "d": "Course complète avec les équipes, un week-end de plage pleine.", "m": false, "crit": true}, {"id": "J4", "ch": "J", "t": "Répétition générale", "s": "2027-04-30", "e": "2027-05-02", "p": "COU", "dep": ["J3", "E7", "H5"], "d": "Tous les modes dégradés testés, chronologie de la journée de course.", "m": false, "crit": true}, {"id": "J5", "ch": "J", "t": "AI Regatta", "s": "2027-05-12", "e": "2027-05-16", "p": "DIR", "dep": ["H6", "J4"], "d": "La régate, du 12 au 16 mai, sans jour de réserve.", "m": false, "crit": true}, {"id": "J6", "ch": "J", "t": "Bilan, replays et retours d’expérience", "s": "2027-05-17", "e": "2027-05-31", "p": "DIR", "dep": ["J5"], "d": "Résumés, données publiées, bilan avec les équipes et les partenaires.", "m": false, "crit": false}]}</script>
 
 <section id="foule" data-detail>
   <div class="wrap">
@@ -3081,41 +3159,48 @@ function calc(){
 ['nBoats','nSpare','oAnemoL','oExist','oFpv','oPtz','oWifi','oJet'].forEach(id=>$('#'+id).addEventListener('input',calc));
 calc();
 
-/* ---------- Calendrier ---------- */
-const START=new Date('2026-11-01'),END=new Date('2027-06-01'),SPAN=END-START;
-const pct=d=>(new Date(d)-START)/SPAN*100;
-const GR=[
- ['Cadrage',[['c1','Décisions et commande du prototype','2026-11-20','2026-12-12','Trancher les dernières questions, commander le prototype (≈ 2 500 €).',['Coque des bateaux : carbone ou non','Emplacement du PC course et des caméras','Prototype : 3 GPS, 3 cartes 4G, radios, 1 anémomètre']]]],
- ['Matériel',[
-  ['c2','Prototype balise + base RTK','2026-12-08','2027-01-18','Assembler 3 balises de test et la base RTK ; premier firmware écrit avec les agents.',['Banc de test à terre','Comparaison ZED-F9P / UM980','Test à l’intérieur d’une coque']],
-  ['c2','Série de balises','2027-02-01','2027-03-05','Fabriquer toutes les balises avec le récepteur retenu.',['Commande groupée','Boîtiers et fixation dans les bateaux','Recette une par une']],
-  ['c2','Bouées instrumentées','2027-02-01','2027-03-10','Espars lestés, anémomètres, panneaux solaires, mouillages.',['Montage','Étalonnage du compas','Correction des mouvements']],
-  ['c2','Caméras et point haut','2027-03-01','2027-04-05','Installer et calibrer les caméras (12 m au plus).',['Calage sur les bouées','Régie et diffusion']]]],
- ['Logiciel',[
-  ['c3','Format des données + simulateur','2026-12-01','2026-12-31','Publier le format du flux équipes et un simulateur de régate.',['Format v0 envoyé aux équipes','Simulateur avec vent réaliste','Exemples en Python et JavaScript']],
-  ['c3','Moteur de course + consoles','2027-01-05','2027-02-10','Départ, départs anticipés, passages de bouées, arrivée, classement ; consoles PC course.',['Testé sur le simulateur','Puis sur les données des essais']],
-  ['c3','Application publique','2027-01-10','2027-02-20','Carte live, classement, replay, vidéo, installation sur iPhone.',['Version légère pour la 4G chargée','Test de charge']],
-  ['c3','Vent, arbitrage, aide au commentateur','2027-02-15','2027-04-05','Carte de vent et tendance, arbitrage assisté, fiches et alertes pour le commentateur.',['Réglés avec les données réelles']]]],
- ['Essais',[
-  ['c4','Essai n°1','2027-01-20','2027-01-23','2 balises sur l’eau : 4G, radio, précision RTK, réception dans la coque.',['RTK fixe > 95 % du temps','> 99 % des trames reçues']],
-  ['c4','Essai n°2','2027-03-10','2027-03-13','Bouées instrumentées + 4 bateaux + PC course complet.',['Mesure du vent sur bouée','Classement automatique']],
-  ['c4','Régate blanche + test foule','2027-04-10','2027-04-12','Course complète avec les équipes, un week-end où la plage est pleine.',['4G sous la charge du public','Retours des équipes']],
-  ['c4','Répétition générale','2027-04-30','2027-05-02','Tous les modes dégradés testés.',['Coupure 4G, coupure Internet','Balise morte, redémarrage du PC course']]]],
- ['Événement',[['c5','Régate','2027-05-12','2027-05-17','La régate, du 12 au 16 mai, sans jour de réserve.',['Assistance technique sur place','Replays et résumés ensuite']]]]
-];
-const MILES=[['Format figé','2027-03-15','Plus aucune modification incompatible du flux équipes après cette date.']];
+/* ---------- Feuille de route ---------- */
 (function(){
-  const months=['Nov','Déc','Janv','Févr','Mars','Avr','Mai'];
-  let h=`<div class="months"><div></div>${months.map(m=>`<div>${m}</div>`).join('')}</div><div style="position:relative">`;let id=0;
-  GR.forEach(([g,rows])=>{h+=`<div class="grp">${g}</div>`;rows.forEach(r=>{const l=pct(r[2]),wd=Math.max(.8,pct(r[3])-l);r.id=id;h+=`<div class="grow"><span class="name">${r[1]}</span><div class="lane"><button type="button" class="gb ${r[0]}" data-i="${id++}" aria-pressed="false" aria-label="${r[1]}" style="left:${l}%;width:${wd}%"></button></div></div>`})});
-  h+=`<div class="grp">Jalon</div>`;MILES.forEach((m,i)=>{h+=`<div class="grow"><span class="name">${m[0]}</span><div class="lane"><button type="button" class="mile" data-m="${i}" aria-label="${m[0]}" style="left:${pct(m[1])}%"></button></div></div>`});
-  h+='</div>';$('#gantt').innerHTML=h;
-  const area=$('#gantt').lastElementChild;const td=document.createElement('div');td.className='today';td.style.left=`calc(190px + (100% - 190px) * ${pct('2026-11-20')/100})`;td.innerHTML='<span>20 NOV.</span>';area.appendChild(td);
-  const flat=GR.flatMap(g=>g[1]);const fmt=d=>new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
-  const show=r=>{document.querySelectorAll('.gb').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.i===r.id)));$('#gd').innerHTML=`<div><p class="meta">${fmt(r[2])} → ${fmt(r[3])}</p><h3>${r[1]}</h3><p class="muted" style="margin-top:10px">${r[4]}</p></div><div><p class="meta">Contenu</p><ul>${r[5].map(x=>`<li>${x}</li>`).join('')}</ul></div>`};
-  document.querySelectorAll('.gb').forEach(b=>b.addEventListener('click',()=>show(flat[+b.dataset.i])));
-  document.querySelectorAll('.mile').forEach(b=>b.addEventListener('click',()=>{const m=MILES[+b.dataset.m];document.querySelectorAll('.gb').forEach(x=>x.setAttribute('aria-pressed','false'));$('#gd').innerHTML=`<div><p class="meta">${fmt(m[1])}</p><h3>${m[0]}</h3></div><div><p class="muted">${m[2]}</p></div>`}));
-  show(flat[0]);
+  const RD=JSON.parse($('#rmdata').textContent),A=RD.a,byId=Object.fromEntries(A.map(x=>[x.id,x])),PO=Object.fromEntries(RD.poles.map(p=>[p.id,p]));
+  const S0=new Date('2026-11-16'),S1=new Date('2027-06-01'),SP=S1-S0,pc=d=>(new Date(d)-S0)/SP*100,end=d=>{const x=new Date(d);x.setDate(x.getDate()+1);return x};
+  const fd=d=>new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'long'});
+  const succ={};A.forEach(x=>x.dep.forEach(d=>(succ[d]=succ[d]||[]).push(x.id)));
+  const anc=(id,set=new Set())=>{byId[id].dep.forEach(d=>{if(!set.has(d)){set.add(d);anc(d,set)}});return set};
+  const des=(id,set=new Set())=>{(succ[id]||[]).forEach(d=>{if(!set.has(d)){set.add(d);des(d,set)}});return set};
+  let pole=null,critOnly=false,sel='A1';
+  $('#rmPoles').innerHTML=`<button type="button" class="chip on" data-p="" aria-pressed="true">Tous les pôles</button>`+RD.poles.map(p=>`<button type="button" class="chip on" data-p="${p.id}" aria-pressed="false"><i style="background:${p.c}"></i>${p.nom}</button>`).join('');
+  const mstart=['2026-12-01','2027-01-01','2027-02-01','2027-03-01','2027-04-01','2027-05-01'];
+  let h=`<div class="rmm" style="--n:7"><span style="border:0"></span><div style="display:block;position:relative;height:38px">${['Nov.','Déc.','Janv.','Févr.','Mars','Avr.','Mai'].map((m,i)=>{const l=i?pc(mstart[i-1]):0;return `<span style="position:absolute;left:${l}%;top:0">${m}</span>`}).join('')}</div></div><div style="position:relative">`;
+  RD.ch.forEach(c=>{h+=`<div class="rmch">${c.id} · ${c.nom}</div>`;A.filter(x=>x.ch===c.id).forEach(x=>{const l=pc(x.s),w=Math.max(.7,pc(end(x.e))-l),col=PO[x.p].c;
+    h+=`<div class="rmr" data-id="${x.id}"><button type="button" class="n" data-go="${x.id}"><b>${x.id}</b>${x.t}</button><div class="ln">${x.m?`<button type="button" class="rmms${x.crit?' crit':''}" data-go="${x.id}" aria-label="${x.t}" style="left:${l}%;background:${col}"></button>`:`<button type="button" class="rmb${x.crit?' crit':''}" data-go="${x.id}" aria-label="${x.t}" style="left:${l}%;width:${w}%;background:${col}"></button>`}</div></div>`})});
+  h+='</div>';$('#rmGantt').innerHTML=h;
+  const area=$('#rmGantt').lastElementChild;
+  mstart.forEach(m=>{const d=document.createElement('div');d.className='rmmonth';d.style.left=`calc(300px + (100% - 300px) * ${pc(m)/100})`;area.appendChild(d)});
+  const td=document.createElement('div');td.className='rmtoday';td.style.left=`calc(300px + (100% - 300px) * ${pc(RD.today)/100})`;td.innerHTML='<span>AUJOURD’HUI</span>';area.appendChild(td);
+  const tag=id=>{const x=byId[id];return `<button type="button" data-go="${id}"><b>${id}</b>${x.t}</button>`};
+  function paint(){const pre=anc(sel),suc=des(sel);
+    document.querySelectorAll('.rmr').forEach(r=>{const x=byId[r.dataset.id],on=(!pole||x.p===pole)&&(!critOnly||x.crit);r.classList.toggle('dim',!on);r.classList.toggle('sel',x.id===sel);r.classList.toggle('pre',pre.has(x.id));r.classList.toggle('suc',suc.has(x.id))});
+    const x=byId[sel],P=PO[x.p],s0=new Date(x.s),e0=end(x.e);
+    const par=A.filter(y=>y.id!==x.id&&!y.m&&!pre.has(y.id)&&!suc.has(y.id)&&new Date(y.s)<e0&&end(y.e)>s0&&y.p!==x.p).slice(0,10);
+    $('#rmDet').innerHTML=`<div><p class="meta">${x.id} · ${RD.ch.find(c=>c.id===x.ch).nom}${x.m?' · jalon':''}</p><h3>${x.t}</h3><p class="muted" style="margin-top:6px">${x.m?fd(x.s):fd(x.s)+' → '+fd(x.e)}</p><p style="margin-top:10px">${x.d}</p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><span class="rmtag"><i style="background:${P.c}"></i>${P.nom}</span>${x.crit?'<span class="rmtag rmcrit">Chemin critique : aucune marge</span>':''}</div></div>
+      <div><p class="meta">Il faut d’abord</p><div class="lk2">${x.dep.map(tag).join('')||'<span class="muted" style="font-size:13px">Rien : peut démarrer tout de suite.</span>'}</div>
+      <p class="meta grpk">Elle débloque</p><div class="lk2">${(succ[x.id]||[]).map(tag).join('')||'<span class="muted" style="font-size:13px">Rien d’autre.</span>'}</div>
+      <p class="meta grpk">En même temps, par d’autres pôles</p><div class="lk2">${par.map(y=>tag(y.id)).join('')||'<span class="muted" style="font-size:13px">—</span>'}</div></div>`}
+  document.getElementById('route').addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){sel=g.dataset.go;paint();if(g.closest('#rmDet')){const r=document.querySelector(`.rmr[data-id="${sel}"]`);r&&r.scrollIntoView({block:'nearest',behavior:'smooth'})}}
+    const c=e.target.closest('#rmPoles [data-p]');if(c){pole=c.dataset.p||null;document.querySelectorAll('#rmPoles [data-p]').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.p||null)===pole)));paint();renderMois()}});
+  $('#rmCrit').addEventListener('click',()=>{critOnly=!critOnly;$('#rmCrit').setAttribute('aria-pressed',String(critOnly));paint();renderMois()});
+  const MO=[['Novembre 2026','2026-11-01','2026-11-30'],['Décembre 2026','2026-12-01','2026-12-31'],['Janvier 2027','2027-01-01','2027-01-31'],['Février 2027','2027-02-01','2027-02-28'],['Mars 2027','2027-03-01','2027-03-31'],['Avril 2027','2027-04-01','2027-04-30'],['Mai 2027','2027-05-01','2027-05-31']];
+  function renderMois(){$('#rmMois').innerHTML=MO.map(([n,a,b])=>{const act=A.filter(x=>new Date(x.s)<=new Date(b)&&new Date(x.e)>=new Date(a)&&(!pole||x.p===pole)&&(!critOnly||x.crit));
+    const pl=RD.poles.map(p=>{const l=act.filter(x=>x.p===p.id);return l.length?`<div class="pl"><span class="rmtag"><i style="background:${p.c}"></i>${p.nom}</span>${l.map(x=>`<p><b>${x.id}</b>${x.t}${x.m?' (jalon)':''}${x.crit?' <span class="rmcrit">●</span>':''}</p>`).join('')}</div>`:''}).join('');
+    const np=new Set(act.map(x=>x.p)).size;
+    return `<article class="carte rmmc"><p class="meta">${act.length} action${act.length>1?'s':''} · ${np} pôle${np>1?'s':''} en parallèle</p><h3>${n}</h3>${pl||'<p class="muted">Rien pour ce filtre.</p>'}</article>`}).join('')}
+  $('#rmView').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(!b)return;document.querySelectorAll('#rmView [data-v]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('#rmCal').hidden=b.dataset.v!=='cal';$('#rmMois').hidden=b.dataset.v==='cal'});
+  // forces vives
+  const heat=v=>`rgba(199,235,0,${Math.min(.85,v/2.2*.85+.04)})`;
+  const tot=RD.months.map((m,i)=>RD.poles.reduce((a,p)=>a+p.etp[i],0));
+  $('#rmHeat').innerHTML=`<thead><tr><th>Pôle</th>${RD.months.map(m=>`<th style="text-align:center">${m}</th>`).join('')}<th style="text-align:center">Course</th><th style="text-align:center">Actions</th></tr></thead><tbody>${RD.poles.map(p=>`<tr><td class="pn"><i style="background:${p.c}"></i>${p.nom}</td>${p.etp.map(v=>`<td style="background:${heat(v)}">${String(v).replace('.',',')}</td>`).join('')}<td>${p.course}</td><td>${A.filter(x=>x.p===p.id).length}</td></tr>`).join('')}<tr class="tot"><td class="pn">Total (ETP)</td>${tot.map(v=>`<td>${v.toFixed(1).replace('.',',')}</td>`).join('')}<td>${RD.poles.reduce((a,p)=>a+p.course,0)}</td><td>${A.length}</td></tr></tbody>`;
+  $('#rmPoleCards').innerHTML=RD.poles.map(p=>{const mine=A.filter(x=>x.p===p.id),cr=mine.filter(x=>x.crit).length;return `<article class="carte rmpc" style="--c:${p.c}"><h3>${p.nom}</h3><p>${p.role}</p><p class="qui">${p.qui}</p><div class="st"><span>${mine.length} actions</span>${cr?`<span class="rmcrit">${cr} sur le chemin critique</span>`:''}<span>pic ${String(Math.max(...p.etp)).replace('.',',')} ETP</span></div></article>`}).join('');
+  paint();renderMois();
 })();
 
 /* ---------- Questions ---------- */
@@ -3295,7 +3380,7 @@ renderPst();
 
 
 /* ---------- Site à plusieurs pages ---------- */
-const VIEWS=[["accueil", "Accueil", ["top", "essentiel"]], ["postulats-page", "Postulats", ["postulats"]], ["dispositif", "Le dispositif", ["plan", "enclair"]], ["a-bord", "À bord et sur site", ["bord", "ensemble"]], ["donnees", "Données et synchro", ["trajet", "liaisons", "foule"]], ["logiciel-page", "Logiciel", ["logiciel"]], ["applications", "Applications", ["apps", "decisions"]], ["prototype-page", "Prototype en direct", ["proto"]], ["materiel-page", "Matériel et coûts", ["materiel", "couts"]], ["projet", "Risques et calendrier", ["risques", "etat", "route"]], ["regles-page", "Règles de course", ["regles"]], ["kit-equipes", "Kit équipes", ["kit"]], ["questions-page", "Questions", ["questions"]], ["glossaire-page", "Glossaire", ["glossaire"]]];
+const VIEWS=[["accueil", "Accueil", ["top", "essentiel"]], ["postulats-page", "Postulats", ["postulats"]], ["dispositif", "Le dispositif", ["plan", "enclair"]], ["a-bord", "À bord et sur site", ["bord", "ensemble"]], ["donnees", "Données et synchro", ["trajet", "liaisons", "foule"]], ["logiciel-page", "Logiciel", ["logiciel"]], ["applications", "Applications", ["apps", "decisions"]], ["prototype-page", "Prototype en direct", ["proto"]], ["materiel-page", "Matériel et coûts", ["materiel", "couts"]], ["projet", "Risques et calendrier", ["risques", "etat"]], ["feuille-de-route", "Feuille de route", ["route", "forces"]], ["regles-page", "Règles de course", ["regles"]], ["kit-equipes", "Kit équipes", ["kit"]], ["questions-page", "Questions", ["questions"]], ["glossaire-page", "Glossaire", ["glossaire"]]];
 const secView={};VIEWS.forEach(v=>v[2].forEach(id=>secView[id]=v[0]));
 let curView=null;
 function viewOf(el){let n=el;while(n&&n!==document.body){if(n.id&&secView[n.id])return secView[n.id];n=n.parentElement}return null}
