@@ -220,7 +220,7 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="r3" viewBox="230 215 1590 1590"><g fill="currentColor"><path d="M 1255 281 C 1258 280 1256 280 1259 281 C 1259 283 1221 481 1217 502 L 1143 891 C 1140 908 1138 926 1134 943 C 1104 951 1069 957 1038 964 L 713 1035 C 692 1040 674 1043 654 1051 C 652 1050 653 1051 651 1050 C 651 1048 863 673 884 638 C 983 468 1058 333 1255 281 z"/><path d="M 1785 275 C 1786 275 1785 275 1786 276 C 1752 415 1718 559 1687 699 L 1641 902 C 1634 930 1627 969 1619 997 C 1605 1001 1587 1005 1573 1008 L 1480 1029 C 1405 1045 1326 1063 1252 1083 L 1250 1082 C 1248 1076 1303 919 1311 897 C 1375 713 1453 517 1596 380 C 1649 329 1716 299 1785 275 z"/><path d="M 1119 997 C 1131 995 1121 1018 1119 1028 L 1102 1121 C 1099 1138 1095 1160 1093 1178 C 1078 1182 1056 1187 1040 1191 L 504 1317 C 501 1318 502 1318 499 1318 L 498 1317 C 499 1312 516 1285 519 1279 L 577 1179 C 587 1161 607 1120 620 1107 C 636 1102 659 1098 675 1094 L 1119 997 z"/><path d="M 1081 1233 C 1083 1232 1082 1233 1084 1233 C 1085 1236 1063 1359 1060 1373 C 1044 1379 1004 1388 985 1393 L 471 1524 C 437 1533 405 1540 372 1550 C 367 1551 371 1544 372 1542 C 401 1491 430 1439 459 1387 C 467 1374 555 1357 572 1353 L 935 1268 C 980 1257 1036 1242 1081 1233 z"/><path d="M 1050 1429 L 1053 1428 L 1053 1429 C 1047 1463 1041 1511 1037 1545 C 1016 1552 987 1559 965 1564 C 732 1624 498 1681 267 1744 L 264 1744 L 263 1743 C 264 1739 332 1617 336 1613 C 357 1605 407 1594 429 1588 L 1050 1429 z"/><path d="M 1604 1051 L 1607 1050 L 1608 1052 C 1608 1055 1601 1083 1600 1089 L 1566 1242 C 1555 1247 1537 1251 1525 1254 L 1178 1337 C 1172 1338 1173 1333 1175 1329 C 1194 1265 1217 1202 1235 1138 C 1277 1128 1318 1119 1360 1109 L 1507 1074 C 1540 1066 1571 1060 1604 1051 z"/><path d="M 1551 1298 L 1553 1298 C 1555 1302 1525 1441 1521 1458 C 1486 1468 1446 1475 1410 1485 L 1108 1561 L 1105 1561 L 1104 1560 C 1104 1553 1154 1402 1158 1395 L 1412 1331 C 1458 1320 1505 1310 1551 1298 z"/><path d="M 1504 1513 L 1507 1513 C 1508 1517 1483 1619 1480 1633 C 1449 1643 1406 1651 1373 1659 L 1104 1728 C 1084 1733 1069 1735 1050 1744 L 1047 1743 C 1046 1739 1082 1630 1086 1620 C 1103 1615 1130 1608 1148 1604 L 1306 1563 C 1373 1547 1437 1529 1504 1513 z"/></g></symbol></defs></svg>
 
 <header class="top">
-  <div class="brand"><svg width="30" height="30" aria-hidden="true" ><use href="#r3"/></svg><b>AI Regatta</b><span>Toulon · Manche 3</span></div>
+  <div class="brand"><svg width="30" height="30" aria-hidden="true" ><use href="#r3"/></svg><b>AI Regatta</b><span>Toulon · Course 3</span></div>
   <nav class="roles" aria-label="Choisir qui regarde">
     <button type="button" data-v="pub" aria-pressed="true">Spectateur</button>
     <button type="button" data-v="com" aria-pressed="false">Comité de course</button>
@@ -312,7 +312,7 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 <!-- ÉQUIPE -->
 <section class="view" id="v-eq" hidden>
  <div class="stage">
-  <div class="vh"><div><span class="k">Console d’équipe</span><h1>L’IA barre, l’équipe regarde</h1></div><p>Les décisions de l’IA tactique et leur motif, la carte vue depuis son bateau. Aucune commande humaine pendant la manche : seul l’arrêt de sécurité reste possible.</p></div>
+  <div class="vh"><div><span class="k">Console d’équipe</span><h1>L’IA barre, l’équipe regarde</h1></div><p>Les décisions de l’IA tactique et leur motif, la carte vue depuis son bateau. Autonome de la porte de départ à l’arrivée. Le règlement permet de reprendre la main à la télécommande, 30 s au plus, contre un tour de pénalité.</p></div>
   <div class="com">
     <div class="map" data-map="eq" style="height:max(520px,min(820px,calc(100vh - 230px)))" aria-label="Carte tactique de l’équipe, zoomable"></div>
     <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
@@ -360,13 +360,14 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 'use strict';
 const SIM=(function(){
   const TEAMS=[{id:'FRA',name:'France',c:'#2F6BFF',f:1.04},{id:'ITA',name:'Italie',c:'#00C2A8',f:1.035},{id:'GBR',name:'Grande-Bretagne',c:'#E4002B',f:1.02},{id:'NED',name:'Pays-Bas',c:'#FF8C1A',f:1.0},{id:'SUI',name:'Suisse',c:'#1E293B',f:1.015},{id:'MON',name:'Monaco',c:'#B07CFF',f:0.985},{id:'GER',name:'Allemagne',c:'#EAB308',f:0.975}];
-  const WW={x:0,y:200},LW1={x:-11,y:18},LW2={x:11,y:18},PIN={x:-42,y:0},SB={x:42,y:0},ZONE=4;
-  const DN1=182,UP2=182,DN2=200,TOTAL=200+DN1+UP2+DN2,D2R=Math.PI/180;
+  // Parcours n°3 du règlement : porte 1-2 (départ, porte, arrivée), bouée au vent 3, zone de pénalité P1-P2 près de la bouée 2
+  const WW={x:0,y:200},LW1={x:-22,y:0},LW2={x:22,y:0},PIN=LW1,SB=LW2,P1={x:30,y:6},P2={x:30,y:-6},ZONE=4;
+  const DN1=200,UP2=200,DN2=200,TOTAL=200+DN1+UP2+DN2,D2R=Math.PI/180;
   function rnd(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
   function build(seed){
     const r=rnd(seed),ocsI=Math.floor(r()*TEAMS.length),touchI=Math.floor(r()*TEAMS.length),touchLeg=r()<.5?1:3;
     const boats=TEAMS.map((tm,i)=>{
-      const sx=-33+i*11+(r()-.5)*3,t0=(i===ocsI?-1.3:0.3+r()*3.2),f=tm.f*(0.95+r()*0.08),tackLen=14+r()*32;
+      const sx=-18+i*6+(r()-.5)*1.5,t0=(i===ocsI?-1.3:0.3+r()*3.2),f=tm.f*(0.95+r()*0.08),tackLen=14+r()*32;
       const vUp=1.36*f,vDn=1.78*f,segs=[];let t=t0,x=sx,y=0;
       const add=(x1,y1,v,leg,kind,ex)=>{const d=Math.hypot(x1-x,y1-y);if(d<.01)return;const mx=(x+x1)/2,lift=kind==='up'?1+0.06*Math.max(-1,Math.min(1,mx/40)):1,dt=d/(v*lift);segs.push({x0:x,y0:y,x1,y1,t0:t,t1:t+dt,leg,kind,...ex});t+=dt;x=x1;y=y1};
       const dwell=(dt,leg,kind,ex)=>{segs.push({x0:x,y0:y,x1:x,y1:y,t0:t,t1:t+dt,leg,kind,...ex});t+=dt};
@@ -384,7 +385,7 @@ const SIM=(function(){
         add(WW.x+R*Math.cos(45*D2R),WW.y+R*Math.sin(45*D2R),vUp,leg,'up');
         arc(WW,R,45,200,vUp*.8,leg,'round')};
       const run=(leg,fin)=>{const g1=(r()<.5?-1:1)*(16+r()*16);add(g1,135+r()*15,vDn,leg,'dn');dwell(1.6,leg,'gybe');add(-g1*.8,70+r()*14,vDn,leg,'dn');dwell(1.6,leg,'gybe');
-        if(fin){add((r()-.5)*30,-3,vDn,leg,'fin');return}
+        if(fin){add((r()-.5)*28,-3,vDn,leg,'fin');return}
         const east=r()<.5,G=east?LW2:LW1,R=radius(leg);
         // on descend entre les deux bouées de la porte puis on remonte autour de celle choisie
         const sx2=east?G.x-R:G.x+R;add(sx2,G.y+7,vDn,leg,'dn');add(sx2,G.y,vDn*.9,leg,'dn');
@@ -398,18 +399,27 @@ const SIM=(function(){
         if(g.kind==='gybe')orders.push({te:g.t0,cmd:'Empanne',code:'gybe',why:'Meilleur angle de descente sur l’autre bord'});
         if(g.kind==='gate'&&g.first)orders.push({te:g.t0,cmd:'Loffe',code:'head_up',why:'Porte : on contourne la bouée et on remonte'});
         if(g.kind==='gate'&&g.last)orders.push({te:g.t1+.3,cmd:'Mode près',code:'mode_upwind',why:'Deuxième tour'})});
+      orders.push({te:segs[segs.length-1].t0,cmd:'Cap sur l’arrivée',code:'mode_downwind',why:'Porte 1-2 : la ligne d’arrivée'});
       return {...tm,i,sx,t0,segs,orders,pens:[],ocs:i===ocsI,recalled:false,ev:{},fin:null};
     });
     return {boats,events:[],alerts:[],log:[],flags:{}};
   }
+  // Tour de pénalité du règlement : passer entre 2 et P1, contourner P2 puis P1 à bâbord, puis franchir l’arrivée
+  function addLoop(b,t){const S=b.segs,L=S[S.length-1];if(L.kind!=='fin')return false;const te=effT(b,t);if(te>=L.t1)return false;
+    const v=Math.hypot(L.x1-L.x0,L.y1-L.y0)/Math.max(.001,L.t1-L.t0),fx=L.x1,fy=L.y1;let x,y,tt;
+    if(te<=L.t0){S.pop();x=L.x0;y=L.y0;tt=L.t0}else{const u=(te-L.t0)/(L.t1-L.t0);x=L.x0+(L.x1-L.x0)*u;y=L.y0+(L.y1-L.y0)*u;L.x1=x;L.y1=y;L.t1=te;tt=te}
+    const add=(x1,y1,kind,vv,ex)=>{const d=Math.hypot(x1-x,y1-y);if(d<.01)return;const dt=d/(vv||v);S.push({x0:x,y0:y,x1,y1,t0:tt,t1:tt+dt,leg:4,kind,...ex});tt+=dt;x=x1;y=y1};
+    const arc=(C,a0,a1)=>{const n=8;for(let k=1;k<=n;k++){const a=(a0+(a1-a0)*k/n)*D2R;add(C.x+4*Math.cos(a),C.y+4*Math.sin(a),'penloop',v*.75,{first:k===1})}};
+    add(26,14,'penloop',v,{start:true});add(26,P2.y,'penloop',v*.9);arc(P2,180,360);add(P1.x+4,P1.y,'penloop',v*.9);arc(P1,0,180);add(fx,fy,'fin',v);
+    b.loops=(b.loops||0)+1;return true}
   function effT(b,t){let e=t;for(const p of b.pens)if(t>p.at)e-=Math.min(t-p.at,p.dur);return e}
   function activePen(b,t){return b.pens.find(p=>p.dur>0.5&&t>=p.at&&t<p.at+p.dur)}
   const W=.35;
   // Avant le départ : boucle elliptique (le cap suit toujours la route), puis approche courbe vers la ligne
-  function pre(b,t){const ang=W*(t-b.t0+12),cx=b.sx,cy=-14;return {x:cx+4*Math.cos(ang),y:cy+3*Math.sin(ang),hdg:Math.atan2(-4*Math.sin(ang),3*Math.cos(ang))/D2R,sog:1.2}}
+  function pre(b,t){const ang=W*(t-b.t0+12),cx=b.sx,cy=-14;return {x:cx+2.6*Math.cos(ang),y:cy+2.4*Math.sin(ang),hdg:Math.atan2(-2.6*Math.sin(ang),2.4*Math.cos(ang))/D2R,sog:1.2}}
   function state(b,t){
     if(t<b.t0-12){const p=pre(b,t);return {...p,leg:0,fin:false,seg:'pre'}}
-    if(t<b.t0){const u=(t-(b.t0-12))/12,P0=[b.sx+4,-14],P1=[b.sx+4,-6],P2=[b.sx,0],m=1-u;
+    if(t<b.t0){const u=(t-(b.t0-12))/12,P0=[b.sx+2.6,-14],P1=[b.sx+2.6,-6],P2=[b.sx,0],m=1-u;
       const x=m*m*P0[0]+2*m*u*P1[0]+u*u*P2[0],y=m*m*P0[1]+2*m*u*P1[1]+u*u*P2[1],dx=2*m*(P1[0]-P0[0])+2*u*(P2[0]-P1[0]),dy=2*m*(P1[1]-P0[1])+2*u*(P2[1]-P1[1]);
       return {x,y,hdg:Math.atan2(dx,dy)/D2R,leg:0,sog:1.3,fin:false,seg:'pre'}}
     const S=b.segs,last=S[S.length-1],te=effT(b,t);
@@ -423,11 +433,11 @@ const SIM=(function(){
     return {x:g.x0+(g.x1-g.x0)*u,y:g.y0+(g.y1-g.y0)*u,hdg,leg:g.leg,sog,fin:false,seg:p?'pen':g.kind};
   }
   function tack(h){h=((h%360)+360)%360;return h<180?'bâbord':'tribord'}
-  function remain(s){if(s.fin)return -1;if(s.leg===0)return TOTAL+20;if(s.leg===1)return (WW.y-s.y)+DN1+UP2+DN2;if(s.leg===2)return (s.y-18)+UP2+DN2;if(s.leg===3)return (WW.y-s.y)+DN2;return Math.max(0,s.y)}
+  function remain(s){if(s.fin)return -1;if(s.leg===0)return TOTAL+20;if(s.leg===1)return (WW.y-s.y)+DN1+UP2+DN2;if(s.leg===2)return s.y+UP2+DN2;if(s.leg===3)return (WW.y-s.y)+DN2;return Math.max(0,s.y)}
   function ranking(sim,t){return sim.boats.map(b=>{const st=state(b,t);return {b,st,rem:remain(st)}}).sort((a,c)=>{if(a.st.fin&&c.st.fin)return a.b.fin-c.b.fin;if(a.st.fin)return -1;if(c.st.fin)return 1;return a.rem-c.rem})}
   // Instant d'entrée dans la zone de 4 m (null si le bateau n'y est pas)
   function zoneEntry(b,M,t){const d=tt=>{const s=state(b,tt);return Math.hypot(s.x-M.x,s.y-M.y)};if(d(t)>=ZONE)return null;let tt=t;while(tt>t-30&&d(tt-.1)<ZONE)tt-=.1;return tt}
-  return {TEAMS,WW,LW1,LW2,PIN,SB,ZONE,TOTAL,build,effT,activePen,state,remain,ranking,tack,zoneEntry};
+  return {TEAMS,WW,LW1,LW2,PIN,SB,P1,P2,ZONE,TOTAL,build,effT,activePen,state,remain,ranking,tack,zoneEntry,addLoop};
 })();
 
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
@@ -453,32 +463,32 @@ const VIEW={},DRAG={},PTRS={};
 function emit(type,t,o){sim.events.push({type,t,...o})}
 function log(t,txt){sim.log.unshift({t,txt});if(sim.log.length>60)sim.log.pop()}
 function tick(t){const F=sim.flags;
-  if(!F.w&&t>=-60){F.w=1;emit('proc',t,{title:'Départ dans 1 minute',body:'Manche 3 : 7 bateaux, deux tours.'});log(t,'Avertissement · 1 son')}
+  if(!F.w&&t>=-60){F.w=1;emit('proc',t,{title:'Départ dans 1 minute',body:'Course 3 : 7 bateaux, parcours n°3, deux tours. Procédure d’une minute, par dérogation.'});log(t,'Avertissement · 1 son')}
   if(!F.p&&t>=-40){F.p=1;log(t,'Préparatoire · pavillon P')}
-  if(!F.o&&t>=-20){F.o=1;emit('proc',t,{title:'Départ dans 20 secondes',body:'La flotte se place sur la ligne.'});log(t,'Dernière étape · 1 son long')}
-  if(!F.g&&t>=0){F.g=1;emit('start',t,{title:'C’est parti !',body:'Manche 3 lancée.'});log(t,'Départ · 1 son')}
+  if(!F.o&&t>=-20){F.o=1;emit('proc',t,{title:'Départ dans 20 secondes',body:'La flotte se place sur la porte 1-2.'});log(t,'Dernière étape · 1 son long')}
+  if(!F.g&&t>=0){F.g=1;emit('start',t,{title:'C’est parti !',body:'Course 3 lancée.'});log(t,'Départ · 1 son')}
   const rk=SIM.ranking(sim,t),place=b=>rk.findIndex(x=>x.b===b)+1,pl=k=>k+(k===1?'re':'e');
   for(const b of sim.boats){const s=SIM.state(b,t);
     if(b.ocs&&!b.ev.ocs&&t>=.2){b.ev.ocs=1;const s0=SIM.state(b,0);sim.alerts.push({id:'ocs',rule:'ocs',kind:'DÉPART ANTICIPÉ',title:b.name+' au-delà de la ligne',boats:[b.id],t:0,x:s0.x,y:0,ocs:true});log(t,'Alerte · '+b.id+' au-delà de la ligne')}
-    if(!b.ev.w1&&s.leg>=2){b.ev.w1=1;const k=place(b);emit('mark',t,{boat:b.id,rk:k,title:b.name+' passe la bouée au vent',body:'Tour 1 · '+pl(k)+' place'})}
-    if(!b.ev.g1&&s.leg>=3){b.ev.g1=1;const k=place(b);emit('gate',t,{boat:b.id,rk:k,title:b.name+' passe la porte',body:'Début du tour 2 · '+pl(k)})}
-    if(!b.ev.w2&&s.leg>=4){b.ev.w2=1;const k=place(b);emit('mark',t,{boat:b.id,rk:k,title:b.name+' passe la bouée au vent',body:'Tour 2 · '+pl(k)+' place'})}
-    if(b.fin==null&&s.fin){b.fin=b.segs[b.segs.length-1].t1+b.pens.reduce((a,p)=>a+p.dur,0)+(b.timePen||0);const k=sim.boats.filter(x=>x.fin!=null).length;emit('finish',t,{boat:b.id,rk:k,title:k===1?b.name+' gagne la manche !':b.name+' termine '+pl(k),body:'Temps : '+fmt(b.fin)});log(t,b.id+' arrive '+pl(k))}}
+    if(!b.ev.w1&&s.leg>=2){b.ev.w1=1;const k=place(b);emit('mark',t,{boat:b.id,rk:k,title:b.name+' passe la bouée 3',body:'Tour 1 · '+pl(k)+' place'})}
+    if(!b.ev.g1&&s.leg>=3){b.ev.g1=1;const k=place(b);emit('gate',t,{boat:b.id,rk:k,title:b.name+' passe la porte 1-2',body:'Début du tour 2 · '+pl(k)})}
+    if(!b.ev.w2&&s.leg>=4){b.ev.w2=1;const k=place(b);emit('mark',t,{boat:b.id,rk:k,title:b.name+' passe la bouée 3',body:'Tour 2 · '+pl(k)+' place'})}
+    if(b.fin==null&&s.fin){b.fin=b.segs[b.segs.length-1].t1+b.pens.reduce((a,p)=>a+p.dur,0)+(b.timePen||0);const k=sim.boats.filter(x=>x.fin!=null).length;emit('finish',t,{boat:b.id,rk:k,title:k===1?b.name+' gagne la course !':b.name+' termine '+pl(k),body:'Temps : '+fmt(b.fin)});log(t,b.id+' arrive '+pl(k))}}
   const act=sim.boats.map(b=>({b,s:SIM.state(b,t)})).filter(o=>!o.s.fin&&o.s.leg>0&&o.s.seg!=='pen');
   for(const o of act){if(o.s.seg!=='round'&&o.s.seg!=='gate')continue;const M=[SIM.WW,SIM.LW1,SIM.LW2].find(m=>Math.hypot(o.s.x-m.x,o.s.y-m.y)<.75),k='t'+o.b.id+o.s.leg;
     if(M&&!F[k]){F[k]=1;pushAlert({rule:'r31',give:o,M,t,d:Math.hypot(o.s.x-M.x,o.s.y-M.y)})}}
   for(let a=0;a<act.length;a++)for(let c=a+1;c<act.length;c++){const A=act[a],C=act[c],d=Math.hypot(A.s.x-C.s.x,A.s.y-C.s.y),k=[A.b.id,C.b.id].sort().join('-')+A.s.leg;
     if(d<1.5&&!F[k]&&(F.na||0)<10){F[k]=1;F.na=(F.na||0)+1;pushAlert({...classify(A,C,t),t,d})}}}
 const RULES={
-  r18:['Règle 6.6 · place à la bouée (RCV 18)','Dans la zone de 4 m, le bateau entré le premier a droit à la place pour passer la bouée ; l’autre doit la lui laisser.'],
-  r10:['Règle 6.1 · bâbord et tribord (RCV 10)','Un bateau bâbord amures (le vent arrive par sa gauche) s’écarte d’un bateau tribord amures.'],
-  r11:['Règle 6.2 · au vent et sous le vent (RCV 11)','Deux bateaux engagés à la même amure : celui qui est au vent s’écarte de celui qui est sous le vent.'],
-  r12:['Règle 6.3 · route libre derrière (RCV 12)','Deux bateaux non engagés à la même amure : celui qui est derrière s’écarte de celui qui est devant.'],
-  r13:['Règle 6.4 · en virant (RCV 13)','Entre le passage face au vent et sa nouvelle route au près, un bateau qui vire s’écarte des autres.'],
-  r31:['Règle 6.7 · toucher une bouée (RCV 31)','Un bateau ne doit pas toucher une bouée ; s’il la touche, il fait un tour de pénalité.'],
-  ocs:['Règle 5.2 · départ anticipé (RCV 29.1)','Au signal de départ, aucune partie du bateau ne doit être du côté parcours de la ligne ; sinon il doit revenir la couper.']};
+  r18:['Place à la bouée (RCV 18) · règle 5.1','Dans la zone de 4 m, le bateau entré le premier a droit à la place pour passer la bouée ; l’autre doit la lui laisser.'],
+  r10:['Bâbord et tribord (RCV 10) · règle 5.1','Un bateau bâbord amures (le vent arrive par sa gauche) s’écarte d’un bateau tribord amures.'],
+  r11:['Au vent et sous le vent (RCV 11) · règle 5.1','Deux bateaux engagés à la même amure : celui qui est au vent s’écarte de celui qui est sous le vent.'],
+  r12:['Route libre derrière (RCV 12) · règle 5.1','Deux bateaux non engagés à la même amure : celui qui est derrière s’écarte de celui qui est devant.'],
+  r13:['En virant (RCV 13) · règle 5.1','Entre le passage face au vent et sa nouvelle route au près, un bateau qui vire s’écarte des autres.'],
+  r31:['Toucher une bouée (RCV 31) · règle 5.1','Un bateau ne doit pas toucher une bouée ; s’il la touche, il fait un tour de pénalité par la zone P1-P2, avant l’arrivée.'],
+  ocs:['Départ anticipé · règle 5.5 (règlement, § 7)','Au signal de départ, aucune partie du bateau ne doit être du côté parcours de la porte 1-2. Un bateau qui ne l’a pas repassée dans les 2 minutes est disqualifié.']};
 const KIND={r18:'PLACE À LA BOUÉE',r10:'BÂBORD / TRIBORD',r11:'AU VENT / SOUS LE VENT',r12:'ROUTE LIBRE DERRIÈRE',r13:'EN VIRANT',r31:'BOUÉE TOUCHÉE',ocs:'DÉPART ANTICIPÉ'};
-const markName=M=>M===SIM.WW?'à la bouée au vent':'à la porte';
+const markName=M=>M===SIM.WW?'à la bouée 3':'à la porte 1-2';
 function classify(A,C,t){const D=Math.PI/180;
   // Place à la bouée (RCV 18) : seulement pour deux bateaux du même bord de parcours, à la bouée qu'ils vont contourner,
   // et jamais entre deux bateaux d'amures opposées au près (RCV 18.1 a) : c'est alors bâbord/tribord qui s'applique.
@@ -500,9 +510,8 @@ function pushAlert(c){const G=c.give,Q=c.prio,g=G.b.id,q=Q&&Q.b.id,tk=x=>SIM.tac
   sim.alerts.push({id:c.rule+g+(q||'')+G.s.leg,tk:Q?{[g]:tk(G),[q]:tk(Q)}:null,rule:c.rule,kind:KIND[c.rule],title:T2,boats:q?[g,q]:[g],t:c.t,x,y,gap:c.d,M:c.M,ent:c.ent,why,leg:G.s.leg});
   log(c.t,'Alerte · '+KIND[c.rule].toLowerCase()+' · '+T2)}
 function decide(id,what){const al=sim.alerts.find(a=>a.id===id);if(!al||al.done)return;al.done=what;const b=sim.boats.find(x=>x.id===al.boats[0]),t=T;
-  if(what==='recall'){b.pens.push({at:t,dur:9,kind:'recall'});b.recalled=true;emit('recall',t,{hot:true,boat:b.id,title:'Rappel : '+b.name,body:'Parti trop tôt, il doit revenir couper la ligne.'});log(t,'Rappel individuel X · '+b.id)}
-  else if(what==='pen'){b.pens.push({at:t,dur:7,kind:'turn'});emit('penalty',t,{hot:true,boat:b.id,title:'Pénalité pour '+b.name,body:al.why+' Un tour sur lui-même.'});log(t,'Pénalité '+b.id+' · un tour')}
-  else if(what==='time'){b.timePen=(b.timePen||0)+20;emit('penalty',t,{hot:true,boat:b.id,title:'Pénalité en temps pour '+b.name,body:'20 secondes ajoutées à son arrivée.'});log(t,'Pénalité '+b.id+' · +20 s')}
+  if(what==='recall'){b.pens.push({at:t,dur:9,kind:'recall'});b.recalled=true;emit('recall',t,{hot:true,boat:b.id,title:'Rappel : '+b.name,body:'Parti trop tôt : il doit repasser la porte 1-2 dans les 2 minutes, sinon il est disqualifié.'});log(t,'Rappel individuel X · '+b.id)}
+  else if(what==='pen'){const ok=SIM.addLoop(b,t);if(ok){b.pens.push({at:t,dur:0,kind:'loop'});emit('penalty',t,{hot:true,boat:b.id,title:'Pénalité pour '+b.name,body:al.why+' Un tour par la zone P1-P2, à faire avant l’arrivée.'});log(t,'Pénalité '+b.id+' · un tour par P1-P2')}else log(t,'Pénalité '+b.id+' : bateau déjà arrivé')}
   else if(what==='jury'){emit('info',t,{title:'Incident à l’étude',body:al.title+' : décision du jury après la manche.'});log(t,'Incident renvoyé au jury')}
   else log(t,'Alerte '+al.boats.join('/')+' sans suite');
   closeReplay();renderAll(true)}
@@ -537,6 +546,7 @@ function mapSVG(k,w,h){
   if(o.lay){const [wx,wy]=P(0,200);[[-130,70],[130,70]].forEach(q=>{const [x,y]=P(q[0],q[1]);g+=`<line x1="${f1(wx)}" y1="${f1(wy)}" x2="${f1(x)}" y2="${f1(y)}" stroke="${Th.lay}" stroke-width="1.6" stroke-dasharray="10 8"/>`})}
   if(o.zone)[[SIM.WW,4],[SIM.LW1,4],[SIM.LW2,4]].forEach(q=>{const [x,y]=P(q[0].x,q[0].y);g+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(q[1]*s)}" fill="none" stroke="${Th.zone}" stroke-width="1.5" stroke-dasharray="4 5"/>`});
   const [px,py]=P(SIM.PIN.x,0),[sx,sy]=P(SIM.SB.x,0);g+=`<line x1="${f1(px)}" y1="${f1(py)}" x2="${f1(sx)}" y2="${f1(sy)}" stroke="${Th.line}" stroke-width="2" stroke-dasharray="9 6"/>`;
+  {const [ax,ay]=P(SIM.P1.x-6,SIM.P1.y+6),[bx,by]=P(SIM.P2.x+6,SIM.P2.y-6);g+=`<rect x="${f1(Math.min(ax,bx))}" y="${f1(Math.min(ay,by))}" width="${f1(Math.abs(bx-ax))}" height="${f1(Math.abs(by-ay))}" rx="${f1(3*s)}" fill="rgba(37,99,235,.08)" stroke="rgba(37,99,235,.35)" stroke-dasharray="4 4"/>`}
   if(o.zoneHL){const [x,y]=P(o.zoneHL.x,o.zoneHL.y);g+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(SIM.ZONE*s)}" fill="rgba(244,63,94,.08)" stroke="#F43F5E" stroke-width="2" stroke-dasharray="6 5"/><text x="${f1(x)}" y="${f1(y-SIM.ZONE*s-8)}" text-anchor="middle" fill="#E11D48" style="font:700 12px 'Plus Jakarta Sans',sans-serif;paint-order:stroke;stroke:#fff;stroke-width:4px">Zone de 4 m</text>`}
   if(o.path)(o.focus||[]).forEach(id=>{const b=sim.boats.find(x=>x.id===id),pts=[];for(let tt=o.path.t0;tt<=o.path.t1+.01;tt+=.25){const ss=SIM.state(b,tt),[x,y]=P(ss.x,ss.y);pts.push(f1(x)+','+f1(y))}g+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${b.c}" stroke-opacity=".45" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>`});
   (o.marks2||[]).forEach(m=>{const [x,y]=P(m.x,m.y);g+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="6" fill="#fff" stroke="${m.c}" stroke-width="3"/><text x="${f1(x+10)}" y="${f1(y+4)}" fill="#0F172A" style="font:700 11.5px 'Plus Jakarta Sans',sans-serif;paint-order:stroke;stroke:#fff;stroke-width:4px">${esc(m.label)}</text>`});
@@ -549,7 +559,7 @@ function mapSVG(k,w,h){
     if(show){const txt=role?b.id+' · '+SIM.tack(q.st.hdg)+' · '+(role==='P'?'prioritaire':'doit s’écarter'):(T>=0&&!o.noPos?(i+1)+' ':'')+b.id+(o.speed?' · '+kn(q.st.sog):''),tw=txt.length*7.2+30,tbg=role==='P'?'#DCFCE7':role==='G'?'#FFE4E6':Th.tagBg,tfg=role==='P'?'#166534':role==='G'?'#9F1239':Th.tagFg;let tx=x+12,ty=y-30;for(let n=0;n<6;n++){const hit=placed.find(p=>Math.abs(p[0]-tx)<tw&&Math.abs(p[1]-ty)<22);if(!hit)break;ty=hit[1]-24}placed.push([tx,ty]);
       tg.push(`<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(tx)}" y2="${f1(ty+11)}" stroke="${b.c}" stroke-opacity=".5" stroke-width="1.5"/><g transform="translate(${f1(tx)} ${f1(ty)})"><rect width="${tw}" height="24" rx="12" fill="${tbg}" style="filter:drop-shadow(0 2px 4px rgba(15,23,42,.18))"/><circle cx="12" cy="12" r="5" fill="${b.c}"/><text x="22" y="16.5" fill="${tfg}" style="font:700 12.5px 'Plus Jakarta Sans',sans-serif">${esc(txt)}</text></g>`)}});
   g+=tr.join('');
-  const mr=Math.max(5,Math.min(13,1.3*s));[[SIM.WW,'Bouée au vent'],[SIM.LW1,''],[SIM.LW2,'Porte'],[SIM.PIN,''],[SIM.SB,'Comité']].forEach(q=>{const [x,y]=P(q[0].x,q[0].y);g+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(mr)}" fill="${Th.mark}" stroke="${Th.markBd}" stroke-width="2"/>`;if(o.labels&&q[1])g+=`<text x="${f1(x+mr+6)}" y="${f1(y+4)}" fill="${Th.lab}" style="font:700 13px 'Plus Jakarta Sans',sans-serif;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round">${q[1]}</text>`});
+  const mr=Math.max(5,Math.min(13,1.3*s));[[SIM.WW,'3 · bouée au vent'],[SIM.LW1,'1 · porte de départ et d’arrivée'],[SIM.LW2,'2'],[SIM.P1,'P1',1],[SIM.P2,'P2',1]].forEach(q=>{const [x,y]=P(q[0].x,q[0].y);g+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(q[2]?mr*.7:mr)}" fill="${Th.mark}" stroke="${Th.markBd}" stroke-width="2"/>`;if(o.labels&&q[1])g+=`<text x="${f1(x+mr+6)}" y="${f1(y+4)}" fill="${Th.lab}" style="font:700 13px 'Plus Jakarta Sans',sans-serif;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round">${q[1]}</text>`});
   (o.rings||[]).forEach(r=>{const [x,y]=P(r.x,r.y);g+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(Math.max(16,4*s))}" fill="none" stroke="#F43F5E" stroke-width="3"/>`});
   if(o.gap){const A=SIM.state(sim.boats.find(b=>b.id===o.gap[0]),t),B=SIM.state(sim.boats.find(b=>b.id===o.gap[1]),t),[x1,y1]=P(A.x,A.y),[x2,y2]=P(B.x,B.y),d=Math.hypot(A.x-B.x,A.y-B.y),c=d<1?'#E11D48':'#0F172A';g+=`<line x1="${f1(x1)}" y1="${f1(y1)}" x2="${f1(x2)}" y2="${f1(y2)}" stroke="${c}" stroke-width="2"/><text x="${f1((x1+x2)/2+10)}" y="${f1((y1+y2)/2-10)}" fill="${c}" style="font:700 15px 'Plus Jakarta Sans',sans-serif;paint-order:stroke;stroke:#fff;stroke-width:4px">${fr(d.toFixed(2))} m</text>`}
   if(o.markGap){const b=sim.boats.find(x=>x.id===o.markGap.b),A=SIM.state(b,t),M=o.markGap.M,[x1,y1]=P(A.x,A.y),[x2,y2]=P(M.x,M.y),d=Math.hypot(A.x-M.x,A.y-M.y);g+=`<line x1="${f1(x1)}" y1="${f1(y1)}" x2="${f1(x2)}" y2="${f1(y2)}" stroke="#E11D48" stroke-width="2"/><text x="${f1((x1+x2)/2+10)}" y="${f1((y1+y2)/2-10)}" fill="#E11D48" style="font:700 15px 'Plus Jakarta Sans',sans-serif;paint-order:stroke;stroke:#fff;stroke-width:4px">${fr(d.toFixed(2))} m du centre</text>`}
@@ -585,7 +595,7 @@ function renderPub(force){const tp=T-1,rk=SIM.ranking(sim,tp),lead=rk[0],evs=sim
   const toasts=evs.filter(want);while(seenToast<toasts.length){const e=toasts[seenToast++];if(tp-e.t<5){$('#toastT').textContent=e.title;$('#toastB').textContent=e.body||'';$('#toast').classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('on'),4000)}}
   if(!force&&slow%3)return;
   let h='';
-  if(pTab==='rank')h=rk.map((q,i)=>{const ap=SIM.activePen(q.b,tp),sub=q.st.fin?'Arrivé · '+fmt(q.b.fin):ap?(ap.kind==='turn'?'Fait sa pénalité':ap.kind==='recall'?'Revient à la ligne':'Arrêté'):LEGN[q.st.leg]+' · '+kn(q.st.sog)+' nds';
+  if(pTab==='rank')h=rk.map((q,i)=>{const ap=SIM.activePen(q.b,tp),sub=q.st.fin?'Arrivé · '+fmt(q.b.fin):q.st.seg==='penloop'?'Fait sa pénalité (P1-P2)':ap?(ap.kind==='turn'?'Fait sa pénalité':ap.kind==='recall'?'Revient à la ligne':'Arrêté'):LEGN[q.st.leg]+' · '+kn(q.st.sog)+' nds';
     return `<button type="button" class="rk${sel===q.b.id?' on':''}" data-b="${q.b.id}"><b class="p">${tp<0?'–':i+1}</b><span class="bar" style="background:${q.b.c}">${q.b.id}</span><span><span class="n">${esc(q.b.name)}</span><span class="s">${sub}</span></span><span class="g">${i===0||tp<0?'':'+'+fr(gapOf(q,lead).toFixed(1))}</span></button>`}).join('');
   else if(pTab==='feed')h=evs.slice().reverse().slice(0,30).map(e=>`<div class="ev"><span class="t">${fmt(e.t)}</span><span><b style="color:${colOf(e)}">${esc(e.title)}</b><span>${esc(e.body||'')}</span></span></div>`).join('')||'<p style="color:var(--texte-2)">Les moments de la course arriveront ici.</p>';
   else{const me=rk.find(q=>q.b.id===fav),p=rk.indexOf(me)+1;
@@ -602,7 +612,7 @@ function renderCom(force){const t=T,rk=SIM.ranking(sim,t),fl=FL.filter(f=>t>=f.t
   const key=open.map(a=>a.id).join();if(force||$('#cAlerts').dataset.k!==key){$('#cAlerts').dataset.k=key;
     $('#cAlerts').innerHTML=open.length?open.map(a=>`<div class="alert"><span class="m">${a.kind} · ${fmt(a.t)}</span><b>${esc(a.title)}</b><div class="chips"><button type="button" class="btn pri" data-rv="${a.id}">Rejeu</button>${a.ocs?`<button type="button" class="btn" data-d="${a.id}" data-w="recall">Rappeler ${a.boats[0]}</button>`:''}<button type="button" class="btn" data-d="${a.id}" data-w="none">Sans suite</button></div></div>`).join(''):'<span style="font-size:14px;color:var(--texte-2)">Aucune alerte. Le moteur de course surveille la ligne, les bouées et les contacts.</span>'}
   $('#cLeg').textContent='Flotte · '+LEGN[rk[0].st.leg];
-  if(force||slow%3===0)$('#cFleet').innerHTML=rk.map((q,i)=>{const ap=SIM.activePen(q.b,t),st=ap?(ap.kind==='stop'?'ARRÊT':ap.kind==='recall'?'RETOUR':'PÉNALITÉ'):q.st.fin?'ARRIVÉ':(q.b.ocs&&!q.b.recalled&&t>0&&q.st.leg===1)?'OCS':q.b.timePen?'+'+q.b.timePen+' S':'';
+  if(force||slow%3===0)$('#cFleet').innerHTML=rk.map((q,i)=>{const ap=SIM.activePen(q.b,t),st=q.st.seg==='penloop'?'PÉNALITÉ':ap?(ap.kind==='stop'?'ARRÊT':ap.kind==='recall'?'RETOUR':'PÉNALITÉ'):q.st.fin?'ARRIVÉ':(q.b.ocs&&!q.b.recalled&&t>0&&q.st.leg===1)?'OCS':q.b.timePen?'+'+q.b.timePen+' S':'';
     return `<button type="button" class="fl" data-fz="${q.b.id}"><b class="p">${t<0?'–':i+1}</b><span style="width:22px;height:22px;background:${q.b.c};border-radius:50%;box-shadow:inset 0 0 0 3px rgba(255,255,255,.5)"></span><span class="id">${q.b.id} <span class="st" style="color:${st==='ARRIVÉ'?'#2563EB':'#E11D48'}">${st}</span></span><span class="v">${kn(q.st.sog)} nd</span><span class="v" style="color:var(--texte-2)">${q.st.fin?'—':Math.max(0,q.rem).toFixed(0)+' m'}</span></button>`}).join('');
   $('#cLog').innerHTML=sim.log.slice(0,10).map(l=>`<div><b>${fmt(l.t)}</b> ${esc(l.txt)}</div>`).join('');
 }
@@ -661,7 +671,7 @@ function openReplay(id){const a=sim.alerts.find(x=>x.id===id);if(!a)return;const
   const R=RULES[a.rule]||RULES.r18;$('#rvRule').innerHTML=`<b>${R[0]}</b><br>${R[1]}`;
   $('#rvSteps').innerHTML=info.S.map(x=>{const r=x.t-ref;return `<button type="button" data-t="${x.t}"><span>${r<0?'−':'+'}${fr(Math.abs(r).toFixed(1))} s</span>${esc(x.txt)}</button>`}).join('');
   $('#rvConcl').innerHTML=`<b>Ce que montre le rejeu</b>${esc(info.concl)}<em>Proposition : ${esc(info.prop)}</em>`;
-  const B=a.boats[0],dec=a.ocs?[['recall','Rappeler '+B,'Pavillon X, corne, tout le monde prévenu',1],['none','Départ correct','L’alerte est classée']]:[['pen','Pénalité '+B,'Un tour sur lui-même, tout de suite',1],['time','+20 s à '+B,'Pénalité en temps à l’arrivée'],['none','Sans suite','Pas de faute'],['jury','Jury','Décision après la manche']];
+  const B=a.boats[0],dec=a.ocs?[['recall','Rappeler '+B,'Pavillon X, corne, tout le monde prévenu',1],['none','Départ correct','L’alerte est classée']]:[['pen','Pénalité '+B,'Un tour par la zone P1-P2, avant l’arrivée',1],['none','Sans suite','Pas de faute'],['jury','Jury','Décision après la course']];
   $('#rvDec').innerHTML=dec.map(d=>`<button type="button" class="dec${d[3]?' pri':''}" data-d="${a.id}" data-w="${d[0]}"><b>${esc(d[1])}</b><span>${d[2]}</span></button>`).join('');
   $('#rv').hidden=false;if(EMB)try{parent.postMessage({airProtoFocus:1},'*')}catch(e){}requestAnimationFrame(()=>{renderRv();$('#rvClose').focus()})}
 function closeReplay(){RV=null;$('#rv').hidden=true}
@@ -692,7 +702,7 @@ $('#pBody').addEventListener('pointerdown',e=>{const f=e.target.closest('[data-f
 $('#v-com').addEventListener('click',e=>{const r=e.target.closest('[data-rv]');if(r){openReplay(r.dataset.rv);return}const d=e.target.closest('[data-d]');if(d){decide(d.dataset.d,d.dataset.w);return}});
 $('#cFleet').addEventListener('pointerdown',e=>{const f=e.target.closest('[data-fz]');if(f){Object.assign(ZM.com,{f:f.dataset.fz,z:Math.max(3,ZM.com.z)});renderAll(true)}});
 $('#bX').addEventListener('click',()=>{const a=sim.alerts.find(a=>a.ocs&&!a.done);if(a)decide(a.id,'recall')});
-$('#bG').addEventListener('click',()=>restart('Rappel général'));$('#bAP').addEventListener('click',()=>restart('Départ retardé'));$('#bN').addEventListener('click',()=>restart('Manche annulée'));
+$('#bG').addEventListener('click',()=>restart('Rappel général'));$('#bAP').addEventListener('click',()=>restart('Départ retardé'));$('#bN').addEventListener('click',()=>restart('Course annulée'));
 $$('[data-g]').forEach(b=>b.addEventListener('click',()=>{gfx=b.dataset.g;$$('[data-g]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))}));
 $('#eqPick').addEventListener('click',e=>{const c=e.target.closest('[data-eq]');if(c){eqTeam=c.dataset.eq;stopArm=false;renderEq(true)}});
 $('#eqStop').addEventListener('click',()=>{const b=sim.boats.find(x=>x.id===eqTeam);if(!stopArm){stopArm=true;renderEq();setTimeout(()=>{stopArm=false},4000);return}stopArm=false;b.pens.push({at:T,dur:15,kind:'stop'});log(T,'Arrêt de sécurité · '+b.id+' (humain)');renderEq()});
