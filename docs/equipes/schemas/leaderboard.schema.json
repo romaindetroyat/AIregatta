@@ -75,7 +75,7 @@
             "items": {
               "type": "string",
               "pattern": "^[A-Z][A-Z0-9]{1,5}$",
-              "description": "Identifiant de bouée, ex. WW, LW1, SB."
+              "description": "Identifiant de bouée, ex. B1, B2, B3, P1."
             }
           },
           "dist_to_next_m": {

@@ -46,7 +46,7 @@
 | Distances | En **mètres**, suffixe `_m`. |
 | Durées | En millisecondes (`_ms`) ou secondes (`_s`), selon le suffixe. |
 | Gîte et tangage | Degrés ; gîte positive = bateau penché sur tribord (à confirmer avec le firmware de la balise), tangage positif = étrave qui monte. |
-| Identifiants | Manche `raceId` = date + numéro de manche : `2027-05-14-M3` (préfixe `SIM-` dans le bac à sable). Équipe `teamId` = code en minuscules : `fra07`. Bateau `boatId` = numéro de voile : `FRA-07`. Bouées : `WW` (bouée au vent), `LW1`/`LW2` (porte sous le vent), `SB` (bateau ou bouée comité, extrémité tribord de la ligne de départ), `PIN` (bouée de l’autre extrémité), `FIN1`/`FIN2` (extrémités de la ligne d’arrivée). |
+| Identifiants | Manche `raceId` = date + numéro de manche : `2027-05-14-M3` (préfixe `SIM-` dans le bac à sable). Équipe `teamId` = code en minuscules : `fra07`. Bateau `boatId` = numéro de voile : `FRA-07`. Bouées du parcours n°3 : `B1` et `B2` (porte 1-2, qui sert au départ, au passage et à l’arrivée), `B3` (bouée au vent, à laisser à bâbord), `P1` et `P2` (tour de pénalité). |
 | Compteur `seq` | Entier croissant **par sujet** (par bateau pour les positions), attribué par le PC course. Il sert à repérer les doublons et les messages arrivés dans le désordre. |
 
 ## 3. Se connecter
@@ -276,11 +276,12 @@ Le chrono est piloté par le PC course (P17). La procédure prévue est celle du
 | `course_version` | entier | — | Version du parcours (augmente à chaque modification) |
 | `name` | texte | — | Nom lisible du parcours |
 | `axis_twd` | nombre | degrés vrais | Direction du vent retenue pour orienter le parcours |
-| `length_m` | nombre | m | Distance entre la porte sous le vent et la bouée au vent (≈ 200 m, P04, à valider) |
-| `marks` | liste | — | Bouées : `mark_id`, `role` (`windward` au vent, `leeward_gate` porte sous le vent, `leeward`, `offset` dégagement, `start_committee`, `start_pin`, `finish`), `kind` (`instrumented` avec vent, `simple` position seule), `lat`, `lon` (position déclarée par le comité), `wind_equipped` |
-| `start_line` | objet | — | `committee_mark` (extrémité comité, `SB`) et `pin_mark` (`PIN`) |
-| `finish_line` | objet | — | `ends` : les deux extrémités (`FIN1`, `FIN2`) |
-| `legs` | liste | — | Ordre des bords : `leg` (numéro), `to_type` (`mark`, `gate` porte, `finish`), `mark_ids`, `rounding` (côté où laisser la bouée : `port` bâbord, `starboard` tribord ; `null` pour une porte, où l’on choisit l’une des deux bouées, et pour l’arrivée) |
+| `length_m` | nombre | m | Distance entre la porte 1-2 et la bouée 3, au vent (≈ 200 m, à valider avec l’organisateur) |
+| `marks` | liste | — | Bouées : `mark_id`, `role` (`gate` porte 1-2 de départ, de passage et d’arrivée, `windward` bouée au vent, `penalty` bouée du tour de pénalité ; d’autres parcours peuvent utiliser `leeward_gate`, `leeward`, `offset`, `start_committee`, `start_pin`, `finish`), `kind` (`instrumented` avec vent, `simple` position seule), `lat`, `lon` (position déclarée par le comité), `wind_equipped` |
+| `start_line` | objet | — | `ends` : les deux extrémités de la ligne de départ (`B1`, `B2`) |
+| `finish_line` | objet | — | `ends` : les deux extrémités de la ligne d’arrivée (`B1`, `B2` : sur le parcours n°3, la même porte) |
+| `penalty_marks` | liste | — | Bouées du tour de pénalité, dans l’ordre : `P1` puis `P2` ; le tour se fait avant de franchir l’arrivée (règlement, § 7) |
+| `legs` | liste | — | Ordre des bords : `leg` (numéro), `to_type` (`mark` bouée à contourner, `line` porte à franchir entre ses deux bouées, `gate` porte où l’on contourne l’une des deux bouées, `finish`), `mark_ids`, `rounding` (côté où laisser la bouée : `port` bâbord, `starboard` tribord ; `null` pour une porte, où l’on choisit l’une des deux bouées, et pour l’arrivée) |
 | `boundary` | liste de `{lat, lon}` | degrés | Polygone des limites du parcours, sommets dans l’ordre, non refermé (le dernier sommet rejoint le premier) |
 | `reference_point` | texte | — | Point du bateau qui sert à l’arbitrage : `bow` (étrave) |
 
@@ -293,12 +294,28 @@ Les positions de `marks` sont celles **déclarées** ; les positions **mesurées
   "race_id": "2027-05-14-M3",
   "seq": 2,
   "course_version": 2,
-  "name": "Construit 2 tours, arrivée sous le vent",
+  "name": "Parcours n°3 : porte 1-2, bouée 3 à bâbord, 2 tours",
   "axis_twd": 135.0,
   "length_m": 200,
   "marks": [
     {
-      "mark_id": "WW",
+      "mark_id": "B1",
+      "role": "gate",
+      "kind": "simple",
+      "lat": 43.1077184,
+      "lon": 5.9412093,
+      "wind_equipped": false
+    },
+    {
+      "mark_id": "B2",
+      "role": "gate",
+      "kind": "simple",
+      "lat": 43.107439,
+      "lon": 5.9408265,
+      "wind_equipped": false
+    },
+    {
+      "mark_id": "B3",
       "role": "windward",
       "kind": "instrumented",
       "lat": 43.1063083,
@@ -306,103 +323,90 @@ Les positions de `marks` sont celles **déclarées** ; les positions **mesurées
       "wind_equipped": true
     },
     {
-      "mark_id": "LW1",
-      "role": "leeward_gate",
-      "kind": "instrumented",
-      "lat": 43.1076189,
-      "lon": 5.9410702,
-      "wind_equipped": true
-    },
-    {
-      "mark_id": "LW2",
-      "role": "leeward_gate",
+      "mark_id": "P1",
+      "role": "penalty",
       "kind": "simple",
-      "lat": 43.1075426,
-      "lon": 5.9409658,
+      "lat": 43.10735,
+      "lon": 5.9408091,
       "wind_equipped": false
     },
     {
-      "mark_id": "SB",
-      "role": "start_committee",
+      "mark_id": "P2",
+      "role": "penalty",
       "kind": "simple",
-      "lat": 43.1072944,
-      "lon": 5.9411485,
-      "wind_equipped": false
-    },
-    {
-      "mark_id": "PIN",
-      "role": "start_pin",
-      "kind": "simple",
-      "lat": 43.1074853,
-      "lon": 5.9414095,
-      "wind_equipped": false
-    },
-    {
-      "mark_id": "FIN1",
-      "role": "finish",
-      "kind": "simple",
-      "lat": 43.107568,
-      "lon": 5.9411746,
-      "wind_equipped": false
-    },
-    {
-      "mark_id": "FIN2",
-      "role": "finish",
-      "kind": "simple",
-      "lat": 43.1074662,
-      "lon": 5.9410354,
+      "lat": 43.1074263,
+      "lon": 5.9407047,
       "wind_equipped": false
     }
   ],
   "start_line": {
-    "committee_mark": "SB",
-    "pin_mark": "PIN"
+    "ends": [
+      "B1",
+      "B2"
+    ]
   },
   "finish_line": {
-    "ends": ["FIN1", "FIN2"]
+    "ends": [
+      "B1",
+      "B2"
+    ]
   },
+  "penalty_marks": [
+    "P1",
+    "P2"
+  ],
   "legs": [
     {
       "leg": 1,
       "to_type": "mark",
-      "mark_ids": ["WW"],
+      "mark_ids": [
+        "B3"
+      ],
       "rounding": "port"
     },
     {
       "leg": 2,
-      "to_type": "gate",
-      "mark_ids": ["LW1", "LW2"],
+      "to_type": "line",
+      "mark_ids": [
+        "B1",
+        "B2"
+      ],
       "rounding": null
     },
     {
       "leg": 3,
       "to_type": "mark",
-      "mark_ids": ["WW"],
+      "mark_ids": [
+        "B3"
+      ],
       "rounding": "port"
     },
     {
       "leg": 4,
       "to_type": "finish",
-      "mark_ids": ["FIN1", "FIN2"],
+      "mark_ids": [
+        "B1",
+        "B2"
+      ],
       "rounding": null
     }
   ],
   "boundary": [
     {
-      "lat": 43.1082171,
-      "lon": 5.9413909
+      "lat": 43.1083409,
+      "lon": 5.9413659
     },
     {
-      "lat": 43.1073081,
-      "lon": 5.9401479
+      "lat": 43.1073246,
+      "lon": 5.9399738
     },
     {
-      "lat": 43.105672,
-      "lon": 5.9423851
+      "lat": 43.1055461,
+      "lon": 5.94241
     },
     {
-      "lat": 43.106581,
-      "lon": 5.9436281
+      "lat": 43.1065624,
+      "lon": 5.943802
     }
   ],
   "reference_point": "bow"
@@ -411,7 +415,7 @@ Les positions de `marks` sont celles **déclarées** ; les positions **mesurées
 
 ### 6.5 `race/{raceId}/marks/{markId}` — position et vent d’une bouée
 
-Une bouée instrumentée (au vent, et sous le vent en option, P20) porte un anémomètre ; les autres ne donnent que leur position, et `wind` vaut `null`.
+La bouée instrumentée (la bouée 3, au vent) porte un anémomètre ; les autres ne donnent que leur position, et `wind` vaut `null`.
 
 | Champ | Type | Unité | Description |
 |---|---|---|---|
@@ -429,10 +433,10 @@ Une bouée instrumentée (au vent, et sous le vent en option, P20) porte un ané
   "t": "2027-05-14T13:04:07.000Z",
   "t_gps_ms": 1494335065000,
   "race_id": "2027-05-14-M3",
-  "mark_id": "WW",
+  "mark_id": "B3",
   "seq": 1447,
-  "lat": 43.1066941,
-  "lon": 5.9422328,
+  "lat": 43.1063123,
+  "lon": 5.9427605,
   "fix": "rtk_fixed",
   "h_acc_m": 0.02,
   "drift_m": 0.5,
@@ -571,7 +575,7 @@ Le moteur vent (S9) fusionne les bouées instrumentées et la station à terre e
 | `twd` | liste de `nx × ny` nombres ou null | degrés vrais | Direction d’où vient le vent, par maille |
 | `conf` | liste de `nx × ny` nombres ou null | 0 à 1 | Confiance (1 = près d’un capteur, faible = extrapolé) |
 | `mean` | objet | nœuds, degrés | Vent moyen sur le parcours : `tws_kn`, `twd` |
-| `sources` | liste de textes | — | Capteurs utilisés (`mark:WW`, `met:davis`…) |
+| `sources` | liste de textes | — | Capteurs utilisés (`mark:B3`, `met:davis`…) |
 
 La grille est alignée sur le nord ; pour passer de mètres en degrés près du site : 1 m ≈ 0,0000090° de latitude et ≈ 0,0000123° de longitude.
 
@@ -635,7 +639,7 @@ La grille est alignée sur le nord ; pour passer de mètres en degrés près du 
     "tws_kn": 9.9,
     "twd": 131.0
   },
-  "sources": ["mark:WW", "mark:LW1", "met:davis"]
+  "sources": ["mark:B3", "met:davis"]
 }
 ```
 
@@ -764,7 +768,7 @@ Le contenu de `details` sera figé au gel du contrat ; d’ici là, il peut s’
   "seq": 9,
   "type": "mark_rounding",
   "boat_id": "FRA-07",
-  "mark_id": "WW",
+  "mark_id": "B3",
   "status": "confirmed",
   "source": "auto",
   "replaces": null,
@@ -919,7 +923,7 @@ Les pavillons sont hissés à la main (P18) ; le comité saisit en même temps d
       "status": "racing",
       "legs_completed": 2,
       "next_leg": 3,
-      "next_mark_ids": ["WW"],
+      "next_mark_ids": ["B3"],
       "dist_to_next_m": 44.5,
       "gap_to_leader_s": 0.0,
       "penalties_pending": 0,
@@ -933,7 +937,7 @@ Les pavillons sont hissés à la main (P18) ; le comité saisit en même temps d
       "status": "racing",
       "legs_completed": 2,
       "next_leg": 3,
-      "next_mark_ids": ["WW"],
+      "next_mark_ids": ["B3"],
       "dist_to_next_m": 56.0,
       "gap_to_leader_s": 6.8,
       "penalties_pending": 0,
@@ -947,7 +951,7 @@ Les pavillons sont hissés à la main (P18) ; le comité saisit en même temps d
       "status": "racing",
       "legs_completed": 2,
       "next_leg": 3,
-      "next_mark_ids": ["WW"],
+      "next_mark_ids": ["B3"],
       "dist_to_next_m": 70.3,
       "gap_to_leader_s": 15.2,
       "penalties_pending": 0,
@@ -961,7 +965,7 @@ Les pavillons sont hissés à la main (P18) ; le comité saisit en même temps d
       "status": "racing",
       "legs_completed": 1,
       "next_leg": 2,
-      "next_mark_ids": ["LW1", "LW2"],
+      "next_mark_ids": ["B1", "B2"],
       "dist_to_next_m": 12.5,
       "gap_to_leader_s": 31.0,
       "penalties_pending": 1,
@@ -975,7 +979,7 @@ Les pavillons sont hissés à la main (P18) ; le comité saisit en même temps d
       "status": "racing",
       "legs_completed": 1,
       "next_leg": 2,
-      "next_mark_ids": ["LW1", "LW2"],
+      "next_mark_ids": ["B1", "B2"],
       "dist_to_next_m": 30.2,
       "gap_to_leader_s": 44.9,
       "penalties_pending": 0,
@@ -989,7 +993,7 @@ Les pavillons sont hissés à la main (P18) ; le comité saisit en même temps d
       "status": "ocs",
       "legs_completed": 0,
       "next_leg": 1,
-      "next_mark_ids": ["WW"],
+      "next_mark_ids": ["B3"],
       "dist_to_next_m": null,
       "gap_to_leader_s": null,
       "penalties_pending": 0,
@@ -1044,8 +1048,8 @@ Le tableau officiel en version électronique : le comité publie à **toutes** l
       "issued_t_gps_ms": 1494333918000,
       "scope": "race",
       "priority": "important",
-      "title": "Porte sous le vent déplacée",
-      "body": "La porte LW1/LW2 a été déplacée de 15 m vers le sud-ouest. Le parcours passe en version 2.",
+      "title": "Porte 1-2 déplacée",
+      "body": "La porte 1-2 a été déplacée de 15 m vers le sud-ouest. Le parcours passe en version 2.",
       "requires_ack": true,
       "ack_deadline": "2027-05-14T12:55:00.000Z",
       "supersedes": null,
@@ -1213,7 +1217,7 @@ Une demande de réparation vise une erreur du comité ou de l’organisation (pa
     "incident_time": "2027-05-14T13:02:30.000Z",
     "incident_t_gps_ms": 1494334968000,
     "reason": "official_system_failure",
-    "description": "La porte LW1/LW2 publiée dans course v2 ne correspondait pas à la position réelle de LW2 (écart de 12 m).",
+    "description": "La porte 1-2 publiée dans course v2 ne correspondait pas à la position réelle de B2 (écart de 12 m).",
     "requested_remedy": "Moyenne des points sur les autres manches du jour"
   }
 }
@@ -1314,7 +1318,7 @@ La réponse arrive dans votre `inbox` (`type: reply`). Si elle intéresse tout l
   "type": "question",
   "payload": {
     "about": "course",
-    "text": "La porte sous le vent est-elle à laisser au choix pour le dernier bord ?"
+    "text": "Au passage de la porte 1-2, peut-on toucher la ligne entre B1 et B2 ?"
   }
 }
 ```

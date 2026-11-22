@@ -50,12 +50,14 @@
           "mark_id": {
             "type": "string",
             "pattern": "^[A-Z][A-Z0-9]{1,5}$",
-            "description": "Identifiant de bouée, ex. WW, LW1, SB."
+            "description": "Identifiant de bouée, ex. B1, B2, B3, P1."
           },
           "role": {
             "type": "string",
             "enum": [
+              "gate",
               "windward",
+              "penalty",
               "leeward_gate",
               "leeward",
               "offset",
@@ -102,20 +104,20 @@
     "start_line": {
       "type": "object",
       "properties": {
-        "committee_mark": {
-          "type": "string",
-          "pattern": "^[A-Z][A-Z0-9]{1,5}$",
-          "description": "Identifiant de bouée, ex. WW, LW1, SB."
-        },
-        "pin_mark": {
-          "type": "string",
-          "pattern": "^[A-Z][A-Z0-9]{1,5}$",
-          "description": "Identifiant de bouée, ex. WW, LW1, SB."
+        "ends": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9]{1,5}$",
+            "description": "Identifiant de bouée, ex. B1, B2, B3, P1."
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Les deux extrémités de la ligne de départ."
         }
       },
       "required": [
-        "committee_mark",
-        "pin_mark"
+        "ends"
       ],
       "additionalProperties": false
     },
@@ -127,7 +129,7 @@
           "items": {
             "type": "string",
             "pattern": "^[A-Z][A-Z0-9]{1,5}$",
-            "description": "Identifiant de bouée, ex. WW, LW1, SB."
+            "description": "Identifiant de bouée, ex. B1, B2, B3, P1."
           },
           "minItems": 2,
           "maxItems": 2
@@ -151,6 +153,7 @@
             "type": "string",
             "enum": [
               "mark",
+              "line",
               "gate",
               "finish"
             ]
@@ -160,7 +163,7 @@
             "items": {
               "type": "string",
               "pattern": "^[A-Z][A-Z0-9]{1,5}$",
-              "description": "Identifiant de bouée, ex. WW, LW1, SB."
+              "description": "Identifiant de bouée, ex. B1, B2, B3, P1."
             },
             "minItems": 1,
             "maxItems": 2
@@ -175,7 +178,7 @@
               "starboard",
               null
             ],
-            "description": "Côté où laisser la bouée ; null pour une porte (au choix entre les deux) ou l'arrivée."
+            "description": "Côté où laisser la bouée ; null pour une porte à franchir, une porte au choix ou l'arrivée."
           }
         },
         "required": [
@@ -220,6 +223,16 @@
       "enum": [
         "bow"
       ]
+    },
+    "penalty_marks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9]{1,5}$",
+        "description": "Identifiant de bouée, ex. B1, B2, B3, P1."
+      },
+      "minItems": 1,
+      "description": "Bouées du tour de pénalité, dans l'ordre (P1 puis P2), à faire avant l'arrivée."
     }
   },
   "required": [

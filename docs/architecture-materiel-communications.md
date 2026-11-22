@@ -482,7 +482,7 @@ Exemple de mesure de vent à une bouée :
 
 ```json
 {
-  "markId": "WW",
+  "markId": "B3",
   "t": "2027-05-15T13:42:07.000Z",
   "lat": 43.1102, "lon": 5.9411,
   "tws_kn": 9.8, "twd": 132.5,

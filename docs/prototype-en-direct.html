@@ -298,7 +298,7 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
   <div class="tvwrap">
     <div class="tv">
       <div class="map" data-map="tv" aria-label="Habillage télévision, carte zoomable"></div>
-      <div class="ov bug"><span class="a"><svg width="34" height="34" aria-hidden="true" style="width:2.7cqw;height:2.7cqw"><use href="#r3"/></svg><b>AI REGATTA</b></span><span class="b"><span>MANCHE 3</span><b id="tLeg">Procédure</b></span><span class="c" id="tClk">−1:00</span></div>
+      <div class="ov bug"><span class="a"><svg width="34" height="34" aria-hidden="true" style="width:2.7cqw;height:2.7cqw"><use href="#r3"/></svg><b>AI REGATTA</b></span><span class="b"><span>COURSE 3</span><b id="tLeg">Procédure</b></span><span class="c" id="tClk">−1:00</span></div>
       <div class="ov lb" id="tLb"></div>
       <div class="ov lt" id="tLt"></div>
     </div>
@@ -318,7 +318,7 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
     <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
       <div class="chips" id="eqPick"></div>
       <section class="card" id="eqCard"></section>
-      <div class="lock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span style="font-size:14px;line-height:1.35"><b style="font:700 15px var(--f-cond);letter-spacing:.08em">IA autonome · commandes verrouillées</b><br><span style="color:var(--texte-3)">Les ordres partent seuls vers le pilote automatique. Aucun humain ne les donne pendant la manche.</span></span></div>
+      <div class="lock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span style="font-size:14px;line-height:1.35"><b style="font:700 15px var(--f-cond);letter-spacing:.08em">IA autonome · commandes verrouillées</b><br><span style="color:var(--texte-3)">Les ordres partent seuls vers le pilote automatique. Aucun humain ne les donne pendant la course.</span></span></div>
       <section class="card" style="gap:6px"><span class="k">Décisions de l’IA</span><div id="eqOrders" style="display:flex;flex-direction:column;gap:6px" aria-live="polite"></div></section>
       <section class="card"><span class="k">Sécurité · seule action humaine</span><button type="button" class="stop" id="eqStop">Arrêt de sécurité</button></section>
     </div>
@@ -512,7 +512,7 @@ function pushAlert(c){const G=c.give,Q=c.prio,g=G.b.id,q=Q&&Q.b.id,tk=x=>SIM.tac
 function decide(id,what){const al=sim.alerts.find(a=>a.id===id);if(!al||al.done)return;al.done=what;const b=sim.boats.find(x=>x.id===al.boats[0]),t=T;
   if(what==='recall'){b.pens.push({at:t,dur:9,kind:'recall'});b.recalled=true;emit('recall',t,{hot:true,boat:b.id,title:'Rappel : '+b.name,body:'Parti trop tôt : il doit repasser la porte 1-2 dans les 2 minutes, sinon il est disqualifié.'});log(t,'Rappel individuel X · '+b.id)}
   else if(what==='pen'){const ok=SIM.addLoop(b,t);if(ok){b.pens.push({at:t,dur:0,kind:'loop'});emit('penalty',t,{hot:true,boat:b.id,title:'Pénalité pour '+b.name,body:al.why+' Un tour par la zone P1-P2, à faire avant l’arrivée.'});log(t,'Pénalité '+b.id+' · un tour par P1-P2')}else log(t,'Pénalité '+b.id+' : bateau déjà arrivé')}
-  else if(what==='jury'){emit('info',t,{title:'Incident à l’étude',body:al.title+' : décision du jury après la manche.'});log(t,'Incident renvoyé au jury')}
+  else if(what==='jury'){emit('info',t,{title:'Incident à l’étude',body:al.title+' : décision du jury après la course.'});log(t,'Incident renvoyé au jury')}
   else log(t,'Alerte '+al.boats.join('/')+' sans suite');
   closeReplay();renderAll(true)}
 function restart(reason){seed=(seed*31+7)%9973;sim=SIM.build(seed);T=-60;seenToast=0;closeReplay();if(reason){emit('proc',-60,{title:reason,body:'Nouvelle procédure de départ.'});log(-60,reason)}renderAll(true)}

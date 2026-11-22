@@ -79,14 +79,14 @@ La phrase `$WIMWV` n’est pas diffusée : elle donne un angle de vent **par rap
 ```
 !AIVDM,1,1,,A,H3IKIuhI86o3L000000000000000,0*6C
 !AIVDM,1,1,,A,B3IKIuh08`6k;WV:b0@n0d3UT000,0*1E
-!AIVDM,1,1,,A,E>jCuG@ccP00000000000000000@=VLL<ECb000003v010,4*55
+!AIVDM,1,1,,A,E>jCuGhQIP00000000000000000@=VQH<EC=H00003v010,4*5B
 $WIMWD,131.0,T,,M,9.9,N,5.1,M*73
-$PAIRW,WW,132.5,9.8,12.1,6.2,130407.00*40
+$PAIRW,B3,132.5,9.8,12.1,6.2,130407.00*31
 $PAIRS,2027-05-14-M3,preparatory,130000.00,14052027*53
 $GPZDA,130407.00,14,05,2027,00,00*60
 ```
 
-Les trois premières lignes donnent : le nom `FRA-07` du MMSI 227990007, sa position (43,106993 N, 5,941678 E, 3,4 nœuds, route 86°, cap 88°), puis la bouée `WW`.
+Les trois premières lignes donnent : le nom `FRA-07` du MMSI 227990007, sa position (43,106993 N, 5,941678 E, 3,4 nœuds, route 86°, cap 88°), puis la bouée `B3`.
 
 ### Correspondance bateaux ↔ MMSI
 
@@ -99,12 +99,11 @@ Le MMSI est le numéro à 9 chiffres qui identifie un navire en AIS. Les numéro
 
 | `boat_id` | MMSI | | `mark_id` | MMSI |
 |---|---|---|---|---|
-| FRA-03 | 227990003 | | WW | 992279901 |
-| FRA-07 | 227990007 | | LW1 | 992279902 |
-| FRA-12 | 227990012 | | LW2 | 992279903 |
-| ITA-05 | 227990021 | | SB | 992279904 |
-| MON-01 | 227990031 | | PIN | 992279905 |
-| ESP-21 | 227990041 | | FIN1 / FIN2 | 992279906 / 992279907 |
+| FRA-03 | 227990003 | | B1 | 992279901 |
+| FRA-07 | 227990007 | | B2 | 992279902 |
+| FRA-12 | 227990012 | | B3 | 992279903 |
+| ITA-05 | 227990021 | | P1 | 992279904 |
+| MON-01 | 227990031 | | P2 | 992279905 |
 
 (Table d’exemple, avec les bateaux fictifs du contrat d’interface.)
 
