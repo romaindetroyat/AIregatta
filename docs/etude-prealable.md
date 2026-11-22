@@ -30,11 +30,13 @@ Tout commence par une présentation à Xavier Caux avant le 11 décembre. Deux b
 
 ## Les chances de réussite
 
-**Le niveau 1 a environ quatre chances sur cinq (80 %)** de fonctionner le jour de la course : l’organisateur le demande, le matériel est simple, l’équipe est en place. Il dépend surtout d’un accord rapide avec le comité ; une présentation avant le 11 décembre et une démonstration au préchauffage le portent à 95 %.
+Ces pronostics ne portent que sur la technique : l’accord du comité, l’équipe, les bateaux d’essai, la préparation des équipes et les arbitres sont supposés acquis. La météo du jour n’est pas comptée.
 
-**Le niveau 2 a un peu moins d’une chance sur deux (45 %).** Le plus incertain n’est pas la technique mais l’accord du comité, puis la fabrication des balises en février, qui repose sur une seule personne. Avec les mêmes mesures, une fabrication à deux et un kit livré tôt aux équipes, il monte à 70 %.
+**Le niveau 1 a neuf chances sur dix de fonctionner toute la journée (90 %).** Il tient en quelques pièces éprouvées ; ses deux points faibles sont l’anémomètre, unique, et la 4G un samedi de mai. Un essai complet à la régate de préchauffage et la radio de secours sur les bouées le portent à 95 %.
 
-**Une belle course a environ trois chances sur dix (30 %)**, six sur dix avec les mesures : le dispositif complet, des arbitres qui suivent et du vent le 15 ou le 16. Ces chiffres sont des estimations de jugement ; ils indiquent où porter l’effort.
+**Le niveau 2 a environ quatre chances sur cinq (80 %).** Les briques sont connues et un prototype tourne déjà en simulation ; le risque tient aux seize balises fabriquées en trois semaines et à la 4G en pleine foule. Les essais de janvier et de mars, puis une répétition générale de toutes les pannes possibles, le portent à 90 %.
+
+**Un jugement assisté au point**, avec des alertes justes et des rejeux exploitables, ajoute une incertitude : environ deux chances sur trois aujourd’hui (65 %), 85 % une fois les seuils réglés sur les données des essais. Ces chiffres sont des estimations de jugement.
 
 ## Ce qu’il reste à décider
 
