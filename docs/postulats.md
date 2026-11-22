@@ -49,7 +49,6 @@
 
 ## À vérifier avec l’organisateur
 
-- La date de la première masterclass : le mail annonce « vendredi 29 novembre », or le 29 novembre 2026 est un dimanche.
 - L’emplacement exact de la zone de régate et du PC course (le premier étage de La Plage convient-il ?).
 - Le nombre de voiliers IA attendus, et si plusieurs types de longueur courent ensemble.
 - La longueur du parcours n°3, la largeur de la porte 1-2 et la position de P1-P2.

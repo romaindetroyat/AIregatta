@@ -40,6 +40,6 @@ Ces pronostics ne portent que sur la technique : l’accord du comité, l’équ
 
 ## Ce qu’il reste à décider
 
-Avec l’organisateur : son accord sur les deux niveaux, l’emplacement du PC course, les dimensions du parcours, le nombre de voiliers attendus, l’arbitrage et la date du préchauffage. La masterclass annoncée le « vendredi 29 novembre » tombe un dimanche : la date est à vérifier. De notre côté : trouver deux bateaux pour les essais de janvier avant le 4 décembre.
+Avec l’organisateur : son accord sur les deux niveaux, l’emplacement du PC course, les dimensions du parcours, le nombre de voiliers attendus, l’arbitrage et la date du préchauffage. Première masterclass le vendredi 27 novembre. De notre côté : trouver deux bateaux pour les essais de janvier avant le 4 décembre.
 
 Le détail de chaque point figure dans les annexes.
