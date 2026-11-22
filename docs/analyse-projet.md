@@ -30,9 +30,9 @@
 
 | Niveau | Aujourd’hui | Avec toutes les mesures |
 |---|---|---|
-| **Bouées et vent en temps réel** — Ce que le comité cherche : la position RTK des bouées et le vent, transmis à toutes les équipes pendant les courses. Les bateaux sont jugés comme le prévoit le règlement, au besoin au niveau de repli B ou C. | ≈ 90 % | ≈ 95 % |
+| **Bouées et vent en temps réel** — Ce que le comité cherche (§ 5) : la position RTK des bouées et le vent, transmis à toutes les équipes pendant les courses. Les bateaux sont jugés comme le prévoit le règlement. | ≈ 80 % | ≈ 95 % |
 | **Le dispositif complet fonctionne** — Retenu par le comité : balise dans chaque bateau, suivi au centimètre, arbitrage assisté, flux aux équipes, application et vidéo. C’est le niveau A. | ≈ 45 % | ≈ 70 % |
-| **… et les manches sont réussies** — En plus : des courses lisibles, un arbitrage qui suit, le 15 ou le 16 couru. | ≈ 30 % | ≈ 60 % |
+| **… et les courses sont réussies** — En plus : des courses lisibles, un arbitrage qui suit, le 15 ou le 16 couru. | ≈ 30 % | ≈ 60 % |
 
 « Aujourd’hui » tient compte des décisions prises.
 
@@ -45,6 +45,8 @@
 | Les équipes ont de quoi se préparer | 85 % | 93 % | Contrat d’interface, schémas, exemples et fiche du bateau de référence sont écrits. Manquent l’exemple de code de l’IA minimale, le simulateur distribuable et les règles relues ; le bac à sable n’ouvre qu’en février. | Exemple d’IA minimale et simulateur fournis dès décembre (+4) ; Règles v1 relues par un arbitre et publiées le 11 janvier (+4) |
 | Des manches lisibles, un arbitrage tenable | 75 % | 85 % | Notre simulation donne 12 alertes pour 7 bateaux, et l’arbitre confirme chaque pénalité : en flotte entière, deux arbitres seront débordés. | Poules de 4 à 5 bateaux, proposées au comité (+6) ; Participation à la régate blanche d’avril demandée à chaque équipe (+4) |
 | Le 15 ou le 16 mai navigable | 85 % | 88 % | Un jour de course et un dimanche de report, jusqu’à 14 h 30. Limites proposées : 4 à 20 nœuds. Mi-mai : brise l’après-midi, mais des épisodes de mistral. | Plusieurs courses courtes dès 10 h le samedi (+3) |
+| Le comité retient le niveau 1 : bouées et vent | 90 % | 97 % | Il le demande lui-même (§ 5), « si nous trouvons les partenaires ». Reste à le convaincre que nous sommes ces partenaires, et à fixer les modalités avec lui. | Rendez-vous avec Xavier Caux avant le 11 décembre (+4) ; Démonstration à la régate de préchauffage (+3) |
+| Les bouées et le vent fonctionnent le jour de la course | 92 % | 97 % | Quatre balises, un anémomètre, une base RTK : peu de pièces, toutes éprouvées. Le point faible est la 4G un samedi de mai. | Essai complet à la régate de préchauffage (+3) ; Radio de secours active sur les bouées (+2) |
 | Le comité d’organisation retient la balise à bord et le jugement assisté | 65 % | 85 % | Le règlement ne prévoit ni balise dans les bateaux, ni sous-bande réservée, ni arbitrage assisté. Il cherche en revanche des partenaires pour les bouées RTK et le vent : c’est notre porte d’entrée. | Présentation à Xavier Caux avant le 11 décembre (+12) ; Démonstration à la régate de préchauffage du premier trimestre (+8) |
 
 ## Ce qui reste vraiment
