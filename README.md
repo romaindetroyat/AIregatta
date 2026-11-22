@@ -4,7 +4,7 @@ Système de suivi, d'arbitrage, d'analyse du vent et de diffusion publique pour 
 
 ## Documents
 
-- [Étude préalable](docs/etude.html) : la synthèse de référence (22 novembre 2026), en sept onglets : l’essentiel, le trajet des données, le montage des balises (bateau, bouée), le matériel, les prototypes, le calendrier et les chances techniques. Version texte : [etude-prealable.md](docs/etude-prealable.md).
+- [Étude préalable](docs/etude.html) : la synthèse de référence (22 novembre 2026), en huit onglets : l’essentiel, le règlement et nos propositions, le trajet des données, le montage des balises (bateau, bouée), le matériel, les prototypes, le calendrier et les chances techniques. Version texte : [etude-prealable.md](docs/etude-prealable.md).
 - [Dossier détaillé](docs/dispositif.html) : l’ancien document général, conservé en archive (règles proposées, contrat d’interface, fabrication, chaîne matérielle, analyse).
 - [Présentation interactive](docs/dispositif.html) : plan d'eau animé, liaisons, état d'avancement, coûts ajustables, feuille de route, questions.
 - [Matériel et communications](docs/architecture-materiel-communications.md) : entités, liaisons entre elles, références de matériel, conception radio, réseau à terre, formats de messages, modes dégradés, nomenclature chiffrée.
