@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Public · Fiche bateau et replay</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+  <div style="padding:14px 18px 16px;background:#D0704A;color:#11150D;display:flex;flex-direction:column;gap:6px">
+    <a href="Public-Live.dc.html" style="align-self:flex-start;display:flex;align-items:center;gap:6px;min-height:44px;color:#11150D;text-decoration:none;font-size:14px;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Direct</a>
+    <span style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.08em">SUI-05 · voile orange n° 5</span>
+    <h1 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:32px;line-height:1.05">Équipe Suisse</h1>
+    <span style="font-size:14px;line-height:1.4">[Nom de l’école ou du laboratoire] · [ville]. Présentation fournie par l’équipe.</span>
+  </div>
+
+  <div style="flex:1;min-height:0;overflow:auto;padding:12px 18px;display:flex;flex-direction:column;gap:10px">
+    <div role="tablist" aria-label="Période" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:4px;border-radius:14px;background:#EEF0E4">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
+        <button type="button" role="tab" aria-selected="{{t.on}}" onClick="{{t.go}}" style="min-height:44px;border:0;border-radius:11px;background:{{t.bg}};font:600 14px 'Instrument Sans',sans-serif;cursor:pointer">{{t.label}}</button>
+      </sc-for>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;text-align:center">
+      <sc-for list="{{stats}}" as="s" hint-placeholder-count="3">
+        <div style="padding:10px 4px;border-radius:14px;background:#FFFFFF"><b style="display:block;font:600 18px 'JetBrains Mono',monospace">{{s.v}}</b><span style="font-size:12px;color:rgba(9,11,7,.68)">{{s.k}}</span></div>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:18px;background:#FFFFFF">
+      <b style="font-size:15px;font-weight:600">{{chartTitle}}</b>
+      <svg viewBox="0 0 320 120" role="img" aria-label="{{chartAria}}" style="width:100%;height:auto">
+        <g stroke="rgba(9,11,7,.1)"><line x1="30" y1="20" x2="310" y2="20"/><line x1="30" y1="60" x2="310" y2="60"/><line x1="30" y1="100" x2="310" y2="100"/></g>
+        <text x="4" y="24" style="font:500 10px 'JetBrains Mono',monospace" fill="rgba(9,11,7,.66)">1er</text><text x="4" y="104" style="font:500 10px 'JetBrains Mono',monospace" fill="rgba(9,11,7,.66)">8e</text>
+        <polyline points="{{line}}" fill="none" stroke="#D0704A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+        <sc-for list="{{pts}}" as="p" hint-placeholder-count="5">
+          <g><circle cx="{{p.x}}" cy="{{p.y}}" r="4.5" fill="#FFFFFF" stroke="#D0704A" stroke-width="2"/><text x="{{p.x}}" y="116" text-anchor="middle" style="font:500 10px 'JetBrains Mono',monospace" fill="rgba(9,11,7,.7)">{{p.l}}</text></g>
+        </sc-for>
+      </svg>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:18px;background:#11150D;color:#F7F8F2">
+      <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:15px;font-weight:600">Replay de la course 3</b><span style="font:500 12px 'JetBrains Mono',monospace;color:#C7EB00">{{rp.t}}</span></div>
+      <svg viewBox="0 0 320 130" role="img" aria-label="Trace de SUI-05 sur le parcours" style="width:100%;height:auto;border-radius:12px;background:#1E2618">
+        <circle cx="160" cy="16" r="5" fill="#D0704A"/><circle cx="140" cy="112" r="4" fill="#D0704A"/><circle cx="180" cy="112" r="4" fill="#D0704A"/>
+        <path d="M150 124 C110 100 100 70 130 50 C150 36 150 24 158 20 C200 40 220 70 182 108" fill="none" stroke="rgba(247,248,242,.25)" stroke-width="2"/>
+        <circle cx="{{rp.x}}" cy="{{rp.y}}" r="7" fill="#D0704A" stroke="#F7F8F2" stroke-width="2"/>
+      </svg>
+      <div role="group" aria-label="Moment du replay" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px">
+        <sc-for list="{{scrub}}" as="s" hint-placeholder-count="4">
+          <button type="button" onClick="{{s.go}}" aria-pressed="{{s.on}}" style="min-height:44px;border:0;border-radius:10px;background:{{s.bg}};color:{{s.fg}};font:600 12px 'Instrument Sans',sans-serif;cursor:pointer">{{s.label}}</button>
+        </sc-for>
+      </div>
+      <span style="font-size:13px;line-height:1.4;color:rgba(247,248,242,.82)">{{rp.say}}</span>
+    </div>
+    <a href="Public-Alertes.dc.html" style="display:flex;justify-content:center;align-items:center;min-height:48px;border-radius:14px;background:#C7EB00;color:#11150D;text-decoration:none;font-weight:600;font-size:15px">Suivre cette équipe</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { tab: 'race', f: 1 }; }
+  renderVals() {
+    const st = this.state;
+    const race = st.tab === 'race';
+    const tabs = [['race','Cette manche'],['event','Tout le tournoi']].map(x => ({ label: x[1], on: String(st.tab === x[0]), bg: st.tab === x[0] ? '#FFFFFF' : 'transparent', go: () => this.setState({ tab: x[0] }) }));
+    const stats = race ? [{ v: '5e', k: 'place actuelle' }, { v: '2,7 nds', k: 'vitesse moy.' }, { v: '4', k: 'virements' }]
+                       : [{ v: '3e', k: 'au général' }, { v: '12 pts', k: 'points' }, { v: '1', k: 'victoire' }];
+    const ranks = race ? [7,6,6,5,5] : [4,1,3,2,3];
+    const labels = race ? ['départ','B3','porte','B3','arrivée'] : ['M1','M2','M3','M4','M5'];
+    const pts = ranks.map((r, i) => ({ x: 40 + i * 64, y: 20 + (r - 1) * (80 / 7), l: labels[i] }));
+    const frames = [
+      { label: 'Départ', t: '0:00', x: 150, y: 124, say: 'Part 7e, côté gauche de la ligne, 2 s en retard.' },
+      { label: 'Bouée', t: '+1:52', x: 130, y: 50, say: 'Vire tôt à gauche et profite de la bascule : gagne une place.' },
+      { label: 'Porte', t: '+2:58', x: 200, y: 60, say: 'Choisit la porte de droite, moins encombrée.' },
+      { label: 'Maint.', t: '+3:41', x: 182, y: 104, say: 'Double NED-14 au portant, 5e à 1,1 s du 4e.' }
+    ];
+    const rp = frames[st.f];
+    const scrub = frames.map((f, i) => ({ label: f.label, on: String(st.f === i), bg: st.f === i ? '#C7EB00' : 'rgba(247,248,242,.1)', fg: st.f === i ? '#11150D' : '#F7F8F2', go: () => this.setState({ f: i }) }));
+    return { tabs, stats, pts, line: pts.map(p => p.x + ',' + p.y).join(' '), rp, scrub,
+      chartTitle: race ? 'Place à chaque bouée' : 'Place à chaque manche',
+      chartAria: race ? 'Place de SUI-05 : 7e au départ, 6e à la bouée au vent, 6e à la porte, 5e au deuxième passage, 5e maintenant' : 'Place de SUI-05 par course : 4, 1, 3, 2, 3' };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Public · Course en direct</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 18px 10px">
+    <div><span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:rgba(9,11,7,.66)">Course 3 · tour 1/2</span><div style="font:600 30px/1 'JetBrains Mono',monospace;letter-spacing:-.03em">+03:41</div></div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <span style="display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:#11150D;color:#C7EB00;font:500 11px 'JetBrains Mono',monospace"><span style="width:7px;height:7px;border-radius:50%;background:#C7EB00"></span>DIRECT</span>
+      <span style="font:500 12px 'JetBrains Mono',monospace;color:#0E5A52">vent 10 nds · sud-est</span>
+    </div>
+  </div>
+
+  <div role="tablist" aria-label="Vues" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin:0 18px;padding:4px;border-radius:14px;background:#EEF0E4">
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+      <button type="button" role="tab" aria-selected="{{t.on}}" onClick="{{t.go}}" style="min-height:44px;border:0;border-radius:11px;background:{{t.bg}};font:600 14px 'Instrument Sans',sans-serif;cursor:pointer">{{t.label}}</button>
+    </sc-for>
+  </div>
+
+  <div style="flex:1;min-height:0;padding:12px 18px;display:flex;flex-direction:column;gap:10px">
+    <sc-if value="{{isMap}}" hint-placeholder-val="{{ true }}">
+      <svg viewBox="0 0 354 400" role="img" aria-label="Carte en direct : six bateaux entre la bouée au vent et la porte, ITA-12 marqué d’un incident à l’étude" style="width:100%;height:auto;border-radius:20px;background:#D6E6E0">
+        <circle cx="177" cy="60" r="9" fill="#D0704A" stroke="#11150D" stroke-width="2"/><text x="192" y="56" style="font:600 11px 'JetBrains Mono',monospace">Bouée au vent</text>
+        <circle cx="150" cy="330" r="8" fill="#D0704A" stroke="#11150D" stroke-width="2"/><circle cx="204" cy="330" r="8" fill="#D0704A" stroke="#11150D" stroke-width="2"/><text x="214" y="346" style="font:600 11px 'JetBrains Mono',monospace">Porte</text>
+        <line x1="90" y1="372" x2="270" y2="356" stroke="#11150D" stroke-dasharray="6 5"/>
+        <path d="M290 30 L276 50" stroke="#0E5A52" stroke-width="3"/><path d="M270 46 L276 58 L284 48 Z" fill="#0E5A52"/>
+        <g><circle cx="168" cy="76" r="10" fill="#C7EB00" stroke="#11150D" stroke-width="1.5"/><text x="120" y="98" style="font:600 12px 'Instrument Sans',sans-serif">1 · FRA</text></g>
+        <g><circle cx="196" cy="84" r="10" fill="#43B3A3" stroke="#11150D" stroke-width="1.5"/><circle cx="196" cy="84" r="16" fill="none" stroke="#D0704A" stroke-width="2" stroke-dasharray="3 3"/><text x="216" y="96" style="font:600 12px 'Instrument Sans',sans-serif">2 · ITA</text></g>
+        <g><circle cx="206" cy="122" r="9" fill="#B8902F" stroke="#11150D" stroke-width="1.5"/><text x="222" y="128" style="font:600 12px 'Instrument Sans',sans-serif">3 · GBR</text></g>
+        <g><circle cx="262" cy="190" r="9" fill="#E0B4E8" stroke="#11150D" stroke-width="1.5"/><text x="278" y="196" style="font:600 12px 'Instrument Sans',sans-serif">4 · NED</text></g>
+        <g><circle cx="230" cy="250" r="9" fill="#D0704A" stroke="#11150D" stroke-width="1.5"/><text x="246" y="256" style="font:600 12px 'Instrument Sans',sans-serif">5 · SUI</text></g>
+        <g><circle cx="110" cy="240" r="9" fill="#6E8BD6" stroke="#11150D" stroke-width="1.5"/><text x="40" y="226" style="font:600 12px 'Instrument Sans',sans-serif">6 · MON</text></g>
+        <g><circle cx="86" cy="300" r="9" fill="#2F3A22" stroke="#11150D" stroke-width="1.5"/><text x="20" y="324" style="font:600 12px 'Instrument Sans',sans-serif">7 · GER</text></g>
+      </svg>
+      <div style="display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:16px;background:#F6DDCF;color:#3F1605">
+        <span style="flex:none;margin-top:3px;width:10px;height:10px;border-radius:50%;background:#D0704A"></span>
+        <span style="font-size:14px;line-height:1.4"><b style="font-weight:600">Incident à l’étude</b> entre FRA et ITA à la bouée au vent. L’arbitre regarde le rejeu.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:center">
+        <div style="padding:10px 6px;border-radius:14px;background:#FFFFFF"><b style="display:block;font:600 18px 'JetBrains Mono',monospace">1,4 s</b><span style="font-size:12px;color:rgba(9,11,7,.68)">écart 1er / 2e</span></div>
+        <div style="padding:10px 6px;border-radius:14px;background:#FFFFFF"><b style="display:block;font:600 18px 'JetBrains Mono',monospace">3,1 nds</b><span style="font-size:12px;color:rgba(9,11,7,.68)">le plus rapide</span></div>
+        <div style="padding:10px 6px;border-radius:14px;background:#FFFFFF"><b style="display:block;font:600 18px 'JetBrains Mono',monospace">2/4</b><span style="font-size:12px;color:rgba(9,11,7,.68)">bords courus</span></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isRank}}" hint-placeholder-val="{{ false }}">
+      <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px">
+        <sc-for list="{{rank}}" as="r" hint-placeholder-count="8">
+          <li>
+            <a href="Public-Bateau.dc.html" style="display:grid;grid-template-columns:26px 12px minmax(0,1fr) auto;gap:10px;align-items:center;min-height:52px;padding:8px 12px;border-radius:14px;background:#FFFFFF;color:#11150D;text-decoration:none">
+              <span style="font:600 16px 'JetBrains Mono',monospace">{{r.p}}</span>
+              <span style="width:12px;height:12px;border-radius:50%;background:{{r.c}}"></span>
+              <span style="display:flex;flex-direction:column"><b style="font-weight:600;font-size:15px">{{r.team}}</b><span style="font-size:12px;color:rgba(9,11,7,.68)">{{r.note}}</span></span>
+              <span style="font:500 13px 'JetBrains Mono',monospace">{{r.gap}}</span>
+            </a>
+          </li>
+        </sc-for>
+      </ol>
+      <p style="margin:0;font-size:12px;color:rgba(9,11,7,.66)">Classement provisoire, calculé chaque seconde sur la distance restante. Il devient définitif après le jury.</p>
+    </sc-if>
+
+    <sc-if value="{{isWind}}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:16px;align-items:center;padding:16px;border-radius:20px;background:#FFFFFF">
+        <svg viewBox="0 0 120 120" width="110" height="110" role="img" aria-label="Boussole : le vent vient du sud-est, 128 degrés">
+          <circle cx="60" cy="60" r="52" fill="#EEF0E4"/><text x="56" y="16" style="font:600 10px 'JetBrains Mono',monospace">N</text>
+          <g transform="rotate(128 60 60)"><path d="M60 10 L68 34 L60 28 L52 34 Z" fill="#0E5A52"/><line x1="60" y1="28" x2="60" y2="96" stroke="#0E5A52" stroke-width="4"/></g>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:2px"><b style="font:600 34px/1 'JetBrains Mono',monospace">10,4 <span style="font-size:16px">nds</span></b><span style="font-size:14px">≈ 19 km/h, du sud-est</span><span style="font-size:13px;color:rgba(9,11,7,.68)">rafales à 12,9 nds</span></div>
+      </div>
+      <div style="padding:14px;border-radius:18px;background:rgba(199,235,0,.16);font-size:14px;line-height:1.45"><b style="font-weight:600">Ce qui se prépare</b> · le vent tourne doucement vers la droite (+6° en 10 min). Les bateaux à droite du parcours devraient gagner un peu. <span style="color:rgba(9,11,7,.66)">Confiance moyenne.</span></div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;font-size:13px">
+        <div style="padding:12px;border-radius:16px;background:#FFFFFF"><b style="display:block;font:600 18px 'JetBrains Mono',monospace">9,6 nds</b>côté gauche (station à terre)</div>
+        <div style="padding:12px;border-radius:16px;background:#FFFFFF"><b style="display:block;font:600 18px 'JetBrains Mono',monospace">10,4 nds</b>côté droit (bouée au vent)</div>
+      </div>
+      <p style="margin:0;font-size:12px;line-height:1.45;color:rgba(9,11,7,.66)">« nds » = nœuds, l’unité de vitesse en mer (1 nœud ≈ 1,85 km/h).</p>
+    </sc-if>
+  </div>
+
+  <nav aria-label="Navigation" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:8px 10px 14px;background:#FFFFFF;box-shadow:0 -1px 0 rgba(9,11,7,.08)">
+    <a href="Public-Live.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:2px;min-height:48px;justify-content:center;color:#11150D;text-decoration:none;font-size:12px;font-weight:600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4E6000" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M4 12a8 8 0 0 1 16 0M7 12a5 5 0 0 1 10 0"/></svg>Direct</a>
+    <a href="Public-Plage.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:2px;min-height:48px;justify-content:center;color:rgba(9,11,7,.7);text-decoration:none;font-size:12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18c3 0 3-2 6-2s3 2 6 2 3-2 6-2"/><path d="M12 3v10M8 7l4-4 4 4"/></svg>Plage</a>
+    <a href="Public-Alertes.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:2px;min-height:48px;justify-content:center;color:rgba(9,11,7,.7);text-decoration:none;font-size:12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>Alertes</a>
+    <a href="Public-Bateau.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:2px;min-height:48px;justify-content:center;color:rgba(9,11,7,.7);text-decoration:none;font-size:12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v14M12 4l7 11H12M4 18h16l-2 3H6z"/></svg>Équipes</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { tab: 'map' }; }
+  renderVals() {
+    const t = this.state.tab;
+    const tabs = [['map','Carte'],['rank','Classement'],['wind','Vent']].map(x => ({ label: x[1], on: String(t === x[0]), bg: t === x[0] ? '#FFFFFF' : 'transparent', go: () => this.setState({ tab: x[0] }) }));
+    const rank = [
+      ['1','#C7EB00','France · FRA-07','en tête, 3,1 nds','—'],
+      ['2','#43B3A3','Italie · ITA-12','incident à l’étude','+1,4 s'],
+      ['3','#B8902F','Grande-Bretagne · GBR-03','est revenu après le rappel','+2,9 s'],
+      ['4','#E0B4E8','Pays-Bas · NED-14','sorti de zone, avertissement','+6,0 s'],
+      ['5','#D0704A','Suisse · SUI-05','remonte : +2 places','+9,8 s'],
+      ['6','#6E8BD6','Monaco · MON-01','','+12 s'],
+      ['7','#2F3A22','Allemagne · GER-09','','+18 s'],
+      ['—','#8FD18A','Espagne · ESP-21','abandon (RET)','']
+    ].map(r => ({ p: r[0], c: r[1], team: r[2], note: r[3], gap: r[4] }));
+    return { tabs, rank, isMap: t === 'map', isRank: t === 'rank', isWind: t === 'wind' };
+  }
+}
+</script>
+</body>
+</html>

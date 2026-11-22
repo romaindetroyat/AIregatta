@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Équipes · Explorateur de flux</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:1440px;height:960px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 28px;background:#FFFFFF;box-shadow:0 1px 0 rgba(9,11,7,.08)">
+    <div style="display:flex;align-items:center;gap:18px">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">AI Regatta <span style="color:#4E6000">· Espace équipes</span></b>
+      <nav aria-label="Espace équipes" style="display:flex;gap:6px">
+        <a href="Equipes-Kit.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Le kit</a>
+        <a href="Equipes-Flux.dc.html" style="padding:8px 14px;border-radius:99px;background:#11150D;color:#F7F8F2;text-decoration:none;font-size:14px;font-weight:600">Explorateur de flux</a>
+        <a href="Equipes-Console.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Exemple de console</a>
+        <a href="Equipes-Bateau.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Liaison bateau</a>
+      </nav>
+    </div>
+    <span style="display:flex;align-items:center;gap:8px;font:500 13px 'JetBrains Mono',monospace"><span style="width:8px;height:8px;border-radius:50%;background:#4E6000"></span>connecté au bac à sable · equipe-sui05 · décalage horloge 1,2 ms</span>
+  </header>
+
+  <div style="flex:1;display:grid;grid-template-columns:330px minmax(0,1fr) minmax(0,1fr);gap:20px;padding:20px 28px;min-height:0">
+    <nav aria-label="Sujets" style="display:flex;flex-direction:column;gap:6px;min-height:0;overflow:auto">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px;margin-bottom:4px">Sujets</b>
+      <sc-for list="{{topics}}" as="t" hint-placeholder-count="12">
+        <button type="button" onClick="{{t.go}}" aria-pressed="{{t.on}}" style="display:flex;flex-direction:column;gap:2px;text-align:left;min-height:48px;padding:8px 12px;border-radius:12px;border:1px solid {{t.border}};background:{{t.bg}};cursor:pointer">
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#11150D">{{t.path}}</span>
+          <span style="display:flex;justify-content:space-between;width:100%;font:400 12px 'Instrument Sans',sans-serif;color:rgba(9,11,7,.68)"><span>{{t.label}}</span><span style="font-family:'JetBrains Mono',monospace">{{t.dir}}</span></span>
+        </button>
+      </sc-for>
+    </nav>
+
+    <section aria-label="Détail du sujet" style="display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08);min-height:0">
+      <span style="font:500 12px 'JetBrains Mono',monospace;color:#4E6000">{{cur.path}}</span>
+      <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:28px">{{cur.label}}</h2>
+      <p style="margin:0;font-size:14px;line-height:1.5;color:rgba(9,11,7,.74)">{{cur.desc}}</p>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;font-size:12px">
+        <sc-for list="{{facts}}" as="f" hint-placeholder-count="4">
+          <div style="padding:8px 10px;border-radius:12px;background:#EEF0E4"><span style="display:block;font:500 10px 'JetBrains Mono',monospace;text-transform:uppercase;color:rgba(9,11,7,.62)">{{f.k}}</span><b style="font:600 13px 'JetBrains Mono',monospace">{{f.v}}</b></div>
+        </sc-for>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:14px;font-weight:600">Dernier message reçu</b><span style="font:500 11px 'JetBrains Mono',monospace;color:rgba(9,11,7,.62)">JSON · UTF-8</span></div>
+      <pre style="flex:1;min-height:0;overflow:auto;margin:0;padding:14px;border-radius:14px;background:#11150D;color:#E9F5B0;font:400 12.5px/1.55 'JetBrains Mono',monospace;white-space:pre">{{cur.json}}</pre>
+    </section>
+
+    <section aria-label="Code" style="display:flex;flex-direction:column;gap:12px;min-height:0">
+      <div role="tablist" aria-label="Langage" style="display:flex;gap:6px">
+        <sc-for list="{{langs}}" as="l" hint-placeholder-count="3">
+          <button type="button" role="tab" aria-selected="{{l.on}}" onClick="{{l.go}}" style="min-height:44px;padding:8px 16px;border-radius:99px;border:1px solid rgba(9,11,7,.15);background:{{l.bg}};font:600 13px 'Instrument Sans',sans-serif;cursor:pointer">{{l.label}}</button>
+        </sc-for>
+      </div>
+      <pre style="flex:1;min-height:0;overflow:auto;margin:0;padding:16px;border-radius:18px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.1);font:400 12.5px/1.6 'JetBrains Mono',monospace;white-space:pre;color:#11150D">{{code}}</pre>
+      <div style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;background:#11150D;color:#F7F8F2">
+        <b style="font-size:14px;font-weight:600">Le trajet d’une position, en temps</b>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;font-size:12px;line-height:1.35">
+          <div style="padding:8px;border-radius:10px;background:rgba(247,248,242,.08)"><b style="display:block;font:600 14px 'JetBrains Mono',monospace;color:#C7EB00">≈ 60 ms</b>balise → 4G → hub</div>
+          <div style="padding:8px;border-radius:10px;background:rgba(247,248,242,.08)"><b style="display:block;font:600 14px 'JetBrains Mono',monospace;color:#C7EB00">≈ 30 ms</b>hub → PC course</div>
+          <div style="padding:8px;border-radius:10px;background:rgba(247,248,242,.08)"><b style="display:block;font:600 14px 'JetBrains Mono',monospace;color:#C7EB00">&lt; 1 ms</b>broker → toutes les équipes</div>
+          <div style="padding:8px;border-radius:10px;background:rgba(247,248,242,.08)"><b style="display:block;font:600 14px 'JetBrains Mono',monospace;color:#C7EB00">t_gps_ms</b>l’heure de mesure fait foi</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { sel: 'pos', lang: 'py' }; }
+  renderVals() {
+    const st = this.state;
+    const j = o => JSON.stringify(o, null, 2);
+    const T = (id, path, label, dir, rate, qos, ret, desc, json) => ({ id, path, label, dir, rate, qos, ret, desc, json: j(json) });
+    const R = 'race/2027-05-14-M3';
+    const all = [
+      T('pos', R + '/boats/SUI-05/pos', 'Position d’un bateau', 'lecture', '10 Hz', '0', 'non', 'Position officielle de la balise, corrigée RTK. bow_lat / bow_lon donnent l’étrave, calculée par le PC course. Si path vaut radio, la cadence tombe à 2 Hz.',
+        { boat_id: 'SUI-05', seq: 18342, t: '2027-05-14T13:42:07.200Z', t_gps_ms: 1494337345200, lat: 43.10512345, lon: 5.93876543, bow_lat: 43.10512712, bow_lon: 5.93876391, fix: 'rtk_fixed', h_acc_m: 0.02, sog_kn: 3.02, cog: 247.1, hdg: 251.0, heel: 14.2, path: '4g', stale: false }),
+      T('clock', R + '/clock', 'Chrono et procédure', 'lecture', 'à chaque étape + 1 Hz', '1', 'oui', 'Heure GPS du départ et étape en cours. Calculez le compte à rebours sur votre horloge synchronisée : start_t_gps_ms − maintenant.',
+        { race_id: '2027-05-14-M3', step: 'preparatory', start_t_gps_ms: 1494337518000, steps_s: { warning: -180, preparatory: -120, one_minute: -60, start: 0 }, prep_flag: 'P', recall: null, updated_t_gps_ms: 1494337398000 }),
+      T('course', R + '/course', 'Parcours', 'lecture', 'à chaque changement', '1', 'oui', 'Bouées, porte, ligne de départ et d’arrivée, limites de zone, ordre des bords et côté de passage.',
+        { version: 3, laps: 2, marks: [ { id: 'WW', lat: 43.1102, lon: 5.9411, rounding: 'port' }, { id: 'LW1', lat: 43.1089, lon: 5.9409 }, { id: 'LW2', lat: 43.1089, lon: 5.9414 } ], start_line: { pin: 'PIN', committee: 'SB' }, sequence: ['start', 'WW', 'LW', 'WW', 'finish'], boundary: '[[lat, lon], …]' }),
+      T('mark', R + '/marks/WW', 'Bouée et vent mesuré', 'lecture', '1 Hz', '0', 'oui', 'Position de la bouée et vent de l’anémomètre (moyenne 10 s, rafale, écart-type de direction).',
+        { mark_id: 'WW', t: '2027-05-14T13:42:07.000Z', lat: 43.1102, lon: 5.9411, tws_kn: 10.4, twd: 128.0, gust_kn: 12.9, twd_std: 6.2, avg_s: 10 }),
+      T('field', R + '/wind/field', 'Carte de vent', 'lecture', '1 Hz', '0', 'non', 'Vent fusionné sur une grille de cases de 20 m couvrant le parcours, avec la source et la confiance de chaque case.',
+        { t: '2027-05-14T13:42:07.000Z', cell_m: 20, origin: { lat: 43.1085, lon: 5.9402 }, rows: 12, cols: 12, tws_kn: '[[9.6, 9.8, …], …]', twd: '[[124, 125, …], …]', confidence: 0.7 }),
+      T('trend', R + '/wind/trend', 'Tendance du vent', 'lecture', 'toutes les 10 s', '1', 'oui', 'Ce que le vent prépare dans 5 à 15 minutes : bascule, renforcement, avec un niveau de confiance.',
+        { t: '2027-05-14T13:42:00.000Z', horizon_min: 10, twd_change: 6, tws_change_kn: 0.5, confidence: 'medium' }),
+      T('events', R + '/events', 'Événements de course', 'lecture', 'à la volée', '1', 'non', 'Départ, OCS, rappels, passages de bouée, pénalités, sorties de zone, arrivées, décisions du comité.',
+        { id: 'ev-0412', t_gps_ms: 1494337559800, type: 'penalty_issued', boat_id: 'ITA-12', reason: 'Pas laissé la place à la bouée (RCV 18)', form: 'turn_360', related: ['FRA-07'], by: 'umpire' }),
+      T('flags', R + '/flags', 'Pavillons en place', 'lecture', 'à chaque changement', '1', 'oui', 'Pavillons hissés par le comité, avec leur sens. Utile pour afficher l’état réel du plan d’eau.',
+        { t_gps_ms: 1494337398000, flags: ['class', 'P'], sound: 'short' }),
+      T('lb', R + '/leaderboard', 'Classement', 'lecture', '1 Hz', '0', 'oui', 'Classement provisoire calculé sur la distance restante, statuts au classement.',
+        { t: '2027-05-14T13:42:07.000Z', provisional: true, rows: [ { rank: 1, boat_id: 'FRA-07', gap_s: 0 }, { rank: 2, boat_id: 'ITA-12', gap_s: 1.4 }, { rank: 5, boat_id: 'SUI-05', gap_s: 9.8 } ] }),
+      T('notices', R + '/notices', 'Avis officiels', 'lecture', 'à la volée', '1', 'oui', 'Avis du comité à toutes les équipes. Si requires_ack est vrai, répondez par un ack sur votre outbox.',
+        { id: 'n-017', t_gps_ms: 1494337618000, priority: 'high', requires_ack: true, text: 'Course 4 : bouée au vent déplacée à 125°. Départ 14 h 40 GPS.' }),
+      T('inbox', 'teams/sui05/inbox', 'Messages pour votre équipe', 'lecture', 'à la volée', '1', 'non', 'Messages du comité réservés à votre équipe : décision, réponse à une demande, consigne de sécurité.',
+        { id: 'm-031', t_gps_ms: 1494337638000, in_reply_to: 'o-0007', text: 'Réclamation reçue. Audition à 15 h 10, tente du jury.', requires_ack: true }),
+      T('outbox', 'teams/sui05/outbox', 'Vos demandes au comité', 'écriture', 'à la volée', '1', 'non', 'Le seul sujet où vous écrivez. Types : ack, protest, redress_request, retire, technical_issue, assistance_request, question.',
+        { id: 'o-0007', t_gps_ms: 1494337633000, type: 'protest', against: ['ITA-12'], incident_t_gps_ms: 1494337559800, text: 'ITA-12 n’a pas laissé la place à la bouée au vent.' }),
+      T('time', 'sys/time', 'Heure du serveur', 'lecture', '1 Hz', '0', 'non', 'Pour mesurer le décalage de votre horloge. Il doit rester sous 5 ms ; sinon votre chrono serait faux.',
+        { t_gps_ms: 1494337345000, leap_s: 18, source: 'gnss_pps' }),
+      T('orders', 'équipe → bateau (votre liaison)', 'Ordres au bateau · format proposé', 'équipe → bateau', 'libre', 'accusé', '—', 'Hors du flux officiel : c’est votre liaison (radio, 4G). Format commun proposé. Manœuvres : vire (tack), empanne (gybe), abats après la bouée au vent (bear_away), loffe après la bouée sous le vent (head_up), face au vent (head_to_wind). Modes : près (mode_upwind), portant (mode_downwind), VMG (mode_vmg), haut (mode_high), bas (mode_low). Réglages à définir : choque (ease), borde (trim), cap (heading).',
+        { v: 1, kind: 'order', boat_id: 'SUI-05', order_id: 1842, t_gps_ms: 1494337345200, cmd: 'bear_away', param: { mark_id: 'WW', side: 'port', twa_deg: 150 }, ttl_ms: 2000, ack_required: true })
+    ];
+    const topics = all.map(t => ({ ...t, on: String(st.sel === t.id), bg: st.sel === t.id ? 'rgba(199,235,0,.2)' : '#FFFFFF', border: st.sel === t.id ? '#11150D' : 'rgba(9,11,7,.1)', go: () => this.setState({ sel: t.id }) }));
+    const cur = all.find(t => t.id === st.sel);
+    const facts = [ { k: 'Sens', v: cur.dir }, { k: 'Cadence', v: cur.rate }, { k: 'QoS', v: cur.qos }, { k: 'Conservé', v: cur.ret } ];
+    const py = [
+      'import json, os, ssl',
+      'import paho.mqtt.client as mqtt',
+      '',
+      'c = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2,',
+      '                client_id="sui05-tactique")',
+      'c.username_pw_set("equipe-sui05", os.environ["AIR_PASS"])',
+      'c.tls_set(cert_reqs=ssl.CERT_REQUIRED)',
+      '',
+      'def on_message(cl, ud, msg):',
+      '    data = json.loads(msg.payload)',
+      '    print(msg.topic, data)',
+      '',
+      'c.on_message = on_message',
+      'c.connect("10.20.0.10", 8883)',
+      'c.subscribe("' + cur.path + '", qos=' + cur.qos + ')',
+      'c.loop_forever()'
+    ].join('\n');
+    const js = [
+      'import mqtt from "mqtt";',
+      '',
+      'const c = mqtt.connect("wss://10.20.0.10:8884/mqtt", {',
+      '  username: "equipe-sui05",',
+      '  password: process.env.AIR_PASS,',
+      '  clean: false, clientId: "sui05-web"',
+      '});',
+      '',
+      'c.on("connect", () =>',
+      '  c.subscribe("' + cur.path + '", { qos: ' + cur.qos + ' }));',
+      '',
+      'c.on("message", (topic, buf) => {',
+      '  const data = JSON.parse(buf.toString());',
+      '  console.log(topic, data);',
+      '});'
+    ].join('\n');
+    const nmea = [
+      '# Flux NMEA 0183 : TCP 10.20.0.10:10110',
+      '# Les autres bateaux arrivent comme des cibles AIS :',
+      '!AIVDM,1,1,,A,B3P8C@@00>ub7?wPa1Pw0wT0S0D0,0*1C',
+      '# Vent à la bouée au vent (direction et force vraies) :',
+      '$WIMWD,128.0,T,,M,10.4,N,5.4,M*5E',
+      '',
+      '# OpenCPN : Options > Connexions > Ajouter',
+      '#   Réseau, TCP, 10.20.0.10, port 10110',
+      '',
+      '# Limites : pas de chrono, pas d’événements,',
+      '# pas de canal comité. Pour cela, utilisez MQTT.'
+    ].join('\n');
+    const langs = [['py','Python'],['js','JavaScript'],['nmea','NMEA / AIS']].map(l => ({ label: l[1], on: String(st.lang === l[0]), bg: st.lang === l[0] ? '#C7EB00' : '#FFFFFF', go: () => this.setState({ lang: l[0] }) }));
+    const ord = [
+      '# Ordres au bateau : votre liaison, pas le broker officiel.',
+      '# Exemple : radio de télémétrie 433 MHz sur port série.',
+      'import json, serial, time',
+      '',
+      'radio = serial.Serial("/dev/ttyUSB0", 57600)',
+      'MANOEUVRES = {"tack", "gybe", "bear_away", "head_up", "head_to_wind"}',
+      'MODES = {"mode_upwind", "mode_downwind", "mode_vmg",',
+      '         "mode_high", "mode_low"}',
+      'REGLAGES = {"ease", "trim", "heading"}  # à définir',
+      '',
+      'def ordre(cmd, n, **param):',
+      '    assert cmd in MANOEUVRES | MODES | REGLAGES',
+      '    msg = {"v": 1, "kind": "order", "boat_id": "SUI-05",',
+      '           "order_id": n, "cmd": cmd, "param": param,',
+      '           "t_gps_ms": gps_ms(), "ttl_ms": 2000}',
+      '    radio.write((json.dumps(msg) + "\\n").encode())',
+      '',
+      '# Bouée au vent passée : abats, puis mode portant',
+      'ordre("bear_away", 1842, mark_id="WW", side="port")',
+      'ordre("mode_downwind", 1843, twa_deg=150)'
+    ].join('\n');
+    const isOrd = cur.id === 'orders';
+    return { topics, cur, facts, langs, code: isOrd ? ord : st.lang === 'py' ? py : st.lang === 'js' ? js : nmea };
+  }
+}
+</script>
+</body>
+</html>

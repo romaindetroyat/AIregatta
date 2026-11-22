@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Médias · Habillage antenne</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C7EB00}a:hover{color:#F7F8F2}
+</style>
+</helmet>
+<div style="position:relative;width:1920px;height:1080px;overflow:hidden;background:#06100F;color:#F7F8F2;font-family:'Instrument Sans',system-ui,sans-serif">
+  <!-- Scène : vue aérienne reconstituée -->
+  <svg viewBox="0 0 1920 1080" width="1920" height="1080" role="img" aria-label="Vue aérienne reconstituée du parcours : bouées, bateaux avec leur sillage et leurs étiquettes" style="position:absolute;inset:0">
+    <defs>
+      <radialGradient id="mer" cx="50%" cy="40%" r="75%"><stop offset="0" stop-color="#14514A"/><stop offset=".55" stop-color="#0C3430"/><stop offset="1" stop-color="#051312"/></radialGradient>
+      <linearGradient id="sil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.55)"/><stop offset="1" stop-color="rgba(255,255,255,0)"/></linearGradient>
+    </defs>
+    <rect width="1920" height="1080" fill="url(#mer)"/>
+    <g stroke="rgba(214,230,224,.07)" stroke-width="2">
+      <path d="M-40 200 Q480 150 960 210 T1960 190"/><path d="M-40 380 Q480 330 960 390 T1960 370"/><path d="M-40 560 Q480 510 960 570 T1960 550"/><path d="M-40 740 Q480 690 960 750 T1960 730"/><path d="M-40 920 Q480 870 960 930 T1960 910"/>
+    </g>
+    <g stroke="rgba(199,235,0,.35)" stroke-width="2" stroke-dasharray="10 12">
+      <line x1="960" y1="170" x2="610" y2="640"/><line x1="960" y1="170" x2="1310" y2="640"/>
+    </g>
+    <g>
+      <circle cx="960" cy="170" r="16" fill="#D0704A" stroke="#F7F8F2" stroke-width="3"/>
+      <rect x="990" y="146" width="168" height="44" rx="10" fill="rgba(6,16,15,.75)" stroke="rgba(247,248,242,.2)"/>
+      <text x="1006" y="166" style="font:700 15px 'JetBrains Mono',monospace" fill="#F7F8F2">BOUÉE AU VENT</text>
+      <text x="1006" y="183" style="font:500 13px 'JetBrains Mono',monospace" fill="#C7EB00">10,4 NDS · 128°</text>
+      <circle cx="900" cy="900" r="13" fill="#D0704A" stroke="#F7F8F2" stroke-width="3"/><circle cx="1020" cy="900" r="13" fill="#D0704A" stroke="#F7F8F2" stroke-width="3"/>
+      <text x="1042" y="906" style="font:700 15px 'JetBrains Mono',monospace" fill="#F7F8F2">PORTE</text>
+    </g>
+    <sc-for list="{{boats}}" as="b" hint-placeholder-count="6">
+      <g>
+        <path d="{{b.wake}}" fill="none" stroke="url(#sil)" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+        <g transform="translate({{b.x}} {{b.y}}) rotate({{b.rot}})"><path d="M0 -26 L13 16 L0 10 L-13 16 Z" fill="{{b.c}}" stroke="#06100F" stroke-width="2.5"/></g>
+        <line x1="{{b.x}}" y1="{{b.y}}" x2="{{b.tx}}" y2="{{b.ty2}}" stroke="rgba(247,248,242,.5)" stroke-width="1.5"/>
+        <g transform="translate({{b.tx}} {{b.ty}})">
+          <rect x="0" y="0" width="150" height="52" rx="10" fill="rgba(6,16,15,.82)" stroke="{{b.c}}" stroke-width="2"/>
+          <rect x="0" y="0" width="38" height="52" rx="10" fill="{{b.c}}"/>
+          <text x="19" y="33" text-anchor="middle" style="font:700 18px 'Funnel Display',sans-serif" fill="#06100F">{{b.pos}}</text>
+          <text x="50" y="22" style="font:700 17px 'Funnel Display',sans-serif" fill="#F7F8F2">{{b.code}}</text>
+          <text x="50" y="42" style="font:500 13px 'JetBrains Mono',monospace" fill="rgba(247,248,242,.8)">{{b.sog}} nds</text>
+        </g>
+      </g>
+    </sc-for>
+  </svg>
+
+  <!-- Bandeau course -->
+  <div style="position:absolute;left:48px;top:40px;display:flex;align-items:stretch;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.6)">
+    <div style="display:flex;align-items:center;gap:12px;padding:14px 20px;background:#C7EB00;color:#06100F">
+      <b style="font:700 26px 'Funnel Display',sans-serif;letter-spacing:-.01em">AI Regatta</b>
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:center;padding:10px 20px;background:rgba(6,16,15,.88)">
+      <span style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(247,248,242,.7)">COURSE 3 · TOUR 1/2</span>
+      <span style="font:700 22px 'Funnel Display',sans-serif">Bord de portant</span>
+    </div>
+    <div style="display:flex;align-items:center;padding:10px 22px;background:#06100F;font:700 40px 'JetBrains Mono',monospace;letter-spacing:-.03em">03:41</div>
+  </div>
+
+  <!-- Vent -->
+  <div style="position:absolute;right:48px;top:40px;display:flex;align-items:center;gap:16px;padding:12px 20px 12px 14px;border-radius:14px;background:rgba(6,16,15,.85);box-shadow:inset 0 0 0 1px rgba(247,248,242,.12)">
+    <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="rgba(247,248,242,.25)" stroke-width="2"/><g transform="rotate(128 28 28)"><path d="M28 6 L35 22 L28 18 L21 22 Z" fill="#C7EB00"/><line x1="28" y1="18" x2="28" y2="48" stroke="#C7EB00" stroke-width="4" stroke-linecap="round"/></g></svg>
+    <div style="display:flex;flex-direction:column"><b style="font:700 30px/1 'JetBrains Mono',monospace">10,4<span style="font-size:15px"> NDS</span></b><span style="font:500 13px 'JetBrains Mono',monospace;color:rgba(247,248,242,.7);letter-spacing:.1em">SUD-EST · RAFALE 12,9</span></div>
+  </div>
+
+  <!-- Classement -->
+  <div style="position:absolute;right:48px;top:150px;width:360px;display:flex;flex-direction:column;gap:4px">
+    <sc-for list="{{rank}}" as="r" hint-placeholder-count="7">
+      <div style="display:grid;grid-template-columns:40px 8px minmax(0,1fr) 78px 44px;align-items:center;gap:10px;height:46px;padding-right:12px;border-radius:10px;background:rgba(6,16,15,.85)">
+        <span style="text-align:center;font:700 20px 'Funnel Display',sans-serif">{{r.p}}</span>
+        <span style="width:8px;height:30px;border-radius:4px;background:{{r.c}}"></span>
+        <b style="font:600 18px 'Funnel Display',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{r.name}}</b>
+        <span style="text-align:right;font:500 15px 'JetBrains Mono',monospace;color:rgba(247,248,242,.85)">{{r.gap}}</span>
+        <span style="text-align:right;font:700 13px 'JetBrains Mono',monospace;color:{{r.trendC}}">{{r.trend}}</span>
+      </div>
+    </sc-for>
+    <span style="margin-top:6px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(247,248,242,.6)">ÉCARTS EN SECONDES · DONNÉES BALISES RTK</span>
+  </div>
+
+  <!-- Mini-carte -->
+  <div style="position:absolute;left:48px;bottom:48px;width:250px;height:250px;border-radius:18px;background:rgba(6,16,15,.85);box-shadow:inset 0 0 0 1px rgba(247,248,242,.12);overflow:hidden">
+    <svg viewBox="0 0 250 250" width="250" height="250" role="img" aria-label="Mini-carte du parcours avec la position des bateaux">
+      <rect x="20" y="20" width="210" height="210" rx="10" fill="none" stroke="rgba(247,248,242,.18)" stroke-dasharray="4 5"/>
+      <circle cx="125" cy="40" r="6" fill="#D0704A"/><circle cx="110" cy="205" r="5" fill="#D0704A"/><circle cx="140" cy="205" r="5" fill="#D0704A"/>
+      <sc-for list="{{boats}}" as="b" hint-placeholder-count="6"><circle cx="{{b.mx}}" cy="{{b.my}}" r="6" fill="{{b.c}}" stroke="#06100F" stroke-width="1.5"/></sc-for>
+    </svg>
+  </div>
+
+  <!-- Graphique bas d'écran -->
+  <sc-if value="{{isDuel}}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;left:340px;right:460px;bottom:48px;display:flex;flex-direction:column;gap:10px;padding:18px 24px;border-radius:18px;background:rgba(6,16,15,.9);box-shadow:inset 0 0 0 1px rgba(247,248,242,.12)">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:600 14px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#C7EB00">DUEL POUR LA TÊTE</span><span style="font:500 14px 'JetBrains Mono',monospace;color:rgba(247,248,242,.7)">vers la porte · 86 m</span></div>
+      <div style="display:grid;grid-template-columns:200px minmax(0,1fr) 200px;align-items:center;gap:20px">
+        <div style="display:flex;flex-direction:column"><b style="font:700 34px/1 'Funnel Display',sans-serif;color:#C7EB00">FRA</b><span style="font:500 15px 'JetBrains Mono',monospace">3,1 nds · VMG 2,6</span></div>
+        <div style="position:relative;height:14px;border-radius:7px;background:rgba(247,248,242,.12)"><div style="position:absolute;left:0;top:0;bottom:0;width:58%;border-radius:7px;background:linear-gradient(90deg,#C7EB00,#8FD18A)"></div><span style="position:absolute;left:58%;top:-30px;transform:translateX(-50%);font:700 20px 'JetBrains Mono',monospace">+1,4 s</span></div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end"><b style="font:700 34px/1 'Funnel Display',sans-serif;color:#43B3A3">ITA</b><span style="font:500 15px 'JetBrains Mono',monospace">2,8 nds · VMG 2,4</span></div>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{isPen}}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:340px;bottom:48px;display:flex;align-items:stretch;border-radius:18px;overflow:hidden">
+      <div style="display:grid;place-items:center;width:120px;background:#D0704A;color:#06100F;font:700 18px 'JetBrains Mono',monospace;letter-spacing:.1em">PÉNALITÉ</div>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:4px;padding:16px 28px;background:rgba(6,16,15,.92)"><b style="font:700 32px/1 'Funnel Display',sans-serif">ITA-12 · Italie</b><span style="font-size:19px;color:rgba(247,248,242,.85)">N’a pas laissé la place à la France à la bouée. Il doit faire un tour sur lui-même.</span></div>
+    </div>
+  </sc-if>
+  <sc-if value="{{isMark}}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:340px;bottom:48px;display:flex;flex-direction:column;gap:6px;padding:18px 24px;border-radius:18px;background:rgba(6,16,15,.92);min-width:560px">
+      <span style="font:600 14px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#C7EB00">PASSAGE À LA BOUÉE AU VENT</span>
+      <sc-for list="{{marks}}" as="m" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:36px 8px minmax(0,1fr) 110px;align-items:center;gap:12px;font-size:20px"><b style="font-family:'Funnel Display',sans-serif">{{m.p}}</b><span style="width:8px;height:24px;border-radius:4px;background:{{m.c}}"></span><span>{{m.name}}</span><span style="text-align:right;font:500 18px 'JetBrains Mono',monospace">{{m.t}}</span></div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <!-- Commande de démonstration (hors antenne) -->
+  <div role="group" aria-label="Graphique à l’antenne (démonstration)" style="position:absolute;right:48px;bottom:48px;display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:16px;background:rgba(247,248,242,.94);color:#06100F">
+    <span style="font:600 11px 'JetBrains Mono',monospace;letter-spacing:.12em">DÉMO · GRAPHIQUE À L’ANTENNE</span>
+    <div style="display:flex;gap:6px">
+      <sc-for list="{{modes}}" as="m" hint-placeholder-count="4">
+        <button type="button" onClick="{{m.go}}" aria-pressed="{{m.on}}" style="min-height:44px;padding:8px 14px;border:0;border-radius:10px;background:{{m.bg}};color:{{m.fg}};font:600 14px 'Instrument Sans',sans-serif;cursor:pointer">{{m.label}}</button>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1920,"height":1080}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { mode: 'duel' }; }
+  renderVals() {
+    const st = this.state;
+    const B = (code, c, pos, sog, x, y, rot, tx, ty, wake, mx, my) => ({ code, c, pos, sog, x, y, rot, tx, ty, ty2: ty + 26, wake, mx, my });
+    const boats = [
+      B('FRA', '#C7EB00', 1, '3,1', 900, 560, 192, 700, 500, 'M960 200 Q930 380 900 560', 117, 120),
+      B('ITA', '#43B3A3', 2, '2,8', 1000, 500, 188, 1050, 430, 'M975 190 Q990 340 1000 500', 133, 110),
+      B('GBR', '#B8902F', 3, '2,9', 1080, 400, 185, 1140, 330, 'M985 185 Q1040 290 1080 400', 142, 95),
+      B('NED', '#E0B4E8', 4, '3,0', 1240, 330, 160, 1300, 250, 'M1300 640 Q1270 480 1240 330', 160, 85),
+      B('SUI', '#D0704A', 5, '3,0', 780, 380, 20, 560, 330, 'M700 700 Q740 540 780 380', 105, 92),
+      B('MON', '#6E8BD6', 6, '2,6', 640, 560, 30, 450, 560, 'M560 820 Q600 690 640 560', 95, 120)
+    ];
+    const rank = [
+      ['1','#C7EB00','France','—','▲1','#C7EB00'], ['2','#43B3A3','Italie','+1,4','▼1','#F1A27E'], ['3','#B8902F','Grande-Bretagne','+2,9','=','rgba(247,248,242,.6)'],
+      ['4','#E0B4E8','Pays-Bas','+6,0','=','rgba(247,248,242,.6)'], ['5','#D0704A','Suisse','+9,8','▲2','#C7EB00'], ['6','#6E8BD6','Monaco','+12,1','▼1','#F1A27E'], ['7','#2F3A22','Allemagne','+18,4','=','rgba(247,248,242,.6)']
+    ].map(r => ({ p: r[0], c: r[1], name: r[2], gap: r[3], trend: r[4], trendC: r[5] }));
+    const marks = [['1','#C7EB00','France','1:52,3'],['2','#43B3A3','Italie','+1,1 s'],['3','#B8902F','Grande-Bretagne','+2,6 s'],['4','#E0B4E8','Pays-Bas','+5,2 s']].map(m => ({ p: m[0], c: m[1], name: m[2], t: m[3] }));
+    const modes = [['duel','Duel'],['pen','Pénalité'],['mark','Passage'],['none','Aucun']].map(m => ({ label: m[1], on: String(st.mode === m[0]), bg: st.mode === m[0] ? '#06100F' : '#E4E7DA', fg: st.mode === m[0] ? '#C7EB00' : '#06100F', go: () => this.setState({ mode: m[0] }) }));
+    return { boats, rank, marks, modes, isDuel: st.mode === 'duel', isPen: st.mode === 'pen', isMark: st.mode === 'mark' };
+  }
+}
+</script>
+</body>
+</html>

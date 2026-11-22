@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>AI Regatta · Vue d’ensemble des maquettes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:1440px;height:1000px;box-sizing:border-box;padding:56px 64px;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column;gap:32px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:10px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(9,11,7,.66)"><span style="width:8px;height:8px;border-radius:50%;background:#C7EB00;box-shadow:0 0 0 4px rgba(199,235,0,.2)"></span>meridia · AI Regatta · maquettes v0.1</div>
+      <h1 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:64px;line-height:1;letter-spacing:-.025em">Trois applications, <span style="color:#4E6000">un seul flux</span></h1>
+      <p style="margin:0;max-width:760px;font-size:18px;line-height:1.5;color:rgba(9,11,7,.7)">Le PC course reçoit les balises, le vent et le chrono. Il redistribue les mêmes données, au même instant, au comité, aux équipes et au public (avec 1 s de différé). Chaque maquette montre ce que l’écran reçoit, ce qu’on y décide et ce qui en sort.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;padding:16px 20px;border-radius:18px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08);font-size:14px;min-width:300px">
+      <b style="font-weight:600">Légende des badges</b>
+      <span style="display:flex;gap:8px;align-items:center"><span style="padding:2px 8px;border-radius:99px;background:#C7EB00;font:500 11px 'JetBrains Mono',monospace">ACTÉ</span> repose sur un postulat validé</span>
+      <span style="display:flex;gap:8px;align-items:center"><span style="padding:2px 8px;border-radius:99px;background:#F6DDCF;color:#7A3412;font:500 11px 'JetBrains Mono',monospace">À TRANCHER</span> décision à prendre avant le développement</span>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+    <sc-for list="{{apps}}" as="app" hint-placeholder-count="3">
+      <div style="display:flex;flex-direction:column;gap:14px;padding:24px;border-radius:24px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08),0 24px 50px -30px rgba(40,52,12,.3)">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#4E6000">{{app.tag}}</span>
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:rgba(9,11,7,.6)">{{app.device}}</span>
+        </div>
+        <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:30px;line-height:1.05">{{app.name}}</h2>
+        <p style="margin:0;font-size:15px;line-height:1.5;color:rgba(9,11,7,.7)">{{app.pitch}}</p>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:14px">
+          <sc-for list="{{app.lines}}" as="l" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px solid rgba(9,11,7,.1)"><span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:rgba(9,11,7,.6);padding-top:2px">{{l.k}}</span><span>{{l.v}}</span></div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:auto">
+          <sc-for list="{{app.boards}}" as="b" hint-placeholder-count="4">
+            <a href="{{b.href}}" style="padding:8px 12px;border-radius:99px;background:#EEF0E4;color:#11150D;text-decoration:none;font-size:13px;font-weight:500">{{b.label}} →</a>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:14px;padding:24px;border-radius:24px;background:#11150D;color:#F7F8F2">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:26px">Décisions à prendre avant de coder <span style="color:#C7EB00">{{doneCount}}/{{total}}</span></h2>
+      <span style="font-size:13px;color:rgba(247,248,242,.7)">Cochez quand c’est tranché</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 24px">
+      <sc-for list="{{decisions}}" as="d" hint-placeholder-count="9">
+        <button type="button" onClick="{{d.toggle}}" style="display:flex;gap:10px;align-items:flex-start;text-align:left;padding:10px 12px;min-height:44px;border:0;border-radius:12px;background:{{d.bg}};color:#F7F8F2;font:400 14px/1.4 'Instrument Sans',sans-serif;cursor:pointer">
+          <span style="flex:none;width:18px;height:18px;margin-top:1px;border-radius:5px;border:1.5px solid #C7EB00;background:{{d.box}}"></span>
+          <span><b style="font-weight:600;color:#C7EB00">{{d.app}}</b> · {{d.q}}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { done: {} }; }
+  renderVals() {
+    const apps = [
+      { tag: 'Comité de course', device: 'PC · 2 écrans', name: 'Console du comité',
+        pitch: 'Piloter la procédure, juger, modifier le parcours et informer tout le monde, en quelques secondes et avec une trace de chaque geste.',
+        lines: [
+          { k: 'Reçoit', v: 'Positions 10 Hz, vent 1 Hz, alertes du moteur de course, santé des balises, demandes des équipes' },
+          { k: 'Décide', v: 'Départ, rappels, report, annulation, parcours, pénalités, réclamations, classement' },
+          { k: 'Émet', v: 'Chrono, pavillons, signaux sonores, avis officiels, messages à une équipe' },
+          { k: 'Public', v: 'Chaque décision a un libellé public, publié avec 1 s de différé' }
+        ],
+        boards: [ { label: 'Départ', href: 'Comite-Depart.dc.html' }, { label: 'Course', href: 'Comite-Course.dc.html' }, { label: 'Décisions', href: 'Comite-Decisions.dc.html' }, { label: 'Messages', href: 'Comite-Messages.dc.html' } ] },
+      { tag: 'Public', device: 'iPhone · ordinateur', name: 'Application publique',
+        pitch: 'Comprendre la course d’un coup d’œil, sur la plage comme à la maison, sans rien installer depuis un magasin d’applications.',
+        lines: [
+          { k: 'Accès', v: 'QR code sur place ou adresse web ; ajout à l’écran d’accueil (PWA)' },
+          { k: 'Voit', v: 'Carte en direct, classement, écarts, vent, chrono, vidéo, replay' },
+          { k: 'Alertes', v: 'Départ, rappel, pénalité, passage de bouée, arrivée, programme modifié' },
+          { k: 'En plus', v: 'Qui est qui, qui mène, pourquoi une pénalité, ce que le vent prépare' }
+        ],
+        boards: [ { label: 'Accès', href: 'Public-Acces.dc.html' }, { label: 'En direct', href: 'Public-Live.dc.html' }, { label: 'Mode plage', href: 'Public-Plage.dc.html' }, { label: 'Alertes', href: 'Public-Alertes.dc.html' }, { label: 'Fiche bateau', href: 'Public-Bateau.dc.html' } ] },
+      { tag: 'Équipes', device: 'leur logiciel', name: 'Kit des équipes',
+        pitch: 'Les équipes écrivent leur logiciel tactique. Nous leur fournissons un flux identique pour tous, une documentation, des exemples et un simulateur.',
+        lines: [
+          { k: 'Fourni', v: 'Flux officiel en lecture, canal comité, simulateur, rejeux, schémas, exemples' },
+          { k: 'Connecteurs', v: 'MQTT (conseillé), WebSocket, NMEA 0183 / AIS, fichiers de rejeu' },
+          { k: 'Bateau', v: 'Liaison à leur charge : vire, empanne, abats, loffe, face au vent ; modes près, portant, VMG, haut, bas' },
+          { k: 'Vers le comité', v: 'Accusés de lecture, réclamations, abandon, problème technique' }
+        ],
+        boards: [ { label: 'Kit', href: 'Equipes-Kit.dc.html' }, { label: 'Flux', href: 'Equipes-Flux.dc.html' }, { label: 'Console', href: 'Equipes-Console.dc.html' }, { label: 'Bateau', href: 'Equipes-Bateau.dc.html' } ] }
+    ];
+    const qs = [
+      ['Comité', 'Règles de course : adaptation des RCV aux drones (P14)'],
+      ['Comité', 'Pénalité : boucle à effectuer ou pénalité en temps ?'],
+      ['Comité', 'Arbitrage en direct ou réclamations après la course ?'],
+      ['Public', 'Nom de domaine et marque de l’application'],
+      ['Public', 'Vidéo dans l’application dès la v1 ou plus tard ?'],
+      ['Public', 'Notifications : lesquelles par défaut ?'],
+      ['Équipes', 'Barre à distance par l’IA autorisée ? (humain exclu en course)'],
+      ['Équipes', 'Relais des données officielles vers le bateau autorisé ?'],
+      ['Équipes', 'Ouverture du bac à sable : janvier 2027 ?']
+    ];
+    const done = this.state.done;
+    const decisions = qs.map((q, i) => ({ app: q[0], q: q[1],
+      bg: done[i] ? 'rgba(199,235,0,.16)' : 'rgba(247,248,242,.06)',
+      box: done[i] ? '#C7EB00' : 'transparent',
+      toggle: () => this.setState({ done: { ...done, [i]: !done[i] } }) }));
+    return { apps, decisions, total: qs.length, doneCount: Object.values(done).filter(Boolean).length };
+  }
+}
+</script>
+</body>
+</html>

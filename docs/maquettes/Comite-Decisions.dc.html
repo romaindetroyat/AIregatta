@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Comité · Toutes les décisions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:1440px;height:1000px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 28px;background:#11150D;color:#F7F8F2">
+    <div style="display:flex;align-items:center;gap:18px">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">AI Regatta <span style="color:#C7EB00">· Comité</span></b>
+      <nav aria-label="Écrans du comité" style="display:flex;gap:6px">
+        <a href="Comite-Depart.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Départ</a>
+        <a href="Comite-Course.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Course et arbitrage</a>
+        <a href="Comite-Decisions.dc.html" style="padding:8px 14px;border-radius:99px;background:#C7EB00;color:#11150D;text-decoration:none;font-size:14px;font-weight:600">Décisions</a>
+        <a href="Comite-Messages.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Messages</a>
+      </nav>
+    </div>
+    <span style="font:500 13px 'JetBrains Mono',monospace;color:rgba(247,248,242,.75)">Référentiel : Règles de course à la voile 2025-2028, à adapter aux drones (P14)</span>
+  </header>
+
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1fr) 460px;gap:20px;padding:20px 28px;min-height:0">
+    <section aria-label="Catalogue" style="display:flex;flex-direction:column;gap:14px;min-height:0">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px">
+        <div><h1 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:36px;letter-spacing:-.02em">Toutes les décisions du comité</h1>
+        <p style="margin:4px 0 0;font-size:15px;color:rgba(9,11,7,.7)">Chaque décision est un bouton de la console. Elle a un signal, un effet sur le moteur de course, un message aux équipes et un libellé public.</p></div>
+        <span style="font:500 13px 'JetBrains Mono',monospace;white-space:nowrap">{{count}} décisions · {{todo}} à trancher</span>
+      </div>
+      <div role="group" aria-label="Filtrer par moment" style="display:flex;flex-wrap:wrap;gap:6px">
+        <sc-for list="{{phases}}" as="p" hint-placeholder-count="6">
+          <button type="button" onClick="{{p.go}}" aria-pressed="{{p.on}}" style="min-height:44px;padding:8px 16px;border-radius:99px;border:1px solid rgba(9,11,7,.15);background:{{p.bg}};font:500 14px 'Instrument Sans',sans-serif;cursor:pointer">{{p.label}} <span style="font:500 11px 'JetBrains Mono',monospace;color:rgba(9,11,7,.6)">{{p.n}}</span></button>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-content:start;overflow:auto">
+        <sc-for list="{{items}}" as="d" hint-placeholder-count="12">
+          <button type="button" onClick="{{d.go}}" aria-pressed="{{d.on}}" style="display:flex;flex-direction:column;gap:6px;text-align:left;min-height:104px;padding:12px 14px;border-radius:16px;border:1px solid {{d.border}};background:{{d.bg}};font:400 13px 'Instrument Sans',sans-serif;cursor:pointer">
+            <span style="display:flex;justify-content:space-between;gap:8px;width:100%"><span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:rgba(9,11,7,.62)">{{d.phase}}</span><span style="padding:1px 8px;border-radius:99px;background:{{d.badgeBg}};color:{{d.badgeFg}};font:500 10px 'JetBrains Mono',monospace">{{d.status}}</span></span>
+            <b style="font-size:15px;font-weight:600;line-height:1.25">{{d.name}}</b>
+            <span style="font:500 12px 'JetBrains Mono',monospace;color:#0E5A52">{{d.signal}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <aside aria-label="Détail de la décision" style="display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08),0 24px 50px -30px rgba(40,52,12,.3)">
+      <span style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:#4E6000">{{cur.phase}} · {{cur.rule}}</span>
+      <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:28px;line-height:1.1">{{cur.name}}</h2>
+      <p style="margin:0;font-size:15px;line-height:1.5;color:rgba(9,11,7,.75)">{{cur.what}}</p>
+      <dl style="margin:0;display:flex;flex-direction:column;gap:0;font-size:14px">
+        <sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid rgba(9,11,7,.1)"><dt style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:rgba(9,11,7,.62);padding-top:2px">{{r.k}}</dt><dd style="margin:0;line-height:1.45">{{r.v}}</dd></div>
+        </sc-for>
+      </dl>
+      <sc-if value="{{cur.isTodo}}" hint-placeholder-val="{{ false }}">
+        <div style="padding:12px 14px;border-radius:14px;background:#F6DDCF;color:#5C2108;font-size:14px;line-height:1.45"><b style="font-weight:600">À trancher :</b> {{cur.todo}}</div>
+      </sc-if>
+      <div style="margin-top:auto;padding:12px 14px;border-radius:14px;background:#EEF0E4;font-size:13px;line-height:1.45">
+        <b style="font-weight:600">Statuts au classement</b> · DNC absent · DNS pas parti · OCS au-delà au départ · UFD / BFD pavillon U / noir · DNF pas arrivé · RET abandon · DSQ disqualifié · DNE disqualification non retirable · RDG réparation accordée
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { phase: 'Tout', sel: 'pen' }; }
+  renderVals() {
+    const st = this.state;
+    const D = (id, phase, name, signal, rule, what, who, engine, team, pub, todo) => ({ id, phase, name, signal, rule, what, who, engine, team, pub, todo });
+    const all = [
+      D('course','Avant','Choisir et orienter le parcours','Tableau + parcours affiché','RCV 27.1','Placer la bouée au vent dans l’axe du vent du jour et fixer le nombre de tours.','Directeur de course','Publie le message « course » conservé : bouées, portes, ligne, limites, ordre des bords','Nouveau parcours reçu, à intégrer avant l’avertissement','Carte mise à jour, « parcours du jour : 2 tours »'),
+      D('aph','Avant','Retarder à terre','Aperçu sur H · 2 sons','Signaux de course','Les bateaux restent à terre ; le prochain signal sera donné au plus tôt 30 min après l’affalé.','Directeur de course','Aucune course active ; chronos en attente','Avis « retard à terre », nouvel horaire','« Départ retardé, prochain point à 14 h 30 »'),
+      D('ap','Avant','Retarder sur l’eau','Aperçu · 2 sons','Signaux de course','Les départs non lancés sont retardés. Avertissement 1 min après l’affalé.','Directeur de course','Arrête le compte à rebours chez tous','Chrono arrêté, attendre le nouvel avertissement','« Départ retardé »'),
+      D('apa','Avant','Plus de course aujourd’hui','Aperçu sur A · 3 sons','Signaux de course','Fin des courses du jour.','Directeur de course','Ferme la journée','Avis officiel','« Plus de course aujourd’hui »'),
+      D('start','Avant','Programmer le départ','Heure GPS','RCV 26','Fixer l’heure GPS exacte du départ ; la procédure et la corne s’en déduisent.','Directeur de course','Message « clock » conservé : heure du départ, durées des étapes','Chaque logiciel calcule le compte à rebours sur son horloge','Chrono affiché à l’identique'),
+      D('prep','Départ','Choisir le pavillon préparatoire','P, I, Z, U ou noir','RCV 26, 29, 30','Fixe la sévérité dans la dernière minute avant le départ.','Directeur de course','Active la règle correspondante dans le contrôle du départ','Pavillon et règle reçus avec le préparatoire','Pavillon affiché avec une phrase d’explication'),
+      D('x','Départ','Rappel individuel','X · 1 son','RCV 29.1','Un ou plusieurs bateaux étaient au-delà de la ligne : ils doivent revenir.','Directeur de course, proposé par le logiciel','Suit le retour du bateau et lève l’état OCS quand il repart correctement','Nom des bateaux concernés, immédiatement','« GBR-03 doit revenir couper la ligne »'),
+      D('gr','Départ','Rappel général','1er substitut · 2 sons','RCV 29.2','Trop de bateaux au-delà ou départ non identifiable : on recommence.','Directeur de course','Relance une procédure 1 min après l’affalé','Nouvelle heure de départ','« Rappel général, nouveau départ à 14 h 09 »'),
+      D('ocs','Départ','Classer OCS, UFD ou BFD','Statut au classement','RCV 29, 30','Confirmer le statut d’un bateau qui n’a pas pris un départ correct.','Arbitre','Statut appliqué au classement','Statut et raison','Statut dans le classement avec explication'),
+      D('c','Pendant','Changer le parcours','C · sons répétés','RCV 33','Déplacer une bouée quand le vent tourne ; les bateaux sont prévenus avant le bord concerné.','Directeur de course','Nouvelle position publiée ; le contrôle des passages suit la nouvelle bouée','Nouvelle position de bouée, avant d’arriver au bord','La bouée bouge sur la carte, message « parcours modifié »'),
+      D('s','Pendant','Réduire le parcours','S · 2 sons','RCV 32','Finir plus tôt, par exemple si le vent tombe.','Directeur de course','Déplace l’arrivée à la bouée ou porte indiquée','Nouvelle arrivée','« Parcours réduit : arrivée à la porte »'),
+      D('n','Pendant','Annuler la course','N · 3 sons','RCV 32','Course annulée (sécurité, vent, erreur du comité).','Directeur de course','Résultats de la course effacés, enregistrement conservé','Avis officiel','« Course annulée »'),
+      D('pen','Pendant','Pénaliser un bateau en course','Message + pavillon de pénalité','§ 7 · RCV 44 adaptée','Après une alerte du logiciel (contact, place à la bouée, priorité), l’arbitre décide en quelques secondes.','Arbitre, sur alerte du moteur de course','Enregistre la pénalité et vérifie le tour par P1-P2 avant l’arrivée (détecté par la balise)','Nom, motif, forme de la pénalité','« ITA-12 pénalisé : n’a pas laissé la place »','Arbitrage en direct, ou réclamations après la course ?'),
+      D('zone','Pendant','Sanctionner une sortie de zone','Message','À écrire','Un bateau franchit la limite de la zone de course.','Arbitre, alerte automatique','Détection sur la position de l’étrave','Alerte immédiate au bateau concerné','« NED-14 hors zone »','Tolérance (quelques mètres ? quelques secondes ?) et sanction (avertissement, temps, abandon forcé) ?'),
+      D('safe','Sécurité','Retirer un bateau pour sécurité','Message + bateau d’assistance','RCV 1, 2','Bateau incontrôlable, en danger ou dangereux : le comité le sort de la course.','Responsable sécurité','Statut RET ou DNF, position suivie pour l’assistance','Ordre de retrait et consigne de récupération','« GER-09 retiré par l’organisation »'),
+      D('stop','Sécurité','Interrompre pour sécurité','N sur H · 3 sons','Signaux de course','Tout le monde rentre (orage, baigneur, bateau à moteur dans la zone).','Responsable sécurité','Toutes les courses arrêtées','Ordre de retour','« Course interrompue pour la sécurité »'),
+      D('fin','Après','Valider les arrivées','1 son par arrivée (option)','RCV 28','Le logiciel détecte la coupure de la ligne par l’étrave ; l’arbitre valide.','Logiciel, validé par l’arbitre','Temps d’arrivée au millième, classement provisoire','Temps et place','Place et écart affichés'),
+      D('tl','Après','Appliquer le temps limite','Statut DNF','Instructions de course','Les bateaux pas arrivés X min après le premier sont classés DNF.','Logiciel, validé par l’arbitre','Clôt la course','Statut','Statut au classement','Durée du temps limite (proposé : 15 min après le premier).'),
+      D('prot','Après','Recevoir une réclamation','Reçue par l’application équipe','RCV 61','Une équipe réclame contre une autre ; dépôt numérique avec horodatage.','Jury','Rien ne change au classement tant que le jury n’a pas décidé','Accusé de réception, heure d’audition','« Réclamation en cours » sur les deux bateaux','Délai de dépôt (proposé : 10 min après l’arrivée du dernier bateau).'),
+      D('rdg','Après','Accorder une réparation','Statut RDG','RCV 62','Un bateau a été pénalisé sans faute de sa part (erreur du comité, balise défaillante).','Jury','Points recalculés','Décision motivée','« Réparation accordée à SUI-05 »','Que faire si une balise officielle tombe en panne en course ?'),
+      D('final','Après','Publier le classement définitif','Avis officiel','RCV 90.3','Après les réclamations, le classement devient définitif.','Jury et directeur de course','Résultats figés, signés et archivés','Avis officiel','Classement « définitif »')
+    ];
+    const phaseNames = ['Tout','Avant','Départ','Pendant','Sécurité','Après'];
+    const phases = phaseNames.map(p => ({ label: p, n: p === 'Tout' ? all.length : all.filter(d => d.phase === p).length, on: String(st.phase === p), bg: st.phase === p ? '#C7EB00' : '#FFFFFF', go: () => this.setState({ phase: p }) }));
+    const items = all.filter(d => st.phase === 'Tout' || d.phase === st.phase).map(d => ({ ...d,
+      status: d.todo ? 'À TRANCHER' : 'ACTÉ', badgeBg: d.todo ? '#F6DDCF' : 'rgba(199,235,0,.35)', badgeFg: d.todo ? '#5C2108' : '#11150D',
+      on: String(st.sel === d.id), bg: st.sel === d.id ? '#FFFFFF' : '#FFFFFF', border: st.sel === d.id ? '#11150D' : 'rgba(9,11,7,.12)',
+      go: () => this.setState({ sel: d.id }) }));
+    const c = all.find(d => d.id === st.sel) || all[0];
+    const cur = { ...c, isTodo: !!c.todo };
+    const rows = [
+      { k: 'Signal', v: c.signal }, { k: 'Qui décide', v: c.who }, { k: 'Moteur de course', v: c.engine },
+      { k: 'Aux équipes', v: c.team }, { k: 'Au public', v: c.pub }, { k: 'Trace', v: 'Journalisé avec l’heure GPS, l’auteur et les données utilisées ; rejouable.' }
+    ];
+    return { phases, items, cur, rows, count: all.length, todo: all.filter(d => d.todo).length };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Comité · Messages et visibilité</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:1440px;height:960px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 28px;background:#11150D;color:#F7F8F2">
+    <div style="display:flex;align-items:center;gap:18px">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">AI Regatta <span style="color:#C7EB00">· Comité</span></b>
+      <nav aria-label="Écrans du comité" style="display:flex;gap:6px">
+        <a href="Comite-Depart.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Départ</a>
+        <a href="Comite-Course.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Course et arbitrage</a>
+        <a href="Comite-Decisions.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Décisions</a>
+        <a href="Comite-Messages.dc.html" style="padding:8px 14px;border-radius:99px;background:#C7EB00;color:#11150D;text-decoration:none;font-size:14px;font-weight:600">Messages</a>
+      </nav>
+    </div>
+    <span style="font:500 13px 'JetBrains Mono',monospace">Course 3 · +05:12,0</span>
+  </header>
+
+  <div style="flex:1;display:grid;grid-template-columns:300px minmax(0,1fr) minmax(0,1fr);gap:20px;padding:20px 28px 12px;min-height:0">
+    <!-- Canaux -->
+    <section aria-label="Canaux vers les équipes" style="display:flex;flex-direction:column;gap:10px">
+      <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Quatre canaux vers les équipes</h2>
+      <sc-for list="{{channels}}" as="c" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:16px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+          <span style="display:flex;justify-content:space-between;font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:#4E6000"><span>{{c.tag}}</span><span>{{c.rank}}</span></span>
+          <b style="font-size:15px;font-weight:600">{{c.name}}</b>
+          <span style="font-size:13px;line-height:1.45;color:rgba(9,11,7,.72)">{{c.desc}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <!-- Rédiger un avis -->
+    <section aria-label="Rédiger un avis" style="display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+      <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Avis officiel</h2>
+      <div role="group" aria-label="Destinataires" style="display:flex;flex-wrap:wrap;gap:6px">
+        <sc-for list="{{audiences}}" as="a" hint-placeholder-count="3">
+          <button type="button" onClick="{{a.go}}" aria-pressed="{{a.on}}" style="min-height:44px;padding:8px 14px;border-radius:99px;border:1px solid rgba(9,11,7,.15);background:{{a.bg}};font:500 13px 'Instrument Sans',sans-serif;cursor:pointer">{{a.label}}</button>
+        </sc-for>
+      </div>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Texte de l’avis
+        <textarea rows="3" style="padding:10px 12px;border-radius:12px;border:1px solid rgba(9,11,7,.18);font:400 14px/1.45 'Instrument Sans',sans-serif;resize:none">Course 4 : bouée au vent déplacée à 125°. Départ programmé à 14 h 40 GPS. Accusé de lecture demandé.</textarea>
+      </label>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;font-size:13px">
+        <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" checked style="width:18px;height:18px">Accusé de lecture obligatoire</label>
+        <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" checked style="width:18px;height:18px">Priorité haute (son dans les logiciels d’équipe)</label>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;font-size:13px">
+        <div style="padding:10px 12px;border-radius:12px;background:#EEF0E4"><b style="display:block;font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:rgba(9,11,7,.62);margin-bottom:4px">Sujet</b><span style="font-family:'JetBrains Mono',monospace">{{topic}}</span></div>
+        <div style="padding:10px 12px;border-radius:12px;background:{{pubBg}}"><b style="display:block;font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:rgba(9,11,7,.62);margin-bottom:4px">Public</b>{{pubText}}</div>
+      </div>
+      <button type="button" onClick="{{send}}" style="min-height:48px;border:0;border-radius:14px;background:#C7EB00;font:600 15px 'Instrument Sans',sans-serif;cursor:pointer">Publier l’avis</button>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font-size:13px;font-weight:600">Accusés de lecture · {{ackCount}}/8</span>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px">
+          <sc-for list="{{acks}}" as="k" hint-placeholder-count="8">
+            <div style="padding:8px;border-radius:10px;background:{{k.bg}};font:500 12px 'JetBrains Mono',monospace;display:flex;flex-direction:column;gap:2px"><b>{{k.id}}</b><span style="color:rgba(9,11,7,.7)">{{k.t}}</span></div>
+          </sc-for>
+        </div>
+        <span style="font-size:12px;color:rgba(9,11,7,.66)">Sans accusé après 60 s : relance automatique, puis appel radio au chef d’équipe.</span>
+      </div>
+    </section>
+
+    <!-- Demandes des équipes -->
+    <section aria-label="Demandes des équipes" style="display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+      <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Demandes des équipes</h2>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <sc-for list="{{reqs}}" as="r" hint-placeholder-count="5">
+          <button type="button" onClick="{{r.go}}" aria-pressed="{{r.on}}" style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;text-align:left;min-height:48px;padding:8px 12px;border-radius:12px;border:1px solid {{r.border}};background:{{r.bg}};font:400 13px 'Instrument Sans',sans-serif;cursor:pointer">
+            <span style="padding:2px 8px;border-radius:99px;background:{{r.tagBg}};font:500 10px 'JetBrains Mono',monospace;text-transform:uppercase">{{r.type}}</span>
+            <span><b style="font-weight:600">{{r.from}}</b> · {{r.short}}</span>
+            <span style="font:500 11px 'JetBrains Mono',monospace;color:rgba(9,11,7,.62)">{{r.t}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:16px;background:#F7F8F2">
+        <b style="font-size:16px;font-weight:600">{{cur.from}} · {{cur.typeLong}}</b>
+        <p style="margin:0;font-size:14px;line-height:1.5">{{cur.body}}</p>
+        <span style="font:500 12px 'JetBrains Mono',monospace;color:#0E5A52">{{cur.data}}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <sc-for list="{{cur.replies}}" as="x" hint-placeholder-count="3">
+            <button type="button" style="min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid rgba(9,11,7,.15);background:#FFFFFF;font:500 13px 'Instrument Sans',sans-serif;cursor:pointer">{{x}}</button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Visibilité publique -->
+  <section aria-label="Ce que voit le public" style="margin:0 28px 18px;padding:14px 18px;border-radius:22px;background:#11150D;color:#F7F8F2;display:grid;grid-template-columns:220px repeat(2,minmax(0,1fr));gap:20px;font-size:13px;line-height:1.5">
+    <div><b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">Ce que voit le public</b><p style="margin:4px 0 0;color:rgba(247,248,242,.72)">Toujours 1 s après les équipes, jamais avant.</p></div>
+    <div><b style="color:#C7EB00">Visible</b> · pavillons et sons avec leur sens · chrono · rappels · changements de parcours · pénalités avec un motif en une phrase · « incident à l’étude » · réclamation en cours (sans le texte) · statuts au classement · avis marqués « public »</div>
+    <div><b style="color:#F1A27E">Jamais visible</b> · discussions de l’arbitre · alertes non confirmées · texte des réclamations · santé des balises · messages à une seule équipe · demandes techniques ou d’assistance</div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { aud: 'all', sent: true, sel: 0 }; }
+  renderVals() {
+    const st = this.state;
+    const channels = [
+      { tag: 'Numérique', rank: 'officiel', name: 'Avis et messages dans le flux', desc: 'Sujet « notices » pour tous, « inbox » pour une équipe. Horodaté, signé, avec accusé de lecture. C’est le canal qui fait foi.' },
+      { tag: 'Numérique', rank: 'officiel', name: 'Demandes des équipes', desc: 'Chaque équipe écrit sur son propre sujet « outbox » : accusés, réclamations, abandon, problème, assistance, question.' },
+      { tag: 'Voix', rank: 'secours', name: 'Radio avec les chefs d’équipe', desc: 'Talkie-walkie (PMR 446) sur un canal dédié : sécurité, urgences, relance si un avis n’est pas lu.' },
+      { tag: 'Visuel', rank: 'règles', name: 'Pavillons et corne', desc: 'Hissés à la main, sons automatiques. Ils font foi pour l’heure des signaux (RCV 26), le chrono GPS sert à tous.' }
+    ];
+    const audDefs = [['all','Toutes les équipes'],['one','Une équipe (FRA-07)'],['pub','Équipes + public']];
+    const audiences = audDefs.map(a => ({ label: a[1], on: String(st.aud === a[0]), bg: st.aud === a[0] ? '#C7EB00' : '#FFFFFF', go: () => this.setState({ aud: a[0] }) }));
+    const topic = st.aud === 'one' ? 'teams/fra07/inbox' : 'race/2027-05-14-M4/notices';
+    const pubText = st.aud === 'pub' ? 'Publié 1 s plus tard, sous une forme courte : « Bouée au vent déplacée, départ à 14 h 40 ».' : 'Rien. Cet avis reste réservé aux équipes.';
+    const ids = ['FRA-07','ITA-12','GBR-03','ESP-21','SUI-05','GER-09','MON-01','NED-14'];
+    const times = ['+0,4 s','+1,1 s','+0,7 s','+2,3 s','+0,9 s',null,'+1,6 s','+3,0 s'];
+    const acks = ids.map((id, i) => ({ id, t: st.sent ? (times[i] || 'en attente') : '—', bg: st.sent && times[i] ? 'rgba(199,235,0,.3)' : st.sent ? '#F6DDCF' : '#EEF0E4' }));
+    const R = (type, typeLong, from, short, t, body, data, replies, tagBg) => ({ type, typeLong, from, short, t, body, data, replies, tagBg });
+    const reqDefs = [
+      R('Réclamation','Réclamation','ITA-12','contre FRA-07, bouée au vent','+04:58','ITA-12 estime que FRA-07 n’a pas laissé la place à la bouée au vent à +03:36. Témoin : vidéo de la digue.','outbox · protest · incident +03:36,8 · contre FRA-07','["Accuser réception","Fixer l’audition","Joindre le rejeu"]','#F6DDCF'),
+      R('Technique','Problème technique','GER-09','perte de la liaison 4G de leur bateau','+01:15','Notre liaison de pilotage ne passe plus. Le bateau tient le dernier mode (VMG).','outbox · technical_issue · balise officielle OK, radio 868','["Lu","Prévenir la sécurité","Demander l’état dans 2 min"]','#EEF0E4'),
+      R('Assistance','Demande d’assistance','MON-01','safran bloqué, demande de remorquage','+05:02','Safran bloqué à droite, le bateau tourne en rond près de la limite ouest.','outbox · assistance_request · position jointe','["Envoyer le bateau d’assistance","Retirer de la course","Lu"]','#F6DDCF'),
+      R('Abandon','Abandon','MON-01','abandonne la course 3','+05:06','Nous abandonnons la course 3.','outbox · retire · statut RET','["Confirmer RET","Lu"]','#EEF0E4'),
+      R('Question','Question','ESP-21','nombre de tours de la course 4 ?','+05:10','Combien de tours pour la course 4 ?','outbox · question','["Répondre à tous","Répondre à ESP-21"]','#EEF0E4')
+    ];
+    const reqs = reqDefs.map((r, i) => ({ ...r, on: String(st.sel === i), bg: st.sel === i ? 'rgba(199,235,0,.16)' : '#FFFFFF', border: st.sel === i ? '#11150D' : 'rgba(9,11,7,.12)', go: () => this.setState({ sel: i }) }));
+    const c = reqDefs[st.sel];
+    const cur = { ...c, replies: JSON.parse(c.replies) };
+    return { channels, audiences, topic, pubText, pubBg: st.aud === 'pub' ? 'rgba(199,235,0,.2)' : '#EEF0E4', acks, ackCount: acks.filter(a => a.bg.indexOf('199') >= 0).length,
+      send: () => this.setState({ sent: true }), reqs, cur };
+  }
+}
+</script>
+</body>
+</html>

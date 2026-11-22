@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Équipes · Exemple de console d’équipe</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:1440px;height:960px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 28px;background:#FFFFFF;box-shadow:0 1px 0 rgba(9,11,7,.08)">
+    <div style="display:flex;align-items:center;gap:18px">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">AI Regatta <span style="color:#4E6000">· Espace équipes</span></b>
+      <nav aria-label="Espace équipes" style="display:flex;gap:6px">
+        <a href="Equipes-Kit.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Le kit</a>
+        <a href="Equipes-Flux.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Explorateur de flux</a>
+        <a href="Equipes-Console.dc.html" style="padding:8px 14px;border-radius:99px;background:#11150D;color:#F7F8F2;text-decoration:none;font-size:14px;font-weight:600">Exemple de console</a>
+        <a href="Equipes-Bateau.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Liaison bateau</a>
+      </nav>
+    </div>
+    <span style="padding:6px 12px;border-radius:99px;background:#F6DDCF;color:#5C2108;font:500 12px 'JetBrains Mono',monospace">EXEMPLE · ce que l’équipe SUI-05 pourrait construire</span>
+  </header>
+
+  <div style="display:flex;align-items:center;gap:24px;padding:10px 28px;font-size:13px">
+    <span style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border-radius:4px;background:#C7EB00"></span><b style="font-weight:600">Donnée officielle</b> (flux de l’organisation)</span>
+    <span style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border-radius:4px;background:#6E8BD6"></span><b style="font-weight:600">Calcul de l’équipe</b> (son propre logiciel)</span>
+    <span style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border-radius:4px;background:#D0704A"></span><b style="font-weight:600">Liaison de l’équipe</b> (sa radio, son bateau)</span>
+  </div>
+
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;padding:0 28px 20px;min-height:0">
+    <section aria-label="Carte tactique" style="display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:22px;background:#11150D;color:#F7F8F2">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Carte tactique</b><span style="font:500 13px 'JetBrains Mono',monospace;color:#C7EB00">+03:41,2 · tour 1/2</span></div>
+      <svg viewBox="0 0 640 560" role="img" aria-label="Carte tactique : notre bateau, les autres, les bouées, le vent par zones et nos lignes de virement" style="width:100%;height:auto;border-radius:16px;background:#1E2618">
+        <g opacity=".55">
+          <rect x="0" y="0" width="320" height="280" fill="#2A3A30"/><rect x="320" y="0" width="320" height="280" fill="#2F4A3A"/>
+          <rect x="0" y="280" width="320" height="280" fill="#26332B"/><rect x="320" y="280" width="320" height="280" fill="#2A3A30"/>
+        </g>
+        <text x="20" y="30" style="font:500 12px 'JetBrains Mono',monospace" fill="#C7EB00">vent officiel · 9,6 nds</text>
+        <text x="480" y="30" style="font:500 12px 'JetBrains Mono',monospace" fill="#C7EB00">10,4 nds · +6° à 10 min</text>
+        <line x1="320" y1="70" x2="170" y2="260" stroke="#6E8BD6" stroke-width="2" stroke-dasharray="8 6"/>
+        <line x1="320" y1="70" x2="480" y2="260" stroke="#6E8BD6" stroke-width="2" stroke-dasharray="8 6"/>
+        <text x="96" y="252" style="font:500 12px 'JetBrains Mono',monospace" fill="#A9BCF0">layline bâbord</text>
+        <text x="490" y="252" style="font:500 12px 'JetBrains Mono',monospace" fill="#A9BCF0">layline tribord</text>
+        <circle cx="320" cy="70" r="11" fill="#D0704A" stroke="#F7F8F2" stroke-width="2"/><text x="338" y="66" style="font:600 13px 'JetBrains Mono',monospace" fill="#F7F8F2">B3</text>
+        <circle cx="290" cy="480" r="9" fill="#D0704A" stroke="#F7F8F2" stroke-width="2"/><circle cx="350" cy="480" r="9" fill="#D0704A" stroke="#F7F8F2" stroke-width="2"/>
+        <circle cx="300" cy="96" r="8" fill="#C7EB00"/><circle cx="332" cy="104" r="8" fill="#43B3A3"/><circle cx="344" cy="140" r="7" fill="#B8902F"/><circle cx="430" cy="200" r="7" fill="#E0B4E8"/><circle cx="160" cy="300" r="7" fill="#6E8BD6"/>
+        <path d="M380 420 C390 360 400 300 390 262" fill="none" stroke="#D0704A" stroke-width="2.5"/>
+        <g transform="translate(390 262) rotate(-20)"><path d="M0 -18 L8 10 L-8 10 Z" fill="#D0704A" stroke="#F7F8F2" stroke-width="2"/></g>
+        <text x="404" y="290" style="font:600 13px 'JetBrains Mono',monospace" fill="#F7F8F2">SUI-05 (nous)</text>
+        <line x1="390" y1="262" x2="470" y2="180" stroke="#6E8BD6" stroke-width="2"/>
+        <text x="470" y="170" style="font:500 12px 'JetBrains Mono',monospace" fill="#A9BCF0">après virement</text>
+        <text x="20" y="540" style="font:500 11px 'JetBrains Mono',monospace" fill="rgba(247,248,242,.6)">positions : flux officiel 10 Hz · laylines et prévision : calcul de l’équipe</text>
+      </svg>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;font-size:12px">
+        <div style="padding:10px;border-radius:12px;background:rgba(199,235,0,.12)"><b style="display:block;font:600 16px 'JetBrains Mono',monospace;color:#C7EB00">3,0 nds</b>vitesse officielle</div>
+        <div style="padding:10px;border-radius:12px;background:rgba(110,139,214,.18)"><b style="display:block;font:600 16px 'JetBrains Mono',monospace;color:#A9BCF0">2,4 nds</b>VMG calculée</div>
+        <div style="padding:10px;border-radius:12px;background:rgba(110,139,214,.18)"><b style="display:block;font:600 16px 'JetBrains Mono',monospace;color:#A9BCF0">38 m</b>avant la layline</div>
+        <div style="padding:10px;border-radius:12px;background:rgba(199,235,0,.12)"><b style="display:block;font:600 16px 'JetBrains Mono',monospace;color:#C7EB00">5e · +9,8 s</b>classement officiel</div>
+      </div>
+    </section>
+
+    <div style="display:flex;flex-direction:column;gap:14px;min-height:0">
+      <section aria-label="Ordres au bateau" style="display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+        <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Ordres au bateau</b><span style="display:flex;align-items:center;gap:6px;font:500 12px 'JetBrains Mono',monospace;color:#9A3D16"><span style="width:8px;height:8px;border-radius:50%;background:#D0704A"></span>radio 433 MHz · 48 ms · −71 dBm</span></div>
+        <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px">
+          <sc-for list="{{orders}}" as="o" hint-placeholder-count="5">
+            <button type="button" onClick="{{o.go}}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:60px;padding:8px;border-radius:16px;border:1px solid {{o.border}};background:{{o.bg}};font:600 15px 'Instrument Sans',sans-serif;cursor:pointer"><span>{{o.label}}</span><span style="font:500 10px 'JetBrains Mono',monospace;color:rgba(9,11,7,.62);text-align:center">{{o.key}}</span></button>
+          </sc-for>
+        </div>
+        <ol style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px">
+          <sc-for list="{{track}}" as="s" hint-placeholder-count="4">
+            <li style="padding:8px 10px;border-radius:12px;background:{{s.bg}};font-size:12px;line-height:1.35"><b style="display:block;font:600 12px 'JetBrains Mono',monospace">{{s.t}}</b>{{s.label}}</li>
+          </sc-for>
+        </ol>
+        <p style="margin:0;font-size:12px;line-height:1.45;color:rgba(9,11,7,.66)">Le pilote automatique à bord exécute ; l’ordre ne fait que le déclencher. Si la liaison tombe : le bateau garde le dernier mode 30 s, puis lofe et s’arrête (comportement déclaré par l’équipe).</p>
+      </section>
+
+      <section aria-label="Comité" style="display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+        <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">Comité</b><span style="padding:3px 10px;border-radius:99px;background:#C7EB00;font:500 11px 'JetBrains Mono',monospace">officiel</span></div>
+        <div style="display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;background:{{noticeBg}}">
+          <span style="flex:1;font-size:13px;line-height:1.4"><b style="font-weight:600">Avis n-017 · priorité haute</b><br>Course 4 : bouée au vent déplacée à 125°. Départ 14 h 40 GPS.</span>
+          <button type="button" onClick="{{ack}}" style="min-height:44px;padding:8px 14px;border-radius:12px;border:0;background:#11150D;color:#F7F8F2;font:600 13px 'Instrument Sans',sans-serif;cursor:pointer">{{ackLabel}}</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <button type="button" style="min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid rgba(9,11,7,.15);background:#FFFFFF;font:500 13px 'Instrument Sans',sans-serif;cursor:pointer">Réclamer</button>
+          <button type="button" style="min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid rgba(9,11,7,.15);background:#FFFFFF;font:500 13px 'Instrument Sans',sans-serif;cursor:pointer">Signaler un problème</button>
+          <button type="button" style="min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid rgba(9,11,7,.15);background:#FFFFFF;font:500 13px 'Instrument Sans',sans-serif;cursor:pointer">Demander l’assistance</button>
+          <button type="button" style="min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid rgba(9,11,7,.15);background:#FFFFFF;font:500 13px 'Instrument Sans',sans-serif;cursor:pointer">Abandonner</button>
+        </div>
+      </section>
+
+      <section aria-label="Télémétrie du bateau" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;font-size:12px">
+        <div style="padding:10px;border-radius:14px;background:#FFFFFF"><b style="display:block;font:600 15px 'JetBrains Mono',monospace;color:#9A3D16">VMG</b>mode actif</div>
+        <div style="padding:10px;border-radius:14px;background:#FFFFFF"><b style="display:block;font:600 15px 'JetBrains Mono',monospace;color:#9A3D16">41°</b>angle au vent apparent</div>
+        <div style="padding:10px;border-radius:14px;background:#FFFFFF"><b style="display:block;font:600 15px 'JetBrains Mono',monospace;color:#9A3D16">7,6 V</b>batterie pilote</div>
+        <div style="padding:10px;border-radius:14px;background:#FFFFFF"><b style="display:block;font:600 15px 'JetBrains Mono',monospace;color:#9A3D16">−4°</b>safran</div>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { last: 'vire', acked: false }; }
+  renderVals() {
+    const st = this.state;
+    const defs = [['vire','Vire','T'],['empanne','Empanne','G'],['abats','Abats','A · bouée au vent'],['loffe','Loffe','L · bouée sous le vent'],['face','Face au vent','F · arrêt'],['pres','Mode près','P'],['portant','Mode portant','D'],['vmg','Mode VMG','V'],['haut','Mode haut','H'],['bas','Mode bas','B']];
+    const orders = defs.map(d => ({ label: d[1], key: d[2], bg: st.last === d[0] ? '#C7EB00' : '#FFFFFF', border: st.last === d[0] ? '#11150D' : 'rgba(9,11,7,.15)', go: () => this.setState({ last: d[0] }) }));
+    const name = defs.find(d => d[0] === st.last)[1];
+    const track = [
+      { t: '+0 ms', label: name + ' envoyé par la console', bg: '#EEF0E4' },
+      { t: '+48 ms', label: 'reçu par le bateau (accusé radio)', bg: '#EEF0E4' },
+      { t: '+1,9 s', label: 'manœuvre en cours (télémétrie)', bg: '#EEF0E4' },
+      { t: '+4,2 s', label: 'terminée, confirmée par la position officielle', bg: 'rgba(199,235,0,.3)' }
+    ];
+    return { orders, track, noticeBg: st.acked ? 'rgba(199,235,0,.18)' : '#F6DDCF', ackLabel: st.acked ? 'Lu ✓' : 'Accuser réception', ack: () => this.setState({ acked: true }) };
+  }
+}
+</script>
+</body>
+</html>

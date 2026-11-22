@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Équipes · Ce qu’on vous fournit</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:1440px;height:960px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 28px;background:#FFFFFF;box-shadow:0 1px 0 rgba(9,11,7,.08)">
+    <div style="display:flex;align-items:center;gap:18px">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">AI Regatta <span style="color:#4E6000">· Espace équipes</span></b>
+      <nav aria-label="Espace équipes" style="display:flex;gap:6px">
+        <a href="Equipes-Kit.dc.html" style="padding:8px 14px;border-radius:99px;background:#11150D;color:#F7F8F2;text-decoration:none;font-size:14px;font-weight:600">Le kit</a>
+        <a href="Equipes-Flux.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Explorateur de flux</a>
+        <a href="Equipes-Console.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Exemple de console</a>
+        <a href="Equipes-Bateau.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Liaison bateau</a>
+      </nav>
+    </div>
+    <span style="font:500 13px 'JetBrains Mono',monospace;color:rgba(9,11,7,.7)">Contrat d’interface v1.0-brouillon · docs/equipes/</span>
+  </header>
+
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:24px;padding:24px 28px;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:18px;min-height:0">
+      <div>
+        <h1 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:44px;line-height:1;letter-spacing:-.02em">Votre logiciel, <span style="color:#4E6000">nos données</span></h1>
+        <p style="margin:8px 0 0;max-width:820px;font-size:16px;line-height:1.5;color:rgba(9,11,7,.72)">Vous écrivez votre logiciel tactique et votre liaison avec le bateau. Nous vous fournissons la même chose, au même instant, pour toutes les équipes : les positions officielles, le vent, le chrono et le canal du comité. Aucun assistant tactique n’est fourni : la tactique, c’est votre travail.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px">
+        <sc-for list="{{items}}" as="i" hint-placeholder-count="12">
+          <button type="button" onClick="{{i.go}}" aria-pressed="{{i.on}}" style="display:flex;flex-direction:column;gap:6px;text-align:left;min-height:118px;padding:14px;border-radius:18px;border:1px solid {{i.border}};background:{{i.bg}};font:400 13px 'Instrument Sans',sans-serif;cursor:pointer">
+            <span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:#4E6000">{{i.cat}}</span>
+            <b style="font-size:16px;font-weight:600;line-height:1.2">{{i.name}}</b>
+            <span style="color:rgba(9,11,7,.7);line-height:1.4">{{i.short}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <section aria-label="Calendrier" style="display:flex;flex-direction:column;gap:10px;padding:16px 18px;border-radius:20px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+        <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">Calendrier des équipes</b>
+        <ol style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px">
+          <sc-for list="{{cal}}" as="c" hint-placeholder-count="6">
+            <li style="display:flex;flex-direction:column;gap:4px;padding:10px 12px;border-radius:14px;background:{{c.bg}}"><span style="font:600 13px 'JetBrains Mono',monospace">{{c.d}}</span><span style="font-size:13px;line-height:1.35">{{c.t}}</span></li>
+          </sc-for>
+        </ol>
+      </section>
+    </div>
+
+    <aside aria-label="Détail" style="display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:24px;background:#11150D;color:#F7F8F2">
+      <span style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:#C7EB00">{{cur.cat}}</span>
+      <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:30px;line-height:1.05">{{cur.name}}</h2>
+      <p style="margin:0;font-size:15px;line-height:1.5;color:rgba(247,248,242,.85)">{{cur.what}}</p>
+      <dl style="margin:0;display:flex;flex-direction:column;font-size:14px">
+        <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+          <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid rgba(247,248,242,.14)"><dt style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:rgba(247,248,242,.6);padding-top:2px">{{r.k}}</dt><dd style="margin:0;line-height:1.45;font-family:{{r.font}}">{{r.v}}</dd></div>
+        </sc-for>
+      </dl>
+      <div style="margin-top:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;font-size:13px;line-height:1.45">
+        <div style="padding:12px;border-radius:14px;background:rgba(199,235,0,.14)"><b style="display:block;color:#C7EB00;font-weight:600;margin-bottom:4px">L’organisation</b>balise scellée, flux officiel, horloge, comité, simulateur, documentation, support</div>
+        <div style="padding:12px;border-radius:14px;background:rgba(247,248,242,.08)"><b style="display:block;color:#F7F8F2;font-weight:600;margin-bottom:4px">Votre équipe</b>bateau, pilote automatique, liaison radio, logiciel tactique, sécurité en cas de perte de liaison</div>
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { sel: 'flux' }; }
+  renderVals() {
+    const st = this.state;
+    const mono = "'JetBrains Mono',monospace";
+    const K = (id, cat, name, short, what, how, fmt, when) => ({ id, cat, name, short, what, how, fmt, when });
+    const all = [
+      K('flux','Données','Flux officiel','Positions 10 Hz, bouées, vent, parcours, événements, classement','Les positions de tous les bateaux viennent des balises officielles (RTK, ± 2 cm). Vous recevez exactement ce que reçoit le comité, en lecture seule.','MQTT sur le réseau « équipes » : mqtts://10.20.0.10:8883','JSON, sujets race/{raceId}/…','dès le bac à sable (janvier)'),
+      K('chrono','Données','Chrono et procédure','Heure GPS du départ, étape, rappels, pavillons','Le message « clock » donne l’heure GPS exacte du départ. Votre logiciel calcule le compte à rebours sur sa propre horloge : jamais à partir de l’arrivée du message.','sujet race/{raceId}/clock, message conservé','JSON + heure GPS en ms','dès le bac à sable'),
+      K('vent','Données','Vent consolidé','Bouée au vent (+ sous le vent en option), station à terre, carte et tendance','Vent mesuré à 1 Hz sur la bouée au vent, station Davis à terre, carte fusionnée par cases de 20 m et tendance à 5–15 min avec un niveau de confiance.','sujets marks/WW, wind/field, wind/trend','JSON, nœuds et degrés vrais','dès le bac à sable'),
+      K('comite','Comité','Canal du comité','Avis à tous, messages à votre équipe, vos demandes','Lecture : avis officiels (notices) et votre boîte (inbox). Écriture : uniquement votre sujet outbox pour accuser réception, réclamer, abandonner, signaler un problème, demander de l’aide.','teams/{teamId}/inbox et /outbox','JSON, schéma outbox','dès le bac à sable'),
+      K('heure','Infrastructure','Horloge GPS','Serveur de temps sur place, mesure de votre décalage','Serveur NTP calé sur le GPS au PC course, et sujet sys/time chaque seconde pour vérifier votre décalage. Objectif : moins de 5 ms.','NTP 10.20.0.1 · chrony conseillé','—','sur place'),
+      K('reseau','Infrastructure','Poste en zone équipes','Câble Ethernet de même longueur pour tous, électricité, Wi-Fi de secours','Réseau « équipes » séparé de celui de l’organisation. Même câble, même distance au serveur pour tout le monde.','Ethernet RJ45, DHCP, VLAN équipes','—','11 mai'),
+      K('nmea','Connecteurs','NMEA 0183 / AIS','Pour OpenCPN, qtVlm, Expedition sans écrire de code','Les autres bateaux arrivent comme des cibles AIS, le vent en phrases MWD/MWV. Pratique pour un affichage rapide ; moins riche que le flux JSON.','TCP 10.20.0.10:10110','NMEA 0183','dès le bac à sable'),
+      K('ws','Connecteurs','WebSocket','Le même flux pour une application dans le navigateur','Même broker, mêmes sujets, accessibles depuis une page web avec mqtt.js.','wss://10.20.0.10:8884/mqtt','JSON','dès le bac à sable'),
+      K('sim','Outils','Simulateur','Une régate complète sans bateau : vent qui tourne, flotte, procédure','Il publie exactement les mêmes messages que le vrai système. Votre logiciel doit passer du simulateur au réel sans changement.','bac à sable cloud ou en local (conteneur)','identique au réel','février'),
+      K('replay','Outils','Rejeux','Les enregistrements des essais et des courses','Fichiers JSON Lines (un message par ligne, avec l’heure de réception) et Parquet pour l’analyse.','téléchargement après chaque essai','JSON Lines, Parquet','à chaque essai'),
+      K('doc','Documentation','Contrat et schémas','Sujets, champs, unités, cadences, schémas JSON','Le contrat d’interface est gelé le 15 mars 2027. Ensuite, tout changement est annoncé 30 jours avant.','docs/equipes/contrat-interface.md','JSON Schema 2020-12','gel 15 mars'),
+      K('ex','Documentation','Exemples de code','Python, JavaScript (navigateur et Node), lecture NMEA','Des programmes courts et commentés : se connecter, tenir l’état de la flotte, calculer le compte à rebours, écrire au comité.','docs/equipes/exemples/','Python 3, JavaScript','janvier')
+    ];
+    const items = all.map(i => ({ ...i, on: String(st.sel === i.id), bg: st.sel === i.id ? 'rgba(199,235,0,.2)' : '#FFFFFF', border: st.sel === i.id ? '#11150D' : 'rgba(9,11,7,.1)', go: () => this.setState({ sel: i.id }) }));
+    const cur = all.find(i => i.id === st.sel);
+    const rows = [ { k: 'Accès', v: cur.how, font: mono }, { k: 'Format', v: cur.fmt, font: mono }, { k: 'Disponible', v: cur.when, font: 'inherit' } ];
+    const cal = [
+      ['janv. 2027','Bac à sable cloud ouvert, comptes créés, exemples publiés'],
+      ['févr.','Simulateur ; objectif : 3 équipes connectées'],
+      ['15 mars','Gel du contrat d’interface'],
+      ['avril','Essais sur l’eau et régate blanche'],
+      ['11 mai','Recette des balises, test réseau et horloge'],
+      ['12–16 mai','AI Regatta']
+    ].map((c, i) => ({ d: c[0], t: c[1], bg: i === 5 ? '#C7EB00' : '#EEF0E4' }));
+    return { items, cur, rows, cal };
+  }
+}
+</script>
+</body>
+</html>

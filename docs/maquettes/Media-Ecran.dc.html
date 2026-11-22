@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Médias · Écran géant de la plage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C7EB00}a:hover{color:#F7F8F2}
+</style>
+</helmet>
+<div style="position:relative;width:1920px;height:1080px;overflow:hidden;background:#06100F;color:#F7F8F2;font-family:'Instrument Sans',system-ui,sans-serif">
+  <header style="position:absolute;left:64px;right:64px;top:48px;display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;align-items:center;gap:20px"><span style="padding:10px 22px;border-radius:14px;background:#C7EB00;color:#06100F;font:700 40px 'Funnel Display',sans-serif">AI Regatta</span><span style="font:600 34px 'Funnel Display',sans-serif;color:rgba(247,248,242,.8)">{{head}}</span></div>
+    <span style="font:700 64px 'JetBrains Mono',monospace;letter-spacing:-.03em">{{clock}}</span>
+  </header>
+
+  <sc-if value="{{isRank}}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;left:64px;right:64px;top:180px;bottom:150px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px">
+      <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{rank}}" as="r" hint-placeholder-count="6">
+          <li style="display:grid;grid-template-columns:90px 22px minmax(0,1fr) 200px;align-items:center;gap:22px;height:100px;padding-right:28px;border-radius:20px;background:{{r.bg}}">
+            <span style="text-align:center;font:700 60px 'Funnel Display',sans-serif">{{r.p}}</span>
+            <span style="width:22px;height:70px;border-radius:8px;background:{{r.c}}"></span>
+            <b style="font:700 56px 'Funnel Display',sans-serif;letter-spacing:-.01em">{{r.name}}</b>
+            <span style="text-align:right;font:700 46px 'JetBrains Mono',monospace;color:rgba(247,248,242,.85)">{{r.gap}}</span>
+          </li>
+        </sc-for>
+      </ol>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="flex:1;border-radius:28px;background:radial-gradient(90% 90% at 50% 40%,#14514A,#061413);display:grid;place-items:center">
+          <svg viewBox="0 0 600 520" width="100%" height="100%" role="img" aria-label="Carte du parcours vue depuis la plage, avec les six premiers bateaux">
+            <circle cx="300" cy="70" r="16" fill="#D0704A" stroke="#F7F8F2" stroke-width="4"/>
+            <circle cx="270" cy="450" r="14" fill="#D0704A" stroke="#F7F8F2" stroke-width="4"/><circle cx="330" cy="450" r="14" fill="#D0704A" stroke="#F7F8F2" stroke-width="4"/>
+            <circle cx="282" cy="120" r="20" fill="#C7EB00" stroke="#06100F" stroke-width="4"/><text x="282" y="128" text-anchor="middle" style="font:700 22px 'Funnel Display',sans-serif" fill="#06100F">1</text>
+            <circle cx="330" cy="140" r="20" fill="#43B3A3" stroke="#06100F" stroke-width="4"/><text x="330" y="148" text-anchor="middle" style="font:700 22px 'Funnel Display',sans-serif" fill="#06100F">2</text>
+            <circle cx="360" cy="190" r="20" fill="#B8902F" stroke="#06100F" stroke-width="4"/><text x="360" y="198" text-anchor="middle" style="font:700 22px 'Funnel Display',sans-serif" fill="#06100F">3</text>
+            <circle cx="470" cy="250" r="20" fill="#E0B4E8" stroke="#06100F" stroke-width="4"/><text x="470" y="258" text-anchor="middle" style="font:700 22px 'Funnel Display',sans-serif" fill="#06100F">4</text>
+            <circle cx="420" cy="330" r="20" fill="#D0704A" stroke="#06100F" stroke-width="4"/><text x="420" y="338" text-anchor="middle" style="font:700 22px 'Funnel Display',sans-serif" fill="#06100F">5</text>
+            <circle cx="170" cy="320" r="20" fill="#6E8BD6" stroke="#06100F" stroke-width="4"/><text x="170" y="328" text-anchor="middle" style="font:700 22px 'Funnel Display',sans-serif" fill="#06100F">6</text>
+            <text x="300" y="505" text-anchor="middle" style="font:600 22px 'JetBrains Mono',monospace" fill="rgba(247,248,242,.7)">VOUS ÊTES ICI · DIGUE NORD</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{isStart}}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:180px 64px 150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;border-radius:32px;background:radial-gradient(80% 90% at 50% 40%,rgba(199,235,0,.18),transparent)">
+      <span style="font:700 40px 'JetBrains Mono',monospace;letter-spacing:.2em;color:#C7EB00">DÉPART DANS</span>
+      <span style="font:700 300px/1 'JetBrains Mono',monospace;letter-spacing:-.05em">0:47</span>
+      <div style="display:flex;align-items:center;gap:22px;font:600 40px 'Funnel Display',sans-serif"><span style="display:grid;place-items:center;width:90px;height:64px;border-radius:10px;background:#3C5BD8;color:#F7F8F2;font:700 40px 'Funnel Display',sans-serif">P</span>Pavillon préparatoire · 8 bateaux sur la ligne</div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{isPen}}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:180px 64px 150px;display:grid;grid-template-columns:420px minmax(0,1fr);align-items:center;gap:56px">
+      <div style="display:grid;place-items:center;height:420px;border-radius:40px;background:#D0704A;color:#06100F;font:700 64px 'Funnel Display',sans-serif;text-align:center;line-height:1">PÉNA-<br>LITÉ</div>
+      <div style="display:flex;flex-direction:column;gap:24px"><b style="font:700 120px/1 'Funnel Display',sans-serif;letter-spacing:-.02em">Italie</b><span style="font:500 52px/1.2 'Instrument Sans',sans-serif">N’a pas laissé la place à la France à la bouée. Elle doit faire un tour sur elle-même.</span><span style="font:600 32px 'JetBrains Mono',monospace;color:rgba(247,248,242,.7)">Décision de l’arbitre · règle 18</span></div>
+    </div>
+  </sc-if>
+
+  <footer style="position:absolute;left:64px;right:64px;bottom:48px;display:flex;justify-content:space-between;align-items:center">
+    <span style="font:600 32px 'Funnel Display',sans-serif;color:rgba(247,248,242,.85)">Vent 10 nœuds du sud-est · suivez la course sur votre téléphone</span>
+    <div role="group" aria-label="Écran affiché (démonstration)" style="display:flex;gap:8px;padding:8px;border-radius:16px;background:rgba(247,248,242,.94)">
+      <sc-for list="{{scenes}}" as="s" hint-placeholder-count="3">
+        <button type="button" onClick="{{s.go}}" aria-pressed="{{s.on}}" style="min-height:48px;padding:10px 18px;border:0;border-radius:10px;background:{{s.bg}};color:{{s.fg}};font:600 18px 'Instrument Sans',sans-serif;cursor:pointer">{{s.label}}</button>
+      </sc-for>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1920,"height":1080}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { sc: 'rank' }; }
+  renderVals() {
+    const st = this.state;
+    const rank = [['1','#C7EB00','France','—'],['2','#43B3A3','Italie','+1,4 s'],['3','#B8902F','Grande-Bretagne','+2,9 s'],['4','#E0B4E8','Pays-Bas','+6,0 s'],['5','#D0704A','Suisse','+9,8 s'],['6','#6E8BD6','Monaco','+12 s']]
+      .map((r, i) => ({ p: r[0], c: r[1], name: r[2], gap: r[3], bg: i === 0 ? 'rgba(199,235,0,.16)' : 'rgba(247,248,242,.06)' }));
+    const scenes = [['rank','Classement'],['start','Départ'],['pen','Pénalité']].map(s => ({ label: s[1], on: String(st.sc === s[0]), bg: st.sc === s[0] ? '#06100F' : '#E4E7DA', fg: st.sc === s[0] ? '#C7EB00' : '#06100F', go: () => this.setState({ sc: s[0] }) }));
+    const heads = { rank: 'Course 3 · tour 1/2', start: 'Course 4 · procédure de départ', pen: 'Course 3 · décision du comité' };
+    return { rank, scenes, head: heads[st.sc], clock: st.sc === 'start' ? '14:39:13' : '03:41', isRank: st.sc === 'rank', isStart: st.sc === 'start', isPen: st.sc === 'pen' };
+  }
+}
+</script>
+</body>
+</html>

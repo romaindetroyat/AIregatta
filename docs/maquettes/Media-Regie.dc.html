@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Médias · Régie graphique</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C7EB00}a:hover{color:#F7F8F2}
+</style>
+</helmet>
+<div style="width:1440px;height:900px;box-sizing:border-box;background:#0B0E09;color:#F7F8F2;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 24px;border-bottom:1px solid rgba(247,248,242,.1)">
+    <div style="display:flex;align-items:center;gap:16px"><b style="font:700 20px 'Funnel Display',sans-serif">AI Regatta <span style="color:#C7EB00">· Régie</span></b>
+      <span style="display:flex;align-items:center;gap:8px;padding:5px 12px;border-radius:99px;background:rgba(208,112,74,.18);color:#F1A27E;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.12em"><span style="width:8px;height:8px;border-radius:50%;background:#D0704A"></span>À L’ANTENNE</span></div>
+    <div style="display:flex;gap:22px;font:500 13px 'JetBrains Mono',monospace;color:rgba(247,248,242,.8)"><span>Course 3 · <b style="color:#F7F8F2">+03:41,2</b></span><span>Synchro régie 0,6 ms</span><span>Public : différé 1 s</span><span>Commentateur : micro ouvert</span></div>
+  </header>
+
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;padding:18px 24px;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+        <sc-for list="{{monitors}}" as="m" hint-placeholder-count="2">
+          <section aria-label="{{m.label}}" style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:700 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:{{m.tagC}}">{{m.label}}</span><span style="font:500 12px 'JetBrains Mono',monospace;color:rgba(247,248,242,.6)">{{m.src}}</span></div>
+            <div style="position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:radial-gradient(90% 90% at 50% 40%,#14514A,#061413);box-shadow:inset 0 0 0 2px {{m.border}}">
+              <svg viewBox="0 0 320 180" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">
+                <circle cx="160" cy="34" r="4" fill="#D0704A"/><circle cx="150" cy="150" r="3.5" fill="#D0704A"/><circle cx="170" cy="150" r="3.5" fill="#D0704A"/>
+                <path d="M150 96 l5 -12 l5 12 z" fill="#C7EB00"/><path d="M168 86 l5 -12 l5 12 z" fill="#43B3A3"/><path d="M182 70 l5 -12 l5 12 z" fill="#B8902F"/><path d="M124 66 l5 -12 l5 12 z" fill="#D0704A"/>
+                <rect x="10" y="8" width="96" height="16" rx="4" fill="#C7EB00"/><rect x="108" y="8" width="40" height="16" rx="4" fill="rgba(6,16,15,.9)"/>
+              </svg>
+              <div style="position:absolute;left:12px;right:12px;bottom:12px;padding:10px 14px;border-radius:10px;background:rgba(6,16,15,.88);font:600 15px 'Funnel Display',sans-serif">{{m.gfx}}</div>
+            </div>
+          </section>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <b style="font:600 18px 'Funnel Display',sans-serif">Graphiques</b>
+        <div style="display:flex;gap:8px">
+          <button type="button" onClick="{{take}}" style="min-height:48px;padding:10px 28px;border:0;border-radius:12px;background:#C7EB00;color:#06100F;font:700 16px 'Instrument Sans',sans-serif;cursor:pointer">PRENDRE ▸ antenne</button>
+          <button type="button" onClick="{{clear}}" style="min-height:48px;padding:10px 18px;border:1px solid rgba(247,248,242,.2);border-radius:12px;background:transparent;color:#F7F8F2;font:600 14px 'Instrument Sans',sans-serif;cursor:pointer">Retirer</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px">
+        <sc-for list="{{cues}}" as="c" hint-placeholder-count="8">
+          <button type="button" onClick="{{c.go}}" aria-pressed="{{c.on}}" style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:78px;padding:12px 14px;border-radius:14px;border:1px solid {{c.border}};background:{{c.bg}};color:#F7F8F2;text-align:left;cursor:pointer;font:400 12px 'Instrument Sans',sans-serif">
+            <span style="font:600 11px 'JetBrains Mono',monospace;color:{{c.keyC}}">{{c.key}}</span>
+            <b style="font:600 16px 'Funnel Display',sans-serif">{{c.label}}</b>
+            <span style="color:rgba(247,248,242,.65)">{{c.sub}}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between"><b style="font:600 16px 'Funnel Display',sans-serif">Rejeu</b><span style="font:500 12px 'JetBrains Mono',monospace;color:rgba(247,248,242,.6)">vue reconstituée + caméra digue, même heure GPS</span></div>
+        <div style="position:relative;height:42px;border-radius:10px;background:rgba(247,248,242,.06)">
+          <div style="position:absolute;left:0;top:0;bottom:0;width:82%;border-radius:10px;background:rgba(199,235,0,.12)"></div>
+          <sc-for list="{{tl}}" as="t" hint-placeholder-count="5">
+            <span title="{{t.label}}" style="position:absolute;left:{{t.x}};top:6px;width:4px;height:30px;border-radius:2px;background:{{t.c}}"></span>
+          </sc-for>
+          <span style="position:absolute;left:82%;top:-4px;width:2px;height:50px;background:#C7EB00"></span>
+        </div>
+        <div style="display:flex;gap:16px;font:500 12px 'JetBrains Mono',monospace;color:rgba(247,248,242,.7)"><span><span style="color:#C7EB00">■</span> départ · passages</span><span><span style="color:#F1A27E">■</span> incidents</span><span><span style="color:#8FD18A">■</span> changement de leader</span></div>
+      </div>
+    </div>
+
+    <aside aria-label="Moments forts et fiche commentateur" style="display:flex;flex-direction:column;gap:12px;min-height:0">
+      <b style="font:600 18px 'Funnel Display',sans-serif">Moments forts détectés</b>
+      <sc-for list="{{hints}}" as="h" hint-placeholder-count="4">
+        <button type="button" onClick="{{h.go}}" style="display:flex;flex-direction:column;gap:3px;text-align:left;min-height:44px;padding:12px 14px;border-radius:14px;border:1px solid rgba(247,248,242,.12);background:rgba(247,248,242,.04);color:#F7F8F2;cursor:pointer;font:400 13px 'Instrument Sans',sans-serif">
+          <span style="display:flex;justify-content:space-between;width:100%;font:600 11px 'JetBrains Mono',monospace;color:{{h.c}}"><span>{{h.kind}}</span><span style="color:rgba(247,248,242,.55)">{{h.t}}</span></span>
+          <b style="font-weight:600;font-size:14px">{{h.title}}</b>
+          <span style="color:rgba(247,248,242,.65)">Suggestion : {{h.sugg}}</span>
+        </button>
+      </sc-for>
+      <div style="margin-top:auto;display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;background:#F7F8F2;color:#06100F;font-size:13px;line-height:1.45">
+        <span style="font:600 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#4E6000">FICHE DU COMMENTATEUR</span>
+        <b style="font:600 16px 'Funnel Display',sans-serif">Suisse, la remontée</b>
+        <span>7e au départ, 5e maintenant. A viré tôt à gauche et profité de la bascule de +6°. Meilleure vitesse au portant de la flotte (3,0 nds).</span>
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { pv: 'duel', pgm: 'rank' }; }
+  renderVals() {
+    const st = this.state;
+    const C = { rank: ['F1','Classement','7 bateaux, écarts','Classement : France en tête, Italie +1,4 s'], duel: ['F2','Duel','2 bateaux, écart en direct','Duel FRA – ITA : +1,4 s vers la porte'], pen: ['F3','Pénalité','motif en une phrase','Pénalité ITA-12 : place à la bouée'], mark: ['F4','Passage de bouée','temps et écarts','Passage bouée au vent : FRA 1:52,3'],
+      wind: ['F5','Vent','force, direction, bascule','Vent 10,4 nds, bascule +6° à droite'], team: ['F6','Fiche équipe','présentation et stats','Fiche : Équipe Suisse'], start: ['F7','Départ','compte à rebours, ligne','Départ dans 1:00, pavillon P'], replay: ['F8','Rejeu','vue de dessus ralentie','Rejeu : croisement à la bouée au vent'] };
+    const cues = Object.keys(C).map(k => ({ key: C[k][0], label: C[k][1], sub: C[k][2], on: String(st.pv === k),
+      bg: st.pgm === k ? 'rgba(208,112,74,.18)' : st.pv === k ? 'rgba(199,235,0,.14)' : 'rgba(247,248,242,.04)',
+      border: st.pgm === k ? '#D0704A' : st.pv === k ? '#C7EB00' : 'rgba(247,248,242,.12)', keyC: st.pgm === k ? '#F1A27E' : '#C7EB00',
+      go: () => this.setState({ pv: k }) }));
+    const monitors = [
+      { label: 'APERÇU', src: 'vue reconstituée', tagC: '#C7EB00', border: '#C7EB00', gfx: C[st.pv][3] },
+      { label: 'ANTENNE', src: 'caméra haute · 12 m', tagC: '#F1A27E', border: '#D0704A', gfx: st.pgm ? C[st.pgm][3] : 'Aucun graphique' }
+    ];
+    const tl = [['8%','#C7EB00','Départ'],['30%','#C7EB00','Bouée au vent'],['44%','#F1A27E','Contact possible'],['61%','#8FD18A','Changement de leader'],['74%','#F1A27E','Pénalité ITA-12']].map(t => ({ x: t[0], c: t[1], label: t[2] }));
+    const H = (kind, c, t, title, sugg, k) => ({ kind, c, t, title, sugg, go: () => this.setState({ pv: k }) });
+    const hints = [
+      H('CHANGEMENT DE LEADER', '#8FD18A', '+03:36', 'La France passe l’Italie à la bouée', 'Duel', 'duel'),
+      H('DÉCISION', '#F1A27E', '+03:39', 'Pénalité pour ITA-12', 'Pénalité', 'pen'),
+      H('VENT', '#C7EB00', '+03:20', 'Bascule de +6° à droite', 'Vent', 'wind'),
+      H('REMONTÉE', '#C7EB00', '+03:41', 'Suisse : +2 places au portant', 'Fiche équipe', 'team')
+    ];
+    return { cues, monitors, tl, hints, take: () => this.setState({ pgm: st.pv }), clear: () => this.setState({ pgm: null }) };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Public · Alertes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+  <div style="padding:16px 18px 10px;display:flex;flex-direction:column;gap:10px;background:#11150D;color:#F7F8F2;border-radius:0 0 24px 24px">
+    <span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:#C7EB00">Aperçu sur l’écran verrouillé</span>
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:16px;background:rgba(247,248,242,.1)">
+      <span style="flex:none;width:30px;height:30px;border-radius:9px;background:#C7EB00;color:#11150D;display:grid;place-items:center;font:700 13px 'Funnel Display',sans-serif">AI</span>
+      <span style="display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:1.35"><b style="font-weight:600;font-size:14px">{{preview.title}}</b><span style="color:rgba(247,248,242,.82)">{{preview.body}}</span></span>
+      <span style="margin-left:auto;font:500 11px 'JetBrains Mono',monospace;color:rgba(247,248,242,.6)">maintenant</span>
+    </div>
+    <button type="button" onClick="{{cycle}}" style="min-height:44px;border:0;border-radius:12px;background:rgba(199,235,0,.18);color:#C7EB00;font:600 13px 'Instrument Sans',sans-serif;cursor:pointer">Voir un autre exemple ({{idx}}/{{n}})</button>
+  </div>
+
+  <div style="flex:1;min-height:0;overflow:auto;padding:12px 18px;display:flex;flex-direction:column;gap:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:16px;background:#FFFFFF">
+      <span style="font-size:14px"><b style="font-weight:600">Mon équipe</b> · alertes en plus</span>
+      <span style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;background:#EEF0E4;font:600 13px 'Instrument Sans',sans-serif"><span style="width:10px;height:10px;border-radius:50%;background:#D0704A"></span>Suisse</span>
+    </div>
+    <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+      <fieldset style="margin:0;padding:6px 14px 8px;border:0;border-radius:18px;background:#FFFFFF">
+        <legend style="float:left;width:100%;padding:8px 0 4px;font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:#4E6000">{{g.name}}</legend>
+        <sc-for list="{{g.items}}" as="it" hint-placeholder-count="3">
+          <label style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:48px;border-top:1px solid rgba(9,11,7,.08);font-size:14px;cursor:pointer">
+            <span style="display:flex;flex-direction:column"><span style="font-weight:500">{{it.label}}</span><span style="font-size:12px;color:rgba(9,11,7,.66)">{{it.sub}}</span></span>
+            <input type="checkbox" checked="{{it.on}}" onChange="{{it.toggle}}" style="width:22px;height:22px;accent-color:#4E6000;flex:none">
+          </label>
+        </sc-for>
+      </fieldset>
+    </sc-for>
+    <p style="margin:0;font-size:12px;line-height:1.45;color:rgba(9,11,7,.66)">Au plus une alerte par minute, sauf départ et arrivée. Sur iPhone, les alertes demandent d’avoir ajouté la page à l’écran d’accueil (iOS 16.4 ou plus récent). Aucune inscription : l’abonnement reste sur le téléphone.</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { off: { tie: true, wind: true }, i: 0 }; }
+  renderVals() {
+    const st = this.state;
+    const previews = [
+      ['Départ dans 5 minutes', 'Course 4 · Meilleure vue : digue nord, face à la ligne.'],
+      ['C’est parti !', 'Course 4 lancée. GBR-03 rappelé : il doit revenir couper la ligne.'],
+      ['Pénalité pour ITA-12', 'N’a pas laissé la place à la France à la bouée. Il doit faire un tour sur lui-même.'],
+      ['La Suisse passe 3e', 'SUI-05 double les Pays-Bas avant la porte sous le vent.'],
+      ['Arrivée serrée !', 'France 1re, Italie 2e à 0,4 s. Classement provisoire.'],
+      ['Programme modifié', 'Vent trop faible : course 5 retardée, prochain point à 16 h.']
+    ];
+    const I = (id, label, sub) => ({ id, label, sub });
+    const defs = [
+      { name: 'La course', items: [ I('t5', 'Départ dans 5 minutes', 'pour venir sur la digue à temps'), I('go', 'Départ et rappels', 'départ lancé, rappel individuel ou général'), I('fin', 'Arrivées et classement', 'premier arrivé, classement définitif') ] },
+      { name: 'Mon équipe', items: [ I('mark', 'Passages de bouée', 'place et écart à chaque bouée'), I('pass', 'Gain ou perte de place', ''), I('pen', 'Pénalités et réclamations', 'avec le motif en une phrase') ] },
+      { name: 'Programme et spectacle', items: [ I('prog', 'Retard, annulation, horaire', 'décisions du comité'), I('tie', 'Arrivée serrée', 'moins d’une seconde d’écart'), I('wind', 'Le vent change', 'grosse bascule ou rafale annoncée') ] }
+    ];
+    const groups = defs.map(g => ({ name: g.name, items: g.items.map(it => ({ ...it, on: !st.off[it.id], toggle: () => this.setState({ off: { ...st.off, [it.id]: !st.off[it.id] } }) })) }));
+    const p = previews[st.i];
+    return { groups, preview: { title: p[0], body: p[1] }, idx: st.i + 1, n: previews.length, cycle: () => this.setState({ i: (st.i + 1) % previews.length }) };
+  }
+}
+</script>
+</body>
+</html>

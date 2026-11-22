@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Public · Mode plage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+  <div style="padding:16px 18px 8px;display:flex;flex-direction:column;gap:4px">
+    <span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:#4E6000">Mode plage · vous êtes sur la digue nord</span>
+    <h1 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:26px;line-height:1.1">Ce que vous voyez, et ce que vos yeux ne voient pas</h1>
+  </div>
+
+  <div role="group" aria-label="Orientation de la carte" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin:4px 18px 0;padding:4px;border-radius:14px;background:#EEF0E4">
+    <sc-for list="{{views}}" as="v" hint-placeholder-count="2">
+      <button type="button" onClick="{{v.go}}" aria-pressed="{{v.on}}" style="min-height:44px;border:0;border-radius:11px;background:{{v.bg}};font:600 13px 'Instrument Sans',sans-serif;cursor:pointer">{{v.label}}</button>
+    </sc-for>
+  </div>
+
+  <div style="flex:1;min-height:0;padding:10px 18px;display:flex;flex-direction:column;gap:10px">
+    <svg viewBox="0 0 354 250" role="img" aria-label="{{aria}}" style="width:100%;height:auto;border-radius:20px;background:#D6E6E0">
+      <sc-if value="{{beach}}" hint-placeholder-val="{{ true }}">
+        <rect x="0" y="0" width="354" height="70" fill="#EAF2EF"/>
+        <line x1="0" y1="70" x2="354" y2="70" stroke="#0E5A52" stroke-width="1.5"/>
+        <text x="10" y="60" style="font:500 10px 'JetBrains Mono',monospace" fill="#0E5A52">horizon · cap Brun à gauche</text>
+        <rect x="0" y="222" width="354" height="28" fill="#F0E9D4"/><text x="10" y="242" style="font:500 10px 'JetBrains Mono',monospace">vous · digue nord</text>
+        <circle cx="160" cy="86" r="5" fill="#D0704A" stroke="#11150D"/><text x="170" y="90" style="font:600 10px 'JetBrains Mono',monospace">bouée au vent</text>
+        <circle cx="140" cy="196" r="7" fill="#D0704A" stroke="#11150D"/><circle cx="196" cy="196" r="7" fill="#D0704A" stroke="#11150D"/>
+        <sc-for list="{{boats}}" as="b" hint-placeholder-count="7">
+          <g><path d="M{{b.bx}} {{b.by}} l{{b.half}} -{{b.h}} l{{b.half}} {{b.h}} z" fill="{{b.c}}" stroke="{{b.stroke}}" stroke-width="{{b.sw}}"/></g>
+        </sc-for>
+      </sc-if>
+      <sc-if value="{{top}}" hint-placeholder-val="{{ false }}">
+        <circle cx="177" cy="40" r="7" fill="#D0704A" stroke="#11150D"/>
+        <circle cx="150" cy="200" r="7" fill="#D0704A" stroke="#11150D"/><circle cx="204" cy="200" r="7" fill="#D0704A" stroke="#11150D"/>
+        <sc-for list="{{boats}}" as="b" hint-placeholder-count="7">
+          <circle cx="{{b.tx}}" cy="{{b.ty}}" r="{{b.r}}" fill="{{b.c}}" stroke="{{b.stroke}}" stroke-width="{{b.sw}}"/>
+        </sc-for>
+        <text x="10" y="242" style="font:500 10px 'JetBrains Mono',monospace">nord en haut</text>
+      </sc-if>
+    </svg>
+
+    <div role="group" aria-label="Choisir un bateau" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:2px">
+      <sc-for list="{{boats}}" as="b" hint-placeholder-count="7">
+        <button type="button" onClick="{{b.pick}}" aria-pressed="{{b.on}}" style="flex:none;display:flex;align-items:center;gap:6px;min-height:44px;padding:6px 12px;border-radius:99px;border:1px solid {{b.chipBorder}};background:#FFFFFF;font:600 13px 'Instrument Sans',sans-serif;cursor:pointer"><span style="width:12px;height:12px;border-radius:50%;background:{{b.c}}"></span>{{b.code}}</button>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:20px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+      <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">{{cur.name}}</b><span style="font:600 15px 'JetBrains Mono',monospace">{{cur.pos}}</span></div>
+      <span style="font-size:14px;line-height:1.4"><b style="font-weight:600">Pour le repérer :</b> {{cur.find}}</span>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;text-align:center">
+        <div style="padding:8px 4px;border-radius:12px;background:#EEF0E4"><b style="display:block;font:600 15px 'JetBrains Mono',monospace">{{cur.sog}}</b><span style="font-size:11px">vitesse</span></div>
+        <div style="padding:8px 4px;border-radius:12px;background:#EEF0E4"><b style="display:block;font:600 15px 'JetBrains Mono',monospace">{{cur.dist}}</b><span style="font-size:11px">de vous</span></div>
+        <div style="padding:8px 4px;border-radius:12px;background:#EEF0E4"><b style="display:block;font:600 15px 'JetBrains Mono',monospace">{{cur.next}}</b><span style="font-size:11px">prochaine bouée</span></div>
+      </div>
+    </div>
+
+    <div style="padding:12px 14px;border-radius:18px;background:#11150D;color:#F7F8F2;font-size:13px;line-height:1.5">
+      <b style="color:#C7EB00;font-weight:600">Invisible depuis la plage</b> · qui mène vraiment (les bateaux ne sont pas alignés) · les écarts en secondes · le vent qui tourne · pourquoi un bateau fait un tour sur lui-même (pénalité) · les décisions du comité · les rappels au départ
+    </div>
+    <a href="Public-Live.dc.html" style="display:flex;justify-content:center;align-items:center;gap:8px;min-height:48px;border-radius:14px;background:#C7EB00;color:#11150D;text-decoration:none;font-weight:600;font-size:15px">Écouter le commentaire en direct</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { view: 'beach', sel: 'SUI' }; }
+  renderVals() {
+    const st = this.state;
+    const defs = [
+      ['FRA','France','#C7EB00',150,100,8,168,56,'1er','voile jaune citron n° 7, juste sous la bouée au vent','3,1 nds','180 m','au vent'],
+      ['ITA','Italie','#43B3A3',176,104,8,196,64,'2e','coque turquoise, à droite de la France','2,8 nds','182 m','au vent'],
+      ['GBR','Grande-Bretagne','#B8902F',196,112,9,206,96,'3e','voile ocre n° 3','2,9 nds','170 m','au vent'],
+      ['NED','Pays-Bas','#E0B4E8',262,128,10,262,150,'4e','voile rose, isolé à droite','3,0 nds','150 m','au vent'],
+      ['SUI','Suisse','#D0704A',226,150,12,230,200,'5e','voile orange n° 5, le plus proche de la digue à droite','3,0 nds','95 m','au vent'],
+      ['MON','Monaco','#6E8BD6',112,146,12,110,190,'6e','voile bleue, à gauche, près de la côte','2,6 nds','100 m','au vent'],
+      ['GER','Allemagne','#2F3A22',86,170,13,86,226,'7e','voile noire, tout à gauche, le plus proche de vous','2,4 nds','70 m','au vent']
+    ];
+    const boats = defs.map(d => {
+      const on = st.sel === d[0];
+      return { code: d[0], c: d[2], bx: d[3], by: d[4], h: d[5] * 2, half: d[5] / 2, tx: d[6], ty: d[7], r: on ? 10 : 7,
+        stroke: on ? '#11150D' : 'rgba(9,11,7,.5)', sw: on ? 2.5 : 1, on: String(on), chipBorder: on ? '#11150D' : 'rgba(9,11,7,.15)',
+        pick: () => this.setState({ sel: d[0] }) };
+    });
+    const d = defs.find(x => x[0] === st.sel);
+    const cur = { name: d[1] + ' · ' + d[0], pos: d[8], find: d[9], sog: d[10], dist: d[11], next: d[12] };
+    const views = [['beach','Vue depuis la plage'],['top','Vue de dessus']].map(v => ({ label: v[1], on: String(st.view === v[0]), bg: st.view === v[0] ? '#FFFFFF' : 'transparent', go: () => this.setState({ view: v[0] }) }));
+    return { boats, cur, views, beach: st.view === 'beach', top: st.view === 'top',
+      aria: st.view === 'beach' ? 'Les bateaux dessinés comme on les voit depuis la digue, les plus proches en bas et plus grands' : 'Carte vue de dessus, nord en haut' };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Comité · Procédure de départ</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:1440px;height:960px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 28px;background:#11150D;color:#F7F8F2">
+    <div style="display:flex;align-items:center;gap:18px">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">AI Regatta <span style="color:#C7EB00">· Comité</span></b>
+      <nav aria-label="Écrans du comité" style="display:flex;gap:6px">
+        <a href="Comite-Depart.dc.html" style="padding:8px 14px;border-radius:99px;background:#C7EB00;color:#11150D;text-decoration:none;font-size:14px;font-weight:600">Départ</a>
+        <a href="Comite-Course.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Course et arbitrage</a>
+        <a href="Comite-Decisions.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Décisions</a>
+        <a href="Comite-Messages.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Messages <span style="padding:1px 7px;border-radius:99px;background:#D0704A;color:#11150D;font-size:12px;font-weight:600">2</span></a>
+      </nav>
+    </div>
+    <div style="display:flex;align-items:center;gap:22px;font:500 13px 'JetBrains Mono',monospace">
+      <span>Sam. 15 mai · Course 3</span>
+      <span>Heure GPS <b style="color:#C7EB00">14:02:13,4</b></span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#C7EB00"></span>Synchro 0,8 ms</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#C7EB00"></span>8/8 balises</span>
+      <span>Arbitre : C. Martin</span>
+    </div>
+  </header>
+
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 340px;gap:20px;padding:20px 28px;min-height:0">
+    <!-- Carte de la zone de départ -->
+    <section aria-label="Zone de départ" style="display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Ligne de départ</h2>
+        <span style="font:500 12px 'JetBrains Mono',monospace;color:rgba(9,11,7,.66)">vent 132° · 9,8 nds · bouée au vent</span>
+      </div>
+      <svg viewBox="0 0 560 420" role="img" aria-label="Carte de la ligne de départ avec la position des huit bateaux et la ligne prévue à la seconde du départ" style="width:100%;height:auto;border-radius:14px;background:#D6E6E0">
+        <defs><marker id="fl" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0E5A52"/></marker></defs>
+        <g stroke="rgba(14,90,82,.18)"><line x1="0" y1="105" x2="560" y2="105"/><line x1="0" y1="210" x2="560" y2="210"/><line x1="0" y1="315" x2="560" y2="315"/><line x1="140" y1="0" x2="140" y2="420"/><line x1="280" y1="0" x2="280" y2="420"/><line x1="420" y1="0" x2="420" y2="420"/></g>
+        <line x1="470" y1="40" x2="420" y2="92" stroke="#0E5A52" stroke-width="3" marker-end="url(#fl)"/>
+        <text x="478" y="36" style="font:500 12px 'JetBrains Mono',monospace" fill="#0E5A52">132° · 9,8 nds</text>
+        <line x1="120" y1="240" x2="440" y2="200" stroke="#11150D" stroke-width="2" stroke-dasharray="7 6"/>
+        <circle cx="120" cy="240" r="9" fill="#D0704A" stroke="#11150D" stroke-width="2"/><text x="96" y="268" style="font:600 12px 'JetBrains Mono',monospace">PIN</text>
+        <circle cx="440" cy="200" r="9" fill="#D0704A" stroke="#11150D" stroke-width="2"/><text x="430" y="228" style="font:600 12px 'JetBrains Mono',monospace">SB</text>
+        <text x="200" y="196" style="font:500 11px 'JetBrains Mono',monospace" fill="rgba(9,11,7,.7)">avantage côté SB : +6 m</text>
+        <sc-for list="{{boats}}" as="b" hint-placeholder-count="8">
+          <g>
+            <line x1="{{b.x}}" y1="{{b.y}}" x2="{{b.px}}" y2="{{b.py}}" stroke="{{b.c}}" stroke-width="1.5" stroke-dasharray="3 4"/>
+            <circle cx="{{b.x}}" cy="{{b.y}}" r="8" fill="{{b.c}}" stroke="#11150D" stroke-width="1.5"/>
+            <text x="{{b.lx}}" y="{{b.ly}}" style="font:600 11px 'JetBrains Mono',monospace">{{b.id}}</text>
+          </g>
+        </sc-for>
+        <text x="16" y="404" style="font:500 11px 'JetBrains Mono',monospace" fill="rgba(9,11,7,.7)">pointillés : position prévue à 0:00 si le bateau garde sa vitesse</text>
+      </svg>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;font-size:13px">
+        <div style="padding:10px 12px;border-radius:12px;background:#EEF0E4"><b style="display:block;font:600 18px 'JetBrains Mono',monospace">142 m</b>longueur de ligne</div>
+        <div style="padding:10px 12px;border-radius:12px;background:#EEF0E4"><b style="display:block;font:600 18px 'JetBrains Mono',monospace">3°</b>biais de la ligne</div>
+        <div style="padding:10px 12px;border-radius:12px;background:{{ocsBg}}"><b style="display:block;font:600 18px 'JetBrains Mono',monospace">{{ocsCount}}</b>bateau(x) au-delà prévu(s)</div>
+      </div>
+    </section>
+
+    <!-- Procédure -->
+    <section aria-label="Procédure de départ" style="display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Procédure</h2>
+        <span style="font:500 12px 'JetBrains Mono',monospace;color:rgba(9,11,7,.66)">départ prévu 14:05:00,0 GPS</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:18px;border-radius:18px;background:#11150D;color:#F7F8F2">
+        <span style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#C7EB00">{{phase}}</span>
+        <span style="font:600 88px/1 'JetBrains Mono',monospace;letter-spacing:-.04em">{{clock}}</span>
+        <span style="font-size:13px;color:rgba(247,248,242,.75)">même chrono chez les équipes, la régie et le public (calculé sur l’heure GPS)</span>
+      </div>
+      <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px">
+        <sc-for list="{{steps}}" as="s" hint-placeholder-count="4">
+          <li style="display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;background:{{s.bg}}">
+            <span style="font:600 14px 'JetBrains Mono',monospace">{{s.t}}</span>
+            <span><b style="font-weight:600">{{s.name}}</b><br><span style="font-size:13px;color:rgba(9,11,7,.7)">{{s.sig}}</span></span>
+            <span style="font:500 11px 'JetBrains Mono',monospace;padding:3px 8px;border-radius:99px;background:{{s.badgeBg}}">{{s.state}}</span>
+          </li>
+        </sc-for>
+      </ol>
+      <fieldset style="margin:0;padding:12px;border:1px solid rgba(9,11,7,.12);border-radius:14px">
+        <legend style="padding:0 6px;font-size:13px;font-weight:600">Pavillon préparatoire</legend>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <sc-for list="{{prep}}" as="p" hint-placeholder-count="5">
+            <button type="button" onClick="{{p.pick}}" aria-pressed="{{p.on}}" style="min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid rgba(9,11,7,.15);background:{{p.bg}};font:500 13px 'Instrument Sans',sans-serif;cursor:pointer">{{p.label}}</button>
+          </sc-for>
+        </div>
+        <p style="margin:8px 0 0;font-size:13px;color:rgba(9,11,7,.72)">{{prepHelp}}</p>
+      </fieldset>
+    </section>
+
+    <!-- Actions -->
+    <aside aria-label="Actions du comité" style="display:flex;flex-direction:column;gap:10px">
+      <button type="button" onClick="{{next}}" style="min-height:56px;padding:14px;border:0;border-radius:16px;background:#C7EB00;color:#11150D;font:600 16px 'Instrument Sans',sans-serif;cursor:pointer">{{nextLabel}}</button>
+      <sc-for list="{{actions}}" as="a" hint-placeholder-count="5">
+        <button type="button" onClick="{{a.go}}" style="display:flex;flex-direction:column;gap:3px;text-align:left;min-height:44px;padding:12px 14px;border-radius:14px;border:1px solid rgba(9,11,7,.14);background:{{a.bg}};color:#11150D;font:400 13px 'Instrument Sans',sans-serif;cursor:pointer">
+          <span style="display:flex;justify-content:space-between;gap:8px;width:100%"><b style="font-weight:600;font-size:15px">{{a.label}}</b><span style="font:500 11px 'JetBrains Mono',monospace;color:rgba(9,11,7,.66)">{{a.flag}}</span></span>
+          <span style="color:rgba(9,11,7,.72)">{{a.effect}}</span>
+        </button>
+      </sc-for>
+      <div style="margin-top:auto;padding:14px;border-radius:16px;background:#EEF0E4;font-size:13px;line-height:1.45">
+        <b style="display:block;font-weight:600;margin-bottom:4px">Dernière action</b>
+        <span>{{log}}</span>
+        <span style="display:block;margin-top:6px;font:500 11px 'JetBrains Mono',monospace;color:rgba(9,11,7,.66)">Journalisé, signé par l’arbitre, rejouable</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Flotte -->
+  <section aria-label="Flotte au départ" style="margin:0 28px 20px;padding:12px 18px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead><tr style="text-align:left;font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:rgba(9,11,7,.66)"><th style="padding:6px 8px">Bateau</th><th style="padding:6px 8px">Balise</th><th style="padding:6px 8px">Liaison</th><th style="padding:6px 8px">Batterie</th><th style="padding:6px 8px">Distance à la ligne</th><th style="padding:6px 8px">Vitesse</th><th style="padding:6px 8px">À 0:00</th></tr></thead>
+      <tbody>
+        <sc-for list="{{boats}}" as="b" hint-placeholder-count="8">
+          <tr style="border-top:1px solid rgba(9,11,7,.08)">
+            <td style="padding:7px 8px;font-weight:600"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:{{b.c}};margin-right:8px"></span>{{b.id}}</td>
+            <td style="padding:7px 8px;font-family:'JetBrains Mono',monospace">{{b.fix}}</td>
+            <td style="padding:7px 8px;font-family:'JetBrains Mono',monospace">{{b.path}}</td>
+            <td style="padding:7px 8px;font-family:'JetBrains Mono',monospace">{{b.bat}}</td>
+            <td style="padding:7px 8px;font-family:'JetBrains Mono',monospace">{{b.dist}}</td>
+            <td style="padding:7px 8px;font-family:'JetBrains Mono',monospace">{{b.sog}}</td>
+            <td style="padding:7px 8px"><span style="padding:2px 8px;border-radius:99px;background:{{b.predBg}};font-size:12px;font-weight:600">{{b.pred}}</span></td>
+          </tr>
+        </sc-for>
+      </tbody>
+    </table>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { step: 2, prep: 'P', log: '14:02:00,0 · Préparatoire, pavillon P, 1 son court (automatique)', recall: null }; }
+  renderVals() {
+    const st = this.state;
+    const raw = [
+      ['FRA-07','#C7EB00',230,214,252,198,'RTK fixe','4G','86 %','−18 m','2,4 nds','OK'],
+      ['ITA-12','#43B3A3',300,232,330,212,'RTK fixe','4G','81 %','−22 m','2,1 nds','OK'],
+      ['GBR-03','#B8902F',400,214,432,190,'RTK fixe','4G','90 %','−6 m','3,0 nds','Au-delà'],
+      ['ESP-21','#8FD18A',180,262,196,232,'RTK fixe','4G','77 %','−27 m','1,6 nds','OK'],
+      ['SUI-05','#D0704A',350,262,372,236,'RTK flottant','4G','69 %','−41 m','2,2 nds','OK'],
+      ['GER-09','#2F3A22',150,300,166,268,'RTK fixe','radio','72 %','−60 m','1,4 nds','En retard'],
+      ['MON-01','#6E8BD6',270,286,286,250,'RTK fixe','4G','88 %','−48 m','2,6 nds','OK'],
+      ['NED-14','#E0B4E8',420,250,446,222,'RTK fixe','4G','93 %','−30 m','2,8 nds','Juste']
+    ];
+    const boats = raw.map(r => ({ id:r[0], c:r[1], x:r[2], y:r[3], px:r[4], py:r[5], lx:r[2]+11, ly:r[3]+4, fix:r[6], path:r[7], bat:r[8], dist:r[9], sog:r[10], pred:r[11],
+      predBg: r[11]==='Au-delà' ? '#F6DDCF' : r[11]==='OK' ? 'rgba(199,235,0,.25)' : '#EEF0E4' }));
+    const ocsCount = boats.filter(b => b.pred === 'Au-delà').length;
+    const names = [
+      ['−5:00','Avertissement','Pavillon de série hissé · 1 son court'],
+      ['−4:00','Préparatoire','Pavillon ' + st.prep + ' hissé · 1 son court'],
+      ['−1:00','Une minute','Pavillon ' + st.prep + ' affalé · 1 son long'],
+      ['0:00','Départ','Pavillon de série affalé · 1 son court']
+    ];
+    const steps = names.map((n, i) => {
+      const s = i + 1; const state = st.step > s ? 'FAIT' : st.step === s ? 'EN COURS' : 'À VENIR';
+      return { t:n[0], name:n[1], sig:n[2], state, bg: st.step === s ? 'rgba(199,235,0,.18)' : '#F7F8F2', badgeBg: state === 'FAIT' ? '#C7EB00' : state === 'EN COURS' ? '#11150D;color:#C7EB00' : '#EEF0E4' };
+    });
+    const clocks = ['−5:00,0','−4:46,6','−1:46,6','−0:46,6','+0:13,4'];
+    const phases = ['Avant l’avertissement','Avertissement','Préparatoire','Une minute','Course lancée'];
+    const prepDefs = [
+      ['P','P · simple','Pas de pénalité particulière : un bateau au-delà de la ligne doit revenir la couper.'],
+      ['I','I · règle 30.1','Dans la dernière minute, un bateau au-delà doit revenir par une extrémité de la ligne.'],
+      ['Z','Z · 20 %','Dans la dernière minute, un bateau dans le triangle ligne / bouée au vent reçoit 20 % de pénalité au score.'],
+      ['U','U · règle 30.3','Dans la dernière minute, un bateau dans le triangle est disqualifié, sauf si la course est recourue.'],
+      ['Noir','Noir · BFD','Dans la dernière minute, un bateau dans le triangle est disqualifié, même si la course est recourue.']
+    ];
+    const prep = prepDefs.map(p => ({ label:p[1], on: String(st.prep === p[0]), bg: st.prep === p[0] ? '#C7EB00' : '#FFFFFF', pick: () => this.setState({ prep: p[0], log: 'Pavillon préparatoire choisi : ' + p[1] }) }));
+    const prepHelp = prepDefs.find(p => p[0] === st.prep)[2] + ' Le choix part aux équipes et au public avec l’explication.';
+    const nextLabels = ['Lancer la procédure (avertissement)','Passer au préparatoire','Passer à une minute','Donner le départ','Procédure terminée'];
+    const act = (label, flag, effect, log, bg) => ({ label, flag, effect, bg: bg || '#FFFFFF', go: () => this.setState({ log }) });
+    const actions = [
+      act('Rappel individuel', 'X · 1 son', 'GBR-03 détecté au-delà. Les équipes reçoivent le nom ; le public voit « GBR-03 doit revenir ».', '14:05:00,6 · Rappel individuel X pour GBR-03 · envoyé aux équipes, à la corne et au public', ocsCount ? '#F6DDCF' : '#FFFFFF'),
+      act('Rappel général', '1er substitut · 2 sons', 'Tous reviennent. Nouvelle procédure 1 min après l’affalé.', 'Rappel général · nouvelle procédure programmée'),
+      act('Retarder (report)', 'Aperçu · 2 sons', 'Tous les chronos s’arrêtent. Reprise : 1 min après l’affalé.', 'Report signalé · chronos arrêtés chez tous'),
+      act('Annuler la course', 'N · 3 sons', 'La course est annulée, retour à la zone d’attente.', 'Annulation signalée · 3 sons'),
+      act('Corne à la main', 'secours', 'Si la corne automatique ne répond pas, le temps vient du pavillon (règle 26).', 'Son manuel déclenché, temps pris sur le pavillon')
+    ];
+    return { boats, ocsCount, ocsBg: ocsCount ? '#F6DDCF' : '#EEF0E4', steps, prep, prepHelp, actions,
+      clock: clocks[st.step], phase: phases[st.step], log: st.log,
+      nextLabel: nextLabels[st.step],
+      next: () => this.setState({ step: Math.min(4, st.step + 1), log: 'Étape suivante · signal sonore automatique (relais Shelly) · message « clock » conservé envoyé à tous' }) };
+  }
+}
+</script>
+</body>
+</html>

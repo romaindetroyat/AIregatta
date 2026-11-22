@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Comité · Course et arbitrage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:1440px;height:960px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 28px;background:#11150D;color:#F7F8F2">
+    <div style="display:flex;align-items:center;gap:18px">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">AI Regatta <span style="color:#C7EB00">· Comité</span></b>
+      <nav aria-label="Écrans du comité" style="display:flex;gap:6px">
+        <a href="Comite-Depart.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Départ</a>
+        <a href="Comite-Course.dc.html" style="padding:8px 14px;border-radius:99px;background:#C7EB00;color:#11150D;text-decoration:none;font-size:14px;font-weight:600">Course et arbitrage</a>
+        <a href="Comite-Decisions.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Décisions</a>
+        <a href="Comite-Messages.dc.html" style="padding:8px 14px;border-radius:99px;color:#F7F8F2;text-decoration:none;font-size:14px">Messages <span style="padding:1px 7px;border-radius:99px;background:#D0704A;color:#11150D;font-size:12px;font-weight:600">2</span></a>
+      </nav>
+    </div>
+    <div style="display:flex;align-items:center;gap:22px;font:500 13px 'JetBrains Mono',monospace">
+      <span>Course 3 · tour 1/2</span>
+      <span>Chrono <b style="color:#C7EB00">+03:41,2</b></span>
+      <span>Vent 128° · 10,4 nds · rafale 12,9</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#C7EB00"></span>8/8 balises</span>
+    </div>
+  </header>
+
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) 300px;gap:20px;padding:20px 28px;min-height:0">
+    <!-- Carte du parcours -->
+    <section aria-label="Parcours" style="display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Parcours</h2><span style="font:500 12px 'JetBrains Mono',monospace;color:rgba(9,11,7,.66)">≈ 200 m (à valider) · zone balisée</span></div>
+      <svg viewBox="0 0 420 560" role="img" aria-label="Parcours avec bouée au vent, porte 1-2 de départ et d’arrivée, traces des bateaux et zone de l’incident sélectionné" style="width:100%;height:auto;border-radius:14px;background:#D6E6E0">
+        <path d="M30 40 L390 40 L390 520 L30 520 Z" fill="none" stroke="#0E5A52" stroke-dasharray="4 6" stroke-width="1.5"/>
+        <text x="36" y="34" style="font:500 11px 'JetBrains Mono',monospace" fill="#0E5A52">limite de zone</text>
+        <circle cx="210" cy="90" r="34" fill="none" stroke="rgba(9,11,7,.35)" stroke-dasharray="3 4"/>
+        <circle cx="210" cy="90" r="9" fill="#D0704A" stroke="#11150D" stroke-width="2"/><text x="226" y="80" style="font:600 12px 'JetBrains Mono',monospace">B3 · 10,4 nds</text>
+        <circle cx="180" cy="440" r="8" fill="#D0704A" stroke="#11150D" stroke-width="2"/><circle cx="240" cy="440" r="8" fill="#D0704A" stroke="#11150D" stroke-width="2"/><text x="252" y="444" style="font:600 12px 'JetBrains Mono',monospace">porte 1-2</text>
+        <line x1="110" y1="490" x2="320" y2="470" stroke="#11150D" stroke-dasharray="6 5" stroke-width="1.5"/><text x="120" y="510" style="font:500 11px 'JetBrains Mono',monospace">ligne départ / arrivée</text>
+        <path d="M200 470 C150 400 120 300 170 230 C200 180 190 130 200 104" fill="none" stroke="#C7EB00" stroke-width="2.5"/>
+        <path d="M260 466 C300 380 310 290 260 210 C240 170 230 130 222 106" fill="none" stroke="#43B3A3" stroke-width="2.5"/>
+        <path d="M150 480 C120 400 140 320 210 250 C240 220 250 170 238 128" fill="none" stroke="#B8902F" stroke-width="2"/>
+        <circle cx="200" cy="104" r="8" fill="#C7EB00" stroke="#11150D" stroke-width="1.5"/><text x="140" y="112" style="font:600 11px 'JetBrains Mono',monospace">FRA-07</text>
+        <circle cx="222" cy="108" r="8" fill="#43B3A3" stroke="#11150D" stroke-width="1.5"/><text x="234" y="122" style="font:600 11px 'JetBrains Mono',monospace">ITA-12</text>
+        <circle cx="238" cy="128" r="7" fill="#B8902F" stroke="#11150D" stroke-width="1.5"/>
+        <circle cx="300" cy="300" r="7" fill="#D0704A" stroke="#11150D" stroke-width="1.5"/><text x="312" y="304" style="font:600 11px 'JetBrains Mono',monospace">SUI-05</text>
+        <circle cx="130" cy="330" r="7" fill="#2F3A22" stroke="#11150D" stroke-width="1.5"/>
+        <circle cx="352" cy="200" r="7" fill="#E0B4E8" stroke="#11150D" stroke-width="1.5"/><text x="300" y="186" style="font:600 11px 'JetBrains Mono',monospace">NED-14</text>
+        <rect x="{{zone.x}}" y="{{zone.y}}" width="{{zone.w}}" height="{{zone.h}}" rx="12" fill="none" stroke="#D0704A" stroke-width="2.5"/>
+      </svg>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{courseActs}}" as="c" hint-placeholder-count="5">
+          <button type="button" onClick="{{c.go}}" style="min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid rgba(9,11,7,.15);background:#FFFFFF;font:500 13px 'Instrument Sans',sans-serif;cursor:pointer">{{c.label}} <span style="font:500 11px 'JetBrains Mono',monospace;color:rgba(9,11,7,.62)">{{c.flag}}</span></button>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- Incident -->
+    <section aria-label="Incident sélectionné" style="display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <div><span style="font:500 12px 'JetBrains Mono',monospace;color:#9A3D16;text-transform:uppercase;letter-spacing:.08em">{{inc.kind}} · {{inc.t}}</span><h2 style="margin:2px 0 0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:24px">{{inc.title}}</h2></div>
+        <span style="padding:4px 10px;border-radius:99px;background:#EEF0E4;font:500 12px 'JetBrains Mono',monospace">confiance {{inc.conf}}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:14px">
+        <svg viewBox="0 0 360 250" role="img" aria-label="Rejeu vu de dessus des deux bateaux impliqués" style="width:100%;height:auto;border-radius:14px;background:#D6E6E0">
+          <circle cx="180" cy="70" r="8" fill="#D0704A" stroke="#11150D" stroke-width="2"/>
+          <circle cx="180" cy="70" r="60" fill="none" stroke="rgba(9,11,7,.35)" stroke-dasharray="3 4"/><text x="246" y="40" style="font:500 10px 'JetBrains Mono',monospace" fill="rgba(9,11,7,.7)">zone 3 longueurs</text>
+          <path d="M70 230 C100 180 130 140 168 96" fill="none" stroke="#C7EB00" stroke-width="2" stroke-dasharray="4 4"/>
+          <path d="M290 230 C260 180 230 140 196 98" fill="none" stroke="#43B3A3" stroke-width="2" stroke-dasharray="4 4"/>
+          <g transform="translate({{rp.ax}} {{rp.ay}}) rotate(40)"><path d="M0 -14 L6 8 L-6 8 Z" fill="#C7EB00" stroke="#11150D" stroke-width="1.5"/></g>
+          <g transform="translate({{rp.bx}} {{rp.by}}) rotate(-40)"><path d="M0 -14 L6 8 L-6 8 Z" fill="#43B3A3" stroke="#11150D" stroke-width="1.5"/></g>
+          <line x1="{{rp.ax}}" y1="{{rp.ay}}" x2="{{rp.bx}}" y2="{{rp.by}}" stroke="#9A3D16" stroke-width="1.5"/>
+          <text x="12" y="20" style="font:600 12px 'JetBrains Mono',monospace">{{rp.label}}</text>
+          <text x="12" y="240" style="font:500 10px 'JetBrains Mono',monospace" fill="rgba(9,11,7,.7)">FRA-07 tribord · ITA-12 bâbord</text>
+        </svg>
+        <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 10px;font-size:13px;align-content:start">
+          <dt style="color:rgba(9,11,7,.66)">Écart mini</dt><dd style="margin:0;font-family:'JetBrains Mono',monospace;font-weight:600">{{rp.gap}}</dd>
+          <dt style="color:rgba(9,11,7,.66)">FRA-07</dt><dd style="margin:0;font-family:'JetBrains Mono',monospace">3,1 nds · cap 312°</dd>
+          <dt style="color:rgba(9,11,7,.66)">ITA-12</dt><dd style="margin:0;font-family:'JetBrains Mono',monospace">2,8 nds · cap 048°</dd>
+          <dt style="color:rgba(9,11,7,.66)">Priorité</dt><dd style="margin:0">FRA-07 (tribord)</dd>
+          <dt style="color:rgba(9,11,7,.66)">Précision</dt><dd style="margin:0;font-family:'JetBrains Mono',monospace">± 2 cm (RTK)</dd>
+          <dt style="color:rgba(9,11,7,.66)">Vidéo</dt><dd style="margin:0">caméra digue, même instant</dd>
+        </dl>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <sc-for list="{{scrub}}" as="s" hint-placeholder-count="4">
+          <button type="button" onClick="{{s.go}}" aria-pressed="{{s.on}}" style="min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid rgba(9,11,7,.15);background:{{s.bg}};font:500 13px 'JetBrains Mono',monospace;cursor:pointer">{{s.label}}</button>
+        </sc-for>
+        <span style="font-size:12px;color:rgba(9,11,7,.66)">rejeu instantané, positions officielles</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+        <sc-for list="{{verdicts}}" as="v" hint-placeholder-count="4">
+          <button type="button" onClick="{{v.go}}" aria-pressed="{{v.on}}" style="display:flex;flex-direction:column;gap:2px;text-align:left;min-height:56px;padding:10px 12px;border-radius:14px;border:1px solid rgba(9,11,7,.14);background:{{v.bg}};font:400 12px 'Instrument Sans',sans-serif;cursor:pointer"><b style="font-size:14px;font-weight:600">{{v.label}}</b><span style="color:rgba(9,11,7,.72)">{{v.sub}}</span></button>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;font-size:13px">
+        <div style="padding:10px 12px;border-radius:12px;background:#EEF0E4"><b style="display:block;font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:rgba(9,11,7,.66);margin-bottom:4px">Envoyé aux équipes</b>{{teamMsg}}</div>
+        <div style="padding:10px 12px;border-radius:12px;background:rgba(199,235,0,.18)"><b style="display:block;font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:rgba(9,11,7,.66);margin-bottom:4px">Vu par le public (1 s plus tard)</b>{{publicMsg}}</div>
+      </div>
+    </section>
+
+    <!-- Alertes + classement -->
+    <aside aria-label="Alertes et classement" style="display:flex;flex-direction:column;gap:10px;min-height:0">
+      <h2 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">Alertes du moteur de course</h2>
+      <sc-for list="{{alerts}}" as="a" hint-placeholder-count="4">
+        <button type="button" onClick="{{a.go}}" aria-pressed="{{a.on}}" style="display:flex;flex-direction:column;gap:2px;text-align:left;min-height:44px;padding:10px 12px;border-radius:14px;border:1px solid {{a.border}};background:{{a.bg}};font:400 12px 'Instrument Sans',sans-serif;cursor:pointer">
+          <span style="display:flex;justify-content:space-between;width:100%;font:500 11px 'JetBrains Mono',monospace;color:rgba(9,11,7,.66)"><span>{{a.kind}}</span><span>{{a.t}}</span></span>
+          <b style="font-size:14px;font-weight:600">{{a.title}}</b>
+        </button>
+      </sc-for>
+      <h2 style="margin:8px 0 0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">Classement provisoire</h2>
+      <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-size:13px">
+        <sc-for list="{{rank}}" as="r" hint-placeholder-count="6">
+          <li style="display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;padding:6px 10px;border-radius:10px;background:#FFFFFF"><span style="font-family:'JetBrains Mono',monospace;font-weight:600">{{r.p}}</span><span>{{r.id}}</span><span style="font-family:'JetBrains Mono',monospace;color:rgba(9,11,7,.7)">{{r.gap}}</span></li>
+        </sc-for>
+      </ol>
+    </aside>
+  </div>
+  <footer style="margin:0 28px 18px;padding:10px 16px;border-radius:16px;background:#11150D;color:#F7F8F2;font:500 12px 'JetBrains Mono',monospace;display:flex;gap:18px;overflow:hidden;white-space:nowrap">
+    <span style="color:#C7EB00">Journal</span><span>{{log}}</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { sel: 0, frame: 2, verdict: null, log: '+03:38,0 · FRA-07 passe la bouée 3 (1er) · +03:39,4 ITA-12 passe la bouée 3 (2e)' }; }
+  renderVals() {
+    const st = this.state;
+    const incidents = [
+      { kind: 'Contact possible', t: '+03:36,8', title: 'FRA-07 / ITA-12 à la bouée au vent', conf: '82 %', zone: { x: 160, y: 60, w: 110, h: 80 }, boats: ['ITA-12', 'FRA-07'] },
+      { kind: 'Sortie de zone', t: '+02:51,0', title: 'NED-14 franchit la limite est', conf: '99 %', zone: { x: 330, y: 170, w: 70, h: 60 }, boats: ['NED-14', null] },
+      { kind: 'Bouée touchée ?', t: '+03:40,1', title: 'GBR-03 très près de la bouée 3', conf: '41 %', zone: { x: 200, y: 80, w: 70, h: 70 }, boats: ['GBR-03', null] },
+      { kind: 'Liaison', t: '+01:12,5', title: 'GER-09 passe sur la radio de secours', conf: 'info', zone: { x: 100, y: 300, w: 70, h: 60 }, boats: ['GER-09', null] }
+    ];
+    const inc = incidents[st.sel];
+    const alerts = incidents.map((a, i) => ({ ...a, on: String(st.sel === i), bg: st.sel === i ? 'rgba(199,235,0,.18)' : '#FFFFFF', border: i < 2 ? '#D0704A' : 'rgba(9,11,7,.14)', go: () => this.setState({ sel: i, verdict: null }) }));
+    const frames = [
+      { label: '−3 s', ax: 112, ay: 176, bx: 252, by: 180, gap: '1,9 m' },
+      { label: '−2 s', ax: 132, ay: 146, bx: 230, by: 148, gap: '0,8 m' },
+      { label: '−1 s', ax: 152, ay: 118, bx: 206, by: 120, gap: '0,24 m' },
+      { label: '0 s', ax: 168, ay: 98, bx: 194, by: 99, gap: '0,04 m' }
+    ];
+    const rp = frames[st.frame];
+    const scrub = frames.map((f, i) => ({ label: f.label, on: String(st.frame === i), bg: st.frame === i ? '#C7EB00' : '#FFFFFF', go: () => this.setState({ frame: i }) }));
+    const who = inc.boats[0];
+    const vdefs = [
+      ['none', 'Pas de suite', 'L’alerte est classée, raison obligatoire', 'Incident ' + inc.t + ' classé sans suite.', 'Rien n’est affiché.'],
+      ['pen', 'Pénalité à effectuer', who + ' : un tour par P1-P2 avant l’arrivée (§ 7)', who + ' : pénalité, un tour par P1 puis P2 avant de franchir l’arrivée.', who + ' pénalisé : n’a pas laissé la place. Il doit faire un tour de pénalité avant l’arrivée.'],
+      ['dsq', 'Disqualifier (DSQ)', 'Faute grave ou bouée mal passée (§ 7)', who + ' : disqualifié de la course (DSQ).', who + ' disqualifié.'],
+      ['jury', 'Renvoyer au jury', 'Décision après la course, avec audition', 'Incident ' + inc.t + ' renvoyé au jury. Audition après la course.', 'Incident à l’étude par le jury.']
+    ];
+    const verdicts = vdefs.map(v => ({ label: v[1], sub: v[2], on: String(st.verdict === v[0]), bg: st.verdict === v[0] ? '#C7EB00' : '#FFFFFF',
+      go: () => this.setState({ verdict: v[0], log: inc.t + ' · ' + v[1] + ' (' + who + ') · décision signée C. Martin · envoyée aux équipes et au public' }) }));
+    const cur = vdefs.find(v => v[0] === st.verdict);
+    const ca = (label, flag, log) => ({ label, flag, go: () => this.setState({ log }) });
+    const courseActs = [
+      ca('Déplacer une bouée', 'C', 'Changement de parcours : bouée 3 déplacée à 125°, annonce C + son répété · nouveau parcours envoyé'),
+      ca('Réduire le parcours', 'S', 'Parcours réduit : arrivée à la porte 1-2 · S + 2 sons'),
+      ca('Annuler la course', 'N', 'Course annulée · N + 3 sons'),
+      ca('Arrêt sécurité', 'N sur H', 'Arrêt de sécurité · bateaux d’assistance sur l’eau'),
+      ca('Temps limite', '15 min', 'Temps limite rappelé aux équipes : 15 min après le premier')
+    ];
+    const rank = [['1','FRA-07','—'],['2','ITA-12','+1,4 s'],['3','GBR-03','+2,9 s'],['4','NED-14','+6,0 s'],['5','SUI-05','+9,8 s'],['6','MON-01','+12 s']].map(r => ({ p: r[0], id: r[1], gap: r[2] }));
+    return { inc, zone: inc.zone, alerts, rp, scrub, verdicts, courseActs, rank, log: st.log,
+      teamMsg: cur ? cur[3] : 'Rien n’est encore envoyé : l’arbitre doit trancher.',
+      publicMsg: cur ? cur[4] : 'Le public voit seulement « incident en cours d’examen » sur les deux bateaux.' };
+  }
+}
+</script>
+</body>
+</html>

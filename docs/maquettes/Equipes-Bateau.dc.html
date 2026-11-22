@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Équipes · Liaison avec le bateau</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4E6000}a:hover{color:#11150D}
+</style>
+</helmet>
+<div style="width:1440px;height:960px;box-sizing:border-box;background:#F7F8F2;color:#11150D;font-family:'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 28px;background:#FFFFFF;box-shadow:0 1px 0 rgba(9,11,7,.08)">
+    <div style="display:flex;align-items:center;gap:18px">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:20px">AI Regatta <span style="color:#4E6000">· Espace équipes</span></b>
+      <nav aria-label="Espace équipes" style="display:flex;gap:6px">
+        <a href="Equipes-Kit.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Le kit</a>
+        <a href="Equipes-Flux.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Explorateur de flux</a>
+        <a href="Equipes-Console.dc.html" style="padding:8px 14px;border-radius:99px;color:#11150D;text-decoration:none;font-size:14px">Exemple de console</a>
+        <a href="Equipes-Bateau.dc.html" style="padding:8px 14px;border-radius:99px;background:#11150D;color:#F7F8F2;text-decoration:none;font-size:14px;font-weight:600">Liaison bateau</a>
+      </nav>
+    </div>
+    <span style="font:500 13px 'JetBrains Mono',monospace;color:rgba(9,11,7,.7)">docs/equipes/liaison-bateau.md</span>
+  </header>
+
+  <div style="padding:20px 28px 0;display:flex;flex-direction:column;gap:14px">
+    <h1 style="margin:0;font-family:'Funnel Display',sans-serif;font-weight:500;font-size:38px;letter-spacing:-.02em">Deux chaînes qui ne se touchent jamais</h1>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+      <div style="display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:20px;background:rgba(208,112,74,.1);box-shadow:inset 0 0 0 1px rgba(208,112,74,.35)">
+        <b style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;color:#9A3D16">Chaîne de l’équipe · à sa charge</b>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px">
+          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">PC tactique à terre</span><span aria-hidden="true">→</span>
+          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">émetteur ({{medium.short}})</span><span aria-hidden="true">→</span>
+          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">récepteur à bord</span><span aria-hidden="true">→</span>
+          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">pilote automatique</span><span aria-hidden="true">→</span>
+          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">safran, voiles</span>
+        </div>
+        <span style="font-size:12px;color:rgba(9,11,7,.7)">+ radiocommande de sécurité 2,4 GHz (ExpressLRS) : conseillée ; obligatoire ou non, à trancher (P16 ne l’impose pas)</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:20px;background:rgba(199,235,0,.16);box-shadow:inset 0 0 0 1px rgba(78,96,0,.25)">
+        <b style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;color:#4E6000">Chaîne officielle · scellée</b>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px">
+          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">balise officielle (GPS RTK)</span><span aria-hidden="true">→</span>
+          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">4G (radio 868 en secours)</span><span aria-hidden="true">→</span>
+          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">PC course</span><span aria-hidden="true">→</span>
+          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">toutes les équipes</span>
+        </div>
+        <span style="font-size:12px;color:rgba(9,11,7,.7)">Aucun fil, aucune donnée entre la balise et l’électronique de l’équipe</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex:1;display:grid;grid-template-columns:400px minmax(0,1fr) 380px;gap:20px;padding:16px 28px 20px;min-height:0">
+    <section aria-label="Support de la liaison" style="display:flex;flex-direction:column;gap:8px">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Par quel moyen ?</b>
+      <sc-for list="{{media}}" as="m" hint-placeholder-count="4">
+        <button type="button" onClick="{{m.go}}" aria-pressed="{{m.on}}" style="display:flex;flex-direction:column;gap:2px;text-align:left;min-height:56px;padding:10px 14px;border-radius:14px;border:1px solid {{m.border}};background:{{m.bg}};cursor:pointer;font:400 12px 'Instrument Sans',sans-serif">
+          <span style="display:flex;justify-content:space-between;width:100%"><b style="font-size:15px;font-weight:600">{{m.name}}</b><span style="font:500 11px 'JetBrains Mono',monospace;color:rgba(9,11,7,.66)">{{m.band}}</span></span>
+          <span style="color:rgba(9,11,7,.72)">{{m.short}}</span>
+        </button>
+      </sc-for>
+      <div style="padding:12px 14px;border-radius:16px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08);font-size:13px;line-height:1.5">
+        <b style="font-weight:600">{{medium.name}}</b> · {{medium.detail}}
+      </div>
+      <div style="padding:10px 14px;border-radius:14px;background:#F6DDCF;color:#5C2108;font-size:13px;line-height:1.45"><b style="font-weight:600">Interdit :</b> 869,4–869,65 MHz, réservé à la radio de secours des balises officielles.</div>
+    </section>
+
+    <section aria-label="Ce que l’équipe peut transmettre" style="display:flex;flex-direction:column;gap:8px;min-height:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Que peut-on transmettre au bateau ?</b><span style="font:500 12px 'JetBrains Mono',monospace;color:rgba(9,11,7,.66)">{{todoCount}} points à trancher</span></div>
+      <sc-for list="{{rules}}" as="r" hint-placeholder-count="6">
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 14px;border-radius:14px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
+          <span style="display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:1.4"><b style="font-size:14px;font-weight:600">{{r.name}}</b><span style="color:rgba(9,11,7,.72)">{{r.why}}</span></span>
+          <span style="display:flex;gap:4px">
+            <sc-for list="{{r.opts}}" as="o" hint-placeholder-count="2">
+              <button type="button" onClick="{{o.go}}" aria-pressed="{{o.on}}" style="min-height:44px;padding:6px 12px;border-radius:10px;border:1px solid rgba(9,11,7,.15);background:{{o.bg}};color:{{o.fg}};font:600 12px 'Instrument Sans',sans-serif;cursor:pointer">{{o.label}}</button>
+            </sc-for>
+          </span>
+        </div>
+      </sc-for>
+      <span style="font-size:12px;color:rgba(9,11,7,.66)">Les choix pré-sélectionnés sont nos recommandations. « Acté » vient des postulats P09, P10 et P36.</span>
+    </section>
+
+    <section aria-label="Format d’un ordre" style="display:flex;flex-direction:column;gap:10px;min-height:0">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Un ordre, proposé</b>
+      <pre style="margin:0;padding:14px;border-radius:16px;background:#11150D;color:#E9F5B0;font:400 12px/1.55 'JetBrains Mono',monospace;white-space:pre;overflow:auto">{{orderJson}}</pre>
+      <div style="padding:12px 14px;border-radius:16px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08);font-size:13px;line-height:1.5">
+        <b style="font-weight:600">Format libre.</b> MAVLink (ArduPilot Rover, mode voilier) ou JSON/CBOR maison : c’est l’équipe qui choisit. Nous conseillons l’accusé de réception et le compte rendu d’exécution.
+      </div>
+      <div style="padding:12px 14px;border-radius:16px;background:#11150D;color:#F7F8F2;font-size:13px;line-height:1.5">
+        <b style="color:#C7EB00;font-weight:600">Perte de liaison : à déclarer</b><br>Chaque équipe décrit ce que fait son bateau sans ordre (garder le mode, lofer, s’arrêter) et le prouve à l’essai. Le bateau reste suivi et classé par sa balise.
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { m: 'r433', ch: { params: 'oui', relay: 'oui', direct: 'oui', ota: 'non' } }; }
+  renderVals() {
+    const st = this.state;
+    const M = (id, name, band, short, detail) => ({ id, name, band, short, detail });
+    const defs = [
+      M('r433', 'Radio de télémétrie', '433 MHz', 'SiK / RFD900x, portée large, débit faible', 'Le choix conseillé : 150 m au plus, liaison directe, latence 30 à 80 ms, insensible à la foule. Puissance plafonnée, canal déclaré à l’inscription.'),
+      M('r868', 'Radio 868 MHz', '863–869,2 MHz', 'LoRa ou FSK, hors sous-bande réservée', 'Possible hors 869,4–869,65 MHz. Attention au rapport cyclique imposé dans cette bande : limite le nombre d’ordres par minute.'),
+      M('g4', 'Réseau 4G', 'opérateur', 'routeur ou modem à bord, serveur de l’équipe', 'Simple à installer, mais latence variable (50 à 300 ms) et réseau chargé par la foule. Prévoir un secours radio.'),
+      M('wifi', 'Wi-Fi', '2,4 / 5 GHz', 'à éviter en course', 'Bande encombrée (public, caméras, Wi-Fi local de l’organisation sur 5 GHz). Toléré pour les réglages à terre.')
+    ];
+    const media = defs.map(m => ({ ...m, on: String(st.m === m.id), bg: st.m === m.id ? 'rgba(199,235,0,.2)' : '#FFFFFF', border: st.m === m.id ? '#11150D' : 'rgba(9,11,7,.12)', go: () => this.setState({ m: m.id }) }));
+    const medium = defs.find(m => m.id === st.m);
+    const R = (id, name, why, fixed) => ({ id, name, why, fixed });
+    const rdefs = [
+      R('orders', 'Les ordres tactiques', 'Manœuvres : vire, empanne, abats (bouée au vent passée), loffe (bouée sous le vent passée), face au vent. Modes : près, portant, VMG, haut, bas. Le pilote automatique exécute.', 'Acté'),
+      R('params', 'Paramètres d’un ordre', 'Par exemple l’angle au vent visé pour le mode haut. Sans eux, les modes sont très rigides.'),
+      R('relay', 'Relayer les données officielles', 'Envoyer au bateau la position des autres et le vent. Égal pour tous, puisque tout le monde reçoit le même flux.'),
+      R('direct', 'Barre à distance par l’IA', 'L’IA à terre commande directement safran et voiles, sans intervention humaine. Un humain au joystick reste exclu en course, sauf sécurité.'),
+      R('ota', 'Changer le logiciel du bateau en course', 'Mise à jour à distance pendant une manche. Entre deux courses : autorisé.'),
+      R('telem', 'Télémétrie du bateau vers l’équipe', 'Capteurs de l’équipe : angle de safran, batterie, vent apparent. Reste chez l’équipe.', 'Autorisé')
+    ];
+    const rules = rdefs.map(r => {
+      if (r.fixed) return { ...r, opts: [ { label: r.fixed, on: 'true', bg: '#C7EB00', fg: '#11150D', go: () => {} } ] };
+      const v = st.ch[r.id];
+      return { ...r, opts: ['oui','non'].map(o => ({ label: o === 'oui' ? 'Autoriser' : 'Interdire', on: String(v === o),
+        bg: v === o ? (o === 'oui' ? '#C7EB00' : '#11150D') : '#FFFFFF', fg: v === o && o === 'non' ? '#F7F8F2' : '#11150D',
+        go: () => this.setState({ ch: { ...st.ch, [r.id]: o } }) })) };
+    });
+    const order = { team: 'sui05', seq: 214, t_gps_ms: 1494337559800, order: 'mode_haut' };
+    if (st.ch.params === 'oui') order.params = { target_twa: 38 };
+    order.ack_required = true;
+    return { media, medium, rules, todoCount: rdefs.filter(r => !r.fixed).length, orderJson: JSON.stringify(order, null, 2) };
+  }
+}
+</script>
+</body>
+</html>
