@@ -4,7 +4,7 @@ Système de suivi, d'arbitrage, d'analyse du vent et de diffusion publique pour 
 
 ## Documents
 
-- [Étude préalable](docs/etude-prealable.md) : le texte de référence, rédigé (22 novembre 2026) : ce que fixe le règlement de l’organisateur, les deux niveaux du dispositif, comment ça marche, le coût, le calendrier, les chances de réussite et ce qu’il reste à décider. C’est aussi la page d’accueil du document général ; les autres onglets en sont les annexes.
+- [Étude préalable](docs/etude-prealable.md) : le texte de référence, rédigé et court (22 novembre 2026) : le règlement de l’organisateur, notre proposition en deux niveaux, le coût et le calendrier, les chances de réussite, ce qu’il reste à décider. C’est la page d’accueil du document général, suivie de 5 annexes repliées (Règlement, Dispositif, Technique, Projet, Équipes) ; le reste est rangé dans une page « Archives », hors du menu.
 - [Présentation interactive](docs/dispositif.html) : plan d'eau animé, liaisons, état d'avancement, coûts ajustables, feuille de route, questions.
 - [Matériel et communications](docs/architecture-materiel-communications.md) : entités, liaisons entre elles, références de matériel, conception radio, réseau à terre, formats de messages, modes dégradés, nomenclature chiffrée.
 - [Liaisons et logiciel](docs/liaisons-et-logiciel.md) : chaque liaison en détail (support, protocole, cadence, débit, latence, sécurité, secours, panne) et chaque module logiciel (besoin, solution, but, critère).
