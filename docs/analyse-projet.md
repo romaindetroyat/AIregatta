@@ -102,6 +102,7 @@ Probabilité et gravité notées sur 5 ; le poids est leur produit.
 | Responsable technique indisponible ou débordé en février | 2 | 5 | **10** | Un suppléant formé dès janvier, commandes avancées, liste de ce qu’on abandonne en premier. |
 | 4G saturée le week-end de la Pentecôte | 3 | 3 | **9** | Déjà prévu : radio de secours, cartes SIM multi-opérateurs, régate blanche un jour de plage pleine. |
 | Règles contestées, soupçon d’intervention humaine | 3 | 3 | **9** | Relecture par un arbitre agréé ; journal des commandes exigé en cas de réclamation. |
+| Flux officiel interrompu en pleine course | 2 | 4 | **8** | Les IA perdent la vue des autres bateaux : comportement déclaré et montré à l’homologation, serveur de secours, radio de secours ; le comité peut interrompre la course. |
 | Bateau à la dérive ou incontrôlable | 2 | 4 | **8** | Comportement en perte de liaison testé à la qualification ; bateau d’assistance. |
 | Moins de 3 jours navigables sur 5 | 2 | 4 | **8** | Limites de vent écrites ; un jour de marge si le programme le permet. |
 | Panne au PC course | 2 | 4 | **8** | Déjà prévu : second serveur, batterie, 5G, radio. |

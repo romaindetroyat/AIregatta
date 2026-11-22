@@ -35,6 +35,7 @@
 
 - **Suivre les bateaux** (Priorité 2) : Rien ne donne la position des bateaux : le départ, les passages et l’arrivée se jugent à l’œil. *Notre proposition :* Une balise scellée dans chaque bateau, posée à l’homologation (règle 2.5, P08).
 - **Juger au centimètre** (Priorité 2) : Départ anticipé, bouée mal passée, tour P1-P2, fenêtre des 5 minutes : aucun moyen de mesure. *Notre proposition :* Le logiciel détecte, l’arbitre confirme toujours (règles 5.2 à 5.6).
+- **Partager la position des bateaux** (Priorité 2) : Le règlement ne dit pas ce que reçoivent les IA ; il laisse les capteurs libres dans les limites du § 12 (lasers de classe 1 ou 1M). *Notre proposition :* Toutes les équipes reçoivent la position de tous les bateaux, des bouées et le vent, au même instant : plus fiable qu’un LIDAR sur l’eau, sans capteur coûteux pour les équipes. Garde-fous : même délai prouvé, comportement déclaré en cas de perte du flux, capteurs embarqués libres en plus (règles 3.7 à 3.9, P11, P65).
 - **Mesurer les reprises de télécommande** (Priorité 2) : La limite de 30 s est fixée, mais rien ne la mesure. *Notre proposition :* Chaque reprise déclarée par l’équipe (`manual_control`) et chronométrée (règle 3.4, P44).
 - **Transmettre les données aux équipes** (Priorité 1) : Le règlement demande la position RTK des bouées et le vent en temps réel (§ 5), sans dire comment. *Notre proposition :* Une page web et un flux MQTT, mêmes données au même instant pour toutes les équipes (niveau 1, P11, P52).
 - **Les fréquences** (À inscrire) : Rien sur la radio des balises ; le Wi-Fi 5 GHz est seulement conseillé (§ 13). *Notre proposition :* La sous-bande 869,4 – 869,65 MHz réservée aux balises (règle 2.7).
@@ -70,11 +71,12 @@
 | P44 | Reprises de télécommande | Proposition : chaque reprise de télécommande est déclarée par l’équipe, chronométrée par le logiciel et montrée à l’arbitre ; journal des commandes fourni en cas de réclamation | *Notre proposition* |
 | P45 | Mise à jour du logiciel | Interdite pendant une manche, libre entre les manches | *Notre proposition* |
 | P48 | Kit équipes | En français et en anglais ; bac à sable ouvert en février 2027 | Acté |
-| P11 | Équité des informations | Proposition : toutes les équipes reçoivent les mêmes données officielles au même instant (positions des bouées et vent au niveau 1 ; des bateaux, chrono et classement au niveau 2). Le règlement n’en dit rien | *Notre proposition* |
+| P11 | Données partagées | Proposition retenue : toutes les équipes reçoivent, au même instant, la position de tous les bateaux et des bouées, le vent, le chrono et les événements. Garde-fous : même délai pour tous, prouvé par un journal ; comportement déclaré en cas de perte du flux ; capteurs embarqués libres en plus | *Notre proposition* |
 | P12 | Assistant tactique | Aucun fourni : la tactique est le travail des équipes | Acté |
 | P15 | Arbitrage | Proposition : deux arbitres à terre ; le logiciel signale, un arbitre confirme toujours. Le règlement ne décrit que l’arbitre de l’homologation | *Notre proposition* |
 | P17 | Chrono | Proposition (niveau 2) : chrono piloté par le PC course, transmis aux équipes, aux médias et au public | *Notre proposition* |
 | P52 | Bouées et vent en temps réel | Proposition, en réponse au règlement (§ 5) : position RTK des bouées 1, 2, 3, P1, P2 et vent à la bouée 3, transmis à toutes les équipes au même instant | *Notre proposition* |
+| P65 | Perte du flux officiel | Proposition : si le flux s’interrompt en course, chaque bateau applique le comportement déclaré et montré à l’homologation ; le comité peut interrompre la course ; réparation possible pour une équipe lésée | *Notre proposition* |
 | P64 | Niveau 2 : notre proposition | Balise dans chaque bateau, jugement assisté, reprises de télécommande chronométrées, application publique, vidéo. ≈ 15 300 € de plus ; à faire retenir par le comité | *Notre proposition* |
 | P43 | Limites de vent | Pas de départ sous 4 nœuds ni au-dessus de 20, mesurés à la bouée au vent ; à valider aux essais | *Notre proposition* |
 | P20 | Mesure du vent sur l’eau | Réponse au règlement (§ 5, niveau 1) : un anémomètre sur la bouée 3 ; un second en option | *Notre proposition* |

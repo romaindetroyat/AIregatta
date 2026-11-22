@@ -33,6 +33,9 @@ Source : Règlement de course AI Regatta 2027, V1.4 du 15/10/2026, de l’associ
 - **3.4** **[Proposition]** L’équipe déclare chaque reprise par un message `manual_control` (début, fin) dans sa boîte d’envoi ; le logiciel la chronomètre et l’affiche à l’arbitre. Chaque équipe garde le journal horodaté de ses commandes, fourni en cas de réclamation. (P44)
 - **3.5** **[Proposition]** Le logiciel du bateau et de l’IA ne change pas pendant une course ; les mises à jour sont libres entre les courses. (P45)
 - **3.6** **[Proposition]** Par sa propre liaison, une équipe envoie ce qu’elle veut à son bateau : ordres, paramètres, réglages, données officielles relayées. (P36)
+- **3.7** **[Proposition]** **Flux officiel partagé** : toutes les équipes reçoivent, au même instant, la position de tous les bateaux et des bouées, le vent, le chrono et les événements. Même flux et même délai pour tous ; un journal horodaté le prouve. (P11)
+- **3.8** **[Proposition]** **Perte du flux** : si le flux officiel s’interrompt en course, chaque bateau applique le comportement déclaré et montré à l’homologation (par exemple garder son cap quelques secondes, puis se mettre face au vent). Le comité peut interrompre la course ; une équipe lésée par la panne peut demander réparation. (P65)
+- **3.9** **[Proposition]** **Capteurs libres** : une équipe peut embarquer ses propres capteurs (caméra, LIDAR de classe 1 ou 1M, § 12) en plus du flux officiel.
 
 ## 4. Parcours et départ
 

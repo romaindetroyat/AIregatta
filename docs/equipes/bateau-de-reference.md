@@ -119,7 +119,7 @@ Les cinq premiers font boucler un parcours ; les trois derniers évitent les pé
 - Boucler seul le parcours n°3, deux tours, en mode autonome
 - Faire le tour de pénalité par la zone P1-P2, avant l’arrivée
 - Reprendre la main à la télécommande et la rendre à l’IA en moins de 30 s
-- Au contrôle d’équipement (pas à la qualification) : montrer le comportement déclaré en cas de perte de liaison
+- Au contrôle d’équipement (pas à la qualification) : montrer le comportement déclaré en cas de perte de liaison ou du flux officiel
 
 ## Ce qui reste à valider
 

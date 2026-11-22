@@ -1430,6 +1430,16 @@ Si le serveur principal tombe, le serveur de secours reprend l’adresse `10.20.
 - Un **rappel général** publie `clock` avec `step: "general_recall"`, puis, quand le comité relance la procédure, un nouveau `start_time`. Un **retard** (`postponed`) fait de même.
 - Une **manche annulée** passe `state.status` à `abandoned` ; la manche suivante apparaît dans `race/current`.
 
+### 8.7 Perte du flux officiel en course (proposition au comité d’organisation)
+
+Le flux officiel donne à toutes les équipes, au même instant, la position de tous les bateaux et des bouées, le vent, le chrono et les événements (règle 3.7). Votre IA peut s’en servir pour sa tactique ; vos propres capteurs (caméra, LIDAR de classe 1 ou 1M) restent permis en plus (règle 3.9).
+
+**Comment détecter la perte.** Considérez le flux comme perdu si vous ne recevez plus `sys/time` depuis **3 s**, ou plus aucune position de bateau depuis **2 s** alors que la course est lancée.
+
+**Ce que fait votre bateau.** Il applique le comportement que vous avez déclaré et montré à l’homologation, par exemple : garder son cap quelques secondes, puis se mettre face au vent, ou finir le bord en cours sans virer (règle 3.8). Votre IA ne doit pas continuer à naviguer sur des positions périmées.
+
+**Ce que fait le comité.** Il peut interrompre la course (`race/{raceId}/state`, `status: "interrupted"`). Une équipe lésée par la panne peut demander réparation. Le journal du PC course prouve, à la milliseconde, ce que chaque équipe a reçu et quand.
+
 ## 9. Versions et politique de changement
 
 - Numérotation **semver** (*semantic versioning*) : `MAJEUR.MINEUR.CORRECTIF`. Un changement **majeur** casse la compatibilité ; **mineur** ajoute un champ ou un sujet facultatif ; **correctif** ne touche que la documentation ou corrige un défaut sans changer la forme.
