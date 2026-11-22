@@ -176,6 +176,15 @@ footer{padding-block:40px 56px;color:var(--ink2);font-size:14px}
 .live iframe{display:block;width:100%;height:min(86vh,860px);border:0;background:#EEF3F9}
 .ph{margin:30px 0 6px;font:500 1.25rem var(--f-d)}
 
+#intro{position:fixed;inset:0;z-index:200;background:#090B07;transition:opacity .6s ease,background-color .6s ease}
+#intro.clear{background-color:rgba(9,11,7,0)}
+#intro iframe{display:block;width:100%;height:100%;border:0;background:transparent;transform-origin:0 0}
+#intro.out{opacity:0;pointer-events:none}
+#intro button{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));border:0;border-radius:999px;padding:8px 14px;background:rgba(238,240,228,.08);color:rgba(238,240,228,.6);font:500 12px var(--f-t);cursor:pointer}
+.introon .brand .logo svg{visibility:hidden}
+.introon .brand .logo span{opacity:0}
+.introland .brand .logo span{opacity:1;transition:opacity .7s .55s}
+
 </style>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="airG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DCFF3A"/><stop offset=".55" stop-color="#C7EB00"/><stop offset="1" stop-color="#43B3A3"/></linearGradient><mask id="airCut"><rect width="64" height="64" fill="#fff"/><path d="M0 31 L64 27 L64 30.2 L0 34.2Z" fill="#000"/></mask><linearGradient id="airT" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#43B3A3"/><stop offset=".55" stop-color="#C7EB00"/><stop offset="1" stop-color="#F4FF9A"/></linearGradient><symbol id="airMark" viewBox="230 215 1590 1590"><g fill="#FFFFFF"><path d="M 1255.88 281.212 C 1258.06 280.868 1256.93 280.834 1259.27 281.44 C 1259.83 283.877 1221.16 481.694 1217.28 502.632 L 1143.68 891.29 C 1140.59 908.736 1138.24 926.712 1134.73 943.996 C 1104.5 951.538 1069.83 957.706 1038.99 964.483 L 713.447 1035.66 C 692.232 1040.26 674.63 1043.24 654.291 1051.07 C 652.505 1050.96 653.405 1051.19 651.634 1050.21 C 651.537 1048.28 863.744 673.137 884.1 638.468 C 983.9 468.497 1058.38 333.775 1255.88 281.212 z"/><path d="M 1785.38 275.065 C 1786.35 275.334 1785.81 275.055 1786.62 276.402 C 1752.78 415.868 1718.25 559.945 1687.28 699.929 L 1641.42 902.123 C 1634.73 930.946 1627.14 969.771 1619 997.418 C 1605.56 1001.59 1587.24 1005.39 1573.27 1008.66 L 1480.62 1029.41 C 1405.82 1045.71 1326.43 1063.81 1252.21 1083.13 L 1250.54 1082.55 C 1248.87 1076.28 1303.48 919.308 1311.15 897.348 C 1375.44 713.235 1453.67 517.869 1596.73 380.334 C 1649.97 329.146 1716.96 299.834 1785.38 275.065 z"/><path d="M 1119.58 997.418 C 1131.17 995.644 1121.29 1018.01 1119.41 1028.49 L 1102.97 1121.19 C 1099.91 1138.48 1095.41 1160.97 1093.55 1178.18 C 1078.66 1182.8 1056.42 1187.42 1040.87 1191.18 L 504.249 1317.79 C 501.588 1318.5 502.274 1318.36 499.526 1318.46 L 498.62 1317.12 C 499.698 1312.26 516.277 1285.15 519.69 1279.25 L 577.852 1179.38 C 587.974 1161.7 607.563 1120.26 620.392 1107.27 C 636.282 1102.64 659.46 1098.16 675.986 1094.61 L 1119.58 997.418 z"/><path d="M 1081.65 1233.23 C 1083.07 1232.97 1082.87 1233.16 1084.43 1233.53 C 1085.1 1236.18 1063.45 1359.15 1060.53 1373.59 C 1044.95 1379.63 1004.23 1388.74 985.943 1393.27 L 471.215 1524.51 C 437.915 1533.18 405.406 1540.91 372.258 1550.44 C 367.51 1551.92 371.104 1544.71 372.106 1542.95 C 401.57 1491.36 430.443 1439.38 459.71 1387.67 C 467.337 1374.2 555.03 1357.72 572.781 1353.5 L 935.324 1268.75 C 980.976 1257.61 1036.07 1242.51 1081.65 1233.23 z"/><path d="M 1050.34 1429.13 L 1053.02 1428.98 L 1053.82 1429.93 C 1047.01 1463.35 1041.66 1511.1 1037.35 1545.47 C 1016.73 1552.89 987.135 1559.25 965.283 1564.86 C 732.685 1624.67 498.964 1681.12 267.218 1744.23 L 264.936 1744.66 L 263.565 1743.56 C 264.515 1739.26 332.866 1617.41 336.467 1613.5 C 357.249 1605.69 407.119 1594.5 429.693 1588.76 L 1050.34 1429.13 z"/><path d="M 1604.59 1051.07 L 1607.49 1050.86 L 1608.47 1052.08 C 1608.68 1055.5 1601.92 1083.81 1600.69 1089.58 L 1566.36 1242.8 C 1555.99 1247.38 1537.09 1251.79 1525.79 1254.5 L 1178.69 1337.78 C 1172.96 1338.21 1173.73 1333.61 1175.1 1329.18 C 1194.61 1265.83 1217.84 1202.56 1235.91 1138.91 C 1277.71 1128.36 1318.29 1119.5 1360.07 1109.74 L 1507.2 1074.43 C 1540.3 1066.49 1571.72 1060.28 1604.59 1051.07 z"/><path d="M 1551.7 1298.09 L 1553.8 1298.27 C 1555.12 1302.65 1525.14 1441.27 1521.7 1458.39 C 1486.56 1468.56 1446.47 1475.97 1410.31 1485 L 1108.2 1561.1 L 1105.64 1561.45 L 1104.66 1560.09 C 1104.94 1553.61 1154.35 1402.53 1158.08 1395.9 L 1412.5 1331.95 C 1458.84 1320.59 1505.53 1310.11 1551.7 1298.09 z"/><path d="M 1504.61 1513.15 L 1507.06 1513.29 C 1508.04 1517.15 1483.13 1619.98 1480.07 1633.27 C 1449.57 1643.88 1406.02 1651.56 1373.61 1659.72 L 1104.03 1728.39 C 1084.34 1733.17 1069.07 1735.89 1050.34 1744.23 L 1047.65 1743.38 C 1046.65 1739.05 1082.42 1630.39 1086.69 1620.52 C 1103.54 1615.21 1130.94 1608.89 1148.71 1604.18 L 1306.53 1563.98 C 1373.18 1547.54 1437.52 1529.18 1504.61 1513.15 z"/></g></symbol></defs></svg>
 <div class="wrap">
@@ -367,7 +376,537 @@ function show(){let h=decodeURIComponent(location.hash.slice(1));if(!ids.include
  document.querySelectorAll('nav.toc a').forEach(a=>{const on=a.getAttribute('href')==='#'+h;if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});}
 addEventListener('hashchange',()=>{show();const n=document.querySelector('nav.toc');if(n&&n.getBoundingClientRect().top<0)n.scrollIntoView()});show()})();
 </script>
-<script id="tjdata" type="application/json">{"src": {"boat": [{"t": "Capteur", "n": "GPS RTK", "hw": "ArduSimple simpleRTK2B (puce u-blox ZED-F9P) et antenne ANN-MB", "sw": "Logiciel interne du récepteur", "proto": "Liaison série vers la carte", "lat": [20, 40], "d": "Le récepteur calcule la position au centimètre 10 fois par seconde. Chaque position porte l’heure GPS exacte de la mesure."}, {"t": "Embarqué", "n": "Balise du bateau", "hw": "Carte ESP32-S3", "sw": "Firmware de la balise (S1)", "proto": "Trame binaire signée de 48 octets", "lat": [2, 5], "d": "Le firmware lit la position, ajoute le cap et la gîte, signe la trame pour qu’on ne puisse pas la falsifier, puis l’envoie aussitôt."}], "wind": [{"t": "Capteur", "n": "Anémomètre de la bouée au vent", "hw": "Gill WindSonic M, à 2 m au-dessus de l’eau", "sw": "Logiciel interne de l’anémomètre", "proto": "Liaison série vers la carte", "lat": [125, 250], "d": "Mesure le vent par ultrasons 4 fois par seconde. Chaque mesure part dès qu’elle existe ; la moyenne sur 10 s est calculée en plus, pour la tendance."}, {"t": "Embarqué", "n": "Balise de la bouée", "hw": "Carte ESP32-S3 et centrale inertielle", "sw": "Firmware des bouées (S2)", "proto": "Trame binaire signée", "lat": [3, 6], "d": "Corrige la direction du vent avec le compas et les mouvements de la bouée, ajoute la position GPS de la bouée, signe et envoie."}], "chrono": [{"t": "Horloge", "n": "Heure GPS", "hw": "Base RTK (heure GPS)", "sw": "chrony", "proto": "Heure GPS et NTP", "lat": [0, 0], "d": "L’horloge de référence est l’heure GPS ; les ordinateurs du site s’y calent à quelques millisecondes près, et chaque position porte l’heure GPS exacte de sa mesure. Tous les ordinateurs du site s’y calent, y compris les PC des équipes et de la régie."}, {"t": "Logiciel", "n": "Console de direction de course", "hw": "Écran du PC course", "sw": "Console de direction de course (S10)", "proto": "—", "lat": [1, 2], "d": "Le comité programme la procédure : par exemple, départ à 14 h 00 min 00 s. Il peut la retarder, rappeler la flotte ou annuler."}, {"t": "Logiciel", "n": "Moteur de course et bus", "hw": "ASUS NUC 14 Pro du PC course", "sw": "Moteur de course (S8) et broker Mosquitto (S5)", "proto": "MQTT, message conservé", "lat": [1, 3], "d": "Publie l’heure exacte du départ et l’étape de la procédure, puis les temps de passage et d’arrivée. Le message est conservé par le broker : un destinataire qui se connecte en cours de route reçoit aussitôt l’état du chrono."}]}, "path": {"4g": [{"t": "Émission", "n": "Modem 4G", "hw": "SIMCom A7670E, SIM IoT multi-opérateurs", "sw": "Pile réseau du modem", "proto": "UDP sur 4G", "lat": [30, 150], "d": "Le modem envoie la trame à l’antenne relais la plus proche. C’est l’étape la plus variable : quelques dizaines de millisecondes en temps normal, beaucoup plus si la foule sature l’antenne."}, {"t": "Transport", "n": "Réseau de l’opérateur et Internet", "hw": "Antenne relais, réseau de l’opérateur", "sw": "—", "proto": "UDP", "lat": [10, 40], "d": "La trame traverse le réseau de l’opérateur jusqu’à Internet, puis jusqu’à notre serveur."}, {"t": "Relais", "n": "Hub cloud", "hw": "Serveur virtuel hébergé en France", "sw": "Récepteur UDP (S4)", "proto": "UDP", "lat": [1, 3], "d": "Vérifie la signature et rejette toute trame falsifiée ou rejouée, puis relaie vers le site."}, {"t": "Transport", "n": "Tunnel vers le site", "hw": "Fibre du site, routeur UniFi", "sw": "WireGuard", "proto": "Tunnel chiffré", "lat": [8, 30], "d": "Un tunnel chiffré et permanent amène la trame jusqu’au PC course."}, {"t": "Logiciel", "n": "Bus de données", "hw": "ASUS NUC 14 Pro du PC course", "sw": "Récepteur et broker Mosquitto (S5)", "proto": "MQTT", "lat": [1, 3], "d": "La trame est décodée, fusionnée avec la radio de secours, horodatée, puis publiée sur le bus. Le moteur de course et l’enregistreur la reçoivent en même temps que tous les autres abonnés."}], "radio": [{"t": "Émission", "n": "Radio LoRa 868 MHz", "hw": "Adafruit RFM95W", "sw": "Firmware (créneau calé sur l’heure GPS)", "proto": "LoRa, trame de 12 octets", "lat": [30, 40], "d": "Chaque balise émet dans son créneau de la seconde GPS, donc jamais en même temps qu’une autre. Le temps d’antenne est d’environ 21 ms."}, {"t": "Réception", "n": "Récepteur radio", "hw": "Carte ESP32-S3 et RFM95W, antenne sur un petit mât", "sw": "Firmware du récepteur", "proto": "Câble USB", "lat": [1, 2], "d": "Deux récepteurs identiques écoutent en parallèle : si l’un tombe, l’autre continue."}, {"t": "Logiciel", "n": "Bus de données", "hw": "ASUS NUC 14 Pro du PC course", "sw": "Passerelle radio (S3) et broker Mosquitto (S5)", "proto": "MQTT", "lat": [1, 3], "d": "La passerelle vérifie la trame, supprime les doublons avec la 4G et publie sur le bus."}]}, "dest": {"equipe": [{"t": "Transport", "n": "Réseau des équipes", "hw": "Commutateur et câble Ethernet, même longueur pour toutes", "sw": "MQTT en lecture seule", "proto": "MQTT", "lat": [0.3, 1], "d": "Le broker envoie le même message à toutes les équipes, à moins d’une milliseconde d’écart entre la première et la dernière."}, {"t": "Destinataire", "n": "Programme de l’équipe", "hw": "PC à terre de l’équipe", "sw": "Client MQTT (Python, JavaScript…) qui alimente l’IA de l’équipe", "proto": "—", "lat": [0, 1], "d": "Le programme de l’équipe reçoit positions, vent et état de la course, et décide de sa tactique."}, {"t": "Terminal", "n": "Bateau de l’équipe", "hw": "Électronique de l’équipe", "sw": "Liaison choisie par l’équipe", "proto": "Libre", "lat": [20, 150], "ext": 1, "d": "Les consignes repartent vers le bateau par la liaison de l’équipe. Ce délai dépend d’elle et ne fait pas partie du système officiel."}], "comite": [{"t": "Transport", "n": "Réseau de l’organisation", "hw": "Commutateur, câble ou Wi-Fi dédié", "sw": "MQTT sur WebSocket", "proto": "WebSocket", "lat": [0.5, 2], "d": "Les consoles se branchent sur le même bus, par une connexion web permanente."}, {"t": "Destinataire", "n": "Consoles du comité", "hw": "Écrans du PC course, tablette de l’arbitre", "sw": "Consoles web (S10)", "proto": "—", "lat": [5, 16], "d": "L’affichage se met à jour à la prochaine image de l’écran, soit au plus 16 ms plus tard."}], "media": [{"t": "Transport", "n": "Réseau de l’organisation", "hw": "Câble", "sw": "MQTT sur WebSocket", "proto": "WebSocket", "lat": [0.5, 2], "d": "La régie et le commentateur reçoivent les données en même temps que le comité."}, {"t": "Destinataire", "n": "Régie et commentateur", "hw": "PC de régie, tablette du commentateur", "sw": "Incrustations OBS (S15), souffleur (S16)", "proto": "—", "lat": [5, 16], "d": "Les incrustations (positions, classement, vent) se mettent à jour en quelques millisecondes."}, {"t": "Terminal", "n": "Image diffusée", "hw": "Mini-PC de régie + OBS Studio, puis YouTube Live", "sw": "Encodage vidéo", "proto": "RTMP / SRT", "lat": [5000, 20000], "ext": 1, "d": "C’est la vidéo, et non les données, qui prend du temps : 1 à 3 s sur place, 5 à 20 s sur YouTube. Les incrustations sont calées sur l’image dans la régie."}], "public": [{"t": "Transport", "n": "Tunnel vers le cloud", "hw": "Fibre du site", "sw": "WireGuard", "proto": "Tunnel chiffré", "lat": [8, 30], "d": "Le PC course envoie un seul flux public vers le cloud."}, {"t": "Relais", "n": "Hub cloud et CDN", "hw": "Serveur virtuel, Cloudflare", "sw": "Relais WebSocket (S4)", "proto": "WebSocket", "lat": [2, 10], "d": "Le cloud démultiplie ce flux pour des milliers de spectateurs, sans charger le site."}, {"t": "Transport", "n": "Internet et 4G du spectateur", "hw": "Box ou téléphone du spectateur", "sw": "—", "proto": "WebSocket", "lat": [30, 300], "d": "Le délai dépend de la connexion du spectateur ; sur la plage, la 4G peut être chargée."}, {"t": "Destinataire", "n": "Application publique", "hw": "iPhone, ordinateur", "sw": "PWA (S14)", "proto": "—", "lat": [16, 50], "d": "La carte se met à jour en douceur, avec un léger lissage."}, {"t": "Réglage", "n": "Différé volontaire", "hw": "—", "sw": "Réglable au PC course", "proto": "—", "lat": [1000, 1000], "delay": 1, "d": "Toutes les équipes recevant déjà toutes les données, ce différé ne protège plus rien. 1 s (acté), juste pour lisser l’animation."}]}}</script><template id="protoSrc"><title>AI Regatta en direct</title>
+<div id="intro" hidden><iframe id="introFrame" title="AI Regatta" tabindex="-1"></iframe><button type="button" id="introSkip">Passer</button></div>
+<template id="introSrc"><!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#090B07">
+<title>AI Regatta animé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@800&family=Syncopate:wght@700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04060c;
+  --bg-2:#0a1428;
+  --bg-3:#0d2040;
+  --ink:#f5f8fc;
+  --ink-soft:rgba(245,248,252,.74);
+  --ink-faint:rgba(245,248,252,.42);
+  --cyan:#19e3ff;
+  --turq:#2af0cf;
+  --lime:#c4ff4d;
+  --grid:rgba(40,190,255,.10);
+  --f-logo:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-wide:"Syncopate","Unbounded",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;min-height:100dvh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+.stage{
+  position:relative;min-height:100vh;min-height:100dvh;
+  display:grid;place-items:center;
+  padding:72px 16px 96px;
+  overflow:hidden;isolation:isolate;
+}
+/* ---------- background ---------- */
+.bg{position:absolute;inset:0;z-index:-3;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 46%, var(--bg-3) 0%, var(--bg-2) 38%, var(--bg) 78%);
+}
+.floor{position:absolute;left:-50%;right:-50%;top:var(--horizon,66%);bottom:-10%;z-index:-2;
+  perspective:520px;perspective-origin:50% 0;pointer-events:none;opacity:0}
+.floor i{position:absolute;inset:0;transform-origin:50% 0;transform:rotateX(76deg);
+  background-image:
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px),
+    linear-gradient(0deg,var(--grid) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 55%,transparent 100%);
+          mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 55%,transparent 100%);
+}
+.horizon{position:absolute;left:0;right:0;top:var(--horizon,66%);height:1px;z-index:-1;pointer-events:none;
+  background:linear-gradient(90deg,transparent 0%,rgba(25,227,255,.0) 8%,rgba(25,227,255,.55) 50%,rgba(25,227,255,0) 92%,transparent 100%);
+  transform:scaleX(0);opacity:0}
+.horizon::after{content:"";position:absolute;left:20%;right:20%;top:-18px;height:36px;
+  background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(25,227,255,.16),transparent 70%)}
+.sea{position:absolute;left:0;right:0;top:var(--horizon,66%);bottom:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(10,40,70,.35),rgba(4,6,12,0) 60%)}
+.scan{position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px);}
+.noise{position:absolute;inset:-50%;z-index:4;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.vignette{position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:radial-gradient(ellipse 85% 75% at 50% 50%,transparent 55%,rgba(0,0,0,.55) 100%)}
+
+/* ---------- wind / speed lines ---------- */
+.wind{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+.wind b{position:absolute;left:0;top:50%;height:1px;border-radius:2px;opacity:0;will-change:transform,opacity;
+  background:linear-gradient(90deg,rgba(25,227,255,0),rgba(25,227,255,.55) 70%,rgba(220,255,255,.95));
+  box-shadow:0 0 6px rgba(25,227,255,.55)}
+.wind b.lime{background:linear-gradient(90deg,rgba(196,255,77,0),rgba(42,240,207,.5) 70%,rgba(236,255,200,.95));
+  box-shadow:0 0 6px rgba(196,255,77,.4)}
+
+/* ---------- HUD ---------- */
+.hud{position:absolute;z-index:5;font:500 11px/1.3 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-faint);opacity:0;pointer-events:none;white-space:nowrap}
+.hud.tl{top:22px;left:24px}
+.hud.tr{top:22px;right:24px;text-align:right}
+.hud.bl{bottom:30px;left:24px}
+.hud .k{color:var(--cyan)}
+.hud.tl::before,.hud.tr::after{content:"";display:inline-block;width:7px;height:7px;border:1px solid var(--cyan);
+  margin-right:10px;vertical-align:1px;opacity:.8}
+.hud.tr::after{margin:0 0 0 10px}
+
+/* ---------- lockup ---------- */
+.lockup{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  gap:.5em;
+  font-size:clamp(34px,5.4vw,92px);
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  outline:none;
+}
+.markwrap{position:relative;flex:none;width:2.85em;aspect-ratio:1/1}
+.markwrap svg{position:relative;display:block;width:100%;height:100%;overflow:visible}
+.halo{position:absolute;inset:-55%;border-radius:50%;pointer-events:none;opacity:0;
+  background:radial-gradient(circle at 50% 50%,rgba(25,227,255,.55) 0%,rgba(42,240,207,.16) 30%,rgba(25,227,255,0) 62%)}
+.flare{position:absolute;left:50%;top:54%;width:170vw;height:2px;pointer-events:none;opacity:0;
+  transform:translate(-50%,-50%) scaleX(0);
+  background:linear-gradient(90deg,transparent 0%,rgba(25,227,255,.0) 18%,rgba(25,227,255,.7) 42%,#fff 50%,rgba(42,240,207,.7) 58%,rgba(42,240,207,0) 82%,transparent 100%);
+  box-shadow:0 0 18px 2px rgba(25,227,255,.45)}
+
+.words{position:relative;display:flex;flex-direction:column;align-items:flex-start}
+.wm-wrap{position:relative;transform:skewX(-9deg);transform-origin:0 100%}
+.wm,.wm-shine{font:800 1em/1 var(--f-logo);letter-spacing:-.005em;white-space:nowrap;margin:0;
+  padding:.04em .08em .06em 0}
+.wm .w,.wm-shine .w{display:inline-block}
+.wm .w + .w,.wm-shine .w + .w{margin-left:.34em}
+.wm .c{display:inline-block;will-change:transform,filter,opacity}
+.wm-shine{position:absolute;inset:0;pointer-events:none;color:transparent;
+  background-image:linear-gradient(100deg,transparent 0%,transparent 40%,rgba(150,245,255,.95) 49%,rgba(220,255,240,1) 50%,rgba(150,245,255,.95) 51%,transparent 60%,transparent 100%);
+  background-size:300% 100%;background-repeat:no-repeat;background-position:110% 0;
+  -webkit-background-clip:text;background-clip:text;opacity:0}
+.rule{position:relative;width:100%;height:1px;margin:.2em 0 0;transform-origin:0 50%;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--cyan),var(--turq) 40%,rgba(245,248,252,.28) 100%)}
+.rule::after{content:"";position:absolute;right:-3px;top:-2px;width:5px;height:5px;border-radius:50%;
+  background:#fff;box-shadow:0 0 10px 2px var(--cyan);opacity:var(--head,0)}
+.tag{position:relative;margin-top:.62em;font:700 max(9px,.15em)/1 var(--f-wide);letter-spacing:.42em;
+  text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+.tag .t{position:relative;display:inline-block;opacity:0}
+.tag .t::after{content:attr(data-g);position:absolute;left:0;top:0;color:var(--cyan);opacity:var(--g,0);
+  text-shadow:0 0 8px rgba(25,227,255,.8)}
+.tag .dot{color:var(--cyan)}
+
+/* ---------- replay ---------- */
+.replay{position:absolute;z-index:6;left:50%;bottom:24px;transform:translateX(-50%);
+  display:inline-flex;align-items:center;gap:10px;
+  font:500 11px/1 var(--f-mono);letter-spacing:.22em;text-transform:uppercase;color:var(--ink);
+  background:rgba(10,20,40,.45);border:1px solid rgba(25,227,255,.32);border-radius:999px;
+  padding:11px 18px 11px 14px;cursor:pointer;opacity:.35;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  transition:border-color .2s,background-color .2s,box-shadow .2s}
+.replay:hover{border-color:var(--cyan);background:rgba(25,227,255,.10);box-shadow:0 0 22px rgba(25,227,255,.25)}
+.replay:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.replay svg{width:14px;height:14px}
+
+@media (max-width:600px){
+  .stage{padding:64px 16px 96px;--horizon:74%}
+  .lockup{flex-direction:column;gap:.5em;font-size:min(9.3vw,52px)}
+  .markwrap{width:min(54vw,250px)}
+  .words{align-items:center}
+  .wm-wrap{transform-origin:50% 100%}
+  .rule{margin-top:.26em}
+  .tag{font-size:max(9px,.19em);letter-spacing:.36em;margin-right:-.36em}
+  .hud{font-size:10px;letter-spacing:.12em}
+  .hud.tl{left:16px;top:18px}.hud.tr{right:16px;top:18px}.hud.bl{left:16px;bottom:78px;display:none}
+}
+@media (max-width:440px){.hud.tr{display:none}}
+/* Intro du site : seulement le logo, sur le fond de l'accueil */
+.hud,.replay,.floor,.horizon,.sea,.scan,.noise{display:none!important}
+.bg{background:radial-gradient(ellipse 70% 55% at 50% 46%,#10140c 0%,#090B07 70%)!important}
+.vignette{background:radial-gradient(ellipse 85% 75% at 50% 50%,transparent 60%,rgba(0,0,0,.35) 100%)}
+.lockup{cursor:default}
+body{transition:background-color .5s}
+body.moving{background:transparent!important}
+body.moving .bg,body.moving .vignette,body.moving .wind,body.moving .rule,body.moving .tag,body.moving .halo,body.moving .flare{opacity:0!important;transition:opacity .45s}
+body.moving .words{opacity:0;transition:opacity .4s}
+</style>
+
+<main class="stage" id="stage">
+  <div class="bg"></div>
+  <div class="sea"></div>
+  <div class="floor" id="floor"><i id="floorPlane"></i></div>
+  <div class="horizon" id="horizon"></div>
+
+  <div class="lockup" id="lockup" role="img" aria-label="AI Regatta — Toulon, 12–16 mai 2027" tabindex="-1">
+    <div class="markwrap" aria-hidden="true">
+      <div class="halo" id="halo"></div>
+      <div class="flare" id="flare"></div>
+      <svg id="mark" xmlns="http://www.w3.org/2000/svg" viewBox="230 215 1590 1590"></svg>
+    </div>
+    <div class="words" aria-hidden="true">
+      <div class="wm-wrap">
+        <p class="wm" id="wm"></p>
+        <p class="wm-shine" id="wmShine"></p>
+      </div>
+      <div class="rule" id="rule"></div>
+      <div class="tag" id="tag"></div>
+    </div>
+  </div>
+
+  <div class="wind" id="wind"></div>
+
+  <div class="hud tl" id="hudTL">43°07′N · 005°56′E</div>
+  <div class="hud tr" id="hudTR">Régate de voiliers drones</div>
+  <div class="hud bl" id="hudBL"><span class="k">●</span> <span id="status">Assemblage 000%</span></div>
+
+  <div class="scan"></div>
+  <div class="noise"></div>
+  <div class="vignette"></div>
+
+  <button class="replay" id="replay" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+    Rejouer
+  </button>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  /* The 8 paths of the R3 monochrome mark (ai-regatta-mark.svg), unchanged. */
+  var D = [
+    "M 1255.88 281.212 C 1258.06 280.868 1256.93 280.834 1259.27 281.44 C 1259.83 283.877 1221.16 481.694 1217.28 502.632 L 1143.68 891.29 C 1140.59 908.736 1138.24 926.712 1134.73 943.996 C 1104.5 951.538 1069.83 957.706 1038.99 964.483 L 713.447 1035.66 C 692.232 1040.26 674.63 1043.24 654.291 1051.07 C 652.505 1050.96 653.405 1051.19 651.634 1050.21 C 651.537 1048.28 863.744 673.137 884.1 638.468 C 983.9 468.497 1058.38 333.775 1255.88 281.212 z",
+    "M 1785.38 275.065 C 1786.35 275.334 1785.81 275.055 1786.62 276.402 C 1752.78 415.868 1718.25 559.945 1687.28 699.929 L 1641.42 902.123 C 1634.73 930.946 1627.14 969.771 1619 997.418 C 1605.56 1001.59 1587.24 1005.39 1573.27 1008.66 L 1480.62 1029.41 C 1405.82 1045.71 1326.43 1063.81 1252.21 1083.13 L 1250.54 1082.55 C 1248.87 1076.28 1303.48 919.308 1311.15 897.348 C 1375.44 713.235 1453.67 517.869 1596.73 380.334 C 1649.97 329.146 1716.96 299.834 1785.38 275.065 z",
+    "M 1119.58 997.418 C 1131.17 995.644 1121.29 1018.01 1119.41 1028.49 L 1102.97 1121.19 C 1099.91 1138.48 1095.41 1160.97 1093.55 1178.18 C 1078.66 1182.8 1056.42 1187.42 1040.87 1191.18 L 504.249 1317.79 C 501.588 1318.5 502.274 1318.36 499.526 1318.46 L 498.62 1317.12 C 499.698 1312.26 516.277 1285.15 519.69 1279.25 L 577.852 1179.38 C 587.974 1161.7 607.563 1120.26 620.392 1107.27 C 636.282 1102.64 659.46 1098.16 675.986 1094.61 L 1119.58 997.418 z",
+    "M 1081.65 1233.23 C 1083.07 1232.97 1082.87 1233.16 1084.43 1233.53 C 1085.1 1236.18 1063.45 1359.15 1060.53 1373.59 C 1044.95 1379.63 1004.23 1388.74 985.943 1393.27 L 471.215 1524.51 C 437.915 1533.18 405.406 1540.91 372.258 1550.44 C 367.51 1551.92 371.104 1544.71 372.106 1542.95 C 401.57 1491.36 430.443 1439.38 459.71 1387.67 C 467.337 1374.2 555.03 1357.72 572.781 1353.5 L 935.324 1268.75 C 980.976 1257.61 1036.07 1242.51 1081.65 1233.23 z",
+    "M 1050.34 1429.13 L 1053.02 1428.98 L 1053.82 1429.93 C 1047.01 1463.35 1041.66 1511.1 1037.35 1545.47 C 1016.73 1552.89 987.135 1559.25 965.283 1564.86 C 732.685 1624.67 498.964 1681.12 267.218 1744.23 L 264.936 1744.66 L 263.565 1743.56 C 264.515 1739.26 332.866 1617.41 336.467 1613.5 C 357.249 1605.69 407.119 1594.5 429.693 1588.76 L 1050.34 1429.13 z",
+    "M 1604.59 1051.07 L 1607.49 1050.86 L 1608.47 1052.08 C 1608.68 1055.5 1601.92 1083.81 1600.69 1089.58 L 1566.36 1242.8 C 1555.99 1247.38 1537.09 1251.79 1525.79 1254.5 L 1178.69 1337.78 C 1172.96 1338.21 1173.73 1333.61 1175.1 1329.18 C 1194.61 1265.83 1217.84 1202.56 1235.91 1138.91 C 1277.71 1128.36 1318.29 1119.5 1360.07 1109.74 L 1507.2 1074.43 C 1540.3 1066.49 1571.72 1060.28 1604.59 1051.07 z",
+    "M 1551.7 1298.09 L 1553.8 1298.27 C 1555.12 1302.65 1525.14 1441.27 1521.7 1458.39 C 1486.56 1468.56 1446.47 1475.97 1410.31 1485 L 1108.2 1561.1 L 1105.64 1561.45 L 1104.66 1560.09 C 1104.94 1553.61 1154.35 1402.53 1158.08 1395.9 L 1412.5 1331.95 C 1458.84 1320.59 1505.53 1310.11 1551.7 1298.09 z",
+    "M 1504.61 1513.15 L 1507.06 1513.29 C 1508.04 1517.15 1483.13 1619.98 1480.07 1633.27 C 1449.57 1643.88 1406.02 1651.56 1373.61 1659.72 L 1104.03 1728.39 C 1084.34 1733.17 1069.07 1735.89 1050.34 1744.23 L 1047.65 1743.38 C 1046.65 1739.05 1082.42 1630.39 1086.69 1620.52 C 1103.54 1615.21 1130.94 1608.89 1148.71 1604.18 L 1306.53 1563.98 C 1373.18 1547.54 1437.52 1529.18 1504.61 1513.15 z"
+  ];
+  /* Build order: the two sails, then the hull bands alternating left / right, top to bottom. */
+  var ORDER = [0, 1, 2, 5, 3, 6, 4, 7];
+
+  /* ---------------- timeline (ms) ---------------- */
+  var T = {
+    band0: 330, bandStep: 112, slide: 720, trace: 500, wipeDelay: 190, wipe: 470,
+    flash: 1990,
+    word: 2160, wordStep: 58, wordDur: 780,
+    rule: 3060, ruleDur: 720,
+    tag: 3260, tagStep: 27,
+    end: 4300,
+    shine0: 3330, shineEvery: 7000, shineDur: 1700
+  };
+
+  /* ---------------- helpers ---------------- */
+  function clamp01(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function prog(t, s, d){ return clamp01((t - s) / d); }
+  function outExpo(x){ return x >= 1 ? 1 : 1 - Math.pow(2, -10 * x); }
+  function outCubic(x){ return 1 - Math.pow(1 - x, 3); }
+  function inOutCubic(x){ return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2; }
+  function outBack(x){ var c1 = 1.55, c3 = c1 + 1; return 1 + c3*Math.pow(x - 1, 3) + c1*Math.pow(x - 1, 2); }
+  function bump(t, s, rise, fall){
+    if (t < s) return 0;
+    if (t < s + rise) return outCubic((t - s) / rise);
+    return 1 - inOutCubic(prog(t, s + rise, fall));
+  }
+  function el(tag, attrs, parent){
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+  /* ---------------- build the mark ---------------- */
+  var svg = document.getElementById("mark");
+  var defs = el("defs", {}, svg);
+  defs.innerHTML =
+    '<linearGradient id="airFill" gradientUnits="userSpaceOnUse" x1="300" y1="1760" x2="1800" y2="280">' +
+      '<stop offset="0" stop-color="#16b8ff"/><stop offset=".5" stop-color="#22ecdf"/><stop offset="1" stop-color="#c4ff4d"/></linearGradient>' +
+    '<linearGradient id="airStroke" gradientUnits="userSpaceOnUse" x1="300" y1="1760" x2="1800" y2="280">' +
+      '<stop offset="0" stop-color="#7fe9ff"/><stop offset=".6" stop-color="#5cffe6"/><stop offset="1" stop-color="#e2ff9a"/></linearGradient>' +
+    '<linearGradient id="airShine" x1="0" y1="0" x2="1" y2="0">' +
+      '<stop offset="0" stop-color="#8ff3ff" stop-opacity="0"/><stop offset=".5" stop-color="#b8fbff" stop-opacity="1"/><stop offset="1" stop-color="#8ff3ff" stop-opacity="0"/></linearGradient>' +
+    '<filter id="airGlow" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">' +
+      '<feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+    '<filter id="airSpark" x="-400%" y="-400%" width="900%" height="900%"><feGaussianBlur stdDeviation="14" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+  var clip = el("clipPath", { id: "airClip" }, defs);
+
+  var ring = el("circle", { cx: 1025, cy: 1010, r: 300, fill: "none", stroke: "#7ff0ff", "stroke-width": 8, opacity: 0 }, svg);
+  var ring2 = el("circle", { cx: 1025, cy: 1010, r: 300, fill: "none", stroke: "#c4ff4d", "stroke-width": 3, opacity: 0 }, svg);
+
+  var bands = [];
+  D.forEach(function(d, i){
+    el("path", { id: "airP" + i, d: d }, defs);
+    el("use", { href: "#airP" + i }, clip);
+  });
+  D.forEach(function(d, i){
+    var g = el("g", {}, svg);
+    var mask = el("mask", { id: "airM" + i, maskUnits: "userSpaceOnUse", x: -200, y: -200, width: 2400, height: 2400 }, defs);
+    var grad = el("linearGradient", { id: "airW" + i, gradientUnits: "userSpaceOnUse" }, defs);
+    var s1 = el("stop", { offset: 0, "stop-color": "#fff" }, grad);
+    var s2 = el("stop", { offset: 0, "stop-color": "#000" }, grad);
+    el("rect", { x: -200, y: -200, width: 2400, height: 2400, fill: "url(#airW" + i + ")" }, mask);
+    var fills = el("g", { mask: "url(#airM" + i + ")" }, g);
+    var color = el("use", { href: "#airP" + i, fill: "url(#airFill)" }, fills);
+    var white = el("use", { href: "#airP" + i, fill: "#ffffff", opacity: 0 }, fills);
+    var stroke = el("path", { d: d, pathLength: 1, fill: "none", stroke: "url(#airStroke)", "stroke-width": 7,
+      "stroke-linejoin": "round", "stroke-dasharray": "1 1", "stroke-dashoffset": 1, filter: "url(#airGlow)" }, g);
+    var spark = el("circle", { r: 11, fill: "#ffffff", filter: "url(#airSpark)", opacity: 0 }, g);
+    bands.push({ i: i, g: g, grad: grad, s1: s1, s2: s2, fills: fills, color: color, white: white, stroke: stroke, spark: spark });
+  });
+  /* idle shimmer layer, clipped to the 8 paths */
+  var shineG = el("g", { "clip-path": "url(#airClip)", opacity: 0 }, svg);
+  var shineR = el("rect", { x: 0, y: 0, width: 520, height: 2400, fill: "url(#airShine)" }, shineG);
+
+  /* geometry: slant axis of each band = bbox diagonal, lower-left -> upper-right */
+  function measure(){
+    bands.forEach(function(b){
+      var bb = b.stroke.getBBox();
+      var x1 = bb.x, y1 = bb.y + bb.height, x2 = bb.x + bb.width, y2 = bb.y;
+      b.grad.setAttribute("x1", x1); b.grad.setAttribute("y1", y1);
+      b.grad.setAttribute("x2", x2); b.grad.setAttribute("y2", y2);
+      var dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy);
+      b.ux = dx / L; b.uy = dy / L;
+      b.len = b.stroke.getTotalLength();
+    });
+  }
+  measure();
+
+  /* ---------------- build the wordmark ---------------- */
+  var wm = document.getElementById("wm"), wmShine = document.getElementById("wmShine");
+  var letters = [];
+  ["AI", "REGATTA"].forEach(function(word){
+    var w = document.createElement("span"); w.className = "w";
+    var ws = document.createElement("span"); ws.className = "w"; ws.textContent = word;
+    word.split("").forEach(function(ch){
+      var c = document.createElement("span"); c.className = "c"; c.textContent = ch;
+      w.appendChild(c); letters.push(c);
+    });
+    wm.appendChild(w); wmShine.appendChild(ws);
+  });
+
+  var tag = document.getElementById("tag");
+  var tagChars = [];
+  "Toulon · 12–16 mai 2027".split("").forEach(function(ch){
+    var s = document.createElement("span");
+    s.className = "t" + (ch === "·" ? " dot" : "");
+    s.textContent = ch === " " ? " " : ch;
+    s.dataset.g = "";
+    tag.appendChild(s);
+    tagChars.push({ el: s, ch: ch });
+  });
+  var GLYPHS = "ABCDEFGHJKLMNPRSTVWXYZ0123456789/<>+=#";
+
+  /* ---------------- wind lines ---------------- */
+  var wind = document.getElementById("wind");
+  var lines = [];
+  (function(){
+    var r = rng(2027);
+    function add(start, dur, y, len, thick, lime){
+      var b = document.createElement("b");
+      if (lime) b.className = "lime";
+      b.style.width = len + "px"; b.style.height = thick + "px";
+      wind.appendChild(b);
+      lines.push({ el: b, s: start, d: dur, y: y, len: len });
+    }
+    for (var k = 0; k < 22; k++){
+      add(180 + r() * 2150, 420 + r() * 520, (r() * 2 - 1) * .36, 90 + r() * 360, r() < .25 ? 2 : 1, r() < .2);
+    }
+    /* burst with the flash */
+    for (var j = 0; j < 7; j++){
+      add(T.flash - 60 + j * 35 + r() * 40, 360 + r() * 260, (r() * 2 - 1) * .16, 200 + r() * 420, r() < .4 ? 2 : 1, j % 3 === 2);
+    }
+  })();
+
+  /* ---------------- refs ---------------- */
+  var $ = function(id){ return document.getElementById(id); };
+  var stage = $("stage"), halo = $("halo"), flare = $("flare"), rule = $("rule"),
+      floor = $("floor"), floorPlane = $("floorPlane"), horizon = $("horizon"),
+      hudTL = $("hudTL"), hudTR = $("hudTR"), hudBL = $("hudBL"), status = $("status"),
+      replay = $("replay"), lockup = $("lockup");
+  var W = stage.clientWidth, H = stage.clientHeight;
+  window.addEventListener("resize", function(){ W = stage.clientWidth; H = stage.clientHeight; });
+
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------- render(t) ---------------- */
+  function render(t, still){
+    /* background */
+    floor.style.opacity = (0.9 * outCubic(prog(t, 0, 900))).toFixed(3);
+    floorPlane.style.backgroundPosition = "0 " + (640 * outCubic(prog(t, 0, T.end))).toFixed(1) + "px";
+    horizon.style.transform = "scaleX(" + outExpo(prog(t, 80, 1300)).toFixed(4) + ")";
+    horizon.style.opacity = (prog(t, 80, 300)).toFixed(3);
+
+    /* HUD */
+    var hud = 0.55 * prog(t, 250, 600);
+    hudTL.style.opacity = hudTR.style.opacity = hudBL.style.opacity = hud.toFixed(3);
+    status.textContent = t >= T.end ? "Système prêt" : "Assemblage " + ("00" + Math.round(100 * prog(t, 0, T.end))).slice(-3) + "%";
+
+    /* bands */
+    var flashFade = prog(t, T.flash - 40, 520);
+    ORDER.forEach(function(idx, k){
+      var b = bands[idx];
+      var s = T.band0 + k * T.bandStep;
+      var appear = prog(t, s, 150);
+      var sp = outBack(prog(t, s, T.slide));
+      var off = (1 - sp) * 175;
+      b.g.setAttribute("transform", "translate(" + (-b.ux * off).toFixed(2) + " " + (-b.uy * off).toFixed(2) + ")");
+      b.g.setAttribute("opacity", appear.toFixed(3));
+
+      var ps = inOutCubic(prog(t, s, T.trace));
+      b.stroke.setAttribute("stroke-dashoffset", (1 - ps).toFixed(4));
+      b.stroke.setAttribute("opacity", (ps > 0 ? 1 - flashFade : 0).toFixed(3));
+
+      if (ps > 0 && ps < 1){
+        var pt = b.stroke.getPointAtLength(ps * b.len);
+        b.spark.setAttribute("cx", pt.x.toFixed(1)); b.spark.setAttribute("cy", pt.y.toFixed(1));
+        b.spark.setAttribute("opacity", Math.min(1, Math.sin(Math.PI * ps) * 2.2).toFixed(3));
+      } else b.spark.setAttribute("opacity", 0);
+
+      var pw = outCubic(prog(t, s + T.wipeDelay, T.wipe));
+      var e = .16;
+      b.s1.setAttribute("offset", Math.max(0, pw * (1 + e) - e).toFixed(4));
+      b.s2.setAttribute("offset", Math.min(1, pw * (1 + e)).toFixed(4));
+      b.fills.setAttribute("opacity", pw > 0 ? 1 : 0);
+      b.white.setAttribute("opacity", inOutCubic(prog(t, T.flash - 80 + k * 22, 520)).toFixed(3));
+    });
+
+    /* completion flash */
+    var f = bump(t, T.flash, 110, 760);
+    halo.style.opacity = Math.max(f, 0.13 * prog(t, T.flash + 300, 900)).toFixed(3);
+    halo.style.transform = "scale(" + (0.75 + 0.35 * prog(t, T.flash, 900)).toFixed(3) + ")";
+    var glow = 26 * f;
+    svg.style.filter = "drop-shadow(0 0 " + (glow + 14).toFixed(1) + "px rgba(25,227,255," + (0.08 + 0.6 * f).toFixed(3) + "))" +
+                       (f > .02 ? " brightness(" + (1 + .35 * f).toFixed(3) + ")" : "");
+    var rp = prog(t, T.flash, 900), rp2 = prog(t, T.flash + 90, 1000);
+    ring.setAttribute("r", (330 + 900 * outExpo(rp)).toFixed(1));
+    ring.setAttribute("stroke-width", (12 * (1 - rp)).toFixed(2));
+    ring.setAttribute("opacity", (rp > 0 && rp < 1 ? .85 * (1 - rp) : 0).toFixed(3));
+    ring2.setAttribute("r", (300 + 1150 * outExpo(rp2)).toFixed(1));
+    ring2.setAttribute("opacity", (rp2 > 0 && rp2 < 1 ? .55 * (1 - rp2) : 0).toFixed(3));
+    var fl = prog(t, T.flash - 20, 260), flo = 1 - prog(t, T.flash + 160, 700);
+    flare.style.opacity = (fl > 0 ? flo : 0).toFixed(3);
+    flare.style.transform = "translate(-50%,-50%) scaleX(" + outExpo(fl).toFixed(4) + ") scaleY(" + (1 + 1.5 * f).toFixed(2) + ")";
+
+    /* wind */
+    for (var n = 0; n < lines.length; n++){
+      var L = lines[n], lp = prog(t, L.s, L.d);
+      if (lp <= 0 || lp >= 1){ L.el.style.opacity = 0; continue; }
+      var x = -L.len + (W + 2 * L.len) * (0.15 * lp + 0.85 * outCubic(lp));
+      L.el.style.opacity = Math.sin(Math.PI * lp).toFixed(3);
+      L.el.style.transform = "translate3d(" + x.toFixed(1) + "px," + (L.y * H).toFixed(1) + "px,0)";
+    }
+
+    /* wordmark letters: rise + blur-to-sharp + cyan-to-white */
+    letters.forEach(function(c, j){
+      var s = T.word + j * T.wordStep;
+      var p = prog(t, s, T.wordDur);
+      if (p >= 1){
+        c.style.transform = "none"; c.style.filter = "none"; c.style.opacity = 1; c.style.color = ""; c.style.textShadow = "";
+        return;
+      }
+      var e2 = outExpo(p);
+      c.style.opacity = outCubic(prog(t, s, 380)).toFixed(3);
+      c.style.transform = "translate3d(" + (-(1 - e2) * .18).toFixed(3) + "em," + ((1 - e2) * .62).toFixed(3) + "em,0) scaleY(" + (1 + (1 - e2) * .35).toFixed(3) + ")";
+      c.style.filter = "blur(" + ((1 - outCubic(p)) * 14).toFixed(2) + "px)";
+      var m = outCubic(prog(t, s + 120, T.wordDur - 120));
+      var r = Math.round(25 + (245 - 25) * m), g = Math.round(227 + (248 - 227) * m), bl = Math.round(255 + (252 - 255) * m);
+      c.style.color = "rgb(" + r + "," + g + "," + bl + ")";
+      c.style.textShadow = "0 0 " + (18 * (1 - m)).toFixed(1) + "px rgba(25,227,255," + (0.9 * (1 - m)).toFixed(2) + ")";
+    });
+
+    /* rule */
+    var rr = outExpo(prog(t, T.rule, T.ruleDur));
+    rule.style.transform = "scaleX(" + rr.toFixed(4) + ")";
+    rule.style.setProperty("--head", (rr > 0 && rr < .995 ? 1 : 0));
+
+    /* tagline: decode left to right */
+    var tick = Math.floor(t / 45);
+    tagChars.forEach(function(o, k){
+      var s = T.tag + k * T.tagStep;
+      if (t < s){ o.el.style.opacity = 0; o.el.style.setProperty("--g", 0); return; }
+      o.el.style.opacity = 1;
+      if (o.ch === " "){ return; }
+      var real = prog(t, s + 95, 220);
+      o.el.style.color = real >= 1 ? "" : "rgba(245,248,252," + (0.74 * real).toFixed(3) + ")";
+      if (real < 1){
+        o.el.dataset.g = GLYPHS.charAt((tick * 7 + k * 13) % GLYPHS.length);
+        o.el.style.setProperty("--g", (1 - real).toFixed(3));
+      } else o.el.style.setProperty("--g", 0);
+    });
+
+    /* replay button */
+    replay.style.opacity = (0.35 + 0.65 * prog(t, T.end - 300, 500)).toFixed(3);
+
+    /* shimmer: one bright pass after the wordmark, then a soft glint every 7 s */
+    var shMark = 0, shWord = 0, posM = 0, posW = 0;
+    if (!still && t >= T.shine0){
+      var cyc = Math.floor((t - T.shine0) / T.shineEvery);
+      var local = (t - T.shine0) - cyc * T.shineEvery;
+      var amp = cyc === 0 ? 1 : .55;
+      var pm = local / T.shineDur;
+      var pwd = (local - 260) / T.shineDur;
+      if (pm >= 0 && pm <= 1){ shMark = amp * .6 * Math.sin(Math.PI * pm); posM = inOutCubic(pm); }
+      if (pwd >= 0 && pwd <= 1){ shWord = amp * .9 * Math.sin(Math.PI * pwd); posW = inOutCubic(pwd); }
+    }
+    shineG.setAttribute("opacity", shMark.toFixed(3));
+    shineR.setAttribute("transform", "translate(" + (-150 + 2900 * posM).toFixed(1) + " 0) skewX(-24)");
+    wmShine.style.opacity = shWord.toFixed(3);
+    wmShine.style.backgroundPosition = (88 - 76 * posW).toFixed(2) + "% 0";
+  }
+
+  /* ---------------- clock ---------------- */
+  var start = 0, raf = 0, paused = false;
+  function frame(now){
+    if (paused) return;
+    var t = now - start;
+    render(t, false);
+    raf = requestAnimationFrame(frame);
+  }
+  function play(){
+    cancelAnimationFrame(raf);
+    paused = false;
+    if (reduced){ render(T.end, true); return; }
+    start = performance.now();
+    raf = requestAnimationFrame(frame);
+  }
+  replay.addEventListener("click", play);
+
+  /* deterministic seek hook (testing / stills) */
+  window.__airSeek = function(t){ paused = true; cancelAnimationFrame(raf); render(t, false); };
+
+  if (window.matchMedia){
+    var mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var onChange = function(){ reduced = mq.matches; if (reduced){ cancelAnimationFrame(raf); render(T.end, true); } };
+    if (mq.addEventListener) mq.addEventListener("change", onChange); else if (mq.addListener) mq.addListener(onChange);
+  }
+
+  function rectOf(){ var a = document.querySelector(".markwrap svg").getBoundingClientRect(); return { sx: a.left, sy: a.top, sw: a.width, sh: a.height }; }
+  function done(ms){ setTimeout(function(){ try{ parent.postMessage({ airIntroDone: 1, rect: rectOf() }, "*"); }catch(e){} }, ms); }
+  window.addEventListener("message", function(e){ if (e.data && e.data.airIntroMove) document.body.classList.add("moving"); });
+  if (reduced){ render(T.end, true); done(600); return; }
+  render(0, false);
+  var go = false;
+  function begin(){ if (go) return; go = true; measure(); play(); done(T.end + 1700); }
+  if (document.fonts && document.fonts.load){
+    Promise.all([
+      document.fonts.load('800 64px "Unbounded"'),
+      document.fonts.load('700 16px "Syncopate"'),
+      document.fonts.load('500 12px "JetBrains Mono"')
+    ]).then(begin, begin);
+    setTimeout(begin, 1400);
+  } else begin();
+})();
+</script>
+
+</body></html></template><script id="tjdata" type="application/json">{"src": {"boat": [{"t": "Capteur", "n": "GPS RTK", "hw": "ArduSimple simpleRTK2B (puce u-blox ZED-F9P) et antenne ANN-MB", "sw": "Logiciel interne du récepteur", "proto": "Liaison série vers la carte", "lat": [20, 40], "d": "Le récepteur calcule la position au centimètre 10 fois par seconde. Chaque position porte l’heure GPS exacte de la mesure."}, {"t": "Embarqué", "n": "Balise du bateau", "hw": "Carte ESP32-S3", "sw": "Firmware de la balise (S1)", "proto": "Trame binaire signée de 48 octets", "lat": [2, 5], "d": "Le firmware lit la position, ajoute le cap et la gîte, signe la trame pour qu’on ne puisse pas la falsifier, puis l’envoie aussitôt."}], "wind": [{"t": "Capteur", "n": "Anémomètre de la bouée au vent", "hw": "Gill WindSonic M, à 2 m au-dessus de l’eau", "sw": "Logiciel interne de l’anémomètre", "proto": "Liaison série vers la carte", "lat": [125, 250], "d": "Mesure le vent par ultrasons 4 fois par seconde. Chaque mesure part dès qu’elle existe ; la moyenne sur 10 s est calculée en plus, pour la tendance."}, {"t": "Embarqué", "n": "Balise de la bouée", "hw": "Carte ESP32-S3 et centrale inertielle", "sw": "Firmware des bouées (S2)", "proto": "Trame binaire signée", "lat": [3, 6], "d": "Corrige la direction du vent avec le compas et les mouvements de la bouée, ajoute la position GPS de la bouée, signe et envoie."}], "chrono": [{"t": "Horloge", "n": "Heure GPS", "hw": "Base RTK (heure GPS)", "sw": "chrony", "proto": "Heure GPS et NTP", "lat": [0, 0], "d": "L’horloge de référence est l’heure GPS ; les ordinateurs du site s’y calent à quelques millisecondes près, et chaque position porte l’heure GPS exacte de sa mesure. Tous les ordinateurs du site s’y calent, y compris les PC des équipes et de la régie."}, {"t": "Logiciel", "n": "Console de direction de course", "hw": "Écran du PC course", "sw": "Console de direction de course (S10)", "proto": "—", "lat": [1, 2], "d": "Le comité programme la procédure : par exemple, départ à 14 h 00 min 00 s. Il peut la retarder, rappeler la flotte ou annuler."}, {"t": "Logiciel", "n": "Moteur de course et bus", "hw": "ASUS NUC 14 Pro du PC course", "sw": "Moteur de course (S8) et broker Mosquitto (S5)", "proto": "MQTT, message conservé", "lat": [1, 3], "d": "Publie l’heure exacte du départ et l’étape de la procédure, puis les temps de passage et d’arrivée. Le message est conservé par le broker : un destinataire qui se connecte en cours de route reçoit aussitôt l’état du chrono."}]}, "path": {"4g": [{"t": "Émission", "n": "Modem 4G", "hw": "SIMCom A7670E, SIM IoT multi-opérateurs", "sw": "Pile réseau du modem", "proto": "UDP sur 4G", "lat": [30, 150], "d": "Le modem envoie la trame à l’antenne relais la plus proche. C’est l’étape la plus variable : quelques dizaines de millisecondes en temps normal, beaucoup plus si la foule sature l’antenne."}, {"t": "Transport", "n": "Réseau de l’opérateur et Internet", "hw": "Antenne relais, réseau de l’opérateur", "sw": "—", "proto": "UDP", "lat": [10, 40], "d": "La trame traverse le réseau de l’opérateur jusqu’à Internet, puis jusqu’à notre serveur."}, {"t": "Relais", "n": "Hub cloud", "hw": "Serveur virtuel hébergé en France", "sw": "Récepteur UDP (S4)", "proto": "UDP", "lat": [1, 3], "d": "Vérifie la signature et rejette toute trame falsifiée ou rejouée, puis relaie vers le site."}, {"t": "Transport", "n": "Tunnel vers le site", "hw": "Fibre du site, routeur UniFi", "sw": "WireGuard", "proto": "Tunnel chiffré", "lat": [8, 30], "d": "Un tunnel chiffré et permanent amène la trame jusqu’au PC course."}, {"t": "Logiciel", "n": "Bus de données", "hw": "ASUS NUC 14 Pro du PC course", "sw": "Récepteur et broker Mosquitto (S5)", "proto": "MQTT", "lat": [1, 3], "d": "La trame est décodée, fusionnée avec la radio de secours, horodatée, puis publiée sur le bus. Le moteur de course et l’enregistreur la reçoivent en même temps que tous les autres abonnés."}], "radio": [{"t": "Émission", "n": "Radio LoRa 868 MHz", "hw": "Adafruit RFM95W", "sw": "Firmware (créneau calé sur l’heure GPS)", "proto": "LoRa, trame de 12 octets", "lat": [30, 40], "d": "Chaque balise émet dans son créneau de la seconde GPS, donc jamais en même temps qu’une autre. Le temps d’antenne est d’environ 21 ms."}, {"t": "Réception", "n": "Récepteur radio", "hw": "Carte ESP32-S3 et RFM95W, antenne sur un petit mât", "sw": "Firmware du récepteur", "proto": "Câble USB", "lat": [1, 2], "d": "Deux récepteurs identiques écoutent en parallèle : si l’un tombe, l’autre continue."}, {"t": "Logiciel", "n": "Bus de données", "hw": "ASUS NUC 14 Pro du PC course", "sw": "Passerelle radio (S3) et broker Mosquitto (S5)", "proto": "MQTT", "lat": [1, 3], "d": "La passerelle vérifie la trame, supprime les doublons avec la 4G et publie sur le bus."}]}, "dest": {"equipe": [{"t": "Transport", "n": "Réseau des équipes", "hw": "Commutateur et câble Ethernet, même longueur pour toutes", "sw": "MQTT en lecture seule", "proto": "MQTT", "lat": [0.3, 1], "d": "Le broker envoie le même message à toutes les équipes, à moins d’une milliseconde d’écart entre la première et la dernière."}, {"t": "Destinataire", "n": "Programme de l’équipe", "hw": "PC à terre de l’équipe", "sw": "Client MQTT (Python, JavaScript…) qui alimente l’IA de l’équipe", "proto": "—", "lat": [0, 1], "d": "Le programme de l’équipe reçoit positions, vent et état de la course, et décide de sa tactique."}, {"t": "Terminal", "n": "Bateau de l’équipe", "hw": "Électronique de l’équipe", "sw": "Liaison choisie par l’équipe", "proto": "Libre", "lat": [20, 150], "ext": 1, "d": "Les consignes repartent vers le bateau par la liaison de l’équipe. Ce délai dépend d’elle et ne fait pas partie du système officiel."}], "comite": [{"t": "Transport", "n": "Réseau de l’organisation", "hw": "Commutateur, câble ou Wi-Fi dédié", "sw": "MQTT sur WebSocket", "proto": "WebSocket", "lat": [0.5, 2], "d": "Les consoles se branchent sur le même bus, par une connexion web permanente."}, {"t": "Destinataire", "n": "Consoles du comité", "hw": "Écrans du PC course, tablette de l’arbitre", "sw": "Consoles web (S10)", "proto": "—", "lat": [5, 16], "d": "L’affichage se met à jour à la prochaine image de l’écran, soit au plus 16 ms plus tard."}], "media": [{"t": "Transport", "n": "Réseau de l’organisation", "hw": "Câble", "sw": "MQTT sur WebSocket", "proto": "WebSocket", "lat": [0.5, 2], "d": "La régie et le commentateur reçoivent les données en même temps que le comité."}, {"t": "Destinataire", "n": "Régie et commentateur", "hw": "PC de régie, tablette du commentateur", "sw": "Incrustations OBS (S15), souffleur (S16)", "proto": "—", "lat": [5, 16], "d": "Les incrustations (positions, classement, vent) se mettent à jour en quelques millisecondes."}, {"t": "Terminal", "n": "Image diffusée", "hw": "Mini-PC de régie + OBS Studio, puis YouTube Live", "sw": "Encodage vidéo", "proto": "RTMP / SRT", "lat": [5000, 20000], "ext": 1, "d": "C’est la vidéo, et non les données, qui prend du temps : 1 à 3 s sur place, 5 à 20 s sur YouTube. Les incrustations sont calées sur l’image dans la régie."}], "public": [{"t": "Transport", "n": "Tunnel vers le cloud", "hw": "Fibre du site", "sw": "WireGuard", "proto": "Tunnel chiffré", "lat": [8, 30], "d": "Le PC course envoie un seul flux public vers le cloud."}, {"t": "Relais", "n": "Hub cloud et CDN", "hw": "Serveur virtuel, Cloudflare", "sw": "Relais WebSocket (S4)", "proto": "WebSocket", "lat": [2, 10], "d": "Le cloud démultiplie ce flux pour des milliers de spectateurs, sans charger le site."}, {"t": "Transport", "n": "Internet et 4G du spectateur", "hw": "Box ou téléphone du spectateur", "sw": "—", "proto": "WebSocket", "lat": [30, 300], "d": "Le délai dépend de la connexion du spectateur ; sur la plage, la 4G peut être chargée."}, {"t": "Destinataire", "n": "Application publique", "hw": "iPhone, ordinateur", "sw": "PWA (S14)", "proto": "—", "lat": [16, 50], "d": "La carte se met à jour en douceur, avec un léger lissage."}, {"t": "Réglage", "n": "Différé volontaire", "hw": "—", "sw": "Réglable au PC course", "proto": "—", "lat": [1000, 1000], "delay": 1, "d": "Toutes les équipes recevant déjà toutes les données, ce différé ne protège plus rien. 1 s (acté), juste pour lisser l’animation."}]}}</script><template id="protoSrc"><title>AI Regatta en direct</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
@@ -1093,6 +1632,20 @@ renderAll(true);requestAnimationFrame(loop);
 })();
 </script>
 </template><script>
+(function(){const h=decodeURIComponent(location.hash.slice(1));if(h&&h!=='essentiel')return;
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const box=document.getElementById('intro'),f=document.getElementById('introFrame');if(!box||!f)return;
+ let ended=false;const finish=()=>{if(ended)return;ended=true;document.body.classList.remove('introon');setTimeout(()=>document.body.classList.remove('introland'),1500);box.classList.add('out');setTimeout(()=>box.remove(),700)};
+ const move=r=>{const t=document.querySelector('.brand .logo svg');if(ended)return;if(!t||!r){finish();return}window.scrollTo(0,0);
+  const R=t.getBoundingClientRect(),sc=R.width/r.sw,tx=R.left-sc*r.sx,ty=R.top-sc*r.sy;
+  try{f.contentWindow.postMessage({airIntroMove:1},'*')}catch(e){}box.classList.add('clear');document.body.classList.add('introland');document.getElementById('introSkip').hidden=true;
+  f.style.transition='transform 1.2s cubic-bezier(.7,0,.2,1)';requestAnimationFrame(()=>requestAnimationFrame(()=>{f.style.transform=`translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px) scale(${sc.toFixed(4)})`}));
+  setTimeout(finish,1250)};
+ box.hidden=false;document.body.classList.add('introon');f.srcdoc=document.getElementById('introSrc').innerHTML;
+ addEventListener('message',e=>{if(e.source===f.contentWindow&&e.data&&e.data.airIntroDone)move(e.data.rect)});
+ document.getElementById('introSkip').addEventListener('click',finish);addEventListener('keydown',e=>{if(e.key==='Escape')finish()},{once:true});
+ setTimeout(finish,14000)})();
+
 (function(){const $=s=>document.querySelector(s);const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TJ=JSON.parse($('#tjdata').textContent);const tjs={src:'boat',path:'4g',dest:'equipe'};let sel=0,timer=null;
