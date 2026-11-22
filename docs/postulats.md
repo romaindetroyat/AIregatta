@@ -1,6 +1,6 @@
 # AI Regatta — Postulats
 
-> Le paramétrage de départ du dossier. Depuis le 21 novembre 2026, le règlement du comité d’organisation (Twelve Med Events, V1.4) fait foi : chaque postulat dit s’il est **décidé par le comité**, s’il est *notre proposition* au comité, s’il est acté de notre côté (technique) ou s’il reste à confirmer.
+> Le paramétrage du dossier. Le règlement du comité d’organisation (Twelve Med Events, V1.4, reçu le 21 novembre 2026) fait foi : chaque postulat dit s’il est **décidé par le comité**, s’il est *notre proposition*, s’il est acté de notre côté (technique) ou s’il reste à confirmer.
 
 Dernière mise à jour : 22 novembre 2026.
 
@@ -13,6 +13,8 @@ Dernière mise à jour : 22 novembre 2026.
 | P03 | Lieu | Plages du Mourillon, autour du Fort Saint-Louis (Toulon), dans le cadre de la Toulon Provence Regatta ; zone de régate matérialisée par des bouées | **Décidé par le comité** |
 | P04 | Parcours | Parcours construit n°3 : porte 1-2 (départ, porte et arrivée), bouée au vent 3 laissée à bâbord, deux tours ; zone de pénalité P1-P2. Longueur fixée par l’organisateur (≈ 200 m retenus pour les calculs) | **Décidé par le comité** |
 | P05 | Réglementation du plan d’eau | Plan d’eau validé ; démarches hors du périmètre de ce dossier | Acté |
+| P57 | Organisateur | L’association Twelve Med Events, autorité organisatrice, sous le patronage de la DGA ; l’AI Regatta fait partie de la Toulon Provence Regatta | **Décidé par le comité** |
+| P58 | Épreuves | Six types de régates : slaloms en duel et Battleboats (bateaux à moteur), régates de voiliers télécommandés ou sous IA. Ce dossier ne couvre que les voiliers sous IA | **Décidé par le comité** |
 
 ## Bateaux et équipes
 
@@ -31,9 +33,12 @@ Dernière mise à jour : 22 novembre 2026.
 | P44 | Reprises de télécommande | Proposition : chaque reprise de télécommande est déclarée par l’équipe, chronométrée par le logiciel et montrée à l’arbitre ; journal des commandes fourni en cas de réclamation | *Notre proposition* |
 | P45 | Mise à jour du logiciel | Interdite pendant une manche, libre entre les manches | *Notre proposition* |
 | P48 | Kit équipes | En français et en anglais ; bac à sable ouvert en février 2027 | Acté |
-| P11 | Équité des informations | Toutes les équipes reçoivent les mêmes données au même instant : positions des bateaux et des bouées, vent, chrono | Acté |
+| P11 | Équité des informations | Proposition : toutes les équipes reçoivent les mêmes données officielles au même instant (positions des bouées et vent au niveau 1 ; des bateaux, chrono et classement au niveau 2). Le règlement n’en dit rien | *Notre proposition* |
 | P12 | Assistant tactique | Aucun fourni : la tactique est le travail des équipes | Acté |
-| P13 | Présence des équipes | Toutes sur place | Acté |
+| P13 | Présence des équipes | Sur place : arrivée une semaine avant la compétition, chaîne d’inscription du 12 au 14 mai (règlement § 6) | **Décidé par le comité** |
+| P59 | Inscription | En ligne sur battleboats.fr, ouverte à tous (écoles, entreprises, particuliers, clubs) ; 20 € par personne, moins 20 € par bateau inscrit | **Décidé par le comité** |
+| P60 | Équipement des équipes | Batteries § 12, 48 V au plus ; lasers de classe 1 ou 1M seulement ; son ≤ 80 dBA à 1 m ; air comprimé ≤ 4 bars ; radiocommande conforme à la réglementation française ; numéro de 10 cm sur la voile | **Décidé par le comité** |
+| P61 | Assurance et responsabilité | Chaque bateau présente une attestation de responsabilité civile ; l’équipe décide seule de courir (§ 16). Hors de notre périmètre | **Décidé par le comité** |
 
 ## Course et comité
 
@@ -42,7 +47,7 @@ Dernière mise à jour : 22 novembre 2026.
 | P14 | Règles de course | Le règlement de l’organisateur (Twelve Med Events, V1.4) fait foi ; RCV pour le parcours construit. Nos règles v0.3 le reprennent et ajoutent nos propositions | **Décidé par le comité** |
 | P15 | Arbitrage | Proposition : deux arbitres à terre ; le logiciel signale, un arbitre confirme toujours. Le règlement ne décrit que l’arbitre de l’homologation | *Notre proposition* |
 | P16 | Sécurité | Une organisation sur l’eau récupère les bateaux en difficulté ; le bateau de sécurité peut dérouter un bateau. Télécommande de fait indispensable (mode manuel) | **Décidé par le comité** |
-| P17 | Chrono | Piloté par le PC course, transmis aux équipes, aux médias et au public | Acté |
+| P17 | Chrono | Proposition (niveau 2) : chrono piloté par le PC course, transmis aux équipes, aux médias et au public | *Notre proposition* |
 | P18 | Signaux du départ | Procédure RCV 26 (5, 4, 1 minute, départ) ; une minute par dérogation. Proposition : signaux sonores déclenchés par le PC course à l’heure GPS | **Décidé par le comité** |
 | P19 | Bouées | Bouées matérialisant la zone et le parcours ; chacun relève leurs coordonnées ; l’organisateur cherche à les transmettre en temps réel (RTK et vent) | **Décidé par le comité** |
 | P42 | Homologation | Homologation statique par un arbitre avant les régates (chaîne d’inscription, 12 – 14 mai) ; pas d’épreuve de qualification sur l’eau | **Décidé par le comité** |
@@ -73,20 +78,23 @@ Dernière mise à jour : 22 novembre 2026.
 | N° | Sujet | Valeur | Statut |
 |---|---|---|---|
 | P56 | Préparation sur place | Régate de préchauffage au premier trimestre 2027 ; bâtiment prêté un mois ; arrivée des équipes une semaine avant | **Décidé par le comité** |
+| P62 | Image et données | En participant, les équipes autorisent l’organisateur et ses partenaires à utiliser leurs images et leurs données (§ 15) : la vidéo et l’application peuvent les montrer | **Décidé par le comité** |
+| P63 | Niveau 1 : demandé par le comité | Transmettre en temps réel la position RTK des bouées et le vent (règlement § 5 : l’organisateur cherche des partenaires). ≈ 6 300 € de matériel | **Décidé par le comité** |
+| P64 | Niveau 2 : notre proposition | Balise dans chaque bateau, jugement assisté, reprises de télécommande chronométrées, application publique, vidéo. ≈ 15 300 € de plus ; à faire retenir par le comité | *Notre proposition* |
 | P32 | Développement logiciel | Meridia, avec des agents IA (GSD) ; 2 à 3 mois de travail | Acté |
 | P51 | Technique | Une personne fiable porte la technique : balises, bouées, réseau, caméras ; un suppléant à former | Acté |
 | P33 | Licence du logiciel | Non open source | Acté |
 | P34 | Budget matériel | ≈ 21 600 €, imprévus compris, caméras embarquées comprises ; ordinateurs neufs ou existants à trancher. Le financement est géré par une autre instance | À confirmer |
 | P35 | Présentation | Charte Meridia, version claire | Acté |
 | P49 | Hors de notre périmètre | Règlement de course (comité d’organisation : Twelve Med Events), réglementation et autorisations, porteur juridique et assurance, sécurité du public et secours, financement du matériel, accueil du public et communication, recrutement des équipes, tracé et longueur du parcours : gérés par d’autres instances | Acté |
-| P50 | Niveaux de repli | Quatre niveaux (complet, régate suivie, régate simple, démonstration) et trois revues de feu vert : fin janvier, mi-mars, mi-avril | Acté |
+| P50 | Niveaux de repli | Deux niveaux : niveau 1, ce que demande le règlement (bouées RTK et vent) ; niveau 2, notre proposition (balise à bord, jugement assisté, vidéo). Niveaux de repli et trois revues de feu vert conservés | *Notre proposition* |
 
 ## Vent
 
 | N° | Sujet | Valeur | Statut |
 |---|---|---|---|
-| P20 | Mesure du vent sur l’eau | Un anémomètre sur la bouée au vent ; un second sous le vent en option | Acté |
-| P21 | Vent à terre | Station météo Davis au PC course | Acté |
+| P20 | Mesure du vent sur l’eau | Réponse au règlement (§ 5, niveau 1) : un anémomètre sur la bouée 3 ; un second en option | *Notre proposition* |
+| P21 | Vent à terre | Proposition (niveau 2) : station météo Davis au PC course, vent de référence à terre | *Notre proposition* |
 
 ## Technique
 
@@ -94,10 +102,10 @@ Dernière mise à jour : 22 novembre 2026.
 |---|---|---|---|
 | P22 | Distance PC course ↔ parcours | 500 m au plus ; en pratique ≈ 150 m | Acté |
 | P23 | Infrastructure du site | Électricité et Internet filaire disponibles | Acté |
-| P24 | Transmission des positions | 4G en principal, radio 868 MHz en secours ; Wi-Fi local en option, à tester | À confirmer |
+| P24 | Transmission des positions | 4G en principal, radio 868 MHz en secours. Le règlement conseille le Wi-Fi en 5 GHz aux équipes et signale que l’organisation utilise des radios HF (§ 13) : plan de fréquences à partager avec elle | À confirmer |
 | P25 | Bus de données | Mosquitto, au PC course, avec un serveur de secours | Acté |
 | P26 | Synchronisation | Priorité absolue : écart d’horloge < 5 ms entre équipes, comité et médias | Acté |
-| P27 | Caméras | 12 m de hauteur au maximum | Acté |
+| P27 | Caméras | Caméras fixes de 12 m au plus. Le règlement interdit les drones aériens et le survol de la zone, sauf dérogation (§ 10) | **Décidé par le comité** |
 | P28 | Choix du matériel | Uniquement du matériel bien noté ; sinon validé au banc | Acté |
 | P29 | Ordinateurs | Réutilisation d’ordinateurs existants s’ils respectent le cahier des charges | À confirmer |
 | P40 | PC course et caméras | Au premier étage du bâtiment La Plage : à confirmer avec l’organisateur, la zone étant autour du Fort Saint-Louis | À confirmer |
@@ -106,6 +114,6 @@ Dernière mise à jour : 22 novembre 2026.
 
 | N° | Sujet | Valeur | Statut |
 |---|---|---|---|
-| P30 | Public | Sur place, et sur l’application (iPhone, ordinateur), avec 1 s de différé | Acté |
-| P31 | Commentaire | Commentateur humain, en français, aidé par le logiciel : lignes de vent et laylines, souffleur des moments forts, fiches prêtes à lire, résumé automatique | Acté |
+| P30 | Public | Proposition (niveau 2) : sur place et sur l’application, avec 1 s de différé. Le règlement prévoit seulement le tableau officiel en ligne (battleboats.fr) | *Notre proposition* |
+| P31 | Commentaire | Proposition (niveau 2) : commentateur humain, aidé par le logiciel (lignes de vent et laylines, souffleur, fiches, résumé automatique) | *Notre proposition* |
 | P41 | Fréquentation | 500 à 2 000 spectateurs en même temps ; Wi-Fi public conseillé au village | Acté |
