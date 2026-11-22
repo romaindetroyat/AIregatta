@@ -305,6 +305,8 @@ p{margin:0}
 .rgxl{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
 .rgxl li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding-bottom:10px;border-bottom:1px dashed var(--filet)}
 .rgxl b{font:500 1.02rem var(--f-titre)}.rgxl span{grid-column:1/-1;font-size:13.5px;color:var(--ivoire-2)}
+.rgx2{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}.rgxl .gpp{color:var(--ivoire)}
+@media (max-width:900px){.rgx2{grid-template-columns:minmax(0,1fr)}}
 .rgxl small{grid-row:1;grid-column:2;font:500 11px var(--f-mono);color:var(--lime-texte);white-space:nowrap}
 @media (max-width:900px){.rgx{grid-template-columns:minmax(0,1fr)}}
 /*rg:fin*//*al:debut*/.rgband{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin:4px 0 22px;padding:16px 18px;border-radius:18px;background:var(--surface);box-shadow:var(--arete)}
@@ -958,7 +960,7 @@ main>section:first-child,main>section.ess{padding-top:clamp(40px,5vw,64px)}
     <button type="button" class="modebtn" id="modeBtn">Mode complet</button>
     <ul>
       <li><a class="l" href="#accueil">Accueil</a></li>
-      <li><a class="l" href="#postulats-page">Postulats</a></li>
+      <li><a class="l" href="#postulats-page">Règlement</a></li>
       <li><a class="l" href="#dispositif">Dispositif</a></li>
       <li><a class="l" href="#a-bord">À bord</a></li>
       <li><a class="l" href="#donnees">Données</a></li>
@@ -968,7 +970,7 @@ main>section:first-child,main>section.ess{padding-top:clamp(40px,5vw,64px)}
       <li><a class="l" href="#materiel-page">Matériel</a></li>
       <li><a class="l" href="#projet">Projet</a></li>
       <li><a class="l" href="#feuille-de-route">Feuille de route</a></li>
-      <li><a class="l" href="#regles-page">Règlement</a></li>
+      <li><a class="l" href="#regles-page">Règles</a></li>
       <li><a class="l" href="#kit-equipes">Équipes</a></li>
       <li><a class="l" href="#questions-page">Questions</a></li>
       <li><a class="l" href="#glossaire-page">Glossaire</a></li>
@@ -1537,11 +1539,25 @@ body.moving .words{opacity:0;transition:opacity .4s}
   </div>
 </section>
 
+<section id="reglement">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="meta">Reçu le 21 novembre 2026</p><h2>Le <em>règlement</em></h2></div>
+      <div style="display:grid;gap:14px"><p class="muted">Règlement de course AI Regatta 2027, V1.4 du 15/10/2026, de l’association Twelve Med Events (autorité organisatrice), reçu le 21 novembre 2026 de Xavier Caux. Il fait foi. D’abord ce que nous en retenons, puis ce qui manque dans le document et ce que nous proposons, enfin nos propres postulats.</p>
+      <p class="muted" style="font-size:14px">Le document demande lui-même la position RTK des bouées et le vent en temps réel (§ 5) : c’est notre niveau 1.</p></div>
+    </div>
+    <div class="carte rgxc"><p class="meta"><span class="rsrc c">1 · Ce que nous retenons du document</span> 26 points</p>
+      <ul class="rgxl rgx2"><li><b>Dates</b><span>Inscriptions et homologation du 12 au 14 mai ; régates le samedi 15 mai dès 10 h ; report au dimanche 16 (courses finies à 14 h 30) ; remise des prix le 16 à 16 h 30</span><small>P02</small></li><li><b>Lieu</b><span>Plages du Mourillon, autour du Fort Saint-Louis (Toulon), dans le cadre de la Toulon Provence Regatta ; zone de régate matérialisée par des bouées</span><small>P03</small></li><li><b>Parcours</b><span>Parcours construit n°3 : porte 1-2 (départ, porte et arrivée), bouée au vent 3 laissée à bâbord, deux tours ; zone de pénalité P1-P2. Longueur fixée par l’organisateur (≈ 200 m retenus pour les calculs)</span><small>P04</small></li><li><b>Bateaux admis</b><span>Voile seule ; longueur hors tout de moins de 1 m, 1,30 m ou 2,70 m ; monocoques, multicoques, foils admis. Pas de jauge de classe</span><small>P07</small></li><li><b>Pilotage des bateaux</b><span>Mode autonome obligatoire de la ligne de départ à l’arrivée ; l’IA peut être embarquée ou à terre (télécommande actionnée par programme)</span><small>P10</small></li><li><b>Intelligence tactique</b><span>Au choix des équipes : embarquée ou à terre (règlement § 2c). Le kit et le bateau de référence partent d’une IA à terre</span><small>P37</small></li><li><b>Commande en course</b><span>Autonome en course ; télécommande permise pour rallier le départ, après l’arrivée, en cas de panne, de sortie de zone ou pour la pénalité ; chaque reprise : 30 s au plus et un tour de pénalité</span><small>P38</small></li><li><b>Présence des équipes</b><span>Sur place : arrivée une semaine avant la compétition, chaîne d’inscription du 12 au 14 mai (règlement § 6)</span><small>P13</small></li><li><b>Règles de course</b><span>Le règlement de l’organisateur (Twelve Med Events, V1.4) fait foi ; RCV pour le parcours construit. Nos règles v0.3 le reprennent et ajoutent nos propositions</span><small>P14</small></li><li><b>Sécurité</b><span>Une organisation sur l’eau récupère les bateaux en difficulté ; le bateau de sécurité peut dérouter un bateau. Télécommande de fait indispensable (mode manuel)</span><small>P16</small></li><li><b>Signaux du départ</b><span>Procédure RCV 26 (5, 4, 1 minute, départ) ; une minute par dérogation. Proposition : signaux sonores déclenchés par le PC course à l’heure GPS</span><small>P18</small></li><li><b>Bouées</b><span>Bouées matérialisant la zone et le parcours ; chacun relève leurs coordonnées ; l’organisateur cherche à les transmettre en temps réel (RTK et vent)</span><small>P19</small></li><li><b>Pénalité</b><span>Un tour par la zone P1-P2, fait à la fin, avant l’arrivée ; un tour aussi pour chaque reprise de télécommande</span><small>P53</small></li><li><b>Batteries</b><span>LiFePO4, ou lithium avec BMS intégré et enveloppe solide du commerce ; 48 V au plus. La balise passe à une batterie USB du commerce</span><small>P54</small></li><li><b>Communication avec les équipes</b><span>battleboats.fr, groupe WhatsApp, briefing chaque jour à 9 h 30 ; vidéo et fiche de présentation avant le 1er mai</span><small>P55</small></li><li><b>Préparation sur place</b><span>Régate de préchauffage au premier trimestre 2027 ; bâtiment prêté un mois ; arrivée des équipes une semaine avant</span><small>P56</small></li><li><b>Organisateur</b><span>L’association Twelve Med Events, autorité organisatrice, sous le patronage de la DGA ; l’AI Regatta fait partie de la Toulon Provence Regatta</span><small>P57</small></li><li><b>Épreuves</b><span>Six types de régates : slaloms en duel et Battleboats (bateaux à moteur), régates de voiliers télécommandés ou sous IA. Ce dossier ne couvre que les voiliers sous IA</span><small>P58</small></li><li><b>Inscription</b><span>En ligne sur battleboats.fr, ouverte à tous (écoles, entreprises, particuliers, clubs) ; 20 € par personne, moins 20 € par bateau inscrit</span><small>P59</small></li><li><b>Équipement des équipes</b><span>Batteries § 12, 48 V au plus ; lasers de classe 1 ou 1M seulement ; son ≤ 80 dBA à 1 m ; air comprimé ≤ 4 bars ; radiocommande conforme à la réglementation française ; numéro de 10 cm sur la voile</span><small>P60</small></li><li><b>Assurance et responsabilité</b><span>Chaque bateau présente une attestation de responsabilité civile ; l’équipe décide seule de courir (§ 16). Hors de notre périmètre</span><small>P61</small></li><li><b>Image et données</b><span>En participant, les équipes autorisent l’organisateur et ses partenaires à utiliser leurs images et leurs données (§ 15) : la vidéo et l’application peuvent les montrer</span><small>P62</small></li><li><b>Niveau 1 : demandé par le comité</b><span>Transmettre en temps réel la position RTK des bouées et le vent (règlement § 5 : l’organisateur cherche des partenaires). ≈ 6 300 € de matériel</span><small>P63</small></li><li><b>Homologation</b><span>Homologation statique par un arbitre avant les régates (chaîne d’inscription, 12 – 14 mai) ; pas d’épreuve de qualification sur l’eau</span><small>P42</small></li><li><b>Classement</b><span>Par type de régate, sur les résultats des courses. Disqualification : départ anticipé non réparé en 2 min, bouée mal passée, arrivée plus de 5 min après le premier. Proposition : points 1, 2, 3… et une course retirée dès 5 courues</span><small>P46</small></li><li><b>Caméras</b><span>Caméras fixes de 12 m au plus. Le règlement interdit les drones aériens et le survol de la zone, sauf dérogation (§ 10)</span><small>P27</small></li></ul></div>
+    <div class="carte rgxc rgxp" style="margin-top:14px"><p class="meta"><span class="rsrc p">2 · Ce qui manque dans le document</span> 12 points, et ce que nous proposons</p>
+      <ul class="rgxl rgx2"><li><b>Suivre les bateaux</b><span>Rien ne donne la position des bateaux : le départ, les passages et l’arrivée se jugent à l’œil.</span><span class="gpp">Notre proposition : Une balise scellée dans chaque bateau, posée à l’homologation (règle 2.5, P08).</span><small>Priorité 2</small></li><li><b>Juger au centimètre</b><span>Départ anticipé, bouée mal passée, tour P1-P2, fenêtre des 5 minutes : aucun moyen de mesure.</span><span class="gpp">Notre proposition : Le logiciel détecte, l’arbitre confirme toujours (règles 5.2 à 5.6).</span><small>Priorité 2</small></li><li><b>Mesurer les reprises de télécommande</b><span>La limite de 30 s est fixée, mais rien ne la mesure.</span><span class="gpp">Notre proposition : Chaque reprise déclarée par l’équipe (<code>manual_control</code>) et chronométrée (règle 3.4, P44).</span><small>Priorité 2</small></li><li><b>Transmettre les données aux équipes</b><span>Le règlement demande la position RTK des bouées et le vent en temps réel (§ 5), sans dire comment.</span><span class="gpp">Notre proposition : Une page web et un flux MQTT, mêmes données au même instant pour toutes les équipes (niveau 1, P11, P52).</span><small>Priorité 1</small></li><li><b>Les fréquences</b><span>Rien sur la radio des balises ; le Wi-Fi 5 GHz est seulement conseillé (§ 13).</span><span class="gpp">Notre proposition : La sous-bande 869,4 – 869,65 MHz réservée aux balises (règle 2.7).</span><small>À inscrire</small></li><li><b>L’arbitrage et les réclamations</b><span>Seul l’arbitre de l’homologation est décrit ; ni jury, ni délai de réclamation.</span><span class="gpp">Notre proposition : Deux arbitres à terre devant les rejeux ; réclamation par message dans les 10 minutes (règles 6.1, 6.2, P15).</span><small>À proposer</small></li><li><b>Le barème du classement</b><span>« Sur les résultats des courses », sans barème ni course retirée.</span><span class="gpp">Notre proposition : 1, 2, 3… ; une course retirée dès 5 courues (règle 6.4).</span><small>À proposer</small></li><li><b>Le nombre de courses et les poules</b><span>Une journée de course, sans nombre de courses ni format.</span><span class="gpp">Notre proposition : Poules de 4 à 5 bateaux, pour que deux arbitres suivent.</span><small>À proposer</small></li><li><b>Les limites de vent</b><span>Aucune.</span><span class="gpp">Notre proposition : Pas de départ sous 4 ni au-dessus de 20 nœuds, mesurés à la bouée 3 (règle 4.6, P43).</span><small>À proposer</small></li><li><b>Le logiciel pendant une course</b><span>Rien sur les mises à jour.</span><span class="gpp">Notre proposition : Pas de mise à jour pendant une course, libre entre les courses (règle 3.5, P45).</span><small>À proposer</small></li><li><b>La zone de bouée</b><span>Les RCV s’appliquent, mais des bateaux de 1 m à 2,70 m peuvent courir ensemble.</span><span class="gpp">Notre proposition : 4 m pour les bateaux de moins de 1,30 m ; à fixer pour 2,70 m (règle 1.4).</span><small>À proposer</small></li><li><b>Les signaux de départ</b><span>La procédure est fixée, pas la façon de la donner.</span><span class="gpp">Notre proposition : Signaux sonores déclenchés à l’heure GPS, pour l’une ou l’autre procédure (règle 4.3).</span><small>À proposer</small></li></ul></div>
+    <div class="carte rgxc rgxv" style="margin-top:14px"><p class="meta">À vérifier avec l’organisateur</p><ul class="fbul"><li>La date de la première masterclass : le mail annonce « vendredi 29 novembre », or le 29 novembre 2026 est un dimanche.</li><li>L’emplacement exact de la zone de régate et du PC course (le premier étage de La Plage convient-il ?).</li><li>Le nombre de voiliers IA attendus, et si plusieurs types de longueur courent ensemble.</li><li>La longueur du parcours n°3, la largeur de la porte 1-2 et la position de P1-P2.</li><li>Qui arbitre et qui forme le jury.</li><li>La date et le lieu de la régate de préchauffage.</li></ul></div>
+  </div>
+</section>
 <section id="postulats">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="meta">Paramétrage initial</p><h2>Les <em>postulats</em> de départ</h2></div>
-      <p class="muted">Ce sur quoi tout le dossier repose, comme les réglages de départ d’un programme. Si l’un d’eux n’est plus vrai, dites-le : on le modifie ici, et on met à jour les sections qu’il touche.</p>
+      <div><p class="meta">3 · Ce que nous posons nous-mêmes</p><h2>Nos <em>postulats</em></h2></div>
+      <p class="muted">Ce que le document ne dit pas et sur quoi le dossier repose : nos propositions au comité, nos choix techniques actés, et ce qui reste à confirmer. Si l’un d’eux n’est plus vrai, dites-le : on le modifie ici, et on met à jour les sections qu’il touche.</p>
     </div>
     <div class="carte pst">
       <div class="psttop"><div class="filters" id="pstF" role="group" aria-label="Filtrer les postulats"></div><div class="pstn" id="pstN"></div></div>
@@ -1570,6 +1586,7 @@ body.moving .words{opacity:0;transition:opacity .4s}
       <p class="muted">La zone de course est resserrée près de la côte nord de l’anse : un parcours d’environ 200 m (à valider), entre le Fort Saint-Louis et la petite digue. Ce schéma est aussi le sommaire du dossier. Cliquez sur un bateau, une bouée, le PC course ou une antenne : son rôle s’affiche, avec des liens vers les sections qui le détaillent. Vous pouvez aussi choisir une section dans la liste sous le plan, en survolant pour voir ce qu’elle concerne sur l’eau. Le plan est à l’échelle, avec un vent d’ouest.</p>
     </div>
 <div class="rgband" data-band="plan"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>La zone de régate, sur les plages du Mourillon, est matérialisée par des bouées (§ 5).</li><li>Parcours n°3 : porte 1-2, bouée 3, zone de pénalité P1-P2 ; chacun relève les coordonnées des bouées.</li><li>L’organisateur cherche à transmettre en temps réel la position RTK des bouées et le vent (§ 5).</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>Niveau 1 : les bouées 1, 2 et 3 balisées et le vent mesuré à la bouée 3, pour toutes les équipes.</li><li>Niveau 2 : une balise dans chaque bateau et un PC course, pour juger au centimètre.</li></ul></div></div>
+
 
 
 
@@ -1691,6 +1708,7 @@ body.moving .words{opacity:0;transition:opacity .4s}
 
 
 
+
     <div class="ctx">
       <div class="carte ctxt">
         <p class="meta">Le contexte</p>
@@ -1714,6 +1732,7 @@ body.moving .words{opacity:0;transition:opacity .4s}
       <div class="seg" role="group" aria-label="Matière de la coque"><button type="button" data-mat="fibre" aria-pressed="true">Fibre de verre ou bois</button><button type="button" data-mat="carbone" aria-pressed="false">Carbone</button><button type="button" data-mat="mat" aria-pressed="false">GPS en tête de mât</button></div></div>
     </div>
 <div class="rgband" data-band="bord"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>Le règlement ne prévoit aucune balise à bord.</li><li>Homologation statique par un arbitre (§ 11) ; batteries admises (§ 12) ; voiliers de moins de 1 m à 2,70 m, multicoques et foils (§ 3).</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>Niveau 2 : une balise scellée, ≈ 250 g, batterie USB admise par le § 12, antennes sur le pont ; posée et contrôlée à l’homologation, du 12 au 14 mai.</li><li>Lacune à combler : sans balise, ni le départ ni l’arrivée ne se jugent au centimètre.</li></ul></div></div>
+
 
 
 
@@ -1849,6 +1868,7 @@ body.moving .words{opacity:0;transition:opacity .4s}
       <p class="muted">La bouée au vent porte la même balise que les bateaux et un anémomètre à ultrasons. Un espar lesté la garde droite : la mesure reste juste malgré le clapot, et le compas corrige ce qui bouge encore. Les bouées de départ n’ont que la balise, en tête de mât : elles fixent les deux bouts de la ligne.</p>
     </div>
 <div class="rgband" data-band="bouee"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>Les bouées matérialisent la zone et le parcours ; chacun relève leurs coordonnées (§ 5).</li><li>L’organisateur veut leur position RTK et le vent en temps réel, s’il trouve des partenaires (§ 5).</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>Niveau 1 : balises RTK sur les bouées 1, 2 et 3 ; anémomètre sur la bouée 3 ; P1 et P2 relevées au centimètre chaque matin.</li></ul></div></div>
+
 
 
 
@@ -2007,6 +2027,7 @@ body.moving .words{opacity:0;transition:opacity .4s}
 
 
 
+
     <div class="carte inv">
       <div class="invtabs" id="invTabs" role="tablist" aria-label="Lieux"></div>
       <div class="invg" id="invG"></div>
@@ -2031,6 +2052,7 @@ body.moving .words{opacity:0;transition:opacity .4s}
 
 
 
+
     <div class="lx">
       <nav class="lnav" id="lnav" aria-label="Liaisons"></nav>
       <article class="carte ldet" id="ldet" aria-live="polite"></article>
@@ -2045,6 +2067,7 @@ body.moving .words{opacity:0;transition:opacity .4s}
       <p class="muted">Choisissez une donnée, un chemin et un destinataire : le schéma montre chaque étape, le matériel, le logiciel, et le temps qu’elle prend. Cliquez sur une étape pour l’expliquer.</p>
     </div>
 <div class="rgband" data-band="trajet"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>Communication officielle : battleboats.fr et WhatsApp (§ 4).</li><li>Aucun canal de données vers les équipes n’est défini.</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>Niveau 1 : bouées et vent diffusés par le hub cloud (page web et MQTT), au même instant pour tous.</li><li>Niveau 2 : flux complet par câble au PC course, horloge commune à quelques millisecondes.</li></ul></div></div>
+
 
 
 
@@ -2133,6 +2156,7 @@ topic write signals/#</code></pre></details>
 
 
 
+
     <div class="swstats" id="swstats"></div>
     <div class="swgrid" id="swgrid"></div>
     <div class="carte method">
@@ -2155,6 +2179,7 @@ topic write signals/#</code></pre></details>
       <p class="muted">À gauche, les appareils dans l’ordre où circulent les données, et leurs liaisons. À droite, la fiabilité estimée, le logiciel à développer et le coût. Chaque liaison est contrôlée : compatible, corrigée après contrôle, ou à vérifier à l’essai.</p>
     </div>
 <div class="rgband" data-band="chaine"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>Batteries § 12 ; 48 V au plus ; radiocommandes conformes (§ 11) ; drones aériens interdits sauf dérogation (§ 10).</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>La chaîne ci-dessous est celle du niveau 2 ; le niveau 1 n’en garde que les balises des bouées, l’anémomètre, la base RTK, le routeur 5G et le hub cloud.</li></ul></div></div>
+
 
 
 
@@ -2310,6 +2335,7 @@ topic write signals/#</code></pre></details>
 
 
 
+
     <div class="fbkpi"><div class="kpi"><span class="meta">À fabriquer</span><b>16</b><span class="muted" style="font-size:12.5px">10 bateaux, 3 bouées, 3 de rechange</span></div><div class="kpi"><span class="meta">Coût par balise</span><b>≈ 455 €</b><span class="muted" style="font-size:12.5px">pièces seules</span></div><div class="kpi"><span class="meta">Masse visée</span><b>≤ 250 g</b><span class="muted" style="font-size:12.5px">boîtier ≈ 170 g + antennes</span></div><div class="kpi"><span class="meta">Autonomie</span><b>≈ 12 h</b><span class="muted" style="font-size:12.5px">batterie USB, ≈ 18 Wh</span></div><div class="kpi"><span class="meta">Temps de montage</span><b>≈ 4 h</b><span class="muted" style="font-size:12.5px">par balise, essais compris</span></div></div>
     <div class="carte fbcard"><p class="meta">Le schéma de câblage</p><div class="tscroll"><svg viewBox="0 0 1120 530" class="fbsvg" role="img" aria-label="Schéma de câblage de la balise">
 <defs><marker id="fbar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker></defs>
@@ -2365,6 +2391,7 @@ topic write signals/#</code></pre></details>
 
 
 
+
     <div class="hwgrid" id="hwgrid"></div>
   </div>
 </section>
@@ -2376,6 +2403,7 @@ topic write signals/#</code></pre></details>
       <p class="muted">Cette analyse ne porte que sur notre part : le dispositif technique et sportif. 17 sujets ont été tranchés le 21 novembre 2026. Sont gérés par d’autres instances, et donc sortis d’ici : la réglementation et les autorisations ; le porteur juridique et l’assurance ; la sécurité du public et les secours ; le financement du matériel ; l’accueil du public et la communication ; le recrutement des équipes ; le tracé et la longueur du parcours ; le règlement de course (comité d’organisation : Twelve Med Events). Les chiffres sont une estimation de jugement, pas un calcul.</p>
     </div>
 <div class="rgband" data-band="analyse"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>Programme, parcours, pénalités et homologation sont fixés par le règlement.</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>Le minimum, c’est le niveau 1 ; l’objectif, le niveau 2, qui dépend d’abord de l’accord du comité.</li></ul></div></div>
+
 
 
 
@@ -2415,6 +2443,7 @@ topic write signals/#</code></pre></details>
 
 
 
+
     <div class="carte fiab">
       <div><p class="meta">Mon estimation</p><h3>Quelles chances que tout fonctionne ?</h3>
         <p class="muted">« Parfaitement », personne ne l’obtient sur un événement en direct, pas même SailGP : il y aura de petits incidents. La vraie question est de savoir si la régate se déroule avec des données justes pour tous, malgré ces incidents, grâce aux secours. Cochez ce qui sera fait pour voir l’effet.</p>
@@ -2450,6 +2479,7 @@ topic write signals/#</code></pre></details>
 
 
 
+
     <div class="board" id="board"></div>
   </div>
 </section>
@@ -2461,6 +2491,7 @@ topic write signals/#</code></pre></details>
       <p class="muted">Prix publics TTC, en ordre de grandeur. Seul le matériel coûte : les personnes sont bénévoles et le logiciel est développé avec des agents IA.</p>
     </div>
 <div class="rgband" data-band="couts"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>Le financement relève de l’organisateur ou d’une autre instance.</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>Niveau 1 ≈ 6 300 € ; niveau 2 ≈ 15 300 € de plus ; total ≈ 21 600 €, imprévus compris. Le simulateur ci-dessous chiffre le niveau 2 complet.</li></ul></div></div>
+
 
 
 
@@ -2500,6 +2531,7 @@ topic write signals/#</code></pre></details>
 
 
 
+
     <div class="acsum acn"><div class="kpi"><span class="meta">Niveau 1 · demandé par le comité</span><b class="num">6 300 €</b><span class="muted" style="font-size:13px">bouées RTK et vent en temps réel (règlement § 5), imprévus compris</span></div><div class="kpi"><span class="meta">Niveau 2 · notre proposition</span><b class="num">15 300 €</b><span class="muted" style="font-size:13px">balise dans chaque bateau, PC course, jugement assisté, vidéo</span></div></div>
     <div class="acsum"><div class="kpi"><span class="meta">Décembre</span><b class="num">1 900 €</b><span class="muted" style="font-size:13px">Commande du prototype (C1)</span></div><div class="kpi"><span class="meta">Février</span><b class="num">10 390 €</b><span class="muted" style="font-size:13px">Série, bouées, 2 caméras d’essai (C4, D2, D3, C7)</span></div><div class="kpi"><span class="meta">Mars</span><b class="num">7 320 €</b><span class="muted" style="font-size:13px">PC course, caméras, signaux (H3)</span></div><div class="kpi ac-tot"><span class="meta">Total, imprévus compris</span><b class="num">21 600 €</b><span class="muted" style="font-size:13px">≈ 19 610 € d’articles + 2 000 € d’imprévus</span></div></div>
     <div class="carte tscroll" style="margin-top:14px"><table class="actab"><thead><tr><th>Qté</th><th>Article et rôle</th><th>Commande</th><th style="text-align:right">Prix</th><th></th><th style="text-align:right">Total</th><th>Où acheter</th></tr></thead><tbody><tr class="lot"><th colspan="5">Balise officielle · 16 exemplaires</th><th class="num">7 280 €</th><th></th></tr><tr><td class="num qte">16</td><td><b>ArduSimple simpleRTK2B Lite</b> <span class="nv n1">4 au niveau 1</span><span class="nv n2">12 au niveau 2</span><span class="rl">Récepteur GPS RTK : la position au centimètre, 10 fois par seconde</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">199 €</td><td class="num x">× 16</td><td class="num t">3 184 €</td><td class="lk"><a href="https://www.ardusimple.com/product/simplertk2blite/" target="_blank" rel="noopener">ArduSimple</a></td></tr><tr><td class="num qte">16</td><td><b>Antenne u-blox ANN-MB-00</b> <span class="nv n1">4 au niveau 1</span><span class="nv n2">12 au niveau 2</span><span class="rl">Antenne GPS bi-fréquence, sur le pont du bateau ou en tête de mât des bouées</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">60 €</td><td class="num x">× 16</td><td class="num t">960 €</td><td class="lk"><a href="https://www.ardusimple.com/product/ann-mb-00-ip67" target="_blank" rel="noopener">ArduSimple</a> <a href="https://futureelectronics.com/fr/p/semiconductors--wireless-rf--antennas--gps-antennas/ann-mb-00-u-blox-6120194" target="_blank" rel="noopener">Future Electronics</a></td></tr><tr><td class="num qte">16</td><td><b>Carte ESP32-S3 + modem 4G A7670E</b> <span class="nv n1">4 au niveau 1</span><span class="nv n2">12 au niveau 2</span><span class="rl">Calcul de la balise et envoi des positions par la 4G</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">49 €</td><td class="num x">× 16</td><td class="num t">784 €</td><td class="lk"><a href="https://openelab.io/fr/products/waveshare-esp32-s3-a7670e-4g" target="_blank" rel="noopener">OpenELab</a> <a href="https://eu.robotshop.com/products/waveshare-esp32-s3-a7670e-4g-development-board-lte-cat-1-2g-wifi-bluetooth-telephone-call-sms-gnss" target="_blank" rel="noopener">RobotShop Europe</a></td></tr><tr><td class="num qte">16</td><td><b>Module radio LoRa RFM95W 868 MHz</b> <span class="nv n1">4 au niveau 1</span><span class="nv n2">12 au niveau 2</span><span class="rl">Chemin de secours si la 4G tombe</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">21 €</td><td class="num x">× 16</td><td class="num t">336 €</td><td class="lk"><a href="https://www.digikey.es/en/products/detail/adafruit-industries-llc/3072/6005357" target="_blank" rel="noopener">DigiKey</a></td></tr><tr><td class="num qte">16</td><td><b>Centrale inertielle BNO085</b> <span class="nv n1">4 au niveau 1</span><span class="nv n2">12 au niveau 2</span><span class="rl">Cap, gîte et mouvements du bateau ou de la bouée</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">30 €</td><td class="num x">× 16</td><td class="num t">480 €</td><td class="lk"><a href="https://anodas.lt/en/bno085-9-dof-imu-fusion-breakout-3-axis-accelerometer-gyroscope-and-magnetometer-adafruit-4754" target="_blank" rel="noopener">Anodas</a> <a href="https://gotronic.fr/download-product-page/33477" target="_blank" rel="noopener">Go Tronic</a></td></tr><tr><td class="num qte">16</td><td><b>Boîtier IP67, batterie USB, alimentation, antennes de pont, carte SIM multi-opérateurs</b> <span class="nv n1">4 au niveau 1</span><span class="nv n2">12 au niveau 2</span><span class="rl">Étanchéité, ≈ 12 h d’autonomie ; batterie admise par le règlement (§ 12) ; détail dans le manuel de fabrication</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">96 €</td><td class="num x">× 16</td><td class="num t">1 536 €</td><td class="lk"><span class="muted">—</span></td></tr><tr class="lot"><th colspan="5">Bouée au vent</th><th class="num">1 590 €</th><th></th></tr><tr><td class="num qte">1</td><td><b>Anémomètre Gill WindSonic M</b> <span class="nv n1">Niveau 1</span><span class="rl">Vitesse et direction du vent, par ultrasons</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">1 300 €</td><td class="num x">× 1</td><td class="num t">1 300 €</td><td class="lk"><a href="https://www.nauticexpo.com/prod/gill-instruments-ltd/product-39900-485171.html" target="_blank" rel="noopener">NauticExpo</a> <a href="https://s.campbellsci.com/documents/fr/product-brochures/b_windsonic_fr.pdf" target="_blank" rel="noopener">Campbell Scientific France</a></td></tr><tr><td class="num qte">1</td><td><b>Support, câble et interface de l’anémomètre</b> <span class="nv n1">Niveau 1</span><span class="rl">Fixation en tête d’espar ; convertisseur RS-232 → 3,3 V vers la balise</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">170 €</td><td class="num x">× 1</td><td class="num t">170 €</td><td class="lk"><span class="muted">—</span></td></tr><tr><td class="num qte">2</td><td><b>Batterie LiFePO4 12,8 V 6 Ah étanche</b> <span class="nv n1">Niveau 1</span><span class="rl">Alimente l’anémomètre et la balise de la bouée au vent ; une de rechange, rechargée chaque soir</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">60 €</td><td class="num x">× 2</td><td class="num t">120 €</td><td class="lk"><span class="muted">—</span></td></tr><tr class="lot"><th colspan="5">Base RTK et radio de secours</th><th class="num">550 €</th><th></th></tr><tr><td class="num qte">1</td><td><b>Base RTK (simpleRTK2B Budget + antenne ANN-MB-00 sur plan de masse, mât)</b> <span class="nv n1">Niveau 1</span><span class="rl">Station fixe au PC course : corrige le GPS de toutes les balises</span></td><td><span class="wv wv-dec">Décembre</span></td><td class="num">300 €</td><td class="num x">× 1</td><td class="num t">300 €</td><td class="lk"><a href="https://www.ardusimple.com/product/simplertk2blite/" target="_blank" rel="noopener">ArduSimple</a></td></tr><tr><td class="num qte">1</td><td><b>Récepteurs radio 868 MHz du PC course (lot)</b> <span class="nv n2">Niveau 2</span><span class="rl">Reçoivent les positions de secours</span></td><td><span class="wv wv-dec">Décembre</span></td><td class="num">250 €</td><td class="num x">× 1</td><td class="num t">250 €</td><td class="lk"><a href="https://www.digikey.es/en/products/detail/adafruit-industries-llc/3072/6005357" target="_blank" rel="noopener">DigiKey</a></td></tr><tr class="lot"><th colspan="5">PC course</th><th class="num">4 510 €</th><th></th></tr><tr><td class="num qte">2</td><td><b>Mini-PC ASUS NUC 14 Pro</b> <span class="nv n2">Niveau 2</span><span class="rl">Serveur principal et serveur de secours : bus de données, moteur de course</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">900 €</td><td class="num x">× 2</td><td class="num t">1 800 €</td><td class="lk"><a href="https://www.ldlc.com/en/product/PB00624811.html" target="_blank" rel="noopener">LDLC</a> <a href="https://www.asus.com/fr/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-14-pro/" target="_blank" rel="noopener">ASUS France</a></td></tr><tr><td class="num qte">1</td><td><b>Routeur Ubiquiti UniFi Cloud Gateway Ultra</b> <span class="nv n2">Niveau 2</span><span class="rl">Réseau du PC course, bascule fibre ↔ 4G</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">100 €</td><td class="num x">× 1</td><td class="num t">100 €</td><td class="lk"><a href="https://eu.store.ui.com/eu/en/products/ucg-ultra" target="_blank" rel="noopener">Ubiquiti Store Europe</a></td></tr><tr><td class="num qte">1</td><td><b>Routeur 5G Netgear Nighthawk M6 Pro</b> <span class="nv n1">Niveau 1</span><span class="rl">Internet de secours si la fibre tombe</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">800 €</td><td class="num x">× 1</td><td class="num t">800 €</td><td class="lk"><a href="https://ldlc.com/en/product/PB00540606.html" target="_blank" rel="noopener">LDLC</a> <a href="https://www.galaxus.fr/fr/s1/product/netgear-nighthawk-m6-pro-routeur-mobile-routeur-23545594" target="_blank" rel="noopener">Galaxus.fr</a></td></tr><tr><td class="num qte">1</td><td><b>Batterie EcoFlow River 2 Pro</b> <span class="nv n2">Niveau 2</span><span class="rl">Le PC course tient sans secteur</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">600 €</td><td class="num x">× 1</td><td class="num t">600 €</td><td class="lk"><a href="https://www.castorama.fr/station-electrique-portable-ecoflow-river-2-pro-720wh/4895251601559_CAFR.prd" target="_blank" rel="noopener">Castorama</a> <a href="https://www.boulanger.com/ref/1187283" target="_blank" rel="noopener">Boulanger</a></td></tr><tr><td class="num qte">1</td><td><b>Onduleur APC Back-UPS 950 VA</b> <span class="nv n2">Niveau 2</span><span class="rl">Entre la batterie et les serveurs : aucune coupure pendant une bascule</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">110 €</td><td class="num x">× 1</td><td class="num t">110 €</td><td class="lk"><span class="muted">—</span></td></tr><tr><td class="num qte">1</td><td><b>Écrans (3), commutateur PoE, borne Wi-Fi, câbles, rallonges</b> <span class="nv n2">Niveau 2</span><span class="rl">Consoles du directeur de course et des deux arbitres ; Wi-Fi du PC course ; alimentation de la caméra</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">1 100 €</td><td class="num x">× 1</td><td class="num t">1 100 €</td><td class="lk"><span class="muted">—</span></td></tr><tr class="lot"><th colspan="5">Caméras et régie</th><th class="num">1 710 €</th><th></th></tr><tr><td class="num qte">1</td><td><b>Caméra motorisée Reolink RLC-823S2 (zoom 16×)</b> <span class="nv n2">Niveau 2</span><span class="rl">Image du parcours depuis le point haut</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">480 €</td><td class="num x">× 1</td><td class="num t">480 €</td><td class="lk"><a href="https://reolink.com/fr/product/rlc-823s2/" target="_blank" rel="noopener">Reolink France</a></td></tr><tr><td class="num qte">1</td><td><b>Mini-PC de régie ASUS NUC 14 Pro, avec OBS Studio</b> <span class="nv n2">Niveau 2</span><span class="rl">Régie : lit la caméra par le réseau, ajoute l’habillage, diffuse ; même modèle que les serveurs, donc interchangeable</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">900 €</td><td class="num x">× 1</td><td class="num t">900 €</td><td class="lk"><a href="https://www.ldlc.com/en/product/PB00624811.html" target="_blank" rel="noopener">LDLC</a> <a href="https://www.asus.com/fr/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-14-pro/" target="_blank" rel="noopener">ASUS France</a></td></tr><tr><td class="num qte">1</td><td><b>Boîtier d’acquisition HDMI → USB</b> <span class="nv n2">Niveau 2</span><span class="rl">Fait entrer l’image des caméras embarquées dans la régie</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">30 €</td><td class="num x">× 1</td><td class="num t">30 €</td><td class="lk"><span class="muted">—</span></td></tr><tr><td class="num qte">1</td><td><b>Mât, fixations, câbles réseau</b> <span class="nv n2">Niveau 2</span><span class="rl">Caméra à 12 m au plus</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">300 €</td><td class="num x">× 1</td><td class="num t">300 €</td><td class="lk"><span class="muted">—</span></td></tr><tr class="lot"><th colspan="5">Météo et outils</th><th class="num">1 150 €</th><th></th></tr><tr><td class="num qte">1</td><td><b>Station Davis Vantage Pro2 + WeatherLink Live</b> <span class="nv n2">Niveau 2</span><span class="rl">Vent à terre, référence pour la carte de vent</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">1 000 €</td><td class="num x">× 1</td><td class="num t">1 000 €</td><td class="lk"><a href="https://www.conrad.com/en/p/davis-instruments-vantage-pro2-with-console-eu-6252eu-wireless-digital-weather-station-max-number-of-sensors-80-3123434.html" target="_blank" rel="noopener">Conrad</a> <a href="https://www.conrad.com/en/p/davis-instruments-6100eu-6100eu-wi-fi-weather-station-3448772.html" target="_blank" rel="noopener">Conrad</a></td></tr><tr><td class="num qte">1</td><td><b>Analyseur de fréquences TinySA Ultra</b> <span class="nv n2">Niveau 2</span><span class="rl">Vérifier que la radio n’est pas brouillée</span></td><td><span class="wv wv-dec">Décembre</span></td><td class="num">150 €</td><td class="num x">× 1</td><td class="num t">150 €</td><td class="lk"><a href="https://lab401.com/products/tinysa-ultra" target="_blank" rel="noopener">Lab401</a> <a href="https://www.passion-radio.com/meter/tiny-sa-ultra-2543.html" target="_blank" rel="noopener">Passion Radio</a></td></tr><tr class="lot"><th colspan="5">Signaux de départ</th><th class="num">300 €</th><th></th></tr><tr><td class="num qte">2</td><td><b>Relais connecté Shelly 1 Gen3</b> <span class="nv n2">Niveau 2</span><span class="rl">Le PC course déclenche la corne, à moins de 50 ms près</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">25 €</td><td class="num x">× 2</td><td class="num t">50 €</td><td class="lk"><a href="https://www.domadoo.fr/de/smarte-beleuchtung/7507-shelly-intelligentes-universalmodul-w-lan-shelly-1-gen3-3800235261767.html" target="_blank" rel="noopener">Domadoo</a> <a href="https://www.shelly.com/it/products/shelly-1-gen3" target="_blank" rel="noopener">Shelly</a></td></tr><tr><td class="num qte">2</td><td><b>Corne électrique marine 12 V</b> <span class="nv n2">Niveau 2</span><span class="rl">Signaux sonores du départ</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">45 €</td><td class="num x">× 2</td><td class="num t">90 €</td><td class="lk"><a href="https://www.poseidonmarine.eu/fr/products/electric-horn-12v-chrome-1" target="_blank" rel="noopener">Poseidon Marine</a> <a href="https://www.h2r-equipements.com/avertisseur-sonore-pour-bateau/2985-osculati-avertisseur-encastrable-12v.html" target="_blank" rel="noopener">H2R Équipements</a></td></tr><tr><td class="num qte">1</td><td><b>Batterie 12 V et câblage</b> <span class="nv n2">Niveau 2</span><span class="rl">Alimentation des cornes</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">160 €</td><td class="num x">× 1</td><td class="num t">160 €</td><td class="lk"><span class="muted">—</span></td></tr><tr class="lot"><th colspan="5">Caméras embarquées</th><th class="num">1 320 €</th><th></th></tr><tr><td class="num qte">2</td><td><b>Caméra embarquée légère, pour l’essai</b> <span class="nv n2">Niveau 2</span><span class="rl">Commandées avec la série, essayées en mars</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">100 €</td><td class="num x">× 2</td><td class="num t">200 €</td><td class="lk"><span class="muted">—</span></td></tr><tr><td class="num qte">1</td><td><b>Récepteur vidéo au PC course</b> <span class="nv n2">Niveau 2</span><span class="rl">Reçoit l’image d’un bateau à la fois, choisi par la régie</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">300 €</td><td class="num x">× 1</td><td class="num t">300 €</td><td class="lk"><span class="muted">—</span></td></tr><tr><td class="num qte">1</td><td><b>Convertisseur vidéo analogique → HDMI</b> <span class="nv n2">Niveau 2</span><span class="rl">Sort l’image du récepteur vers la régie</span></td><td><span class="wv wv-fev">Février</span></td><td class="num">20 €</td><td class="num x">× 1</td><td class="num t">20 €</td><td class="lk"><span class="muted">—</span></td></tr><tr><td class="num qte">8</td><td><b>Caméra embarquée légère</b> <span class="nv n2">Niveau 2</span><span class="rl">Les 8 autres, seulement si l’essai de mars est concluant</span></td><td><span class="wv wv-mar">Mars</span></td><td class="num">100 €</td><td class="num x">× 8</td><td class="num t">800 €</td><td class="lk"><span class="muted">—</span></td></tr><tr class="lot"><th colspan="5">Prototypes</th><th class="num">1 200 €</th><th></th></tr><tr><td class="num qte">1</td><td><b>Lot prototype</b> <span class="nv n1">Niveau 1</span><span class="rl">2 balises complètes (une carte 4G Waveshare, une LilyGO) et leurs rechanges, pour l’essai de janvier ; l’anémomètre est commandé sur devis avec la série</span></td><td><span class="wv wv-dec">Décembre</span></td><td class="num">1 200 €</td><td class="num x">× 1</td><td class="num t">1 200 €</td><td class="lk"><span class="muted">—</span></td></tr><tr class="lot"><th colspan="5">Imprévus (10 %)</th><th class="num">2 000 €</th><th></th></tr><tr class="tot"><th colspan="5">Total matériel</th><th class="num">21 600 €</th><th></th></tr></tbody></table></div>
@@ -2523,6 +2555,7 @@ topic write signals/#</code></pre></details>
 
 
 
+
     <div class="rmbar"><div class="rmchips" id="rmPoles" role="group" aria-label="Filtrer par pôle"></div><button type="button" class="chip" id="rmCrit" aria-pressed="false">Chemin critique seul</button></div>
     <div id="rmCal"><div class="carte gscroll"><div class="rmg" id="rmGantt"></div></div><div class="carte rmd" id="rmDet" aria-live="polite"></div></div>
     <div id="rmMois" hidden></div>
@@ -2535,6 +2568,7 @@ topic write signals/#</code></pre></details>
       <p class="muted">Sept pôles, un responsable chacun, tous bénévoles, pour notre périmètre : le dispositif technique et sportif. La charge est en équivalents temps plein (ETP) par mois, pour savoir combien de disponibilité demander à chacun ; la colonne « Course » compte les personnes présentes sur place pendant la semaine de course.</p>
     </div>
 <div class="rgband" data-band="forces"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>L’organisateur tient l’inscription, la communication, la sécurité, l’assurance et l’accueil.</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>Notre part : le dispositif technique et nos propositions sportives.</li></ul></div></div>
+
 
 
 
@@ -2567,6 +2601,7 @@ topic write signals/#</code></pre></details>
 
 
 
+
     <div class="g4">
       <div class="carte">
         <p class="meta">Réponse courte</p>
@@ -2593,23 +2628,6 @@ topic write signals/#</code></pre></details>
   </div>
 </section>
 
-<section id="reglement">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><p class="meta">Reçu le 21 novembre 2026</p><h2>Le règlement de <em>l’organisateur</em></h2></div>
-      <div style="display:grid;gap:14px"><p class="muted">Règlement de course AI Regatta 2027, V1.4 du 15/10/2026, de l’association Twelve Med Events (autorité organisatrice), reçu le 21 novembre 2026 de Xavier Caux. Il fait foi. À gauche, ce que le comité d’organisation a décidé ; à droite, ce que nous lui proposons pour que le dispositif serve la course.</p>
-      <p class="muted" style="font-size:14px">Le comité écrit lui-même qu’il cherche des partenaires pour transmettre en temps réel la position RTK des bouées et le vent (§ 5) : c’est le cœur de notre dispositif.</p></div>
-    </div>
-    <div class="rgx">
-      <div class="carte rgxc"><p class="meta"><span class="rsrc c">Décidé par le comité</span> 15 points</p><ul class="rgxl"><li><b>Dates</b><span>Inscriptions et homologation du 12 au 14 mai ; régates le samedi 15 mai dès 10 h ; report au dimanche 16 jusqu’à 14 h 30 ; prix le 16 à 16 h 30.</span><small>§ 6</small></li><li><b>Lieu</b><span>Plages du Mourillon, autour du Fort Saint-Louis, dans la Toulon Provence Regatta.</span><small>§ intro, 5</small></li><li><b>Bateaux</b><span>Voile seule ; moins de 1 m, de 1,30 m ou de 2,70 m ; monocoques, multicoques, foils. Pas de jauge de classe.</span><small>§ 3</small></li><li><b>Autonomie</b><span>Mode autonome obligatoire de la ligne de départ à l’arrivée ; IA embarquée ou à terre.</span><small>§ 2c</small></li><li><b>Télécommande</b><span>Pour rallier le départ, après l’arrivée, en cas de panne, de sortie de zone ou pour la pénalité. Chaque reprise : 30 s au plus, un tour de pénalité.</span><small>§ 2c, 7</small></li><li><b>Parcours</b><span>Parcours construit n°3 : porte 1-2 (départ, porte, arrivée), bouée au vent 3 à bâbord, deux tours ; zone de pénalité P1-P2.</span><small>§ 5</small></li><li><b>Départ</b><span>RCV 26 : 5, 4, 1 minute, départ ; une minute par dérogation.</span><small>§ 5</small></li><li><b>Règles de passage</b><span>Les RCV s’appliquent au parcours construit.</span><small>§ 2d</small></li><li><b>Pénalité</b><span>Un tour par la zone P1-P2, à la fin, avant l’arrivée.</span><small>§ 7</small></li><li><b>Disqualification</b><span>Départ anticipé non réparé en 2 min ; bouée ou porte mal franchie ; arrivée plus de 5 min après le premier.</span><small>§ 7</small></li><li><b>Classement</b><span>Par type de régate, sur les résultats des courses.</span><small>§ 8</small></li><li><b>Homologation</b><span>Contrôle statique par un arbitre ; modifications déclarées ensuite.</span><small>§ 11</small></li><li><b>Batteries</b><span>LiFePO4, ou lithium avec BMS intégré et enveloppe solide ; 48 V au plus.</span><small>§ 12</small></li><li><b>Communication</b><span>battleboats.fr, groupe WhatsApp, briefing chaque jour à 9 h 30 ; Wi-Fi en 5 GHz conseillé ; drones aériens interdits sauf dérogation.</span><small>§ 4, 10, 13</small></li><li><b>Équipes</b><span>Vidéo et fiche de présentation avant le 1er mai ; régate de préchauffage au premier trimestre ; bâtiment prêté un mois ; arrivée une semaine avant.</span><small>§ 6, 14</small></li></ul></div>
-      <div class="carte rgxc rgxp"><p class="meta"><span class="rsrc p">Nos propositions</span> 12 points</p><ul class="rgxl"><li><b>Positions RTK des bouées et vent en temps réel</b><span>Les bouées 1, 2, 3, P1, P2 au centimètre et le vent à la bouée 3, pour toutes les équipes au même instant. C’est ce que le comité cherche (§ 5).</span><small>Priorité 1</small></li><li><b>Une balise officielle dans chaque bateau</b><span>Scellée, sans lien avec l’électronique de l’équipe : seule source pour le départ, les passages, la pénalité et l’arrivée. À inscrire au règlement (homologation, § 11).</span><small>Priorité 2</small></li><li><b>Jugement assisté</b><span>Départs anticipés, passages de bouées et de portes, tour P1-P2, fenêtre des 5 minutes : détectés au centimètre, l’arbitre confirme toujours.</span><small>Priorité 2</small></li><li><b>Reprises de télécommande chronométrées</b><span>Chaque reprise déclarée par l’équipe (<code>manual_control</code>), chronométrée et montrée à l’arbitre : la règle des 30 s devient vérifiable.</span><small>Priorité 2</small></li><li><b>Sous-bande radio réservée</b><span>869,4 – 869,65 MHz pour les balises ; les équipes déclarent leurs émetteurs.</span><small>À inscrire</small></li><li><b>Arbitrage et réclamations</b><span>Deux arbitres devant les écrans et les rejeux ; réclamation par message dans les 10 minutes.</span><small>À proposer</small></li><li><b>Points et course retirée</b><span>1, 2, 3… ; une course retirée à partir de 5 courues.</span><small>À proposer</small></li><li><b>Limites de vent</b><span>4 à 20 nœuds mesurés à la bouée 3.</span><small>À proposer</small></li><li><b>Équité du logiciel</b><span>Pas de mise à jour pendant une course ; liaison de l’équipe libre.</span><small>À proposer</small></li><li><b>Signaux sonores automatiques</b><span>Déclenchés à l’heure GPS, pour la procédure de 5 minutes comme pour celle d’une minute.</span><small>À proposer</small></li><li><b>Préparer les équipes</b><span>Kit en français et en anglais, bateau de référence IOM conseillé, bac à sable en février.</span><small>Notre offre</small></li><li><b>Démonstration</b><span>Le dispositif tourne à la régate de préchauffage du premier trimestre.</span><small>À proposer</small></li></ul></div>
-    </div>
-    <div class="rgx" style="margin-top:14px">
-      <div class="carte rgxc rgxv"><p class="meta">À vérifier avec l’organisateur</p><ul class="fbul"><li>La date de la première masterclass : le mail annonce « vendredi 29 novembre », or le 29 novembre 2026 est un dimanche.</li><li>L’emplacement exact de la zone de régate et du PC course (le premier étage de La Plage convient-il ?).</li><li>Le nombre de voiliers IA attendus, et si plusieurs types de longueur courent ensemble.</li><li>La longueur du parcours n°3 et le nombre de courses le 15 mai.</li><li>Qui arbitre et qui forme le jury.</li><li>La date et le lieu de la régate de préchauffage.</li><li>La zone de bouée pour des bateaux de 2,70 m.</li></ul></div>
-      <div class="carte rgxc"><p class="meta">Ce que le règlement a changé dans ce dossier</p><ul class="fbul"><li>Postulats, règles, feuille de route, analyse, kit et fabrication alignés sur le règlement.</li><li>Bouées : 3 balisées (1, 2, 3) au lieu de 4 ; P1 et P2 relevées au centimètre chaque matin ; 16 balises : 10 bateaux, 3 bouées, 3 de rechange.</li><li>Balise : batterie USB du commerce (BMS et enveloppe solide), admise par le § 12 ; ≈ 12 h d’autonomie.</li><li>Logiciel : procédure de 5 minutes par défaut, pénalité P1-P2 en fin de parcours, disqualifications et fenêtre de 5 minutes, reprises de télécommande chronométrées.</li><li>Prototype en direct : il suit le parcours n°3 (porte 1-2, bouée 3) et la pénalité par la zone P1-P2.</li></ul></div>
-    </div>
-  </div>
-</section>
 <section id="regles">
   <div class="wrap">
     <div class="sec-head">
@@ -2694,6 +2712,7 @@ topic write signals/#</code></pre></details>
 
 
 
+
     <div class="appgrid">
       <article class="carte apppanel" id="appPanel" aria-live="polite"></article>
       <aside class="carte appside">
@@ -2725,6 +2744,7 @@ topic write signals/#</code></pre></details>
       <div class="chips" id="decFilters" role="group" aria-label="Filtrer par moment"></div></div>
     </div>
 <div class="rgband" data-band="decisions"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>Pénalité : un tour par P1-P2 avant l’arrivée ; DSQ : départ anticipé non réparé en 2 min, bouée mal passée, arrivée 5 min après le premier ; procédure RCV 26 (§ 5, 7).</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>Proposition : chaque décision est un bouton de la console, avec un message aux équipes ; l’arbitre confirme toujours.</li></ul></div></div>
+
 
 
 
@@ -3480,6 +3500,7 @@ renderAll(true);requestAnimationFrame(loop);
 
 
 
+
     <div class="kitgrid" id="kitGrid"></div>
     <div class="kitcols">
       <div class="carte kitbox">
@@ -3532,6 +3553,7 @@ renderAll(true);requestAnimationFrame(loop);
       <p class="muted">Un bateau type pour naviguer vite : un IOM du commerce, un pilote automatique libre, une IA minimale. Il est conseillé, non imposé. Cette fiche est une proposition : aucun bateau n’a encore été monté ainsi, et plusieurs points restent à valider.</p>
     </div>
 <div class="rgband" data-band="refboat"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>Voile seule, moins de 1 m à 2,70 m ; autonome de la ligne de départ à l’arrivée ; télécommande pour rallier le départ et reprendre la main (§ 2c, 3).</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>Un IOM documenté, conseillé et non imposé, pour qu’une équipe parte de quelque chose qui marche.</li></ul></div></div>
+
 
 
 
@@ -3608,6 +3630,7 @@ renderAll(true);requestAnimationFrame(loop);
       <p class="muted">Cochez au fur et à mesure ; les coches restent dans votre navigateur.</p>
     </div>
 <div class="rgband" data-band="questions"><div><p class="meta"><span class="rsrc c">Ce que dit le règlement</span></p><ul><li>Le règlement a tranché le programme, le parcours, les pénalités et l’homologation.</li></ul></div><div><p class="meta"><span class="rsrc p">Notre approche</span></p><ul><li>Restent nos questions et celles à poser à l’organisateur.</li></ul></div></div>
+
 
 
 
@@ -4203,15 +4226,15 @@ renderOrd();
 
 
 /* ---------- Postulats de départ ---------- */
-const PST=JSON.parse($('#pstdata').textContent);let pstT='Tous',pstS='tous';
+const PSTALL=JSON.parse($('#pstdata').textContent),PST=PSTALL.filter(x=>x[4]!=='o');let pstT='Tous',pstS='tous';
 function renderPst(){
   const themes=['Tous',...new Set(PST.map(x=>x[1]))];
   const nc=PST.filter(x=>x[4]==='c').length,no=PST.filter(x=>x[4]==='o').length,np=PST.filter(x=>x[4]==='p').length;
   const SL={a:'Acté',c:'À confirmer',o:'Décidé par le comité',p:'Notre proposition'},SC={a:'',c:'tbc',o:'org',p:'prop'};
-  $('#pstF').innerHTML=themes.map(t=>`<button type="button" class="chip${t===pstT?' on':''}" aria-pressed="${t===pstT}" data-t="${t}">${t}</button>`).join('')+[['o','Décidés par le comité'],['p','Nos propositions'],['c','À confirmer']].map(([k,l])=>`<button type="button" class="chip${pstS===k?' on':''}" aria-pressed="${pstS===k}" data-s="${k}">${l}</button>`).join('');
+  $('#pstF').innerHTML=themes.map(t=>`<button type="button" class="chip${t===pstT?' on':''}" aria-pressed="${t===pstT}" data-t="${t}">${t}</button>`).join('')+[['p','Nos propositions'],['a','Actés'],['c','À confirmer']].map(([k,l])=>`<button type="button" class="chip${pstS===k?' on':''}" aria-pressed="${pstS===k}" data-s="${k}">${l}</button>`).join('');
   $('#pstF').querySelectorAll('[data-t]').forEach(b=>b.addEventListener('click',()=>{pstT=b.dataset.t;renderPst()}));
   $('#pstF').querySelectorAll('[data-s]').forEach(b=>b.addEventListener('click',()=>{pstS=pstS===b.dataset.s?'tous':b.dataset.s;renderPst()}));
-  $('#pstN').innerHTML=`<b>${no}</b> décidés par le comité · <b>${np}</b> nos propositions · <b>${PST.length-nc-no-np}</b> actés · <b>${nc}</b> à confirmer`;
+  $('#pstN').innerHTML=`<b>${np}</b> nos propositions · <b>${PST.length-nc-np}</b> actés · <b>${nc}</b> à confirmer · <b>${PSTALL.length-PST.length}</b> repris du document, plus haut`;
   const L=PST.filter(x=>(pstT==='Tous'||x[1]===pstT)&&(pstS==='tous'||x[4]===pstS));
   $('#pstL').innerHTML=L.map(x=>`<div class="pr ${SC[x[4]]||''}"><span class="pid">${x[0]}</span><div class="pbody"><span class="pth">${x[1]}</span><b>${x[2]}</b><span class="pval">${x[3]}</span>${x[5].length?`<div class="pimp"><span>Si ça change :</span>${x[5].map(i=>`<button type="button" class="lnk" data-goto="${i[1]}">${i[0]}</button>`).join('')}</div>`:''}</div><span class="pstat">${SL[x[4]]||'Acté'}</span></div>`).join('');
   $('#pstL').querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>goTo(b.dataset.goto)));
@@ -4220,7 +4243,7 @@ renderPst();
 
 
 /* ---------- Site à plusieurs pages ---------- */
-const VIEWS=[["accueil", "Accueil", ["top", "essentiel"]], ["postulats-page", "Postulats", ["postulats"]], ["dispositif", "Le dispositif", ["offre", "plan", "enclair"]], ["a-bord", "À bord et sur site", ["bord", "bouee", "ensemble"]], ["donnees", "Données et synchro", ["trajet", "liaisons", "foule"]], ["logiciel-page", "Logiciel", ["logiciel"]], ["applications", "Applications", ["apps", "decisions"]], ["prototype-page", "Prototype en direct", ["proto"]], ["materiel-page", "Matériel et coûts", ["chaine", "fabrication", "materiel", "couts", "achats"]], ["projet", "Risques et calendrier", ["analyse", "risques", "etat"]], ["feuille-de-route", "Feuille de route", ["route", "forces"]], ["regles-page", "Règlement et règles", ["reglement", "regles"]], ["kit-equipes", "Kit équipes", ["kit", "refboat"]], ["questions-page", "Questions", ["questions"]], ["glossaire-page", "Glossaire", ["glossaire"]]];
+const VIEWS=[["accueil", "Accueil", ["top", "essentiel"]], ["postulats-page", "Règlement", ["reglement", "postulats"]], ["dispositif", "Le dispositif", ["offre", "plan", "enclair"]], ["a-bord", "À bord et sur site", ["bord", "bouee", "ensemble"]], ["donnees", "Données et synchro", ["trajet", "liaisons", "foule"]], ["logiciel-page", "Logiciel", ["logiciel"]], ["applications", "Applications", ["apps", "decisions"]], ["prototype-page", "Prototype en direct", ["proto"]], ["materiel-page", "Matériel et coûts", ["chaine", "fabrication", "materiel", "couts", "achats"]], ["projet", "Risques et calendrier", ["analyse", "risques", "etat"]], ["feuille-de-route", "Feuille de route", ["route", "forces"]], ["regles-page", "Règles de course", ["regles"]], ["kit-equipes", "Kit équipes", ["kit", "refboat"]], ["questions-page", "Questions", ["questions"]], ["glossaire-page", "Glossaire", ["glossaire"]]];
 const secView={};VIEWS.forEach(v=>v[2].forEach(id=>secView[id]=v[0]));
 let curView=null;
 function viewOf(el){let n=el;while(n&&n!==document.body){if(n.id&&secView[n.id])return secView[n.id];n=n.parentElement}return null}
