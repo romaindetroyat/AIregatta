@@ -24,7 +24,7 @@ Le principe : **toutes les équipes reçoivent les mêmes données, au même ins
 
 ## 2. Liste de contrôle avant le jour J
 
-À faire, et à cocher, avant la première manche (au plus tard la veille, lors du test de connexion sur le site).
+À faire, et à cocher, avant la première course (au plus tard la veille, lors du test de connexion sur le site).
 
 **Inscription et comptes**
 
@@ -64,7 +64,7 @@ Le principe : **toutes les équipes reçoivent les mêmes données, au même ins
 ## 3. Questions fréquentes
 
 **1. Pouvons-nous recevoir le flux par la 4G ou Internet au lieu du câble ?**
-Non, pas pendant les manches : toutes les équipes sont sur place (P13) et reçoivent le flux par câble, pour une latence identique. Il n’y a pas de miroir cloud du flux équipes le jour J. Le bac à sable cloud sert au développement, avant l’épreuve.
+Non, pas pendant les courses : toutes les équipes sont sur place (P13) et reçoivent le flux par câble, pour une latence identique. Il n’y a pas de miroir cloud du flux équipes le jour J. Le bac à sable cloud sert au développement, avant l’épreuve.
 
 **2. Le chrono que j’affiche peut-il être en retard sur celui du comité ?**
 Pas si vous suivez le §7 du contrat : avec chrony calé sur `10.20.0.1` et un compte à rebours calculé à partir de l’heure GPS du départ, votre chrono est juste à quelques millisecondes près, même si le réseau ralentit. Il ne faut jamais décompter à partir de l’arrivée des messages.
@@ -84,7 +84,7 @@ C’est acté depuis le 21 novembre 2026 (P36). Les données sont les mêmes pou
 **7. Pouvons-nous barrer notre bateau au joystick ?**
 C’est acté depuis le 20 novembre 2026 (règles 3.2 à 3.4) : **un humain ne barre pas en course**, sauf l’arrêt de sécurité ; **une IA qui barre seule, sans intervention humaine**, est autorisée, même depuis la terre. En course, vous envoyez des ordres tactiques (vire, empanne, mode VMG, haut, bas), éventuellement avec un angle visé.
 
-**8. Notre liaison avec le bateau est tombée en pleine manche. Que se passe-t-il ?**
+**8. Notre liaison avec le bateau est tombée en pleine course. Que se passe-t-il ?**
 Votre bateau applique le comportement que vous avez déclaré (par exemple : garder le mode, puis rejoindre un point de sécurité, puis se mettre bout au vent). Il reste suivi et classé par sa balise. Prévenez le comité (`technical_issue`), et demandez de l’aide si le bateau devient dangereux (`assistance_request`, plus appel direct).
 
 **9. Comment faire une réclamation ?**
@@ -103,4 +103,4 @@ Oui, jusqu’à 3 connexions simultanées (à confirmer), chacune avec un **iden
 Branchez-le sur le flux **NMEA 0183** (`10.20.0.10:10110`) : les bateaux apparaissent comme des cibles AIS et les bouées comme des aides à la navigation. Voir [connecteurs.md](connecteurs.md#c-nmea-0183-sur-tcp--pour-les-logiciels-de-navigation).
 
 **14. Pouvons-nous tester avec de vraies données avant mai ?**
-Oui : les manches d’essai d’avril et la régate blanche sont enregistrées et publiées en fichiers de rejeu (JSON Lines et Parquet), rejouables sur le bac à sable.
+Oui : les courses d’essai d’avril et la régate blanche sont enregistrées et publiées en fichiers de rejeu (JSON Lines et Parquet), rejouables sur le bac à sable.

@@ -17,8 +17,8 @@
     },
     "race_id": {
       "type": "string",
-      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-M\\d{1,2}$",
-      "description": "Identifiant de manche : date + numéro de manche, préfixe SIM- dans le bac à sable."
+      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-C\\d{1,2}$",
+      "description": "Identifiant de course : date + numéro de course, préfixe SIM- dans le bac à sable."
     },
     "seq": {
       "type": "integer",

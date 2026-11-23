@@ -82,8 +82,8 @@ La phrase `$WIMWV` n’est pas diffusée : elle donne un angle de vent **par rap
 !AIVDM,1,1,,A,E>jCuGhQIP00000000000000000@=VQH<EC=H00003v010,4*5B
 $WIMWD,131.0,T,,M,9.9,N,5.1,M*73
 $PAIRW,B3,132.5,9.8,12.1,6.2,130407.00*31
-$PAIRS,2027-05-14-M3,preparatory,130000.00,14052027*53
-$GPZDA,130407.00,14,05,2027,00,00*60
+$PAIRS,2027-05-15-C3,preparatory,130000.00,15052027*5D
+$GPZDA,130407.00,15,05,2027,00,00*61
 ```
 
 Les trois premières lignes donnent : le nom `FRA-07` du MMSI 227990007, sa position (43,106993 N, 5,941678 E, 3,4 nœuds, route 86°, cap 88°), puis la bouée `B3`.
@@ -143,8 +143,8 @@ Un broker dans le cloud, **identique à celui du site** (mêmes sujets, mêmes f
 
 - Même identifiant `equipe-<code>`, **mot de passe différent** de celui du site.
 - Certificat signé par une autorité publique : pas de fichier `ca-ai-regatta.crt` à installer pour le bac à sable (à confirmer).
-- Les manches simulées portent un `race_id` préfixé par `SIM-` (par exemple `SIM-2027-01-20-M4`), pour ne jamais les confondre avec une vraie manche.
-- Une manche démarre régulièrement (rythme à confirmer, par exemple toutes les 20 minutes), avec des scénarios variés : bascules, rappel général, changement de parcours, bateau perdu, passage sur la radio de secours, bascule de serveur.
+- Les courses simulées portent un `race_id` préfixé par `SIM-` (par exemple `SIM-2027-01-20-C4`), pour ne jamais les confondre avec une vraie course.
+- Une course démarre régulièrement (rythme à confirmer, par exemple toutes les 20 minutes), avec des scénarios variés : bascules, rappel général, changement de parcours, bateau perdu, passage sur la radio de secours, bascule de serveur.
 - Un **robot comité** répond à vos messages `outbox` (accusé de réception `receipt`, réponses types), publie des avis de test avec `requires_ack`, et vous permet de tester votre chaîne de bout en bout.
 - La latence est celle d’Internet (quelques dizaines de ms), pas celle du câble du site : ne réglez pas vos temporisations fines sur le bac à sable.
 - **Piloter un bateau simulé** depuis votre logiciel (envoyer vos ordres tactiques au simulateur) : extension envisagée, à décider par l’organisation.
@@ -153,15 +153,15 @@ Le jour J, il suffit de changer l’adresse du broker et le mot de passe : un lo
 
 ### Les fichiers de rejeu
 
-Chaque manche réelle (essais d’avril, régate blanche, puis manches de l’épreuve) et une sélection de manches simulées sont enregistrées et mises à disposition **de toutes les équipes en même temps**, après la manche.
+Chaque course réelle (essais d’avril, régate blanche, puis courses de l’épreuve) et une sélection de courses simulées sont enregistrées et mises à disposition **de toutes les équipes en même temps**, après la course.
 
 | Format | Contenu | Usage |
 |---|---|---|
-| **JSON Lines** compressé (`2027-05-14-M3.jsonl.gz`) | Une ligne JSON par message reçu, dans l’ordre : `{"rx_t_gps_ms": …, "topic": "…", "qos": 0, "retain": false, "payload": {…}}`, précédée d’une ligne d’en-tête `{"type": "header", "contract_version": "1.0.0", "race_id": "…"}` | Rejouer exactement le flux dans votre logiciel |
-| **Parquet** (`2027-05-14-M3/positions.parquet`, `marks.parquet`, `wind_field.parquet`, `events.parquet`, `leaderboard.parquet`) | Une table par type de message, une colonne par champ du contrat | Analyse avec pandas, Polars, DuckDB, R… |
+| **JSON Lines** compressé (`2027-05-15-C3.jsonl.gz`) | Une ligne JSON par message reçu, dans l’ordre : `{"rx_t_gps_ms": …, "topic": "…", "qos": 0, "retain": false, "payload": {…}}`, précédée d’une ligne d’en-tête `{"type": "header", "contract_version": "1.0.0", "race_id": "…"}` | Rejouer exactement le flux dans votre logiciel |
+| **Parquet** (`2027-05-15-C3/positions.parquet`, `marks.parquet`, `wind_field.parquet`, `events.parquet`, `leaderboard.parquet`) | Une table par type de message, une colonne par champ du contrat | Analyse avec pandas, Polars, DuckDB, R… |
 
 Parquet est un format de tableau compact, lu directement par les outils d’analyse de données ; JSON Lines est un simple fichier texte avec un message JSON par ligne.
 
 Le simulateur sait aussi **rejouer un fichier sur le bac à sable**, en temps réel ou accéléré : c’est le meilleur moyen de tester votre logiciel sur des données réelles avant l’épreuve. Une version du simulateur à faire tourner sur votre propre ordinateur (par exemple en image Docker) est envisagée, à confirmer : le logiciel de l’organisation n’est pas open source (P33).
 
-Où sont les fichiers sur le site : sur le serveur du PC course, réseau équipes, après chaque manche (adresse à confirmer).
+Où sont les fichiers sur le site : sur le serveur du PC course, réseau équipes, après chaque course (adresse à confirmer).

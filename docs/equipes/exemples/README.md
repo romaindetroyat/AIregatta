@@ -42,7 +42,7 @@ Variables communes aux exemples Python et Node.js :
 | `AIR_USER` | `equipe-fra07` | Compte de l’équipe |
 | `AIR_PASSWORD` | — | Mot de passe, à saisir dans votre terminal, jamais dans un fichier versionné |
 | `AIR_BOAT` | `FRA-07` | Votre bateau |
-| `AIR_RACE` | `SIM-2027-01-20-M4` | Facultatif : forcer une manche au lieu de suivre `race/current` |
+| `AIR_RACE` | `SIM-2027-01-20-C4` | Facultatif : forcer une course au lieu de suivre `race/current` |
 
 ## Lancer chaque exemple
 
@@ -55,19 +55,19 @@ read -rs AIR_PASSWORD && export AIR_PASSWORD      # saisie masquée
 python3 python/abonnement.py
 ```
 
-Sur le site, remplacez l’adresse par `10.20.0.10` et ajoutez `export AIR_CA=./ca-ai-regatta.crt`. Vous devez voir une ligne par seconde : manche, compte à rebours, vitesse et chemin de votre bateau, distance à la prochaine bouée, écart d’horloge. Si l’écart dépasse 5 ms, réglez chrony avant d’aller plus loin (contrat, §7).
+Sur le site, remplacez l’adresse par `10.20.0.10` et ajoutez `export AIR_CA=./ca-ai-regatta.crt`. Vous devez voir une ligne par seconde : course, compte à rebours, vitesse et chemin de votre bateau, distance à la prochaine bouée, écart d’horloge. Si l’écart dépasse 5 ms, réglez chrony avant d’aller plus loin (contrat, §7).
 
 **Envoyer au comité (Python)** — mêmes variables :
 
 ```
 python3 python/envoyer_au_comite.py --dry-run ack --notice N-0014      # affiche le message sans l'envoyer
-python3 python/envoyer_au_comite.py ack --notice N-0014 --race SIM-2027-01-20-M4
-python3 python/envoyer_au_comite.py protest --race SIM-2027-01-20-M4 --against FRA-03 \
+python3 python/envoyer_au_comite.py ack --notice N-0014 --race SIM-2027-01-20-C4
+python3 python/envoyer_au_comite.py protest --race SIM-2027-01-20-C4 --against FRA-03 \
     --incident 2027-01-20T10:03:02.000Z --rule "[règle à préciser]" \
     --description "Test de réclamation sur le bac à sable"
 ```
 
-Le script se termine avec le code 0 si le comité (ou le robot comité du bac à sable) a renvoyé un `receipt`, 1 sinon. Sur le bac à sable, n’envoyez des réclamations que sur des manches `SIM-…`.
+Le script se termine avec le code 0 si le comité (ou le robot comité du bac à sable) a renvoyé un `receipt`, 1 sinon. Sur le bac à sable, n’envoyez des réclamations que sur des courses `SIM-…`.
 
 **Navigateur** — ouvrez `javascript/navigateur.html` (un double-clic suffit), saisissez l’adresse WebSocket, le compte et le mot de passe, puis « Se connecter ». Sur le site, le certificat `ca-ai-regatta.crt` doit d’abord être installé dans le magasin de certificats du système ; sinon le navigateur refuse la connexion sans message clair.
 

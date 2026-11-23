@@ -11,7 +11,7 @@
 //   AIR_PASSWORD  mot de passe (obligatoire)
 //   AIR_BOAT      votre bateau (défaut FRA-07)
 //
-// Le script suit la manche indiquée par race/current, tient l'état de la flotte et affiche chaque seconde
+// Le script suit la course indiquée par race/current, tient l'état de la flotte et affiche chaque seconde
 // le compte à rebours (calculé localement) et la liste des bateaux.
 
 import mqtt from "mqtt";
@@ -59,7 +59,7 @@ function followRace(raceId) {
   state.boats.clear();
   state.lastSeq.clear();
   client.subscribe(`race/${raceId}/#`, { qos: 1 });
-  console.log(`[manche] suivi de ${raceId}`);
+  console.log(`[course] suivi de ${raceId}`);
 }
 
 client.on("connect", (connack) => {

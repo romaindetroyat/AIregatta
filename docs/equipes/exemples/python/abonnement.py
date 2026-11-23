@@ -3,7 +3,7 @@
 
 Ce que fait ce script :
   1. se connecte au broker du PC course (ou au bac à sable) en TLS, avec le compte de l'équipe ;
-  2. suit la manche indiquée par `race/current` et s'abonne à tous ses sujets ;
+  2. suit la course indiquée par `race/current` et s'abonne à tous ses sujets ;
   3. tient à jour l'état de la flotte (une entrée par bateau), en écartant doublons et messages en retard (`seq`) ;
   4. calcule le compte à rebours LOCALEMENT, à partir de l'heure GPS du départ (message `clock`) ;
   5. affiche chaque seconde la distance de l'étrave de votre bateau à sa prochaine bouée ;
@@ -20,7 +20,7 @@ Configuration par variables d'environnement (aucun secret dans le code) :
   AIR_USER       compte, ex. equipe-fra07     (obligatoire)
   AIR_PASSWORD   mot de passe                 (obligatoire)
   AIR_BOAT       votre bateau, ex. FRA-07     (défaut FRA-07)
-  AIR_RACE       forcer une manche, ex. 2027-05-14-M3 (facultatif ; sinon race/current)
+  AIR_RACE       forcer une course, ex. 2027-05-15-C3 (facultatif ; sinon race/current)
   AIR_CLIENT_ID  identifiant client MQTT stable (défaut <AIR_USER>-abonnement)
 
 Exemple :
@@ -158,7 +158,7 @@ def switch_race(client, new_race_id):
         client.unsubscribe(f"race/{old}/#")
     if new_race_id:
         client.subscribe(race_topics(new_race_id))
-    print(f"[manche] suivi de {new_race_id}")
+    print(f"[course] suivi de {new_race_id}")
 
 
 def on_message(client, userdata, message):
@@ -197,7 +197,7 @@ def on_message(client, userdata, message):
         return
     with state.lock:
         if parts[1] != state.race_id:
-            return  # message d'une autre manche (changement de manche en cours)
+            return  # message d'une autre course (changement de course en cours)
         kind = parts[2]
         if kind == "boats" and len(parts) == 5 and parts[4] == "pos":
             if state.accept("pos/" + parts[3], msg):
@@ -258,7 +258,7 @@ def status_line() -> str:
     with state.lock:
         offset = state.gps_utc_offset_s
         now = now_gps_ms(offset)
-        out = [f"manche {state.race_id or '—'}"]
+        out = [f"course {state.race_id or '—'}"]
 
         # Compte à rebours calculé localement (§7) : jamais à partir de l'arrivée des messages.
         clock = state.clock

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://[domaine-a-definir]/ai-regatta/contrat/1.0/schemas/course.schema.json",
   "title": "race/{raceId}/course",
-  "description": "Parcours de la manche (message conservé).",
+  "description": "Parcours de la course (message conservé).",
   "type": "object",
   "properties": {
     "t": {
@@ -17,8 +17,8 @@
     },
     "race_id": {
       "type": "string",
-      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-M\\d{1,2}$",
-      "description": "Identifiant de manche : date + numéro de manche, préfixe SIM- dans le bac à sable."
+      "pattern": "^(SIM-)?\\d{4}-\\d{2}-\\d{2}-C\\d{1,2}$",
+      "description": "Identifiant de course : date + numéro de course, préfixe SIM- dans le bac à sable."
     },
     "seq": {
       "type": "integer",

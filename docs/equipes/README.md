@@ -64,7 +64,7 @@ Sur le site, chaque équipe a une **prise Ethernet** dans la zone équipes : câ
 ## Ce qui est de votre responsabilité
 
 - **Votre logiciel** : réception du flux, tactique, affichage, envoi de vos messages au comité. L’organisation fournit le flux, la documentation et des exemples, **pas d’assistant tactique** (P12).
-- **Votre liaison avec votre bateau** (P10, P36) : matériel, protocole, fiabilité, dans le respect du plan de fréquences, avec des émetteurs déclarés à l’inscription. Vous y envoyez ce que vous voulez, données officielles comprises. Aucun humain ne commande le bateau pendant une manche ; le logiciel ne change pas pendant une manche.
+- **Votre liaison avec votre bateau** (P10, P36) : matériel, protocole, fiabilité, dans le respect du plan de fréquences, avec des émetteurs déclarés à l’inscription. Vous y envoyez ce que vous voulez, données officielles comprises. Aucun humain ne commande le bateau pendant une course ; le logiciel ne change pas pendant une course.
 - **Votre bateau** : jauge IOM (classe 1 m) pour la coque, les appendices, les gréements et le poids ; électronique libre (P07). À vous l’autopilote, les capteurs, et le comportement en cas de perte de liaison, déclaré à l’avance. Un bateau de référence est documenté dans le kit : conseillé, non imposé.
 - **Votre tactique** : c’est le cœur de l’épreuve.
 - **L’heure de vos PC** : synchronisée sur le serveur de temps du site (écart < 5 ms, P26).

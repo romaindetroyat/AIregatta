@@ -124,7 +124,7 @@ Ordre envoyé par le PC à terre :
   "kind": "order",
   "boat_id": "FRA-07",
   "order_id": 1842,
-  "t_gps_ms": 1494335047200,
+  "t_gps_ms": 1494421447200,
   "cmd": "mode_high",
   "param": {"twa_deg": 38},
   "ttl_ms": 2000
@@ -139,7 +139,7 @@ Accusé de réception immédiat, envoyé par le bateau :
   "kind": "ack",
   "boat_id": "FRA-07",
   "order_id": 1842,
-  "t_gps_ms": 1494335047290,
+  "t_gps_ms": 1494421447290,
   "status": "accepted"
 }
 ```
@@ -152,7 +152,7 @@ Compte rendu d’exécution :
   "kind": "report",
   "boat_id": "FRA-07",
   "order_id": 1842,
-  "t_gps_ms": 1494335049650,
+  "t_gps_ms": 1494421449650,
   "status": "done",
   "detail": "TWA 38 atteint"
 }

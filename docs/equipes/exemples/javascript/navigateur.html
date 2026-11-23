@@ -88,7 +88,7 @@ function followRace(raceId) {
   state.raceId = raceId; state.clock = null;
   state.boats.clear(); state.lastSeq.clear(); state.ranks.clear();
   client.subscribe(`race/${raceId}/#`, { qos: 1 });
-  document.getElementById("race").textContent = `Manche ${raceId}`;
+  document.getElementById("race").textContent = `Course ${raceId}`;
 }
 
 function onMessage(topic, payload) {

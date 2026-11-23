@@ -14,10 +14,10 @@ Mêmes variables d'environnement que abonnement.py (AIR_HOST, AIR_PORT, AIR_TLS,
 AIR_USER, AIR_PASSWORD, AIR_BOAT).
 
 Exemples :
-  python3 envoyer_au_comite.py ack --notice N-0014 --race 2027-05-14-M3
-  python3 envoyer_au_comite.py ack --inbox C-fra07-0032 --race 2027-05-14-M3
-  python3 envoyer_au_comite.py protest --race 2027-05-14-M3 --against FRA-03 \\
-      --incident "2027-05-14T13:03:02.000Z" --rule "[règle à préciser]" \\
+  python3 envoyer_au_comite.py ack --notice N-0014 --race 2027-05-15-C3
+  python3 envoyer_au_comite.py ack --inbox C-fra07-0032 --race 2027-05-15-C3
+  python3 envoyer_au_comite.py protest --race 2027-05-15-C3 --against FRA-03 \\
+      --incident "2027-05-15T13:03:02.000Z" --rule "[règle à préciser]" \\
       --description "Au croisement, FRA-03 bâbord amures n'a pas manœuvré pour éviter FRA-07."
   python3 envoyer_au_comite.py --dry-run ack --notice N-0014      # affiche sans envoyer
 """
@@ -150,7 +150,7 @@ def main() -> None:
     target = ack.add_mutually_exclusive_group(required=True)
     target.add_argument("--notice", help="notice_id de l'avis, ex. N-0014")
     target.add_argument("--inbox", help="msg_id du message reçu dans l'inbox")
-    ack.add_argument("--race", default=None, help="race_id, ex. 2027-05-14-M3")
+    ack.add_argument("--race", default=None, help="race_id, ex. 2027-05-15-C3")
 
     protest = sub.add_parser("protest", help="réclamation")
     protest.add_argument("--race", required=True)

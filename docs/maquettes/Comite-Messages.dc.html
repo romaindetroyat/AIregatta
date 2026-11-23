@@ -118,7 +118,7 @@ class Component extends DCLogic {
     ];
     const audDefs = [['all','Toutes les équipes'],['one','Une équipe (FRA-07)'],['pub','Équipes + public']];
     const audiences = audDefs.map(a => ({ label: a[1], on: String(st.aud === a[0]), bg: st.aud === a[0] ? '#C7EB00' : '#FFFFFF', go: () => this.setState({ aud: a[0] }) }));
-    const topic = st.aud === 'one' ? 'teams/fra07/inbox' : 'race/2027-05-14-M4/notices';
+    const topic = st.aud === 'one' ? 'teams/fra07/inbox' : 'race/2027-05-15-C4/notices';
     const pubText = st.aud === 'pub' ? 'Publié 1 s plus tard, sous une forme courte : « Bouée au vent déplacée, départ à 14 h 40 ».' : 'Rien. Cet avis reste réservé aux équipes.';
     const ids = ['FRA-07','ITA-12','GBR-03','ESP-21','SUI-05','GER-09','MON-01','NED-14'];
     const times = ['+0,4 s','+1,1 s','+0,7 s','+2,3 s','+0,9 s',null,'+1,6 s','+3,0 s'];

@@ -23,7 +23,7 @@
 ## 1. Le vocabulaire en deux minutes
 
 - **MQTT** : un protocole très simple pour diffuser des messages. Un programme central, le **broker** (ici Mosquitto, au PC course), reçoit des messages et les redistribue à tous ceux qui se sont **abonnés**.
-- **Sujet** (*topic* en anglais) : l’adresse d’un message, écrite comme un chemin, par exemple `race/2027-05-14-M3/boats/FRA-07/pos`. On s’abonne à un sujet précis, ou à une famille avec un joker : `+` remplace un niveau, `#` remplace tout ce qui suit (`race/2027-05-14-M3/#` = tout ce qui concerne la manche).
+- **Sujet** (*topic* en anglais) : l’adresse d’un message, écrite comme un chemin, par exemple `race/2027-05-15-C3/boats/FRA-07/pos`. On s’abonne à un sujet précis, ou à une famille avec un joker : `+` remplace un niveau, `#` remplace tout ce qui suit (`race/2027-05-15-C3/#` = tout ce qui concerne la course).
 - **QoS** (*quality of service*) : le niveau de garantie de livraison. **QoS 0** : envoyé une fois, sans accusé de réception, perdu si le réseau hoquette (parfait pour une position qui sera remplacée 100 ms plus tard). **QoS 1** : le broker renvoie le message jusqu’à ce qu’il soit acquitté ; il peut arriver en double, jamais perdu tant que la session est conservée.
 - **Message conservé** (*retained*) : le broker garde le dernier message d’un sujet et le donne immédiatement à tout nouvel abonné. C’est ce qui permet de connaître l’état de la course dès la connexion, sans attendre.
 - **Session persistante** : le broker se souvient de vos abonnements et met de côté les messages QoS 1 pendant une courte déconnexion.
@@ -38,7 +38,7 @@
 | Noms des champs | Anglais, en `snake_case` (minuscules et tirets bas) : `boat_id`, `sog_kn`. Le suffixe indique l’unité quand elle n’est pas évidente. Cette règle remplace les noms des exemples du §7.3 de l’architecture (`boatId`, `hAcc_m` deviennent `boat_id`, `h_acc_m`). |
 | Champs présents | **Tous les champs listés sont toujours présents.** Une valeur inconnue vaut `null`, jamais un champ absent. |
 | Champs inconnus | Votre logiciel **doit ignorer** les champs qu’il ne connaît pas : de nouveaux champs facultatifs peuvent apparaître (voir §9). |
-| Temps | Chaque message porte **deux** horodatages du même instant : `t`, texte ISO 8601 en UTC avec millisecondes (`2027-05-14T13:04:07.200Z`), et `t_gps_ms`, entier (voir ci-dessous). Les autres instants suivent la même règle : un champ texte et son jumeau `…_t_gps_ms`. |
+| Temps | Chaque message porte **deux** horodatages du même instant : `t`, texte ISO 8601 en UTC avec millisecondes (`2027-05-15T13:04:07.200Z`), et `t_gps_ms`, entier (voir ci-dessous). Les autres instants suivent la même règle : un champ texte et son jumeau `…_t_gps_ms`. |
 | `t_gps_ms` | Millisecondes écoulées depuis l’époque GPS (6 janvier 1980, 00:00:00 UTC), **dans l’échelle de temps GPS**, qui ne connaît pas les secondes intercalaires. Avantage : c’est un entier qui ne fait que croître, idéal pour calculer des écarts. Conversion : `t_gps_ms = temps_unix_ms − 315 964 800 000 + 1 000 × gps_utc_offset_s`, avec `gps_utc_offset_s` = 18 s aujourd’hui (valeur publiée dans `sys/time` et `clock`, à confirmer pour mai 2027 selon les annonces de l’IERS). |
 | Position | Latitude et longitude en degrés décimaux, système **WGS84** (celui du GPS), 7 décimales (≈ 1 cm). |
 | Angles | Degrés **vrais** (par rapport au nord géographique, pas magnétique), de 0 (inclus) à 360 (exclu), sens des aiguilles d’une montre. Une direction de vent (`twd`) indique **d’où vient** le vent. |
@@ -46,7 +46,7 @@
 | Distances | En **mètres**, suffixe `_m`. |
 | Durées | En millisecondes (`_ms`) ou secondes (`_s`), selon le suffixe. |
 | Gîte et tangage | Degrés ; gîte positive = bateau penché sur tribord (à confirmer avec le firmware de la balise), tangage positif = étrave qui monte. |
-| Identifiants | Manche `raceId` = date + numéro de manche : `2027-05-14-M3` (préfixe `SIM-` dans le bac à sable). Équipe `teamId` = code en minuscules : `fra07`. Bateau `boatId` = numéro de voile : `FRA-07`. Bouées du parcours n°3 : `B1` et `B2` (porte 1-2, qui sert au départ, au passage et à l’arrivée), `B3` (bouée au vent, à laisser à bâbord), `P1` et `P2` (tour de pénalité). |
+| Identifiants | Course `raceId` = date + numéro de course : `2027-05-15-C3` (préfixe `SIM-` dans le bac à sable). Équipe `teamId` = code en minuscules : `fra07`. Bateau `boatId` = numéro de voile : `FRA-07`. Bouées du parcours n°3 : `B1` et `B2` (porte 1-2, qui sert au départ, au passage et à l’arrivée), `B3` (bouée au vent, à laisser à bâbord), `P1` et `P2` (tour de pénalité). |
 | Compteur `seq` | Entier croissant **par sujet** (par bateau pour les positions), attribué par le PC course. Il sert à repérer les doublons et les messages arrivés dans le désordre. |
 
 ## 3. Se connecter
@@ -107,8 +107,8 @@ Les deux serveurs reçoivent les mêmes publications du moteur de course : les m
 ## 5. Arborescence des sujets
 
 ```
-race/current                          # manche en cours (ajout au §7.3)
-race/{raceId}/state                   # état de la manche
+race/current                          # course en cours (ajout au §7.3)
+race/{raceId}/state                   # état de la course
 race/{raceId}/clock                   # heure GPS du départ, étape de la procédure
 race/{raceId}/course                  # bouées, lignes, bords, limites
 race/{raceId}/marks/{markId}          # position mesurée + vent si équipée
@@ -148,51 +148,51 @@ Débit total reçu par une équipe abonnée à tout : de l’ordre de 6 à 20 ko
 
 ## 6. Les sujets un par un
 
-### 6.1 `race/current` — la manche en cours
+### 6.1 `race/current` — la course en cours
 
-Indique quelle manche suivre : la manche en cours, ou la prochaine entre deux manches. Abonnez-vous à ce sujet d’abord, puis à `race/{raceId}/#` pour la manche indiquée.
+Indique quelle course suivre : la course en cours, ou la prochaine entre deux courses. Abonnez-vous à ce sujet d’abord, puis à `race/{raceId}/#` pour la course indiquée.
 
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms` | texte, entier | — | Instant de publication |
-| `race_id` | texte ou null | — | Manche en cours ou prochaine ; `null` quand la journée est finie |
+| `race_id` | texte ou null | — | Course en cours ou prochaine ; `null` quand la journée est finie |
 | `day` | texte | date | Jour de course, `AAAA-MM-JJ` |
-| `races_today` | liste de textes | — | Manches prévues dans la journée |
+| `races_today` | liste de textes | — | Courses prévues dans la journée |
 
 ```json
 {
-  "t": "2027-05-14T12:50:00.000Z",
-  "t_gps_ms": 1494334218000,
-  "race_id": "2027-05-14-M3",
-  "day": "2027-05-14",
-  "races_today": ["2027-05-14-M1", "2027-05-14-M2", "2027-05-14-M3", "2027-05-14-M4"]
+  "t": "2027-05-15T12:50:00.000Z",
+  "t_gps_ms": 1494420618000,
+  "race_id": "2027-05-15-C3",
+  "day": "2027-05-15",
+  "races_today": ["2027-05-15-C1", "2027-05-15-C2", "2027-05-15-C3", "2027-05-15-C4"]
 }
 ```
 
-### 6.2 `race/{raceId}/state` — l’état de la manche
+### 6.2 `race/{raceId}/state` — l’état de la course
 
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms`, `seq` | | | Instant de publication, compteur |
-| `race_id` | texte | — | Manche |
+| `race_id` | texte | — | Course |
 | `status` | texte | — | `scheduled` (prévue), `sequence` (procédure de départ en cours), `racing` (en course), `finished` (terminée), `postponed` (retardée), `abandoned` (annulée) |
-| `race_number` | entier | — | Numéro de la manche dans la journée |
+| `race_number` | entier | — | Numéro de la course dans la journée |
 | `day` | texte | date | Jour de course |
-| `entries` | liste de `boat_id` | — | Bateaux inscrits à la manche |
+| `entries` | liste de `boat_id` | — | Bateaux inscrits à la course |
 | `course_version` | entier | — | Version du parcours en vigueur ; elle change à chaque modification de `course` |
-| `time_limit_s` | entier ou null | s | Temps limite de la manche, fixé par les instructions de course |
+| `time_limit_s` | entier ou null | s | Temps limite de la course, fixé par les instructions de course |
 | `results_status` | texte | — | `none`, `provisional` (provisoire), `final` (définitif, après réclamations) |
 | `message_fr` | texte ou null | — | Courte phrase lisible |
 
 ```json
 {
-  "t": "2027-05-14T12:57:00.010Z",
-  "t_gps_ms": 1494334638010,
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T12:57:00.010Z",
+  "t_gps_ms": 1494421038010,
+  "race_id": "2027-05-15-C3",
   "seq": 4,
   "status": "sequence",
   "race_number": 3,
-  "day": "2027-05-14",
+  "day": "2027-05-15",
   "entries": ["FRA-03", "FRA-07", "FRA-12", "ITA-05", "MON-01", "ESP-21"],
   "course_version": 2,
   "time_limit_s": 900,
@@ -208,7 +208,7 @@ Le chrono est piloté par le PC course (P17). La procédure prévue est celle du
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms`, `seq` | | | Instant de publication, compteur |
-| `race_id` | texte | — | Manche |
+| `race_id` | texte | — | Course |
 | `step` | texte | — | Dernière étape franchie : `none` (procédure pas encore lancée), `warning` (avertissement), `preparatory` (préparatoire), `one_minute` (−1:00, procédure de 5 minutes), `last_step` (−0:20, procédure d’une minute), `start` (départ donné), `postponed` (retard), `general_recall` (rappel général : un nouveau départ sera publié), `abandoned` (annulation) |
 | `start_time`, `start_t_gps_ms` | texte, entier, ou null | — | **Heure GPS exacte du départ.** `null` tant qu’elle n’est pas fixée |
 | `procedure` | liste | — | Les étapes prévues : `step`, `offset_s` (décalage par rapport au départ, négatif), `time` et `t_gps_ms` (heure de l’étape), `sound` (`short`, `long`, `none`) |
@@ -218,47 +218,47 @@ Le chrono est piloté par le PC course (P17). La procédure prévue est celle du
 
 ```json
 {
-  "t": "2027-05-14T12:59:30.000Z",
-  "t_gps_ms": 1494334788000,
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T12:59:30.000Z",
+  "t_gps_ms": 1494421188000,
+  "race_id": "2027-05-15-C3",
   "seq": 91,
   "step": "preparatory",
-  "start_time": "2027-05-14T13:00:00.000Z",
-  "start_t_gps_ms": 1494334818000,
+  "start_time": "2027-05-15T13:00:00.000Z",
+  "start_t_gps_ms": 1494421218000,
   "procedure": [
     {
       "step": "warning",
       "offset_s": -60,
-      "time": "2027-05-14T12:59:00.000Z",
-      "t_gps_ms": 1494334758000,
+      "time": "2027-05-15T12:59:00.000Z",
+      "t_gps_ms": 1494421158000,
       "sound": "short"
     },
     {
       "step": "preparatory",
       "offset_s": -40,
-      "time": "2027-05-14T12:59:20.000Z",
-      "t_gps_ms": 1494334778000,
+      "time": "2027-05-15T12:59:20.000Z",
+      "t_gps_ms": 1494421178000,
       "sound": "short"
     },
     {
       "step": "last_step",
       "offset_s": -20,
-      "time": "2027-05-14T12:59:40.000Z",
-      "t_gps_ms": 1494334798000,
+      "time": "2027-05-15T12:59:40.000Z",
+      "t_gps_ms": 1494421198000,
       "sound": "short"
     },
     {
       "step": "start",
       "offset_s": 0,
-      "time": "2027-05-14T13:00:00.000Z",
-      "t_gps_ms": 1494334818000,
+      "time": "2027-05-15T13:00:00.000Z",
+      "t_gps_ms": 1494421218000,
       "sound": "short"
     }
   ],
   "next_signal": {
     "step": "last_step",
-    "time": "2027-05-14T12:59:40.000Z",
-    "t_gps_ms": 1494334798000
+    "time": "2027-05-15T12:59:40.000Z",
+    "t_gps_ms": 1494421198000
   },
   "individual_recall": [],
   "gps_utc_offset_s": 18
@@ -272,7 +272,7 @@ Le chrono est piloté par le PC course (P17). La procédure prévue est celle du
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms`, `seq` | | | Instant de publication, compteur |
-| `race_id` | texte | — | Manche |
+| `race_id` | texte | — | Course |
 | `course_version` | entier | — | Version du parcours (augmente à chaque modification) |
 | `name` | texte | — | Nom lisible du parcours |
 | `axis_twd` | nombre | degrés vrais | Direction du vent retenue pour orienter le parcours |
@@ -289,9 +289,9 @@ Les positions de `marks` sont celles **déclarées** ; les positions **mesurées
 
 ```json
 {
-  "t": "2027-05-14T12:40:00.000Z",
-  "t_gps_ms": 1494333618000,
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T12:40:00.000Z",
+  "t_gps_ms": 1494420018000,
+  "race_id": "2027-05-15-C3",
   "seq": 2,
   "course_version": 2,
   "name": "Parcours n°3 : porte 1-2, bouée 3 à bâbord, 2 tours",
@@ -420,7 +420,7 @@ La bouée instrumentée (la bouée 3, au vent) porte un anémomètre ; les autre
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms`, `seq` | | | Instant de la mesure, compteur |
-| `race_id`, `mark_id` | texte | — | Manche, bouée |
+| `race_id`, `mark_id` | texte | — | Course, bouée |
 | `lat`, `lon` | nombre ou null | degrés | Position mesurée |
 | `fix` | texte | — | Qualité de la position : `none`, `3d`, `dgnss`, `rtk_float`, `rtk_fixed` (RTK : correction centimétrique) |
 | `h_acc_m` | nombre ou null | m | Précision horizontale estimée |
@@ -430,9 +430,9 @@ La bouée instrumentée (la bouée 3, au vent) porte un anémomètre ; les autre
 
 ```json
 {
-  "t": "2027-05-14T13:04:07.000Z",
-  "t_gps_ms": 1494335065000,
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T13:04:07.000Z",
+  "t_gps_ms": 1494421465000,
+  "race_id": "2027-05-15-C3",
   "mark_id": "B3",
   "seq": 1447,
   "lat": 43.1063123,
@@ -480,8 +480,8 @@ Exemple normal (4G, 10 Hz) :
 
 ```json
 {
-  "t": "2027-05-14T13:04:07.200Z",
-  "t_gps_ms": 1494335065200,
+  "t": "2027-05-15T13:04:07.200Z",
+  "t_gps_ms": 1494421465200,
   "boat_id": "FRA-07",
   "seq": 2472,
   "lat": 43.1069934,
@@ -507,8 +507,8 @@ Même bateau passé sur la radio de secours (2 Hz, pas de cap ni de gîte, étra
 
 ```json
 {
-  "t": "2027-05-14T13:04:09.500Z",
-  "t_gps_ms": 1494335067500,
+  "t": "2027-05-15T13:04:09.500Z",
+  "t_gps_ms": 1494421467500,
   "boat_id": "FRA-07",
   "seq": 2491,
   "lat": 43.106995,
@@ -534,8 +534,8 @@ Bateau perdu (plus aucune donnée depuis 3,1 s : dernière position connue, `sta
 
 ```json
 {
-  "t": "2027-05-14T13:05:12.000Z",
-  "t_gps_ms": 1494335130000,
+  "t": "2027-05-15T13:05:12.000Z",
+  "t_gps_ms": 1494421530000,
   "boat_id": "ITA-05",
   "seq": 2960,
   "lat": 43.107184,
@@ -566,7 +566,7 @@ Le moteur vent (S9) fusionne les bouées instrumentées et la station à terre e
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms`, `seq` | | | Instant de calcul, compteur |
-| `race_id` | texte | — | Manche |
+| `race_id` | texte | — | Course |
 | `grid.origin_lat`, `grid.origin_lon` | nombre | degrés | **Coin sud-ouest** de la grille |
 | `grid.cell_m` | nombre | m | Taille d’une maille (20) |
 | `grid.nx`, `grid.ny` | entier | — | Nombre de mailles d’ouest en est (`nx`) et du sud au nord (`ny`) |
@@ -581,9 +581,9 @@ La grille est alignée sur le nord ; pour passer de mètres en degrés près du 
 
 ```json
 {
-  "t": "2027-05-14T13:04:07.000Z",
-  "t_gps_ms": 1494335065000,
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T13:04:07.000Z",
+  "t_gps_ms": 1494421465000,
+  "race_id": "2027-05-15-C3",
   "seq": 1447,
   "grid": {
     "origin_lat": 43.1064791,
@@ -657,9 +657,9 @@ Prévision simple à 5, 10 et 15 minutes, avec un niveau de confiance (S9). Ce n
 
 ```json
 {
-  "t": "2027-05-14T13:04:07.000Z",
-  "t_gps_ms": 1494335065000,
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T13:04:07.000Z",
+  "t_gps_ms": 1494421465000,
+  "race_id": "2027-05-15-C3",
   "seq": 248,
   "now": {
     "tws_kn": 9.9,
@@ -704,9 +704,9 @@ Un message par événement. Le logiciel du PC course **signale**, un arbitre **d
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms` | | | **Instant de l’événement** (par exemple l’instant exact du passage de bouée), pas de la publication |
-| `seq` | entier | — | Compteur des événements de la manche |
+| `seq` | entier | — | Compteur des événements de la course |
 | `event_id` | texte | — | Identifiant unique |
-| `race_id` | texte | — | Manche |
+| `race_id` | texte | — | Course |
 | `type` | texte | — | Voir la liste ci-dessous |
 | `boat_id` | texte ou null | — | Bateau concerné (`null` pour un événement de flotte) |
 | `mark_id` | texte ou null | — | Bouée concernée |
@@ -732,7 +732,7 @@ Un message par événement. Le logiciel du PC course **signale**, un arbitre **d
 | `finish` | Arrivée | `rank`, `finish_time`, `finish_t_gps_ms`, `elapsed_ms` |
 | `retired` | Abandon | `reason` |
 | `postponement` | Retard de la procédure | `new_warning_time` (ou `null`) |
-| `abandonment` | Manche annulée | `reason_fr` |
+| `abandonment` | Course annulée | `reason_fr` |
 | `course_change` | Changement de parcours (bouée déplacée) | `course_version`, `mark_ids` |
 | `shortened_course` | Parcours réduit | `course_version`, `finish_at` |
 
@@ -740,10 +740,10 @@ Le contenu de `details` sera figé au gel du contrat ; d’ici là, il peut s’
 
 ```json
 {
-  "t": "2027-05-14T12:57:00.000Z",
-  "t_gps_ms": 1494334638000,
-  "event_id": "2027-05-14-M3-E0001",
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T12:57:00.000Z",
+  "t_gps_ms": 1494421038000,
+  "event_id": "2027-05-15-C3-E0001",
+  "race_id": "2027-05-15-C3",
   "seq": 1,
   "type": "warning",
   "boat_id": null,
@@ -752,8 +752,8 @@ Le contenu de `details` sera figé au gel du contrat ; d’ici là, il peut s’
   "source": "committee",
   "replaces": null,
   "details": {
-    "start_time": "2027-05-14T13:00:00.000Z",
-    "start_t_gps_ms": 1494334818000
+    "start_time": "2027-05-15T13:00:00.000Z",
+    "start_t_gps_ms": 1494421218000
   },
   "text_fr": "Signal d'avertissement, départ à 15:00:00 heure locale"
 }
@@ -761,10 +761,10 @@ Le contenu de `details` sera figé au gel du contrat ; d’ici là, il peut s’
 
 ```json
 {
-  "t": "2027-05-14T13:01:52.300Z",
-  "t_gps_ms": 1494334930300,
-  "event_id": "2027-05-14-M3-E0009",
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T13:01:52.300Z",
+  "t_gps_ms": 1494421330300,
+  "event_id": "2027-05-15-C3-E0009",
+  "race_id": "2027-05-15-C3",
   "seq": 9,
   "type": "mark_rounding",
   "boat_id": "FRA-07",
@@ -783,10 +783,10 @@ Le contenu de `details` sera figé au gel du contrat ; d’ici là, il peut s’
 
 ```json
 {
-  "t": "2027-05-14T13:00:00.000Z",
-  "t_gps_ms": 1494334818000,
-  "event_id": "2027-05-14-M3-E0005",
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T13:00:00.000Z",
+  "t_gps_ms": 1494421218000,
+  "event_id": "2027-05-15-C3-E0005",
+  "race_id": "2027-05-15-C3",
   "seq": 5,
   "type": "ocs",
   "boat_id": "ESP-21",
@@ -803,10 +803,10 @@ Le contenu de `details` sera figé au gel du contrat ; d’ici là, il peut s’
 
 ```json
 {
-  "t": "2027-05-14T13:03:10.000Z",
-  "t_gps_ms": 1494335008000,
-  "event_id": "2027-05-14-M3-E0012",
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T13:03:10.000Z",
+  "t_gps_ms": 1494421408000,
+  "event_id": "2027-05-15-C3-E0012",
+  "race_id": "2027-05-15-C3",
   "seq": 12,
   "type": "penalty_issued",
   "boat_id": "FRA-03",
@@ -826,10 +826,10 @@ Le contenu de `details` sera figé au gel du contrat ; d’ici là, il peut s’
 
 ```json
 {
-  "t": "2027-05-14T13:09:41.700Z",
-  "t_gps_ms": 1494335399700,
-  "event_id": "2027-05-14-M3-E0031",
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T13:09:41.700Z",
+  "t_gps_ms": 1494421799700,
+  "event_id": "2027-05-15-C3-E0031",
+  "race_id": "2027-05-15-C3",
   "seq": 31,
   "type": "finish",
   "boat_id": "FRA-07",
@@ -839,8 +839,8 @@ Le contenu de `details` sera figé au gel du contrat ; d’ici là, il peut s’
   "replaces": null,
   "details": {
     "rank": 1,
-    "finish_time": "2027-05-14T13:09:41.700Z",
-    "finish_t_gps_ms": 1494335399700,
+    "finish_time": "2027-05-15T13:09:41.700Z",
+    "finish_t_gps_ms": 1494421799700,
     "elapsed_ms": 581700
   },
   "text_fr": "FRA-07 franchit la ligne d'arrivée, 1er provisoire"
@@ -862,29 +862,29 @@ Les pavillons sont hissés à la main (P18) ; le comité saisit en même temps d
 
 ```json
 {
-  "t": "2027-05-14T12:58:30.000Z",
-  "t_gps_ms": 1494334728000,
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T12:58:30.000Z",
+  "t_gps_ms": 1494421128000,
+  "race_id": "2027-05-15-C3",
   "seq": 3,
   "flags": [
     {
       "flag": "orange",
-      "since": "2027-05-14T12:50:00.000Z",
-      "since_t_gps_ms": 1494334218000,
+      "since": "2027-05-15T12:50:00.000Z",
+      "since_t_gps_ms": 1494420618000,
       "over": null,
       "meaning_fr": "Ligne de départ en place"
     },
     {
       "flag": "class",
-      "since": "2027-05-14T12:57:00.000Z",
-      "since_t_gps_ms": 1494334638000,
+      "since": "2027-05-15T12:57:00.000Z",
+      "since_t_gps_ms": 1494421038000,
       "over": null,
       "meaning_fr": "Signal d'avertissement"
     },
     {
       "flag": "P",
-      "since": "2027-05-14T12:58:00.000Z",
-      "since_t_gps_ms": 1494334698000,
+      "since": "2027-05-15T12:58:00.000Z",
+      "since_t_gps_ms": 1494421098000,
       "over": null,
       "meaning_fr": "Signal préparatoire"
     }
@@ -911,9 +911,9 @@ Les pavillons sont hissés à la main (P18) ; le comité saisit en même temps d
 
 ```json
 {
-  "t": "2027-05-14T13:04:07.000Z",
-  "t_gps_ms": 1494335065000,
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T13:04:07.000Z",
+  "t_gps_ms": 1494421465000,
+  "race_id": "2027-05-15-C3",
   "seq": 248,
   "provisional": true,
   "entries": [
@@ -1007,14 +1007,14 @@ Les pavillons sont hissés à la main (P18) ; le comité saisit en même temps d
 
 ### 6.12 `race/{raceId}/notices` — les avis officiels
 
-Le tableau officiel en version électronique : le comité publie à **toutes** les équipes. Le message conservé contient **la liste complète** des avis valables pour la manche (y compris ceux de la journée et de l’épreuve) ; un nouvel avis remplace la liste par une liste plus longue.
+Le tableau officiel en version électronique : le comité publie à **toutes** les équipes. Le message conservé contient **la liste complète** des avis valables pour la course (y compris ceux de la journée et de l’épreuve) ; un nouvel avis remplace la liste par une liste plus longue.
 
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms`, `seq` | | | Instant de publication, compteur |
 | `notices[].notice_id` | texte | — | Identifiant, `N-0001`… |
 | `notices[].issued`, `issued_t_gps_ms` | | | Instant de publication de l’avis |
-| `notices[].scope` | texte | — | Portée : `event` (épreuve), `day` (journée), `race` (manche) |
+| `notices[].scope` | texte | — | Portée : `event` (épreuve), `day` (journée), `race` (course) |
 | `notices[].priority` | texte | — | `info`, `important`, `urgent` |
 | `notices[].title`, `body` | texte | — | Titre (120 caractères au plus) et texte |
 | `notices[].requires_ack` | booléen | — | `true` si chaque équipe doit en accuser réception (message `ack` dans `outbox`) |
@@ -1024,19 +1024,19 @@ Le tableau officiel en version électronique : le comité publie à **toutes** l
 
 ```json
 {
-  "t": "2027-05-14T12:45:00.000Z",
-  "t_gps_ms": 1494333918000,
-  "race_id": "2027-05-14-M3",
+  "t": "2027-05-15T12:45:00.000Z",
+  "t_gps_ms": 1494420318000,
+  "race_id": "2027-05-15-C3",
   "seq": 7,
   "notices": [
     {
       "notice_id": "N-0012",
-      "issued": "2027-05-14T08:30:00.000Z",
-      "issued_t_gps_ms": 1494318618000,
+      "issued": "2027-05-15T08:30:00.000Z",
+      "issued_t_gps_ms": 1494405018000,
       "scope": "day",
       "priority": "info",
       "title": "Programme du jour",
-      "body": "4 manches prévues. Premier signal d'avertissement à 12:00 heure locale.",
+      "body": "4 courses prévues. Premier signal d'avertissement à 12:00 heure locale.",
       "requires_ack": false,
       "ack_deadline": null,
       "supersedes": null,
@@ -1044,14 +1044,14 @@ Le tableau officiel en version électronique : le comité publie à **toutes** l
     },
     {
       "notice_id": "N-0014",
-      "issued": "2027-05-14T12:45:00.000Z",
-      "issued_t_gps_ms": 1494333918000,
+      "issued": "2027-05-15T12:45:00.000Z",
+      "issued_t_gps_ms": 1494420318000,
       "scope": "race",
       "priority": "important",
       "title": "Porte 1-2 déplacée",
       "body": "La porte 1-2 a été déplacée de 15 m vers le sud-ouest. Le parcours passe en version 2.",
       "requires_ack": true,
-      "ack_deadline": "2027-05-14T12:55:00.000Z",
+      "ack_deadline": "2027-05-15T12:55:00.000Z",
       "supersedes": null,
       "attachment_url": null
     }
@@ -1068,7 +1068,7 @@ Seule votre équipe lit ce sujet. QoS 1, non conservé : gardez une **session pe
 | `t`, `t_gps_ms` | | | Instant d’envoi |
 | `msg_id` | texte | — | Identifiant unique du message |
 | `team_id` | texte | — | Votre équipe |
-| `race_id` | texte ou null | — | Manche concernée |
+| `race_id` | texte ou null | — | Course concernée |
 | `type` | texte | — | `receipt` (accusé de réception automatique de l’un de vos messages), `message`, `reply` (réponse à une question), `penalty_notice`, `protest_notice` (une réclamation vous vise), `hearing` (convocation à une instruction), `decision` (décision de l’arbitre ou du jury), `safety`, `technical`, `error` (votre message a été refusé) |
 | `in_reply_to` | texte ou null | — | `msg_id` de votre message auquel celui-ci répond |
 | `priority` | texte | — | `info`, `important`, `urgent` |
@@ -1078,13 +1078,13 @@ Seule votre équipe lit ce sujet. QoS 1, non conservé : gardez une **session pe
 
 ```json
 {
-  "t": "2027-05-14T13:03:06.180Z",
-  "t_gps_ms": 1494335004180,
+  "t": "2027-05-15T13:03:06.180Z",
+  "t_gps_ms": 1494421404180,
   "msg_id": "C-fra07-0031",
   "team_id": "fra07",
-  "race_id": "2027-05-14-M3",
+  "race_id": "2027-05-15-C3",
   "type": "receipt",
-  "in_reply_to": "fra07-20270514-0005",
+  "in_reply_to": "fra07-20270515-0005",
   "priority": "info",
   "requires_ack": false,
   "title": "Réclamation recevable",
@@ -1100,13 +1100,13 @@ Seule votre équipe lit ce sujet. QoS 1, non conservé : gardez une **session pe
 
 ```json
 {
-  "t": "2027-05-14T13:03:41.500Z",
-  "t_gps_ms": 1494335039500,
+  "t": "2027-05-15T13:03:41.500Z",
+  "t_gps_ms": 1494421439500,
   "msg_id": "C-fra07-0032",
   "team_id": "fra07",
-  "race_id": "2027-05-14-M3",
+  "race_id": "2027-05-15-C3",
   "type": "decision",
-  "in_reply_to": "fra07-20270514-0005",
+  "in_reply_to": "fra07-20270515-0005",
   "priority": "urgent",
   "requires_ack": false,
   "title": "Réclamation R-0004 : pénalité pour FRA-03",
@@ -1121,11 +1121,11 @@ Seule votre équipe lit ce sujet. QoS 1, non conservé : gardez une **session pe
 
 ```json
 {
-  "t": "2027-05-14T13:20:00.000Z",
-  "t_gps_ms": 1494336018000,
+  "t": "2027-05-15T13:20:00.000Z",
+  "t_gps_ms": 1494422418000,
   "msg_id": "C-fra07-0033",
   "team_id": "fra07",
-  "race_id": "2027-05-14-M3",
+  "race_id": "2027-05-15-C3",
   "type": "hearing",
   "in_reply_to": null,
   "priority": "important",
@@ -1134,7 +1134,7 @@ Seule votre équipe lit ce sujet. QoS 1, non conservé : gardez une **session pe
   "body": "Instruction à 16:00 heure locale, tente du jury. Rejeu vidéo et traces disponibles.",
   "data": {
     "protest_id": "R-0004",
-    "hearing_time": "2027-05-14T14:00:00.000Z"
+    "hearing_time": "2027-05-15T14:00:00.000Z"
   }
 }
 ```
@@ -1148,9 +1148,9 @@ Enveloppe commune :
 | Champ | Type | Unité | Description |
 |---|---|---|---|
 | `t`, `t_gps_ms` | | | Instant d’envoi, selon votre horloge synchronisée |
-| `msg_id` | texte | — | Identifiant **unique**, choisi par vous, préfixé par votre code : `fra07-20270514-0005`. Renvoyer le même `msg_id` ne crée pas de doublon |
+| `msg_id` | texte | — | Identifiant **unique**, choisi par vous, préfixé par votre code : `fra07-20270515-0005`. Renvoyer le même `msg_id` ne crée pas de doublon |
 | `team_id`, `boat_id` | texte | — | Votre équipe et votre bateau ; ils doivent correspondre à votre compte |
-| `race_id` | texte ou null | — | Manche concernée, `null` si le message n’en concerne aucune |
+| `race_id` | texte ou null | — | Course concernée, `null` si le message n’en concerne aucune |
 | `type` | texte | — | `ack`, `protest`, `redress_request`, `retire`, `technical_issue`, `assistance_request`, `question` |
 | `payload` | objet | — | Contenu propre au type (tableaux ci-dessous) |
 
@@ -1165,12 +1165,12 @@ Les règles de fond (délais pour réclamer, forme, recevabilité) relèvent des
 
 ```json
 {
-  "t": "2027-05-14T12:46:12.400Z",
-  "t_gps_ms": 1494333990400,
-  "msg_id": "fra07-20270514-0003",
+  "t": "2027-05-15T12:46:12.400Z",
+  "t_gps_ms": 1494420390400,
+  "msg_id": "fra07-20270515-0003",
   "team_id": "fra07",
   "boat_id": "FRA-07",
-  "race_id": "2027-05-14-M3",
+  "race_id": "2027-05-15-C3",
   "type": "ack",
   "payload": {
     "ref_id": "N-0014",
@@ -1205,18 +1205,18 @@ La réponse arrive dans votre `inbox` en moins d’une seconde : un `receipt` av
 
 ```json
 {
-  "t": "2027-05-14T13:03:06.120Z",
-  "t_gps_ms": 1494335004120,
-  "msg_id": "fra07-20270514-0005",
+  "t": "2027-05-15T13:03:06.120Z",
+  "t_gps_ms": 1494421404120,
+  "msg_id": "fra07-20270515-0005",
   "team_id": "fra07",
   "boat_id": "FRA-07",
-  "race_id": "2027-05-14-M3",
+  "race_id": "2027-05-15-C3",
   "type": "protest",
   "payload": {
     "against": ["FRA-03"],
     "mode": "live",
-    "incident_time": "2027-05-14T13:03:02.000Z",
-    "incident_t_gps_ms": 1494335000000,
+    "incident_time": "2027-05-15T13:03:02.000Z",
+    "incident_t_gps_ms": 1494421400000,
     "rule": "10",
     "location": {
       "lat": 43.107201,
@@ -1241,19 +1241,19 @@ Une demande de réparation vise une erreur du comité ou de l’organisation (pa
 
 ```json
 {
-  "t": "2027-05-14T13:12:00.000Z",
-  "t_gps_ms": 1494335538000,
-  "msg_id": "fra07-20270514-0006",
+  "t": "2027-05-15T13:12:00.000Z",
+  "t_gps_ms": 1494421938000,
+  "msg_id": "fra07-20270515-0006",
   "team_id": "fra07",
   "boat_id": "FRA-07",
-  "race_id": "2027-05-14-M3",
+  "race_id": "2027-05-15-C3",
   "type": "redress_request",
   "payload": {
-    "incident_time": "2027-05-14T13:02:30.000Z",
-    "incident_t_gps_ms": 1494334968000,
+    "incident_time": "2027-05-15T13:02:30.000Z",
+    "incident_t_gps_ms": 1494421368000,
     "reason": "official_system_failure",
     "description": "La porte 1-2 publiée dans course v2 ne correspondait pas à la position réelle de B2 (écart de 12 m).",
-    "requested_remedy": "Moyenne des points sur les autres manches du jour"
+    "requested_remedy": "Moyenne des points sur les autres courses du jour"
   }
 }
 ```
@@ -1267,12 +1267,12 @@ Une demande de réparation vise une erreur du comité ou de l’organisation (pa
 
 ```json
 {
-  "t": "2027-05-14T13:06:30.000Z",
-  "t_gps_ms": 1494335208000,
-  "msg_id": "fra07-20270514-0007",
+  "t": "2027-05-15T13:06:30.000Z",
+  "t_gps_ms": 1494421608000,
+  "msg_id": "fra07-20270515-0007",
   "team_id": "fra07",
   "boat_id": "FRA-07",
-  "race_id": "2027-05-14-M3",
+  "race_id": "2027-05-15-C3",
   "type": "retire",
   "payload": {
     "reason": "damage",
@@ -1291,9 +1291,9 @@ Une demande de réparation vise une erreur du comité ou de l’organisation (pa
 
 ```json
 {
-  "t": "2027-05-14T12:20:00.000Z",
-  "t_gps_ms": 1494332418000,
-  "msg_id": "fra07-20270514-0002",
+  "t": "2027-05-15T12:20:00.000Z",
+  "t_gps_ms": 1494418818000,
+  "msg_id": "fra07-20270515-0002",
   "team_id": "fra07",
   "boat_id": "FRA-07",
   "race_id": null,
@@ -1318,12 +1318,12 @@ Ce message **complète** l’appel direct à l’officier de sécurité, il ne l
 
 ```json
 {
-  "t": "2027-05-14T13:07:15.000Z",
-  "t_gps_ms": 1494335253000,
-  "msg_id": "fra07-20270514-0008",
+  "t": "2027-05-15T13:07:15.000Z",
+  "t_gps_ms": 1494421653000,
+  "msg_id": "fra07-20270515-0008",
   "team_id": "fra07",
   "boat_id": "FRA-07",
-  "race_id": "2027-05-14-M3",
+  "race_id": "2027-05-15-C3",
   "type": "assistance_request",
   "payload": {
     "urgency": "urgent",
@@ -1344,9 +1344,9 @@ La réponse arrive dans votre `inbox` (`type: reply`). Si elle intéresse tout l
 
 ```json
 {
-  "t": "2027-05-14T12:10:00.000Z",
-  "t_gps_ms": 1494331818000,
-  "msg_id": "fra07-20270514-0001",
+  "t": "2027-05-15T12:10:00.000Z",
+  "t_gps_ms": 1494418218000,
+  "msg_id": "fra07-20270515-0001",
   "team_id": "fra07",
   "boat_id": "FRA-07",
   "race_id": null,
@@ -1374,8 +1374,8 @@ Publié chaque seconde, au début de la seconde, par le serveur synchronisé sur
 
 ```json
 {
-  "t": "2027-05-14T13:04:07.000Z",
-  "t_gps_ms": 1494335065000,
+  "t": "2027-05-15T13:04:07.000Z",
+  "t_gps_ms": 1494421465000,
   "seq": 3847,
   "gps_utc_offset_s": 18,
   "source": "gnss",
@@ -1456,7 +1456,7 @@ Exception : après une bascule de serveur, `seq` peut repartir d’une valeur pl
 
 1. connectez-vous avec le **même identifiant client** et `clean_session = false` ;
 2. **réabonnez-vous à tout**, systématiquement (ne comptez pas sur la mémoire du broker) ;
-3. les **messages conservés** vous redonnent aussitôt l’état complet : manche en cours, état, chrono, parcours, bouées, pavillons, classement, avis, version du contrat ;
+3. les **messages conservés** vous redonnent aussitôt l’état complet : course en cours, état, chrono, parcours, bouées, pavillons, classement, avis, version du contrat ;
 4. les événements manqués pendant la coupure ne sont pas tous rejoués : reconstruisez la situation à partir du classement et de l’état, pas en rejouant les événements.
 
 ### 8.5 Bascule sur le serveur de secours
@@ -1467,7 +1467,7 @@ Si le serveur principal tombe, le serveur de secours reprend l’adresse `10.20.
 
 - Un **changement de parcours** publie un nouveau `course` (avec `course_version` + 1), un événement `course_change`, et en général un avis. Relisez toujours `course` au lieu de corriger votre copie.
 - Un **rappel général** publie `clock` avec `step: "general_recall"`, puis, quand le comité relance la procédure, un nouveau `start_time`. Un **retard** (`postponed`) fait de même.
-- Une **manche annulée** passe `state.status` à `abandoned` ; la manche suivante apparaît dans `race/current`.
+- Une **course annulée** passe `state.status` à `abandoned` ; la course suivante apparaît dans `race/current`.
 
 ### 8.7 Perte du flux officiel en course (proposition au comité d’organisation)
 
