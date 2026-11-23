@@ -1,25 +1,25 @@
 # AI Regatta — Achats
 
-> Tout le matériel à acheter pour 10 bateaux : quantité, rôle, prix, où l’acheter (livraison France). Total : **21 600 €**, imprévus de 10 % compris. Seul le matériel coûte : tout le monde est bénévole.
+> Tout le matériel à acheter pour 6 bateaux : quantité, rôle, prix, où l’acheter (livraison France). Total : **19 100 €**, imprévus de 10 % compris. Seul le matériel coûte : tout le monde est bénévole.
 
 | Commande | Montant |
 |---|---|
 | Décembre · Commande du prototype (C1) | 1 900 € |
-| Février · Série, bouées, 2 caméras d’essai (C4, D2, D3, C7) | 10 390 € |
-| Mars · PC course, caméras, signaux (H3) | 7 320 € |
-| Imprévus (10 %) | 2 000 € |
-| **Total** | **21 600 €** |
+| Février · Série, bouées, 2 caméras d’essai (C4, D2, D3, C7) | 8 570 € |
+| Mars · PC course, caméras, signaux (H3) | 6 920 € |
+| Imprévus (10 %) | 1 700 € |
+| **Total** | **19 100 €** |
 
-## Balise officielle · 16 exemplaires
+## Balise officielle · 12 exemplaires
 
 | Qté | Article | Rôle | Commande | Prix | Total | Où acheter |
 |---|---|---|---|---|---|---|
-| 16 | ArduSimple simpleRTK2B Lite | Récepteur GPS RTK : la position au centimètre, 10 fois par seconde | Février | 199 € | 3 184 € | [ArduSimple, boutique officielle (UE)](https://www.ardusimple.com/product/simplertk2blite/) |
-| 16 | Antenne u-blox ANN-MB-00 | Antenne GPS bi-fréquence, sur le pont du bateau ou en tête de mât des bouées | Février | 60 € | 960 € | [ArduSimple, ANN-MB-00 (L1/L2, adaptée au ZED-F9P)](https://www.ardusimple.com/product/ann-mb-00-ip67) · [Future Electronics (page FR)](https://futureelectronics.com/fr/p/semiconductors--wireless-rf--antennas--gps-antennas/ann-mb-00-u-blox-6120194) |
-| 16 | Carte ESP32-S3 + modem 4G A7670E | Calcul de la balise et envoi des positions par la 4G | Février | 49 € | 784 € | [OpenELab (France), Waveshare ESP32-S3-A7670E-4G](https://openelab.io/fr/products/waveshare-esp32-s3-a7670e-4g) · [RobotShop Europe](https://eu.robotshop.com/products/waveshare-esp32-s3-a7670e-4g-development-board-lte-cat-1-2g-wifi-bluetooth-telephone-call-sms-gnss) |
-| 16 | Module radio LoRa RFM95W 868 MHz | Chemin de secours si la 4G tombe | Février | 21 € | 336 € | [DigiKey (UE, livre en France)](https://www.digikey.es/en/products/detail/adafruit-industries-llc/3072/6005357) |
-| 16 | Centrale inertielle BNO085 | Cap, gîte et mouvements du bateau ou de la bouée | Février | 30 € | 480 € | [Anodas (UE)](https://anodas.lt/en/bno085-9-dof-imu-fusion-breakout-3-axis-accelerometer-gyroscope-and-magnetometer-adafruit-4754) · [Go Tronic (France), réf. 37262](https://gotronic.fr/download-product-page/33477) |
-| 16 | Boîtier IP67, batterie USB, alimentation, antennes de pont, carte SIM multi-opérateurs | Étanchéité, ≈ 12 h d’autonomie ; batterie admise par le règlement (§ 12) ; détail dans le manuel de fabrication | Février | 96 € | 1 536 € | — |
+| 12 | ArduSimple simpleRTK2B Lite | Récepteur GPS RTK : la position au centimètre, 10 fois par seconde | Février | 199 € | 2 388 € | [ArduSimple, boutique officielle (UE)](https://www.ardusimple.com/product/simplertk2blite/) |
+| 12 | Antenne u-blox ANN-MB-00 | Antenne GPS bi-fréquence, sur le pont du bateau ou en tête de mât des bouées | Février | 60 € | 720 € | [ArduSimple, ANN-MB-00 (L1/L2, adaptée au ZED-F9P)](https://www.ardusimple.com/product/ann-mb-00-ip67) · [Future Electronics (page FR)](https://futureelectronics.com/fr/p/semiconductors--wireless-rf--antennas--gps-antennas/ann-mb-00-u-blox-6120194) |
+| 12 | Carte ESP32-S3 + modem 4G A7670E | Calcul de la balise et envoi des positions par la 4G | Février | 49 € | 588 € | [OpenELab (France), Waveshare ESP32-S3-A7670E-4G](https://openelab.io/fr/products/waveshare-esp32-s3-a7670e-4g) · [RobotShop Europe](https://eu.robotshop.com/products/waveshare-esp32-s3-a7670e-4g-development-board-lte-cat-1-2g-wifi-bluetooth-telephone-call-sms-gnss) |
+| 12 | Module radio LoRa RFM95W 868 MHz | Chemin de secours si la 4G tombe | Février | 21 € | 252 € | [DigiKey (UE, livre en France)](https://www.digikey.es/en/products/detail/adafruit-industries-llc/3072/6005357) |
+| 12 | Centrale inertielle BNO085 | Cap, gîte et mouvements du bateau ou de la bouée | Février | 30 € | 360 € | [Anodas (UE)](https://anodas.lt/en/bno085-9-dof-imu-fusion-breakout-3-axis-accelerometer-gyroscope-and-magnetometer-adafruit-4754) · [Go Tronic (France), réf. 37262](https://gotronic.fr/download-product-page/33477) |
+| 12 | Boîtier IP67, batterie USB, alimentation, antennes de pont, carte SIM multi-opérateurs | Étanchéité, ≈ 12 h d’autonomie ; batterie admise par le règlement (§ 12) ; détail dans le manuel de fabrication | Février | 96 € | 1 152 € | — |
 
 ## Bouée au vent
 
@@ -78,7 +78,7 @@
 | 2 | Caméra embarquée légère, pour l’essai | Commandées avec la série, essayées en mars | Février | 100 € | 200 € | — |
 | 1 | Récepteur vidéo au PC course | Reçoit l’image d’un bateau à la fois, choisi par la régie | Février | 300 € | 300 € | — |
 | 1 | Convertisseur vidéo analogique → HDMI | Sort l’image du récepteur vers la régie | Février | 20 € | 20 € | — |
-| 8 | Caméra embarquée légère | Les 8 autres, seulement si l’essai de mars est concluant | Mars | 100 € | 800 € | — |
+| 4 | Caméra embarquée légère | Les 4 autres, seulement si l’essai de mars est concluant | Mars | 100 € | 400 € | — |
 
 ## Prototypes
 

@@ -144,7 +144,7 @@ meta/schema                           # version du contrat (ajout au §7.3)
 | `sys/time` | PC course → équipes | 1 Hz | 0 | Non | [time](schemas/time.schema.json) |
 | `meta/schema` | PC course → équipes | À chaque nouvelle version | 1 | Oui | [meta](schemas/meta.schema.json) |
 
-Débit total reçu par une équipe abonnée à tout : de l’ordre de 10 à 30 ko/s pour 10 bateaux.
+Débit total reçu par une équipe abonnée à tout : de l’ordre de 6 à 20 ko/s pour 6 bateaux.
 
 ## 6. Les sujets un par un
 

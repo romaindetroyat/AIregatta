@@ -359,7 +359,7 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 (function(){
 'use strict';
 const SIM=(function(){
-  const TEAMS=[{id:'FRA',name:'France',c:'#2F6BFF',f:1.04},{id:'ITA',name:'Italie',c:'#00C2A8',f:1.035},{id:'GBR',name:'Grande-Bretagne',c:'#E4002B',f:1.02},{id:'NED',name:'Pays-Bas',c:'#FF8C1A',f:1.0},{id:'SUI',name:'Suisse',c:'#1E293B',f:1.015},{id:'MON',name:'Monaco',c:'#B07CFF',f:0.985},{id:'GER',name:'Allemagne',c:'#EAB308',f:0.975}];
+  const TEAMS=[{id:'FRA',name:'France',c:'#2F6BFF',f:1.04},{id:'ITA',name:'Italie',c:'#00C2A8',f:1.035},{id:'GBR',name:'Grande-Bretagne',c:'#E4002B',f:1.02},{id:'NED',name:'Pays-Bas',c:'#FF8C1A',f:1.0},{id:'SUI',name:'Suisse',c:'#1E293B',f:1.015},{id:'MON',name:'Monaco',c:'#B07CFF',f:0.985}];
   // Parcours n°3 du règlement : porte 1-2 (départ, porte, arrivée), bouée au vent 3, zone de pénalité P1-P2 près de la bouée 2
   const WW={x:0,y:200},LW1={x:-22,y:0},LW2={x:22,y:0},PIN=LW1,SB=LW2,P1={x:30,y:6},P2={x:30,y:-6},ZONE=4;
   const DN1=200,UP2=200,DN2=200,TOTAL=200+DN1+UP2+DN2,D2R=Math.PI/180;
@@ -463,7 +463,7 @@ const VIEW={},DRAG={},PTRS={};
 function emit(type,t,o){sim.events.push({type,t,...o})}
 function log(t,txt){sim.log.unshift({t,txt});if(sim.log.length>60)sim.log.pop()}
 function tick(t){const F=sim.flags;
-  if(!F.w&&t>=-60){F.w=1;emit('proc',t,{title:'Départ dans 1 minute',body:'Course 3 : 7 bateaux, parcours n°3, deux tours. Procédure d’une minute, par dérogation.'});log(t,'Avertissement · 1 son')}
+  if(!F.w&&t>=-60){F.w=1;emit('proc',t,{title:'Départ dans 1 minute',body:'Course 3 : 6 bateaux, parcours n°3, deux tours. Procédure d’une minute, par dérogation.'});log(t,'Avertissement · 1 son')}
   if(!F.p&&t>=-40){F.p=1;log(t,'Préparatoire · pavillon P')}
   if(!F.o&&t>=-20){F.o=1;emit('proc',t,{title:'Départ dans 20 secondes',body:'La flotte se place sur la porte 1-2.'});log(t,'Dernière étape · 1 son long')}
   if(!F.g&&t>=0){F.g=1;emit('start',t,{title:'C’est parti !',body:'Course 3 lancée.'});log(t,'Départ · 1 son')}
@@ -601,7 +601,7 @@ function renderPub(force){const tp=T-1,rk=SIM.ranking(sim,tp),lead=rk[0],evs=sim
   else{const me=rk.find(q=>q.b.id===fav),p=rk.indexOf(me)+1;
     h=`<div class="card"><span class="k" style="font-size:12px">Vous suivez</span><div class="row"><b style="font:800 30px var(--f-cond);">${esc(me.b.name)}</b><span style="width:14px;height:36px;border-radius:3px;background:${me.b.c}"></span></div><div class="stat3"><div><b>${tp<0?'—':p+(p===1?'er':'e')}</b><span>PLACE</span></div><div><b>${kn(me.st.sog)}</b><span>NŒUDS</span></div><div><b>${p===1||tp<0?'—':'+'+fr(gapOf(me,lead).toFixed(1))+' s'}</b><span>ÉCART</span></div></div></div><div class="chips" style="margin-top:6px">${SIM.TEAMS.map(x=>`<button type="button" class="btn" data-fav="${x.id}" aria-pressed="${x.id===fav}" style="${x.id===fav?'':'border-color:'+x.c}">${x.id}</button>`).join('')}</div>`}
   $('#pBody').innerHTML=h;
-  const LS=['Près','Portant','Près','Portant'],cl=lead.st.leg;$('#pubLive').innerHTML=`<span class="k">La course</span><div class="row" style="align-items:baseline"><b style="font:800 30px/1 var(--f-cond);">${tp<0?'Départ '+fmt(tp).replace('−','dans '):lead.st.fin?'Terminée':esc(lead.b.name)}</b><span class="k" style="font-size:12px">${tp<0?'':lead.st.fin?'':'EN TÊTE'}</span></div><div class="legs">${LS.map((x,i)=>`<span class="${cl>i+1?'on':cl===i+1?'cur':''}">${i<2?'T1':'T2'} · ${x}</span>`).join('')}</div><div class="stat3"><div><b>10,4</b><span>NŒUDS DE VENT</span></div><div><b>${sim.boats.filter(b=>b.fin!=null).length}/7</b><span>ARRIVÉS</span></div><div><b>${sim.events.filter(e=>e.t<=tp&&(e.type==='penalty'||e.type==='recall')).length}</b><span>DÉCISIONS</span></div></div>`;
+  const LS=['Près','Portant','Près','Portant'],cl=lead.st.leg;$('#pubLive').innerHTML=`<span class="k">La course</span><div class="row" style="align-items:baseline"><b style="font:800 30px/1 var(--f-cond);">${tp<0?'Départ '+fmt(tp).replace('−','dans '):lead.st.fin?'Terminée':esc(lead.b.name)}</b><span class="k" style="font-size:12px">${tp<0?'':lead.st.fin?'':'EN TÊTE'}</span></div><div class="legs">${LS.map((x,i)=>`<span class="${cl>i+1?'on':cl===i+1?'cur':''}">${i<2?'T1':'T2'} · ${x}</span>`).join('')}</div><div class="stat3"><div><b>10,4</b><span>NŒUDS DE VENT</span></div><div><b>${sim.boats.filter(b=>b.fin!=null).length}/${sim.boats.length}</b><span>ARRIVÉS</span></div><div><b>${sim.events.filter(e=>e.t<=tp&&(e.type==='penalty'||e.type==='recall')).length}</b><span>DÉCISIONS</span></div></div>`;
   $('#notifs').innerHTML=evs.filter(want).slice().reverse().slice(0,12).map(e=>`<div class="notif" style="border-left-color:${colOf(e)}"><span class="mono" style="font-size:13px;color:var(--texte-2)">${fmt(e.t)}</span><span><b>${esc(e.title)}</b><span>${esc(e.body||'')}</span></span></div>`).join('');
 }
 const FL=[{t:-60,l:'AI',bg:'#FFFFFF',fg:'#0F172A',n:'Avertissement'},{t:-40,l:'P',bg:'#2F4FD8',fg:'#FFFFFF',n:'Préparatoire'},{t:-20,l:'1′',bg:'#FFD400',fg:'#0F172A',n:'Dernière minute'},{t:0,l:'GO',bg:'#2563EB',fg:'#0F172A',n:'Course lancée'}];
@@ -622,7 +622,7 @@ function renderTv(){const tp=T-1,rk=SIM.ranking(sim,tp),lead=rk[0],evs=sim.event
   let mode=gfx;const hot=evs.filter(e=>['penalty','recall','mark','gate','finish','start'].includes(e.type)).slice(-1)[0];
   if(mode==='auto')mode=tp<0?'count':hot&&tp-hot.t<6?'event':rk[1]&&!rk[1].st.fin&&gapOf(rk[1],lead)<4?'duel':'lead';
   let L=null;
-  if(mode==='count')L=['#2563EB','DÉPART DANS',fmt(tp).replace('−',''),'Pavillon P · 7 bateaux · deux tours'];
+  if(mode==='count')L=['#2563EB','DÉPART DANS',fmt(tp).replace('−',''),'Pavillon P · 6 bateaux · deux tours'];
   else if(mode==='event'&&hot)L=[hot.hot?'#F43F5E':'#2563EB',hot.hot?'DÉCISION DU COMITÉ':'EN COURSE',hot.title,hot.body||''];
   else if(mode==='duel'&&rk[1])L=['#2563EB','DUEL POUR LA TÊTE',rk[0].b.id+' — '+rk[1].b.id,'Écart : '+fr(gapOf(rk[1],lead).toFixed(1))+' s · '+LEGN[lead.st.leg]];
   else if(mode==='wind')L=['#2563EB','LE VENT','10,4 nœuds du sud-est','La droite du parcours est favorisée'];

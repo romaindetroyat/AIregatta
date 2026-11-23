@@ -30,16 +30,16 @@ Le premier contrôle avait trouvé 1 liaison incompatible (caméra → mélangeu
 
 Avec deux balises de rechange, le secours radio et les niveaux de repli, une panne d’appareil coûte une manche, pas la régate.
 
-## À bord · la balise officielle, 16 exemplaires
+## À bord · la balise officielle, 12 exemplaires
 
 | Appareil | Fiabilité | Logiciel | Coût | Relié à |
 |---|---|---|---|---|
-| **Antenne u-blox ANN-MB-00** ×16 — Capte les satellites GPS, Galileo et les autres, sur deux fréquences. | 98 % | Aucun | ≈ 960 € | ✓ Récepteur RTK simpleRTK2B Lite (u-blox ZED-F9P) (câble SMA, bandes L1 et L2) |
-| **Récepteur RTK simpleRTK2B Lite (u-blox ZED-F9P)** ×16 — Calcule la position au centimètre, 10 fois par seconde, avec les corrections de la base. | 95 % | Réglage : Réglage du récepteur (cadence, messages, corrections) ; pas de code. | ≈ 3 184 € | ✓ Carte ESP32-S3 avec modem 4G SIMCom A7670E (liaison série 3,3 V ; heure tirée des messages GPS) |
-| **Centrale inertielle Adafruit BNO085** ×16 — Mesure cap, gîte et tangage du bateau. | 90 % | Petit logiciel : Lecture du mode UART-RVC et filtrage dans le firmware de la balise. | ≈ 480 € | ✓ Carte ESP32-S3 avec modem 4G SIMCom A7670E (liaison série, mode UART-RVC (100 mesures par seconde)) |
-| **Carte ESP32-S3 avec modem 4G SIMCom A7670E** ×16 — Le cerveau de la balise : rassemble les mesures, horodate, envoie en 4G et par radio. | 85 % | Gros logiciel : Firmware de la balise (S1) : lecture GPS et centrale, envoi 10 Hz signé, client NTRIP pour les corrections, radio de secours en créneaux, carte SD. | ≈ 784 € | ✓ Réseau 4G (cartes SIM multi-opérateurs) (4G LTE Cat-1, petits paquets UDP signés)<br>✓ Radio LoRa Adafruit RFM95W (868 MHz) (bus SPI) |
-| **Radio LoRa Adafruit RFM95W (868 MHz)** ×16 — Chemin de secours si la 4G tombe. | 92 % | Gros logiciel : Dans le firmware : messages de 12 octets, créneaux calés sur l’heure GPS. | ≈ 336 € | ! Récepteurs LoRa du PC course (869,4 – 869,65 MHz, un canal partagé en créneaux) |
-| **Boîtier IP67, batterie USB, alimentation, antennes de pont, carte SIM multi-opérateurs** ×16 — Étanchéité et ≈ 12 h d’autonomie ; batterie du commerce admise par le règlement (§ 12). | 90 % | Aucun | ≈ 1 536 € | ✓ Carte ESP32-S3 avec modem 4G SIMCom A7670E (5 V USB) |
+| **Antenne u-blox ANN-MB-00** ×12 — Capte les satellites GPS, Galileo et les autres, sur deux fréquences. | 98 % | Aucun | ≈ 720 € | ✓ Récepteur RTK simpleRTK2B Lite (u-blox ZED-F9P) (câble SMA, bandes L1 et L2) |
+| **Récepteur RTK simpleRTK2B Lite (u-blox ZED-F9P)** ×12 — Calcule la position au centimètre, 10 fois par seconde, avec les corrections de la base. | 95 % | Réglage : Réglage du récepteur (cadence, messages, corrections) ; pas de code. | ≈ 2 388 € | ✓ Carte ESP32-S3 avec modem 4G SIMCom A7670E (liaison série 3,3 V ; heure tirée des messages GPS) |
+| **Centrale inertielle Adafruit BNO085** ×12 — Mesure cap, gîte et tangage du bateau. | 90 % | Petit logiciel : Lecture du mode UART-RVC et filtrage dans le firmware de la balise. | ≈ 360 € | ✓ Carte ESP32-S3 avec modem 4G SIMCom A7670E (liaison série, mode UART-RVC (100 mesures par seconde)) |
+| **Carte ESP32-S3 avec modem 4G SIMCom A7670E** ×12 — Le cerveau de la balise : rassemble les mesures, horodate, envoie en 4G et par radio. | 85 % | Gros logiciel : Firmware de la balise (S1) : lecture GPS et centrale, envoi 10 Hz signé, client NTRIP pour les corrections, radio de secours en créneaux, carte SD. | ≈ 588 € | ✓ Réseau 4G (cartes SIM multi-opérateurs) (4G LTE Cat-1, petits paquets UDP signés)<br>✓ Radio LoRa Adafruit RFM95W (868 MHz) (bus SPI) |
+| **Radio LoRa Adafruit RFM95W (868 MHz)** ×12 — Chemin de secours si la 4G tombe. | 92 % | Gros logiciel : Dans le firmware : messages de 12 octets, créneaux calés sur l’heure GPS. | ≈ 252 € | ! Récepteurs LoRa du PC course (869,4 – 869,65 MHz, un canal partagé en créneaux) |
+| **Boîtier IP67, batterie USB, alimentation, antennes de pont, carte SIM multi-opérateurs** ×12 — Étanchéité et ≈ 12 h d’autonomie ; batterie du commerce admise par le règlement (§ 12). | 90 % | Aucun | ≈ 1 152 € | ✓ Carte ESP32-S3 avec modem 4G SIMCom A7670E (5 V USB) |
 
 ## Les liaisons
 
@@ -76,7 +76,7 @@ Avec deux balises de rechange, le secours radio et les niveaux de repli, une pan
 |---|---|---|---|---|
 | **Caméra motorisée Reolink RLC-823S2** ×1 — Filme le parcours depuis le point haut. | 92 % | Réglage : Réglage ; orientation par ONVIF. | ≈ 780 € | ✓ Routeur Ubiquiti UniFi Cloud Gateway Ultra (câble réseau avec alimentation (PoE), flux RTSP)<br>✓ Mini-PC de régie ASUS NUC 14 Pro + OBS Studio, boîtier d’acquisition (flux vidéo RTSP par le réseau) |
 | **Mini-PC de régie ASUS NUC 14 Pro + OBS Studio, boîtier d’acquisition** ×1 — Régie : caméras, habillage, diffusion. Même modèle que les serveurs : les trois sont interchangeables. | 95 % | Réglage : OBS se règle ; l’habillage télé (S15) s’y affiche comme une page web. | ≈ 930 € | ✓ Diffusion vidéo (diffusion en direct (RTMP)) |
-| **Caméras embarquées, récepteur 5,8 GHz et convertisseur** ×10 + 1 — Images à bord des bateaux. | 70 % | Réglage : Réglage des canaux. | ≈ 1 320 € | ! Mini-PC de régie ASUS NUC 14 Pro + OBS Studio, boîtier d’acquisition (5,8 GHz → récepteur → convertisseur HDMI → boîtier USB) |
+| **Caméras embarquées, récepteur 5,8 GHz et convertisseur** ×6 + 1 — Images à bord des bateaux. | 70 % | Réglage : Réglage des canaux. | ≈ 920 € | ! Mini-PC de régie ASUS NUC 14 Pro + OBS Studio, boîtier d’acquisition (5,8 GHz → récepteur → convertisseur HDMI → boîtier USB) |
 
 ## Les destinataires
 

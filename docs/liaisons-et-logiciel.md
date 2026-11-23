@@ -14,7 +14,7 @@
 | Protocole et format | UDP, trame binaire de 48 octets signée (HMAC-SHA256 tronqué), avec numéro de séquence |
 | Ce qui circule | Position RTK, vitesse et route fond, cap, gîte, tangage, qualité RTK, précision estimée, batterie, qualité 4G |
 | Cadence | 10 Hz |
-| Débit | ≈ 0,5 ko/s par balise, ≈ 5 ko/s pour 10 bateaux |
+| Débit | ≈ 0,5 ko/s par balise, ≈ 3 ko/s pour 6 bateaux |
 | Latence | 50 à 150 ms ; plusieurs secondes si la 4G sature |
 | Sécurité | Clé propre à chaque balise ; trame modifiée ou rejouée rejetée |
 | Secours | Radio 868 MHz (liaison suivante) ; tout est aussi enregistré sur la carte SD de la balise |

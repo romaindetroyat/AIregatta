@@ -6,7 +6,7 @@
 
 L’AI Regatta est une régate de voiliers radiocommandés pilotés par intelligence artificielle, organisée par l’association Twelve Med Events dans le cadre de la Toulon Provence Regatta, le samedi 15 mai 2027 sur les plages du Mourillon. Le règlement de l’organisateur, reçu le 21 novembre, fixe la course et dit ce qui lui manque : transmettre en temps réel la position des bouées et le vent, « si nous trouvons les partenaires nécessaires ».
 
-Nous proposons d’être ce partenaire, pour environ 6 300 € de matériel, puis de suivre chaque bateau au centimètre pour aider l’arbitrage, pour environ 15 300 € de plus. Tout le monde est bénévole : seul le matériel se paie.
+Nous proposons d’être ce partenaire, pour environ 6 300 € de matériel, puis de suivre chaque bateau au centimètre pour aider l’arbitrage, pour environ 12 800 € de plus. Tout le monde est bénévole : seul le matériel se paie.
 
 ## Le règlement
 
@@ -24,9 +24,9 @@ Les deux niveaux reposent sur les mêmes choix : un GPS RTK précis à quelques 
 
 ## Coût et calendrier
 
-Le niveau 1 coûte environ 6 300 € de matériel, imprévus compris ; le niveau 2 ajoute environ 15 300 €, soit 21 600 € en tout. Le financement relève de l’organisateur ou d’une autre instance.
+Le niveau 1 coûte environ 6 300 € de matériel, imprévus compris ; le niveau 2 ajoute environ 12 800 € pour six bateaux, soit 19 100 € en tout. Le financement relève de l’organisateur ou d’une autre instance.
 
-Tout commence par une présentation à Xavier Caux avant le 11 décembre. Deux balises prototypes sont testées sur l’eau fin janvier ; les seize balises de série sont montées en février, à temps pour montrer le niveau 1 à la régate de préchauffage du premier trimestre. Mars et avril servent aux essais du système complet ; le montage sur site a lieu du 7 au 11 mai. Le chemin critique est celui des balises : un retard en février se répercute jusqu’en mai.
+Tout commence par une présentation à Xavier Caux avant le 11 décembre. Deux balises prototypes sont testées sur l’eau fin janvier ; les douze balises de série sont montées en février, à temps pour montrer le niveau 1 à la régate de préchauffage du premier trimestre. Mars et avril servent aux essais du système complet ; le montage sur site a lieu du 7 au 11 mai. Le chemin critique est celui des balises : un retard en février se répercute jusqu’en mai.
 
 ## Les chances de réussite
 
@@ -34,7 +34,7 @@ Ces pronostics ne portent que sur la technique : l’accord du comité, l’équ
 
 **Le niveau 1 a neuf chances sur dix de fonctionner toute la journée (90 %).** Il tient en quelques pièces éprouvées ; ses deux points faibles sont l’anémomètre, unique, et la 4G un samedi de mai. Un essai complet à la régate de préchauffage et la radio de secours sur les bouées le portent à 95 %.
 
-**Le niveau 2 a environ quatre chances sur cinq (80 %).** Les briques sont connues et un prototype tourne déjà en simulation ; le risque tient aux seize balises fabriquées en trois semaines et à la 4G en pleine foule. Les essais de janvier et de mars, puis une répétition générale de toutes les pannes possibles, le portent à 90 %.
+**Le niveau 2 a environ quatre chances sur cinq (80 %).** Les briques sont connues et un prototype tourne déjà en simulation ; le risque tient aux douze balises fabriquées en trois semaines et à la 4G en pleine foule. Les essais de janvier et de mars, puis une répétition générale de toutes les pannes possibles, le portent à 90 %.
 
 **Un jugement assisté au point**, avec des alertes justes et des rejeux exploitables, ajoute une incertitude : environ deux chances sur trois aujourd’hui (65 %), 85 % une fois les seuils réglés sur les données des essais. Ces chiffres sont des estimations de jugement.
 

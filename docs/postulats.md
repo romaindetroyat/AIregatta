@@ -61,7 +61,7 @@
 
 **Ce que nous avons fixé de notre côté.** Le matériel est choisi parmi des références bien notées ou validées au banc. Les données passent par la 4G, avec une radio de secours, et toutes les machines partagent l’heure GPS à quelques millisecondes près. Meridia développe le logiciel avec des agents IA; une personne fiable porte la technique. Les équipes reçoivent un kit en français et en anglais, un bac à sable en février et la fiche d’un bateau de référence; la tactique reste leur affaire.
 
-**Ce qui reste à confirmer.** Le nombre de bateaux inscrits, l’emplacement du PC course, le choix entre ordinateurs neufs et existants, et le financement du matériel, estimé à 21 600 €.
+**Ce qui reste à confirmer.** Le nombre de bateaux inscrits, l’emplacement du PC course, le choix entre ordinateurs neufs et existants, et le financement du matériel, estimé à 19 100 € pour six bateaux.
 
 
 Dernière mise à jour : 22 novembre 2026.

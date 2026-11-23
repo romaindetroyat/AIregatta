@@ -21,7 +21,7 @@
 | Bac à sable | Ouverture en février 2027. |
 | Kit équipes | En français et en anglais. |
 | Aides au commentateur | Lignes de vent et laylines, souffleur des moments forts, fiches prêtes à lire, résumé automatique. |
-| Options de matériel | Caméras embarquées ajoutées (≈ 1 320 €, achetées en deux temps) : la liste d’achats passe à ≈ 21 600 €. |
+| Options de matériel | Caméras embarquées ajoutées (≈ 920 € pour six bateaux, achetées en deux temps) : la liste d’achats passe à ≈ 19 100 €. |
 | Niveaux de repli et revues | Quatre niveaux de repli et critères de feu vert adoptés. |
 
 ## Les chances de succès techniques
@@ -39,7 +39,7 @@ L’accord du comité d’organisation, la tenue de l’équipe, les bateaux d�
 | Condition | Aujourd’hui | Avec les mesures | Pourquoi | Mesures |
 |---|---|---|---|---|
 | Les bouées et le vent fonctionnent toute la journée | 92 % | 97 % | Quatre balises (une de rechange), une base RTK doublée par le réseau Centipede, un anémomètre éprouvé en mer. Points faibles : l’anémomètre est unique, et la 4G peut saturer un samedi de mai. | Essai complet à la régate de préchauffage (+3) ; Radio de secours active sur les bouées (+2) |
-| Les balises des bateaux, le PC course et le flux tiennent toute la journée | 85 % | 93 % | Des briques éprouvées (GPS RTK, 4G, MQTT), un prototype qui tourne déjà en simulation, des secours prévus (radio, serveur, onduleur). Points faibles : seize balises fabriquées en trois semaines, la 4G en pleine foule, la carte 4G encore à choisir. | Essais sur l’eau en janvier, en mars et au préchauffage (+5) ; Répétition générale avec tous les modes dégradés (+3) |
+| Les balises des bateaux, le PC course et le flux tiennent toute la journée | 85 % | 93 % | Des briques éprouvées (GPS RTK, 4G, MQTT), un prototype qui tourne déjà en simulation, des secours prévus (radio, serveur, onduleur). Points faibles : douze balises fabriquées en trois semaines, la 4G en pleine foule, la carte 4G encore à choisir. | Essais sur l’eau en janvier, en mars et au préchauffage (+5) ; Répétition générale avec tous les modes dégradés (+3) |
 | Le jugement assisté donne des alertes justes, sans noyer l’arbitre | 85 % | 93 % | Notre simulation détecte bien les règles 10 à 18, le départ anticipé et les passages ; elle donne encore 12 alertes pour 7 bateaux, dont certaines inutiles. | Seuils d’alerte réglés sur les données des essais (+5) ; Rejeux vérifiés à la régate blanche (+3) |
 
 ## Ce qui reste vraiment
@@ -110,7 +110,7 @@ Les risques techniques détaillés restent dans [en-clair-succes-risques.md](en-
 | Quand | Revue | Feu vert si |
 |---|---|---|
 | Fin janvier | Revue n°1 | Position RTK fixe plus de 95 % du temps à l’essai n°1 ; Responsable technique et son suppléant en place ; Bateau de référence et règles v1 publiés |
-| Mi-mars | Revue n°2 | Le système complet a tourné à l’essai n°2 ; 16 balises recettées ; Format des données gelé |
+| Mi-mars | Revue n°2 | Le système complet a tourné à l’essai n°2 ; 12 balises recettées ; Format des données gelé |
 | Mi-avril | Revue n°3 | Régate blanche courue ; Modes dégradés testés ; Les personnes du PC course pour la semaine sont nommées |
 
 Si un critère manque, on descend d’un niveau de repli et on le dit aux équipes le jour même.

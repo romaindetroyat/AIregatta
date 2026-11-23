@@ -4,7 +4,7 @@
 
 | À fabriquer | Coût par balise | Masse visée | Autonomie | Temps de montage |
 |---|---|---|---|---|
-| **16** — 10 bateaux, 3 bouées, 3 de rechange | **≈ 455 €** — pièces seules | **≤ 250 g** — boîtier ≈ 170 g + antennes | **≈ 12 h** — batterie USB, ≈ 18 Wh | **≈ 4 h** — par balise, essais compris |
+| **12** — 6 bateaux, 3 bouées, 3 de rechange | **≈ 455 €** — pièces seules | **≤ 250 g** — boîtier ≈ 170 g + antennes | **≈ 12 h** — batterie USB, ≈ 18 Wh | **≈ 4 h** — par balise, essais compris |
 
 ## 1. Ce qu’on fabrique
 
@@ -85,7 +85,7 @@ Schéma : voir le document général, page Matériel, « Fabriquer la balise ».
 
 - Compter les pièces de la nomenclature, lot par lot.
 - Noter le numéro de série du GPS et l’IMEI du modem sur la fiche de la balise.
-- Vérifier la version de firmware du GPS : la même sur les 16 (mettre à jour avec u-center 2 si besoin).
+- Vérifier la version de firmware du GPS : la même sur les 12 (mettre à jour avec u-center 2 si besoin).
 
 ### 2. Régler le GPS — 15 min
 
@@ -104,7 +104,7 @@ Schéma : voir le document général, page Matériel, « Fabriquer la balise ».
 - Percer avec le gabarit commun (imprimé une fois pour toutes) : 3 traversées SMA (GPS, 4G, radio), embase M8.
 - Les trois antennes vont sur le pont, dans l’axe (P39) ; dans le boîtier, seulement les câbles et les traversées.
 - Coller l’ILS contre la paroi et marquer « aimant ici » à l’extérieur.
-- Les 16 boîtiers se percent à la suite : c’est plus rapide et plus régulier.
+- Les 12 boîtiers se percent à la suite : c’est plus rapide et plus régulier.
 
 ### 5. Monter l’alimentation — 30 min
 
@@ -121,7 +121,7 @@ Schéma : voir le document général, page Matériel, « Fabriquer la balise ».
 ### 7. Programmer et identifier — 15 min
 
 - Par l’embase M8, en USB : charger le firmware de série.
-- Écrire dans la mémoire de la carte le numéro de la balise (01 à 16), sa clé de signature et le profil : bateau ou bouée.
+- Écrire dans la mémoire de la carte le numéro de la balise (01 à 12), sa clé de signature et le profil : bateau ou bouée.
 - Coller l’étiquette numérotée sur le couvercle.
 
 ### 8. Essayer au banc — 30 min
@@ -248,7 +248,7 @@ Détail pour les équipes : `equipes/bateau-de-reference.md`.
 | Janvier | Essai sur l’eau ; choisir la carte ; figer le brochage, le gabarit de perçage et le fichier de réglages GPS. |
 | 1er – 12 février | Commande de la série (C4) ; perçage des boîtiers et réglage des GPS dès réception. |
 | 15 février – 5 mars | Montage par lots de 4 (C5) : ≈ 4 h par balise, soit ≈ 16 h par lot ; essais d’autonomie la nuit. |
-| Début mars | Recette complète des 16, étanchéité, scellés ; registre des balises à jour avant l’essai du 10 mars. |
+| Début mars | Recette complète des 12, étanchéité, scellés ; registre des balises à jour avant l’essai du 10 mars. |
 | Mars | Essai à 4 bateaux ; corrections du firmware ; recharge et contrôle avant la régate blanche d’avril. |
 
 Le montage de série se fait à deux : l’un perce et câble, l’autre règle, programme et essaie. Le suppléant technique apprend dès janvier, sur les deux prototypes.
