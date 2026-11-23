@@ -50,21 +50,23 @@ Source : Règlement de course AI Regatta 2027, V1.4 du 15/10/2026, de l’associ
 ## 5. Passages, pénalités et disqualifications
 
 - **5.1** **[Comité, § 2d]** Les RCV s’appliquent : bâbord-tribord (10), au vent (11), route libre derrière (12), en virant (13), éviter le contact (14), place à la bouée (18), toucher une bouée (31). 
-- **5.2** **[Proposition]** Le logiciel signale à l’arbitre tout rapprochement de deux bateaux à moins de 1,5 m, la règle qui s’applique et la zone de bouée; l’arbitre confirme toujours. 
+- **5.2** **[Proposition]** Le logiciel ne juge pas les contacts : il enregistre tout rapprochement de deux bateaux à moins de 1,5 m et prépare le rejeu, avec la règle qui s’applique et la zone de bouée. L’arbitre ne l’ouvre que sur réclamation (6.2).
 - **5.3** **[Comité, § 7]** Toute pénalité est un tour, fait à la fin, avant de franchir l’arrivée : passer entre la bouée 2 et P1, contourner P2 puis P1 en les laissant à bâbord. Le tour se fait en mode automatique ou à la télécommande. 
 - **5.4** **[Proposition]** Le logiciel suit le tour dans la zone P1-P2 et le valide pour l’arbitre. 
 - **5.5** **[Comité, § 7]** Disqualification : départ anticipé non réparé dans les 2 minutes; bouée ou porte non franchie ou mal franchie; ligne d’arrivée non franchie 5 minutes après le premier. 
-- **5.6** **[Proposition]** Le logiciel détecte au centimètre les départs anticipés, les passages de bouées et de portes et les arrivées, et ouvre la fenêtre des 5 minutes; l’arbitre confirme.
+- **5.6** **[Proposition]** Le logiciel détecte au centimètre les départs anticipés, les passages de bouées et de portes, les bouées touchées et les arrivées, et ouvre la fenêtre des 5 minutes; il le signale de lui-même à l’arbitre, qui confirme.
 - **5.7** **[Proposition]** Une sortie de la zone de régate de plus de 5 m ou de plus de 5 s est signalée à l’arbitre et à l’équipe.
 - **5.8** **[Comité, § 7]** Une organisation présente sur l’eau récupère les bateaux en difficulté; le bateau de sécurité peut dérouter un bateau en course. 
 
 ## 6. Arbitrage, réclamations et classement
 
-- **6.1** **[Proposition]** Deux arbitres à terre, chacun devant son écran : le premier suit le départ et les bouées, le second ouvre les rejeux et propose les décisions. 
-- **6.2** **[Proposition]** Les autres incidents passent par une réclamation, envoyée par un message `protest` dans la boîte d’envoi de l’équipe, dans les 10 minutes qui suivent l’arrivée du dernier bateau.
-- **6.3** **[Comité, § 8]** Un classement par type de régate, sur les résultats des différentes courses. 
-- **6.4** **[Proposition]** Points : 1 au premier, 2 au deuxième, etc.; une course retirée à partir de 5 courues. 
-- **6.5** **[Comité, § 17]** Un prix au premier de chaque type de régate; des prix spéciaux.
+- **6.1** **[Proposition]** Deux arbitres à terre, chacun devant son écran : le premier confirme ce que le logiciel détecte (départ, bouées, tour de pénalité, arrivée), le second juge les réclamations sur rejeu.
+- **6.2** **[Proposition]** Réclamation en direct. Un contact ou une question de priorité (règles 10 à 18) n’est jugé que sur réclamation : l’équipe envoie un message `protest` (bateau visé, instant, règle) dans les 10 s qui suivent l’incident, à la main ou par son IA. L’arbitre décide sur le rejeu dans la minute : pénalité (un tour, 5.3), rejet ou renvoi au jury; la décision part aux deux équipes, puis au public.
+- **6.3** **[Proposition]** Garde-fous : une réclamation n’est recevable que si les balises montrent les deux bateaux à moins de 2 m l’un de l’autre dans les 10 s qui précèdent; trois réclamations au plus par équipe et par course; une réclamation rejetée ne coûte rien, mais elle est publiée.
+- **6.4** **[Proposition]** Une réclamation qui ne peut plus se régler par un tour (bateau visé déjà arrivé, renvoi au jury) se juge après la course : disqualification ou rejet. Les autres incidents passent par une réclamation dans les 10 minutes qui suivent l’arrivée du dernier bateau.
+- **6.5** **[Comité, § 8]** Un classement par type de régate, sur les résultats des différentes courses. 
+- **6.6** **[Proposition]** Points : 1 au premier, 2 au deuxième, etc.; une course retirée à partir de 5 courues. 
+- **6.7** **[Comité, § 17]** Un prix au premier de chaque type de régate; des prix spéciaux.
 
 ## 7. Programme et équipes
 

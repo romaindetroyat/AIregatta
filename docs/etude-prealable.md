@@ -36,7 +36,7 @@ Ces pronostics ne portent que sur la technique : l’accord du comité, l’équ
 
 **Le niveau 2 a environ quatre chances sur cinq (80 %).** Les briques sont connues et un prototype tourne déjà en simulation ; le risque tient aux douze balises fabriquées en trois semaines et à la 4G en pleine foule. Les essais de janvier et de mars, puis une répétition générale de toutes les pannes possibles, le portent à 90 %.
 
-**Un jugement assisté au point**, avec des alertes justes et des rejeux exploitables, ajoute une incertitude : environ deux chances sur trois aujourd’hui (65 %), 85 % une fois les seuils réglés sur les données des essais. Ces chiffres sont des estimations de jugement.
+**Un jugement assisté au point** ajoute peu d’incertitude, car les contacts se jugent sur réclamation des équipes : le logiciel n’a plus à les trouver seul, seulement à rejouer fidèlement les positions, et il détecte lui-même le départ, les bouées et l’arrivée. Environ trois chances sur quatre aujourd’hui (75 %), 90 % après la régate blanche. Ces chiffres sont des estimations de jugement.
 
 ## Ce qu’il reste à décider
 

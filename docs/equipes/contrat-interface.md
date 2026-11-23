@@ -1069,7 +1069,7 @@ Seule votre équipe lit ce sujet. QoS 1, non conservé : gardez une **session pe
 | `msg_id` | texte | — | Identifiant unique du message |
 | `team_id` | texte | — | Votre équipe |
 | `race_id` | texte ou null | — | Manche concernée |
-| `type` | texte | — | `receipt` (accusé de réception automatique de l’un de vos messages), `message`, `reply` (réponse à une question), `penalty_notice`, `protest_notice` (une réclamation vous vise), `hearing` (convocation à une instruction), `decision` (décision du jury), `safety`, `technical`, `error` (votre message a été refusé) |
+| `type` | texte | — | `receipt` (accusé de réception automatique de l’un de vos messages), `message`, `reply` (réponse à une question), `penalty_notice`, `protest_notice` (une réclamation vous vise), `hearing` (convocation à une instruction), `decision` (décision de l’arbitre ou du jury), `safety`, `technical`, `error` (votre message a été refusé) |
 | `in_reply_to` | texte ou null | — | `msg_id` de votre message auquel celui-ci répond |
 | `priority` | texte | — | `info`, `important`, `urgent` |
 | `requires_ack` | booléen | — | `true` : répondez par un `ack` |
@@ -1078,8 +1078,8 @@ Seule votre équipe lit ce sujet. QoS 1, non conservé : gardez une **session pe
 
 ```json
 {
-  "t": "2027-05-14T13:05:40.180Z",
-  "t_gps_ms": 1494335158180,
+  "t": "2027-05-14T13:03:06.180Z",
+  "t_gps_ms": 1494335004180,
   "msg_id": "C-fra07-0031",
   "team_id": "fra07",
   "race_id": "2027-05-14-M3",
@@ -1087,11 +1087,34 @@ Seule votre équipe lit ce sujet. QoS 1, non conservé : gardez une **session pe
   "in_reply_to": "fra07-20270514-0005",
   "priority": "info",
   "requires_ack": false,
-  "title": "Réclamation reçue",
-  "body": "Votre réclamation contre FRA-03 est enregistrée sous le n° R-0004.",
+  "title": "Réclamation recevable",
+  "body": "Votre réclamation contre FRA-03 est recevable, n° R-0004. Décision de l’arbitre dans la minute.",
   "data": {
     "accepted": true,
-    "protest_id": "R-0004"
+    "admissible": true,
+    "protest_id": "R-0004",
+    "min_distance_m": 0.8
+  }
+}
+```
+
+```json
+{
+  "t": "2027-05-14T13:03:41.500Z",
+  "t_gps_ms": 1494335039500,
+  "msg_id": "C-fra07-0032",
+  "team_id": "fra07",
+  "race_id": "2027-05-14-M3",
+  "type": "decision",
+  "in_reply_to": "fra07-20270514-0005",
+  "priority": "urgent",
+  "requires_ack": false,
+  "title": "Réclamation R-0004 : pénalité pour FRA-03",
+  "body": "FRA-03, bâbord amures, ne s’est pas écarté de FRA-07 (RCV 10). FRA-03 doit faire un tour par P1-P2 avant l’arrivée.",
+  "data": {
+    "protest_id": "R-0004",
+    "outcome": "penalty_one_turn",
+    "boat_id": "FRA-03"
   }
 }
 ```
@@ -1100,7 +1123,7 @@ Seule votre équipe lit ce sujet. QoS 1, non conservé : gardez une **session pe
 {
   "t": "2027-05-14T13:20:00.000Z",
   "t_gps_ms": 1494336018000,
-  "msg_id": "C-fra07-0032",
+  "msg_id": "C-fra07-0033",
   "team_id": "fra07",
   "race_id": "2027-05-14-M3",
   "type": "hearing",
@@ -1131,7 +1154,7 @@ Enveloppe commune :
 | `type` | texte | — | `ack`, `protest`, `redress_request`, `retire`, `technical_issue`, `assistance_request`, `question` |
 | `payload` | objet | — | Contenu propre au type (tableaux ci-dessous) |
 
-Les règles de fond (délais pour réclamer, forme, recevabilité) relèvent des **règles de course et des instructions de course** (règles 9.3 et 9.5 : réclamation dans les 10 minutes qui suivent l’arrivée du dernier bateau). Ce contrat ne fixe que la forme du message.
+Les règles de fond (délais pour réclamer, forme, recevabilité) relèvent des **règles de course** : un contact ou une question de priorité se réclame **en direct, dans les 10 s** (règle 6.2), avec des garde-fous (règle 6.3) ; les autres incidents, dans les 10 minutes qui suivent l’arrivée du dernier bateau (règle 6.4). Ce contrat fixe la forme des messages et les délais de réponse.
 
 #### `ack` — accusé de réception
 
@@ -1162,17 +1185,28 @@ Les règles de fond (délais pour réclamer, forme, recevabilité) relèvent des
 |---|---|---|
 | `against` | liste de `boat_id` | Bateau(x) réclamé(s) |
 | `incident_time`, `incident_t_gps_ms` | texte, entier | Instant de l’incident (le jury retrouvera les traces et la vidéo à partir de là) |
-| `rule` | texte | Numéro de la règle invoquée, dans nos règles de course (par exemple `6.1`) |
+| `mode` | texte | `live` : en course, pour un contact ou une priorité (règle 6.2) ; `after_race` : après la course (règle 6.4) |
+| `rule` | texte | Règle invoquée : numéro de RCV (`10`, `11`, `12`, `13`, `14`, `18`, `31`) ou de nos règles de course |
 | `location` | `{lat, lon}` ou null | Lieu de l’incident |
 | `description` | texte | Ce qui s’est passé (2 000 caractères au plus) |
 | `witnesses` | liste de `boat_id` | Témoins éventuels |
 
-Une réclamation envoyée ici **sert de « héler »** (le cri « Protest ! » des régates habitables) et en garde la trace horodatée. Délai : 10 minutes après l’arrivée du dernier bateau (règle 9.3) ; formulaire complémentaire éventuel dans les instructions de course.
+Une réclamation envoyée ici **sert de « héler »** (le cri « Protest ! » des régates habitables) et en garde la trace horodatée. Votre IA peut l’envoyer seule : elle reçoit la position de tous les bateaux.
+
+**En direct (`live`).** Le message doit partir dans les **10 s** qui suivent l’incident. Le PC course vérifie aussitôt sa recevabilité, sur les positions des balises :
+
+- les deux bateaux sont passés à **moins de 2 m** l’un de l’autre dans les 10 s qui précèdent ;
+- l’équipe n’a pas dépassé **3 réclamations** dans la course ;
+- l’incident n’a pas déjà fait l’objet d’une réclamation de sa part.
+
+La réponse arrive dans votre `inbox` en moins d’une seconde : un `receipt` avec `admissible: true` et le numéro de la réclamation, ou un `error` avec le motif du refus. Le bateau visé reçoit un `protest_notice`. L’arbitre ouvre le rejeu et décide **dans la minute** ; la décision arrive aux deux équipes en `decision` (`penalty_one_turn` : un tour par P1-P2 avant l’arrivée ; `rejected` ; `jury`), puis au public une seconde plus tard. Une réclamation rejetée ne coûte rien, mais elle est publiée.
+
+**Après la course (`after_race`).** Dans les 10 minutes qui suivent l’arrivée du dernier bateau ; c’est aussi la voie d’une réclamation `live` renvoyée au jury, ou qui vise un bateau déjà arrivé (règle 6.4).
 
 ```json
 {
-  "t": "2027-05-14T13:05:40.120Z",
-  "t_gps_ms": 1494335158120,
+  "t": "2027-05-14T13:03:06.120Z",
+  "t_gps_ms": 1494335004120,
   "msg_id": "fra07-20270514-0005",
   "team_id": "fra07",
   "boat_id": "FRA-07",
@@ -1180,9 +1214,10 @@ Une réclamation envoyée ici **sert de « héler »** (le cri « Protest ! » d
   "type": "protest",
   "payload": {
     "against": ["FRA-03"],
+    "mode": "live",
     "incident_time": "2027-05-14T13:03:02.000Z",
     "incident_t_gps_ms": 1494335000000,
-    "rule": "6.2",
+    "rule": "10",
     "location": {
       "lat": 43.107201,
       "lon": 5.941883

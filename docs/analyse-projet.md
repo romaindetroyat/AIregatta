@@ -32,7 +32,7 @@ L’accord du comité d’organisation, la tenue de l’équipe, les bateaux d�
 |---|---|---|
 | **Bouées et vent en temps réel** — La position RTK des bouées et le vent arrivent à toutes les équipes, toute la journée de course. | ≈ 90 % | ≈ 95 % |
 | **Le suivi complet fonctionne** — En plus : chaque bateau suivi au centimètre, le PC course et le flux partagé tiennent toute la journée. | ≈ 80 % | ≈ 90 % |
-| **… et le jugement assisté est fiable** — En plus : des alertes justes et des rejeux exploitables par l’arbitre. | ≈ 65 % | ≈ 85 % |
+| **… et le jugement assisté est fiable** — En plus : des détections justes au départ, aux bouées et à l’arrivée, et des rejeux fidèles pour juger les réclamations. | ≈ 75 % | ≈ 90 % |
 
 « Aujourd’hui » tient compte des décisions prises.
 
@@ -40,7 +40,7 @@ L’accord du comité d’organisation, la tenue de l’équipe, les bateaux d�
 |---|---|---|---|---|
 | Les bouées et le vent fonctionnent toute la journée | 92 % | 97 % | Quatre balises (une de rechange), une base RTK doublée par le réseau Centipede, un anémomètre éprouvé en mer. Points faibles : l’anémomètre est unique, et la 4G peut saturer un samedi de mai. | Essai complet à la régate de préchauffage (+3) ; Radio de secours active sur les bouées (+2) |
 | Les balises des bateaux, le PC course et le flux tiennent toute la journée | 85 % | 93 % | Des briques éprouvées (GPS RTK, 4G, MQTT), un prototype qui tourne déjà en simulation, des secours prévus (radio, serveur, onduleur). Points faibles : douze balises fabriquées en trois semaines, la 4G en pleine foule, la carte 4G encore à choisir. | Essais sur l’eau en janvier, en mars et au préchauffage (+5) ; Répétition générale avec tous les modes dégradés (+3) |
-| Le jugement assisté donne des alertes justes, sans noyer l’arbitre | 85 % | 93 % | Notre simulation détecte bien les règles 10 à 18, le départ anticipé et les passages ; elle donne encore 12 alertes pour 7 bateaux, dont certaines inutiles. | Seuils d’alerte réglés sur les données des essais (+5) ; Rejeux vérifiés à la régate blanche (+3) |
+| Le jugement assisté détecte juste et rejoue fidèlement | 95 % | 98 % | Les contacts se jugent sur réclamation des équipes : le logiciel n’a plus à les trouver seul, seulement à rejouer fidèlement les positions. Il détecte lui-même le départ anticipé, les bouées et l’arrivée, des mesures simples au centimètre ; l’arbitre confirme toujours. | Rejeux et seuils du départ et de l’arrivée vérifiés à la régate blanche (+3) |
 
 ## Ce qui reste vraiment
 

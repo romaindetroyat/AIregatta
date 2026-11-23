@@ -320,6 +320,7 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
       <section class="card" id="eqCard"></section>
       <div class="lock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span style="font-size:14px;line-height:1.35"><b style="font:700 15px var(--f-cond);letter-spacing:.08em">IA autonome · commandes verrouillées</b><br><span style="color:var(--texte-3)">Les ordres partent seuls vers le pilote automatique. Aucun humain ne les donne pendant la course.</span></span></div>
       <section class="card" style="gap:6px"><span class="k">Décisions de l’IA</span><div id="eqOrders" style="display:flex;flex-direction:column;gap:6px" aria-live="polite"></div></section>
+      <section class="card" style="gap:8px"><div class="row"><span class="k">Réclamation · contacts et priorités</span><span class="k" id="eqPq">0/3</span></div><p style="margin:0;font-size:13.5px;color:var(--texte-2);line-height:1.45">L’IA réclame seule après un contact. L’équipe peut aussi réclamer à la main : recevable si un bateau est passé à moins de 2 m dans les 10 dernières secondes.</p><button type="button" class="btn pri" id="eqProt">Réclamer maintenant</button><div id="eqProts" style="display:flex;flex-direction:column;gap:6px"></div></section>
       <section class="card"><span class="k">Sécurité · seule action humaine</span><button type="button" class="stop" id="eqStop">Arrêt de sécurité</button></section>
     </div>
   </div>
@@ -478,7 +479,8 @@ function tick(t){const F=sim.flags;
   for(const o of act){if(o.s.seg!=='round'&&o.s.seg!=='gate')continue;const M=[SIM.WW,SIM.LW1,SIM.LW2].find(m=>Math.hypot(o.s.x-m.x,o.s.y-m.y)<.75),k='t'+o.b.id+o.s.leg;
     if(M&&!F[k]){F[k]=1;pushAlert({rule:'r31',give:o,M,t,d:Math.hypot(o.s.x-M.x,o.s.y-M.y)})}}
   for(let a=0;a<act.length;a++)for(let c=a+1;c<act.length;c++){const A=act[a],C=act[c],d=Math.hypot(A.s.x-C.s.x,A.s.y-C.s.y),k=[A.b.id,C.b.id].sort().join('-')+A.s.leg;
-    if(d<1.5&&!F[k]&&(F.na||0)<10){F[k]=1;F.na=(F.na||0)+1;pushAlert({...classify(A,C,t),t,d})}}}
+    if(d<1.5&&!F[k]&&(F.na||0)<10){F[k]=1;F.na=(F.na||0)+1;const c={...classify(A,C,t),t,d};(sim.pend=sim.pend||[]).push({c,at:t+3+(k.length%4)})}}
+  if(sim.pend)for(let i=sim.pend.length-1;i>=0;i--){const q=sim.pend[i];if(t>=q.at){sim.pend.splice(i,1);protest(q.c,q.c.prio.b.id,t)}}}
 const RULES={
   r18:['Place à la bouée (RCV 18) · règle 5.1','Dans la zone de 4 m, le bateau entré le premier a droit à la place pour passer la bouée ; l’autre doit la lui laisser.'],
   r10:['Bâbord et tribord (RCV 10) · règle 5.1','Un bateau bâbord amures (le vent arrive par sa gauche) s’écarte d’un bateau tribord amures.'],
@@ -503,18 +505,31 @@ function classify(A,C,t){const D=Math.PI/180;
   const rel=(C.s.x-A.s.x)*Math.sin(A.s.hdg*D)+(C.s.y-A.s.y)*Math.cos(A.s.hdg*D);
   if(Math.abs(rel)>1.1){const give=rel>0?A:C;return {rule:'r12',give,prio:give===A?C:A}}
   const give=A.s.y>C.s.y?A:C;return {rule:'r11',give,prio:give===A?C:A}}
-function pushAlert(c){const G=c.give,Q=c.prio,g=G.b.id,q=Q&&Q.b.id,tk=x=>SIM.tack(x.s.hdg);
+function protest(c,by,t){sim.pq=sim.pq||{};{const g0=c.give.b.id,q0=c.prio&&c.prio.b.id,ag0=g0===by?q0:g0;if(sim.alerts.some(a=>a.by===by&&a.against===ag0&&Math.abs(a.t-c.t)<10)){(sim.ref=sim.ref||[]).push({by,t,why:'Déjà réclamé contre '+ag0+' pour cet incident'});return}}if((sim.pq[by]||0)>=3){(sim.ref=sim.ref||[]).push({by,t,why:'Quota de 3 réclamations atteint'});log(t,'Réclamation de '+by+' refusée : quota atteint');return}
+  sim.pq[by]=(sim.pq[by]||0)+1;const g=c.give.b.id,q=c.prio&&c.prio.b.id,ag=g===by?q:g;pushAlert(c,by);emit('info',t,{title:'Réclamation de '+by,body:by+' réclame contre '+ag+'. L’arbitre regarde le rejeu.'})}
+function pushAlert(c,by){const G=c.give,Q=c.prio,g=G.b.id,q=Q&&Q.b.id,tk=x=>SIM.tack(x.s.hdg);
   const T2={r18:g+' / '+q+' '+markName(c.M),r10:g+' bâbord, '+q+' tribord',r11:g+' au vent de '+q,r12:g+' derrière '+q,r13:g+' vire près de '+q,r31:g+' touche la bouée '+(c.M===SIM.WW?'au vent':'de la porte')}[c.rule];
   const why={r18:'N’a pas laissé la place à '+(Q&&Q.b.name)+' '+(c.M?markName(c.M):'')+'.',r10:'Bâbord amures, ne s’est pas écarté de '+(Q&&Q.b.name)+', tribord amures.',r11:'Au vent, ne s’est pas écarté de '+(Q&&Q.b.name)+'.',r12:'Derrière, ne s’est pas écarté de '+(Q&&Q.b.name)+'.',r13:'A viré trop près de '+(Q&&Q.b.name)+'.',r31:'A touché la bouée.'}[c.rule];
   const x=Q?(G.s.x+Q.s.x)/2:c.M.x,y=Q?(G.s.y+Q.s.y)/2:c.M.y;
-  sim.alerts.push({id:c.rule+g+(q||'')+G.s.leg,tk:Q?{[g]:tk(G),[q]:tk(Q)}:null,rule:c.rule,kind:KIND[c.rule],title:T2,boats:q?[g,q]:[g],t:c.t,x,y,gap:c.d,M:c.M,ent:c.ent,why,leg:G.s.leg});
-  log(c.t,'Alerte · '+KIND[c.rule].toLowerCase()+' · '+T2)}
+  sim.alerts.push({id:(by?'p'+by+(sim.alerts.length):'')+c.rule+g+(q||'')+G.s.leg,tk:Q?{[g]:tk(G),[q]:tk(Q)}:null,rule:c.rule,kind:by?'RÉCLAMATION DE '+by+' · '+KIND[c.rule]:KIND[c.rule],by,against:by?(g===by?q:g):null,title:T2,boats:q?[g,q]:[g],t:c.t,x,y,gap:c.d,M:c.M,ent:c.ent,why,leg:G.s.leg});
+  log(T,by?'Réclamation de '+by+' contre '+(g===by?q:g)+' · '+KIND[c.rule].toLowerCase():'Alerte · '+KIND[c.rule].toLowerCase()+' · '+T2)}
 function decide(id,what){const al=sim.alerts.find(a=>a.id===id);if(!al||al.done)return;al.done=what;const b=sim.boats.find(x=>x.id===al.boats[0]),t=T;
   if(what==='recall'){b.pens.push({at:t,dur:9,kind:'recall'});b.recalled=true;emit('recall',t,{hot:true,boat:b.id,title:'Rappel : '+b.name,body:'Parti trop tôt : il doit repasser la porte 1-2 dans les 2 minutes, sinon il est disqualifié.'});log(t,'Rappel individuel X · '+b.id)}
   else if(what==='pen'){const ok=SIM.addLoop(b,t);if(ok){b.pens.push({at:t,dur:0,kind:'loop'});emit('penalty',t,{hot:true,boat:b.id,title:'Pénalité pour '+b.name,body:al.why+' Un tour par la zone P1-P2, à faire avant l’arrivée.'});log(t,'Pénalité '+b.id+' · un tour par P1-P2')}else log(t,'Pénalité '+b.id+' : bateau déjà arrivé')}
   else if(what==='jury'){emit('info',t,{title:'Incident à l’étude',body:al.title+' : décision du jury après la course.'});log(t,'Incident renvoyé au jury')}
+  else if(al.by){emit('info',t,{title:'Réclamation rejetée',body:'La réclamation de '+al.by+' contre '+al.against+' est rejetée après examen du rejeu.'});log(t,'Réclamation de '+al.by+' rejetée')}
   else log(t,'Alerte '+al.boats.join('/')+' sans suite');
   closeReplay();renderAll(true)}
+function teamProtest(){const t=T,by=eqTeam;if(t<0)return;sim.pq=sim.pq||{};sim.ref=sim.ref||[];
+  if((sim.pq[by]||0)>=3){sim.ref.push({by,t,why:'Quota de 3 réclamations atteint'});log(t,'Réclamation de '+by+' refusée : quota atteint');renderAll(true);return}
+  const me=sim.boats.find(x=>x.id===by);let best=null;
+  for(let tt=Math.max(0,t-10);tt<=t+1e-6;tt+=.25){const a=SIM.state(me,tt);if(a.fin)continue;for(const o of sim.boats){if(o===me)continue;const c=SIM.state(o,tt);if(c.fin)continue;const d=Math.hypot(a.x-c.x,a.y-c.y);if(!best||d<best.d)best={d,tt,o,a,c}}}
+  if(!best||best.d>2){sim.ref.push({by,t,why:'Aucun bateau à moins de 2 m dans les 10 s'+(best?' (le plus proche : '+best.o.id+' à '+best.d.toFixed(1).replace('.',',')+' m)':'')});log(t,'Réclamation de '+by+' refusée : aucun bateau à moins de 2 m');renderAll(true);return}
+  const A={b:me,s:best.a},C={b:best.o,s:best.c};protest({...classify(A,C,best.tt),t:best.tt,d:best.d},by,t);renderAll(true)}
+function renderProt(){const by=eqTeam,el=$('#eqProts');if(!el)return;$('#eqPq').textContent=((sim.pq&&sim.pq[by])||0)+'/3';
+  const rows=sim.alerts.filter(a=>a.by===by).map(a=>({t:a.t,txt:'Contre '+a.against+' · '+KIND[a.rule].toLowerCase(),st:!a.done?'EN COURS':a.done==='pen'?'ACCORDÉE':a.done==='jury'?'AU JURY':'REJETÉE'})).concat((sim.ref||[]).filter(r=>r.by===by).map(r=>({t:r.t,txt:r.why,st:'REFUSÉE'}))).sort((a,b)=>b.t-a.t);
+  el.innerHTML=rows.slice(0,4).map(r=>`<div class="ord"><span class="t">${fmt(r.t)}</span><span><b style="font-size:14px">${esc(r.txt)}</b></span><span class="s" style="color:${r.st==='ACCORDÉE'?'#16A34A':r.st==='EN COURS'?'#2563EB':'#E11D48'}">${r.st}</span></div>`).join('')||'<span style="font-size:13.5px;color:var(--texte-2)">Aucune réclamation pour l’instant.</span>';
+  const b=$('#eqProt');if(b)b.disabled=T<0}
 function restart(reason){seed=(seed*31+7)%9973;sim=SIM.build(seed);T=-60;seenToast=0;closeReplay();if(reason){emit('proc',-60,{title:reason,body:'Nouvelle procédure de départ.'});log(-60,reason)}renderAll(true)}
 
 /* ================= Cartes zoomables ================= */
@@ -610,7 +625,7 @@ function renderCom(force){const t=T,rk=SIM.ranking(sim,t),fl=FL.filter(f=>t>=f.t
   $$('#cSteps i').forEach((el,i)=>el.classList.toggle('on',t>=FL[i].t));
   const open=sim.alerts.filter(a=>!a.done),ocs=open.find(a=>a.ocs);$('#bX').disabled=!ocs;$('#bX').classList.toggle('urg',!!ocs);
   const key=open.map(a=>a.id).join();if(force||$('#cAlerts').dataset.k!==key){$('#cAlerts').dataset.k=key;
-    $('#cAlerts').innerHTML=open.length?open.map(a=>`<div class="alert"><span class="m">${a.kind} · ${fmt(a.t)}</span><b>${esc(a.title)}</b><div class="chips"><button type="button" class="btn pri" data-rv="${a.id}">Rejeu</button>${a.ocs?`<button type="button" class="btn" data-d="${a.id}" data-w="recall">Rappeler ${a.boats[0]}</button>`:''}<button type="button" class="btn" data-d="${a.id}" data-w="none">Sans suite</button></div></div>`).join(''):'<span style="font-size:14px;color:var(--texte-2)">Aucune alerte. Le moteur de course surveille la ligne, les bouées et les contacts.</span>'}
+    $('#cAlerts').innerHTML=open.length?open.map(a=>`<div class="alert"><span class="m">${a.kind} · ${fmt(a.t)}</span><b>${esc(a.title)}</b><div class="chips"><button type="button" class="btn pri" data-rv="${a.id}">Rejeu</button>${a.ocs?`<button type="button" class="btn" data-d="${a.id}" data-w="recall">Rappeler ${a.boats[0]}</button>`:''}<button type="button" class="btn" data-d="${a.id}" data-w="none">${a.by?'Rejeter':'Sans suite'}</button></div></div>`).join(''):'<span style="font-size:14px;color:var(--texte-2)">Rien à juger. Le moteur de course surveille la ligne, les bouées et l’arrivée ; les contacts se jugent sur réclamation des équipes.</span>'}
   $('#cLeg').textContent='Flotte · '+LEGN[rk[0].st.leg];
   if(force||slow%3===0)$('#cFleet').innerHTML=rk.map((q,i)=>{const ap=SIM.activePen(q.b,t),st=q.st.seg==='penloop'?'PÉNALITÉ':ap?(ap.kind==='stop'?'ARRÊT':ap.kind==='recall'?'RETOUR':'PÉNALITÉ'):q.st.fin?'ARRIVÉ':(q.b.ocs&&!q.b.recalled&&t>0&&q.st.leg===1)?'OCS':q.b.timePen?'+'+q.b.timePen+' S':'';
     return `<button type="button" class="fl" data-fz="${q.b.id}"><b class="p">${t<0?'–':i+1}</b><span style="width:22px;height:22px;background:${q.b.c};border-radius:50%;box-shadow:inset 0 0 0 3px rgba(255,255,255,.5)"></span><span class="id">${q.b.id} <span class="st" style="color:${st==='ARRIVÉ'?'#2563EB':'#E11D48'}">${st}</span></span><span class="v">${kn(q.st.sog)} nd</span><span class="v" style="color:var(--texte-2)">${q.st.fin?'—':Math.max(0,q.rem).toFixed(0)+' m'}</span></button>`}).join('');
@@ -629,7 +644,7 @@ function renderTv(){const tp=T-1,rk=SIM.ranking(sim,tp),lead=rk[0],evs=sim.event
   else if(mode==='lead'&&tp>=0)L=['#2563EB',lead.st.fin?'VAINQUEUR':'EN TÊTE',lead.b.name,lead.st.fin?'En '+fmt(lead.b.fin):kn(lead.st.sog)+' nds · '+Math.max(0,lead.rem).toFixed(0)+' m restants'];
   $('#tLt').innerHTML=L?`<i style="background:${L[0]}"></i><div><span style="color:${L[0]}">${L[1]}</span><b>${esc(L[2])}</b><p>${esc(L[3])}</p></div>`:'';
 }
-function renderEq(force){const t=T,b=sim.boats.find(x=>x.id===eqTeam),rk=SIM.ranking(sim,t),q=rk.find(x=>x.b===b),p=rk.indexOf(q)+1,ap=SIM.activePen(b,t),te=SIM.effT(b,t);
+function renderEq(force){renderProt();const t=T,b=sim.boats.find(x=>x.id===eqTeam),rk=SIM.ranking(sim,t),q=rk.find(x=>x.b===b),p=rk.indexOf(q)+1,ap=SIM.activePen(b,t),te=SIM.effT(b,t);
   if(force)$('#eqPick').innerHTML=SIM.TEAMS.map(x=>`<button type="button" class="btn" data-eq="${x.id}" aria-pressed="${x.id===eqTeam}" style="${x.id===eqTeam?'':'border-color:'+x.c}">${x.id}</button>`).join('');
   $('#eqCard').style.boxShadow='inset 0 6px 0 '+b.c+',var(--ombre)';
   $('#eqCard').innerHTML=`<div class="row" style="align-items:baseline"><b style="font:800 30px var(--f-cond);">${esc(b.name)}</b><span class="k" style="font-size:12px">${LEGN[q.st.leg]}</span></div><div class="stat4"><div><b>${t<0?'—':p+(p===1?'er':'e')}</b><span>PLACE</span></div><div><b>${kn(q.st.sog)}</b><span>NŒUDS</span></div><div><b>${q.st.fin?'✓':Math.max(0,q.rem).toFixed(0)+' m'}</b><span>RESTE</span></div><div><b>${ap&&ap.kind==='stop'?'ARRÊT':'46 ms'}</b><span>LIAISON</span></div></div>`;
@@ -671,7 +686,7 @@ function openReplay(id){const a=sim.alerts.find(x=>x.id===id);if(!a)return;const
   const R=RULES[a.rule]||RULES.r18;$('#rvRule').innerHTML=`<b>${R[0]}</b><br>${R[1]}`;
   $('#rvSteps').innerHTML=info.S.map(x=>{const r=x.t-ref;return `<button type="button" data-t="${x.t}"><span>${r<0?'−':'+'}${fr(Math.abs(r).toFixed(1))} s</span>${esc(x.txt)}</button>`}).join('');
   $('#rvConcl').innerHTML=`<b>Ce que montre le rejeu</b>${esc(info.concl)}<em>Proposition : ${esc(info.prop)}</em>`;
-  const B=a.boats[0],dec=a.ocs?[['recall','Rappeler '+B,'Pavillon X, corne, tout le monde prévenu',1],['none','Départ correct','L’alerte est classée']]:[['pen','Pénalité '+B,'Un tour par la zone P1-P2, avant l’arrivée',1],['none','Sans suite','Pas de faute'],['jury','Jury','Décision après la course']];
+  const B=a.boats[0],dec=a.ocs?[['recall','Rappeler '+B,'Pavillon X, corne, tout le monde prévenu',1],['none','Départ correct','L’alerte est classée']]:[['pen','Pénalité '+B,'Un tour par la zone P1-P2, avant l’arrivée',1],['none',a.by?'Rejeter':'Sans suite',a.by?'La réclamation n’est pas fondée':'Pas de faute'],['jury','Jury','Décision après la course']];
   $('#rvDec').innerHTML=dec.map(d=>`<button type="button" class="dec${d[3]?' pri':''}" data-d="${a.id}" data-w="${d[0]}"><b>${esc(d[1])}</b><span>${d[2]}</span></button>`).join('');
   $('#rv').hidden=false;if(EMB)try{parent.postMessage({airProtoFocus:1},'*')}catch(e){}requestAnimationFrame(()=>{renderRv();$('#rvClose').focus()})}
 function closeReplay(){RV=null;$('#rv').hidden=true}
@@ -705,6 +720,7 @@ $('#bX').addEventListener('click',()=>{const a=sim.alerts.find(a=>a.ocs&&!a.done
 $('#bG').addEventListener('click',()=>restart('Rappel général'));$('#bAP').addEventListener('click',()=>restart('Départ retardé'));$('#bN').addEventListener('click',()=>restart('Course annulée'));
 $$('[data-g]').forEach(b=>b.addEventListener('click',()=>{gfx=b.dataset.g;$$('[data-g]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))}));
 $('#eqPick').addEventListener('click',e=>{const c=e.target.closest('[data-eq]');if(c){eqTeam=c.dataset.eq;stopArm=false;renderEq(true)}});
+$('#eqProt').addEventListener('click',teamProtest);
 $('#eqStop').addEventListener('click',()=>{const b=sim.boats.find(x=>x.id===eqTeam);if(!stopArm){stopArm=true;renderEq();setTimeout(()=>{stopArm=false},4000);return}stopArm=false;b.pens.push({at:T,dur:15,kind:'stop'});log(T,'Arrêt de sécurité · '+b.id+' (humain)');renderEq()});
 $('#rvDec').addEventListener('click',e=>{const d=e.target.closest('[data-d]');if(d)decide(d.dataset.d,d.dataset.w)});
 $('#rvPlay').addEventListener('click',()=>{if(!RV)return;if(RV.t>=RV.t1-.01)RV.t=RV.t0;RV.play=!RV.play;renderRv()});

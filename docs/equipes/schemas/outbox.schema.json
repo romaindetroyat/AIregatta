@@ -133,7 +133,8 @@
                 "description": "Même instant en ms écoulées depuis l'époque GPS (1980-01-06T00:00:00Z), échelle GPS sans seconde intercalaire."
               },
               "rule": {
-                "type": "string"
+                "type": "string",
+                "description": "Règle invoquée : numéro de RCV (10, 11, 12, 13, 14, 18, 31) ou de nos règles de course."
               },
               "location": {
                 "oneOf": [
@@ -176,6 +177,14 @@
                   "pattern": "^[A-Z]{3}-\\d{2,3}$",
                   "description": "Numéro de voile, ex. FRA-07."
                 }
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "live",
+                  "after_race"
+                ],
+                "description": "live : en course, dans les 10 s qui suivent l'incident (contacts et priorités, règle 6.2) ; after_race : après la course (règle 6.4)."
               }
             },
             "required": [
@@ -185,7 +194,8 @@
               "rule",
               "location",
               "description",
-              "witnesses"
+              "witnesses",
+              "mode"
             ],
             "additionalProperties": false
           }
