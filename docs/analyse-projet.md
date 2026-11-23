@@ -12,7 +12,7 @@
 | Qualification | Remplacé par le règlement : homologation statique par un arbitre, du 12 au 14 mai. |
 | Limites de vent | De 4 à 20 nœuds, à valider aux essais. |
 | Intervention humaine | Remplacé par le règlement : reprises de télécommande permises, 30 s au plus, un tour de pénalité. Notre proposition : les chronométrer. |
-| Mise à jour du logiciel | Interdite pendant une manche, libre entre les manches. |
+| Mise à jour du logiciel | Interdite pendant une course, libre entre les courses. |
 | Radiocommande | Remplacé par le règlement : la télécommande sert à rallier le départ, elle est de fait indispensable. |
 | Liaison équipe → bateau | Tout est libre : ordres, paramètres, réglages, données officielles relayées. |
 | Pénalités | Le tour par la zone P1-P2 est celui du règlement ; « le logiciel signale, l’arbitre confirme » devient notre proposition. |
@@ -67,11 +67,11 @@ L’accord du comité d’organisation, la tenue de l’équipe, les bateaux d�
 |---|---|---|---|
 | Important | **Éprouver le bateau de référence** | La fiche est écrite (version 0.1) : un IOM d’occasion à 450 – 1 500 €, ArduPilot, huit comportements d’IA. Mais aucun bateau n’a encore été monté ainsi, et il manque l’exemple de code de l’IA minimale. | Monter un bateau selon la fiche dès qu’un IOM est disponible ; écrire l’exemple de code ; corriger la fiche après l’essai de janvier. |
 | Important | **La balise sur des bateaux très différents** | Le règlement admet des voiliers de moins de 1 m à 2,70 m, multicoques et foils. La balise d’≈ 250 g et ses antennes sur le pont doivent s’y adapter ; sur un petit bateau, son poids compte. Et dire si les 250 g de la balise comptent dans le poids minimum de 4 kg. | À écrire avec un jaugeur de la classe avant le 8 janvier. |
-| Important | **La pose des balises à l’homologation** | Le règlement prévoit une homologation statique par un arbitre, du 12 au 14 mai. La pose et le contrôle des balises doivent y trouver leur place. | Proposé : il peut se représenter et ne court en manche classée qu’une fois qualifié. |
-| Important | **Nos propositions de règles** | La version 0.3 reprend le règlement de l’organisateur et y ajoute 20 propositions. | À soumettre au comité avec le dispositif, avant le 11 décembre. |
+| Important | **La pose des balises à l’homologation** | Le règlement prévoit une homologation statique par un arbitre, du 12 au 14 mai. La pose et le contrôle des balises doivent y trouver leur place. | Proposé : la balise est posée, scellée et contrôlée pendant l’homologation, sur un poste dédié de la chaîne d’inscription (≈ 15 min par bateau). |
+| Important | **Nos propositions de règles** | La version 0.3 reprend le règlement de l’organisateur et y ajoute 25 propositions. | À soumettre au comité avec le dispositif, avant le 11 décembre. |
 | Important | **Les commandes à délai long** | L’anémomètre se vend sur devis ; la série de balises est commandée début février pour un essai le 10 mars. | Devis de l’anémomètre en décembre ; commande de série dès le 1er février, réception mi-février. |
 | À prévoir | **La version anglaise du kit** | Décidée. Contrat d’interface, règles et bateau de référence à traduire. | Fin janvier, après l’accord du comité sur nos propositions. |
-| À prévoir | **Les seuils d’alerte de l’arbitrage** | Trop d’alertes noient les arbitres, trop peu laissent passer des fautes. | À régler sur les données des essais de mars et de la régate blanche. |
+| À prévoir | **Les seuils des détections automatiques** | Départ anticipé, bouée touchée, tour de pénalité et arrivée sont signalés par le logiciel ; les contacts se jugent sur réclamation. Les seuils de détection doivent être justes au centimètre. | À vérifier sur les données des essais de mars et de la régate blanche. |
 | À prévoir | **Un seul anémomètre sur l’eau** | Le second n’est pas retenu. La donnée la plus attendue des équipes repose sur un capteur. | Écrire le repli sur la station à terre et le dire aux équipes. |
 | À prévoir | **Batteries et bateau qui coule** | Charge et transport des batteries au lithium ne sont pas décrits. Un bateau qui coule emporte une balise de 455 €. | Consignes de charge ; flotteur ou longe de récupération sur chaque balise. |
 
@@ -81,7 +81,7 @@ L’accord du comité d’organisation, la tenue de l’équipe, les bateaux d�
 |---|---|---|
 | Avant le 20 janvier | La longueur du parcours n°3 et l’emplacement de la zone | pour placer les bouées de l’essai n°1 et régler le moteur de course |
 | Fin janvier | Le nombre d’équipes inscrites | pour commander la bonne quantité de balises début février |
-| Décembre, février, mars | Le financement des trois commandes | ≈ 1 900 €, 10 390 € et 7 320 €, plus 2 000 € d’imprévus |
+| Décembre, février, mars | Le financement des trois commandes | ≈ 1 900 €, 8 570 € et 6 920 €, plus 1 700 € d’imprévus |
 | Mars | Le dispositif d’accueil du public | écran, sonorisation et commentateur : notre logiciel fournit le mode grand écran et les aides au commentateur |
 
 ## Les risques qui pèsent le plus
@@ -93,7 +93,7 @@ Probabilité et gravité notées sur 5 ; le poids est leur produit.
 | Chaîne des balises en retard | 3 | 5 | **15** | Fabrication à deux avec le suppléant, manuel de fabrication, niveaux de repli B et C. |
 | Pas de bateau pour l’essai de janvier | 3 | 4 | **12** | Deux IOM achetés ou prêtés avant le 15 janvier. |
 | Équipes pas prêtes malgré le kit | 3 | 4 | **12** | Bateau de référence avant Noël, simulateur dès décembre, support, régate blanche. |
-| IA indisciplinées, arbitres débordés | 4 | 3 | **12** | Poules réduites, seuils d’alerte réglés aux essais, régate blanche. |
+| IA indisciplinées, arbitres débordés | 4 | 3 | **12** | Poules réduites, réclamations limitées à 3 par équipe et par course, régate blanche. |
 | Responsable technique indisponible ou débordé en février | 2 | 5 | **10** | Un suppléant formé dès janvier, commandes avancées, liste de ce qu’on abandonne en premier. |
 | 4G saturée le week-end de la Pentecôte | 3 | 3 | **9** | Déjà prévu : radio de secours, cartes SIM multi-opérateurs, régate blanche un jour de plage pleine. |
 | Règles contestées, soupçon d’intervention humaine | 3 | 3 | **9** | Relecture par un arbitre agréé ; journal des commandes exigé en cas de réclamation. |
@@ -118,6 +118,6 @@ Si un critère manque, on descend d’un niveau de repli et on le dit aux équip
 | Niveau | Nom | Contenu |
 |---|---|---|
 | A | Complet | Suivi au centimètre, arbitrage assisté, application publique, vidéo. |
-| B | Régate suivie | Suivi au centimètre et classement automatique ; arbitrage à vue, sans alertes automatiques ; ni carte de vent, ni habillage télé. |
+| B | Régate suivie | Suivi au centimètre et classement automatique ; arbitrage à vue et sur réclamation, sans détections automatiques ; ni carte de vent, ni habillage télé. |
 | C | Régate simple | Départs et arrivées jugés par le comité, GPS ordinaire pour l’affichage. L’IA barre toujours. |
 | D | Démonstration | Deux ou trois bateaux sur un parcours commenté. |
