@@ -10,7 +10,7 @@ Nous proposons d’être ce partenaire, pour environ 6 300 € de matériel, pui
 
 ## Le règlement
 
-Les voiliers, de moins d’un mètre à 2,70 m, courent en mode autonome de la ligne de départ à l’arrivée ; une reprise à la télécommande est permise, 30 secondes au plus, contre un tour de pénalité. Le parcours compte trois bouées : une porte 1-2 pour le départ, le passage et l’arrivée, et la bouée 3 au vent. Les pénalités se font à la fin, autour de deux bouées P1 et P2. Un départ anticipé non réparé en deux minutes, une bouée mal passée ou une arrivée plus de cinq minutes après le premier valent disqualification.
+Les voiliers, de moins d’un mètre à 2,70 m, courent en mode autonome de la ligne de départ à l’arrivée ; une reprise à la télécommande est permise, 30 secondes au plus, contre un tour de pénalité, sauf pour faire ce tour. Le parcours compte trois bouées : une porte 1-2 pour le départ, le passage et l’arrivée, et la bouée 3 au vent. Les pénalités se font à la fin, autour de deux bouées P1 et P2. Un départ anticipé non réparé en deux minutes, une bouée mal passée ou une arrivée plus de cinq minutes après le premier valent disqualification.
 
 Rien, en revanche, ne permet de mesurer ce que le règlement impose : tout se juge à l’œil, sur des bateaux d’un mètre, à plus de cent mètres de la plage.
 

@@ -43,7 +43,7 @@ Source : Règlement de course AI Regatta 2027, V1.4 du 15/10/2026, de l’associ
 - **4.2** **[Comité, § 5]** Procédure de départ de la RCV 26 : signaux à 5 minutes, 4 minutes, 1 minute, puis départ. Par dérogation, une procédure d’une minute peut être courue. 
 - **4.3** **[Proposition]** Les signaux sonores sont déclenchés par le PC course à l’heure GPS, pour l’une ou l’autre procédure; les pavillons restent hissés à la main. 
 - **4.4** **[Comité, § 5]** Chacun relève les coordonnées des bouées avant les courses; l’organisateur cherche des partenaires pour les transmettre en temps réel (GPS RTK) avec la direction et la vitesse du vent. 
-- **4.5** **[Proposition]** **Réponse à cette demande** : la position RTK des bouées 1, 2, 3, P1 et P2 et le vent mesuré à la bouée 3 sont transmis en temps réel, au même instant, à toutes les équipes. 
+- **4.5** **[Proposition]** **Réponse à cette demande** : la position RTK des bouées 1, 2 et 3 (et de P1-P2 si elles sont balisées, en option) et le vent mesuré à la bouée 3 sont transmis en temps réel, au même instant, à toutes les équipes. 
 - **4.6** **[Proposition]** Pas de départ sous 4 nœuds ni au-dessus de 20 nœuds, mesurés à la bouée 3; valeurs à valider avec le directeur de course. 
 - **4.7** **[Comité, § 4]** Briefing chaque jour à 9 h 30 près de la zone de régate. Le tableau officiel est sur battleboats.fr; les nouvelles publications sont annoncées sur WhatsApp. 
 
@@ -74,4 +74,4 @@ Source : Règlement de course AI Regatta 2027, V1.4 du 15/10/2026, de l’associ
 - **7.2** **[Comité, § 6]** Samedi 15 mai : régates officielles, mise à disposition à 10 h. En cas de report au dimanche 16, les courses finissent au plus tard à 14 h 30; remise des prix le 16 à 16 h 30. 
 - **7.3** **[Comité, § 6]** Une régate de préchauffage au premier trimestre 2027; un bâtiment près du plan d’eau pendant un mois; arrivée des équipes une semaine avant. 
 - **7.4** **[Comité, § 14]** Chaque équipe envoie avant le 1er mai une vidéo de moins de 30 s et une fiche A4 de présentation. 
-- **7.5** **[Proposition]** Chaque équipe reçoit la fiche d’implantation de la balise en décembre, et la balise à son arrivée sur le site, une semaine avant la course; elle l’implante, puis l’arbitre la contrôle et la scelle pendant la chaîne d’inscription, du 12 au 14 mai. Les équipes testent leur liaison au flux officiel dans le bâtiment prêté.
+- **7.5** **[Proposition]** Chaque équipe reçoit la fiche d’implantation de la balise en décembre, et la balise à son arrivée sur le site (une semaine avant la course est conseillé, au plus tard à la chaîne d’inscription); elle l’implante, puis l’arbitre la contrôle et la scelle pendant la chaîne d’inscription, du 12 au 14 mai. Les équipes testent leur liaison au flux officiel dans le bâtiment prêté.

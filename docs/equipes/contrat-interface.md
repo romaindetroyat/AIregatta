@@ -276,12 +276,12 @@ Le chrono est piloté par le PC course (P17). La procédure prévue est celle du
 | `course_version` | entier | — | Version du parcours (augmente à chaque modification) |
 | `name` | texte | — | Nom lisible du parcours |
 | `axis_twd` | nombre | degrés vrais | Direction du vent retenue pour orienter le parcours |
-| `length_m` | nombre | m | Distance entre la porte 1-2 et la bouée 3, au vent (≈ 200 m, à valider avec l’organisateur) |
+| `length_m` | nombre | m | Distance entre la bouée 1 et la bouée 3, au vent ; l’axe 1-3 est perpendiculaire à la porte 1-2 (≈ 200 m, à valider avec l’organisateur) |
 | `marks` | liste | — | Bouées : `mark_id`, `role` (`gate` porte 1-2 de départ, de passage et d’arrivée, `windward` bouée au vent, `penalty` bouée du tour de pénalité ; d’autres parcours peuvent utiliser `leeward_gate`, `leeward`, `offset`, `start_committee`, `start_pin`, `finish`), `kind` (`instrumented` avec vent, `simple` position seule), `lat`, `lon` (position déclarée par le comité), `wind_equipped` |
 | `start_line` | objet | — | `ends` : les deux extrémités de la ligne de départ (`B1`, `B2`) |
 | `finish_line` | objet | — | `ends` : les deux extrémités de la ligne d’arrivée (`B1`, `B2` : sur le parcours n°3, la même porte) |
-| `penalty_marks` | liste | — | Bouées du tour de pénalité, dans l’ordre : `P1` puis `P2` ; le tour se fait avant de franchir l’arrivée (règlement, § 7) |
-| `legs` | liste | — | Ordre des bords : `leg` (numéro), `to_type` (`mark` bouée à contourner, `line` porte à franchir entre ses deux bouées, `gate` porte où l’on contourne l’une des deux bouées, `finish`), `mark_ids`, `rounding` (côté où laisser la bouée : `port` bâbord, `starboard` tribord ; `null` pour une porte, où l’on choisit l’une des deux bouées, et pour l’arrivée) |
+| `penalty_marks` | liste | — | Bouées du tour de pénalité ; le tour consiste à passer entre `B2` et `P1`, puis à contourner `P2` et `P1` en les laissant à bâbord ; le tour se fait avant de franchir l’arrivée (règlement, § 7) |
+| `legs` | liste | — | Ordre des bords : `leg` (numéro), `to_type` (`mark` bouée à contourner, `line` porte à franchir entre ses deux bouées, `gate` porte à passer, en contournant au choix l’une des deux bouées (le passage entre les deux tours du parcours n°3), `finish`), `mark_ids`, `rounding` (côté où laisser la bouée : `port` bâbord, `starboard` tribord ; `null` pour une porte, où l’on choisit l’une des deux bouées, et pour l’arrivée) |
 | `boundary` | liste de `{lat, lon}` | degrés | Polygone des limites du parcours, sommets dans l’ordre, non refermé (le dernier sommet rejoint le premier) |
 | `reference_point` | texte | — | Point du bateau qui sert à l’arbitrage : `bow` (étrave) |
 
@@ -302,16 +302,16 @@ Les positions de `marks` sont celles **déclarées** ; les positions **mesurées
       "mark_id": "B1",
       "role": "gate",
       "kind": "simple",
-      "lat": 43.1077184,
-      "lon": 5.9412093,
+      "lat": 43.1075787,
+      "lon": 5.9410179,
       "wind_equipped": false
     },
     {
       "mark_id": "B2",
       "role": "gate",
       "kind": "simple",
-      "lat": 43.107439,
-      "lon": 5.9408265,
+      "lat": 43.1072992,
+      "lon": 5.9406351,
       "wind_equipped": false
     },
     {
@@ -326,16 +326,16 @@ Les positions de `marks` sont celles **déclarées** ; les positions **mesurées
       "mark_id": "P1",
       "role": "penalty",
       "kind": "simple",
-      "lat": 43.10735,
-      "lon": 5.9408091,
+      "lat": 43.1072103,
+      "lon": 5.9406177,
       "wind_equipped": false
     },
     {
       "mark_id": "P2",
       "role": "penalty",
       "kind": "simple",
-      "lat": 43.1074263,
-      "lon": 5.9407047,
+      "lat": 43.1072865,
+      "lon": 5.9405133,
       "wind_equipped": false
     }
   ],
@@ -366,7 +366,7 @@ Les positions de `marks` sont celles **déclarées** ; les positions **mesurées
     },
     {
       "leg": 2,
-      "to_type": "line",
+      "to_type": "gate",
       "mark_ids": [
         "B1",
         "B2"
@@ -393,20 +393,20 @@ Les positions de `marks` sont celles **déclarées** ; les positions **mesurées
   ],
   "boundary": [
     {
-      "lat": 43.1083409,
-      "lon": 5.9413659
+      "lat": 43.1080869,
+      "lon": 5.9410179
     },
     {
-      "lat": 43.1073246,
-      "lon": 5.9399738
+      "lat": 43.1071976,
+      "lon": 5.9397998
     },
     {
-      "lat": 43.1055461,
-      "lon": 5.94241
+      "lat": 43.105419,
+      "lon": 5.942236
     },
     {
-      "lat": 43.1065624,
-      "lon": 5.943802
+      "lat": 43.1063083,
+      "lon": 5.943454
     }
   ],
   "reference_point": "bow"

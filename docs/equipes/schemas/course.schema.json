@@ -232,7 +232,7 @@
         "description": "Identifiant de bouée, ex. B1, B2, B3, P1."
       },
       "minItems": 1,
-      "description": "Bouées du tour de pénalité, dans l'ordre (P1 puis P2), à faire avant l'arrivée."
+      "description": "Bouées du tour de pénalité. Le tour, à faire avant l'arrivée : passer entre B2 et P1, contourner P2 puis P1 en les laissant à bâbord (règlement, § 7)."
     }
   },
   "required": [

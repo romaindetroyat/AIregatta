@@ -333,7 +333,7 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 <!-- ÉQUIPE -->
 <section class="view" id="v-eq" hidden>
  <div class="stage">
-  <div class="vh"><div><span class="k">Console d’équipe</span><h1>L’IA tacticienne, à terre</h1></div><p>L’IA de l’équipe tourne sur son ordinateur à terre. Elle lit le flux officiel et envoie au pilote automatique du bateau des ordres simples, chacun avec son motif, dans quatre domaines : stratégie, performance, tactique, règles. Le règlement permet de reprendre la main à la télécommande, 30 s au plus, contre un tour de pénalité.</p></div>
+  <div class="vh"><div><span class="k">Console d’équipe</span><h1>L’IA tacticienne, à terre</h1></div><p>L’IA de l’équipe tourne sur son ordinateur à terre. Elle lit le flux officiel et envoie au pilote automatique du bateau des ordres simples, chacun avec son motif, dans quatre domaines : stratégie, performance, tactique, règles. Le règlement permet de reprendre la main à la télécommande, 30 s au plus, contre un tour de pénalité, sauf pour faire ce tour.</p></div>
   <div class="com">
     <div class="map" data-map="eq" style="height:max(520px,min(820px,calc(100vh - 230px)))" aria-label="Carte tactique de l’équipe, zoomable"></div>
     <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
@@ -383,13 +383,13 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 (function(){
 'use strict';
 const SIM=(function(){
-  const TEAMS=[{id:'FRA',name:'France',c:'#2F6BFF',f:1.04},{id:'ITA',name:'Italie',c:'#00C2A8',f:1.035},{id:'GBR',name:'Grande-Bretagne',c:'#E4002B',f:1.02},{id:'NED',name:'Pays-Bas',c:'#FF8C1A',f:1.0},{id:'SUI',name:'Suisse',c:'#1E293B',f:1.015},{id:'MON',name:'Monaco',c:'#B07CFF',f:0.985}];
+  const TEAMS=[{id:'FRA',name:'France',c:'#2F6BFF',f:1.12},{id:'ITA',name:'Italie',c:'#00C2A8',f:1.035},{id:'GBR',name:'Grande-Bretagne',c:'#E4002B',f:0.88},{id:'NED',name:'Pays-Bas',c:'#FF8C1A',f:1.0},{id:'SUI',name:'Suisse',c:'#1E293B',f:1.015},{id:'MON',name:'Monaco',c:'#B07CFF',f:0.985}];
   // Parcours n°3 du règlement : porte 1-2 (départ, porte, arrivée), bouée au vent 3, zone de pénalité P1-P2 près de la bouée 2
-  const WW={x:0,y:200},LW1={x:-22,y:0},LW2={x:22,y:0},PIN=LW1,SB=LW2,P1={x:30,y:6},P2={x:30,y:-6},ZONE=4;
+  const WW={x:-22,y:200},LW1={x:-22,y:0},LW2={x:22,y:0},PIN=LW1,SB=LW2,P1={x:30,y:6},P2={x:30,y:-6},ZONE=4;
   const DN1=200,UP2=200,DN2=200,TOTAL=200+DN1+UP2+DN2,D2R=Math.PI/180;
   function rnd(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
   function build(seed){
-    const r=rnd(seed),ocsI=Math.floor(r()*TEAMS.length),touchI=Math.floor(r()*TEAMS.length),touchLeg=r()<.5?1:3;
+    const r=rnd(seed),ocsI=1+Math.floor(r()*(TEAMS.length-2)),touchI=Math.floor(r()*TEAMS.length),touchLeg=r()<.5?1:3;
     const boats=TEAMS.map((tm,i)=>{
       const sx=-18+i*6+(r()-.5)*1.5,t0=(i===ocsI?-1.3:0.3+r()*3.2),f=tm.f*(0.95+r()*0.08),tackLen=14+r()*32;
       const vUp=1.36*f,vDn=1.78*f,segs=[];let t=t0,x=sx,y=0;
@@ -500,9 +500,9 @@ function tick(t){const F=sim.flags;
     if(b.fin==null&&s.fin){b.fin=b.segs[b.segs.length-1].t1+b.pens.reduce((a,p)=>a+p.dur,0)+(b.timePen||0);const k=sim.boats.filter(x=>x.fin!=null).length;emit('finish',t,{boat:b.id,rk:k,title:k===1?b.name+' gagne la course !':b.name+' termine '+pl(k),body:'Temps : '+fmt(b.fin)});log(t,b.id+' arrive '+pl(k))}}
   const act=sim.boats.map(b=>({b,s:SIM.state(b,t)})).filter(o=>!o.s.fin&&o.s.leg>0&&o.s.seg!=='pen');
   for(const o of act){if(o.s.seg!=='round'&&o.s.seg!=='gate')continue;const M=[SIM.WW,SIM.LW1,SIM.LW2].find(m=>Math.hypot(o.s.x-m.x,o.s.y-m.y)<.75),k='t'+o.b.id+o.s.leg;
-    if(M&&!F[k]){F[k]=1;pushAlert({rule:'r31',give:o,M,t,d:Math.hypot(o.s.x-M.x,o.s.y-M.y)})}}
+    if(M&&!F[k]&&(F['nl'+o.s.leg]||0)<2){F[k]=1;F['nl'+o.s.leg]=(F['nl'+o.s.leg]||0)+1;pushAlert({rule:'r31',give:o,M,t,d:Math.hypot(o.s.x-M.x,o.s.y-M.y)})}}
   for(let a=0;a<act.length;a++)for(let c=a+1;c<act.length;c++){const A=act[a],C=act[c],d=Math.hypot(A.s.x-C.s.x,A.s.y-C.s.y),k=[A.b.id,C.b.id].sort().join('-')+A.s.leg;
-    if(d<1.5&&!F[k]&&(F.na||0)<10){F[k]=1;F.na=(F.na||0)+1;const c={...classify(A,C,t),t,d};(sim.pend=sim.pend||[]).push({c,at:t+3+(k.length%4)})}}
+    if(d<1.5&&!F[k]&&(F['nl'+A.s.leg]||0)<2){F[k]=1;F['nl'+A.s.leg]=(F['nl'+A.s.leg]||0)+1;const c={...classify(A,C,t),t,d};(sim.pend=sim.pend||[]).push({c,at:t+3+(k.length%4)})}}
   if(sim.pend)for(let i=sim.pend.length-1;i>=0;i--){const q=sim.pend[i];if(t>=q.at){sim.pend.splice(i,1);protest(q.c,q.c.prio.b.id,t)}}}
 const RULES={
   r18:['Place à la bouée (RCV 18) · règle 5.1','Dans la zone de 4 m, le bateau entré le premier a droit à la place pour passer la bouée ; l’autre doit la lui laisser.'],

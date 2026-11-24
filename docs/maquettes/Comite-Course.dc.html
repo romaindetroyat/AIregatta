@@ -152,7 +152,7 @@ class Component extends DCLogic {
     const who = inc.boats[0];
     const vdefs = [
       ['none', 'Pas de suite', 'L’alerte est classée, raison obligatoire', 'Incident ' + inc.t + ' classé sans suite.', 'Rien n’est affiché.'],
-      ['pen', 'Pénalité à effectuer', who + ' : un tour par P1-P2 avant l’arrivée (§ 7)', who + ' : pénalité, un tour par P1 puis P2 avant de franchir l’arrivée.', who + ' pénalisé : n’a pas laissé la place. Il doit faire un tour de pénalité avant l’arrivée.'],
+      ['pen', 'Pénalité à effectuer', who + ' : un tour par P1-P2 avant l’arrivée (§ 7)', who + ' : pénalité, un tour de pénalité (entre 2 et P1, autour de P2 puis de P1) avant de franchir l’arrivée.', who + ' pénalisé : n’a pas laissé la place. Il doit faire un tour de pénalité avant l’arrivée.'],
       ['dsq', 'Disqualifier (DSQ)', 'Faute grave ou bouée mal passée (§ 7)', who + ' : disqualifié de la course (DSQ).', who + ' disqualifié.'],
       ['jury', 'Renvoyer au jury', 'Décision après la course, avec audition', 'Incident ' + inc.t + ' renvoyé au jury. Audition après la course.', 'Incident à l’étude par le jury.']
     ];
