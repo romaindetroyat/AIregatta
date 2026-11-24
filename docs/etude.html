@@ -1231,6 +1231,8 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 .tvwrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 .tv{position:relative;width:100%;max-width:1280px;aspect-ratio:16/9;border-radius:24px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(15,23,42,.45);container-type:inline-size}
 .tv .map{position:absolute;inset:0;border-radius:0;box-shadow:none}
+.tv .tv3d{position:absolute;inset:0;width:100%;height:100%;z-index:2;display:block;background:#01141E}
+.tv.img-map .tv3d{display:none}
 .ov{position:absolute;z-index:3;pointer-events:none}
 .bug{left:2.2cqw;top:2.6cqw;display:flex;align-items:center;gap:.8cqw;height:4.6cqw;padding:0 .6cqw 0 .6cqw;border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 1cqw 3cqw -1cqw rgba(15,23,42,.35)}
 .bug .a{display:flex;align-items:center;gap:.6cqw}
@@ -1366,17 +1368,19 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 <!-- TÉLÉVISION -->
 <section class="view" id="v-tv" hidden>
  <div class="stage">
-  <div class="vh"><div><span class="k">Habillage télévision</span><h1>Le direct en 16:9</h1></div><p>La carte suit le groupe de tête, le classement et les bandeaux s’affichent seuls. La régie peut imposer un graphique ou reprendre la caméra.</p></div>
+  <div class="vh"><div><span class="k">Habillage télévision</span><h1>Le direct en 16:9</h1></div><p>L’image 3D de la course suit le groupe de tête, une seconde après le direct ; le classement et les bandeaux s’affichent seuls. La régie choisit l’image (3D ou carte), la caméra et le graphique. Bateaux agrandis trois fois pour être visibles.</p></div>
   <div class="tvwrap">
     <div class="tv">
       <div class="map" data-map="tv" aria-label="Habillage télévision, carte zoomable"></div>
+      <canvas class="tv3d" aria-label="Image 3D de la course, avec une seconde de différé"></canvas>
       <div class="ov bug"><span class="a"><svg width="34" height="34" aria-hidden="true" style="width:2.7cqw;height:2.7cqw"><use href="#r3"/></svg><b>AI REGATTA</b></span><span class="b"><span>COURSE 3</span><b id="tLeg">Procédure</b></span><span class="c" id="tClk">−1:00</span></div>
       <div class="ov lb" id="tLb"></div>
       <div class="ov lt" id="tLt"></div>
     </div>
+    <div class="regie"><span class="k">Régie · image</span><button type="button" class="btn" data-img="3d" aria-pressed="true">Image 3D</button><button type="button" class="btn" data-img="map" aria-pressed="false">Carte</button><span class="k" style="margin-left:6px">Caméra</span><button type="button" class="btn" data-c3="lead" aria-pressed="true">Tête de course</button><button type="button" class="btn" data-c3="top" aria-pressed="false">Vue d’ensemble</button></div>
     <div class="regie"><span class="k">Régie · graphique</span>
       <button type="button" class="btn" data-g="auto" aria-pressed="true">Auto</button><button type="button" class="btn" data-g="lead" aria-pressed="false">Leader</button><button type="button" class="btn" data-g="duel" aria-pressed="false">Duel</button><button type="button" class="btn" data-g="wind" aria-pressed="false">Vent</button><button type="button" class="btn" data-g="none" aria-pressed="false">Aucun</button>
-      <span style="font-size:13px;color:var(--texte-2)">La caméra suit le groupe de tête ; zoomez ou faites glisser pour reprendre la main.</span></div>
+      <span style="font-size:13px;color:var(--texte-2)">En image 3D, la caméra suit le groupe de tête, sans à-coups ; en carte, zoomez ou faites glisser pour reprendre la main.</span></div>
   </div>
  </div>
 </section>
@@ -1430,6 +1434,100 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
   </div>
 </div>
 
+<script>/* Moteur 3D AI Regatta (three.js r147, script classique) : AIR3D(canvas, api)
+   api : { SIM, getSim(), getT(), controls:bool, scale }
+   Retourne { frame(dt), resize(), setMode('lead'|'top'|'boat'), follow(id), visible } */
+window.AIR3D=function(canvas,api){
+const THREE=window.THREE,SIM=api.SIM;
+const R=new THREE.WebGLRenderer({canvas,antialias:true});R.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=.92;R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();scene.background=new THREE.Color('#7DB9D6');scene.fog=new THREE.Fog('#86BED8',420,1250);
+const cam=new THREE.PerspectiveCamera(42,16/9,.5,3000);
+const ctl=api.controls&&THREE.OrbitControls?new THREE.OrbitControls(cam,canvas):null;
+if(ctl){ctl.enableDamping=true;ctl.dampingFactor=.08;ctl.maxPolarAngle=Math.PI*.46;ctl.minDistance=14;ctl.maxDistance=700;ctl.rotateSpeed=.6}
+scene.add(new THREE.HemisphereLight('#E6F3FF','#0B2430',.55));
+const sun=new THREE.DirectionalLight('#FFF2DC',1.2);sun.position.set(-160,220,120);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera,{left:-220,right:220,top:220,bottom:-220,near:10,far:700});scene.add(sun);
+// mer : bleu profond, houle légère
+const SEG=api.lite?90:140,SEA=new THREE.PlaneGeometry(1600,1600,SEG,SEG);SEA.rotateX(-Math.PI/2);
+const sea=new THREE.Mesh(SEA,new THREE.MeshStandardMaterial({color:'#01141E',roughness:.3,metalness:.05,flatShading:true}));sea.receiveShadow=true;sea.position.set(0,0,-100);scene.add(sea);
+const base=SEA.attributes.position.array.slice();let wt=0;
+function waves(){const p=SEA.attributes.position.array;for(let k=0;k<p.length;k+=3){const x=base[k],z=base[k+2];p[k+1]=.22*Math.sin(x*.09+wt*1.3)+.16*Math.sin(z*.13-wt*1.7)+.08*Math.sin((x+z)*.31+wt*2.1)}SEA.attributes.position.needsUpdate=true;SEA.computeVertexNormals()}
+// plage, promenade, façades, fort
+const std=(c,r)=>new THREE.MeshStandardMaterial({color:c,roughness:r||.9});
+const sand=new THREE.Mesh(new THREE.BoxGeometry(900,2,140),std('#E2D3A8',.95));sand.position.set(40,.2,140);sand.receiveShadow=true;scene.add(sand);
+const prom=new THREE.Mesh(new THREE.BoxGeometry(900,6,40),std('#D3CCBA'));prom.position.set(40,3,225);scene.add(prom);
+{const m=std('#C6B995',.95),a=new THREE.Mesh(new THREE.CylinderGeometry(30,34,16,8),m),b=new THREE.Mesh(new THREE.CylinderGeometry(14,15,14,8),m);a.position.set(-150,8,-320);b.position.set(-150,23,-320);a.castShadow=b.castShadow=true;scene.add(a,b)}
+for(let k=0;k<24;k++){const h=8+((k*37)%14),w=14+((k*13)%10);const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,16),std(['#F3EDE2','#EADFCB','#F7F3EA','#E4D7C2'][k%4]));b.position.set(-380+k*34,h/2+6,262+(k%3)*6);b.castShadow=true;scene.add(b)}
+// repère : parcours (x, y) -> monde (x, -y)
+const W=(x,y)=>new THREE.Vector3(x,0,-y);
+function label(txt,col,big){const c=document.createElement('canvas'),g=c.getContext('2d');const f=big?44:34,font=`800 ${f}px "Plus Jakarta Sans", system-ui, sans-serif`;g.font=font;const w=Math.ceil(g.measureText(txt).width)+36;c.width=w;c.height=f+26;
+  g.fillStyle='rgba(255,255,255,.95)';const r=c.height/2;g.beginPath();g.moveTo(r,0);g.arcTo(w,0,w,c.height,r);g.arcTo(w,c.height,0,c.height,r);g.arcTo(0,c.height,0,0,r);g.arcTo(0,0,w,0,r);g.fill();
+  g.fillStyle=col||'#0F172A';g.font=font;g.textBaseline='middle';g.fillText(txt,18,c.height/2+2);
+  const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:t,depthTest:false,transparent:true,sizeAttenuation:false}));const k=(big?.00011:.0001)*(api.labelScale||1);sp.scale.set(w*k,c.height*k,1);sp.renderOrder=10;return sp}
+function buoy(M,txt,small){const g=new THREE.Group(),m=new THREE.MeshStandardMaterial({color:small?'#FDBA74':'#FF6A13',roughness:.45});
+  const b=new THREE.Mesh(new THREE.CylinderGeometry(small?.9:1.5,small?1.1:1.8,small?2.6:4.2,20),m);b.position.y=small?1.1:1.8;b.castShadow=true;g.add(b);
+  const top=new THREE.Mesh(new THREE.ConeGeometry(small?.9:1.5,small?1:1.6,20),m);top.position.y=(small?2.4:3.9)+.5;g.add(top);
+  const ring=new THREE.Mesh(new THREE.RingGeometry(small?2.4:4,small?2.8:4.6,40),new THREE.MeshBasicMaterial({color:'#FFFFFF',transparent:true,opacity:.5,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=.35;g.add(ring);
+  if(txt){const l=label(txt,'#0F172A',!small);l.position.y=small?12:18;l.scale.multiplyScalar(6);g.add(l)}
+  g.scale.setScalar(.5);g.position.copy(W(M.x,M.y));scene.add(g)}
+buoy(SIM.WW,'Bouée au vent');buoy(SIM.LW1,'1');buoy(SIM.LW2,'2');buoy(SIM.P1,'',1);buoy(SIM.P2,'P1-P2 · option',1);
+function dashed(a,b,col,op){const g=new THREE.BufferGeometry().setFromPoints([W(a.x,a.y).setY(.45),W(b.x,b.y).setY(.45)]);const l=new THREE.Line(g,new THREE.LineDashedMaterial({color:col,dashSize:2.5,gapSize:2,transparent:true,opacity:op}));l.computeLineDistances();scene.add(l)}
+dashed(SIM.LW1,SIM.LW2,'#FFFFFF',.9);dashed(SIM.LW1,SIM.WW,'#FFFFFF',.22);
+// voiliers (IOM, agrandis)
+const K=api.scale||3;
+const HG=(()=>{const sh=new THREE.Shape();sh.moveTo(0,-.5);sh.bezierCurveTo(.12,-.32,.11,.25,.07,.5);sh.lineTo(-.07,.5);sh.bezierCurveTo(-.11,.25,-.12,-.32,0,-.5);
+  const g=new THREE.ExtrudeGeometry(sh,{depth:.07,bevelEnabled:true,bevelThickness:.03,bevelSize:.02,bevelSegments:2,steps:1});g.rotateX(Math.PI/2);g.translate(0,.05,0);return g})();
+const tri=pts=>{const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pts.flat(),3));g.computeVertexNormals();return g};
+function makeBoat(T){const root=new THREE.Group(),heel=new THREE.Group();root.add(heel);const col=new THREE.Color(T.c);
+  const add=(geo,mat,x,y,z)=>{const o=new THREE.Mesh(geo,mat);o.position.set(x,y,z);o.castShadow=true;heel.add(o);return o};
+  add(HG,new THREE.MeshStandardMaterial({color:col,roughness:.35,metalness:.1}),0,0,0);
+  add(new THREE.BoxGeometry(.12,.012,.8),std('#F8FAFC',.6),0,.13,0);
+  add(new THREE.BoxGeometry(.012,.38,.08),std('#1E293B'),0,-.17,.02);
+  const bulb=add(new THREE.SphereGeometry(.045,16,10),std('#334155'),0,-.37,.02);bulb.scale.set(1,1,3);
+  add(new THREE.CylinderGeometry(.007,.009,1.6,8),new THREE.MeshStandardMaterial({color:'#E2E8F0',metalness:.6,roughness:.3}),0,.93,-.08);
+  add(new THREE.BoxGeometry(.05,.03,.04),new THREE.MeshStandardMaterial({color:'#C7EB00',emissive:'#556B00'}),0,.15,.05);
+  const sm=new THREE.MeshStandardMaterial({color:'#FFFFFF',roughness:.7,side:THREE.DoubleSide,transparent:true,opacity:.96});
+  const main=new THREE.Group();main.position.set(0,.16,-.08);
+  [new THREE.Mesh(tri([[0,.02,0],[0,1.55,0],[0,.06,.42]]),sm),new THREE.Mesh(tri([[0,.75,.012],[0,.95,.012],[0,.78,.21]]),new THREE.MeshStandardMaterial({color:col,side:THREE.DoubleSide}))].forEach(o=>{o.castShadow=true;main.add(o)});
+  const boom=new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,.44,6),std('#CBD5E1'));boom.rotation.x=Math.PI/2;boom.position.set(0,.06,.21);main.add(boom);heel.add(main);
+  const jib=new THREE.Group();jib.position.set(0,.16,-.46);const js=new THREE.Mesh(tri([[0,.02,0],[0,1.2,.36],[0,.04,.32]]),sm);js.castShadow=true;jib.add(js);heel.add(jib);
+  root.scale.setScalar(K);scene.add(root);const lab=label(T.id,T.c);lab.position.y=2.1;root.add(lab);
+  const N=90,tg=new THREE.BufferGeometry();tg.setAttribute('position',new THREE.Float32BufferAttribute(new Float32Array(N*3),3));tg.setDrawRange(0,0);
+  const trail=new THREE.Line(tg,new THREE.LineBasicMaterial({color:col,transparent:true,opacity:.8}));scene.add(trail);
+  return {sb:T,root,heel,main,jib,trail,hist:[],N,heelA:0,boomA:.2}}
+let boats=[],simRef=null;
+function sync(){const s=api.getSim();if(s===simRef)return;simRef=s;boats.forEach(b=>{scene.remove(b.root);scene.remove(b.trail)});boats=s.boats.map(makeBoat)}
+function place(t){for(const m of boats){const st=SIM.state(m.sb,t),h=st.hdg*Math.PI/180,p=W(st.x,st.y);
+  m.root.position.set(p.x,0,p.z);m.root.rotation.y=-h;
+  const twa=Math.acos(Math.max(-1,Math.min(1,Math.cos(h))))*180/Math.PI,side=Math.sin(h)>=0?1:-1;
+  const heelT=st.fin||(st.seg==='pre'&&t<-5)?.04:(st.seg==='tack'?.02:Math.max(.05,.33*(1-twa/180)));
+  const boomT=Math.min(1.35,Math.max(.14,twa/180*1.6));
+  m.heelA+=(side*heelT-m.heelA)*.08;m.boomA+=(side*boomT-m.boomA)*.1;
+  m.heel.rotation.z=-m.heelA;m.main.rotation.y=m.boomA;m.jib.rotation.y=m.boomA*.8;
+  m.heel.position.y=.03*Math.sin(wt*2.2+m.sb.i);m.heel.rotation.x=.03*Math.sin(wt*1.7+m.sb.i*2);
+  const hs=m.hist,L=hs.length;if(!L||Math.hypot(hs[L-3]-p.x,hs[L-1]-p.z)>.6){hs.push(p.x,.25,p.z);if(hs.length>m.N*3)hs.splice(0,3)}
+  const a=m.trail.geometry.attributes.position.array;a.set(hs);m.trail.geometry.attributes.position.needsUpdate=true;m.trail.geometry.setDrawRange(0,hs.length/3)}}
+// caméra posée : point de vue fixe côté plage, déplacement lent, jamais derrière le bateau
+let mode='lead',followId='FRA',userMoved=false;const look=new THREE.Vector3(0,2,0);
+const OFF=new THREE.Vector3(34,30,62);
+if(ctl)ctl.addEventListener('start',()=>{userMoved=true});
+function centre(){const t=api.getT();if(mode==='boat'){const m=boats.find(b=>b.sb.id===followId);if(m)return m.root.position.clone()}
+  const rk=SIM.ranking(simRef,t);const ids=rk.slice(0,3).map(q=>q.b.id);const c=new THREE.Vector3();let n=0;boats.forEach(b=>{if(ids.includes(b.sb.id)){c.add(b.root.position);n++}});return n?c.divideScalar(n):c}
+function updateCam(){if(mode==='top'){if(!userMoved){cam.position.lerp(new THREE.Vector3(-150,160,40),.05);look.lerp(new THREE.Vector3(-10,0,-95),.05)}cam.lookAt(look);if(ctl){ctl.target.copy(look);ctl.update()}return}
+  const c=centre();c.y=2;look.lerp(c,.035);
+  if(!userMoved)cam.position.lerp(look.clone().add(OFF),.03);
+  if(ctl){ctl.target.copy(look);ctl.update()}else cam.lookAt(look)}
+cam.position.set(40,32,70);
+function resize(){const w=canvas.clientWidth||canvas.parentNode.clientWidth,h=canvas.clientHeight||canvas.parentNode.clientHeight;if(!w||!h)return;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+let lw=0,lh=0;
+return {
+  frame(dt){sync();wt+=dt;const w=canvas.clientWidth,h=canvas.clientHeight;if(w!==lw||h!==lh){lw=w;lh=h;resize()}waves();place(api.getT());updateCam();R.render(scene,cam)},
+  resize,
+  setMode(m){mode=m;userMoved=false},
+  follow(id){followId=id;mode='boat';userMoved=false}
+}};
+</script>
 <script>
 (function(){
 'use strict';
@@ -1803,6 +1901,18 @@ $$('.roles [data-v]').forEach(b=>b.addEventListener('click',()=>{role=b.dataset.
 $$('[data-sp]').forEach(b=>b.addEventListener('click',()=>{speed=+b.dataset.sp;$$('[data-sp]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))}));
 $('#play').addEventListener('click',()=>{playing=!playing;$('#play').textContent=playing?'❚❚':'▶';$('#play').setAttribute('aria-label',playing?'Pause':'Lecture')});
 $('#restart').addEventListener('click',()=>restart(''));
+/* Image 3D de la vue télé : chargée à la première ouverture, une seconde de différé comme le reste de l'habillage */
+let E3=null,img3='3d',e3State='idle';
+function applyImg(){const tv=document.querySelector('.tv');if(tv)tv.classList.toggle('img-map',img3!=='3d');document.querySelectorAll('[data-img]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.img===img3)))}
+function need3D(){if(e3State!=='idle')return;e3State='loading';const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js';
+  sc.onload=()=>{try{E3=window.AIR3D(document.querySelector('.tv3d'),{SIM,getSim:()=>sim,getT:()=>T-1,controls:false,lite:true});e3State='ready'}catch(err){e3State='failed';img3='map';applyImg()}};
+  sc.onerror=()=>{e3State='failed';img3='map';applyImg()};document.head.appendChild(sc)}
+document.querySelectorAll('[data-img]').forEach(b=>b.addEventListener('click',()=>{img3=b.dataset.img;applyImg()}));
+document.querySelectorAll('[data-c3]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-c3]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));if(E3)E3.setMode(b.dataset.c3)}));
+let l3=performance.now();(function f3(now){const dt=Math.min(.1,(now-l3)/1000);l3=now;
+  if(role==='tv'&&img3==='3d'&&!document.hidden){need3D();if(E3)try{E3.frame(dt)}catch(err){}}
+  requestAnimationFrame(f3)})(l3);
+applyImg();
 $$('[data-pt]').forEach(b=>b.addEventListener('click',()=>{pTab=b.dataset.pt;$$('[data-pt]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));renderPub(true)}));
 $('#pBody').addEventListener('pointerdown',e=>{const f=e.target.closest('[data-fav]');if(f){fav=f.dataset.fav;renderPub(true);return}const r=e.target.closest('[data-b]');if(r){sel=r.dataset.b;ZM.pub.f=sel;renderPub(true)}});
 $('#v-com').addEventListener('click',e=>{const r=e.target.closest('[data-rv]');if(r){openReplay(r.dataset.rv);return}const d=e.target.closest('[data-d]');if(d){decide(d.dataset.d,d.dataset.w);return}});
