@@ -58,7 +58,7 @@ Sur le site, chaque équipe a une **prise Ethernet** dans la zone équipes : câ
 | **15 mars 2027** | **Gel du contrat d’interface** (version `1.0.0`) ; ensuite, seulement des ajouts compatibles annoncés 30 jours à l’avance |
 | **Avril 2027** | **Régate blanche et essais sur l’eau** : premières données réelles, publiées en fichiers de rejeu |
 | [date à définir] | Date limite d’inscription et de déclaration des fréquences |
-| Début avril 2027 | Tests à quai : pose des balises, contrôle de la jauge IOM, test de connexion |
+| Début avril 2027 | Tests à quai : implantation d’un gabarit de balise (mêmes dimensions et poids), contrôle de la jauge IOM, test de connexion |
 | **12 mai 2027** | **Premier jour** : contrôles et qualification (parcours seul, tour de pénalité, arrêt sur ordre). L’épreuve dure jusqu’au 16 mai, sans jour de réserve |
 
 ## Ce qui est de votre responsabilité

@@ -20,7 +20,7 @@ Source : Règlement de course AI Regatta 2027, V1.4 du 15/10/2026, de l’associ
 - **2.2** **[Comité, § 2b, 11]** Homologation statique par un arbitre avant les régates; toute modification significative ensuite lui est déclarée. Aucune pièce ne doit être larguée sur le plan d’eau. 
 - **2.3** **[Comité, § 12]** Batteries : LiFePO4, ou lithium avec circuit de protection (BMS) intégré et enveloppe solide du commerce, non démontée; sinon sacs ignifuges et chargeur présenté à l’homologation. 48 V au plus. Un jeu de rechange chargé; de quoi courir trois courses de suite. 
 - **2.4** **[Comité, § 10]** Numéro fourni à l’inscription, sur chaque côté de la voile, chiffres de 10 cm.
-- **2.5** **[Proposition]** **Balise officielle** fournie et scellée par l’organisation dans chaque bateau, sans lien avec l’électronique de l’équipe, antennes sur le pont dans l’axe; contrôlée à l’homologation. 
+- **2.5** **[Proposition]** **Balise officielle**, imposée et fournie par l’organisation, implantée par l’équipe dans son bateau selon la fiche d’implantation (boîtier près de la quille, antennes sur le pont dans l’axe), sans lien avec l’électronique de l’équipe; contrôlée et scellée à l’homologation.
 - **2.6** **[Proposition]** Balise en panne pendant une course : réparation (RDG) si la panne vient du matériel officiel et qu’elle est prouvée par les journaux du PC course.
 - **2.7** **[Proposition]** La sous-bande 869,4 – 869,65 MHz est réservée aux balises; les équipes déclarent leurs émetteurs. Le règlement conseille déjà le Wi-Fi en 5 GHz (§ 13).
 - **2.8** **[Proposition]** Bateau de référence : un IOM du commerce documenté dans le kit, conseillé, non imposé. 
@@ -74,4 +74,4 @@ Source : Règlement de course AI Regatta 2027, V1.4 du 15/10/2026, de l’associ
 - **7.2** **[Comité, § 6]** Samedi 15 mai : régates officielles, mise à disposition à 10 h. En cas de report au dimanche 16, les courses finissent au plus tard à 14 h 30; remise des prix le 16 à 16 h 30. 
 - **7.3** **[Comité, § 6]** Une régate de préchauffage au premier trimestre 2027; un bâtiment près du plan d’eau pendant un mois; arrivée des équipes une semaine avant. 
 - **7.4** **[Comité, § 14]** Chaque équipe envoie avant le 1er mai une vidéo de moins de 30 s et une fiche A4 de présentation. 
-- **7.5** **[Proposition]** Les balises sont installées et contrôlées pendant la chaîne d’inscription, du 12 au 14 mai; les équipes testent leur liaison au flux officiel dans le bâtiment prêté.
+- **7.5** **[Proposition]** Chaque équipe reçoit la fiche d’implantation de la balise en décembre, et la balise à son arrivée sur le site, une semaine avant la course; elle l’implante, puis l’arbitre la contrôle et la scelle pendant la chaîne d’inscription, du 12 au 14 mai. Les équipes testent leur liaison au flux officiel dans le bâtiment prêté.

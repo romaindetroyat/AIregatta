@@ -13,7 +13,7 @@
 
 | N° | Élément | À qui | Où et pourquoi |
 |---|---|---|---|
-| 1 | **Balise officielle** | Organisation | Fournie et scellée par l’organisation : boîtier de ≈ 250 g au fond, près de la quille ; antennes sur le pont, dans l’axe. Rien au-dessus de son antenne GPS. |
+| 1 | **Balise officielle** | Organisation, implantée par l’équipe | Imposée et fournie par l’organisation, implantée par l’équipe selon la fiche d’implantation : boîtier de ≈ 250 g au fond, près de la quille ; antennes sur le pont, dans l’axe. Rien au-dessus de son antenne GPS. Contrôlée et scellée par l’arbitre à l’homologation. |
 | 2 | **Pilote automatique** | Équipe | Un contrôleur de vol du commerce avec le logiciel libre ArduPilot Rover, réglé en voilier. Il tient un cap, règle l’écoute et vire seul. |
 | 3 | **GPS et compas de l’équipe** | Équipe | Sur le pont arrière, loin du treuil (aimants) et à 20 cm au moins des antennes officielles. |
 | 4 | **Girouette** | Équipe | En tête de mât ou sur une petite perche à l’arrière : elle donne au pilote l’angle du vent. Conseillée, pas indispensable pour les premiers essais. |
