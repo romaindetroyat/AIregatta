@@ -440,11 +440,14 @@ function makeBoat(T){const root=new THREE.Group(),heel=new THREE.Group();root.ad
   const main=new THREE.Group();main.position.set(0,.16,-.08);
   [new THREE.Mesh(tri([[0,.02,0],[0,1.55,0],[0,.06,.42]]),sm),new THREE.Mesh(tri([[0,.75,.012],[0,.95,.012],[0,.78,.21]]),new THREE.MeshStandardMaterial({color:col,side:THREE.DoubleSide}))].forEach(o=>{o.castShadow=true;main.add(o)});
   const boom=new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,.44,6),std('#CBD5E1'));boom.rotation.x=Math.PI/2;boom.position.set(0,.06,.21);main.add(boom);heel.add(main);
-  const jib=new THREE.Group();jib.position.set(0,.16,-.46);const js=new THREE.Mesh(tri([[0,.02,0],[0,1.2,.36],[0,.04,.32]]),sm);js.castShadow=true;jib.add(js);heel.add(jib);
+  // foc : amure fixée à l'étrave, tête fixée sur l'étai en haut ; seul le point d'écoute pivote autour de l'étai
+  const JT=new THREE.Vector3(0,.18,-.46),JH=new THREE.Vector3(0,1.36,-.1),JC=new THREE.Vector3(0,.2,-.14),JA=JH.clone().sub(JT).normalize();
+  const jg=tri([[JT.x,JT.y,JT.z],[JH.x,JH.y,JH.z],[JC.x,JC.y,JC.z]]);const jib=new THREE.Mesh(jg,sm);jib.castShadow=true;heel.add(jib);
+  const stay=new THREE.Line(new THREE.BufferGeometry().setFromPoints([JT,new THREE.Vector3(0,1.72,-.08)]),new THREE.LineBasicMaterial({color:'#94A3B8'}));heel.add(stay);
   root.scale.setScalar(K);scene.add(root);const lab=label(T.id,T.c);lab.position.y=2.1;lab.scale.multiplyScalar(3/K);root.add(lab);
   const N=90,tg=new THREE.BufferGeometry();tg.setAttribute('position',new THREE.Float32BufferAttribute(new Float32Array(N*3),3));tg.setDrawRange(0,0);
   const trail=new THREE.Line(tg,new THREE.LineBasicMaterial({color:col,transparent:true,opacity:.8}));scene.add(trail);
-  return {sb:T,root,heel,main,jib,trail,hist:[],N,heelA:0,boomA:.2,ox:0,oz:0}}
+  return {sb:T,root,heel,main,jib,jg,JT,JC,JA,trail,hist:[],N,heelA:0,boomA:.2,ox:0,oz:0}}
 let boats=[],simRef=null;
 function sync(){const s=api.getSim();if(s===simRef)return;simRef=s;boats.forEach(b=>{scene.remove(b.root);scene.remove(b.trail)});boats=s.boats.map(makeBoat)}
 // écartement visuel : les bateaux étant agrandis, on les décale doucement à l'image quand ils se chevaucheraient (la course n'est pas modifiée)
@@ -460,7 +463,8 @@ function place(t){const S=boats.map(m=>SIM.state(m.sb,t)),P=S.map(st=>W(st.x,st.
   const heelT=st.fin||(st.seg==='pre'&&t<-5)?.04:(st.seg==='tack'?.02:Math.max(.05,.33*(1-twa/180)));
   const boomT=Math.min(1.35,Math.max(.14,twa/180*1.6));
   m.heelA+=(side*heelT-m.heelA)*.08;m.boomA+=(side*boomT-m.boomA)*.1;
-  m.heel.rotation.z=-m.heelA;m.main.rotation.y=m.boomA;m.jib.rotation.y=m.boomA*.8;
+  m.heel.rotation.z=-m.heelA;m.main.rotation.y=m.boomA;
+  {const c=m.JC.clone().sub(m.JT).applyAxisAngle(m.JA,m.boomA*.85).add(m.JT),a=m.jg.attributes.position.array;a[6]=c.x;a[7]=c.y;a[8]=c.z;m.jg.attributes.position.needsUpdate=true;m.jg.computeVertexNormals()}
   m.heel.position.y=.03*Math.sin(wt*2.2+m.sb.i);m.heel.rotation.x=.03*Math.sin(wt*1.7+m.sb.i*2);
   const hs=m.hist,L=hs.length;if(!L||Math.hypot(hs[L-3]-p.x,hs[L-1]-p.z)>.6){hs.push(p.x,.25,p.z);if(hs.length>m.N*3)hs.splice(0,3)}
   const a=m.trail.geometry.attributes.position.array;a.set(hs);m.trail.geometry.attributes.position.needsUpdate=true;m.trail.geometry.setDrawRange(0,hs.length/3)}}
@@ -531,8 +535,35 @@ const SIM=(function(){
       orders.push({te:segs[segs.length-1].t0,cmd:'Cap sur l’arrivée',code:'mode_downwind',dom:'strat',why:'Porte 1-2 : la ligne d’arrivée, par le chemin le plus court'});
       return {...tm,i,sx,t0,segs,orders,pens:[],ocs:i===ocsI,recalled:false,ev:{},fin:null};
     });
+    avoid(boats,r);
     return {boats,events:[],alerts:[],log:[],flags:{}};
   }
+
+  // Règle 10 : au près, le bateau bâbord amures s'écarte du bateau tribord amures, en abattant pour passer derrière, ou en virant.
+  function reroute(b,tA,tB,plan,v){const S=b.segs,kA=S.findIndex(g=>tA>=g.t0&&tA<g.t1),kB=S.findIndex(g=>tB>=g.t0&&tB<g.t1);
+    if(kA<0||kB<0||kB<kA)return 0;if(S.slice(kA,kB+1).some(g=>g.kind!=='up'&&g.kind!=='tack'))return 0;
+    const pA=state(b,tA),pB=state(b,tB),gA=S[kA],gB=S[kB],leg=gA.leg,mid=[];let t=tA,x=pA.x,y=pA.y;
+    const go=(x1,y1)=>{const d=Math.hypot(x1-x,y1-y);if(d<.01)return;mid.push({x0:x,y0:y,x1,y1,t0:t,t1:t+d/v,leg,kind:'up',avoid:true});t+=d/v;x=x1;y=y1};
+    for(const q of plan){if(q.dwell){mid.push({x0:x,y0:y,x1:x,y1:y,t0:t,t1:t+q.dwell,leg,kind:'tack',avoid:true});t+=q.dwell}else go(q.x,q.y)}
+    go(pB.x,pB.y);const delta=t-tB;
+    const head=tA-gA.t0>.05?[{...gA,x1:pA.x,y1:pA.y,t1:tA}]:[],tail=[{...gB,x0:pB.x,y0:pB.y,t0:t,t1:gB.t1+delta}];
+    b.segs=[...S.slice(0,kA),...head,...mid,...tail,...S.slice(kB+1).map(g=>({...g,t0:g.t0+delta,t1:g.t1+delta}))];
+    b.orders.forEach(o=>{if(o.te>tA)o.te+=delta});return 1}
+  function avoid(boats,r){const done=new Set(),end=Math.max(...boats.map(b=>b.segs[b.segs.length-1].t1))+60;
+    for(let t=0;t<end;t+=.5){const st=boats.map(b=>state(b,t));
+      for(let a=0;a<boats.length;a++)for(let c=0;c<boats.length;c++){if(a===c)continue;const A=st[a],C=st[c];
+        if(A.fin||C.fin||A.seg!=='up'||C.seg!=='up'||A.leg!==C.leg||!(A.leg===1||A.leg===3))continue;
+        if(tack(A.hdg)!=='bâbord'||tack(C.hdg)!=='tribord')continue;
+        const key=a+'-'+c+'-'+A.leg;if(done.has(key))continue;
+        let dmin=1e9,tc=t;for(let u=0;u<=8;u+=.25){const P=state(boats[a],t+u),Q=state(boats[c],t+u);if(P.seg!=='up'&&P.seg!=='tack')break;const d=Math.hypot(P.x-Q.x,P.y-Q.y);if(d<dmin){dmin=d;tc=t+u}}
+        if(dmin>4)continue;done.add(key);if(tc-t<2)continue;
+        const B=boats[a],Sb=boats[c],q=state(Sb,tc),hs=q.hdg*D2R,dx=Math.sin(hs),dy=Math.cos(hs),v=Math.max(.8,A.sog);
+        let ok=0,mode='dip';
+        if(tc-t>4.5&&r()<.5){mode='tack';const pA=state(B,t);ok=reroute(B,t,tc+7,[{dwell:2.3},{x:pA.x+dx*v*4.5,y:pA.y+dy*v*4.5},{dwell:2.3}],v)}
+        if(!ok){mode='dip';ok=reroute(B,t,tc+5,[{x:q.x-dx*6,y:q.y-dy*6-2}],v*1.12)}
+        if(ok){B.orders.push({te:t,cmd:mode==='tack'?'Vire':'Abats',code:mode==='tack'?'tack':'bear_away',dom:'tact',why:'Bâbord amures face à '+Sb.id+', tribord amures : '+(mode==='tack'?'on vire pour s’écarter (RCV 10)':'on abat pour passer derrière (RCV 10)')});
+          if(mode==='tack')B.orders.push({te:t+2.3+4.5,cmd:'Vire',code:'tack',dom:'tact',why:'Route dégagée : retour sur le bord prévu'});
+          B.avoids=(B.avoids||0)+1}}}}
   // Tour de pénalité du règlement : passer entre 2 et P1, contourner P2 puis P1 à bâbord, puis franchir l’arrivée
   function addLoop(b,t){const S=b.segs,L=S[S.length-1];if(L.kind!=='fin')return false;const te=effT(b,t);if(te>=L.t1)return false;
     const v=Math.hypot(L.x1-L.x0,L.y1-L.y0)/Math.max(.001,L.t1-L.t0),fx=L.x1,fy=L.y1;let x,y,tt;
