@@ -1850,15 +1850,21 @@ render();play();$('#tjp').addEventListener('pointerenter',()=>clearInterval(time
 const doc=()=>{try{return f.contentDocument}catch(e){return null}};
 const click=sel=>{const d=doc();const b=d&&d.querySelector(sel);if(b){b.click();return true}return false};
 function mark(g){document.querySelectorAll('.pvc').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.go===g)));steps.hidden=g!=='arb'}
-function go(g){clearInterval(poll);mark(g);if(g!=='arb'){note.textContent='';click('.roles [data-v="'+g+'"]');return}
+function go(g,scroll){clearInterval(poll);mark(g);if(g!=='arb'){note.textContent='';click('.roles [data-v="'+g+'"]');if(scroll)f.closest('.live').scrollIntoView({block:'start',behavior:'smooth'});return}
  click('.roles [data-v="com"]');const d=doc();if(!d)return;
- const open=()=>{const al=[...d.querySelectorAll('#cAlerts .alert')].find(x=>/RÉCLAMATION/.test(x.textContent));const b=al&&al.querySelector('[data-rv]');if(!b)return false;click('[data-sp="4"]');b.click();note.textContent='Voici une réclamation en rejeu. Lancez la lecture, puis choisissez une décision en bas du rejeu.';f.closest('.live').scrollIntoView({block:'start',behavior:'smooth'});return true};
+ const open=()=>{const al=[...d.querySelectorAll('#cAlerts .alert')].find(x=>/RÉCLAMATION/.test(x.textContent));const b=al&&al.querySelector('[data-rv]');if(!b)return false;click('[data-sp="4"]');b.click();note.textContent='Voici une réclamation en rejeu. Lancez la lecture, puis choisissez une décision en bas du rejeu.';return true};
  if(open())return;note.textContent='La course avance en accéléré jusqu’à la première réclamation…';click('[data-sp="10"]');const d0=Date.now();
  poll=setInterval(()=>{if(open()||Date.now()-d0>90000)clearInterval(poll)},250)}
-document.querySelectorAll('.pvc').forEach(b=>b.addEventListener('click',()=>{want=b.dataset.go;if(done)go(want);else load()}));
+document.querySelectorAll('.pvc').forEach(b=>b.addEventListener('click',()=>{want=b.dataset.go;if(done)go(want,true);else load()}));
+// le cadre prend la hauteur de son contenu : on ne défile que dans la page
+addEventListener('message',e=>{if(e.source!==f.contentWindow||!e.data)return;
+ if(e.data.airProtoFocus){setTimeout(()=>{fit();requestAnimationFrame(()=>{const d=doc(),bx=d&&d.querySelector('.rvbox');if(!bx)return;const y=f.getBoundingClientRect().top+bx.getBoundingClientRect().top-72;window.scrollBy({top:y,behavior:'smooth'})})},450)}});
 f.addEventListener('load',()=>{setTimeout(()=>go(want),150)});
 function load(){if(done||!document.getElementById('prototypes').classList.contains('on'))return;done=true;try{localStorage.setItem('air-role','com')}catch(e){}
  f.srcdoc='<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>'+t.innerHTML+'</body></html>'}
+function fit(){const d=doc();if(!d||!d.body)return;let h=Math.ceil(d.body.offsetHeight)+24;const rv=d.getElementById('rv'),bx=d.querySelector('.rvbox');
+ if(rv&&!rv.hidden&&bx)h=Math.max(h,Math.ceil(bx.scrollHeight)+56);h=Math.max(640,h);if(Math.abs(h-f.offsetHeight)>4)f.style.height=h+'px'}
+setInterval(()=>{if(done&&document.getElementById('prototypes').classList.contains('on'))fit()},400);
 addEventListener('hashchange',load);load()})();
 
 (function(){const $=s=>document.querySelector(s);const NS='http://www.w3.org/2000/svg';
