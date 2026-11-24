@@ -20,7 +20,9 @@ Rien, en revanche, ne permet de mesurer ce que le règlement impose : tout se ju
 
 **Le niveau 2 comble ce que le règlement ne couvre pas.** Une balise scellée dans chaque bateau donne sa position dix fois par seconde. Le PC course détecte les départs, les passages, les pénalités et les arrivées, et chronomètre les reprises de télécommande ; l’arbitre confirme toujours. Toutes les équipes reçoivent la position de tous les bateaux, et le public suit la course sur une application et en vidéo. Ce niveau suppose que le comité l’inscrive dans son règlement.
 
-Les deux niveaux reposent sur les mêmes choix : un GPS RTK précis à quelques centimètres, la 4G doublée d’une radio de secours, et l’heure GPS pour dater chaque mesure. Une balise pèse environ 250 g, tient une journée et coûte 455 € de pièces. Meridia développe le logiciel avec des agents IA ; une personne fiable porte la technique.
+**Le périmètre de Meridia.** Meridia réalise le logiciel qui traite les flux de données fournis par le matériel : pour les équipes, qui y branchent leur stratégie et la communication avec leur bateau ; pour les organisateurs, qui y trouvent la gestion de la régate ; pour les arbitres, qui tranchent les situations litigieuses ; et pour le public, avec une application web sur téléphone et l’affichage sur des écrans. Le matériel et les installations sont nos préconisations, pensées pour faciliter l’arrivée des données ; leur achat, leur installation et leur mise en œuvre relèvent de l’organisateur et de ses partenaires. Nos deux préconisations principales : partager les données de position plutôt qu’équiper chaque bateau d’un LIDAR, et faire tourner l’IA à terre cette année plutôt qu’à bord, où les modèles demanderaient trop de calcul et d’électricité.
+
+Les deux niveaux reposent sur les mêmes choix : un GPS RTK précis à quelques centimètres, la 4G doublée d’une radio de secours, et l’heure GPS pour dater chaque mesure. Une balise pèse environ 250 g, tient une journée et coûte 455 € de pièces. Meridia développe le logiciel avec des agents IA .
 
 ## Coût et calendrier
 

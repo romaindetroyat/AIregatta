@@ -6,7 +6,7 @@
 
 | Sujet | Décision |
 |---|---|
-| Équipe | Meridia porte le logiciel ; une personne fiable porte la technique (balises, bouées, réseau, caméras). |
+| Équipe | Meridia réalise le logiciel. Le matériel (balises, bouées, réseau, caméras) est préconisé ; son achat, son installation et sa mise en œuvre relèvent de l’organisateur et d’un partenaire matériel. |
 | Jauge | Remplacé par le règlement de l’organisateur : voile seule, moins de 1 m, 1,30 m ou 2,70 m, sans jauge de classe. L’IOM reste le bateau de référence conseillé. |
 | Bateau de référence | Un IOM du commerce documenté dans le kit : conseillé, non imposé. |
 | Qualification | Remplacé par le règlement : homologation statique par un arbitre, du 12 au 14 mai. |
@@ -50,7 +50,7 @@ L’accord du comité d’organisation, la tenue de l’équipe, les bateaux d�
 
 | Niveau | Point | Constat | Quoi faire |
 |---|---|---|---|
-| Important | **L’équipe logiciel et technique** | Meridia porte le logiciel ; une personne fiable porte la technique. Reste à l’écrire : qui décide de quoi, quelles disponibilités en février (plein temps pour la fabrication), et qui la remplace en cas d’absence. | Une page « qui fait quoi » avant le 27 novembre ; un suppléant technique formé dès janvier, en montant le prototype avec elle. |
+| Important | **L’équipe logiciel et technique** | Meridia réalise le logiciel ; le matériel revient à un partenaire de l’organisateur, à désigner. Reste à l’écrire : qui décide de quoi, quelles disponibilités en février (plein temps pour la fabrication), et qui la remplace en cas d’absence. | Une page « qui fait quoi » avant le 27 novembre ; un suppléant technique formé dès janvier, en montant le prototype avec elle. |
 
 ### À trancher
 
