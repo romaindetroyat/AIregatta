@@ -477,7 +477,7 @@ table.axt td,table.axt th{vertical-align:top;font-size:14px;line-height:1.45}
     <button type="button" class="pvc" data-go="arb" aria-pressed="false"><b>L’arbitrage</b><span>Le logiciel détecte seul le départ, les bouées et l’arrivée. Les contacts, eux, se jugent sur réclamation d’une équipe : l’arbitre ouvre le rejeu et décide.</span><i>Montrer une réclamation →</i></button>
     <button type="button" class="pvc" data-go="pub" aria-pressed="false"><b>Le spectateur</b><span>La course sur son téléphone, une seconde après les équipes, avec le classement et les décisions expliquées.</span></button>
     <button type="button" class="pvc" data-go="tv" aria-pressed="false"><b>La télévision</b><span>L’habillage 16:9 : la carte suit le groupe de tête, les bandeaux s’affichent seuls.</span></button>
-    <button type="button" class="pvc" data-go="eq" aria-pressed="false"><b>Une équipe</b><span>Ce que reçoit le programme d’une équipe : son bateau, les autres, le vent, au même instant que tous.</span></button>
+    <button type="button" class="pvc" data-go="eq" aria-pressed="false"><b>Une équipe</b><span>Son IA, à terre, et les ordres qu’elle envoie au bateau avec leur motif : stratégie, performance, tactique, règles et décisions de l’arbitre.</span></button>
   </div>
   <ol class="pvs" id="pvArb" hidden><li><b>La réclamation</b><span>Quelques secondes après un contact, l’IA de l’équipe lésée réclame. La réclamation apparaît dans « À juger », à droite de la carte du comité.</span></li><li><b>Le rejeu</b><span>Les positions officielles rejouées au ralenti, vues de dessus, avec la règle en cause et ce que montre chaque instant.</span></li><li><b>La décision</b><span>Pénalité (un tour par P1-P2 avant l’arrivée), rejet ou jury : elle part aux deux équipes, puis au public une seconde plus tard.</span></li></ol>
   <p class="pvn" id="pvn" aria-live="polite"></p>
@@ -1250,6 +1250,12 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 .ord code{font:600 11.5px ui-monospace,Menlo,monospace;color:var(--cyan);margin-left:6px;padding:1px 6px;border-radius:6px;background:#fff}
 .ord span.w{display:block;font-size:13.5px;color:var(--texte-2)}
 .ord .s{font:700 11px var(--f-texte);color:var(--ok);padding:3px 8px;border-radius:999px;background:#fff}
+.dom{display:inline-block;font:700 10.5px var(--f-texte);font-style:normal;letter-spacing:.03em;padding:2px 8px;border-radius:999px;margin:3px 0 2px}
+.doms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.dt{display:grid;gap:3px;padding:10px 12px;border-radius:14px;background:var(--panneau-2);border-left:4px solid var(--c)}
+.dt b{font:700 13px var(--f-texte);color:var(--c)}.dt span{font-size:13px;line-height:1.4;color:var(--texte-3)}
+.d-strat{--c:#2563EB}.d-perf{--c:#0E9F6E}.d-tact{--c:#D97706}.d-regle{--c:#E11D48}
+.dom.d-strat{background:#E3EDFF;color:#1D4ED8}.dom.d-perf{background:#DCFCE7;color:#047857}.dom.d-tact{background:#FEF3C7;color:#B45309}.dom.d-regle{background:#FFE4E6;color:#BE123C}
 .stop{min-height:54px;border-radius:999px;border:0;background:var(--alerte-doux);color:var(--alerte-2);font:800 15px var(--f-texte);letter-spacing:.02em;cursor:pointer;transition:transform .15s}
 .stop:active{transform:scale(.98)}
 .stop.arm{background:var(--alerte);color:#fff;box-shadow:0 10px 24px -10px rgba(244,63,94,.8)}
@@ -1360,14 +1366,15 @@ main{padding:16px max(16px,env(safe-area-inset-left,0px)) 20px max(16px,env(safe
 <!-- ÉQUIPE -->
 <section class="view" id="v-eq" hidden>
  <div class="stage">
-  <div class="vh"><div><span class="k">Console d’équipe</span><h1>L’IA barre, l’équipe regarde</h1></div><p>Les décisions de l’IA tactique et leur motif, la carte vue depuis son bateau. Autonome de la porte de départ à l’arrivée. Le règlement permet de reprendre la main à la télécommande, 30 s au plus, contre un tour de pénalité.</p></div>
+  <div class="vh"><div><span class="k">Console d’équipe</span><h1>L’IA tacticienne, à terre</h1></div><p>L’IA de l’équipe tourne sur son ordinateur à terre. Elle lit le flux officiel et envoie au pilote automatique du bateau des ordres simples, chacun avec son motif, dans quatre domaines : stratégie, performance, tactique, règles. Le règlement permet de reprendre la main à la télécommande, 30 s au plus, contre un tour de pénalité.</p></div>
   <div class="com">
     <div class="map" data-map="eq" style="height:max(520px,min(820px,calc(100vh - 230px)))" aria-label="Carte tactique de l’équipe, zoomable"></div>
     <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
       <div class="chips" id="eqPick"></div>
       <section class="card" id="eqCard"></section>
+      <section class="card" style="gap:8px"><span class="k">Les quatre domaines de l’IA</span><div class="doms" id="eqDoms"></div></section>
       <div class="lock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span style="font-size:14px;line-height:1.35"><b style="font:700 15px var(--f-cond);letter-spacing:.08em">IA autonome · commandes verrouillées</b><br><span style="color:var(--texte-3)">Les ordres partent seuls vers le pilote automatique. Aucun humain ne les donne pendant la course.</span></span></div>
-      <section class="card" style="gap:6px"><span class="k">Décisions de l’IA</span><div id="eqOrders" style="display:flex;flex-direction:column;gap:6px" aria-live="polite"></div></section>
+      <section class="card" style="gap:6px"><span class="k">Ordres envoyés au bateau</span><div id="eqOrders" style="display:flex;flex-direction:column;gap:6px" aria-live="polite"></div></section>
       <section class="card" style="gap:8px"><div class="row"><span class="k">Réclamation · contacts et priorités</span><span class="k" id="eqPq">0/3</span></div><p style="margin:0;font-size:13.5px;color:var(--texte-2);line-height:1.45">L’IA réclame seule après un contact. L’équipe peut aussi réclamer à la main : recevable si un bateau est passé à moins de 2 m dans les 10 dernières secondes.</p><button type="button" class="btn pri" id="eqProt">Réclamer maintenant</button><div id="eqProts" style="display:flex;flex-direction:column;gap:6px"></div></section>
       <section class="card"><span class="k">Sécurité · seule action humaine</span><button type="button" class="stop" id="eqStop">Arrêt de sécurité</button></section>
     </div>
@@ -1440,15 +1447,15 @@ const SIM=(function(){
         const sx2=east?G.x-R:G.x+R;add(sx2,G.y+7,vDn,leg,'dn');add(sx2,G.y,vDn*.9,leg,'dn');
         if(east)arc(G,R,180,360,vDn*.75,leg,'gate');else arc(G,R,0,-180,vDn*.75,leg,'gate')};
       beat(1);run(2,false);beat(3);run(4,true);
-      const orders=[{te:t0,cmd:'Mode près',code:'mode_upwind',why:'Départ : cap sur la bouée au vent'}];
+      const orders=[{te:t0,cmd:'Mode près',code:'mode_upwind',dom:'strat',why:'Départ : cap sur la bouée 3, côté du plan d’eau choisi avant le signal'}];
       segs.forEach(g=>{
-        if(g.kind==='tack'){orders.push({te:g.t0,cmd:'Vire',code:'tack',why:g.lay?'Layline tribord atteinte : la bouée sera droit devant':(g.x0>0?'Le vent a tourné à droite : l’autre bord fait gagner':'Bord gauche épuisé, retour vers la droite')});if(g.lay)orders.push({te:g.t1+.5,cmd:'Mode haut',code:'mode_high',why:'Approche de la bouée : serrer le vent'})}
-        if(g.kind==='round'&&g.first)orders.push({te:g.t0,cmd:'Abats',code:'bear_away',why:'Bouée au vent : on la laisse à bâbord en abattant'});
-        if(g.kind==='round'&&g.last)orders.push({te:g.t1+.3,cmd:'Mode portant',code:'mode_downwind',why:'Descente vers la porte'});
-        if(g.kind==='gybe')orders.push({te:g.t0,cmd:'Empanne',code:'gybe',why:'Meilleur angle de descente sur l’autre bord'});
-        if(g.kind==='gate'&&g.first)orders.push({te:g.t0,cmd:'Loffe',code:'head_up',why:'Porte : on contourne la bouée et on remonte'});
-        if(g.kind==='gate'&&g.last)orders.push({te:g.t1+.3,cmd:'Mode près',code:'mode_upwind',why:'Deuxième tour'})});
-      orders.push({te:segs[segs.length-1].t0,cmd:'Cap sur l’arrivée',code:'mode_downwind',why:'Porte 1-2 : la ligne d’arrivée'});
+        if(g.kind==='tack'){orders.push({te:g.t0,cmd:'Vire',code:'tack',dom:'strat',why:g.lay?'Layline tribord atteinte : la bouée sera droit devant':(g.x0>0?'Le vent a tourné à droite : l’autre bord fait gagner':'Bord gauche épuisé, retour vers la droite')});if(g.lay)orders.push({te:g.t1+.5,cmd:'Mode haut',code:'mode_high',dom:'tact',why:'Approche de la bouée : serrer le vent pour garder sa place'})}
+        if(g.kind==='round'&&g.first)orders.push({te:g.t0,cmd:'Abats',code:'bear_away',dom:'tact',why:'Bouée 3 : on la laisse à bâbord en abattant'});
+        if(g.kind==='round'&&g.last)orders.push({te:g.t1+.3,cmd:'Mode portant',code:'mode_downwind',dom:'perf',why:'Descente vers la porte : angle de meilleure vitesse vers la cible'});
+        if(g.kind==='gybe')orders.push({te:g.t0,cmd:'Empanne',code:'gybe',dom:'perf',why:'Meilleur angle de descente sur l’autre bord'});
+        if(g.kind==='gate'&&g.first)orders.push({te:g.t0,cmd:'Loffe',code:'head_up',dom:'tact',why:'Porte 1-2 : on la franchit et on remonte au vent'});
+        if(g.kind==='gate'&&g.last)orders.push({te:g.t1+.3,cmd:'Mode près',code:'mode_upwind',dom:'perf',why:'Deuxième tour : vitesse cible au près'})});
+      orders.push({te:segs[segs.length-1].t0,cmd:'Cap sur l’arrivée',code:'mode_downwind',dom:'strat',why:'Porte 1-2 : la ligne d’arrivée, par le chemin le plus court'});
       return {...tm,i,sx,t0,segs,orders,pens:[],ocs:i===ocsI,recalled:false,ev:{},fin:null};
     });
     return {boats,events:[],alerts:[],log:[],flags:{}};
@@ -1692,14 +1699,26 @@ function renderTv(){const tp=T-1,rk=SIM.ranking(sim,tp),lead=rk[0],evs=sim.event
   else if(mode==='lead'&&tp>=0)L=['#2563EB',lead.st.fin?'VAINQUEUR':'EN TÊTE',lead.b.name,lead.st.fin?'En '+fmt(lead.b.fin):kn(lead.st.sog)+' nds · '+Math.max(0,lead.rem).toFixed(0)+' m restants'];
   $('#tLt').innerHTML=L?`<i style="background:${L[0]}"></i><div><span style="color:${L[0]}">${L[1]}</span><b>${esc(L[2])}</b><p>${esc(L[3])}</p></div>`:'';
 }
-function renderEq(force){renderProt();const t=T,b=sim.boats.find(x=>x.id===eqTeam),rk=SIM.ranking(sim,t),q=rk.find(x=>x.b===b),p=rk.indexOf(q)+1,ap=SIM.activePen(b,t),te=SIM.effT(b,t);
+const DOMN={strat:'Stratégie',perf:'Performance',tact:'Tactique',regle:'Règles'};
+function renderDoms(){const el=$('#eqDoms');if(!el)return;const t=T,b=sim.boats.find(x=>x.id===eqTeam),st=SIM.state(b,t),te=SIM.effT(b,t),ap=SIM.activePen(b,t);
+  const last=d=>{const o=b.orders.filter(o=>o.dom===d&&t>=0&&te>=o.te).slice(-1)[0];return o?o.why:'En attente du départ'};
+  let tac='Aucun adversaire à moins de 25 m : on suit la stratégie.';
+  if(t>=0&&!st.fin){let best=null;for(const o of sim.boats){if(o===b)continue;const s2=SIM.state(o,t);if(s2.fin)continue;const d=Math.hypot(st.x-s2.x,st.y-s2.y);if(!best||d<best.d)best={d,o,s2}}
+    if(best&&best.d<25){try{const c=classify({b,s:st},{b:best.o,s:best.s2},t),R={r10:'RCV 10',r11:'RCV 11',r12:'RCV 12',r13:'RCV 13',r18:'RCV 18'}[c.rule]||'';tac=best.o.id+' à '+fr(best.d.toFixed(0))+' m · '+(c.prio&&c.prio.b===b?'priorité à nous ('+R+') : on garde la route':'on doit s’écarter ('+R+')')}catch(e){tac=best.o.id+' à '+fr(best.d.toFixed(0))+' m'}}}
+  const pq=(sim.pq&&sim.pq[b.id])||0;
+  const reg=ap&&ap.kind==='loop'||b.pens.some(p=>p.kind==='loop'&&!st.fin)?'Pénalité reçue : tour par P1-P2 à faire avant l’arrivée':b.ocs&&!b.recalled&&t>0&&st.leg===1?'Départ anticipé : revenir couper la porte 1-2':'Aucune pénalité · réclamations '+pq+'/3';
+  const mode=b.orders.filter(o=>/^mode_/.test(o.code)&&t>=0&&te>=o.te).slice(-1)[0];
+  const perf=t<0?'Mise en place sur la ligne':kn(st.sog)+' nœuds · '+(mode?mode.cmd.toLowerCase():'mode près');
+  const tiles=[['strat',last('strat')],['perf',perf],['tact',tac],['regle',reg]];
+  el.innerHTML=tiles.map(([d,v])=>`<div class="dt d-${d}"><b>${DOMN[d]}</b><span>${esc(v)}</span></div>`).join('')}
+function renderEq(force){renderProt();renderDoms();const t=T,b=sim.boats.find(x=>x.id===eqTeam),rk=SIM.ranking(sim,t),q=rk.find(x=>x.b===b),p=rk.indexOf(q)+1,ap=SIM.activePen(b,t),te=SIM.effT(b,t);
   if(force)$('#eqPick').innerHTML=SIM.TEAMS.map(x=>`<button type="button" class="btn" data-eq="${x.id}" aria-pressed="${x.id===eqTeam}" style="${x.id===eqTeam?'':'border-color:'+x.c}">${x.id}</button>`).join('');
   $('#eqCard').style.boxShadow='inset 0 6px 0 '+b.c+',var(--ombre)';
   $('#eqCard').innerHTML=`<div class="row" style="align-items:baseline"><b style="font:800 30px var(--f-cond);">${esc(b.name)}</b><span class="k" style="font-size:12px">${LEGN[q.st.leg]}</span></div><div class="stat4"><div><b>${t<0?'—':p+(p===1?'er':'e')}</b><span>PLACE</span></div><div><b>${kn(q.st.sog)}</b><span>NŒUDS</span></div><div><b>${q.st.fin?'✓':Math.max(0,q.rem).toFixed(0)+' m'}</b><span>RESTE</span></div><div><b>${ap&&ap.kind==='stop'?'ARRÊT':'46 ms'}</b><span>LIAISON</span></div></div>`;
-  const rows=b.orders.filter(o=>t>=0&&te>=o.te).map(o=>({t:o.te,cmd:o.cmd,code:o.code,why:o.why}));
-  b.pens.filter(x=>t>=x.at&&x.dur>.5).forEach(x=>rows.push({t:SIM.effT(b,x.at)+.001,cmd:x.kind==='stop'?'Face au vent':x.kind==='turn'?'Tour de pénalité':'Retour à la ligne',code:x.kind==='stop'?'head_to_wind':'penalty',why:x.kind==='stop'?'Arrêt de sécurité demandé par un humain, signalé au comité':'Décision du comité reçue, exécutée par l’IA',human:x.kind==='stop'}));
+  const rows=b.orders.filter(o=>t>=0&&te>=o.te).map(o=>({t:o.te,cmd:o.cmd,code:o.code,why:o.why,dom:o.dom}));
+  b.pens.filter(x=>t>=x.at&&x.dur>.5).forEach(x=>rows.push({t:SIM.effT(b,x.at)+.001,cmd:x.kind==='stop'?'Face au vent':x.kind==='turn'?'Tour de pénalité':'Retour à la ligne',code:x.kind==='stop'?'head_to_wind':'penalty',why:x.kind==='stop'?'Arrêt de sécurité demandé par un humain, signalé au comité':x.kind==='recall'?'Rappel du comité : revenir couper la porte 1-2':'Décision de l’arbitre reçue : tour par P1-P2 avant l’arrivée',dom:'regle',human:x.kind==='stop'}));
   rows.sort((a,c)=>c.t-a.t);
-  $('#eqOrders').innerHTML=rows.slice(0,7).map((r,i)=>{const age=te-r.t;return `<div class="ord${i===0&&age<6?' new':''}"><span class="t">${fmt(r.t)}</span><span><b>${esc(r.cmd)}<code>${r.code}</code></b><span class="w">${esc(r.why)}</span></span><span class="s" style="${r.human?'color:#E11D48':''}">${r.human?'HUMAIN':age<.05?'ENVOYÉ':age<1.5?'REÇU':'EXÉCUTÉ'}</span></div>`}).join('')||'<span style="font-size:14px;color:var(--texte-2)">L’IA attend le départ. Premier ordre au signal : mode près.</span>';
+  $('#eqOrders').innerHTML=rows.slice(0,7).map((r,i)=>{const age=te-r.t;return `<div class="ord${i===0&&age<6?' new':''}"><span class="t">${fmt(r.t)}</span><span><b>${esc(r.cmd)}<code>${r.code}</code></b>${r.dom?`<i class="dom d-${r.dom}">${DOMN[r.dom]}</i>`:''}<span class="w">${esc(r.why)}</span></span><span class="s" style="${r.human?'color:#E11D48':''}">${r.human?'HUMAIN':age<.05?'ENVOYÉ':age<1.5?'REÇU':'EXÉCUTÉ'}</span></div>`}).join('')||'<span style="font-size:14px;color:var(--texte-2)">L’IA attend le départ. Premier ordre au signal : mode près.</span>';
   const stopping=ap&&ap.kind==='stop',S=$('#eqStop');S.disabled=!!stopping||t<0||q.st.fin;S.textContent=stopping?'Bateau arrêté, face au vent':stopArm?'Confirmer l’arrêt de sécurité':'Arrêt de sécurité';S.classList.toggle('arm',stopArm);
 }
 function rvInfo(a){const B=id=>sim.boats.find(b=>b.id===id),g=a.boats[0],q=a.boats[1],st=(id,t)=>SIM.state(B(id),t),dist=t=>q?Math.hypot(st(g,t).x-st(q,t).x,st(g,t).y-st(q,t).y):Math.hypot(st(g,t).x-a.M.x,st(g,t).y-a.M.y);
