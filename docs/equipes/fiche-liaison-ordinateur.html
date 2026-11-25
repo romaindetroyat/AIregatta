@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Liaison ordinateur-bateau · fiche A4</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+@page{size:A4;margin:0}
+:root{--ink:#0F172A;--ink2:#475569;--line:#D6DEE8;--soft:#F3F6FA;--navy:#0B2A3F;--lime:#C7EB00;--limeInk:#2E3600;
+  --blue:#2563EB;--blueSoft:#EAF0FE;--ok:#15803D;--okSoft:#E7F6EC;--warn:#B45309;--warnSoft:#FDF3E2;
+  --f:"Plus Jakarta Sans","Inter",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font:400 8.3pt/1.33 var(--f);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet{width:210mm;height:297mm;padding:9mm 11mm 7mm;display:flex;flex-direction:column;gap:2.6mm;overflow:hidden;page-break-after:always;break-after:page}
+.sheet:last-child{page-break-after:auto;break-after:auto}
+h1,h2,h3{margin:0;letter-spacing:-.01em}
+p{margin:0}
+ul,ol{margin:0;padding-left:4.2mm;display:flex;flex-direction:column;gap:.5mm}
+.top{background:var(--navy);color:#F8FAFC;border-radius:3.4mm;padding:3.4mm 5mm;display:flex;justify-content:space-between;align-items:flex-end;gap:6mm}
+.top .k{font:700 7.4pt var(--f);letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
+.top h1{font:800 13.5pt/1.15 var(--f);margin-top:.8mm}
+.top p{color:rgba(248,250,252,.8);margin-top:1mm;max-width:130mm}
+.top .side{text-align:right;font-size:8pt;color:rgba(248,250,252,.8);white-space:nowrap}
+.top .side b{display:block;color:#fff;font-size:9.5pt}
+.badge{display:inline-grid;place-items:center;width:7mm;height:7mm;border-radius:2mm;background:var(--lime);color:var(--limeInk);font:800 11pt var(--f);margin-right:2.4mm;vertical-align:-1.2mm}
+.box{border:1px solid var(--line);border-radius:2.8mm;padding:2.4mm 3.6mm}
+.lbl{font:700 7.2pt var(--f);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-bottom:1.6mm}
+h2{font:800 10pt var(--f);margin-bottom:1.2mm}
+h3{font:800 8.8pt var(--f);margin-bottom:.9mm}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.6mm}
+.chain{display:flex;align-items:center;gap:1.8mm;flex-wrap:nowrap}
+.node{border:1px solid var(--line);background:var(--soft);border-radius:2.4mm;padding:1.3mm 2.2mm;font-size:7.6pt;line-height:1.22;flex:1}
+.node b{display:block;font-size:8.2pt}
+.node.shore{border-color:var(--blue);background:var(--blueSoft)}
+.node.boat{border-color:var(--ok);background:var(--okSoft)}
+.node.focus{border:2px solid var(--ink);background:#fff}
+.arr{font-size:7.6pt;color:var(--ink2);text-align:center;white-space:nowrap;flex:none}
+.arr span{display:block;font-size:11pt;line-height:1;color:var(--ink)}
+.radio{font-size:7.6pt;color:var(--blue);font-weight:700;white-space:nowrap;flex:none;text-align:center}
+.legend{display:flex;gap:5mm;font-size:7pt;color:var(--ink2);margin-top:1.2mm}
+.legend i{display:inline-block;width:3mm;height:3mm;border-radius:.8mm;margin-right:1.4mm;vertical-align:-.5mm}
+table{width:100%;border-collapse:collapse;font-size:8pt}
+td,th{padding:.6mm 0;border-bottom:1px dashed var(--line);vertical-align:top;text-align:left}
+th{font:700 7.2pt var(--f);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;padding-left:3mm}
+tr.tot td{border-bottom:0;font-weight:800;padding-top:1.6mm}
+.pill{display:inline-block;font:700 6.8pt var(--f);letter-spacing:.05em;text-transform:uppercase;border-radius:99px;padding:.5mm 2mm;margin-right:1.4mm}
+.pill.ok{background:var(--okSoft);color:var(--ok)}
+.pill.warn{background:var(--warnSoft);color:var(--warn)}
+.rel{display:flex;flex-direction:column;gap:.9mm}
+.steps{counter-reset:s;list-style:none;padding:0;gap:.9mm}
+.steps li{counter-increment:s;display:grid;grid-template-columns:4.8mm 1fr;gap:2mm;align-items:start}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:4.4mm;height:4.4mm;border-radius:50%;background:var(--navy);color:#fff;font:700 6.8pt var(--f);margin-top:.2mm}
+.note{background:var(--warnSoft);border-radius:2.6mm;padding:2.4mm 3.4mm;font-size:8.6pt}
+.note b{color:var(--warn)}
+.verdict{background:var(--soft);border-radius:2.4mm;padding:2mm 3.2mm;font-size:8.1pt}
+.dec{background:var(--lime);color:var(--limeInk);border-radius:2.8mm;padding:2.2mm 3.6mm;font-size:8.2pt;display:flex;justify-content:space-between;gap:6mm}
+.dec b{color:var(--ink)}
+.foot{margin-top:auto;font-size:7.2pt;color:var(--ink2);display:flex;justify-content:space-between;gap:6mm}
+svg text{font-family:var(--f)}
+</style>
+</head>
+<body>
+
+<!-- ============ RECTO : OPTION A ============ -->
+<section class="sheet">
+  <header class="top">
+    <div>
+      <div class="k">AI Regatta · Réunion technique · Piloter le bateau depuis l’ordinateur</div>
+      <h1><span class="badge">A</span>Radio imposée avec prise écolage + petit boîtier</h1>
+      <p>L’ordinateur prend la place des mains sur les manches de la radio. Les servos et la batterie du bateau ne changent pas.</p>
+    </div>
+    <div class="side"><b>Jeudi 26 novembre 2026</b>Recto · option A</div>
+  </header>
+
+  <div class="box">
+    <div class="lbl">Comment ça se branche</div>
+    <div class="chain">
+      <div class="node shore"><b>Ordinateur</b>Mac ou PC, avec l’IA de l’équipe et le programme Meridia</div>
+      <div class="arr"><span>→</span>câble USB</div>
+      <div class="node shore focus"><b>Petit boîtier</b>à fabriquer (détails ci-dessous)</div>
+      <div class="arr"><span>→</span>câble jack</div>
+      <div class="node shore"><b>Radio imposée</b>RadioMaster Pocket ou TX12, réglée en « maître »</div>
+      <div class="radio">))) radio )))</div>
+      <div class="node boat"><b>Récepteur</b>RadioMaster ER4 → safran et écoute</div>
+    </div>
+    <div class="legend"><span><i style="background:var(--blueSoft);border:1px solid var(--blue)"></i>à terre</span><span><i style="background:var(--okSoft);border:1px solid var(--ok)"></i>dans le bateau</span><span>Un interrupteur de la radio choisit qui pilote : l’ordinateur ou un humain.</span></div>
+  </div>
+
+  <div class="box">
+    <h2>Le boîtier à fabriquer</h2>
+    <div class="grid2">
+      <div style="display:flex;flex-direction:column;gap:1.6mm">
+        <p>La prise écolage sert normalement aux cours de pilotage : la radio d’un élève y pilote celle du moniteur. <b>Le boîtier fait semblant d’être la radio de l’élève.</b> L’ordinateur lui dit où mettre le safran et l’écoute, et la radio obéit sans voir la différence. Aucun boîtier tout fait n’existe pour ça : il faut le fabriquer.</p>
+        <svg viewBox="0 0 300 92" width="88%" role="img" aria-label="Dessin du boîtier : câble USB d’un côté, câble jack de l’autre, carte électronique au milieu">
+          <rect x="0" y="0" width="300" height="92" rx="8" fill="#F3F6FA"/>
+          <rect x="8" y="34" width="34" height="22" rx="3" fill="#EAF0FE" stroke="#2563EB"/>
+          <text x="25" y="49" text-anchor="middle" font-size="8" font-weight="700" fill="#0F172A">PC</text>
+          <path d="M42 45 H96" stroke="#0F172A" stroke-width="2.2" fill="none"/>
+          <text x="69" y="39" text-anchor="middle" font-size="7" fill="#475569">USB</text>
+          <rect x="96" y="18" width="108" height="56" rx="7" fill="#fff" stroke="#0F172A" stroke-width="1.6"/>
+          <rect x="108" y="30" width="58" height="32" rx="2" fill="#0B6E4F"/>
+          <rect x="114" y="38" width="20" height="16" rx="1" fill="#1F2937"/>
+          <g fill="#C7D2DE"><rect x="140" y="34" width="3" height="3"/><rect x="146" y="34" width="3" height="3"/><rect x="152" y="34" width="3" height="3"/><rect x="158" y="34" width="3" height="3"/><rect x="140" y="55" width="3" height="3"/><rect x="146" y="55" width="3" height="3"/><rect x="152" y="55" width="3" height="3"/><rect x="158" y="55" width="3" height="3"/></g>
+          <rect x="172" y="36" width="22" height="20" rx="2" fill="#FDF3E2" stroke="#B45309"/>
+          <text x="183" y="49" text-anchor="middle" font-size="6.5" font-weight="700" fill="#B45309">3,3 V</text>
+          <text x="137" y="86" text-anchor="middle" font-size="7" fill="#475569">carte</text>
+          <text x="183" y="86" text-anchor="middle" font-size="7" fill="#475569">adaptateur</text>
+          <path d="M204 45 H256" stroke="#0F172A" stroke-width="2.2" fill="none"/>
+          <text x="230" y="39" text-anchor="middle" font-size="7" fill="#475569">jack 3,5 mm</text>
+          <rect x="256" y="32" width="36" height="26" rx="3" fill="#EAF0FE" stroke="#2563EB"/>
+          <text x="274" y="48" text-anchor="middle" font-size="8" font-weight="700" fill="#0F172A">Radio</text>
+        </svg>
+      </div>
+      <div>
+        <div class="lbl">Les pièces, par boîtier</div>
+        <table>
+          <tr><td>Carte électronique type « Arduino Nano » (le cerveau du boîtier)</td><td class="n">≈ 5 à 10 €</td></tr>
+          <tr><td>Câble jack 3,5 mm (comme un câble audio), coupé d’un côté</td><td class="n">≈ 3 €</td></tr>
+          <tr><td>Adaptateur de tension : 2 résistances et 1 petite diode, pour ne pas abîmer la radio</td><td class="n">≈ 1 €</td></tr>
+          <tr><td>Câble USB vers l’ordinateur</td><td class="n">≈ 3 €</td></tr>
+          <tr><td>Petit boîtier en plastique, un peu de gaine</td><td class="n">≈ 3 €</td></tr>
+          <tr class="tot"><td>Total des pièces</td><td class="n">≈ 15 à 20 €</td></tr>
+        </table>
+        <p style="margin-top:1.8mm;font-size:8.4pt;color:var(--ink2)">Variante : une carte qui travaille directement en 3,3 V évite l’adaptateur. À choisir pendant la mise au point.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>Mise au point et fabrication</h3>
+      <ol class="steps">
+        <li><span><b>Prototype</b> : un premier boîtier, testé sur la radio imposée. On vérifie la tension du signal et le réglage « maître » de la radio.</span></li>
+        <li><span><b>Programme</b> : Meridia écrit le programme chargé dans la carte et celui de l’ordinateur.</span></li>
+        <li><span><b>Série</b> : 6 boîtiers + 2 de secours, fabriqués par un partenaire ou un fablab. Fils soudés, boîtier fermé.</span></li>
+        <li><span><b>Remise aux équipes</b> : boîtier prêt à brancher, programme déjà chargé. Rien à régler.</span></li>
+      </ol>
+      <p style="margin-top:2mm;font-size:8.4pt;color:var(--ink2)">Montage à la portée d’un bricoleur en électronique : environ 1 heure par boîtier, une fois le prototype validé.</p>
+    </div>
+    <div class="box">
+      <h3>Les pièges connus (témoignages)</h3>
+      <ul>
+        <li><b>Radio en mode « élève »</b> : elle n’émet plus. Il faut le mode « maître », qui accepte la prise.</li>
+        <li><b>Tension trop forte</b> : la carte sort du 5 V, beaucoup de radios attendent du 3,3 V. D’où l’adaptateur.</li>
+        <li><b>Fils simplement enroulés</b> ou trop près de l’antenne : les commandes tremblent. Fils soudés, boîtier à l’écart.</li>
+        <li><b>Un seul modèle de radio imposé</b> évite les différences d’une marque à l’autre.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="box">
+      <h3>Coût par équipe</h3>
+      <table>
+        <tr><td>Radio imposée</td><td class="n">65 à 130 €</td></tr>
+        <tr><td>Récepteur ER4</td><td class="n">≈ 17 €</td></tr>
+        <tr><td>Boîtier (pièces)</td><td class="n">15 à 20 €</td></tr>
+        <tr class="tot"><td>Total</td><td class="n">≈ 100 à 170 €</td></tr>
+      </table>
+    </div>
+    <div class="box">
+      <h3>Fiabilité</h3>
+      <div class="rel">
+        <div><span class="pill ok">Éprouvé</span>La prise écolage, depuis 2009, dont une course de drones pilotés par IA.</div>
+        <div><span class="pill ok">Éprouvé</span>La radio vers le bateau.</div>
+        <div><span class="pill warn">À valider</span>Le boîtier, à mettre au point.</div>
+      </div>
+    </div>
+    <div class="box">
+      <h3>Ce que ça impose aux équipes</h3>
+      <ul>
+        <li>Acheter la radio imposée</li>
+        <li>Changer le récepteur du bateau</li>
+        <li>Régler la radio une fois : mode « maître », interrupteur</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>Les tests avant de valider</h3>
+    <div class="grid3" style="gap:3mm">
+      <div><b>1. Sur la table</b> : le boîtier fait bouger le safran et l’écoute dans le bon sens.</div>
+      <div><b>2. Endurance</b> : plusieurs heures d’affilée, on compte les coupures et les tremblements.</div>
+      <div><b>3. À l’eau</b> : portée jusqu’au point le plus loin, sécurité en cas de coupure, reprise en main par l’interrupteur.</div>
+    </div>
+  </div>
+
+  <div class="verdict"><b>Plus :</b> un humain peut reprendre la main si l’ordinateur plante, et la technique est éprouvée. <b>Moins :</b> il faut quelqu’un pour fabriquer les boîtiers, et c’est la solution la plus chère. <b>À décider :</b> l’usage de l’interrupteur pendant la course (sécurité seulement, ou pénalité).</div>
+
+  <div class="foot"><span>Matériel : achat et fabrication par les équipes et les partenaires. Meridia : les programmes.</span><span>Prix indicatifs relevés en novembre 2026, à confirmer.</span></div>
+</section>
+
+<!-- ============ VERSO : OPTION B ============ -->
+<section class="sheet">
+  <header class="top">
+    <div>
+      <div class="k">AI Regatta · Réunion technique · Piloter le bateau depuis l’ordinateur</div>
+      <h1><span class="badge">B</span>ExpressLRS complet, sans radio</h1>
+      <p>L’ordinateur pilote directement un petit émetteur du commerce. Les servos et la batterie du bateau ne changent pas.</p>
+    </div>
+    <div class="side"><b>Jeudi 26 novembre 2026</b>Verso · option B</div>
+  </header>
+
+  <div class="box">
+    <div class="lbl">Comment ça se branche</div>
+    <div class="chain">
+      <div class="node shore"><b>Ordinateur</b>Mac ou PC, avec l’IA de l’équipe et le programme Meridia</div>
+      <div class="arr"><span>→</span>câble USB-C</div>
+      <div class="node shore focus"><b>Émetteur</b>RadioMaster Ranger Micro, antenne vissée</div>
+      <div class="radio">))) radio )))</div>
+      <div class="node boat"><b>Récepteur</b>RadioMaster ER4 → safran et écoute</div>
+    </div>
+    <div class="legend"><span><i style="background:var(--blueSoft);border:1px solid var(--blue)"></i>à terre</span><span><i style="background:var(--okSoft);border:1px solid var(--ok)"></i>dans le bateau</span><span>Pas de radio : l’émetteur est le seul matériel entre l’ordinateur et le bateau.</span></div>
+  </div>
+
+  <div class="box">
+    <h2>La liaison avec l’ordinateur, en détail</h2>
+    <div class="grid2">
+      <div>
+        <div class="lbl">Le matériel à terre</div>
+        <table>
+          <tr><td><b>Émetteur Ranger Micro</b> : boîtier noir de 7 cm, 40 g. Émet à 100 mW, la limite autorisée. Portée annoncée : 2 km.</td><td class="n">≈ 40 €</td></tr>
+          <tr><td><b>Câble USB-C</b> : alimente l’émetteur et lui transmet les ordres.</td><td class="n">≈ 5 €</td></tr>
+          <tr><td><b>Petite batterie</b> : si l’ordinateur ne suffit pas à alimenter l’émetteur.</td><td class="n">≈ 15 €</td></tr>
+          <tr><td><b>Adaptateur de secours</b> : si le câble seul ne transmet pas les ordres sur ce modèle.</td><td class="n">≈ 10 €</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="lbl">Installation, une seule fois</div>
+        <ol class="steps">
+          <li><span><b>Mot de passe</b> : depuis un téléphone, on donne le même mot de passe à l’émetteur et au récepteur. Chaque bateau a le sien.</span></li>
+          <li><span><b>Réglage du câble</b> : depuis le téléphone, on indique à l’émetteur d’écouter l’ordinateur par le câble.</span></li>
+          <li><span><b>Programme</b> : on installe le programme Meridia, identique sur Mac et sur PC. Il trouve l’émetteur tout seul.</span></li>
+          <li><span><b>Sécurité</b> : on règle ce que fait le bateau si le contact est perdu : safran droit, écoute choquée.</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>Pendant la course</h3>
+      <ul>
+        <li>Le programme envoie les ordres <b>en continu</b>, au moins 50 fois par seconde. Sans cet envoi continu, la liaison ne s’établit pas.</li>
+        <li>Il affiche en permanence <b>la qualité du signal</b> renvoyée par le bateau, et prévient avant qu’elle ne baisse.</li>
+        <li>Si l’ordinateur plante ou si le câble se débranche, le bateau se met <b>tout seul en sécurité</b>.</li>
+        <li>Une radio ExpressLRS peut servir de secours pour reprendre la main : elle porte le même mot de passe et marche dès qu’on l’allume.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Ce que disent les témoignages</h3>
+      <ul>
+        <li><span class="pill ok">Réussi</span>Drones pilotés depuis un PC Windows et un petit ordinateur Raspberry Pi.</li>
+        <li><span class="pill ok">Réussi</span>Appairage sans radio, une fois l’envoi continu en place.</li>
+        <li><span class="pill warn">Problème</span>Coupures occasionnelles signalées sous Windows.</li>
+        <li><span class="pill warn">Problème</span>Réglages délicats sur certains modèles, restés sans réponse.</li>
+        <li><span class="pill warn">Manque</span>Aucun retour sur un voilier, aucun sur ce modèle précis.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="box">
+      <h3>Coût par équipe</h3>
+      <table>
+        <tr><td>Émetteur + câble</td><td class="n">≈ 45 €</td></tr>
+        <tr><td>Récepteur ER4</td><td class="n">≈ 17 €</td></tr>
+        <tr><td>Petite batterie, si besoin</td><td class="n">≈ 15 €</td></tr>
+        <tr><td>Adaptateur, si besoin</td><td class="n">≈ 10 €</td></tr>
+        <tr class="tot"><td>Total</td><td class="n">≈ 60 à 90 €</td></tr>
+      </table>
+    </div>
+    <div class="box">
+      <h3>Fiabilité</h3>
+      <div class="rel">
+        <div><span class="pill ok">Éprouvé</span>La radio vers le bateau : le système le plus utilisé en course de drones.</div>
+        <div><span class="pill warn">À valider</span>Le lien ordinateur → émetteur.</div>
+        <div><span class="pill warn">Vigilance</span>Le signal passe moins bien au ras de l’eau : antenne du récepteur haute, hors de la coque si possible.</div>
+      </div>
+    </div>
+    <div class="box">
+      <h3>Ce que ça impose aux équipes</h3>
+      <ul>
+        <li>Changer le récepteur du bateau</li>
+        <li>Pas de radio à acheter</li>
+        <li>Régler l’émetteur une fois, depuis un téléphone</li>
+        <li>Une version logicielle figée, la même pour tous</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>Les tests avant de valider</h3>
+    <div class="grid3" style="gap:3mm">
+      <div><b>1. Le câble seul</b> : l’émetteur obéit-il à l’ordinateur par le seul câble USB-C ? C’est le point non confirmé sur ce modèle.</div>
+      <div><b>2. Endurance</b> : plusieurs heures d’affilée, sur Mac et sur PC, on compte les coupures.</div>
+      <div><b>3. À l’eau</b> : portée jusqu’au point le plus loin, mise en sécurité quand on débranche l’ordinateur.</div>
+    </div>
+  </div>
+
+  <div class="verdict"><b>Plus :</b> la solution la moins chère, tout vient du commerce, rien à fabriquer. <b>Moins :</b> le lien avec l’ordinateur reste à valider, et pas de reprise en main humaine sans radio en plus.</div>
+
+  <div class="dec"><span><b>Proposition :</b> tester A et B côte à côte avant de choisir. On garde B s’il passe les tests, sinon A.</span><span style="white-space:nowrap"><b>≈ 200 € de matériel · 3 à 4 jours</b></span></div>
+
+  <div class="foot"><span>Règles communes : 2,4 GHz à 100 mW au plus, matériel déclaré à l’inscription, sécurité vérifiée à l’homologation.</span><span>Prix indicatifs relevés en novembre 2026, à confirmer.</span></div>
+</section>
+
+</body>
+</html>
