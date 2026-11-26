@@ -72,9 +72,9 @@ body[data-mode="phone"] .phone{height:min(calc(100vh - 190px),860px)}
 .hud.p .race{font:600 2.8cqw var(--m);letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}
 .hud.p .clk{font:800 9cqw/1 var(--f);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .hud.p .leg{font:600 3.2cqw var(--f);color:rgba(248,250,252,.8);text-align:right}
-.hud.p .rank{position:absolute;left:4cqw;right:4cqw;bottom:6cqw;border-radius:6cqw;padding:3.5cqw 4cqw}
-.hud.p .rank h4{margin:0 0 1.6cqw;font:600 2.6cqw var(--m);letter-spacing:.14em;text-transform:uppercase;color:rgba(248,250,252,.7);display:flex;justify-content:space-between}
-.hud.p .rk{grid-template-columns:5cqw 3cqw minmax(0,1fr) auto;gap:2.4cqw;padding:1.1cqw 0;font-size:3.6cqw}
+.hud.p .rank{position:absolute;left:4cqw;right:4cqw;bottom:5cqw;border-radius:5cqw;padding:2.6cqw 3.6cqw}
+.hud.p .rank h4{margin:0 0 1cqw;font:600 2.6cqw var(--m);letter-spacing:.14em;text-transform:uppercase;color:rgba(248,250,252,.7);display:flex;justify-content:space-between}
+.hud.p .rk{grid-template-columns:4.4cqw 2.6cqw minmax(0,1fr) auto;gap:2.2cqw;padding:.6cqw 0;font-size:3.2cqw}
 .hud.p .rk i{width:2.8cqw;height:2.8cqw}
 .hud.p .toast{font-size:4.4cqw;padding:2.6cqw 5cqw;top:40%}
 .hud.p .home{position:absolute;bottom:1.6cqw;left:50%;transform:translateX(-50%);width:36%;height:1.2cqw;border-radius:999px;background:rgba(255,255,255,.8)}
@@ -430,18 +430,18 @@ function meridiaIcon(g,x,y,s){const gr=g.createRadialGradient(x+s*.5,y+s*.25,s*.
 function txt(g,t,x,y,font,col,mirror,align){g.save();g.font=font;g.fillStyle=col;g.textBaseline='middle';const w=g.measureText(t).width;let cx=align==='center'?x:x+w/2;g.translate(cx,y);if(mirror)g.scale(-1,1);g.fillText(t,-w/2,0);g.restore()}
 const tex=c=>{const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=8;return t};
 // coque : u = longueur (arrière -> étrave), v = de haut en bas (liston -> quille) ; la flottaison est vers 40 % de la hauteur
-function hullTex(L){const c=document.createElement('canvas');c.width=2048;c.height=256;const g=c.getContext('2d');const H=256,WL=100;
+function hullTex(L,mir){const c=document.createElement('canvas');c.width=2048;c.height=256;const g=c.getContext('2d');const H=256,WL=100;
   g.fillStyle=L.hull;g.fillRect(0,0,2048,H);
-  if(L.kind==='aireg'){g.fillStyle='#F8FAFC';g.fillRect(0,0,2048,7);txt(g,'Ai Regatta.com',90,52,'700 62px "Plus Jakarta Sans",sans-serif','#FFFFFF');
+  if(L.kind==='aireg'){g.fillStyle='#F8FAFC';g.fillRect(0,0,2048,7);txt(g,'Ai Regatta.com',90,52,'700 62px "Plus Jakarta Sans",sans-serif','#FFFFFF',mir);
     g.save();g.fillStyle='#FFFFFF';for(let k=0;k<3;k++){g.beginPath();g.moveTo(1340+k*22,7);g.lineTo(1350+k*22,7);g.lineTo(1320+k*22,WL);g.lineTo(1310+k*22,WL);g.fill()}g.restore();
     const fl=g.createLinearGradient(1420,0,1960,0);fl.addColorStop(0,'rgba(0,85,164,0)');fl.addColorStop(.15,'#1F4FB8');fl.addColorStop(.42,'#1F4FB8');fl.addColorStop(.44,'#F4F4F4');fl.addColorStop(.68,'#F4F4F4');fl.addColorStop(.7,'#E1062C');fl.addColorStop(1,'#E1062C');
     g.fillStyle=fl;g.beginPath();g.moveTo(1420,7);for(let x=1420;x<=2048;x+=16)g.lineTo(x,7+6*Math.sin(x*.02));g.lineTo(2048,WL);for(let x=2048;x>=1420;x-=16)g.lineTo(x,WL+8*Math.sin(x*.018+1));g.fill()}
   else if(L.kind==='meridia'){const gr=g.createLinearGradient(0,0,2048,0);gr.addColorStop(0,'#43B3A3');gr.addColorStop(.5,'#C7EB00');gr.addColorStop(1,'#DCFF3A');g.fillStyle=gr;g.fillRect(0,0,2048,9);g.fillRect(0,WL-14,2048,4);
-    meridiaIcon(g,110,16,70);txt(g,'meridia',200,50,'500 66px "Funnel Display",sans-serif','#EEF0E4');txt(g,'L’IA, EN PLEINE LUMIÈRE',1120,52,'500 26px "JetBrains Mono",monospace','#C7EB00')}
-  else if(L.kind==='calanque'){g.fillStyle='#14A3A0';g.beginPath();g.moveTo(0,WL+10);for(let x=0;x<=2048;x+=16)g.lineTo(x,62+18*Math.sin(x*.012));g.lineTo(2048,H);g.lineTo(0,H);g.fill();txt(g,'CALANQUE',120,36,'800 46px "Plus Jakarta Sans",sans-serif','#0E6E6B')}
-  else if(L.kind==='mistral'){const gr=g.createLinearGradient(0,0,2048,0);gr.addColorStop(0,'#FF5A1F');gr.addColorStop(1,'#FFC21A');g.fillStyle=gr;g.fillRect(0,0,2048,H);g.fillStyle='rgba(255,255,255,.9)';for(let k=0;k<5;k++)g.fillRect(1500+k*70,0,26,WL);txt(g,'MISTRAL VOLT',110,52,'800 54px "Plus Jakarta Sans",sans-serif','#FFFFFF')}
-  else if(L.kind==='lavande'){g.fillStyle='#F1ECF8';g.fillRect(0,0,2048,6);g.strokeStyle='#B9A2E6';g.lineWidth=5;for(let k=0;k<14;k++){const x=1300+k*48;g.beginPath();g.moveTo(x,WL);g.quadraticCurveTo(x+8,50,x+20,14);g.stroke()}txt(g,'Lavandine',110,52,'700 60px "Plus Jakarta Sans",sans-serif','#F1ECF8')}
-  else if(L.kind==='phare'){g.fillStyle='#FFFFFF';for(let k=0;k<4;k++){g.beginPath();g.moveTo(1250+k*150,0);g.lineTo(1320+k*150,0);g.lineTo(1250+k*150,WL);g.lineTo(1180+k*150,WL);g.fill()}txt(g,'PHARE AZUR',110,52,'800 56px "Plus Jakarta Sans",sans-serif','#FFFFFF')}
+    meridiaIcon(g,110,16,70);txt(g,'meridia',200,50,'500 66px "Funnel Display",sans-serif','#EEF0E4',mir);txt(g,'L’IA, EN PLEINE LUMIÈRE',1120,52,'500 26px "JetBrains Mono",monospace','#C7EB00',mir)}
+  else if(L.kind==='calanque'){g.fillStyle='#14A3A0';g.beginPath();g.moveTo(0,WL+10);for(let x=0;x<=2048;x+=16)g.lineTo(x,62+18*Math.sin(x*.012));g.lineTo(2048,H);g.lineTo(0,H);g.fill();txt(g,'CALANQUE',120,36,'800 46px "Plus Jakarta Sans",sans-serif','#0E6E6B',mir)}
+  else if(L.kind==='mistral'){const gr=g.createLinearGradient(0,0,2048,0);gr.addColorStop(0,'#FF5A1F');gr.addColorStop(1,'#FFC21A');g.fillStyle=gr;g.fillRect(0,0,2048,H);g.fillStyle='rgba(255,255,255,.9)';for(let k=0;k<5;k++)g.fillRect(1500+k*70,0,26,WL);txt(g,'MISTRAL VOLT',110,52,'800 54px "Plus Jakarta Sans",sans-serif','#FFFFFF',mir)}
+  else if(L.kind==='lavande'){g.fillStyle='#F1ECF8';g.fillRect(0,0,2048,6);g.strokeStyle='#B9A2E6';g.lineWidth=5;for(let k=0;k<14;k++){const x=1300+k*48;g.beginPath();g.moveTo(x,WL);g.quadraticCurveTo(x+8,50,x+20,14);g.stroke()}txt(g,'Lavandine',110,52,'700 60px "Plus Jakarta Sans",sans-serif','#F1ECF8',mir)}
+  else if(L.kind==='phare'){g.fillStyle='#FFFFFF';for(let k=0;k<4;k++){g.beginPath();g.moveTo(1250+k*150,0);g.lineTo(1320+k*150,0);g.lineTo(1250+k*150,WL);g.lineTo(1180+k*150,WL);g.fill()}txt(g,'PHARE AZUR',110,52,'800 56px "Plus Jakarta Sans",sans-serif','#FFFFFF',mir)}
   g.fillStyle='rgba(0,0,0,.22)';g.fillRect(0,WL+4,2048,H-WL);g.fillStyle=L.kind==='meridia'?'#14170F':L.kind==='calanque'?'#0F5F5D':'#151B2C';g.fillRect(0,WL+12,2048,H);return tex(c)}
 function deckTex(L){const c=document.createElement('canvas');c.width=1024;c.height=128;const g=c.getContext('2d');
   if(L.deck==='wood'){g.fillStyle='#9A5636';g.fillRect(0,0,1024,128);for(let y=6;y<122;y+=9){g.fillStyle=`hsl(18,${44+hash(y)*12}%,${33+hash(y+3)*10}%)`;g.fillRect(0,y,1024,8);g.fillStyle='rgba(30,14,6,.55)';g.fillRect(0,y+8,1024,1);for(let x=hash(y)*200;x<1024;x+=180+hash(x+y)*160)g.fillRect(x,y,1,8)}
@@ -470,10 +470,10 @@ function sailTex(L,mirror,jib){const c=document.createElement('canvas');c.width=
 const K=4.2;
 const halfB=s=>.088*Math.pow(Math.max(0,Math.sin(Math.PI*(.18+.82*s))),.8);
 const depth=s=>.05*Math.pow(Math.max(0,Math.sin(Math.PI*(.1+.9*s))),.7);
-const sheer=s=>.032+.024*s*s;
+const sheer=s=>.05+.03*s*s;
 function hullSide(sg){const NS=48,NT=10,pos=[],uv=[],idx=[];
   for(let i=0;i<=NS;i++){const s=i/NS,b=halfB(s),d=depth(s),hs=sheer(s),z=.5-s;for(let j=0;j<=NT;j++){const th=j/NT,a=th*Math.PI/2;
-    pos.push(sg*b*Math.pow(Math.cos(a),.6),hs+(-d-hs)*Math.pow(Math.sin(a),1.6),z);uv.push(sg>0?s:1-s,1-th)}}
+    pos.push(sg*b*Math.pow(Math.cos(a),.6),hs+(-d-hs)*Math.pow(Math.sin(a),1.6),z);uv.push(s,1-th)}}
   for(let i=0;i<NS;i++)for(let j=0;j<NT;j++){const a=i*(NT+1)+j,b=a+NT+1;if(sg>0)idx.push(a,b,a+1,b,b+1,a+1);else idx.push(a,a+1,b,b,a+1,b+1)}
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeVertexNormals();return g}
 function deckGeo(){const NS=48,pos=[],uv=[],idx=[];for(let i=0;i<=NS;i++){const s=i/NS,b=halfB(s),hs=sheer(s),z=.5-s;pos.push(-b,hs,z,b,hs,z);uv.push(s,0,s,1)}
@@ -486,14 +486,18 @@ const HS=[hullSide(1),hullSide(-1)],DECK=deckGeo(),TRANSOM=transomGeo();
 function sailGrid(ns,nt){const n=(ns+1)*(nt+1),g=new THREE.BufferGeometry(),idx=[];g.setAttribute('position',new THREE.Float32BufferAttribute(new Float32Array(n*3),3));g.setAttribute('uv',new THREE.Float32BufferAttribute(new Float32Array(n*2),2));
   for(let i=0;i<ns;i++)for(let j=0;j<nt;j++){const a=i*(nt+1)+j,b=a+nt+1;idx.push(a,b,a+1,b,b+1,a+1)}g.setIndex(idx);g.userData={ns,nt};return g}
 const tmpA=new THREE.Vector3(),tmpB=new THREE.Vector3(),tmpC=new THREE.Vector3(),tmpN=new THREE.Vector3();
-function shapeSail(g,T,Hd,C,camber,planeUV){const {ns,nt}=g.userData,p=g.attributes.position.array,uv=g.attributes.uv.array;
+const tmpR=new THREE.Vector3(),tmpP=new THREE.Vector3();
+function shapeSail(g,T,Hd,C,camber,planeUV,roach){const {ns,nt}=g.userData,p=g.attributes.position.array,uv=g.attributes.uv.array;
   tmpN.copy(Hd).sub(T).cross(tmpB.copy(C).sub(T)).normalize();
-  for(let i=0;i<=ns;i++){const s=i/ns;tmpA.copy(T).lerp(Hd,s);tmpB.copy(C).lerp(Hd,s);for(let j=0;j<=nt;j++){const t=j/nt,k=i*(nt+1)+j;tmpC.copy(tmpA).lerp(tmpB,t).addScaledVector(tmpN,camber*4*t*(1-t)*(1-.55*s));
-    p[k*3]=tmpC.x;p[k*3+1]=tmpC.y;p[k*3+2]=tmpC.z;if(planeUV){uv[k*2]=planeUV(tmpC)[0];uv[k*2+1]=planeUV(tmpC)[1]}else{uv[k*2]=t;uv[k*2+1]=s}}}
+  if(roach){tmpR.copy(Hd).sub(C).cross(tmpN).normalize();if(tmpR.dot(tmpP.copy(C).sub(T))<0)tmpR.negate()}
+  for(let i=0;i<=ns;i++){const s=i/ns;tmpA.copy(T).lerp(Hd,s);tmpB.copy(C).lerp(Hd,s);const rs=roach?roach*Math.sin(Math.PI*(s*.9+.05))*Math.min(1,s*5):0;for(let j=0;j<=nt;j++){const t=j/nt,k=i*(nt+1)+j;tmpC.copy(tmpA).lerp(tmpB,t);
+    if(planeUV){const q=planeUV(tmpC);uv[k*2]=q[0];uv[k*2+1]=q[1]}else{uv[k*2]=t;uv[k*2+1]=s}
+    if(rs)tmpC.addScaledVector(tmpR,rs*Math.pow(t,1.6));tmpC.addScaledVector(tmpN,camber*4*t*(1-t)*(1-.55*s));
+    p[k*3]=tmpC.x;p[k*3+1]=tmpC.y;p[k*3+2]=tmpC.z}}
   g.attributes.position.needsUpdate=true;g.attributes.uv.needsUpdate=true;g.computeVertexNormals()}
 function makeBoat(T){const L=LIV[T.id],root=new THREE.Group(),heel=new THREE.Group();root.add(heel);
-  const ht=hullTex(L),hm=new THREE.MeshStandardMaterial({map:ht,roughness:.28,metalness:.05});
-  HS.forEach(g=>heel.add(new THREE.Mesh(g,hm)));heel.add(new THREE.Mesh(DECK,new THREE.MeshStandardMaterial({map:deckTex(L),roughness:.55})));
+  const hmS=new THREE.MeshStandardMaterial({map:hullTex(L,true),roughness:.28,metalness:.05}),hmP=new THREE.MeshStandardMaterial({map:hullTex(L,false),roughness:.28,metalness:.05});
+  heel.add(new THREE.Mesh(HS[0],hmS),new THREE.Mesh(HS[1],hmP));heel.add(new THREE.Mesh(DECK,new THREE.MeshStandardMaterial({map:deckTex(L),roughness:.55})));
   heel.add(new THREE.Mesh(TRANSOM,new THREE.MeshStandardMaterial({color:L.hull,roughness:.3})));
   const carbon=std('#111318',.32,{metalness:.25});
   const fin=new THREE.Mesh(new THREE.BoxGeometry(.008,.40,.075),carbon);fin.position.set(0,-.24,-.05);heel.add(fin);
@@ -503,7 +507,7 @@ function makeBoat(T){const L=LIV[T.id],root=new THREE.Group(),heel=new THREE.Gro
   const fitting=new THREE.Mesh(new THREE.BoxGeometry(.03,.012,.05),std(L.tag,.4));fitting.position.set(0,.06,.08);heel.add(fitting);
   const main=new THREE.Group();main.position.set(0,.09,-.1);heel.add(main);
   const boom=new THREE.Mesh(new THREE.CylinderGeometry(.005,.005,.42,6),std('#2A2E36',.4));boom.rotation.x=Math.PI/2;boom.position.set(0,.0,.21);main.add(boom);
-  const mg=sailGrid(14,7),jg=sailGrid(12,6);
+  const mg=sailGrid(18,9),jg=sailGrid(12,6);
   const sA=sailTex(L,false,false),sB=sailTex(L,true,false),jA=sailTex(L,false,true);
   const mk=(g,t,side)=>new THREE.Mesh(g,new THREE.MeshStandardMaterial({map:t,side,roughness:.75,transparent:true,opacity:.97}));
   main.add(mk(mg,sB,THREE.FrontSide),mk(mg,sA,THREE.BackSide));
@@ -528,13 +532,13 @@ const finT=b=>b.fin!=null?b.fin:b.segs[b.segs.length-1].t1;
 const boats={};
 function ensureBoats(){sim.boats.forEach(b=>{if(!boats[b.id])boats[b.id]=makeBoat(b);boats[b.id].sb=b;boats[b.id].hist=[]})}
 function place(t,dt){Object.values(boats).forEach(m=>{const st=SIM.state(m.sb,t),h=st.hdg*Math.PI/180,p=W(st.x,st.y);
-  m.root.position.set(p.x,waveH(p.x,p.z,wt)*.6+.02,p.z);m.root.rotation.y=PHI-h;
+  m.root.position.set(p.x,waveH(p.x,p.z,wt)*.6+.028*K,p.z);m.root.rotation.y=PHI-h;
   const twa=Math.acos(Math.max(-1,Math.min(1,Math.cos(h))))*180/Math.PI,side=Math.sin(h)>=0?1:-1;
   const heelT=st.fin||(st.seg==='pre'&&t<-5)?.05:(st.seg==='tack'?.03:Math.max(.06,.36*(1-twa/180)));
   const boomT=Math.min(1.3,Math.max(.12,twa/180*1.55));
   m.heelA+=(side*heelT-m.heelA)*lerpK(dt,3);m.boomA+=(side*boomT-m.boomA)*lerpK(dt,2.4);m.cam+=(side*.05-m.cam)*lerpK(dt,2);
   m.heel.rotation.z=-m.heelA;m.heel.rotation.x=.025*Math.sin(wt*1.6+m.sb.i*2);m.heel.position.y=.012*Math.sin(wt*2.1+m.sb.i);
-  m.main.rotation.y=m.boomA;shapeSail(m.mg,MT,MH,MC,-m.cam*.9,mainUV);
+  m.main.rotation.y=m.boomA;shapeSail(m.mg,MT,MH,MC,-m.cam*.9,mainUV,.16);
   const C=JC0.clone().sub(JT).applyAxisAngle(JA,m.boomA*.85).add(JT);shapeSail(m.jg,JT,JH,C,-m.cam*.55,null);
   // sillage
   const hs=m.hist,sp=st.sog||0;if(!hs.length||Math.hypot(hs[hs.length-3]-p.x,hs[hs.length-1]-p.z)>.5){hs.push(p.x,h,p.z);if(hs.length>70*3)hs.splice(0,3)}
@@ -543,15 +547,15 @@ function place(t,dt){Object.values(boats).forEach(m=>{const st=SIM.state(m.sb,t)
   m.wake.geometry.attributes.position.needsUpdate=true;m.wake.geometry.attributes.alpha.needsUpdate=true})}
 
 /* ================= Caméras : deux écrans, plans posés qui s’enchaînent lentement ================= */
-const views={desk:{cam:new THREE.PerspectiveCamera(38,16/10,.5,30000),fov:38,el:$('#scrD'),k:1},phone:{cam:new THREE.PerspectiveCamera(58,9/19.5,.5,30000),fov:58,el:$('#scrP'),k:.82}};
+const views={desk:{cam:new THREE.PerspectiveCamera(38,16/10,.5,30000),fov:38,el:$('#scrD'),k:1},phone:{cam:new THREE.PerspectiveCamera(58,9/19.5,.5,30000),fov:58,el:$('#scrP'),k:.9,offY:.05}};
 Object.values(views).forEach(v=>{v.canvas=v.el.querySelector('canvas');v.R=mkR(v.canvas);v.w=0;v.h=0});
 const cen=new THREE.Vector3().copy(W(0,40)),lead=cen.clone();
 const SHOTS=[
- {n:'large',f:(c,l,k)=>[c.clone().addScaledVector(U,92*k).addScaledVector(RV,58*k).setY(34*k),c.clone().addScaledVector(U,-30).setY(6)]},
- {n:'travers',f:(c,l,k)=>[c.clone().addScaledVector(RV,-52*k).addScaledVector(U,20*k).setY(11*k),c.clone().setY(2)]},
- {n:'tête',f:(c,l,k)=>[l.clone().addScaledVector(U,15*k).addScaledVector(RV,17*k).setY(4.6*k),l.clone().addScaledVector(U,-4).setY(2.4)]},
- {n:'haut',f:(c,l,k)=>[c.clone().addScaledVector(U,45*k).addScaledVector(RV,-28*k).setY(92*k),c.clone().addScaledVector(U,-18).setY(0)]}];
-const START={f:(c,l,k)=>{const g=W(0,8);return [g.clone().addScaledVector(U,50*k).addScaledVector(RV,34*k).setY(15*k),W(0,-6).setY(3)]}};
+ {n:'large',f:(c,l,k)=>[c.clone().addScaledVector(U,48*k).addScaledVector(RV,30*k).setY(16*k),c.clone().addScaledVector(U,-4).setY(3)]},
+ {n:'travers',f:(c,l,k)=>[c.clone().addScaledVector(RV,-34*k).addScaledVector(U,14*k).setY(7.5*k),c.clone().setY(3)]},
+ {n:'tête',f:(c,l,k)=>[l.clone().addScaledVector(U,13*k).addScaledVector(RV,15*k).setY(3.6*k),l.clone().addScaledVector(U,-2).setY(3)]},
+ {n:'haut',f:(c,l,k)=>[c.clone().addScaledVector(U,32*k).addScaledVector(RV,-20*k).setY(62*k),c.clone().addScaledVector(U,-4).setY(0)]}];
+const START={f:(c,l,k)=>{const g=W(0,8);return [g.clone().addScaledVector(U,36*k).addScaledVector(RV,24*k).setY(11*k),W(0,-4).setY(3)]}};
 let forced=-1,snap=false;
 Object.values(views).forEach((v,i)=>{v.shot=i;v.timer=i*6;const [p,lk]=START.f(cen,lead,v.k);v.cam.position.copy(p);v.look=lk.clone()});
 function updateCams(dt,t){const S=Object.values(boats).map(m=>({m,st:SIM.state(m.sb,t)}));const run=S.filter(o=>!o.st.fin);const pool=run.length?run:S;
@@ -592,7 +596,7 @@ function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;wt+=dt;seaMat
   acc+=dt;if(acc>.2){acc=0;hud(T)}if(msgEnd&&now>msgEnd){msgEnd=0;$$('.toast').forEach(e=>e.classList.remove('on'))}
   // rendu : chaque écran visible reçoit sa propre caméra
   Object.values(views).forEach(v=>{if(!v.el.offsetParent)return;const w=v.el.clientWidth,h=v.el.clientHeight;if(w<2||h<2)return;
-   if(w!==v.w||h!==v.h){v.w=w;v.h=h;v.R.setSize(w,h,false);v.cam.aspect=w/h;v.cam.updateProjectionMatrix()}v.R.render(scene,v.cam)});
+   if(w!==v.w||h!==v.h){v.w=w;v.h=h;v.R.setSize(w,h,false);v.cam.aspect=w/h;if(v.offY)v.cam.setViewOffset(w,h,0,h*v.offY,w,h);v.cam.updateProjectionMatrix()}v.R.render(scene,v.cam)});
   // allègement automatique si l’ordinateur peine
   if(dt>.045){slow++;if(slow>90&&PR>1){PR=Math.max(1,PR-.25);Object.values(views).forEach(v=>{v.R.setPixelRatio(PR);v.w=0});slow=0}}else slow=Math.max(0,slow-1);
   requestAnimationFrame(frame)}
