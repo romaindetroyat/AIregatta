@@ -187,15 +187,25 @@ body.idle #help,#help.gone{opacity:0}
 #s8 .label b{font:800 54px/1.05 var(--f);display:block}
 
 /* ===== 9. interface public ===== */
-#s9{padding-top:70px}
-#s9 .head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
+#s9{padding:44px 60px 40px}
+#s9 .head{display:flex;justify-content:space-between;align-items:flex-end;margin:0 60px 22px}
+#s9 .head .kicker{margin-bottom:12px}
+#s9 h2{font-size:58px}
 #s9 h2{margin:0}
-#s9 .head p{font:500 26px/1.35 var(--f);color:var(--mute);max-width:640px;text-align:right}
-#s9 .frame{position:relative;height:740px;border-radius:30px;overflow:hidden;background:#0B1424;border:1.5px solid var(--line);box-shadow:0 40px 90px -40px rgba(0,0,0,.95)}
-#s9 iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+#s9 .head p{font:500 24px/1.35 var(--f);color:var(--mute);max-width:720px;text-align:right}
+#s9 .frame{position:relative;height:868px;transition:all .45s var(--ease);z-index:3;border-radius:30px;overflow:hidden;background:#0B1424;border:1.5px solid var(--line);box-shadow:0 40px 90px -40px rgba(0,0,0,.95)}
+#s9 iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;pointer-events:none}
 #s9 .wait{position:absolute;inset:0;display:grid;place-items:center;font:600 28px var(--f);color:var(--dim)}
-#s9 .open{position:absolute;right:22px;top:20px;z-index:3;font:700 20px/1 var(--f);color:var(--ink);text-decoration:none;background:rgba(8,18,48,.8);border:1.5px solid var(--line);padding:12px 18px;border-radius:999px}
-#s9 .open:hover{background:var(--pink)}
+#s9 .frame.max{position:absolute;left:16px;right:16px;top:16px;bottom:16px;height:auto;z-index:30;border-radius:22px}
+#s9 .zbar{position:absolute;right:18px;top:16px;z-index:4;display:flex;gap:10px}
+#s9 .zbar button,#s9 .open{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:10px;font:700 21px/1 var(--f);color:var(--ink);background:rgba(8,18,48,.82);border:1.5px solid var(--line);padding:12px 18px;border-radius:999px;backdrop-filter:blur(8px);transition:background .2s}
+#s9 .zbar button:hover,#s9 .open:hover{background:var(--pink)}
+#s9 .zbar svg{width:24px;height:24px}
+#s9 .zbar .close{display:none;background:var(--pink)}
+#s9 .frame.max .zbar .close{display:inline-flex}
+#s9 .frame.max .zbar .z{display:none}
+#s9 .frame.max .open{display:none}
+#s9 .open{position:absolute;left:18px;top:16px;z-index:4}
 
 /* ===== 10 / 11 / 15 schémas ===== */
 .diag{display:flex;justify-content:center;align-items:center;height:760px}
@@ -219,7 +229,7 @@ body.idle #help,#help.gone{opacity:0}
 #s12 .boat{opacity:0}
 #s12 .mark circle{transform-box:fill-box;transform-origin:center;transition:transform .35s cubic-bezier(.3,1.6,.5,1),filter .35s}
 #s12 .mark.hit circle{transform:scale(1.28);filter:brightness(1.25) drop-shadow(0 0 10px rgba(255,120,140,.9))}
-#s12.on .boat{opacity:1;transition:opacity .3s .9s}
+#s12.on .boat{opacity:1}
 
 /* ===== 13 / 14 règlement ===== */
 #s13 .two{display:grid;grid-template-columns:1fr 1.15fr;gap:36px}
@@ -423,7 +433,13 @@ body.idle #help,#help.gone{opacity:0}
   </div>
   <div class="frame r zoom" style="--d:.35s">
     <div class="wait">Chargement de la régate 3D…</div>
-    <a class="open" href="regate-3d.html" target="_blank" rel="noopener">Ouvrir en grand ↗</a>
+    <a class="open" href="regate-3d.html" target="_blank" rel="noopener">Ouvrir dans un onglet ↗</a>
+    <div class="zbar">
+      <button type="button" class="z" data-zoom="desk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M8 10.5h5M10.5 8v5"/></svg>Grand écran</button>
+      <button type="button" class="z" data-zoom="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M8 10.5h5M10.5 8v5"/></svg>Téléphone</button>
+      <button type="button" class="z" data-zoom="both"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M8 10.5h5M10.5 8v5"/></svg>Les deux</button>
+      <button type="button" class="close" data-zoom="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Fermer</button>
+    </div>
   </div>
 </section>
 
@@ -460,36 +476,37 @@ body.idle #help,#help.gone{opacity:0}
       <rect width="1600" height="700" fill="url(#ripple)"/>
       <!-- zone de pénalité -->
       <g class="mark" style="--d:.5s">
-        <rect x="450" y="470" width="150" height="214" rx="26" fill="#7CC6FF" fill-opacity=".14" stroke="#7CC6FF" stroke-opacity=".5" stroke-width="2.5" stroke-dasharray="10 8"/>
-        <text x="625" y="664" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="24">Zone de réparation</text>
-        <text x="625" y="692" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="24">de pénalité</text>
+        <rect x="640" y="410" width="150" height="190" rx="26" fill="#7CC6FF" fill-opacity=".14" stroke="#7CC6FF" stroke-opacity=".5" stroke-width="2.5" stroke-dasharray="10 8"/>
+        <text x="812" y="500" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="24">Zone de réparation</text>
+        <text x="812" y="528" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="24">de pénalité</text>
       </g>
       <!-- lignes de départ et d’arrivée -->
       <g class="mark" style="--d:.65s">
-        <line x1="210" y1="352" x2="210" y2="462" stroke="#fff" stroke-width="3" stroke-dasharray="8 7"/>
-        <circle cx="210" cy="352" r="9" fill="#fff"/><circle cx="210" cy="462" r="9" fill="#fff"/>
-        <rect x="56" y="388" width="130" height="44" rx="22" fill="#fff"/><text x="121" y="418" text-anchor="middle" fill="#0B1A44" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="24">Départ</text>
+        <line x1="200" y1="585" x2="200" y2="675" stroke="#fff" stroke-width="3" stroke-dasharray="8 7"/>
+        <circle cx="200" cy="585" r="9" fill="#fff"/><circle cx="200" cy="675" r="9" fill="#fff"/>
+        <rect x="46" y="608" width="130" height="44" rx="22" fill="#fff"/><text x="111" y="638" text-anchor="middle" fill="#0B1A44" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="24">Départ</text>
       </g>
       <g class="mark" style="--d:.8s">
-        <line x1="150" y1="170" x2="150" y2="282" stroke="#5FD08A" stroke-width="3" stroke-dasharray="8 7"/>
-        <circle cx="150" cy="170" r="9" fill="#5FD08A"/><circle cx="150" cy="282" r="9" fill="#5FD08A"/>
-        <rect x="20" y="300" width="130" height="44" rx="22" fill="#5FD08A"/><text x="85" y="330" text-anchor="middle" fill="#07301A" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="24">Arrivée</text>
+        <line x1="170" y1="120" x2="170" y2="220" stroke="#5FD08A" stroke-width="3" stroke-dasharray="8 7"/>
+        <circle cx="170" cy="120" r="9" fill="#5FD08A"/><circle cx="170" cy="220" r="9" fill="#5FD08A"/>
+        <rect x="40" y="238" width="130" height="44" rx="22" fill="#5FD08A"/><text x="105" y="268" text-anchor="middle" fill="#07301A" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="24">Arrivée</text>
       </g>
-      <!-- routes -->
-      <path id="mainRoute" d="M222 430 C232 412 245 407 280 407 L1300 407 C1440 407 1470 228 1350 210 L330 250 C232 254 214 110 300 92 L540 92" fill="none" stroke="none"/>
-      <path id="penRoute" d="M222 430 C205 520 255 612 350 612 C410 612 440 640 470 670 C500 705 560 705 585 665 C615 615 610 520 575 488 C545 462 500 462 478 490 C462 512 470 560 490 590" fill="none" stroke="none"/>
-      <g id="wake2" fill="none" stroke-linecap="round"></g>
-      <circle id="split" cx="0" cy="0" r="0" fill="none" stroke="#fff" stroke-width="3" opacity="0"/>
-      <g id="wake" fill="none" stroke-linecap="round"></g>
+      <!-- routes (invisibles) : tronc commun, puis deux bateaux symétriques -->
+      <path id="routeC" d="M215 630 L1250 630 C1500 630 1520 330 1380 330 L640 330" fill="none" stroke="none"/>
+      <path id="routeT" d="M640 330 C500 330 290 300 292 170 C292 95 360 70 420 80 L540 88" fill="none" stroke="none"/>
+      <path id="routeB" d="M640 330 C500 330 290 360 292 490 C292 565 360 590 420 580 L540 572" fill="none" stroke="none"/>
+      <g id="wakeC" fill="none" stroke-linecap="round"></g><g id="wakeT" fill="none" stroke-linecap="round"></g><g id="wakeB" fill="none" stroke-linecap="round"></g>
+      <circle id="split" cx="640" cy="330" r="0" fill="none" stroke="#fff" stroke-width="3" opacity="0"/>
       <!-- bouées -->
-      <g class="mark" style="--d:.35s" filter="url(#sh)"><circle cx="330" cy="170" r="34" fill="url(#buoyR)"/><text x="330" y="181" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">1</text></g>
-      <g class="mark" style="--d:.45s" filter="url(#sh)"><circle cx="350" cy="560" r="34" fill="url(#buoyR)"/><text x="350" y="571" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">2</text></g>
-      <g class="mark" style="--d:.55s" filter="url(#sh)"><circle cx="1380" cy="310" r="34" fill="url(#buoyR)"/><text x="1380" y="321" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">3</text></g>
-      <g class="mark" style="--d:.6s" filter="url(#sh)"><circle cx="525" cy="530" r="28" fill="url(#buoyR)"/><text x="525" y="539" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="22">P1</text></g>
-      <g class="mark" style="--d:.7s" filter="url(#sh)"><circle cx="525" cy="626" r="28" fill="url(#buoyR)"/><text x="525" y="635" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="22">P2</text></g>
-      <!-- bateau qui parcourt la route -->
-      <g class="boat" id="boat"><g id="boatInner"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#fff"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
-      <g class="boat" id="boat2"><g id="boatInner2"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#FF7A95"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
+      <g class="mark" style="--d:.35s" filter="url(#sh)"><circle cx="360" cy="160" r="34" fill="url(#buoyR)"/><text x="360" y="171" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">1</text></g>
+      <g class="mark" style="--d:.45s" filter="url(#sh)"><circle cx="360" cy="500" r="34" fill="url(#buoyR)"/><text x="360" y="511" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">2</text></g>
+      <g class="mark" style="--d:.55s" filter="url(#sh)"><circle cx="1400" cy="480" r="34" fill="url(#buoyR)"/><text x="1400" y="491" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">3</text></g>
+      <g class="mark" style="--d:.6s" filter="url(#sh)"><circle cx="715" cy="465" r="28" fill="url(#buoyR)"/><text x="715" y="474" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="22">P1</text></g>
+      <g class="mark" style="--d:.7s" filter="url(#sh)"><circle cx="715" cy="550" r="28" fill="url(#buoyR)"/><text x="715" y="559" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="22">P2</text></g>
+      <!-- bateaux -->
+      <g class="boat" id="boatC"><g id="boatInnerC"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#fff"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
+      <g class="boat" id="boatT"><g id="boatInnerT"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#fff"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
+      <g class="boat" id="boatB"><g id="boatInnerB"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#fff"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
     </svg>
     <div class="legend">
       <div class="li r" style="--d:.5s"><span class="sw"><svg viewBox="0 0 50 50"><line x1="25" y1="6" x2="25" y2="44" stroke="#fff" stroke-width="3" stroke-dasharray="6 5"/><circle cx="25" cy="6" r="5" fill="#fff"/><circle cx="25" cy="44" r="5" fill="#fff"/></svg></span>Ligne de départ</div>
@@ -497,7 +514,6 @@ body.idle #help,#help.gone{opacity:0}
       <div class="li r" style="--d:.7s"><span class="sw"><svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="18" fill="#E8283F"/></svg></span>Bouées 1, 2 et 3</div>
       <div class="li r" style="--d:.8s"><span class="sw"><svg viewBox="0 0 50 50"><path d="M4 30 L36 30" stroke="#fff" stroke-opacity=".25" stroke-width="3" stroke-linecap="round"/><path d="M18 30 L36 30" stroke="#fff" stroke-opacity=".7" stroke-width="4" stroke-linecap="round"/><path d="M36 26 L48 26 L44 32 L36 32Z M40 25 L40 8 L48 25Z" fill="#fff"/></svg></span>Route du parcours (sillage)</div>
       <div class="li r" style="--d:.9s"><span class="sw"><svg viewBox="0 0 50 50"><rect x="9" y="5" width="32" height="40" rx="9" fill="#7CC6FF" fill-opacity=".2" stroke="#7CC6FF" stroke-width="2" stroke-dasharray="5 4"/><circle cx="25" cy="17" r="6" fill="#E8283F"/><circle cx="25" cy="33" r="6" fill="#E8283F"/></svg></span>Zone de réparation de pénalité (P1, P2)</div>
-      <div class="li r" style="--d:1s"><span class="sw"><svg viewBox="0 0 50 50"><path d="M6 30 L24 30" stroke="#FF7A95" stroke-opacity=".6" stroke-width="4" stroke-linecap="round"/><path d="M26 26 L44 26 L40 32 L28 32Z M33 25 L33 8 L43 25Z" fill="#FF7A95"/></svg></span>Route vers la pénalité</div>
     </div>
   </div>
   <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
@@ -617,32 +633,41 @@ body.idle #help,#help.gone{opacity:0}
     if(s.id==='s12')startBoat();
   }
   function leave(s){
-    if(s.id==='s9'){const ifr=s.querySelector('iframe');if(ifr)ifr.remove();const f=s.querySelector('.frame');if(!f.querySelector('.wait')){const w=document.createElement('div');w.className='wait';w.textContent='Chargement de la régate 3D…';f.prepend(w)}}
+    if(s.id==='s9'){frame.classList.remove('max');const ifr=s.querySelector('iframe');if(ifr)ifr.remove();const f=s.querySelector('.frame');if(!f.querySelector('.wait')){const w=document.createElement('div');w.className='wait';w.textContent='Chargement de la régate 3D…';f.prepend(w)}}
     if(s.id==='s12')stopBoat();
     // rejouer les animations au prochain passage
     s.querySelectorAll('.r,.ch,.route,.mark,.arrowhead').forEach(e=>{e.style.animation='none';void e.offsetWidth;e.style.animation=''});
   }
+  // loupe de la slide 9 : agrandit la régate 3D sur toute la slide (grand écran, téléphone ou les deux)
+  const frame=document.querySelector('#s9 .frame');
+  function zoom(m){const ifr=frame.querySelector('iframe');
+    if(m==='off'){frame.classList.remove('max');if(ifr)ifr.contentWindow.postMessage({regateMode:'both'},'*');return}
+    frame.classList.add('max');if(ifr)ifr.contentWindow.postMessage({regateMode:m},'*')}
+  frame.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();zoom(b.dataset.zoom);b.blur()}));
   // bateau animé le long de la route du parcours voiliers
-  let raf=0,t0=0;const route=$('mainRoute'),route2=$('penRoute'),L=route.getTotalLength(),L2=route2.getTotalLength();
-  const boat=$('boat'),boat2=$('boat2'),ring=$('split');
-  const buoys=[...document.querySelectorAll('#s12 .mark')].filter(g=>g.querySelector('circle')).map(g=>{const c=g.querySelector('circle');return {g,x:+c.getAttribute('cx'),y:+c.getAttribute('cy')}});
-  function mkWake(id,col){const g=$(id),NW=16;for(let i=0;i<NW;i++){const pth=document.createElementNS('http://www.w3.org/2000/svg','path');const f=(i+1)/NW;pth.setAttribute('stroke',col);pth.setAttribute('stroke-opacity',(f*f*.9).toFixed(3));pth.setAttribute('stroke-width',(2+f*8).toFixed(1));g.appendChild(pth)}return g}
-  const wk=mkWake('wake','#fff'),wk2=mkWake('wake2','#FF7A95');
+  let raf=0,t0=0;const R={C:$('routeC'),T:$('routeT'),B:$('routeB')},LEN={};for(const k in R)LEN[k]=R[k].getTotalLength();
+  const ring=$('split');
+  const buoys=[...document.querySelectorAll('#s12 .mark')].filter(g=>g.querySelector('circle:not([r="9"])')).map(g=>{const c=g.querySelector('circle');return {g,x:+c.getAttribute('cx'),y:+c.getAttribute('cy')}});
+  function mkWake(id){const g=$(id),NW=16;for(let i=0;i<NW;i++){const pth=document.createElementNS('http://www.w3.org/2000/svg','path');const f=(i+1)/NW;pth.setAttribute('stroke','#fff');pth.setAttribute('stroke-opacity',(f*f*.9).toFixed(3));pth.setAttribute('stroke-width',(2+f*8).toFixed(1));g.appendChild(pth)}return g}
+  const WK={C:mkWake('wakeC'),T:mkWake('wakeT'),B:mkWake('wakeB')};
   function seg(r,a,b){a=Math.max(0,a);if(b-a<.5)return '';let d='';for(let k=0;k<=3;k++){const p=r.getPointAtLength(a+(b-a)*k/3);d+=(k?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)}return d}
-  function place(r,len,d,bt,inner,g,WL){d=Math.min(d,len);const p=r.getPointAtLength(d),q=r.getPointAtLength(Math.min(len,d+2)),pr=r.getPointAtLength(Math.max(0,d-2));
-    const a=Math.atan2(q.y-pr.y,q.x-pr.x)*180/Math.PI;bt.setAttribute('transform','translate('+p.x.toFixed(1)+' '+(p.y-6).toFixed(1)+')');inner.setAttribute('transform',Math.abs(a)>90?'scale(-1 1)':'');
-    const ch=g.children,n=ch.length;for(let i=0;i<n;i++)ch[i].setAttribute('d',seg(r,d-WL+WL*i/n,d-WL+WL*(i+1)/n-3));return p}
+  // place le bateau k à la distance d sur sa route ; sillage de longueur WL (le sillage du tronc commun se prolonge après la séparation)
+  function place(k,d,WL,op){const r=R[k],len=LEN[k],bt=$('boat'+k),inner=$('boatInner'+k);d=Math.max(0,Math.min(d,len));
+    const p=r.getPointAtLength(d),q=r.getPointAtLength(Math.min(len,d+2)),pr=r.getPointAtLength(Math.max(0,d-2)),a=Math.atan2(q.y-pr.y,q.x-pr.x)*180/Math.PI;
+    bt.setAttribute('transform','translate('+p.x.toFixed(1)+' '+(p.y-6).toFixed(1)+')');inner.setAttribute('transform',Math.abs(a)>90?'scale(-1 1)':'');bt.style.opacity=op;
+    const ch=WK[k].children,n=ch.length;for(let i=0;i<n;i++)ch[i].setAttribute('d',WL>0?seg(r,d-WL+WL*i/n,d-WL+WL*(i+1)/n-3):'');WK[k].style.opacity=op;return p}
   function startBoat(){cancelAnimationFrame(raf);t0=performance.now();const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-    const V=760,T=L/V*1000,P=600,SPLIT=60,V2=L2/(T*.62/1000);
-    const step=now=>{const el=now-t0-700,tt=el<0?0:el%(T+P);let d=reduce?L*.45:Math.min(L,tt/1000*V),d2=reduce?L2*.6:Math.min(L2,tt/1000*V2);
-      const p1=place(route,L,d,boat,$('boatInner'),wk,320);
-      // avant la séparation, un seul bateau ; ensuite deux routes
-      boat2.style.opacity=d<SPLIT?0:(d2>=L2?Math.max(0,1-(tt/1000*V2-L2)/240):1);
-      const p2=place(route2,L2,Math.max(d2,0),boat2,$('boatInner2'),wk2,d<SPLIT?0:260);
-      wk2.style.opacity=boat2.style.opacity;
-      const sp=route.getPointAtLength(SPLIT),age=(d-SPLIT)/V;ring.setAttribute('cx',sp.x);ring.setAttribute('cy',sp.y);
-      if(age>0&&age<.6){ring.setAttribute('r',(10+age*110).toFixed(1));ring.setAttribute('opacity',(1-age/.6).toFixed(2))}else ring.setAttribute('opacity',0);
-      buoys.forEach(b=>{const near=Math.hypot(p1.x-b.x,p1.y-b.y)<95||(+boat2.style.opacity>.1&&Math.hypot(p2.x-b.x,p2.y-b.y)<80);b.g.classList.toggle('hit',near)});
+    const V=820,TC=LEN.C/V,TS=LEN.T/V,FADE=.35,P=.5,TOT=TC+TS+FADE+P;
+    const step=now=>{let t=Math.max(0,(now-t0)/1000-.7)%TOT;if(reduce)t=TC+TS*.6;
+      const pts=[];
+      if(t<TC){pts.push(place('C',t*V,320,1));place('T',0,0,0);place('B',0,0,0)}
+      else{const u=t-TC,d=u*V,op=u<TS?1:Math.max(0,1-(u-TS)/FADE);
+        // le sillage commun s’efface derrière la séparation
+        place('C',LEN.C,Math.max(0,320-d),0);$('boatC').style.opacity=0;WK.C.style.opacity=1;
+        pts.push(place('T',d,Math.min(d,300),op),place('B',d,Math.min(d,300),op));
+        const age=u;if(age<.6){ring.setAttribute('r',(10+age*120).toFixed(1));ring.setAttribute('opacity',(1-age/.6).toFixed(2))}else ring.setAttribute('opacity',0)}
+      if(t<TC)ring.setAttribute('opacity',0);
+      buoys.forEach(b=>b.g.classList.toggle('hit',pts.some(p=>Math.hypot(p.x-b.x,p.y-b.y)<95)));
       if(!reduce)raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step)}
   function stopBoat(){cancelAnimationFrame(raf)}
   // commandes
@@ -655,6 +680,7 @@ body.idle #help,#help.gone{opacity:0}
     else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(k)){e.preventDefault();prev()}
     else if(k==='Home'){e.preventDefault();go(0)}else if(k==='End'){e.preventDefault();go(N-1)}
     else if(k==='f'||k==='F'){full()}
+    else if(k==='Escape'&&frame.classList.contains('max')){zoom('off')}
     else if(/^[1-9]$/.test(k)){/* saut direct : chiffres */}
     hideHelp()});
   // balayage tactile

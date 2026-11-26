@@ -84,6 +84,11 @@ footer b{color:var(--ink)}
 
 /* intégration dans une autre page (présentation) : #embed */
 .embed header,.embed footer{display:none}.embed #stage{min-height:100vh;padding-block:2vh}
+.embed #stage{gap:2.5vw;padding-block:2vh}
+.embed .desk{width:min(100%,calc((96vh - 96px) * 1.6))}
+.embed .phone{height:96vh}
+.embed body[data-mode="desk"] .desk{width:min(100%,calc((96vh - 96px) * 1.6))}
+.embed body[data-mode="phone"] .phone{height:96vh}
 </style>
 <script>if(location.hash==='#embed')document.documentElement.classList.add('embed')</script>
 
@@ -600,9 +605,11 @@ function hud(t){const rk=SIM.ranking(sim,t),leg=Math.min(5,rk[0].st.leg);
   if(m&&m!==lastMsg)toast(m);lastMsg=m}
 
 /* ================= Mise en page : un ou deux écrans ================= */
-function setMode(m){document.body.dataset.mode=m;$$('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===m)));try{localStorage.setItem('regate3d-mode',m)}catch(e){}}
+const EMBED=document.documentElement.classList.contains('embed');
+function setMode(m){document.body.dataset.mode=m;$$('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===m)));if(!EMBED)try{localStorage.setItem('regate3d-mode',m)}catch(e){}}
+addEventListener('message',e=>{const m=e.data&&e.data.regateMode;if(m==='both'||m==='desk'||m==='phone')setMode(m)});
 $$('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
-{let m='both';try{m=localStorage.getItem('regate3d-mode')||'both'}catch(e){}setMode(m)}
+{let m='both';if(!EMBED)try{m=localStorage.getItem('regate3d-mode')||'both'}catch(e){}setMode(m)}
 
 
 /* ================= Boucle ================= */

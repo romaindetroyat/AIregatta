@@ -12,7 +12,10 @@ s = re.sub(r'(masterclass/[\w.-]+\.(?:jpg|png))', data, s)
 r3 = ('<!doctype html><html lang="fr" class="embed"><head><meta charset="utf-8">'
       '<meta name="viewport" content="width=device-width, initial-scale=1">' + (D / 'regate-3d.html').read_text())
 s = s.replace("ifr.src='regate-3d.html#embed';", "ifr.srcdoc=document.getElementById('r3d').textContent.split('<\\\\/script>').join('</'+'script>');")
-s = s.replace('<a class="open" href="regate-3d.html" target="_blank" rel="noopener">Ouvrir en grand ↗</a>', '')
-s = s.replace('</body>', '<script type="text/plain" id="r3d">' + r3.replace('</script>', '<\\/script>') + '</script>\n</body>')
+old = '<a class="open" href="regate-3d.html" target="_blank" rel="noopener">Ouvrir dans un onglet ↗</a>'
+assert old in s
+s = s.replace(old, '')
+assert s.count('<script>\n(function(){') == 1
+s = s.replace('<script>\n(function(){', '<script type="text/plain" id="r3d">' + r3.replace('</script>', '<\\/script>') + '</script>\n<script>\n(function(){')
 (D / 'masterclass-ai-regatta-autonome.html').write_text(s)
 print(len(s) // 1024, 'Ko')
