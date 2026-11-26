@@ -213,12 +213,12 @@ body.idle #help,#help.gone{opacity:0}
 #s12 .legend .sw{flex:none;width:50px;height:50px;display:grid;place-items:center}
 #s12 .legend .sw svg{width:50px;height:50px}
 #s12 .route{stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
-#s12.on .route.pen{animation:draw 1.6s var(--ease) 1s forwards}
 #s12 .arrowhead{opacity:0}
-#s12.on .arrowhead.a2{animation:fade .3s ease 2.5s forwards}
 #s12 .mark{opacity:0;transform-box:fill-box;transform-origin:center}
 #s12.on .mark{animation:pop .6s var(--ease) both;animation-delay:var(--d)}
 #s12 .boat{opacity:0}
+#s12 .mark circle{transform-box:fill-box;transform-origin:center;transition:transform .35s cubic-bezier(.3,1.6,.5,1),filter .35s}
+#s12 .mark.hit circle{transform:scale(1.28);filter:brightness(1.25) drop-shadow(0 0 10px rgba(255,120,140,.9))}
 #s12.on .boat{opacity:1;transition:opacity .3s .9s}
 
 /* ===== 13 / 14 règlement ===== */
@@ -476,10 +476,11 @@ body.idle #help,#help.gone{opacity:0}
         <rect x="20" y="300" width="130" height="44" rx="22" fill="#5FD08A"/><text x="85" y="330" text-anchor="middle" fill="#07301A" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="24">Arrivée</text>
       </g>
       <!-- routes -->
-      <path id="mainRoute" d="M222 407 L1300 407 C1440 407 1470 228 1350 210 L330 250 C232 254 214 110 300 92 L520 92" fill="none" stroke="none"/>
+      <path id="mainRoute" d="M222 430 C232 412 245 407 280 407 L1300 407 C1440 407 1470 228 1350 210 L330 250 C232 254 214 110 300 92 L540 92" fill="none" stroke="none"/>
+      <path id="penRoute" d="M222 430 C205 520 255 612 350 612 C410 612 440 640 470 670 C500 705 560 705 585 665 C615 615 610 520 575 488 C545 462 500 462 478 490 C462 512 470 560 490 590" fill="none" stroke="none"/>
+      <g id="wake2" fill="none" stroke-linecap="round"></g>
+      <circle id="split" cx="0" cy="0" r="0" fill="none" stroke="#fff" stroke-width="3" opacity="0"/>
       <g id="wake" fill="none" stroke-linecap="round"></g>
-      <path class="route pen" id="penRoute" d="M210 470 C190 560 250 600 330 610 M470 470 C420 520 420 640 470 680 M580 680 C630 640 630 520 580 470" fill="none" stroke="#FF7A95" stroke-width="4" stroke-linecap="round" style="--len:900"/>
-      <path class="arrowhead a2" d="M566 462 L582 470 L574 486" fill="none" stroke="#FF7A95" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
       <!-- bouées -->
       <g class="mark" style="--d:.35s" filter="url(#sh)"><circle cx="330" cy="170" r="34" fill="url(#buoyR)"/><text x="330" y="181" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">1</text></g>
       <g class="mark" style="--d:.45s" filter="url(#sh)"><circle cx="350" cy="560" r="34" fill="url(#buoyR)"/><text x="350" y="571" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">2</text></g>
@@ -488,13 +489,15 @@ body.idle #help,#help.gone{opacity:0}
       <g class="mark" style="--d:.7s" filter="url(#sh)"><circle cx="525" cy="626" r="28" fill="url(#buoyR)"/><text x="525" y="635" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="22">P2</text></g>
       <!-- bateau qui parcourt la route -->
       <g class="boat" id="boat"><g id="boatInner"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#fff"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
+      <g class="boat" id="boat2"><g id="boatInner2"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#FF7A95"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
     </svg>
     <div class="legend">
       <div class="li r" style="--d:.5s"><span class="sw"><svg viewBox="0 0 50 50"><line x1="25" y1="6" x2="25" y2="44" stroke="#fff" stroke-width="3" stroke-dasharray="6 5"/><circle cx="25" cy="6" r="5" fill="#fff"/><circle cx="25" cy="44" r="5" fill="#fff"/></svg></span>Ligne de départ</div>
       <div class="li r" style="--d:.6s"><span class="sw"><svg viewBox="0 0 50 50"><line x1="25" y1="6" x2="25" y2="44" stroke="#5FD08A" stroke-width="3" stroke-dasharray="6 5"/><circle cx="25" cy="6" r="5" fill="#5FD08A"/><circle cx="25" cy="44" r="5" fill="#5FD08A"/></svg></span>Ligne d’arrivée</div>
       <div class="li r" style="--d:.7s"><span class="sw"><svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="18" fill="#E8283F"/></svg></span>Bouées 1, 2 et 3</div>
-      <div class="li r" style="--d:.8s"><span class="sw"><svg viewBox="0 0 50 50"><path d="M4 30 L36 30" stroke="#fff" stroke-opacity=".25" stroke-width="3" stroke-linecap="round"/><path d="M18 30 L36 30" stroke="#fff" stroke-opacity=".7" stroke-width="4" stroke-linecap="round"/><path d="M36 26 L48 26 L44 32 L36 32Z M40 25 L40 8 L48 25Z" fill="#fff"/></svg></span>Route du parcours (sillage du bateau)</div>
+      <div class="li r" style="--d:.8s"><span class="sw"><svg viewBox="0 0 50 50"><path d="M4 30 L36 30" stroke="#fff" stroke-opacity=".25" stroke-width="3" stroke-linecap="round"/><path d="M18 30 L36 30" stroke="#fff" stroke-opacity=".7" stroke-width="4" stroke-linecap="round"/><path d="M36 26 L48 26 L44 32 L36 32Z M40 25 L40 8 L48 25Z" fill="#fff"/></svg></span>Route du parcours (sillage)</div>
       <div class="li r" style="--d:.9s"><span class="sw"><svg viewBox="0 0 50 50"><rect x="9" y="5" width="32" height="40" rx="9" fill="#7CC6FF" fill-opacity=".2" stroke="#7CC6FF" stroke-width="2" stroke-dasharray="5 4"/><circle cx="25" cy="17" r="6" fill="#E8283F"/><circle cx="25" cy="33" r="6" fill="#E8283F"/></svg></span>Zone de réparation de pénalité (P1, P2)</div>
+      <div class="li r" style="--d:1s"><span class="sw"><svg viewBox="0 0 50 50"><path d="M6 30 L24 30" stroke="#FF7A95" stroke-opacity=".6" stroke-width="4" stroke-linecap="round"/><path d="M26 26 L44 26 L40 32 L28 32Z M33 25 L33 8 L43 25Z" fill="#FF7A95"/></svg></span>Route vers la pénalité</div>
     </div>
   </div>
   <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
@@ -620,16 +623,26 @@ body.idle #help,#help.gone{opacity:0}
     s.querySelectorAll('.r,.ch,.route,.mark,.arrowhead').forEach(e=>{e.style.animation='none';void e.offsetWidth;e.style.animation=''});
   }
   // bateau animé le long de la route du parcours voiliers
-  let raf=0,t0=0;const route=$('mainRoute'),boat=$('boat'),L=route.getTotalLength();
-  const wk=$('wake'),NW=18,WL=300;for(let i=0;i<NW;i++){const pth=document.createElementNS('http://www.w3.org/2000/svg','path');const f=(i+1)/NW;pth.setAttribute('stroke','#fff');pth.setAttribute('stroke-opacity',(f*f*.85).toFixed(3));pth.setAttribute('stroke-width',(2+f*8).toFixed(1));wk.appendChild(pth)}
-  function seg(a,b){a=Math.max(0,a);if(b-a<.5)return '';let d='';const n=4;for(let k=0;k<=n;k++){const p=route.getPointAtLength(a+(b-a)*k/n);d+=(k?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)}return d}
+  let raf=0,t0=0;const route=$('mainRoute'),route2=$('penRoute'),L=route.getTotalLength(),L2=route2.getTotalLength();
+  const boat=$('boat'),boat2=$('boat2'),ring=$('split');
+  const buoys=[...document.querySelectorAll('#s12 .mark')].filter(g=>g.querySelector('circle')).map(g=>{const c=g.querySelector('circle');return {g,x:+c.getAttribute('cx'),y:+c.getAttribute('cy')}});
+  function mkWake(id,col){const g=$(id),NW=16;for(let i=0;i<NW;i++){const pth=document.createElementNS('http://www.w3.org/2000/svg','path');const f=(i+1)/NW;pth.setAttribute('stroke',col);pth.setAttribute('stroke-opacity',(f*f*.9).toFixed(3));pth.setAttribute('stroke-width',(2+f*8).toFixed(1));g.appendChild(pth)}return g}
+  const wk=mkWake('wake','#fff'),wk2=mkWake('wake2','#FF7A95');
+  function seg(r,a,b){a=Math.max(0,a);if(b-a<.5)return '';let d='';for(let k=0;k<=3;k++){const p=r.getPointAtLength(a+(b-a)*k/3);d+=(k?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)}return d}
+  function place(r,len,d,bt,inner,g,WL){d=Math.min(d,len);const p=r.getPointAtLength(d),q=r.getPointAtLength(Math.min(len,d+2)),pr=r.getPointAtLength(Math.max(0,d-2));
+    const a=Math.atan2(q.y-pr.y,q.x-pr.x)*180/Math.PI;bt.setAttribute('transform','translate('+p.x.toFixed(1)+' '+(p.y-6).toFixed(1)+')');inner.setAttribute('transform',Math.abs(a)>90?'scale(-1 1)':'');
+    const ch=g.children,n=ch.length;for(let i=0;i<n;i++)ch[i].setAttribute('d',seg(r,d-WL+WL*i/n,d-WL+WL*(i+1)/n-3));return p}
   function startBoat(){cancelAnimationFrame(raf);t0=performance.now();const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-    const step=now=>{const T=7500,P=700,el=now-t0-900;let u=el<0?0:Math.min(1,(el%(T+P))/T);if(reduce)u=.45;
-      const d=u*L,p=route.getPointAtLength(d),q=route.getPointAtLength(Math.min(L,d+2)),pr=route.getPointAtLength(Math.max(0,d-2));
-      const a=Math.atan2(q.y-pr.y,q.x-pr.x)*180/Math.PI,flip=Math.abs(a)>90;
-      boat.setAttribute('transform','translate('+p.x.toFixed(1)+' '+(p.y-6).toFixed(1)+')');
-      $('boatInner').setAttribute('transform',flip?'scale(-1 1)':'');
-      const ch=wk.children;for(let i=0;i<NW;i++){ch[i].setAttribute('d',seg(d-WL+WL*i/NW,d-WL+WL*(i+1)/NW-4))}
+    const V=760,T=L/V*1000,P=600,SPLIT=60,V2=L2/(T*.62/1000);
+    const step=now=>{const el=now-t0-700,tt=el<0?0:el%(T+P);let d=reduce?L*.45:Math.min(L,tt/1000*V),d2=reduce?L2*.6:Math.min(L2,tt/1000*V2);
+      const p1=place(route,L,d,boat,$('boatInner'),wk,320);
+      // avant la séparation, un seul bateau ; ensuite deux routes
+      boat2.style.opacity=d<SPLIT?0:(d2>=L2?Math.max(0,1-(tt/1000*V2-L2)/240):1);
+      const p2=place(route2,L2,Math.max(d2,0),boat2,$('boatInner2'),wk2,d<SPLIT?0:260);
+      wk2.style.opacity=boat2.style.opacity;
+      const sp=route.getPointAtLength(SPLIT),age=(d-SPLIT)/V;ring.setAttribute('cx',sp.x);ring.setAttribute('cy',sp.y);
+      if(age>0&&age<.6){ring.setAttribute('r',(10+age*110).toFixed(1));ring.setAttribute('opacity',(1-age/.6).toFixed(2))}else ring.setAttribute('opacity',0);
+      buoys.forEach(b=>{const near=Math.hypot(p1.x-b.x,p1.y-b.y)<95||(+boat2.style.opacity>.1&&Math.hypot(p2.x-b.x,p2.y-b.y)<80);b.g.classList.toggle('hit',near)});
       if(!reduce)raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step)}
   function stopBoat(){cancelAnimationFrame(raf)}
   // commandes
