@@ -81,7 +81,11 @@ body[data-mode="phone"] .phone{height:min(calc(100vh - 190px),860px)}
 footer{padding-block:4px 18px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font-size:12.5px;color:var(--ink2);text-align:center}
 footer b{color:var(--ink)}
 .noscript{padding:40px;text-align:center}
+
+/* intégration dans une autre page (présentation) : #embed */
+.embed header,.embed footer{display:none}.embed #stage{min-height:100vh;padding-block:2vh}
 </style>
+<script>if(location.hash==='#embed')document.documentElement.classList.add('embed')</script>
 
 <header>
   <div class="brand"><div class="mk" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2 L12 19 M12 4 L19 17 L12 17 M11 6 L5 17 L11 17" stroke="#fff" stroke-width="1.8" fill="none" stroke-linejoin="round"/><path d="M3 20 Q12 23 21 20" stroke="#C7EB00" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></div>

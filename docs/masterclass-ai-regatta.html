@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Battleboats 2027 · AI Regatta</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#081230;--bg2:#0E1C45;--card:#12245A;--card2:#182C68;--line:rgba(220,232,255,.16);
+  --ink:#F5F7FC;--mute:rgba(235,241,255,.74);--dim:rgba(235,241,255,.5);
+  --pink:#F2476F;--pink2:#FF7A95;--sky:#4CB4F7;--yellow:#FFD23F;--green:#5FD08A;--red:#E8283F;
+  --f:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:radial-gradient(120% 90% at 70% 0%,#13285E 0%,var(--bg) 55%) fixed,var(--bg);color:var(--ink);font:500 16px/1.4 var(--f);overflow:hidden;-webkit-font-smoothing:antialiased}
+body.idle{cursor:none}
+/* ---------- scène 1920 x 1080, mise à l’échelle de la fenêtre ---------- */
+#viewport{position:fixed;inset:0;overflow:hidden}
+#deck{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;
+  background:radial-gradient(90% 80% at 85% 0%,rgba(76,180,247,.16),transparent 60%),radial-gradient(70% 70% at 0% 100%,rgba(242,71,111,.12),transparent 60%),linear-gradient(180deg,#0B1A44 0%,#081230 100%);
+  overflow:hidden;box-shadow:0 40px 120px -40px rgba(0,0,0,.8)}
+#deck::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;pointer-events:none;opacity:.55;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='150' viewBox='0 0 480 150'%3E%3Cg fill='none' stroke='%234CB4F7' stroke-opacity='.10' stroke-width='2'%3E%3Cpath d='M0 40c60-18 120-18 180 0s120 18 180 0 90-14 120-6'/%3E%3Cpath d='M0 80c60-18 120-18 180 0s120 18 180 0 90-14 120-6'/%3E%3Cpath d='M0 120c60-18 120-18 180 0s120 18 180 0 90-14 120-6'/%3E%3C/g%3E%3C/svg%3E") repeat-x bottom/480px 150px}
+.slide{position:absolute;inset:0;padding:92px 120px 120px;opacity:0;visibility:hidden;transition:opacity .55s ease,visibility 0s linear .55s;z-index:1}
+.slide.on{opacity:1;visibility:visible;transition:opacity .55s ease;z-index:2}
+/* ---------- apparition des éléments ---------- */
+.r{opacity:0}
+.slide.on .r{animation:rise .85s var(--ease) both;animation-delay:var(--d,0s)}
+.slide.on .r.zoom{animation-name:zoom}.slide.on .r.left{animation-name:fromLeft}.slide.on .r.right{animation-name:fromRight}
+.slide.on .r.wipe{animation-name:wipe;animation-duration:1.3s}.slide.on .r.pop{animation-name:pop;animation-duration:.7s}
+.slide.on .r.fade{animation-name:fade}
+@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes zoom{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes fromLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:none}}
+@keyframes fromRight{from{opacity:0;transform:translateX(70px) rotate(var(--rot,0deg))}to{opacity:1;transform:rotate(var(--rot,0deg))}}
+@keyframes wipe{from{opacity:1;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+/* ---------- typographie ---------- */
+.kicker{font:700 22px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--pink2);display:flex;align-items:center;gap:16px;margin:0 0 22px}
+.kicker::before{content:"";width:46px;height:4px;border-radius:4px;background:var(--pink)}
+h2{font:800 76px/1.02 var(--f);letter-spacing:-.025em;margin:0 0 44px;text-wrap:balance}
+h2 em{font-style:normal;color:var(--pink)}
+p{margin:0}
+.lead{font:500 36px/1.38 var(--f);color:var(--mute);text-wrap:pretty}
+.lead b,.txt b{color:var(--ink);font-weight:700}
+ul.list{list-style:none;margin:0;padding:0;display:grid;gap:30px}
+ul.list li{position:relative;padding-left:48px;font:500 35px/1.34 var(--f);color:var(--mute);text-wrap:pretty}
+ul.list li::before{content:"";position:absolute;left:4px;top:.5em;width:18px;height:18px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 6px rgba(242,71,111,.18)}
+ul.list li b{color:var(--ink)}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1.5px solid var(--line);border-radius:30px;padding:40px 44px;box-shadow:0 30px 60px -36px rgba(0,0,0,.8)}
+.tag{display:inline-flex;align-items:center;gap:10px;font:700 22px/1 var(--f);padding:12px 18px;border-radius:999px;background:rgba(76,180,247,.14);color:#BFE4FF;border:1.5px solid rgba(76,180,247,.35)}
+.tag.ai{background:rgba(242,71,111,.14);color:#FFD0DB;border-color:rgba(242,71,111,.4)}
+.tag svg{width:24px;height:24px}
+.photo{border-radius:28px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.9),0 0 0 1.5px rgba(255,255,255,.12)}
+.photo img{display:block;width:100%;height:100%;object-fit:cover}
+.white{background:#fff;border-radius:28px;box-shadow:0 40px 80px -40px rgba(0,0,0,.9)}
+/* ---------- pied de slide ---------- */
+.foot{position:absolute;left:120px;bottom:40px;display:flex;align-items:center;gap:22px;font:600 24px/1 var(--f);color:var(--dim)}
+.foot img{width:54px;height:54px;border-radius:10px;background:#fff;padding:3px}
+.foot .site{color:var(--mute)}
+.foot .num{font:700 20px/1 var(--mono);letter-spacing:.1em;color:var(--dim);padding-left:22px;border-left:2px solid var(--line)}
+/* ---------- commandes ---------- */
+#ctrl{position:fixed;right:max(22px,env(safe-area-inset-right,0px));bottom:max(20px,env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;z-index:50;
+  background:rgba(8,18,48,.72);border:1px solid rgba(220,232,255,.18);border-radius:999px;padding:7px;backdrop-filter:blur(10px);transition:opacity .4s}
+body.idle #ctrl{opacity:.12}
+#ctrl button{all:unset;cursor:pointer;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:var(--ink);background:rgba(255,255,255,.08);transition:background .2s,transform .2s}
+#ctrl button:hover{background:var(--pink)}#ctrl button:active{transform:scale(.92)}
+#ctrl button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+#ctrl button[disabled]{opacity:.3;pointer-events:none}
+#ctrl svg{width:22px;height:22px}
+#count{font:700 15px/1 var(--mono);color:var(--mute);min-width:64px;text-align:center;letter-spacing:.06em}
+#bar{position:fixed;left:0;top:0;height:4px;background:linear-gradient(90deg,var(--pink),var(--sky));z-index:50;transition:width .5s var(--ease)}
+#help{position:fixed;left:max(22px,env(safe-area-inset-left,0px));bottom:max(24px,env(safe-area-inset-bottom,0px));font:500 13px/1.4 var(--f);color:var(--dim);z-index:50;transition:opacity .6s}
+#help kbd{font:700 12px var(--mono);border:1px solid rgba(220,232,255,.3);border-radius:6px;padding:2px 6px;color:var(--mute)}
+body.idle #help,#help.gone{opacity:0}
+
+/* ===== 1. titre ===== */
+#s1{padding:0}
+#s1 .big2027{position:absolute;right:-30px;bottom:-120px;font:800 520px/1 var(--f);letter-spacing:-.05em;color:transparent;-webkit-text-stroke:2px rgba(76,180,247,.13)}
+#s1 .left{position:absolute;left:130px;top:96px;width:1060px}
+#s1 .bbchip{display:inline-block;background:#fff;border-radius:26px;padding:20px 30px;box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
+#s1 .bbchip img{display:block;width:290px}
+#s1 h1{font:800 172px/.92 var(--f);letter-spacing:-.045em;margin:44px 0 22px;white-space:nowrap}
+#s1 h1 .ch{display:inline-block;opacity:0}
+#s1.on h1 .ch{animation:letter .9s var(--ease) both;animation-delay:calc(.35s + var(--i) * .055s)}
+@keyframes letter{from{opacity:0;transform:translateY(60px) rotate(6deg)}to{opacity:1;transform:none}}
+#s1 h1 .ai{color:var(--pink)}
+#s1 .wave{display:block;width:520px;height:28px;margin:-4px 0 34px}
+#s1 .wave path{stroke-dasharray:640;stroke-dashoffset:640}
+#s1.on .wave path{animation:draw 1.6s var(--ease) 1s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+#s1 .sub{font:600 40px/1.3 var(--f);color:var(--mute);max-width:820px}
+#s1 .when{display:flex;gap:18px;margin-top:44px;flex-wrap:nowrap}
+#s1 .when span{display:inline-flex;align-items:center;gap:14px;font:700 30px/1 var(--f);padding:20px 28px;border-radius:999px;background:rgba(255,255,255,.08);border:1.5px solid var(--line)}
+#s1 .when span:first-child{background:var(--pink);border-color:var(--pink)}
+#s1 .when svg{width:30px;height:30px}
+#s1 .poster{position:absolute;right:130px;top:84px;width:620px;--rot:3deg;transform:rotate(3deg)}
+#s1 .poster img{display:block;width:100%;border-radius:22px;box-shadow:0 60px 120px -40px rgba(0,0,0,.95),0 0 0 1.5px rgba(255,255,255,.15)}
+#s1.on .poster img{animation:float 7s ease-in-out 1.6s infinite}
+@keyframes float{50%{transform:translateY(-12px)}}
+#s1 .med{position:absolute;left:130px;bottom:54px;display:flex;align-items:center;gap:18px;font:600 22px/1.2 var(--f);color:var(--dim)}
+#s1 .med img{width:64px;height:64px;border-radius:12px;background:#fff;padding:4px}
+
+/* ===== 2. mosaïque ===== */
+#s2{padding:0}
+#s2 .grid{position:absolute;inset:0;display:grid;grid-template-columns:1.15fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:10px}
+#s2 .grid figure{margin:0;overflow:hidden;position:relative}
+#s2 .grid img{width:100%;height:100%;object-fit:cover;display:block}
+#s2.on .grid img{animation:slowzoom 14s ease-out both}
+@keyframes slowzoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+#s2 .g1{grid-row:1/3}
+#s2 .panel{position:absolute;right:0;bottom:0;width:1060px;height:500px;background:linear-gradient(135deg,rgba(8,18,48,.96),rgba(18,36,90,.95));clip-path:polygon(16% 0,100% 0,100% 100%,0 100%);display:flex;flex-direction:column;justify-content:center;align-items:flex-end;padding:0 110px 0 0;text-align:right}
+#s2 .panel .n{font:700 22px/1 var(--mono);letter-spacing:.2em;color:var(--pink2);margin-bottom:26px}
+#s2 .panel h2{font-size:78px;margin:0;max-width:760px}
+
+/* ===== 3. TPR ===== */
+#s3 .cols{display:grid;grid-template-columns:1fr 860px;gap:80px;align-items:start}
+#s3 .ph{position:relative;height:640px}
+#s3 .ph .photo{position:absolute;inset:0}
+#s3 .tpr{position:absolute;right:-30px;bottom:-60px;width:300px;padding:26px 30px;background:rgba(8,18,48,.82);border-radius:26px;border:1.5px solid var(--line);backdrop-filter:blur(6px)}
+#s3 .tpr img{display:block;width:100%}
+
+/* ===== 4. innover ===== */
+#s4 .two{display:grid;grid-template-columns:1fr 130px 1fr;align-items:center;margin-top:20px}
+#s4 .card h3{font:800 44px/1.1 var(--f);margin:0 0 24px;display:flex;align-items:center;gap:18px}
+#s4 .card h3 svg{width:52px;height:52px;flex:none}
+#s4 .card p{font:500 33px/1.42 var(--f);color:var(--mute)}
+#s4 .card.hi{border-color:rgba(242,71,111,.6);background:linear-gradient(180deg,rgba(242,71,111,.16),rgba(242,71,111,.05))}
+#s4 .arrow svg{width:110px;height:60px;display:block;margin:auto}
+#s4 .badge{display:inline-block;margin-top:30px;font:800 30px/1 var(--f);padding:18px 26px;border-radius:999px;background:var(--pink);color:#fff;box-shadow:0 16px 40px -12px rgba(242,71,111,.8)}
+#s4.on .badge{animation:pop .7s var(--ease) 1.5s both,glow 2.8s ease-in-out 2.4s 2}
+@keyframes glow{50%{box-shadow:0 0 0 14px rgba(242,71,111,.18),0 16px 40px -12px rgba(242,71,111,.8)}}
+
+/* ===== 5. cap 2027 ===== */
+#s5 .cols{display:grid;grid-template-columns:1fr 960px;gap:80px;align-items:center;height:700px}
+#s5 .item{display:flex;gap:30px;align-items:flex-start;margin-bottom:46px}
+#s5 .item .n{flex:none;width:86px;height:86px;border-radius:24px;display:grid;place-items:center;font:800 44px/1 var(--f);background:var(--pink);box-shadow:0 18px 40px -14px rgba(242,71,111,.8)}
+#s5 .item:nth-child(2) .n{background:var(--sky);box-shadow:0 18px 40px -14px rgba(76,180,247,.8)}
+#s5 .item p{font:600 40px/1.3 var(--f);padding-top:14px}
+#s5 .item small{display:block;font:500 28px/1.3 var(--f);color:var(--dim);margin-top:10px}
+#s5 .photo{height:620px}
+
+/* ===== 6. trois régates ===== */
+#s6 h2{margin-bottom:36px}
+#s6 .three{display:grid;grid-template-columns:1fr 1.32fr 1fr;gap:34px;align-items:stretch}
+#s6 .card{padding:36px 38px;display:flex;flex-direction:column;gap:20px}
+#s6 .fam{font:700 20px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sky)}
+#s6 .card.sail .fam{color:var(--yellow)}
+#s6 h3{font:800 50px/1 var(--f);margin:0;display:flex;align-items:center;gap:18px}
+#s6 h3 .ic{width:64px;height:64px;border-radius:18px;display:grid;place-items:center;background:rgba(76,180,247,.16);flex:none}
+#s6 .card.sail h3 .ic{background:rgba(255,210,63,.14)}
+#s6 h3 .ic svg{width:40px;height:40px}
+#s6 .card p{font:500 27px/1.42 var(--f);color:var(--mute)}
+#s6 .tags{display:flex;flex-direction:column;gap:12px;margin-top:auto}
+#s6 .tags .tag{align-self:flex-start}
+#s6 ul.mini{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+#s6 ul.mini li{font:500 28px/1.38 var(--f);color:var(--mute);padding-left:34px;position:relative}
+#s6 ul.mini li::before{content:"";position:absolute;left:0;top:.48em;width:14px;height:14px;border-radius:50%;background:var(--yellow)}
+#s6 .card.bb{border-color:rgba(242,71,111,.5)}
+
+/* ===== 7. caractéristiques ===== */
+#s7 .grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+#s7 .card{display:flex;gap:34px;align-items:center;padding:40px;min-height:300px}
+#s7 .ic{flex:none;width:108px;height:108px;border-radius:30px;display:grid;place-items:center;background:rgba(242,71,111,.14);border:1.5px solid rgba(242,71,111,.35)}
+#s7 .card:nth-child(2) .ic,#s7 .card:nth-child(3) .ic{background:rgba(76,180,247,.14);border-color:rgba(76,180,247,.35)}
+#s7 .ic svg{width:58px;height:58px}
+#s7 .card p{font:500 34px/1.4 var(--f);color:var(--mute)}
+#s7 .card p b{color:var(--ink)}
+
+/* ===== 8. lieu ===== */
+#s8{padding:0}
+#s8 .grid{position:absolute;inset:0;display:grid;grid-template-columns:1.6fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:10px}
+#s8 figure{margin:0;overflow:hidden}
+#s8 img{width:100%;height:100%;object-fit:cover;display:block}
+#s8 .m{grid-row:1/4}
+#s8.on .m img{animation:slowzoom 16s ease-out both}
+#s8 .label{position:absolute;left:90px;bottom:90px;background:rgba(8,18,48,.85);backdrop-filter:blur(8px);border:1.5px solid var(--line);border-radius:28px;padding:34px 44px}
+#s8 .label .kicker{margin-bottom:14px}
+#s8 .label b{font:800 54px/1.05 var(--f);display:block}
+
+/* ===== 9. interface public ===== */
+#s9{padding-top:70px}
+#s9 .head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
+#s9 h2{margin:0}
+#s9 .head p{font:500 26px/1.35 var(--f);color:var(--mute);max-width:640px;text-align:right}
+#s9 .frame{position:relative;height:780px;border-radius:30px;overflow:hidden;background:#0B1424;border:1.5px solid var(--line);box-shadow:0 40px 90px -40px rgba(0,0,0,.95)}
+#s9 iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+#s9 .wait{position:absolute;inset:0;display:grid;place-items:center;font:600 28px var(--f);color:var(--dim)}
+#s9 .open{position:absolute;right:22px;top:20px;z-index:3;font:700 20px/1 var(--f);color:var(--ink);text-decoration:none;background:rgba(8,18,48,.8);border:1.5px solid var(--line);padding:12px 18px;border-radius:999px}
+#s9 .open:hover{background:var(--pink)}
+
+/* ===== 10 / 11 / 15 schémas ===== */
+.diag{display:flex;justify-content:center;align-items:center;height:760px}
+.diag .white{padding:30px;display:flex;align-items:center;justify-content:center;max-width:1640px;max-height:760px}
+.diag .white img{display:block;max-width:100%;max-height:700px;object-fit:contain}
+#s10 .white img{width:1500px}
+#s11 .photo{height:740px;width:auto;aspect-ratio:661/427}
+#s15 .white img{height:690px}
+
+/* ===== 12. parcours voiliers ===== */
+#s12 .wrap{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:start}
+#s12 svg.course{display:block;width:100%;height:auto;border-radius:30px;box-shadow:0 40px 90px -40px rgba(0,0,0,.95),0 0 0 1.5px var(--line)}
+#s12 .legend{display:grid;gap:18px;padding-top:6px}
+#s12 .legend .li{display:flex;gap:18px;align-items:center;font:600 26px/1.25 var(--f);color:var(--mute)}
+#s12 .legend .sw{flex:none;width:50px;height:50px;display:grid;place-items:center}
+#s12 .legend .sw svg{width:50px;height:50px}
+#s12 .route{stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+#s12.on .route.main{animation:draw 3.2s var(--ease) .9s forwards}
+#s12.on .route.pen{animation:draw 2.4s var(--ease) 3.6s forwards}
+#s12 .arrowhead{opacity:0}
+#s12.on .arrowhead.a1{animation:fade .4s ease 3.9s forwards}
+#s12.on .arrowhead.a2{animation:fade .4s ease 5.8s forwards}
+#s12 .mark{opacity:0;transform-box:fill-box;transform-origin:center}
+#s12.on .mark{animation:pop .6s var(--ease) both;animation-delay:var(--d)}
+#s12 .boat{opacity:0}
+#s12.on .boat{opacity:1;transition:opacity .4s 4.2s}
+
+/* ===== 13 / 14 règlement ===== */
+#s13 .two{display:grid;grid-template-columns:1fr 1.15fr;gap:36px}
+.rule h3{font:800 40px/1.1 var(--f);margin:0 0 22px;display:flex;align-items:center;gap:16px}
+.rule h3 .dot{width:16px;height:16px;border-radius:50%;background:var(--pink);flex:none}
+.rule p,.rule li{font:500 28px/1.45 var(--f);color:var(--mute)}
+.rule ul{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.rule li{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start}
+.rule li .tag{margin-top:2px;font-size:19px;padding:10px 14px;white-space:nowrap}
+#s14 .grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+#s14 .rule{padding:34px 40px}
+#s14 .rule p,#s14 .rule li{font-size:30px}
+#s14 .rule.wide{grid-column:1/3}
+
+/* ===== 16. contact ===== */
+#s16{padding-top:76px}
+#s16 h2{font-size:72px;margin-bottom:40px}
+#s16 .top{display:grid;grid-template-columns:auto 1fr auto;gap:70px;align-items:center}
+#s16 .qr{display:flex;flex-direction:column;align-items:center;gap:18px}
+#s16 .qr .white{padding:18px;border-radius:24px}
+#s16 .qr .white img{display:block;width:220px}
+#s16 .soc{display:flex;gap:12px}
+#s16 .soc img{width:46px;height:46px;border-radius:12px;display:block}
+#s16 .rows{display:grid;gap:22px}
+#s16 .row{display:flex;align-items:center;gap:24px;font:700 44px/1 var(--f);user-select:text}
+#s16 .row img{width:66px;height:66px}
+#s16 .row a{color:var(--ink);text-decoration:none}
+#s16 .row a:hover{color:var(--pink2)}
+#s16 .grp{margin-top:40px;height:270px}
+#s16 .press{position:absolute;left:0;right:0;bottom:52px;text-align:center;white-space:nowrap}
+#s16 .press span{display:inline-flex;align-items:center;gap:14px;font:700 26px/1 var(--f);padding:18px 30px;border-radius:999px;background:var(--pink);box-shadow:0 18px 40px -14px rgba(242,71,111,.8)}
+#s16 .press svg{width:28px;height:28px}
+#s16 .logos{display:flex;flex-direction:column;gap:18px;align-items:flex-end}
+#s16 .logos .white{padding:12px 18px;border-radius:18px;display:flex;align-items:center}
+#s16 .logos img{display:block;height:110px}
+#s16.on .logos .white{animation:pop .7s var(--ease) both}
+#s16.on .logos .white:nth-child(2){animation-delay:.15s}
+
+@media (prefers-reduced-motion:reduce){
+  .slide.on .r,#s1.on h1 .ch,#s1.on .poster img,#s2.on .grid img,#s8.on .m img,#s4.on .badge{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}
+  .slide{transition:none}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="viewport"><div id="deck">
+
+<!-- 1 ─ Titre -->
+<section class="slide" id="s1" data-title="Titre">
+  <div class="big2027 r fade" style="--d:.2s">2027</div>
+  <div class="left">
+    <div class="bbchip r pop" style="--d:.1s"><img class="r wipe" style="--d:.45s" src="masterclass/logo-battleboats.png" alt="Battleboats"></div>
+    <h1 aria-label="AI Regatta"><span class="ai">AI</span> Regatta</h1>
+    <svg class="wave" viewBox="0 0 520 28" aria-hidden="true"><path d="M2 14c40-16 80-16 120 0s80 16 120 0 80-16 120 0 80 16 120 0 30-10 36-8" fill="none" stroke="#F2476F" stroke-width="6" stroke-linecap="round"/></svg>
+    <p class="sub r" style="--d:1.1s">Régate de drones voiliers autonomes et drones motorisés</p>
+    <div class="when r" style="--d:1.35s">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>Samedi 15 mai 2027 · 11h</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Fort Saint-Louis · Toulon</span>
+    </div>
+  </div>
+  <div class="poster r right" style="--d:.5s"><img src="masterclass/affiche.jpg" alt="Affiche AI Regatta, 15 mai 2027"></div>
+  <div class="med r fade" style="--d:1.8s"><img src="masterclass/logo-med-events.jpg" alt="MED Events">Airegatta.com · Battleboats.fr</div>
+</section>
+
+<!-- 2 ─ Mosaïque -->
+<section class="slide" id="s2" data-title="Drones voiliers et motorisés">
+  <div class="grid">
+    <figure class="g1 r fade" style="--d:0s"><img src="masterclass/photo-public.jpg" alt=""></figure>
+    <figure class="r fade" style="--d:.12s"><img src="masterclass/photo-flotte.jpg" alt=""></figure>
+    <figure class="r fade" style="--d:.24s"><img src="masterclass/photo-bouees.jpg" alt=""></figure>
+    <figure class="r fade" style="--d:.36s"><img src="masterclass/photo-fort.jpg" alt="" style="object-position:50% 70%"></figure>
+    <figure class="r fade" style="--d:.48s"><img src="masterclass/photo-voilier-ger.jpg" alt=""></figure>
+  </div>
+  <div class="panel r right" style="--d:.6s">
+    <div class="n">AI REGATTA · 2027</div>
+    <h2>Régate de drones voiliers <em>autonomes</em> et drones motorisés</h2>
+  </div>
+</section>
+
+<!-- 3 ─ TPR -->
+<section class="slide" id="s3" data-title="De la Toulon Provence Regatta aux drones">
+  <div class="kicker r">Histoire</div>
+  <h2 class="r" style="--d:.1s">De la Toulon Provence Regatta <em>aux drones</em></h2>
+  <div class="cols">
+    <ul class="list">
+      <li class="r left" style="--d:.35s">La Toulon Provence Regatta est née pour accompagner l’arrivée de la <b>flamme olympique en 2024</b> à Toulon</li>
+      <li class="r left" style="--d:.55s">Régate de <b>12 MJI</b> dont un avait vu la flamme olympique au début du siècle dernier</li>
+      <li class="r left" style="--d:.75s">12 MJI, voilier emblématique de la <b>Coupe de l’America</b></li>
+      <li class="r left" style="--d:.95s">Coupe de l’America, <b>une terre d’innovation</b></li>
+    </ul>
+    <div class="ph">
+      <div class="photo r zoom" style="--d:.3s"><img src="masterclass/photo-tpr.jpg" alt="Régate de 12 MJI devant Toulon"></div>
+      <div class="tpr r pop" style="--d:1.2s"><img class="r wipe" style="--d:1.5s" src="masterclass/logo-tpr.png" alt="Toulon Provence Regatta"></div>
+    </div>
+  </div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
+</section>
+
+<!-- 4 ─ Innover -->
+<section class="slide" id="s4" data-title="Comment innover ?">
+  <div class="kicker r">L’idée</div>
+  <h2 class="r" style="--d:.1s">Comment <em>innover</em> ?</h2>
+  <div class="two">
+    <div class="card r left" style="--d:.35s">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="#4CB4F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Constat</h3>
+      <p>L’Intelligence Artificielle sert aujourd’hui à régler le voilier (comportement, voiles, foils…). <b style="color:var(--ink)">Aucun tacticien virtuel n’existe</b> sur des courses de quelques minutes car les paramètres sont trop importants et aléatoires.</p>
+    </div>
+    <div class="arrow r fade" style="--d:.9s"><svg viewBox="0 0 110 60" fill="none" stroke="#F2476F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 30h88M74 10l22 20-22 20"/></svg></div>
+    <div class="card hi r right" style="--d:1s">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="#F2476F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z"/></svg>Mai 2026</h3>
+      <p>Création d’une régate innovante de <b style="color:var(--ink)">drones voiliers autonomes</b> en modèle réduit : la <b style="color:var(--ink)">Destinus AI Regatta</b>.</p>
+      <span class="badge">Une première mondiale</span>
+    </div>
+  </div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
+</section>
+
+<!-- 5 ─ Cap 2027 -->
+<section class="slide" id="s5" data-title="Cap sur 2027">
+  <div class="kicker r">La suite</div>
+  <h2 class="r" style="--d:.1s">Cap sur <em>2027</em></h2>
+  <div class="cols">
+    <div>
+      <div class="item r left" style="--d:.35s"><div class="n">1</div><p>Une régate classique<small>selon les règles ISAF</small></p></div>
+      <div class="item r left" style="--d:.6s"><div class="n">2</div><p>Des régates « gaming »<small>avec des voiliers et des bateaux à moteur</small></p></div>
+    </div>
+    <div class="photo r zoom" style="--d:.5s"><img src="masterclass/photo-cap-2027.jpg" alt="Drones en course devant le Fort Saint-Louis"></div>
+  </div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
+</section>
+
+<!-- 6 ─ 3 types -->
+<section class="slide" id="s6" data-title="3 types de régates">
+  <div class="kicker r">Programme</div>
+  <h2 class="r" style="--d:.1s">En 2027, <em>3 types</em> de régates</h2>
+  <div class="three">
+    <div class="card r" style="--d:.35s">
+      <div class="fam">Bateaux motorisés</div>
+      <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#4CB4F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M17 4v16M3 9l4-3 4 3M13 15l4 3 4-3"/></svg></span>Duel</h3>
+      <p>Deux bateaux face à face sur un slalom.</p>
+      <div class="tags">
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="7" width="12" height="14" rx="3"/><path d="M12 7V3M9 12h.01M15 12h.01M10 17h4"/></svg>avec télécommande</span>
+        <span class="tag ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>en mode autonome sous IA</span>
+      </div>
+    </div>
+    <div class="card bb r" style="--d:.55s">
+      <div class="fam">Bateaux motorisés</div>
+      <h3><span class="ic" style="background:rgba(242,71,111,.16)"><svg viewBox="0 0 24 24" fill="none" stroke="#F2476F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>Battleboats</h3>
+      <p>Une régate « gaming » sous forme de parcours côtier semé d’embûches. Chaque drone a droit à des options (validées au préalable par un jury mais non divulguées aux autres concurrents) pour arriver premier. Il faut être inventif tout en respectant l’environnement : toute option doit être flottante.</p>
+      <div class="tags" style="flex-direction:row;flex-wrap:wrap">
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="7" width="12" height="14" rx="3"/><path d="M12 7V3M9 12h.01M15 12h.01M10 17h4"/></svg>avec télécommande</span>
+        <span class="tag ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>en mode autonome sous IA</span>
+      </div>
+    </div>
+    <div class="card sail r" style="--d:.75s">
+      <div class="fam">Voiliers</div>
+      <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFD23F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v15M12 4c4 3 6 8 6 12h-6M11 7c-3 3-5 6-5 9h5M3 19h18l-2 2H5z"/></svg></span>Voiliers</h3>
+      <ul class="mini">
+        <li>Une régate classique de voiliers radiocommandés qui respecte les règles de priorité de l’ISAF (règles internationales de régate)</li>
+        <li>Une régate de drones voiliers autonomes</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
+</section>
+
+<!-- 7 ─ Caractéristiques -->
+<section class="slide" id="s7" data-title="Caractéristiques principales">
+  <div class="kicker r">Participer</div>
+  <h2 class="r" style="--d:.1s">Caractéristiques <em>principales</em></h2>
+  <div class="grid">
+    <div class="card r" style="--d:.3s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FF7A95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 4.5a3.2 3.2 0 0 1 0 6.2M18 14.3c2 .7 3.5 2.9 3.5 5.7"/></svg></div>
+      <p>Une compétition ouverte aux <b>entreprises, organismes publics / parapublics, écoles, clubs…</b> : participation possible en équipe mixte école / entreprise…</p></div>
+    <div class="card r" style="--d:.45s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#4CB4F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6.5A7.5 7.5 0 1 0 18 17.5M4 10h9M4 14h9"/></svg></div>
+      <p>Le budget mini est de <b>quelques centaines d’euros</b>.</p></div>
+    <div class="card r" style="--d:.6s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#4CB4F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="6" r="2.2"/><path d="M7 18h7a3.5 3.5 0 0 0 0-7H10a3.5 3.5 0 0 1 0-7h7"/></svg></div>
+      <p>Un <b>parcours d’entraînement</b> mis à disposition par l’organisation.</p></div>
+    <div class="card r" style="--d:.75s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FF7A95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M8 14h3"/></svg></div>
+      <p>Des régates officielles organisées le <b>15 mai 2027</b>.</p></div>
+  </div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
+</section>
+
+<!-- 8 ─ Le lieu -->
+<section class="slide" id="s8" data-title="Le cadre">
+  <div class="grid">
+    <figure class="m r fade"><img src="masterclass/lieu-mourillon.jpg" alt="Plage du Mourillon"></figure>
+    <figure class="r fade" style="--d:.2s"><img src="masterclass/lieu-public.jpg" alt=""></figure>
+    <figure class="r fade" style="--d:.35s"><img src="masterclass/lieu-spectacle-1.jpg" alt=""></figure>
+    <figure class="r fade" style="--d:.5s"><img src="masterclass/lieu-spectacle-2.jpg" alt=""></figure>
+  </div>
+  <div class="label r left" style="--d:.7s"><div class="kicker">Toulon</div><b>Plage du Mourillon<br>&amp; Fort Saint-Louis</b></div>
+</section>
+
+<!-- 9 ─ Interface public : régate 3D -->
+<section class="slide" id="s9" data-title="Interface avec le public">
+  <div class="head">
+    <div><div class="kicker r">Le public</div><h2 class="r" style="--d:.1s">Interface avec <em>le public</em></h2></div>
+    <p class="r" style="--d:.25s">Une régate simulée, jouée en accéléré : ce que voient les spectateurs sur grand écran et sur leur téléphone.</p>
+  </div>
+  <div class="frame r zoom" style="--d:.35s">
+    <div class="wait">Chargement de la régate 3D…</div>
+    <a class="open" href="regate-3d.html" target="_blank" rel="noopener">Ouvrir en grand ↗</a>
+  </div>
+</section>
+
+<!-- 10 ─ Slalom -->
+<section class="slide" id="s10" data-title="Slalom pour les duels">
+  <div class="kicker r">Parcours</div>
+  <h2 class="r" style="--d:.1s">Slalom pour les <em>duels</em></h2>
+  <div class="diag" style="height:700px"><div class="white r zoom" style="--d:.3s"><img src="masterclass/parcours-slalom.png" alt="Parcours en slalom pour les duels"></div></div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
+</section>
+
+<!-- 11 ─ Parcours Battleboats -->
+<section class="slide" id="s11" data-title="Parcours des Battleboats">
+  <div class="kicker r">Parcours</div>
+  <h2 class="r" style="--d:.1s">Parcours des <em>Battleboats</em></h2>
+  <div class="diag" style="height:700px"><div class="photo r zoom" style="--d:.3s;height:680px"><img src="masterclass/parcours-battleboats.jpg" alt="Parcours côtier des Battleboats vu du ciel"></div></div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">www.battleboats.fr</span><span class="num"></span></div>
+</section>
+
+<!-- 12 ─ Parcours voiliers (redessiné, animé) -->
+<section class="slide" id="s12" data-title="Parcours construit pour les voiliers">
+  <div class="kicker r">Parcours</div>
+  <h2 class="r" style="--d:.1s;margin-bottom:34px">Parcours construit pour les <em>voiliers</em></h2>
+  <div class="wrap">
+    <svg class="course r zoom" style="--d:.2s" viewBox="0 0 1600 700" role="img" aria-label="Schéma du parcours : départ, bouées 1, 2 et 3, arrivée, zone de réparation de pénalité P1 P2">
+      <defs>
+        <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B4E8C"/><stop offset="1" stop-color="#0E2E63"/></linearGradient>
+        <pattern id="ripple" width="160" height="60" patternUnits="userSpaceOnUse"><path d="M0 30c20-8 40-8 60 0s40 8 60 0 30-6 40-4" fill="none" stroke="#7CC6FF" stroke-opacity=".10" stroke-width="2"/></pattern>
+        <radialGradient id="buoyR" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FF8A9E"/><stop offset=".55" stop-color="#E8283F"/><stop offset="1" stop-color="#A3122A"/></radialGradient>
+        <radialGradient id="buoyY" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFF1A8"/><stop offset=".55" stop-color="#FFD23F"/><stop offset="1" stop-color="#C99A00"/></radialGradient>
+        <filter id="sh" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity=".45"/></filter>
+      </defs>
+      <rect width="1600" height="700" fill="url(#sea)"/>
+      <rect width="1600" height="700" fill="url(#ripple)"/>
+      <!-- zone de pénalité -->
+      <g class="mark" style="--d:.5s">
+        <rect x="450" y="470" width="150" height="214" rx="26" fill="#7CC6FF" fill-opacity=".14" stroke="#7CC6FF" stroke-opacity=".5" stroke-width="2.5" stroke-dasharray="10 8"/>
+        <text x="625" y="664" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="24">Zone de réparation</text>
+        <text x="625" y="692" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="24">de pénalité</text>
+      </g>
+      <!-- lignes de départ et d’arrivée -->
+      <g class="mark" style="--d:.65s">
+        <line x1="210" y1="352" x2="210" y2="462" stroke="#fff" stroke-width="3" stroke-dasharray="8 7"/>
+        <circle cx="210" cy="352" r="9" fill="#fff"/><circle cx="210" cy="462" r="9" fill="#fff"/>
+        <rect x="56" y="388" width="130" height="44" rx="22" fill="#fff"/><text x="121" y="418" text-anchor="middle" fill="#0B1A44" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="24">Départ</text>
+      </g>
+      <g class="mark" style="--d:.8s">
+        <line x1="150" y1="170" x2="150" y2="282" stroke="#5FD08A" stroke-width="3" stroke-dasharray="8 7"/>
+        <circle cx="150" cy="170" r="9" fill="#5FD08A"/><circle cx="150" cy="282" r="9" fill="#5FD08A"/>
+        <rect x="20" y="300" width="130" height="44" rx="22" fill="#5FD08A"/><text x="85" y="330" text-anchor="middle" fill="#07301A" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="24">Arrivée</text>
+      </g>
+      <!-- routes -->
+      <path class="route main" id="mainRoute" d="M222 407 L1300 407 C1440 407 1470 228 1350 210 L330 250 C232 254 214 110 300 92 L520 92" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="--len:3200"/>
+      <path class="arrowhead a1" d="M506 78 L530 92 L506 106" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="route pen" id="penRoute" d="M210 470 C190 560 250 600 330 610 M470 470 C420 520 420 640 470 680 M580 680 C630 640 630 520 580 470" fill="none" stroke="#FF7A95" stroke-width="4" stroke-linecap="round" style="--len:900"/>
+      <path class="arrowhead a2" d="M566 462 L582 470 L574 486" fill="none" stroke="#FF7A95" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- bouées -->
+      <g class="mark" style="--d:.35s" filter="url(#sh)"><circle cx="330" cy="170" r="34" fill="url(#buoyR)"/><text x="330" y="181" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">1</text></g>
+      <g class="mark" style="--d:.45s" filter="url(#sh)"><circle cx="350" cy="560" r="34" fill="url(#buoyR)"/><text x="350" y="571" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">2</text></g>
+      <g class="mark" style="--d:.55s" filter="url(#sh)"><circle cx="1380" cy="310" r="34" fill="url(#buoyR)"/><text x="1380" y="321" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">3</text></g>
+      <g class="mark" style="--d:.6s" filter="url(#sh)"><circle cx="525" cy="530" r="28" fill="url(#buoyR)"/><text x="525" y="539" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="22">P1</text></g>
+      <g class="mark" style="--d:.7s" filter="url(#sh)"><circle cx="525" cy="626" r="28" fill="url(#buoyR)"/><text x="525" y="635" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="22">P2</text></g>
+      <!-- bateau qui parcourt la route -->
+      <g class="boat" id="boat"><g id="boatInner"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#fff"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
+    </svg>
+    <div class="legend">
+      <div class="li r" style="--d:.5s"><span class="sw"><svg viewBox="0 0 50 50"><line x1="25" y1="6" x2="25" y2="44" stroke="#fff" stroke-width="3" stroke-dasharray="6 5"/><circle cx="25" cy="6" r="5" fill="#fff"/><circle cx="25" cy="44" r="5" fill="#fff"/></svg></span>Ligne de départ</div>
+      <div class="li r" style="--d:.6s"><span class="sw"><svg viewBox="0 0 50 50"><line x1="25" y1="6" x2="25" y2="44" stroke="#5FD08A" stroke-width="3" stroke-dasharray="6 5"/><circle cx="25" cy="6" r="5" fill="#5FD08A"/><circle cx="25" cy="44" r="5" fill="#5FD08A"/></svg></span>Ligne d’arrivée</div>
+      <div class="li r" style="--d:.7s"><span class="sw"><svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="18" fill="#E8283F"/></svg></span>Bouées 1, 2 et 3</div>
+      <div class="li r" style="--d:.8s"><span class="sw"><svg viewBox="0 0 50 50"><path d="M4 25h34M30 15l10 10-10 10" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Route du parcours</div>
+      <div class="li r" style="--d:.9s"><span class="sw"><svg viewBox="0 0 50 50"><rect x="9" y="5" width="32" height="40" rx="9" fill="#7CC6FF" fill-opacity=".2" stroke="#7CC6FF" stroke-width="2" stroke-dasharray="5 4"/><circle cx="25" cy="17" r="6" fill="#E8283F"/><circle cx="25" cy="33" r="6" fill="#E8283F"/></svg></span>Zone de réparation de pénalité (P1, P2)</div>
+    </div>
+  </div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
+</section>
+
+<!-- 13 ─ Règlement 1 -->
+<section class="slide" id="s13" data-title="Règlement : homologation et navigation">
+  <div class="kicker r">Règlement</div>
+  <h2 class="r" style="--d:.1s">Homologation &amp; <em>navigation sous IA</em></h2>
+  <div class="two">
+    <div class="card rule r left" style="--d:.3s">
+      <h3><span class="dot"></span>Homologation</h3>
+      <p>Chaque équipe doit homologuer un <b style="color:var(--ink)">bateau principal</b> et peut homologuer d’autres composants additionnels et optionnels intégrés dans le bateau au moment du départ.</p>
+      <p style="margin-top:18px">Le bateau principal et les composants additionnels doivent être composés d’éléments <b style="color:var(--ink)">solidaires les uns des autres ou flottants</b> (les bateaux ne peuvent donc pas laisser des pièces ou des éléments dans le fond ou à la surface de la zone de régate).</p>
+    </div>
+    <div class="card rule r right" style="--d:.5s">
+      <h3><span class="dot" style="background:var(--sky)"></span>Mode de navigation sous IA</h3>
+      <ul>
+        <li><span class="tag">Manuel</span><span>Via télécommande : ralliement de la ligne de départ et reprise en main après le franchissement de la ligne d’arrivée (soumis à pénalité).</span></li>
+        <li><span class="tag ai">Autonome</span><span>Sans intervention humaine, obligatoire dès le passage de la ligne de départ et pendant tout le parcours, jusqu’au franchissement de la ligne d’arrivée. Ce système autonome peut être embarqué ou non. S’il n’est pas embarqué, l’utilisation de la télécommande doit se faire sans intervention humaine (de manière autonome via programmation).</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
+</section>
+
+<!-- 14 ─ Règlement 2 -->
+<section class="slide" id="s14" data-title="Règlement : priorité, propulsion, drones, actions spéciales">
+  <div class="kicker r">Règlement</div>
+  <h2 class="r" style="--d:.1s">Priorité, propulsion &amp; <em>actions spéciales</em></h2>
+  <div class="grid">
+    <div class="card rule r" style="--d:.3s">
+      <h3><span class="dot"></span>Priorité</h3>
+      <ul>
+        <li><span class="tag">Parcours construit</span><span>Racing Rules of Sailing</span></li>
+        <li><span class="tag ai">Parcours côtier</span><span>Pas de priorité, contact autorisé</span></li>
+      </ul>
+    </div>
+    <div class="card rule r" style="--d:.45s">
+      <h3><span class="dot" style="background:var(--sky)"></span>Propulsion &amp; type de drone</h3>
+      <p><b style="color:var(--ink)">Propulsion :</b> vélique / motorisé suivant catégorie.</p>
+      <p style="margin-top:12px"><b style="color:var(--ink)">Type de drone :</b> max 1 mètre, max 1,3 mètre, max 2,7 mètres. Le voilier doit toujours être en contact avec la mer.</p>
+    </div>
+    <div class="card rule wide r" style="--d:.6s">
+      <h3><span class="dot" style="background:var(--yellow)"></span>Actions spéciales</h3>
+      <p>Le bateau participant aux Battleboats a le droit de mettre en œuvre des actions spéciales (<b style="color:var(--ink)">boost avec moteur annexe, grappin, parachute…</b>) pendant la régate. Ces actions ne doivent avoir aucun préjudice ni sur l’environnement, ni sur les personnes. Ces actions doivent être homologuées.</p>
+    </div>
+  </div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
+</section>
+
+<!-- 15 ─ Participants -->
+<section class="slide" id="s15" data-title="Exemple de participants">
+  <div class="kicker r">Ils se lancent</div>
+  <h2 class="r" style="--d:.1s">Exemple de <em>participants</em></h2>
+  <div class="diag" style="height:720px"><div class="white r zoom" style="--d:.3s"><img src="masterclass/participant-pyrovigil.jpg" alt="Le voilier de classe M de Pyrovigil, Battleboat 39"></div></div>
+  <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
+</section>
+
+<!-- 16 ─ Contact -->
+<section class="slide" id="s16" data-title="Contact">
+  <div class="kicker r">Contact</div>
+  <h2 class="r" style="--d:.1s">Vivons ensemble l’aventure <em>AI REGATTA</em></h2>
+  <div class="top">
+    <div class="qr r pop" style="--d:.3s">
+      <div class="white"><img src="masterclass/qr-airegatta.png" alt="QR code AI Regatta"></div>
+      <div class="soc"><img src="masterclass/ico-facebook.png" alt="Facebook"><img src="masterclass/ico-instagram.png" alt="Instagram"><img src="masterclass/ico-linkedin.png" alt="LinkedIn"><img src="masterclass/ico-youtube.jpg" alt="YouTube"></div>
+    </div>
+    <div class="rows">
+      <div class="row r left" style="--d:.45s"><img src="masterclass/ico-tel.png" alt="">+33 6 22 53 27 65</div>
+      <div class="row r left" style="--d:.6s"><img src="masterclass/ico-mail.png" alt=""><a href="mailto:info@airegatta.com?subject=AI%20Regatta">info@airegatta.com</a></div>
+      <div class="row r left" style="--d:.75s"><img src="masterclass/ico-web.png" alt=""><a href="https://airegatta.com/" target="_blank" rel="noopener">https://airegatta.com</a></div>
+    </div>
+    <div class="logos"><div class="white"><img src="masterclass/logo-battleboats.png" alt="Battleboats"></div><div class="white" style="padding:8px"><img src="masterclass/logo-med-events.jpg" alt="MED Events"></div></div>
+  </div>
+  <div class="grp photo r zoom" style="--d:.9s"><img src="masterclass/photo-groupe.jpg" alt="Les équipes réunies sur le port de Toulon" style="object-position:50% 40%"></div>
+  <div class="press r" style="--d:1.2s"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>Point Presse AI Regatta : samedi 15 mai 10h, Local « La Plage », Plage du Mourillon</span></div>
+</section>
+
+</div></div>
+
+<div id="ctrl" role="group" aria-label="Navigation">
+  <button id="prev" type="button" aria-label="Slide précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <span id="count">1 / 16</span>
+  <button id="next" type="button" aria-label="Slide suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button id="full" type="button" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</div>
+<div id="help"><kbd>←</kbd> <kbd>→</kbd> ou <kbd>espace</kbd> pour avancer · <kbd>F</kbd> plein écran</div>
+
+<script>
+(function(){
+  const deck=document.getElementById('deck'),slides=[...deck.querySelectorAll('.slide')],N=slides.length;
+  const $=id=>document.getElementById(id);
+  // titre lettre par lettre
+  const h1=document.querySelector('#s1 h1');let k=0;
+  h1.querySelectorAll('.ai').forEach(e=>e.remove());
+  const words=[['AI','ai'],[' ',''],['Regatta','']];h1.textContent='';
+  words.forEach(([w,c])=>{const host=c?Object.assign(document.createElement('span'),{className:c}):h1;if(c)h1.appendChild(host);
+    [...w].forEach(ch=>{const s=document.createElement('span');s.className='ch';s.style.setProperty('--i',k++);s.textContent=ch===' '?' ':ch;host.appendChild(s)})});
+  // numéros de page
+  slides.forEach((s,i)=>{const n=s.querySelector('.num');if(n)n.textContent=String(i+1).padStart(2,'0')+' / '+N});
+  // mise à l’échelle
+  function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);deck.style.transform='translate(-50%,-50%) scale('+s+')'}
+  addEventListener('resize',fit);fit();
+  let cur=-1;
+  function go(i,fromHash){i=Math.max(0,Math.min(N-1,i));if(i===cur)return;
+    if(cur>=0)leave(slides[cur]);cur=i;
+    slides.forEach((s,j)=>{s.classList.toggle('on',j===i);s.setAttribute('aria-hidden',j===i?'false':'true')});
+    enter(slides[i]);
+    $('count').textContent=(i+1)+' / '+N;$('bar').style.width=((i+1)/N*100)+'%';
+    $('prev').disabled=i===0;$('next').disabled=i===N-1;
+    if(!fromHash){try{history.replaceState(null,'','#'+(i+1))}catch(e){location.hash=String(i+1)}}
+  }
+  // régate 3D chargée seulement sur sa slide (allège le partage d’écran)
+  function enter(s){
+    if(s.id==='s9'){const f=s.querySelector('.frame');if(!f.querySelector('iframe')){const ifr=document.createElement('iframe');ifr.src='regate-3d.html#embed';ifr.title='Régate 3D';ifr.loading='eager';ifr.addEventListener('load',()=>{const w=f.querySelector('.wait');if(w)w.remove()});f.prepend(ifr)}}
+    if(s.id==='s12')startBoat();
+  }
+  function leave(s){
+    if(s.id==='s9'){const ifr=s.querySelector('iframe');if(ifr)ifr.remove();const f=s.querySelector('.frame');if(!f.querySelector('.wait')){const w=document.createElement('div');w.className='wait';w.textContent='Chargement de la régate 3D…';f.prepend(w)}}
+    if(s.id==='s12')stopBoat();
+    // rejouer les animations au prochain passage
+    s.querySelectorAll('.r,.ch,.route,.mark,.arrowhead').forEach(e=>{e.style.animation='none';void e.offsetWidth;e.style.animation=''});
+  }
+  // bateau animé le long de la route du parcours voiliers
+  let raf=0,t0=0;const route=$('mainRoute'),boat=$('boat'),L=route.getTotalLength();
+  function startBoat(){cancelAnimationFrame(raf);t0=performance.now();const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    const step=now=>{const T=14000,el=now-t0-4200;let u=el<0?0:(el%T)/T;if(reduce)u=.45;
+      const d=u*L,p=route.getPointAtLength(d),q=route.getPointAtLength(Math.min(L,d+2));
+      const a=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI,flip=Math.abs(a)>90;
+      boat.setAttribute('transform','translate('+p.x.toFixed(1)+' '+(p.y-6).toFixed(1)+')');
+      $('boatInner').setAttribute('transform',flip?'scale(-1 1)':'');
+      if(!reduce)raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step)}
+  function stopBoat(){cancelAnimationFrame(raf)}
+  // commandes
+  const next=()=>go(cur+1),prev=()=>go(cur-1);
+  $('next').onclick=next;$('prev').onclick=prev;
+  const full=()=>{try{if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen().catch(()=>{})}catch(e){}};
+  $('full').onclick=full;
+  addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey)return;const k=e.key;
+    if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(k)){e.preventDefault();next()}
+    else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(k)){e.preventDefault();prev()}
+    else if(k==='Home'){e.preventDefault();go(0)}else if(k==='End'){e.preventDefault();go(N-1)}
+    else if(k==='f'||k==='F'){full()}
+    else if(/^[1-9]$/.test(k)){/* saut direct : chiffres */}
+    hideHelp()});
+  // balayage tactile
+  let sx=null;addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+  addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)(dx<0?next:prev)();sx=null},{passive:true});
+  // curseur et commandes discrets quand on ne bouge pas (partage d’écran)
+  let idle;const wake=()=>{document.body.classList.remove('idle');clearTimeout(idle);idle=setTimeout(()=>document.body.classList.add('idle'),2600)};
+  addEventListener('mousemove',wake);wake();
+  let helpT=setTimeout(hideHelp,9000);function hideHelp(){$('help').classList.add('gone')}
+  // lien direct vers une slide : #1 … #16
+  const fromHash=()=>{const n=parseInt(location.hash.slice(1),10);return n>=1&&n<=N?n-1:0};
+  addEventListener('hashchange',()=>go(fromHash(),true));
+  go(fromHash(),true);
+})();
+</script>
+</body>
+</html>
