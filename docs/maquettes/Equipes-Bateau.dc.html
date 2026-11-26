@@ -37,10 +37,10 @@ a{color:#4E6000}a:hover{color:#11150D}
           <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">PC tactique à terre</span><span aria-hidden="true">→</span>
           <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">émetteur ({{medium.short}})</span><span aria-hidden="true">→</span>
           <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">récepteur à bord</span><span aria-hidden="true">→</span>
-          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">pilote automatique</span><span aria-hidden="true">→</span>
+          <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">{{medium.pilot}}</span><span aria-hidden="true">→</span>
           <span style="padding:8px 12px;border-radius:12px;background:#FFFFFF">safran, voiles</span>
         </div>
-        <span style="font-size:12px;color:rgba(9,11,7,.7)">+ radiocommande de sécurité 2,4 GHz (ExpressLRS) : conseillée ; obligatoire ou non, à trancher (P16 ne l’impose pas)</span>
+        <span style="font-size:12px;color:rgba(9,11,7,.7)">+ reprise en main pour la sécurité : interrupteur de la radio (A), radio ExpressLRS facultative (B, C)</span>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:20px;background:rgba(199,235,0,.16);box-shadow:inset 0 0 0 1px rgba(78,96,0,.25)">
         <b style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;color:#4E6000">Chaîne officielle · scellée</b>
@@ -57,8 +57,8 @@ a{color:#4E6000}a:hover{color:#11150D}
 
   <div style="flex:1;display:grid;grid-template-columns:400px minmax(0,1fr) 380px;gap:20px;padding:16px 28px 20px;min-height:0">
     <section aria-label="Support de la liaison" style="display:flex;flex-direction:column;gap:8px">
-      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Par quel moyen ?</b>
-      <sc-for list="{{media}}" as="m" hint-placeholder-count="4">
+      <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Quel montage ?</b>
+      <sc-for list="{{media}}" as="m" hint-placeholder-count="3">
         <button type="button" onClick="{{m.go}}" aria-pressed="{{m.on}}" style="display:flex;flex-direction:column;gap:2px;text-align:left;min-height:56px;padding:10px 14px;border-radius:14px;border:1px solid {{m.border}};background:{{m.bg}};cursor:pointer;font:400 12px 'Instrument Sans',sans-serif">
           <span style="display:flex;justify-content:space-between;width:100%"><b style="font-size:15px;font-weight:600">{{m.name}}</b><span style="font:500 11px 'JetBrains Mono',monospace;color:rgba(9,11,7,.66)">{{m.band}}</span></span>
           <span style="color:rgba(9,11,7,.72)">{{m.short}}</span>
@@ -89,7 +89,7 @@ a{color:#4E6000}a:hover{color:#11150D}
       <b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Un ordre, proposé</b>
       <pre style="margin:0;padding:14px;border-radius:16px;background:#11150D;color:#E9F5B0;font:400 12px/1.55 'JetBrains Mono',monospace;white-space:pre;overflow:auto">{{orderJson}}</pre>
       <div style="padding:12px 14px;border-radius:16px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08);font-size:13px;line-height:1.5">
-        <b style="font-weight:600">Format libre.</b> MAVLink (ArduPilot Rover, mode voilier) ou JSON/CBOR maison : c’est l’équipe qui choisit. Nous conseillons l’accusé de réception et le compte rendu d’exécution.
+        <b style="font-weight:600">Format commun.</b> Le programme de liaison fourni par Meridia reçoit ces ordres et les transmet : mouvements de safran et d’écoute en A et B, langage MAVLink vers ArduPilot en C. Il renvoie l’accusé de réception et le compte rendu d’exécution.
       </div>
       <div style="padding:12px 14px;border-radius:16px;background:#11150D;color:#F7F8F2;font-size:13px;line-height:1.5">
         <b style="color:#C7EB00;font-weight:600">Perte de liaison : à déclarer</b><br>Chaque équipe décrit ce que fait son bateau sans ordre (garder le mode, lofer, s’arrêter) et le prouve à l’essai. Le bateau reste suivi et classé par sa balise.
@@ -100,21 +100,20 @@ a{color:#4E6000}a:hover{color:#11150D}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
 class Component extends DCLogic {
-  constructor(p){ super(p); this.state = { m: 'r433', ch: { params: 'oui', relay: 'oui', direct: 'oui', ota: 'non' } }; }
+  constructor(p){ super(p); this.state = { m: 'B', ch: { params: 'oui', relay: 'oui', direct: 'oui', ota: 'non' } }; }
   renderVals() {
     const st = this.state;
-    const M = (id, name, band, short, detail) => ({ id, name, band, short, detail });
+    const M = (id, name, band, short, pilot, detail) => ({ id, name, band, short, pilot, detail });
     const defs = [
-      M('r433', 'Radio de télémétrie', '433 MHz', 'SiK / RFD900x, portée large, débit faible', 'Le choix conseillé : 150 m au plus, liaison directe, latence 30 à 80 ms, insensible à la foule. Puissance plafonnée, canal déclaré à l’inscription.'),
-      M('r868', 'Radio 868 MHz', '863–869,2 MHz', 'LoRa ou FSK, hors sous-bande réservée', 'Possible hors 869,4–869,65 MHz. Attention au rapport cyclique imposé dans cette bande : limite le nombre d’ordres par minute.'),
-      M('g4', 'Réseau 4G', 'opérateur', 'routeur ou modem à bord, serveur de l’équipe', 'Simple à installer, mais latence variable (50 à 300 ms) et réseau chargé par la foule. Prévoir un secours radio.'),
-      M('wifi', 'Wi-Fi', '2,4 / 5 GHz', 'à éviter en course', 'Bande encombrée (public, caméras, Wi-Fi local de l’organisation sur 5 GHz). Toléré pour les réglages à terre.')
+      M('A', 'A · Radio avec prise écolage', '2,4 GHz', 'radio imposée + petit boîtier', 'servos du bateau', 'L’ordinateur pilote la radio imposée par sa prise écolage, grâce à un petit boîtier à fabriquer. Un interrupteur rend la main à un humain. ≈ 100 à 170 € par équipe.'),
+      M('B', 'B · Émetteur sans radio', '2,4 GHz', 'émetteur Ranger Micro en USB', 'servos du bateau', 'L’ordinateur pilote directement un émetteur du commerce. Rien à fabriquer ; le lien ordinateur-émetteur est à valider. ≈ 60 à 90 € par équipe.'),
+      M('C', 'C · Pilote automatique à bord', '2,4 GHz', 'émetteur Ranger Micro, dans les deux sens', 'pilote automatique ArduPilot', 'Le pilote barre seul ; l’ordinateur envoie des ordres de tacticien et reçoit le cap et la vitesse. GPS, girouette et batterie 3S à bord. ≈ 290 à 390 € par équipe.')
     ];
     const media = defs.map(m => ({ ...m, on: String(st.m === m.id), bg: st.m === m.id ? 'rgba(199,235,0,.2)' : '#FFFFFF', border: st.m === m.id ? '#11150D' : 'rgba(9,11,7,.12)', go: () => this.setState({ m: m.id }) }));
     const medium = defs.find(m => m.id === st.m);
     const R = (id, name, why, fixed) => ({ id, name, why, fixed });
     const rdefs = [
-      R('orders', 'Les ordres tactiques', 'Manœuvres : vire, empanne, abats (bouée au vent passée), loffe (bouée sous le vent passée), face au vent. Modes : près, portant, VMG, haut, bas. Le pilote automatique exécute.', 'Acté'),
+      R('orders', 'Les ordres tactiques', 'Manœuvres : vire, empanne, abats (bouée au vent passée), loffe (bouée sous le vent passée), face au vent. Modes : près, portant, VMG, haut, bas. Le programme de liaison les exécute, ou le pilote automatique en C.', 'Acté'),
       R('params', 'Paramètres d’un ordre', 'Par exemple l’angle au vent visé pour le mode haut. Sans eux, les modes sont très rigides.'),
       R('relay', 'Relayer les données officielles', 'Envoyer au bateau la position des autres et le vent. Égal pour tous, puisque tout le monde reçoit le même flux.'),
       R('direct', 'Barre à distance par l’IA', 'L’IA à terre commande directement safran et voiles, sans intervention humaine. Un humain au joystick reste exclu en course, sauf sécurité.'),

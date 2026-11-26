@@ -169,7 +169,7 @@ Les équipes développent leur propre logiciel. L’organisation fournit les don
 | Que leur fournit-on ? | Flux officiel en lecture (positions, bouées, vent, parcours, chrono, pavillons, événements, classement), canal comité, horloge GPS, simulateur, rejeux, schémas, exemples | [equipes/README.md](equipes/README.md) |
 | Par quels connecteurs ? | MQTT (conseillé), WebSocket, NMEA 0183 / AIS, fichiers de rejeu ; bac à sable cloud dès février | [equipes/connecteurs.md](equipes/connecteurs.md) |
 | Comment intégrer les données ? | Abonnement aux sujets, schémas JSON, état de flotte reconstruit à partir des messages conservés, chrono calculé localement | [equipes/contrat-interface.md](equipes/contrat-interface.md), [exemples](equipes/exemples/) |
-| Comment parler à leur bateau ? | Par leur propre liaison (radio 433 MHz conseillée, 868 hors sous-bande réservée, 4G), vers un pilote automatique à bord | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
+| Comment parler à leur bateau ? | Par radio ExpressLRS 2,4 GHz, selon l’un des trois montages : A, radio avec prise écolage ; B, émetteur sans radio ; C, pilote automatique à bord | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
 | Que peuvent-ils transmettre ? | Les ordres tactiques (acté) : manœuvres (vire, empanne, abats, loffe, face au vent) et modes (près, portant, VMG, haut, bas) ; paramètres et relais des données officielles libres, l’IA peut barrer seule, mise à jour interdite pendant une manche (actés les 20 et 21 novembre) | [equipes/liaison-bateau.md](equipes/liaison-bateau.md) |
 
 ### Maquettes côté équipes
@@ -223,7 +223,7 @@ Une fois tranchées, ces décisions passent dans les [postulats](postulats.md).
 
 ## 5. Est-ce encore un drone si l’IA est à terre ?
 
-Oui. Un drone est un bateau **sans personne à bord**. Ici, personne n’est à bord et personne ne barre : l’IA de l’équipe décide à terre, le pilote automatique exécute à bord. Le système complet (bateau + IA à terre) est autonome ; seule l’intelligence tactique est déportée, comme pour beaucoup de drones commandés depuis une station au sol. Pour 2027, rien n’oblige à l’embarquer.
+Oui. Un drone est un bateau **sans personne à bord**. Ici, personne n’est à bord et personne ne barre : l’IA de l’équipe décide à terre et pilote le bateau par radio, directement ou par un pilote automatique à bord. Le système complet (bateau + IA à terre) est autonome ; seule l’intelligence tactique est déportée, comme pour beaucoup de drones commandés depuis une station au sol. Pour 2027, rien n’oblige à l’embarquer.
 
 ### Si tout doit être embarqué, ce qui change
 

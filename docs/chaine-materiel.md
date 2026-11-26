@@ -82,7 +82,7 @@ Avec deux balises de rechange, le secours radio et les niveaux de repli, une pan
 
 | Appareil | Fiabilité | Logiciel | Coût | Relié à |
 |---|---|---|---|---|
-| **PC des équipes** — — Reçoivent le flux officiel, décident, commandent leur bateau par leur propre liaison. | 98 % | Aucun : Côté organisation : contrat d’interface et exemples, déjà écrits. | — | — |
+| **PC des équipes** — — Reçoivent le flux officiel, décident, commandent leur bateau par radio ExpressLRS (trois montages proposés). | 98 % | Aucun : Côté organisation : contrat d’interface et exemples, déjà écrits. | — | — |
 | **Consoles du directeur de course et des deux arbitres (3 écrans)** ×3 — Procédure, alertes, rejeux, décisions. | 98 % | Gros logiciel : Consoles (S10) : comptées avec les mini-PC. | ≈ 1 100 € | — |
 | **Téléphones du public** — — L’application publique, avec 1 s de différé. | 95 % | Gros logiciel : Application publique (S14). | — | — |
 | **Diffusion vidéo** — — La course en direct, avec l’habillage. | 90 % | Gros logiciel : Habillage télé (S15). | — | — |

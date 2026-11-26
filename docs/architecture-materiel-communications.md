@@ -17,7 +17,7 @@
 - **Distance maximale PC course ↔ parcours : 500 m.**
 - **Électricité et Internet filaire disponibles** sur le site.
 - **La position de chaque bateau est fournie par une balise officielle** identique pour tous, imposée et fournie par l'organisation, implantée par chaque équipe selon la fiche d'implantation, puis contrôlée et scellée à l'homologation (option A, décidée le 19 novembre 2026). Les positions envoyées par l'électronique des équipes ne servent ni au suivi, ni au classement, ni à l'arbitrage.
-- **Pas de sortie de données de la balise officielle vers l'électronique des équipes** : chaque équipe a son propre GPS et sa propre liaison avec son bateau. La balise officielle ne sert qu'à l'organisation (suivi, classement, arbitrage).
+- **Pas de sortie de données de la balise officielle vers l'électronique des équipes** : chaque équipe a sa propre liaison avec son bateau, et en montage C son propre GPS. La balise officielle ne sert qu'à l'organisation (suivi, classement, arbitrage).
 
 ## Décisions du 20 novembre 2026
 
@@ -153,7 +153,7 @@ flowchart TB
   CAM -- "⑥ RTSP / JSON" --> SRV
   SRV <-- "⑦ WebSocket" --> CON
   SRV -- "⑧ MQTT / WebSocket / NMEA (lecture seule)" --> EQT
-  EQT -- "⑨ consignes (canal de l'équipe)" --> EQB
+  EQT -- "⑨ ordres (ExpressLRS 2,4 GHz)" --> EQB
   SEC -- "⑪ 2,4 GHz ELRS" --> EQB
   SRV -- "⑫ flux public différé" --> HUB --> CDN --> PWA
 ```
@@ -172,8 +172,8 @@ flowchart TB
 | ⑥ | CAM → SRV | Ethernet (PoE) ou faisceau Wi-Fi 5 GHz | RTSP (H.264/H.265) pour la vidéo ; MQTT/JSON pour les résultats de vision | 25–30 i/s ; 1 Hz pour les risées | — | Vidéo live ; carte des risées ; position/orientation PTZ (ONVIF) |
 | ⑦ | SRV ↔ CON | Réseau local orga | WebSocket (JSON) + API HTTP | Temps réel | < 100 ms | Toutes les données ; commandes de direction de course (séquence, parcours, pénalités) |
 | ⑧ | SRV → EQT | Réseau local équipes (Ethernet, même longueur de câble pour tous) ; toutes les équipes sont sur place (P13) | MQTT : lecture du flux, écriture dans la seule boîte d’envoi (un compte par équipe) ; WebSocket JSON ; flux NMEA 0183 / Signal K en option | 10 Hz bateaux, 1 Hz vent | < 50 ms en local | Positions de tous les bateaux, bouées, vent mesuré et carte de vent, état de la course, événements, classement |
-| ⑨ | EQT → EQB | **Au choix de l'équipe** (4G, radio de télémétrie) | Au choix (MAVLink, MQTT, propriétaire) | — | — | Consignes de l'équipe. L'organisation n'intervient pas, sauf plan de fréquences |
-| ⑪ | SEC → EQB | 2,4 GHz, saut de fréquence | ExpressLRS (ELRS) | 50–150 Hz | < 20 ms | Reprise en main manuelle, mode sécurité |
+| ⑨ | EQT → EQB | 2,4 GHz, saut de fréquence, 100 mW | ExpressLRS, selon l'un des trois montages A, B, C ([equipes/liaison-bateau.md](equipes/liaison-bateau.md)) ; MAVLink en C | 50–150 Hz | < 20 ms | Ordres de l'équipe, transmis par le programme de liaison |
+| ⑪ | SEC → EQB | 2,4 GHz, saut de fréquence | ExpressLRS (ELRS), même récepteur que ⑨ | 50–150 Hz | < 20 ms | Reprise en main manuelle pour la sécurité : interrupteur de la radio en A, radio ExpressLRS facultative en B et C |
 | ⑫ | SRV → HUB → PWA | Internet | WebSocket diffusé par le cloud (CDN) ; fichiers de replay sur stockage objet | 1–2 Hz, différé de 1 s (P30) | ≈ 1 s | Flux public agrégé : positions lissées, classement, vent, événements |
 
 ### Pourquoi ce découpage
@@ -316,19 +316,23 @@ Hauteur visée pour l'analyse des risées : **20 m minimum, 40 m idéalement**.
 
 Contraintes : 20 à 40 g, environ 4 à 8 W pendant l'émission. Réservé aux bateaux qui peuvent l'embarquer.
 
-### 4.11 Matériel de sécurité (SEC), homologué par l'organisation
+### 4.11 Matériel de sécurité (SEC)
 
-| Référence | Prix indicatif |
-|---|---|
-| Émetteur **RadioMaster Pocket ELRS** ou **RadioMaster Boxer ELRS** | ≈ 70–150 € |
-| Récepteur **RadioMaster ER6** (sorties PWM, pour des servos ou un relais) ou **RP3** (sortie série vers un autopilote) | ≈ 20–30 € |
+Le récepteur ExpressLRS de la liaison ⑨ sert aussi à la sécurité. En cas de coupure, il met le bateau dans une position réglée à l'avance (montages A et B) ou laisse le pilote appliquer son comportement de secours (montage C). La reprise en main par un humain passe par l'interrupteur de la radio imposée (montage A), ou par une radio ExpressLRS facultative, appairée au même récepteur (montages B et C) : RadioMaster Pocket ELRS, ≈ 70 €. Le fonctionnement est vérifié au contrôle d'équipement.
 
-Règle proposée : chaque bateau embarque un récepteur ELRS appairé à un émetteur tenu par l'équipe. Une voie est réservée au **mode sécurité** (choquer les voiles, se mettre face au vent ou s'arrêter). Le fonctionnement est vérifié au contrôle d'équipement.
+### 4.12 Liaison entre l'ordinateur de l'équipe et son bateau
 
-### 4.12 Kit de référence proposé aux équipes (optionnel, l'architecture reste libre)
+Trois montages, détaillés dans [equipes/liaison-bateau.md](equipes/liaison-bateau.md), testés avant le choix :
 
-| Fonction | Référence | Prix indicatif |
+| Montage | Matériel | Prix indicatif par équipe |
 |---|---|---|
+| **A · Radio avec prise écolage** | Radio RadioMaster Pocket ou TX12 MKII (ExpressLRS), récepteur ER4, petit boîtier fabriqué (≈ 20 € de pièces) | ≈ 100–170 € |
+| **B · Émetteur sans radio** | Émetteur RadioMaster Ranger Micro et câble USB-C, récepteur ER4 | ≈ 60–90 € |
+| **C · Pilote automatique à bord** | Même émetteur, récepteur RP2, carte **Matek H743-WING V3** sous **ArduPilot Rover, mode voilier**, GPS et compas, girouette, batterie 3S | ≈ 290–390 € |
+
+En C, ArduPilot gère nativement les voiliers : un virement peut être déclenché par une commande, et en mode automatique le bateau tire des bords tout seul pour atteindre un point au vent. L'ExpressLRS transporte dans les deux sens le langage standard des drones (MAVLink), sans radio de télémétrie séparée.
+
+---|---|---|
 | Autopilote | **Matek H743-SLIM** ou **H743-WING V3** sous **ArduPilot Rover, mode voilier** (girouette, réglage de voile, virements automatiques, navigation par waypoints) | ≈ 80–120 € |
 | Girouette | Capteur d'angle magnétique AS5600 sur une girouette imprimée en 3D | ≈ 10–20 € |
 | Calcul embarqué (pour l'IA à bord) | Raspberry Pi Zero 2 W ou Raspberry Pi 5 / CM5 | ≈ 20–90 € |
@@ -516,8 +520,7 @@ Le flux NMEA proposé en option reprend les mêmes données en phrases standard 
 | Usage | Bande | Qui | Règle |
 |---|---|---|---|
 | Radio de secours officielle | 869,4–869,65 MHz | Organisation | **Réservée** : interdite aux équipes |
-| Télémétrie / consignes des équipes | 433 MHz, 863–869,2 MHz, ou 4G | Équipes | Canal déclaré à l'inscription, puissance maximale fixée |
-| Radiocommandes de sécurité | 2,4 GHz, ExpressLRS en saut de fréquence | Équipes | Conseillée (P16) ; déclarée et homologuée au contrôle si installée |
+| Liaison des équipes avec leur bateau, et reprise en main | 2,4 GHz, ExpressLRS en saut de fréquence | Équipes | 100 mW au plus ; émetteurs déclarés à l'inscription et vérifiés au contrôle |
 | Vidéo embarquée | 5,8 GHz | Équipes ou orga | Canaux attribués par l'organisation |
 | Faisceau caméra et Wi-Fi local | 5 GHz | Organisation | Canaux choisis après un relevé du spectre sur le site |
 

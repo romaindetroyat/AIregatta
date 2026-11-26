@@ -1,80 +1,107 @@
-# AI Regatta — Communiquer avec votre bateau
+# AI Regatta — Piloter votre bateau depuis l’ordinateur
 
-> Version 1.0-draft, 20 novembre 2026. Concerne la **liaison 7** (« consignes de l’équipe vers son bateau ») de [liaisons-et-logiciel.md](../liaisons-et-logiciel.md#7-consignes-de-léquipe-vers-son-bateau-flux-essentiel).
-> Les points marqués **« à trancher par l’organisation »** sont des propositions, pas encore des règles.
+> Version 2.0-draft, 26 novembre 2026. Remplace la version du 20 novembre. Concerne la liaison entre l’ordinateur de l’équipe, à terre, et son bateau.
+> Trois montages sont proposés. Aucun n’est encore validé sur l’eau : un kit d’essai de chacun doit être testé avant le choix définitif. Fiches de présentation : [fiche-liaison-ordinateur.pdf](fiche-liaison-ordinateur.pdf).
 
 ## 1. Qui fait quoi
 
-| | Organisation | Équipe |
-|---|---|---|
-| Position officielle du bateau | Balise officielle, scellée, autonome | — |
-| Flux de course (positions, vent, chrono…) | Fourni à toutes les équipes, par câble | Le reçoit sur son PC à terre |
-| **Liaison PC à terre → bateau** | Fixe seulement le plan de fréquences et les règles d’usage | **Entièrement à sa charge** : matériel, logiciel, réglages, fiabilité (P10, P36) |
-| Électronique de bord (autopilote, capteurs, servos) | — | Libre (P07) |
-| Tactique | Aucun assistant fourni (P12) | C’est son travail |
-| Sécurité sur l’eau | Bateaux d’assistance (P16) | Comportement du bateau en cas de perte de liaison, déclaré à l’avance |
-
-**La balise officielle n’a aucun lien avec votre électronique** (P09) : elle a sa propre batterie, ne reçoit rien de votre bateau et ne vous transmet rien. Votre bateau reste suivi et classé même si toute votre électronique tombe en panne. Inversement, la position de votre propre GPS ne sert ni au suivi, ni au classement, ni à l’arbitrage (P08).
-
-## 2. Les fréquences
-
-### 2.1 Supports autorisés
-
-| Support | Bandes | Statut | Remarques |
+| | Organisation | Meridia | Équipe |
 |---|---|---|---|
-| **4G / 5G** (modem USB, routeur, carte SIM) | Réseaux des opérateurs | Autorisé | Simple et sans réglage radio ; la foule peut saturer l’antenne relais (voir l’architecture, « La foule peut-elle gêner la 4G ? »). Prévoyez un mode dégradé |
-| **Radio de télémétrie 433 MHz** (type SiK, Holybro, RFD) | 433,05–434,79 MHz | Autorisé, **déclaration obligatoire** | Bon compromis portée / débit à 150–500 m ; attention, la plupart de ces radios sortent d’usine à une puissance **supérieure** à la limite européenne : réglez-la |
-| **Radio 868 MHz** (SiK 868, LoRa…) | 863–869,2 MHz et 869,7–870 MHz | Autorisé, **déclaration obligatoire** | **Interdit dans la sous-bande 869,4–869,65 MHz**, réservée à la radio de secours des balises officielles. Le temps d’émission autorisé (0,1 à 1 %) est très faible pour une télémétrie continue |
-| **2,4 GHz** (Wi-Fi, ExpressLRS, Bluetooth) | 2 400–2 483,5 MHz | Autorisé, **déclaration obligatoire** | Bande très encombrée le jour J : téléphones du public, radiocommandes de sécurité, Wi-Fi. Ne comptez pas sur elle seule pour vos ordres |
-| **5,8 GHz** (vidéo embarquée) | 5 725–5 875 MHz | À confirmer dans le plan de fréquences | Le plan actuel (architecture §9) prévoit des canaux attribués par l’organisation |
-| **5 GHz Wi-Fi** | 5 150–5 350 et 5 470–5 725 MHz | Réservé à l’organisation sur le site (faisceau caméra, Wi-Fi local), canaux choisis après relevé du spectre | Pas d’usage équipe sans accord |
+| Position officielle du bateau | Balise officielle, scellée, autonome | Traite ses données | Implante la balise |
+| Flux de course (positions, vent, chrono…) | Le fournit à toutes les équipes | Le diffuse | Le reçoit sur son ordinateur |
+| **Liaison ordinateur → bateau** | Recommande trois montages (A, B, C) et fixe les règles radio | Fournit le **programme de liaison**, sur Mac et PC | Achète, installe et règle son matériel |
+| Tactique | Aucun assistant fourni | — | C’est son travail : son IA, sur son ordinateur |
+| Sécurité sur l’eau | Bateaux d’assistance | — | Déclare le comportement du bateau en cas de coupure |
 
-### 2.2 Limites de puissance et de temps d’émission
+**La balise officielle n’a aucun lien avec votre électronique** : elle a sa propre batterie et ne reçoit rien de votre bateau. Votre bateau reste suivi et classé même si toute votre électronique tombe en panne.
 
-Valeurs de référence de la réglementation européenne des « appareils de faible portée » (recommandation CEPT ERC 70-03, reprise en France par les décisions de l’Arcep). **L’organisation vérifiera les valeurs en vigueur avant l’épreuve (à confirmer).**
+## 2. Les trois montages
 
-| Bande | Puissance maximale | Temps d’émission maximal | Commentaire |
-|---|---|---|---|
-| 433,05–434,79 MHz | 10 mW PAR | 10 % | Réglage courant d’une radio SiK : 20 dBm (100 mW), **à baisser** à 10 dBm au plus, gain d’antenne compris |
-| 863–865 MHz | 25 mW PAR | 0,1 % | |
-| 865–868 MHz | 25 mW PAR | 1 % | |
-| 868,0–868,6 MHz | 25 mW PAR | 1 % | |
-| 868,7–869,2 MHz | 25 mW PAR | 0,1 % | |
-| **869,4–869,65 MHz** | — | — | **Réservée à l’organisation : interdite aux équipes** |
-| 869,7–870 MHz | 5 mW PAR (25 mW à 1 %) | Sans limite à 5 mW | |
-| 2 400–2 483,5 MHz | 100 mW PIRE | Sans limite pour le Wi-Fi et le saut de fréquence | Réglez ExpressLRS et le Wi-Fi à 100 mW au plus |
-| 5 725–5 875 MHz | 25 mW PIRE | — | Vidéo : canal attribué par l’organisation (à confirmer) |
+Dans les trois cas :
+- l’IA de l’équipe, à terre, décide et envoie des ordres de tacticien (§4) ;
+- le **programme de liaison** fourni par Meridia transmet ces ordres au bateau ;
+- la radio est de l’**ExpressLRS en 2,4 GHz**, le système des drones de course ;
+- les **servos du bateau** (safran, treuil d’écoute) ne changent pas.
 
-Vocabulaire : **PAR** (puissance apparente rayonnée, *ERP*) et **PIRE** (puissance isotrope rayonnée équivalente, *EIRP*) mesurent la puissance réellement envoyée dans l’air, **gain de l’antenne compris** (PIRE ≈ PAR + 2,15 dB). Le **temps d’émission** (*duty cycle*) est la part du temps pendant laquelle l’émetteur peut parler : 1 %, c’est 36 secondes par heure au total.
+### A. Radio imposée avec prise écolage + petit boîtier
 
-Conséquence pratique : en 868 MHz, hors de la sous-bande réservée, un flux de télémétrie MAVLink continu **dépasse** vite la limite de 1 %. Pour une liaison bavarde, préférez la **433 MHz** (10 %) ou la **4G**.
-
-### 2.3 Déclaration obligatoire à l’inscription
-
-Chaque équipe déclare, pour **chaque émetteur** embarqué ou à terre : le type de matériel, la bande et le canal (ou la plage de saut de fréquence), la puissance réglée, l’antenne, et l’usage (ordres, télémétrie, vidéo, sécurité). L’organisation peut attribuer des canaux pour éviter que deux équipes se gênent, et vérifier les réglages au contrôle (mesure au spectre, architecture §9). Tout changement après l’inscription doit être déclaré avant d’être utilisé.
-
-## 3. Architecture recommandée
-
-```mermaid
-flowchart LR
-  FLUX["Flux officiel<br/>(MQTT, câble)"] --> PC["PC à terre de l'équipe<br/>logiciel tactique"]
-  PC -- "ordres tactiques<br/>(4G, 433 MHz…)" --> AP["Autopilote à bord<br/>ex. ArduPilot Rover, mode voilier"]
-  AP -- "accusés + compte rendu<br/>+ télémétrie propre" --> PC
-  AP --> SERVOS["Safran, treuil de voile"]
-  CAPT["Capteurs de l'équipe<br/>GPS, girouette, centrale"] --> AP
+```
+Ordinateur ── USB ── petit boîtier ── jack ── radio imposée  ))) radio )))  récepteur ER4 → safran + écoute
 ```
 
-> **Acté (P37)** : pour 2027, l’intelligence tactique de chaque équipe reste à terre ; le bateau, sans personne à bord, est bien un drone. Le tout embarqué est envisagé pour 2028.
+- **Principe** : la prise écolage sert normalement aux cours de pilotage. Le boîtier fait semblant d’être la radio de l’élève ; la radio obéit à l’ordinateur. Un interrupteur de la radio choisit qui pilote : l’ordinateur ou un humain.
+- **Radio imposée** : RadioMaster Pocket ou TX12 MKII, version ExpressLRS.
+- **Le boîtier** : aucun boîtier tout fait n’existe. Il est fabriqué par un partenaire ou un fablab : une petite carte électronique, un câble jack, un câble USB, un boîtier étanche, environ 20 € de pièces. Liste d’achat : page « Pièces du boîtier écolage ».
+- **La barre** : l’ordinateur commande directement le safran et l’écoute. Il barre à partir du cap donné par la balise officielle.
+- **Coût par équipe** : ≈ 100 à 170 € (radio 65 à 130 €, récepteur ≈ 18 €, boîtier ≈ 20 €).
+- **Fiabilité** : la prise écolage est une technique ancienne, avec de nombreux retours positifs. Le boîtier reste à mettre au point.
+- **Ce que ça impose** : acheter la radio imposée, changer le récepteur du bateau, régler la radio une fois.
 
-- **À terre** : le PC de l’équipe reçoit le flux officiel, décide de la tactique et envoie des **ordres simples**.
-- **À bord** : un autopilote **exécute** ces ordres de façon autonome (barre, réglage de voile, virement). Le pilotage fin doit rester à bord : la latence de la liaison (et ses coupures) ne doit jamais faire perdre le contrôle du bateau.
-- Exemple éprouvé, cité dans le kit de référence (architecture §4.12) : **ArduPilot Rover en mode voilier**, sur un contrôleur de vol de type Matek H743, avec une girouette, piloté par **MAVLink** (le protocole de messages d’ArduPilot) sur une radio de télémétrie. ArduPilot sait déjà virer sur commande et tirer des bords seul vers un point au vent. Une architecture maison (Raspberry Pi, microcontrôleur, protocole propre) est tout aussi acceptable.
+### B. ExpressLRS complet, sans radio
 
-## 4. Les ordres tactiques
+```
+Ordinateur ── USB-C ── émetteur Ranger Micro  ))) radio )))  récepteur ER4 → safran + écoute
+```
+
+- **Principe** : l’ordinateur pilote directement un petit émetteur du commerce. Pas de radio, rien à fabriquer.
+- **La barre** : comme en A, l’ordinateur commande directement le safran et l’écoute, à partir du cap de la balise officielle.
+- **Coût par équipe** : ≈ 60 à 90 € (émetteur et câble ≈ 43 €, récepteur ≈ 18 €, batterie et adaptateur si besoin). Liste d’achat : page « Pièces de la liaison ExpressLRS ».
+- **Fiabilité** : la radio vers le bateau est très éprouvée. Le lien entre l’ordinateur et l’émetteur reste à valider : les témoignages sont mitigés.
+- **Ce que ça impose** : changer le récepteur du bateau, régler l’émetteur une fois depuis un téléphone.
+
+### C. Le système des drones : pilote automatique à bord
+
+```
+Ordinateur ── USB-C ── émetteur Ranger Micro  ))) radio, dans les deux sens )))  récepteur RP2 → pilote automatique → safran + écoute
+                                                                                         ↑ GPS, compas, girouette
+```
+
+- **Principe** : on reprend le montage complet d’un drone. À bord, une carte de pilote automatique (Matek H743-WING avec le logiciel libre ArduPilot, en mode voilier) barre et règle l’écoute toute seule. L’ordinateur envoie des ordres de tacticien : « cap 45° », « vire », « va à la bouée ». En retour, il reçoit le cap, la vitesse et l’état du bateau.
+- **La liaison** : le même émetteur qu’en B, réglé pour transporter les ordres et les retours du bateau dans les deux sens. Ce branchement en USB entre l’ordinateur et l’émetteur est **documenté officiellement** par ExpressLRS ; il utilise le langage standard des drones pour parler à un ordinateur (MAVLink).
+- **Coût par équipe** : ≈ 290 à 390 € (carte ≈ 110 €, GPS et compas ≈ 45 €, girouette 50 à 150 €, émetteur et câble ≈ 43 €, récepteur ≈ 22 €, batterie 3S ≈ 20 €). Liste d’achat : page « Pièces du pilote automatique ».
+- **Fiabilité** : la liaison et le logiciel sont éprouvés sur des milliers de drones et de bateaux autonomes. Le mode voilier existe mais il faut l’apprendre au bateau : réglages et essais sur l’eau.
+- **Ce que ça impose** : installer la carte, le GPS, la girouette et une batterie 3S (la carte demande 8 V au moins) ; changer le récepteur ; plusieurs sorties d’essai pour régler le pilote.
+- **Atout** : le bateau barre seul. Le délai de la liaison ne le gêne pas, et les ordres correspondent au métier de tacticien.
+
+### Comparaison
+
+| | A. Écolage + boîtier | B. ExpressLRS sans radio | C. Pilote à bord |
+|---|---|---|---|
+| Coût par équipe | ≈ 100 à 170 € | ≈ 60 à 90 € | ≈ 290 à 390 € |
+| Ce qui change dans le bateau | Le récepteur | Le récepteur | Récepteur, carte, GPS, girouette, batterie 3S |
+| Qui barre | L’ordinateur, à terre | L’ordinateur, à terre | Le pilote, à bord |
+| Rien à fabriquer | Non : le boîtier | Oui | Oui |
+| Reprise en main par un humain | Interrupteur de la radio | Avec une radio ExpressLRS en plus | Avec une radio ExpressLRS en plus |
+| Point à valider | Le boîtier | Le lien ordinateur-émetteur | Les réglages du pilote sur l’eau |
+
+### Les essais avant de choisir
+
+Un kit d’essai par montage, testé dans le même ordre :
+1. **Sur la table** : l’ordinateur fait bouger le safran et l’écoute dans le bon sens.
+2. **Endurance** : plusieurs heures d’affilée, sur Mac et sur PC, en comptant les coupures.
+3. **À l’eau** : portée jusqu’au point le plus loin du parcours, mise en sécurité quand on coupe l’ordinateur. Pour C, cap tenu et virements automatiques.
+
+Budget indicatif : ≈ 200 € pour A et B, ≈ 350 € de plus pour C ; 3 à 4 jours de travail pour A et B, une semaine de plus pour C (réglages sur l’eau).
+
+## 3. Les règles radio
+
+| Bande | Usage | Règle |
+|---|---|---|
+| **2 400–2 483,5 MHz** | Liaison de l’équipe (ExpressLRS), radio de secours | **100 mW au plus**, antenne comprise. Les émetteurs proposés sont réglés à 100 mW d’usine : ne pas augmenter |
+| 869,4–869,65 MHz | Radio de secours des balises officielles | **Interdite aux équipes** |
+| 5 GHz (Wi-Fi) | Réseau de l’organisation sur le site | Interdit aux équipes sans accord |
+
+**Déclaration à l’inscription** : chaque émetteur (type, puissance réglée, antenne, usage). Tout changement est déclaré avant d’être utilisé. L’organisation peut vérifier les réglages au contrôle.
+
+**Une version logicielle figée** : ExpressLRS change souvent. L’organisation fixe une version, la même pour toutes les équipes, jusqu’à la régate (version 3.5 au moins pour le montage C).
+
+**Antenne du récepteur** : le signal passe moins bien au ras de l’eau et à travers une coque en carbone. Placer l’antenne haut, hors de la coque si possible.
+
+## 4. Les ordres de tacticien
 
 ### 4.1 La liste des ordres
 
-Les équipes envoient à leur bateau des ordres tactiques simples (P36). Ils se rangent en deux familles : les **manœuvres**, ponctuelles, et les **modes**, qui restent actifs jusqu’à l’ordre suivant. Le pilote automatique à bord exécute ; l’ordre ne fait que le déclencher. Cette liste est la référence commune ; l’organisation pourra la compléter avant le gel du 15 mars 2027.
+L’IA de l’équipe envoie au programme de liaison des ordres simples. En A et B, le programme les traduit en mouvements de safran et d’écoute ; en C, il les transmet au pilote automatique, qui les exécute. Les ordres se rangent en deux familles : les **manœuvres**, ponctuelles, et les **modes**, qui restent actifs jusqu’à l’ordre suivant. Cette liste est la référence commune ; elle pourra être complétée avant le gel du 15 mars 2027.
 
 **Manœuvres**
 
@@ -83,8 +110,8 @@ Les équipes envoient à leur bateau des ordres tactiques simples (P36). Ils se 
 | Vire | `tack` | Virement de bord (l’avant du bateau passe face au vent) | — |
 | Empanne | `gybe` | Empannage (l’arrière du bateau passe face au vent) | — |
 | Abats | `bear_away` | Contournement de la **bouée au vent** : une fois la bouée passée, le bateau s’écarte du vent pour partir au portant | `mark_id`, `side` (côté de passage) |
-| Loffe | `head_up` | Contournement de la **bouée sous le vent** (ou de la porte) : une fois la bouée passée, le bateau remonte vers le vent pour repartir au près | `mark_id`, `side` |
-| Face au vent | `head_to_wind` | Le bateau se met bout au vent et s’arrête, voiles qui faseyent (attente avant le départ, sécurité, ralentir) | `duration_s` |
+| Loffe | `head_up` | Contournement de la **bouée sous le vent** (ou de la porte) : une fois la bouée passée, le bateau remonte vers le vent | `mark_id`, `side` |
+| Face au vent | `head_to_wind` | Le bateau se met bout au vent et s’arrête, voiles qui faseyent | `duration_s` |
 
 **Modes**
 
@@ -92,31 +119,23 @@ Les équipes envoient à leur bateau des ordres tactiques simples (P36). Ils se 
 |---|---|---|---|
 | Mode près | `mode_upwind` | Navigation vers le vent, au plus près efficace | `twa_deg` : angle au vent vrai visé |
 | Mode portant | `mode_downwind` | Navigation vent arrière ou grand largue | `twa_deg` |
-| Mode VMG | `mode_vmg` | Le bateau cherche la meilleure vitesse utile vers la bouée, au près comme au portant | `twa_deg` |
+| Mode VMG | `mode_vmg` | Le bateau cherche la meilleure vitesse utile vers la bouée | `twa_deg` |
 | Mode haut | `mode_high` | Le bateau serre le vent (plus près, moins vite) | `twa_deg` |
 | Mode bas | `mode_low` | Le bateau s’écarte du vent (plus loin, plus vite) | `twa_deg` |
+| Cap | `heading` | Tenir un cap fixe | `heading_deg` (degrés vrais) |
 
-**Réglages (à définir)**
+**Réglages**
 
-Des ordres plus fins sont envisagés. Leur nom, leur effet exact et leurs paramètres restent à choisir avec les équipes avant le gel du contrat.
-
-| Ordre | Code proposé | Effet envisagé | Paramètre envisagé |
+| Ordre | Code proposé | Effet | Paramètre |
 |---|---|---|---|
-| Choque | `ease` | Relâcher une écoute (grand-voile ou foc) | `sheet` (`main`, `jib`), `amount_pct` |
-| Borde | `trim` | Reprendre une écoute | `sheet`, `amount_pct` |
-| Cap | `heading` | Tenir un cap fixe, sans tenir compte du vent | `heading_deg` (degrés vrais) |
+| Choque | `ease` | Relâcher l’écoute | `amount_pct` |
+| Borde | `trim` | Reprendre l’écoute | `amount_pct` |
 
-**Contournement d’une bouée, en pratique.** L’ordre « abats » ou « loffe » peut être envoyé à l’approche : le pilote automatique l’exécute au moment où le bateau passe la bouée, du bon côté. C’est l’équipe qui décide quand et comment ; la position officielle de la balise, elle, fait foi pour le passage de la bouée (moteur de course S8).
+**VMG** (*velocity made good*) : la vitesse à laquelle on se rapproche réellement de la bouée. **TWA** (*true wind angle*) : l’angle entre l’axe du bateau et le vent vrai.
 
-**VMG** (*velocity made good*) : la vitesse à laquelle on se rapproche réellement de la bouée au vent (ou sous le vent), et non la vitesse sur l’eau. **TWA** (*true wind angle*) : l’angle entre l’axe du bateau et le vent vrai.
+### 4.2 Format des ordres
 
-### 4.2 Structure de message proposée
-
-L’organisation n’impose pas de format sur votre liaison (elle est à vous). Elle propose une structure commune, pour faciliter l’entraide, le contrôle et l’éventuel arbitrage. Deux variantes équivalentes :
-
-**Variante JSON ou CBOR** (CBOR est un JSON binaire, plus compact pour une radio lente) :
-
-Ordre envoyé par le PC à terre :
+Le programme de liaison reçoit les ordres dans un format commun :
 
 ```json
 {
@@ -131,75 +150,37 @@ Ordre envoyé par le PC à terre :
 }
 ```
 
-Accusé de réception immédiat, envoyé par le bateau :
-
-```json
-{
-  "v": 1,
-  "kind": "ack",
-  "boat_id": "FRA-07",
-  "order_id": 1842,
-  "t_gps_ms": 1494421447290,
-  "status": "accepted"
-}
-```
-
-Compte rendu d’exécution :
-
-```json
-{
-  "v": 1,
-  "kind": "report",
-  "boat_id": "FRA-07",
-  "order_id": 1842,
-  "t_gps_ms": 1494421449650,
-  "status": "done",
-  "detail": "TWA 38 atteint"
-}
-```
+Il répond par un accusé de réception (`"kind": "ack"`, `status` : `accepted`, `rejected`, `expired`), puis par un compte rendu (`"kind": "report"`, `status` : `started`, `done`, `failed`, `aborted`).
 
 | Champ | Description |
 |---|---|
-| `v` | Version de la structure (1) |
-| `kind` | `order` (terre → bateau), `ack` (accusé de réception), `report` (compte rendu d’exécution) |
-| `boat_id` | Bateau visé ; le bateau ignore un ordre qui ne lui est pas adressé |
-| `order_id` | Numéro croissant attribué par le PC à terre ; un ordre déjà reçu (même numéro) n’est pas exécuté deux fois |
-| `t_gps_ms` | Instant d’émission, même convention que le contrat d’interface (ms depuis l’époque GPS) ; le GPS de bord donne l’heure exacte |
-| `cmd` | `tack`, `gybe`, `bear_away`, `head_up`, `head_to_wind`, `mode_upwind`, `mode_downwind`, `mode_vmg`, `mode_high`, `mode_low` ; à définir : `ease`, `trim`, `heading` |
-| `param` | Facultatif : `twa_deg` (angle au vent visé, en degrés), autres paramètres selon la décision (c) ci-dessous |
-| `ttl_ms` | Durée de validité : un ordre reçu trop tard est refusé (`status: "expired"`), pour ne pas virer au mauvais moment |
-| `status` | Accusé : `accepted`, `rejected`, `expired`. Compte rendu : `started`, `done`, `failed`, `aborted` |
-| `detail` | Texte court facultatif |
+| `boat_id` | Bateau visé |
+| `order_id` | Numéro croissant ; un ordre déjà reçu n’est pas exécuté deux fois |
+| `t_gps_ms` | Instant d’émission, même convention que le contrat d’interface |
+| `cmd`, `param` | L’ordre et ses paramètres (§4.1) |
+| `ttl_ms` | Durée de validité : un ordre arrivé trop tard est refusé, pour ne pas virer au mauvais moment |
 
-Ajoutez une **authentification** (au minimum un code d’intégrité avec une clé partagée entre votre PC et votre bateau) : sur une radio, n’importe qui peut émettre sur votre canal.
+Le programme tient le **journal des ordres**, fourni au jury en cas de réclamation.
 
-**Variante MAVLink** (si vous utilisez ArduPilot) : un message MAVLink propre à votre équipe (dialecte personnalisé) reprenant les mêmes champs (`order_id`, `t_gps_ms`, `cmd`, `param`, `ttl_ms`), et le message d’accusé de réception standard de MAVLink pour l’`ack`. Une partie des ordres peut aussi passer par des fonctions existantes d’ArduPilot (virement sur commande, changement de mode) : vérifiez dans la documentation de la version d’ArduPilot que vous utilisez.
+### 4.3 Ce qui est tranché
 
-### 4.3 Ce qui a été tranché par l’organisation
+Décisions du 20 et du 21 novembre 2026 :
+- l’IA peut commander directement le safran et l’écoute ; aucun humain ne barre en course, sauf arrêt de sécurité ;
+- les paramètres des ordres sont libres (angles, points de passage) ;
+- les données officielles peuvent être utilisées à bord comme à terre ;
+- le journal des ordres est fourni au jury en cas de réclamation.
 
-> Décisions du 20 et du 21 novembre 2026 : **(a)** l’IA peut commander directement le safran et les voiles, aucun humain ne barre en course, sauf arrêt de sécurité ; **(b)**, **(c)**, **(d)** tout est libre sur votre liaison, données officielles relayées comprises ; **(e)** le journal des ordres est tenu par l’équipe et fourni au jury en cas de réclamation. Le tableau ci-dessous garde, pour mémoire, les options qui étaient étudiées.
+À trancher : l’usage de l’interrupteur de reprise en main pendant la course (sécurité seulement, ou pénalité).
 
-| | Question | Options | Recommandation |
-|---|---|---|---|
-| **(a)** | **Barre à distance** : l’IA à terre peut-elle commander directement safran et voiles ? Un humain peut-il barrer au manche (joystick) ? | 1. IA autorisée, humain interdit en course sauf sécurité · 2. Ordres tactiques seuls, sauf sécurité · 3. Tout autorisé | **Acté le 20 novembre 2026 : option 1** (règles 3.2 à 3.4). Ce qui compte est l’absence d’intervention humaine pendant la course, pas l’endroit où l’IA calcule. Ancienne proposition : En course, seuls les ordres tactiques (et leurs paramètres) sont permis ; la commande manuelle n’est autorisée que pour la **sécurité** (arrêt, dégagement, retour au ponton), et l’équipe le signale au comité. L’esprit de l’épreuve est un bateau autonome guidé par une tactique |
-| **(b)** | **Relais des données officielles** : une équipe peut-elle retransmettre à son bateau des données du flux officiel (autres bateaux, vent, parcours) ? | 1. Autorisé · 2. Interdit | **Autorisé.** Toutes les équipes reçoivent les mêmes données au même instant (P11) ; les utiliser à bord ou à terre ne crée pas d’inégalité |
-| **(c)** | **Paramètres des ordres** : angles visés, points de passage (*waypoints*), réglages de voile ? | 1. Ordres seuls · 2. Ordres + paramètres (angles, waypoints) · 3. Tout est libre | **Acté le 21 novembre 2026 : tout est libre (option 3).** Un `twa_deg` ou un point de passage précise l’ordre sans en faire une barre à distance. La cadence des ordres reste à surveiller (à confirmer : une limite, par exemple 1 ordre par seconde ?) |
-| **(d)** | **Télémétrie du bateau vers l’équipe** (ses propres capteurs : vitesse, girouette, batterie, état de l’autopilote) | 1. Autorisé · 2. Interdit | **Autorisé.** Ce sont les données de l’équipe, sur sa propre liaison, dans le respect du plan de fréquences |
-| (e) | **Journal des ordres** : l’équipe doit-elle enregistrer ses ordres et les fournir au jury sur demande ? | 1. Oui · 2. Non | **Oui** (proposition) : utile pour instruire une réclamation ou vérifier la règle (a) |
+## 5. Perte de liaison et sécurité
 
-### 4.4 Perte de liaison : comportement déclaré
+Chaque équipe déclare à l’inscription ce que fait son bateau quand il ne reçoit plus rien, et le démontre au contrôle.
 
-Chaque équipe **définit et déclare à l’inscription** ce que fait son bateau quand il ne reçoit plus rien de la terre, et le démontre au contrôle. Exemple de comportement raisonnable :
+- **Montages A et B** : le récepteur met le bateau dans une position réglée à l’avance : **safran droit, écoute choquée**. Le bateau ralentit et dérive.
+- **Montage C** : le pilote garde le cap quelques secondes, puis rejoint un point de sécurité déclaré ou se met face au vent.
 
-1. pendant les premières secondes (par exemple 10 s), **garder le dernier mode** (VMG, haut ou bas) et continuer le bord en cours, en évitant les limites du parcours ;
-2. au-delà, **aller vers un point de sécurité** déclaré (hors du parcours, à l’écart des autres bateaux) ;
-3. si c’est impossible ou si la position du bateau est perdue, **se mettre bout au vent** (voiles choquées, bateau arrêté) et attendre un bateau d’assistance.
+Les témoignages montrent que ce comportement ne va pas de soi (délai caché, bateau qui accélère) : il se teste sur l’eau, en coupant l’ordinateur.
 
-Un bateau qui a perdu sa liaison reste suivi et classé par sa balise officielle. L’équipe prévient le comité par un message `technical_issue` (et, si le bateau devient dangereux, `assistance_request`) dans `outbox`.
-
-## 5. Sécurité
-
-- La sécurité sur l’eau est assurée par les **bateaux d’assistance** de l’organisation (P16), qui peuvent récupérer ou remorquer un bateau à tout moment.
-- La reprise en main à distance **n’est pas obligatoire** (P16). Une équipe qui veut un **arrêt de sécurité** ou une radiocommande de secours l’installe sur 2,4 GHz (ExpressLRS en saut de fréquence, architecture §9), la déclare et la fait homologuer au contrôle. (Le tableau du §9 de l’architecture indique « obligatoire » pour ces radiocommandes : le postulat P16, plus récent, prévaut ; à confirmer.)
-- Le **mode sécurité** déclenché à distance (arrêt, bout au vent) est toujours autorisé, même en course, si la sécurité l’exige (voir la recommandation (a)).
-- Seul l’arrêt de sécurité est permis en course ; il vaut abandon et se signale au comité (`retire`, `safety`).
+- La sécurité sur l’eau est assurée par les **bateaux d’assistance** de l’organisation, qui peuvent récupérer un bateau à tout moment.
+- La reprise en main par un humain n’est autorisée en course que pour la sécurité ; elle vaut abandon et se signale au comité (`retire`, `safety`).
+- Un bateau qui a perdu sa liaison reste suivi et classé par sa balise officielle. L’équipe prévient le comité (`technical_issue`, ou `assistance_request` si le bateau devient dangereux).

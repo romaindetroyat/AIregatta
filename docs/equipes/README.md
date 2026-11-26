@@ -40,8 +40,8 @@ Sur le site, chaque équipe a une **prise Ethernet** dans la zone équipes : câ
 |---|---|
 | [contrat-interface.md](contrat-interface.md) | Le contrat d’interface : conventions, connexion, tous les sujets MQTT avec leurs champs et un exemple, horloge, pannes, versions |
 | [connecteurs.md](connecteurs.md) | Les connecteurs proposés et quand utiliser chacun |
-| [bateau-de-reference.md](bateau-de-reference.md) | Le bateau de référence, conseillé : un IOM du commerce, un pilote automatique libre, une IA minimale ; jauge, budget, poids, réglages de départ, huit semaines pour naviguer |
-| [liaison-bateau.md](liaison-bateau.md) | Communiquer avec votre bateau : fréquences, puissances, architecture conseillée, ordres tactiques |
+| [bateau-de-reference.md](bateau-de-reference.md) | Le bateau de référence, conseillé : un IOM du commerce, une liaison ExpressLRS avec l’ordinateur, une IA minimale ; jauge, budget, poids, réglages de départ, huit semaines pour naviguer |
+| [liaison-bateau.md](liaison-bateau.md) | Piloter votre bateau depuis l’ordinateur : trois montages (A, B, C), coûts, essais, règles radio, ordres de tacticien, perte de liaison |
 | [regles-equite-et-faq.md](regles-equite-et-faq.md) | Règles d’équité, liste de contrôle avant le jour J, questions fréquentes |
 | [schemas/](schemas/) | Les schémas JSON (JSON Schema 2020-12) de chaque type de message |
 | [exemples/](exemples/) | Code prêt à lancer en Python, JavaScript (navigateur et Node.js) et NMEA |
@@ -64,8 +64,8 @@ Sur le site, chaque équipe a une **prise Ethernet** dans la zone équipes : câ
 ## Ce qui est de votre responsabilité
 
 - **Votre logiciel** : réception du flux, tactique, affichage, envoi de vos messages au comité. L’organisation fournit le flux, la documentation et des exemples, **pas d’assistant tactique** (P12).
-- **Votre liaison avec votre bateau** (P10, P36) : matériel, protocole, fiabilité, dans le respect du plan de fréquences, avec des émetteurs déclarés à l’inscription. Vous y envoyez ce que vous voulez, données officielles comprises. Aucun humain ne commande le bateau pendant une course ; le logiciel ne change pas pendant une course.
-- **Votre bateau** : jauge IOM (classe 1 m) pour la coque, les appendices, les gréements et le poids ; électronique libre (P07). À vous l’autopilote, les capteurs, et le comportement en cas de perte de liaison, déclaré à l’avance. Un bateau de référence est documenté dans le kit : conseillé, non imposé.
+- **Votre liaison avec votre bateau** : un des trois montages ExpressLRS proposés ([liaison-bateau.md](liaison-bateau.md)), avec le programme de liaison fourni par Meridia ; vous achetez et installez le matériel, avec des émetteurs déclarés à l’inscription. Vous y envoyez ce que vous voulez, données officielles comprises. Aucun humain ne commande le bateau pendant une course ; le logiciel ne change pas pendant une course.
+- **Votre bateau** : jauge IOM (classe 1 m) pour la coque, les appendices, les gréements et le poids ; électronique libre (P07). À vous la liaison avec l’ordinateur (trois montages proposés), les capteurs, et le comportement en cas de perte de liaison, déclaré à l’avance. Un bateau de référence est documenté dans le kit : conseillé, non imposé.
 - **Votre tactique** : c’est le cœur de l’épreuve.
 - **L’heure de vos PC** : synchronisée sur le serveur de temps du site (écart < 5 ms, P26).
 

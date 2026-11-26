@@ -112,16 +112,16 @@
 
 | | |
 |---|---|
-| Support physique | Au choix de l’équipe : 4G, radio de télémétrie (433 MHz, ou 868 MHz hors sous-bande réservée), Wi-Fi |
-| Protocole et format | Au choix de l’équipe, par exemple MAVLink avec ArduPilot |
-| Ce qui circule | Consignes tactiques : vire, empanne, abats (bouée au vent passée), loffe (bouée sous le vent passée), face au vent, mode près, mode portant, mode VMG, mode haut, mode bas |
+| Support physique | Radio ExpressLRS 2,4 GHz, 100 mW, selon l’un des trois montages proposés : A, radio avec prise écolage ; B, émetteur sans radio ; C, pilote automatique à bord ([equipes/liaison-bateau.md](equipes/liaison-bateau.md)) |
+| Protocole et format | Ordres au format commun, transmis par le programme de liaison ; en C, langage standard des drones (MAVLink) vers le pilote ArduPilot |
+| Ce qui circule | Ordres de tacticien : vire, empanne, abats, loffe, face au vent, modes près, portant, VMG, haut, bas, cap, choque, borde ; en A et B, traduits en mouvements de safran et d’écoute |
 | Cadence | Libre |
 | Débit | Faible |
-| Latence | Dépend de l’équipe ; le pilotage fin doit rester à bord |
-| Sécurité | Sous la responsabilité de l’équipe |
+| Latence | Quelques millièmes de seconde pour la radio. En A et B, l’ordinateur barre à partir du cap de la balise officielle ; en C, le pilote barre à bord |
+| Sécurité | Comportement en cas de coupure déclaré par l’équipe et vérifié au contrôle |
 | Secours | Bateaux d’assistance |
 | Si elle tombe | Hors système officiel : le bateau reste suivi et classé par sa balise. Le comportement en cas de perte de liaison est défini par l’équipe. |
-| Modules logiciels | aucun (liaison à la charge de l’équipe) |
+| Modules logiciels | Programme de liaison fourni par Meridia ; matériel à la charge de l’équipe |
 
 ### 8. Consoles du PC course
 

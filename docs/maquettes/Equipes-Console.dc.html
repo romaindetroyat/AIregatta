@@ -68,7 +68,7 @@ a{color:#4E6000}a:hover{color:#11150D}
 
     <div style="display:flex;flex-direction:column;gap:14px;min-height:0">
       <section aria-label="Ordres au bateau" style="display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:22px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(9,11,7,.08)">
-        <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Ordres au bateau</b><span style="display:flex;align-items:center;gap:6px;font:500 12px 'JetBrains Mono',monospace;color:#9A3D16"><span style="width:8px;height:8px;border-radius:50%;background:#D0704A"></span>radio 433 MHz · 48 ms · −71 dBm</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-family:'Funnel Display',sans-serif;font-weight:500;font-size:22px">Ordres au bateau</b><span style="display:flex;align-items:center;gap:6px;font:500 12px 'JetBrains Mono',monospace;color:#9A3D16"><span style="width:8px;height:8px;border-radius:50%;background:#D0704A"></span>ExpressLRS 2,4 GHz · 6 ms · −71 dBm</span></div>
         <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px">
           <sc-for list="{{orders}}" as="o" hint-placeholder-count="5">
             <button type="button" onClick="{{o.go}}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:60px;padding:8px;border-radius:16px;border:1px solid {{o.border}};background:{{o.bg}};font:600 15px 'Instrument Sans',sans-serif;cursor:pointer"><span>{{o.label}}</span><span style="font:500 10px 'JetBrains Mono',monospace;color:rgba(9,11,7,.62);text-align:center">{{o.key}}</span></button>

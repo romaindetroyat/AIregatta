@@ -163,11 +163,11 @@ class Component extends DCLogic {
     ].join('\n');
     const langs = [['py','Python'],['js','JavaScript'],['nmea','NMEA / AIS']].map(l => ({ label: l[1], on: String(st.lang === l[0]), bg: st.lang === l[0] ? '#C7EB00' : '#FFFFFF', go: () => this.setState({ lang: l[0] }) }));
     const ord = [
-      '# Ordres au bateau : votre liaison, pas le broker officiel.',
-      '# Exemple : radio de télémétrie 433 MHz sur port série.',
-      'import json, serial, time',
+      '# Ordres au bateau : par le programme de liaison, pas le broker officiel.',
+      '# Il les transmet par l’émetteur ExpressLRS (montages A, B ou C).',
+      'import json, socket, time',
       '',
-      'radio = serial.Serial("/dev/ttyUSB0", 57600)',
+      'liaison = socket.create_connection(("127.0.0.1", 7070))',
       'MANOEUVRES = {"tack", "gybe", "bear_away", "head_up", "head_to_wind"}',
       'MODES = {"mode_upwind", "mode_downwind", "mode_vmg",',
       '         "mode_high", "mode_low"}',
@@ -178,7 +178,7 @@ class Component extends DCLogic {
       '    msg = {"v": 1, "kind": "order", "boat_id": "SUI-05",',
       '           "order_id": n, "cmd": cmd, "param": param,',
       '           "t_gps_ms": gps_ms(), "ttl_ms": 2000}',
-      '    radio.write((json.dumps(msg) + "\\n").encode())',
+      '    liaison.sendall((json.dumps(msg) + "\\n").encode())',
       '',
       '# Bouée 3 passée à bâbord : abats, puis mode portant',
       'ordre("bear_away", 1842, mark_id="B3", side="port")',
