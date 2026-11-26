@@ -263,7 +263,8 @@ const W=(x,y)=>G0.clone().addScaledVector(RV,x).addScaledVector(U,y);
 
 /* ================= Rendu ================= */
 let PR=Math.min(1.75,window.devicePixelRatio||1);
-function mkR(canvas){const R=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});R.setPixelRatio(PR);
+const UNDERWATER=new THREE.Plane(new THREE.Vector3(0,1,0),-.25);
+function mkR(canvas){const R=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});R.localClippingEnabled=true;R.setPixelRatio(PR);
  R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.02;R.setClearColor('#D3E1E8',1);return R}
 const scene=new THREE.Scene();
 const HORIZON=new THREE.Color('#D3E1E8'),ZENITH=new THREE.Color('#2F6FB0');
@@ -506,7 +507,7 @@ function makeBoat(T){const L=LIV[T.id],root=new THREE.Group(),heel=new THREE.Gro
   const hmS=new THREE.MeshStandardMaterial({map:hullTex(L,true),roughness:.28,metalness:.05}),hmP=new THREE.MeshStandardMaterial({map:hullTex(L,false),roughness:.28,metalness:.05});
   heel.add(new THREE.Mesh(HS[0],hmS),new THREE.Mesh(HS[1],hmP));heel.add(new THREE.Mesh(DECK,new THREE.MeshStandardMaterial({map:deckTex(L),roughness:.55})));
   heel.add(new THREE.Mesh(TRANSOM,new THREE.MeshStandardMaterial({color:L.hull,roughness:.3})));
-  const carbon=std('#111318',.32,{metalness:.25});
+  const carbon=std('#111318',.32,{metalness:.25});carbon.clippingPlanes=[UNDERWATER];
   const fin=new THREE.Mesh(new THREE.BoxGeometry(.008,.40,.075),carbon);fin.position.set(0,-.24,-.05);heel.add(fin);
   const bulb=new THREE.Mesh(new THREE.SphereGeometry(1,20,12),carbon);bulb.scale.set(.032,.03,.14);bulb.position.set(0,-.44,-.07);heel.add(bulb);
   const rud=new THREE.Mesh(new THREE.BoxGeometry(.007,.15,.05),carbon);rud.position.set(0,-.07,.43);heel.add(rud);
