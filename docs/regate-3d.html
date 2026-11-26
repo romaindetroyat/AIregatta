@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Funnel+Display:wght@500;600&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Funnel+Display:wght@500;600&family=JetBrains+Mono:wght@500&family=Fraunces:opsz,wght@9..144,500&family=Inter:wght@600&display=swap">
 <style>
 /* Vitrine sombre : bandeau, scène avec un écran d’ordinateur et un iPhone qui montrent la même régate, chacun avec sa caméra et son habillage */
 :root{
@@ -121,7 +121,7 @@ footer b{color:var(--ink)}
     </div></div>
   </div>
 </main>
-<footer>Course simulée, même moteur que le prototype. Décor : côte, plages, digues, Fort Saint-Louis et bâtiments d’après <b>OpenStreetMap</b> (© contributeurs OpenStreetMap, licence ODbL) ; reliefs du Faron et de Saint-Mandrier stylisés. Sponsors fictifs, sauf AI Regatta et Meridia.</footer>
+<footer>Course simulée, même moteur que le prototype. Décor : côte, plages, digues, Fort Saint-Louis et bâtiments d’après <b>OpenStreetMap</b> (© contributeurs OpenStreetMap, licence ODbL) ; reliefs du Faron et de Saint-Mandrier stylisés. Sponsors fictifs, sauf AI Regatta, Meridia et Yuzu Digital.</footer>
 <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
 <script>const SIM=(function(){
   const TEAMS=[{id:'FRA',name:'France',c:'#2F6BFF',f:1.17},{id:'ITA',name:'Italie',c:'#00C2A8',f:1.035},{id:'GBR',name:'Grande-Bretagne',c:'#E4002B',f:0.88},{id:'NED',name:'Pays-Bas',c:'#FF8C1A',f:1.0},{id:'SUI',name:'Suisse',c:'#1E293B',f:1.015},{id:'MON',name:'Monaco',c:'#B07CFF',f:0.985}];
@@ -420,13 +420,19 @@ const LIV={
  FRA:{name:'AI Regatta',code:'FRA',tag:'#2F6BFF',hull:'#1C2758',deck:'wood',sail:'#FBFBF8',ink:'#1C2758',num:'FRA 07',kind:'aireg'},
  ITA:{name:'Meridia',code:'MER',tag:'#C7EB00',hull:'#090B07',deck:'carbon',sail:'#1B1F16',ink:'#EEF0E4',num:'MER 01',kind:'meridia'},
  SUI:{name:'Calanque',code:'SUI',tag:'#14A3A0',hull:'#F4F2EC',deck:'white',sail:'#FBFBF8',ink:'#0E6E6B',num:'SUI 12',kind:'calanque'},
- NED:{name:'Mistral Volt',code:'NED',tag:'#FF8A1F',hull:'#FF7A1A',deck:'white',sail:'#FBFBF8',ink:'#E8540B',num:'NED 21',kind:'mistral'},
+ NED:{name:'Yuzu Digital',code:'YUZ',tag:'#F5C518',hull:'#1C2433',deck:'white',sail:'#F5EEE0',ink:'#1C2433',num:'YUZ 05',kind:'yuzu'},
  MON:{name:'Lavandine',code:'MON',tag:'#A98BE0',hull:'#6E54A3',deck:'white',sail:'#F1ECF8',ink:'#5A3F91',num:'MON 09',kind:'lavande'},
  GBR:{name:'Phare Azur',code:'GBR',tag:'#E4002B',hull:'#C8102E',deck:'white',sail:'#FBFBF8',ink:'#C8102E',num:'GBR 44',kind:'phare'}};
 const MWING=new Path2D('M0,553 Q134.8,280.3 253,0 L500,230 L176,553 Z M1000,553 Q865.2,280.3 747,0 L500,230 L824,553 Z');
 function rr(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()}
 function meridiaIcon(g,x,y,s){const gr=g.createRadialGradient(x+s*.5,y+s*.25,s*.05,x+s*.5,y+s*.3,s*1.2);gr.addColorStop(0,'#DCFF3A');gr.addColorStop(.4,'#C7EB00');gr.addColorStop(.75,'#8FD18A');gr.addColorStop(1,'#43B3A3');
   g.save();rr(g,x,y,s,s,s*.3);g.fillStyle=gr;g.fill();g.translate(x+s*.15,y+s*.3);g.scale(s*.7/1000,s*.7/1000);g.fillStyle='#090B07';g.fill(MWING);g.restore()}
+function yuzuMark(g,x,y,s,dark){const r=s*.36,cx=x+s*.5,cy=y+s*.62,ink=dark?'#F5EEE0':'#1C2433';g.save();
+  g.beginPath();g.arc(cx,cy,r,0,Math.PI*2);g.clip();g.fillStyle='#F5C518';g.fillRect(cx-r,cy-r,r*.96,2*r);g.fillStyle=ink;g.beginPath();g.moveTo(cx-r*.02,cy-r);g.quadraticCurveTo(cx-r*.22,cy,cx+r*.02,cy+r);g.lineTo(cx+r,cy+r);g.lineTo(cx+r,cy-r);g.fill();g.restore();
+  g.save();g.translate(cx+r*.32,cy-r*1.22);g.rotate(-.55);g.fillStyle=ink;g.beginPath();g.moveTo(-r*.5,0);g.quadraticCurveTo(0,-r*.5,r*.5,0);g.quadraticCurveTo(0,r*.5,-r*.5,0);g.fill();g.restore()}
+function yuzuLogo(g,x,y,h,dark,mirror){const ink=dark?'#F5EEE0':'#1C2433';g.save();if(mirror){const w=h*3.3;g.translate(x+w/2,0);g.scale(-1,1);g.translate(-(x+w/2),0)}
+  yuzuMark(g,x,y,h,dark);g.font=`500 ${h*.5}px "Fraunces",Georgia,serif`;g.fillStyle=ink;g.textBaseline='alphabetic';let px=x+h*.95;for(const ch of 'YUZU'){g.fillText(ch,px,y+h*.62);px+=g.measureText(ch).width+h*.09}
+  g.font=`600 ${h*.17}px "Inter",sans-serif`;g.fillStyle=dark?'#F5C518':'#6B7180';px=x+h*.97;for(const ch of 'DIGITAL'){g.fillText(ch,px,y+h*.88);px+=g.measureText(ch).width+h*.075}g.restore()}
 function txt(g,t,x,y,font,col,mirror,align){g.save();g.font=font;g.fillStyle=col;g.textBaseline='middle';const w=g.measureText(t).width;let cx=align==='center'?x:x+w/2;g.translate(cx,y);if(mirror)g.scale(-1,1);g.fillText(t,-w/2,0);g.restore()}
 const tex=c=>{const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=8;return t};
 // coque : u = longueur (arrière -> étrave), v = de haut en bas (liston -> quille) ; la flottaison est vers 40 % de la hauteur
@@ -439,7 +445,7 @@ function hullTex(L,mir){const c=document.createElement('canvas');c.width=2048;c.
   else if(L.kind==='meridia'){const gr=g.createLinearGradient(0,0,2048,0);gr.addColorStop(0,'#43B3A3');gr.addColorStop(.5,'#C7EB00');gr.addColorStop(1,'#DCFF3A');g.fillStyle=gr;g.fillRect(0,0,2048,9);g.fillRect(0,WL-14,2048,4);
     meridiaIcon(g,110,16,70);txt(g,'meridia',200,50,'500 66px "Funnel Display",sans-serif','#EEF0E4',mir);txt(g,'L’IA, EN PLEINE LUMIÈRE',1120,52,'500 26px "JetBrains Mono",monospace','#C7EB00',mir)}
   else if(L.kind==='calanque'){g.fillStyle='#14A3A0';g.beginPath();g.moveTo(0,WL+10);for(let x=0;x<=2048;x+=16)g.lineTo(x,62+18*Math.sin(x*.012));g.lineTo(2048,H);g.lineTo(0,H);g.fill();txt(g,'CALANQUE',120,36,'800 46px "Plus Jakarta Sans",sans-serif','#0E6E6B',mir)}
-  else if(L.kind==='mistral'){const gr=g.createLinearGradient(0,0,2048,0);gr.addColorStop(0,'#FF5A1F');gr.addColorStop(1,'#FFC21A');g.fillStyle=gr;g.fillRect(0,0,2048,H);g.fillStyle='rgba(255,255,255,.9)';for(let k=0;k<5;k++)g.fillRect(1500+k*70,0,26,WL);txt(g,'MISTRAL VOLT',110,52,'800 54px "Plus Jakarta Sans",sans-serif','#FFFFFF',mir)}
+  else if(L.kind==='yuzu'){g.fillStyle='#F5C518';g.fillRect(0,0,2048,8);g.fillRect(0,WL-12,2048,5);g.fillStyle='#F5EEE0';g.fillRect(0,WL-4,2048,2);yuzuLogo(g,100,6,92,true,mir);txt(g,'yuzudigital.fr',1080,52,'500 28px "JetBrains Mono",monospace','#F5C518',mir)}
   else if(L.kind==='lavande'){g.fillStyle='#F1ECF8';g.fillRect(0,0,2048,6);g.strokeStyle='#B9A2E6';g.lineWidth=5;for(let k=0;k<14;k++){const x=1300+k*48;g.beginPath();g.moveTo(x,WL);g.quadraticCurveTo(x+8,50,x+20,14);g.stroke()}txt(g,'Lavandine',110,52,'700 60px "Plus Jakarta Sans",sans-serif','#F1ECF8',mir)}
   else if(L.kind==='phare'){g.fillStyle='#FFFFFF';for(let k=0;k<4;k++){g.beginPath();g.moveTo(1250+k*150,0);g.lineTo(1320+k*150,0);g.lineTo(1250+k*150,WL);g.lineTo(1180+k*150,WL);g.fill()}txt(g,'PHARE AZUR',110,52,'800 56px "Plus Jakarta Sans",sans-serif','#FFFFFF',mir)}
   g.fillStyle='rgba(0,0,0,.22)';g.fillRect(0,WL+4,2048,H-WL);g.fillStyle=L.kind==='meridia'?'#14170F':L.kind==='calanque'?'#0F5F5D':'#151B2C';g.fillRect(0,WL+12,2048,H);return tex(c)}
@@ -453,15 +459,16 @@ function deckTex(L){const c=document.createElement('canvas');c.width=1024;c.heig
 function sailTex(L,mirror,jib){const c=document.createElement('canvas');c.width=512;c.height=1024;const g=c.getContext('2d');const H=1024,Wd=512;
   g.fillStyle=L.sail;g.fillRect(0,0,Wd,H);const at=(u,v)=>[u*Wd,H-v*H];
   g.strokeStyle=L.kind==='meridia'?'rgba(238,240,228,.10)':'rgba(15,23,42,.07)';g.lineWidth=2;for(let v=.1;v<1;v+=.1){const[x,y]=at(0,v);g.beginPath();g.moveTo(x,y);g.lineTo(x+Wd,y-Wd*.25);g.stroke()}
-  if(jib){if(L.kind==='aireg'){g.fillStyle='#1C2758';g.fillRect(0,H-120,Wd,26)}else if(L.kind==='meridia'){g.fillStyle='#C7EB00';g.fillRect(0,H-110,Wd,14)}else{g.fillStyle=L.tag;g.fillRect(0,H-110,Wd,20)}return tex(c)}
+  if(jib){if(L.kind==='aireg'){g.fillStyle='#1C2758';g.fillRect(0,H-120,Wd,26)}else if(L.kind==='meridia'){g.fillStyle='#C7EB00';g.fillRect(0,H-110,Wd,14)}else if(L.kind==='yuzu'){g.fillStyle='#F5C518';g.fillRect(0,H-120,Wd,24);g.fillStyle='#1C2433';g.fillRect(0,H-92,Wd,6)}else{g.fillStyle=L.tag;g.fillRect(0,H-110,Wd,20)}return tex(c)}
   const leech=(v)=>1-v;
+  [.13,.27,.41,.55,.68,.8,.9].forEach(v=>{const[x0,y0]=at(0,v);g.strokeStyle=L.kind==='meridia'?'rgba(238,240,228,.16)':'rgba(15,23,42,.13)';g.lineWidth=5;g.beginPath();g.moveTo(x0,y0);g.lineTo(Wd,y0);g.stroke()});
   if(L.kind==='aireg'){const bands=[['#1F4FB8',.14],['#F4F4F4',.075],['#E1062C',.075]];let off=0;bands.reverse().forEach(([col,w])=>{g.fillStyle=col;g.beginPath();const a=at(1-off,0),b=at(0,1-off),d=at(0,1-off-w),e=at(1-off-w,0);g.moveTo(...a);g.lineTo(...b);g.lineTo(...d);g.lineTo(...e);g.fill();off+=w});
     txt(g,'Ai Regatta',28,H-.20*H,'800 58px "Plus Jakarta Sans",sans-serif','#1C2758',mirror);txt(g,'.com',30,H-.145*H,'700 34px "Plus Jakarta Sans",sans-serif','#2F6BFF',mirror);
     txt(g,'FRA',30,H-.56*H,'800 70px "Plus Jakarta Sans",sans-serif','#1C2758',mirror);txt(g,'07',30,H-.64*H,'800 70px "Plus Jakarta Sans",sans-serif','#1C2758',mirror)}
   else if(L.kind==='meridia'){g.save();const s=.6;g.translate(mirror?Wd-30-1000*s*.5:30,H-.42*H);g.scale(s*.5,s*.5);if(mirror){g.translate(1000,0);g.scale(-1,1)}g.strokeStyle='#C7EB00';g.lineWidth=14;g.stroke(MWING);g.restore();
     meridiaIcon(g,mirror?Wd*.42:28,H-.235*H,64);txt(g,'meridia',mirror?28:104,H-.205*H,'500 64px "Funnel Display",sans-serif','#EEF0E4',mirror);txt(g,'MER 01',30,H-.6*H,'500 50px "JetBrains Mono",monospace','#C7EB00',mirror)}
   else if(L.kind==='calanque'){g.fillStyle='#14A3A0';g.beginPath();g.moveTo(...at(0,0));g.lineTo(...at(1,0));g.lineTo(...at(.55,.45));g.lineTo(...at(0,.32));g.fill();txt(g,'CALANQUE',24,H-.12*H,'800 44px "Plus Jakarta Sans",sans-serif','#FFFFFF',mirror);txt(g,'SUI 12',30,H-.6*H,'800 56px "Plus Jakarta Sans",sans-serif','#0E6E6B',mirror)}
-  else if(L.kind==='mistral'){const gr=g.createLinearGradient(0,H,0,H*.4);gr.addColorStop(0,'#FF5A1F');gr.addColorStop(1,'rgba(255,194,26,0)');g.fillStyle=gr;g.fillRect(0,H*.4,Wd,H*.6);txt(g,'MISTRAL',26,H-.14*H,'800 52px "Plus Jakarta Sans",sans-serif','#FFFFFF',mirror);txt(g,'VOLT',26,H-.2*H,'800 52px "Plus Jakarta Sans",sans-serif','#FFFFFF',mirror);txt(g,'NED 21',30,H-.6*H,'800 56px "Plus Jakarta Sans",sans-serif','#E8540B',mirror)}
+  else if(L.kind==='yuzu'){g.fillStyle='#F5C518';g.beginPath();g.moveTo(...at(0,0));g.lineTo(...at(1.2,0));g.lineTo(...at(.9,.12));g.lineTo(...at(0,.2));g.fill();g.fillStyle='#1C2433';g.beginPath();g.moveTo(...at(0,.2));g.lineTo(...at(.9,.12));g.lineTo(...at(.88,.14));g.lineTo(...at(0,.225));g.fill();yuzuLogo(g,22,H-.4*H,66,false,mirror);g.save();if(mirror){g.translate(24+60,0);g.scale(-1,1);g.translate(-84,0)}yuzuMark(g,24,H-.8*H,120,false);g.restore();txt(g,'YUZ 05',30,H-.52*H,'500 46px "JetBrains Mono",monospace','#1C2433',mirror)}
   else if(L.kind==='lavande'){for(let k=0;k<6;k++){g.fillStyle=k%2?'#CDB9EE':'#A98BE0';const v0=.05+k*.06;g.beginPath();g.moveTo(...at(0,v0));g.lineTo(...at(leech(v0),v0));g.lineTo(...at(leech(v0+.04),v0+.04));g.lineTo(...at(0,v0+.04));g.fill()}txt(g,'Lavandine',26,H-.47*H,'700 50px "Plus Jakarta Sans",sans-serif','#5A3F91',mirror);txt(g,'MON 09',30,H-.62*H,'800 52px "Plus Jakarta Sans",sans-serif','#5A3F91',mirror)}
   else if(L.kind==='phare'){g.fillStyle='#C8102E';g.beginPath();g.moveTo(...at(0,.62));g.lineTo(...at(.38,.62));g.lineTo(...at(0,1));g.fill();g.fillStyle='#C8102E';g.fillRect(0,H-.1*H,Wd,.05*H);txt(g,'PHARE AZUR',24,H-.2*H,'800 46px "Plus Jakarta Sans",sans-serif','#C8102E',mirror);txt(g,'GBR 44',30,H-.5*H,'800 56px "Plus Jakarta Sans",sans-serif','#1E293B',mirror)}
   return tex(c)}
@@ -490,7 +497,7 @@ const tmpR=new THREE.Vector3(),tmpP=new THREE.Vector3();
 function shapeSail(g,T,Hd,C,camber,planeUV,roach){const {ns,nt}=g.userData,p=g.attributes.position.array,uv=g.attributes.uv.array;
   tmpN.copy(Hd).sub(T).cross(tmpB.copy(C).sub(T)).normalize();
   if(roach){tmpR.copy(Hd).sub(C).cross(tmpN).normalize();if(tmpR.dot(tmpP.copy(C).sub(T))<0)tmpR.negate()}
-  for(let i=0;i<=ns;i++){const s=i/ns;tmpA.copy(T).lerp(Hd,s);tmpB.copy(C).lerp(Hd,s);const rs=roach?roach*Math.sin(Math.PI*(s*.9+.05))*Math.min(1,s*5):0;for(let j=0;j<=nt;j++){const t=j/nt,k=i*(nt+1)+j;tmpC.copy(tmpA).lerp(tmpB,t);
+  for(let i=0;i<=ns;i++){const s=i/ns;tmpA.copy(T).lerp(Hd,s);tmpB.copy(C).lerp(Hd,s);const rs=roach?roach*(s<.67?Math.pow(Math.sin(Math.PI/2*s/.67),1.6):1-.55*(s-.67)/.33):0;for(let j=0;j<=nt;j++){const t=j/nt,k=i*(nt+1)+j;tmpC.copy(tmpA).lerp(tmpB,t);
     if(planeUV){const q=planeUV(tmpC);uv[k*2]=q[0];uv[k*2+1]=q[1]}else{uv[k*2]=t;uv[k*2+1]=s}
     if(rs)tmpC.addScaledVector(tmpR,rs*Math.pow(t,1.6));tmpC.addScaledVector(tmpN,camber*4*t*(1-t)*(1-.55*s));
     p[k*3]=tmpC.x;p[k*3+1]=tmpC.y;p[k*3+2]=tmpC.z}}
@@ -507,7 +514,7 @@ function makeBoat(T){const L=LIV[T.id],root=new THREE.Group(),heel=new THREE.Gro
   const fitting=new THREE.Mesh(new THREE.BoxGeometry(.03,.012,.05),std(L.tag,.4));fitting.position.set(0,.06,.08);heel.add(fitting);
   const main=new THREE.Group();main.position.set(0,.09,-.1);heel.add(main);
   const boom=new THREE.Mesh(new THREE.CylinderGeometry(.005,.005,.42,6),std('#2A2E36',.4));boom.rotation.x=Math.PI/2;boom.position.set(0,.0,.21);main.add(boom);
-  const mg=sailGrid(18,9),jg=sailGrid(12,6);
+  const mg=sailGrid(24,9),jg=sailGrid(12,6);
   const sA=sailTex(L,false,false),sB=sailTex(L,true,false),jA=sailTex(L,false,true);
   const mk=(g,t,side)=>new THREE.Mesh(g,new THREE.MeshStandardMaterial({map:t,side,roughness:.75,transparent:true,opacity:.97}));
   main.add(mk(mg,sB,THREE.FrontSide),mk(mg,sA,THREE.BackSide));
@@ -538,7 +545,7 @@ function place(t,dt){Object.values(boats).forEach(m=>{const st=SIM.state(m.sb,t)
   const boomT=Math.min(1.3,Math.max(.12,twa/180*1.55));
   m.heelA+=(side*heelT-m.heelA)*lerpK(dt,3);m.boomA+=(side*boomT-m.boomA)*lerpK(dt,2.4);m.cam+=(side*.05-m.cam)*lerpK(dt,2);
   m.heel.rotation.z=-m.heelA;m.heel.rotation.x=.025*Math.sin(wt*1.6+m.sb.i*2);m.heel.position.y=.012*Math.sin(wt*2.1+m.sb.i);
-  m.main.rotation.y=m.boomA;shapeSail(m.mg,MT,MH,MC,-m.cam*.9,mainUV,.16);
+  m.main.rotation.y=m.boomA;shapeSail(m.mg,MT,MH,MC,-m.cam*.9,mainUV,.2);
   const C=JC0.clone().sub(JT).applyAxisAngle(JA,m.boomA*.85).add(JT);shapeSail(m.jg,JT,JH,C,-m.cam*.55,null);
   // sillage
   const hs=m.hist,sp=st.sog||0;if(!hs.length||Math.hypot(hs[hs.length-3]-p.x,hs[hs.length-1]-p.z)>.5){hs.push(p.x,h,p.z);if(hs.length>70*3)hs.splice(0,3)}
@@ -607,5 +614,5 @@ window.__regate={get T(){return T},set T(v){T=v},get race(){return raceNo},shot(
 <script>
 (function(){let go=false;const run=()=>{if(go)return;go=true;try{window.__start()}catch(e){console.error(e)}};
  if(!window.THREE){document.getElementById('stage').innerHTML='<p class="noscript">La 3D n’a pas pu se charger.</p>';return}
- const f=document.fonts;if(f&&f.load){Promise.all([f.load('800 60px "Plus Jakarta Sans"'),f.load('700 60px "Plus Jakarta Sans"'),f.load('500 60px "Funnel Display"'),f.load('500 40px "JetBrains Mono"')]).then(run,run);setTimeout(run,3000)}else run()})();
+ const f=document.fonts;if(f&&f.load){Promise.all([f.load('800 60px "Plus Jakarta Sans"'),f.load('700 60px "Plus Jakarta Sans"'),f.load('500 60px "Funnel Display"'),f.load('500 40px "JetBrains Mono"'),f.load('500 40px "Fraunces"'),f.load('600 20px "Inter"')]).then(run,run);setTimeout(run,3000)}else run()})();
 </script>
