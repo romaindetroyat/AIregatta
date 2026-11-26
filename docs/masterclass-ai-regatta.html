@@ -474,46 +474,44 @@ body.idle #help,#help.gone{opacity:0}
       </defs>
       <rect width="1600" height="700" fill="url(#sea)"/>
       <rect width="1600" height="700" fill="url(#ripple)"/>
-      <!-- zone de pénalité -->
+      <!-- zone de pénalité (sous la bouée 2, comme dans le règlement) -->
       <g class="mark" style="--d:.5s">
-        <rect x="640" y="410" width="150" height="190" rx="26" fill="#7CC6FF" fill-opacity=".14" stroke="#7CC6FF" stroke-opacity=".5" stroke-width="2.5" stroke-dasharray="10 8"/>
-        <text x="812" y="500" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="24">Zone de réparation</text>
-        <text x="812" y="528" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="24">de pénalité</text>
+        <rect x="270" y="500" width="120" height="186" rx="24" fill="#7CC6FF" fill-opacity=".14" stroke="#7CC6FF" stroke-opacity=".5" stroke-width="2.5" stroke-dasharray="10 8"/>
+        <text x="410" y="584" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="24">Zone de réparation</text>
+        <text x="410" y="612" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="24">de pénalité</text>
       </g>
-      <!-- lignes de départ et d’arrivée -->
+      <!-- porte de départ = porte d’arrivée, entre les bouées 1 et 2 -->
       <g class="mark" style="--d:.65s">
-        <line x1="200" y1="585" x2="200" y2="675" stroke="#fff" stroke-width="3" stroke-dasharray="8 7"/>
-        <circle cx="200" cy="585" r="9" fill="#fff"/><circle cx="200" cy="675" r="9" fill="#fff"/>
-        <rect x="46" y="608" width="130" height="44" rx="22" fill="#fff"/><text x="111" y="638" text-anchor="middle" fill="#0B1A44" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="24">Départ</text>
+        <line x1="330" y1="158" x2="330" y2="382" stroke="#fff" stroke-width="3" stroke-dasharray="9 8" stroke-opacity=".85"/>
+        <rect x="24" y="228" width="186" height="84" rx="22" fill="#fff"/>
+        <text x="117" y="262" text-anchor="middle" fill="#0B1A44" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="23">Départ</text>
+        <text x="117" y="292" text-anchor="middle" fill="#1E7A47" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="23">Arrivée</text>
       </g>
-      <g class="mark" style="--d:.8s">
-        <line x1="170" y1="120" x2="170" y2="220" stroke="#5FD08A" stroke-width="3" stroke-dasharray="8 7"/>
-        <circle cx="170" cy="120" r="9" fill="#5FD08A"/><circle cx="170" cy="220" r="9" fill="#5FD08A"/>
-        <rect x="40" y="238" width="130" height="44" rx="22" fill="#5FD08A"/><text x="105" y="268" text-anchor="middle" fill="#07301A" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="24">Arrivée</text>
-      </g>
-      <!-- routes (invisibles) : tronc commun, puis deux bateaux symétriques -->
-      <path id="routeC" d="M215 630 L1250 630 C1500 630 1520 330 1380 330 L640 330" fill="none" stroke="none"/>
-      <path id="routeT" d="M640 330 C500 330 290 300 292 170 C292 95 360 70 420 80 L540 88" fill="none" stroke="none"/>
-      <path id="routeB" d="M640 330 C500 330 290 360 292 490 C292 565 360 590 420 580 L540 572" fill="none" stroke="none"/>
-      <g id="wakeC" fill="none" stroke-linecap="round"></g><g id="wakeT" fill="none" stroke-linecap="round"></g><g id="wakeB" fill="none" stroke-linecap="round"></g>
-      <circle id="split" cx="640" cy="330" r="0" fill="none" stroke="#fff" stroke-width="3" opacity="0"/>
+      <!-- vent -->
+      <g class="mark" style="--d:.9s"><path d="M1540 70 L1440 70 M1462 52 L1440 70 L1462 88" fill="none" stroke="#BFE4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="1490" y="112" text-anchor="middle" fill="#BFE4FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="22">Vent</text></g>
+      <!-- routes (invisibles) : tour 1, choix bouée 1 ou 2, tour 2 et arrivée -->
+      <path id="routeC1" d="M215 300 C260 290 290 285 330 285 L1300 330 C1470 335 1490 200 1385 205 L520 225 C440 228 400 270 330 270" fill="none" stroke="none"/>
+      <path id="routeT" d="M330 270 C250 270 220 170 250 105 C280 45 370 55 420 120 C480 200 600 255 760 268" fill="none" stroke="none"/>
+      <path id="routeB" d="M330 270 C250 270 220 370 250 435 C280 495 370 485 420 420 C480 340 600 285 760 272" fill="none" stroke="none"/>
+      <path id="routeC2" d="M760 270 C900 300 1100 330 1300 332 C1470 335 1490 200 1385 205 L520 225 C440 228 400 262 330 268 L240 270" fill="none" stroke="none"/>
+      <g id="wakeC1" fill="none" stroke-linecap="round"></g><g id="wakeT" fill="none" stroke-linecap="round"></g><g id="wakeB" fill="none" stroke-linecap="round"></g><g id="wakeC2" fill="none" stroke-linecap="round"></g>
+      <circle id="split" cx="330" cy="270" r="0" fill="none" stroke="#fff" stroke-width="3" opacity="0"/>
       <!-- bouées -->
-      <g class="mark" style="--d:.35s" filter="url(#sh)"><circle cx="360" cy="160" r="34" fill="url(#buoyR)"/><text x="360" y="171" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">1</text></g>
-      <g class="mark" style="--d:.45s" filter="url(#sh)"><circle cx="360" cy="500" r="34" fill="url(#buoyR)"/><text x="360" y="511" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">2</text></g>
-      <g class="mark" style="--d:.55s" filter="url(#sh)"><circle cx="1400" cy="480" r="34" fill="url(#buoyR)"/><text x="1400" y="491" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">3</text></g>
-      <g class="mark" style="--d:.6s" filter="url(#sh)"><circle cx="715" cy="465" r="28" fill="url(#buoyR)"/><text x="715" y="474" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="22">P1</text></g>
-      <g class="mark" style="--d:.7s" filter="url(#sh)"><circle cx="715" cy="550" r="28" fill="url(#buoyR)"/><text x="715" y="559" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="22">P2</text></g>
+      <g class="mark" style="--d:.35s" filter="url(#sh)"><circle cx="330" cy="124" r="34" fill="url(#buoyR)"/><text x="330" y="135" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">1</text></g>
+      <g class="mark" style="--d:.45s" filter="url(#sh)"><circle cx="330" cy="416" r="34" fill="url(#buoyR)"/><text x="330" y="427" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">2</text></g>
+      <g class="mark" style="--d:.55s" filter="url(#sh)"><circle cx="1400" cy="268" r="34" fill="url(#buoyR)"/><text x="1400" y="279" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="32">3</text></g>
+      <g class="mark" style="--d:.6s" filter="url(#sh)"><circle cx="330" cy="548" r="26" fill="url(#buoyR)"/><text x="330" y="556" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="21">P1</text></g>
+      <g class="mark" style="--d:.7s" filter="url(#sh)"><circle cx="330" cy="640" r="26" fill="url(#buoyR)"/><text x="330" y="648" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="21">P2</text></g>
       <!-- bateaux -->
       <g class="boat" id="boatC"><g id="boatInnerC"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#fff"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
       <g class="boat" id="boatT"><g id="boatInnerT"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#fff"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
       <g class="boat" id="boatB"><g id="boatInnerB"><path d="M-22 6 L22 6 L16 14 L-16 14 Z" fill="#0B1A44" stroke="#fff" stroke-width="2"/><path d="M-2 4 L-2 -34 L18 4 Z" fill="#fff"/><path d="M-6 4 L-6 -26 L-20 4 Z" fill="#F2476F"/></g></g>
     </svg>
     <div class="legend">
-      <div class="li r" style="--d:.5s"><span class="sw"><svg viewBox="0 0 50 50"><line x1="25" y1="6" x2="25" y2="44" stroke="#fff" stroke-width="3" stroke-dasharray="6 5"/><circle cx="25" cy="6" r="5" fill="#fff"/><circle cx="25" cy="44" r="5" fill="#fff"/></svg></span>Ligne de départ</div>
-      <div class="li r" style="--d:.6s"><span class="sw"><svg viewBox="0 0 50 50"><line x1="25" y1="6" x2="25" y2="44" stroke="#5FD08A" stroke-width="3" stroke-dasharray="6 5"/><circle cx="25" cy="6" r="5" fill="#5FD08A"/><circle cx="25" cy="44" r="5" fill="#5FD08A"/></svg></span>Ligne d’arrivée</div>
-      <div class="li r" style="--d:.7s"><span class="sw"><svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="18" fill="#E8283F"/></svg></span>Bouées 1, 2 et 3</div>
-      <div class="li r" style="--d:.8s"><span class="sw"><svg viewBox="0 0 50 50"><path d="M4 30 L36 30" stroke="#fff" stroke-opacity=".25" stroke-width="3" stroke-linecap="round"/><path d="M18 30 L36 30" stroke="#fff" stroke-opacity=".7" stroke-width="4" stroke-linecap="round"/><path d="M36 26 L48 26 L44 32 L36 32Z M40 25 L40 8 L48 25Z" fill="#fff"/></svg></span>Route du parcours (sillage)</div>
-      <div class="li r" style="--d:.9s"><span class="sw"><svg viewBox="0 0 50 50"><rect x="9" y="5" width="32" height="40" rx="9" fill="#7CC6FF" fill-opacity=".2" stroke="#7CC6FF" stroke-width="2" stroke-dasharray="5 4"/><circle cx="25" cy="17" r="6" fill="#E8283F"/><circle cx="25" cy="33" r="6" fill="#E8283F"/></svg></span>Zone de réparation de pénalité (P1, P2)</div>
+      <div class="li r" style="--d:.5s"><span class="sw"><svg viewBox="0 0 50 50"><line x1="25" y1="9" x2="25" y2="41" stroke="#fff" stroke-width="3" stroke-dasharray="6 5"/><circle cx="25" cy="8" r="7" fill="#E8283F"/><circle cx="25" cy="42" r="7" fill="#E8283F"/></svg></span>Porte de départ et d’arrivée : bouées 1 et 2</div>
+      <div class="li r" style="--d:.6s"><span class="sw"><svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="18" fill="#E8283F"/><text x="25" y="33" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans,Arial" font-weight="800" font-size="22">3</text></svg></span>Bouée au vent, laissée à bâbord</div>
+      <div class="li r" style="--d:.7s"><span class="sw"><svg viewBox="0 0 50 50"><path d="M4 30 L36 30" stroke="#fff" stroke-opacity=".25" stroke-width="3" stroke-linecap="round"/><path d="M18 30 L36 30" stroke="#fff" stroke-opacity=".7" stroke-width="4" stroke-linecap="round"/><path d="M36 26 L48 26 L44 32 L36 32Z M40 25 L40 8 L48 25Z" fill="#fff"/></svg></span>2 tours : à la porte, on enroule la bouée 1 ou 2 au choix</div>
+      <div class="li r" style="--d:.8s"><span class="sw"><svg viewBox="0 0 50 50"><rect x="9" y="5" width="32" height="40" rx="9" fill="#7CC6FF" fill-opacity=".2" stroke="#7CC6FF" stroke-width="2" stroke-dasharray="5 4"/><circle cx="25" cy="17" r="6" fill="#E8283F"/><circle cx="25" cy="33" r="6" fill="#E8283F"/></svg></span>Zone de réparation de pénalité (P1, P2)</div>
     </div>
   </div>
   <div class="foot"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
@@ -645,28 +643,28 @@ body.idle #help,#help.gone{opacity:0}
     frame.classList.add('max');if(ifr)ifr.contentWindow.postMessage({regateMode:m},'*')}
   frame.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();zoom(b.dataset.zoom);b.blur()}));
   // bateau animé le long de la route du parcours voiliers
-  let raf=0,t0=0;const R={C:$('routeC'),T:$('routeT'),B:$('routeB')},LEN={};for(const k in R)LEN[k]=R[k].getTotalLength();
+  let raf=0,t0=0;const R={C1:$('routeC1'),T:$('routeT'),B:$('routeB'),C2:$('routeC2')},LEN={};for(const k in R)LEN[k]=R[k].getTotalLength();
   const ring=$('split');
-  const buoys=[...document.querySelectorAll('#s12 .mark')].filter(g=>g.querySelector('circle:not([r="9"])')).map(g=>{const c=g.querySelector('circle');return {g,x:+c.getAttribute('cx'),y:+c.getAttribute('cy')}});
+  const buoys=[...document.querySelectorAll('#s12 .mark')].filter(g=>g.querySelector('circle')).map(g=>{const c=g.querySelector('circle');return {g,x:+c.getAttribute('cx'),y:+c.getAttribute('cy')}});
   function mkWake(id){const g=$(id),NW=16;for(let i=0;i<NW;i++){const pth=document.createElementNS('http://www.w3.org/2000/svg','path');const f=(i+1)/NW;pth.setAttribute('stroke','#fff');pth.setAttribute('stroke-opacity',(f*f*.9).toFixed(3));pth.setAttribute('stroke-width',(2+f*8).toFixed(1));g.appendChild(pth)}return g}
-  const WK={C:mkWake('wakeC'),T:mkWake('wakeT'),B:mkWake('wakeB')};
+  const WK={C1:mkWake('wakeC1'),T:mkWake('wakeT'),B:mkWake('wakeB'),C2:mkWake('wakeC2')};
   function seg(r,a,b){a=Math.max(0,a);if(b-a<.5)return '';let d='';for(let k=0;k<=3;k++){const p=r.getPointAtLength(a+(b-a)*k/3);d+=(k?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)}return d}
-  // place le bateau k à la distance d sur sa route ; sillage de longueur WL (le sillage du tronc commun se prolonge après la séparation)
-  function place(k,d,WL,op){const r=R[k],len=LEN[k],bt=$('boat'+k),inner=$('boatInner'+k);d=Math.max(0,Math.min(d,len));
-    const p=r.getPointAtLength(d),q=r.getPointAtLength(Math.min(len,d+2)),pr=r.getPointAtLength(Math.max(0,d-2)),a=Math.atan2(q.y-pr.y,q.x-pr.x)*180/Math.PI;
-    bt.setAttribute('transform','translate('+p.x.toFixed(1)+' '+(p.y-6).toFixed(1)+')');inner.setAttribute('transform',Math.abs(a)>90?'scale(-1 1)':'');bt.style.opacity=op;
-    const ch=WK[k].children,n=ch.length;for(let i=0;i<n;i++)ch[i].setAttribute('d',WL>0?seg(r,d-WL+WL*i/n,d-WL+WL*(i+1)/n-3):'');WK[k].style.opacity=op;return p}
+  // sillage de la route k qui se termine à la distance d, de longueur WL
+  function trail(k,d,WL,op){const r=R[k],ch=WK[k].children,n=ch.length;d=Math.min(d,LEN[k]);for(let i=0;i<n;i++)ch[i].setAttribute('d',WL>1?seg(r,d-WL+WL*i/n,d-WL+WL*(i+1)/n-3):'');WK[k].style.opacity=op}
+  function boatAt(id,k,d,op){const r=R[k],len=LEN[k];d=Math.max(0,Math.min(d,len));const p=r.getPointAtLength(d),q=r.getPointAtLength(Math.min(len,d+2)),pr=r.getPointAtLength(Math.max(0,d-2)),a=Math.atan2(q.y-pr.y,q.x-pr.x)*180/Math.PI;
+    $('boat'+id).setAttribute('transform','translate('+p.x.toFixed(1)+' '+(p.y-6).toFixed(1)+')');$('boatInner'+id).setAttribute('transform',Math.abs(a)>90?'scale(-1 1)':'');$('boat'+id).style.opacity=op;return p}
+  function pulse(x,y,age){ring.setAttribute('cx',x);ring.setAttribute('cy',y);if(age>=0&&age<.6){ring.setAttribute('r',(10+age*120).toFixed(1));ring.setAttribute('opacity',(1-age/.6).toFixed(2))}else ring.setAttribute('opacity',0)}
   function startBoat(){cancelAnimationFrame(raf);t0=performance.now();const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-    const V=820,TC=LEN.C/V,TS=LEN.T/V,FADE=.35,P=.5,TOT=TC+TS+FADE+P;
-    const step=now=>{let t=Math.max(0,(now-t0)/1000-.7)%TOT;if(reduce)t=TC+TS*.6;
-      const pts=[];
-      if(t<TC){pts.push(place('C',t*V,320,1));place('T',0,0,0);place('B',0,0,0)}
-      else{const u=t-TC,d=u*V,op=u<TS?1:Math.max(0,1-(u-TS)/FADE);
-        // le sillage commun s’efface derrière la séparation
-        place('C',LEN.C,Math.max(0,320-d),0);$('boatC').style.opacity=0;WK.C.style.opacity=1;
-        pts.push(place('T',d,Math.min(d,300),op),place('B',d,Math.min(d,300),op));
-        const age=u;if(age<.6){ring.setAttribute('r',(10+age*120).toFixed(1));ring.setAttribute('opacity',(1-age/.6).toFixed(2))}else ring.setAttribute('opacity',0)}
-      if(t<TC)ring.setAttribute('opacity',0);
+    const V=820,W=320,T1=LEN.C1/V,TS=LEN.T/V,T2=LEN.C2/V,FADE=.4,P=.5,TOT=T1+TS+T2+FADE+P;
+    const step=now=>{let t=Math.max(0,(now-t0)/1000-.7)%TOT;if(reduce)t=T1+TS*.55;const pts=[];
+      ['C1','T','B','C2'].forEach(k=>trail(k,0,0,0));['C','T','B'].forEach(id=>$('boat'+id).style.opacity=0);ring.setAttribute('opacity',0);
+      if(t<T1){const d=t*V;pts.push(boatAt('C','C1',d,1));trail('C1',d,W,1)}
+      else if(t<T1+TS){const u=t-T1,d=u*V;trail('C1',LEN.C1,W-d,1);                       // le sillage du 1er tour s’efface
+        pts.push(boatAt('T','T',d,1),boatAt('B','B',d,1));trail('T',d,Math.min(d,W*.8),1);trail('B',d,Math.min(d,W*.8),1);pulse(330,270,u)}
+      else{const u=t-T1-TS,d=u*V,op=u<T2?1:Math.max(0,1-(u-T2)/FADE);
+        trail('T',LEN.T,W*.8-d,1);trail('B',LEN.B,W*.8-d,1);                              // les deux bateaux se rejoignent
+        pts.push(boatAt('C','C2',d,op));trail('C2',d,Math.min(d,W),op);
+        if(u<.6)pulse(760,270,u);if(u>=T2-.05&&u<T2+.55)pulse(330,268,u-T2+.05)}         // passage de la ligne d’arrivée
       buoys.forEach(b=>b.g.classList.toggle('hit',pts.some(p=>Math.hypot(p.x-b.x,p.y-b.y)<95)));
       if(!reduce)raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step)}
   function stopBoat(){cancelAnimationFrame(raf)}
