@@ -2,7 +2,7 @@
 images, régate 3D, moteur three.js et polices intégrés.
 Lancer depuis la racine du dépôt :  python3 tools/masterclass_hors_ligne.py
 Sortie : docs/Battleboats-2027-AI-Regatta-masterclass.html
-Option : chemin d’un three.min.js 0.147.0 local en argument (sinon téléchargé sur jsDelivr)."""
+Arguments : [three.min.js local] [page source dans docs/] [fichier de sortie dans docs/]"""
 import base64, re, pathlib, sys, urllib.request
 
 D = pathlib.Path('docs')
@@ -31,7 +31,9 @@ def inline_fonts(html):
         return '<style>\n' + '\n'.join(keep) + '\n</style>'
     return re.sub(r'<link rel="stylesheet" href="(https://fonts\.googleapis\.com/[^"]+)">', repl, html)
 
-s = (D / 'masterclass-ai-regatta.html').read_text()
+SRC = sys.argv[2] if len(sys.argv) > 2 else 'masterclass-ai-regatta.html'
+OUT = sys.argv[3] if len(sys.argv) > 3 else 'Battleboats-2027-AI-Regatta-masterclass.html'
+s = (D / SRC).read_text()
 s = inline_fonts(s)
 # images
 mime = {'.jpg': 'image/jpeg', '.png': 'image/png'}
@@ -54,6 +56,6 @@ s = s.replace(old, '')
 assert s.count('<script>\n(function(){') == 1
 s = s.replace('<script>\n(function(){', '<script type="text/plain" id="r3d">' + r3.replace('</script>', '<\\/script>') + '</script>\n<script>\n(function(){')
 assert 'fonts.googleapis' not in s and 'cdn.jsdelivr' not in s.replace(THREE, '')
-out = D / 'Battleboats-2027-AI-Regatta-masterclass.html'
+out = D / OUT
 out.write_text(s)
 print(out, len(s) // 1024, 'Ko')

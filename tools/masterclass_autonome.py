@@ -2,7 +2,10 @@
 (images intégrées, régate 3D intégrée dans l’iframe). Lancer depuis la racine du dépôt."""
 import base64, html, re, pathlib
 D = pathlib.Path('docs')
-s = (D / 'masterclass-ai-regatta.html').read_text()
+import sys
+SRC = sys.argv[1] if len(sys.argv) > 1 else 'masterclass-ai-regatta.html'
+OUT = sys.argv[2] if len(sys.argv) > 2 else 'masterclass-ai-regatta-autonome.html'
+s = (D / SRC).read_text()
 mime = {'.jpg': 'image/jpeg', '.png': 'image/png'}
 def data(m):
     p = D / m.group(1)
@@ -17,5 +20,5 @@ assert old in s
 s = s.replace(old, '')
 assert s.count('<script>\n(function(){') == 1
 s = s.replace('<script>\n(function(){', '<script type="text/plain" id="r3d">' + r3.replace('</script>', '<\\/script>') + '</script>\n<script>\n(function(){')
-(D / 'masterclass-ai-regatta-autonome.html').write_text(s)
+(D / OUT).write_text(s)
 print(len(s) // 1024, 'Ko')
