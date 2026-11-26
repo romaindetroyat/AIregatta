@@ -124,7 +124,7 @@ footer b{color:var(--ink)}
 <footer>Course simulée, même moteur que le prototype. Décor : côte, plages, digues, Fort Saint-Louis et bâtiments d’après <b>OpenStreetMap</b> (© contributeurs OpenStreetMap, licence ODbL) ; reliefs du Faron et de Saint-Mandrier stylisés. Sponsors fictifs, sauf AI Regatta, Meridia et Yuzu Digital.</footer>
 <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
 <script>const SIM=(function(){
-  const TEAMS=[{id:'FRA',name:'France',c:'#2F6BFF',f:1.17},{id:'ITA',name:'Italie',c:'#00C2A8',f:1.035},{id:'GBR',name:'Grande-Bretagne',c:'#E4002B',f:0.88},{id:'NED',name:'Pays-Bas',c:'#FF8C1A',f:1.0},{id:'SUI',name:'Suisse',c:'#1E293B',f:1.015},{id:'MON',name:'Monaco',c:'#B07CFF',f:0.985}];
+  const TEAMS=[{id:'FRA',name:'France',c:'#2F6BFF',f:1.17},{id:'ITA',name:'Italie',c:'#00C2A8',f:1.035},{id:'GBR',name:'Grande-Bretagne',c:'#E4002B',f:0.84},{id:'NED',name:'Pays-Bas',c:'#FF8C1A',f:1.1},{id:'SUI',name:'Suisse',c:'#1E293B',f:1.015},{id:'MON',name:'Monaco',c:'#B07CFF',f:0.985}];
   // Parcours n°3 du règlement : porte 1-2 (départ, porte, arrivée), bouée au vent 3, zone de pénalité P1-P2 près de la bouée 2
   const WW={x:-22,y:200},LW1={x:-22,y:0},LW2={x:22,y:0},PIN=LW1,SB=LW2,P1={x:30,y:6},P2={x:30,y:-6},ZONE=4;
   const DN1=200,UP2=200,DN2=200,TOTAL=200+DN1+UP2+DN2,D2R=Math.PI/180;
@@ -497,7 +497,7 @@ const tmpR=new THREE.Vector3(),tmpP=new THREE.Vector3();
 function shapeSail(g,T,Hd,C,camber,planeUV,roach){const {ns,nt}=g.userData,p=g.attributes.position.array,uv=g.attributes.uv.array;
   tmpN.copy(Hd).sub(T).cross(tmpB.copy(C).sub(T)).normalize();
   if(roach){tmpR.copy(Hd).sub(C).cross(tmpN).normalize();if(tmpR.dot(tmpP.copy(C).sub(T))<0)tmpR.negate()}
-  for(let i=0;i<=ns;i++){const s=i/ns;tmpA.copy(T).lerp(Hd,s);tmpB.copy(C).lerp(Hd,s);const rs=roach?roach*(s<.67?Math.pow(Math.sin(Math.PI/2*s/.67),1.6):1-.55*(s-.67)/.33):0;for(let j=0;j<=nt;j++){const t=j/nt,k=i*(nt+1)+j;tmpC.copy(tmpA).lerp(tmpB,t);
+  for(let i=0;i<=ns;i++){const s=i/ns;tmpA.copy(T).lerp(Hd,s);tmpB.copy(C).lerp(Hd,s);const rs=roach?roach*Math.min(1,s/.22)*(1-.6*Math.max(0,(s-.8)/.2)):0;for(let j=0;j<=nt;j++){const t=j/nt,k=i*(nt+1)+j;tmpC.copy(tmpA).lerp(tmpB,t);
     if(planeUV){const q=planeUV(tmpC);uv[k*2]=q[0];uv[k*2+1]=q[1]}else{uv[k*2]=t;uv[k*2+1]=s}
     if(rs)tmpC.addScaledVector(tmpR,rs*Math.pow(t,1.6));tmpC.addScaledVector(tmpN,camber*4*t*(1-t)*(1-.55*s));
     p[k*3]=tmpC.x;p[k*3+1]=tmpC.y;p[k*3+2]=tmpC.z}}
@@ -545,7 +545,7 @@ function place(t,dt){Object.values(boats).forEach(m=>{const st=SIM.state(m.sb,t)
   const boomT=Math.min(1.3,Math.max(.12,twa/180*1.55));
   m.heelA+=(side*heelT-m.heelA)*lerpK(dt,3);m.boomA+=(side*boomT-m.boomA)*lerpK(dt,2.4);m.cam+=(side*.05-m.cam)*lerpK(dt,2);
   m.heel.rotation.z=-m.heelA;m.heel.rotation.x=.025*Math.sin(wt*1.6+m.sb.i*2);m.heel.position.y=.012*Math.sin(wt*2.1+m.sb.i);
-  m.main.rotation.y=m.boomA;shapeSail(m.mg,MT,MH,MC,-m.cam*.9,mainUV,.2);
+  m.main.rotation.y=m.boomA;shapeSail(m.mg,MT,MH,MC,-m.cam*.9,mainUV,.1);
   const C=JC0.clone().sub(JT).applyAxisAngle(JA,m.boomA*.85).add(JT);shapeSail(m.jg,JT,JH,C,-m.cam*.55,null);
   // sillage
   const hs=m.hist,sp=st.sog||0;if(!hs.length||Math.hypot(hs[hs.length-3]-p.x,hs[hs.length-1]-p.z)>.5){hs.push(p.x,h,p.z);if(hs.length>70*3)hs.splice(0,3)}
