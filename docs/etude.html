@@ -274,6 +274,70 @@ table.axt td,table.axt th{vertical-align:top;font-size:14px;line-height:1.45}
 .lkd summary::-webkit-details-marker{display:none}
 .lkd p{margin:0;font-size:14px;line-height:1.5}
 
+.mtw{--paper:var(--surface);--navy:#0B2A3F;--hull:#E9EFF4;--hullLine:#7A8EA3;--deck:#FFFFFF;--off:#C7EB00;--offLine:#6F8C00;--team:#DCE8FD;--teamLine:#2563EB;--pw:#D14343;--cmd:#2563EB;--data:#0F8A5F;--ok:#15803D;--f:var(--f-t);--m:var(--f-m);display:flex;flex-direction:column;gap:12px;margin-top:14px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .mtw{--navy:#061522;--hull:#132B3D;--hullLine:#5E7A93;--deck:#0F2130;--off:#9DBA00;--offLine:#C7EB00;--team:#17305A;--teamLine:#7DA6FF;--pw:#F07272;--cmd:#7DA6FF;--data:#4FD1A0;--ok:#5AD08A}}
+:root[data-theme="dark"] .mtw{--navy:#061522;--hull:#132B3D;--hullLine:#5E7A93;--deck:#0F2130;--off:#9DBA00;--offLine:#C7EB00;--team:#17305A;--teamLine:#7DA6FF;--pw:#F07272;--cmd:#7DA6FF;--data:#4FD1A0;--ok:#5AD08A}
+.mtw .mt-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.mtw .mt-card h2{font:800 19px var(--f)}
+.mtw .mt-card .mt-sub{color:var(--ink2);font-size:14px;margin-top:-6px}
+.mtw .mt-tscroll{overflow-x:auto}
+.mtw table.mt-mx{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+.mtw .mt-mx th,.mtw .mt-mx td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.mtw .mt-mx th{font:700 12px var(--f);letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.mtw .mt-mx td.mt-c{text-align:center;width:16%;font-weight:700}
+.mtw .mt-mx .mt-y{color:var(--ok)}
+.mtw .mt-mx .mt-n{color:var(--ink2);font-weight:500}
+.mtw .mt-mx tr.mt-grp td{font:700 12px var(--f);letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);background:var(--bg)}
+.mtw .mt-mx tfoot td{font-weight:800;border-bottom:0}
+.mtw .mt-plan{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:980px){.mtw .mt-plan{grid-template-columns:minmax(0,1fr)}}
+.mtw .mt-svgbox{overflow-x:auto;border-radius:12px;background:var(--bg)}
+.mtw .mt-svgbox svg{display:block;width:100%;min-width:640px;height:auto}
+.mtw svg .mt-hull{fill:var(--hull);stroke:var(--hullLine);stroke-width:2}
+.mtw svg .mt-axis{stroke:var(--hullLine);stroke-width:1;stroke-dasharray:6 6;opacity:.6}
+.mtw svg .mt-off{fill:var(--off);stroke:var(--offLine);stroke-width:1.5}
+.mtw svg .mt-team{fill:var(--team);stroke:var(--teamLine);stroke-width:1.5}
+.mtw svg .mt-orig{fill:var(--deck);stroke:var(--hullLine);stroke-width:1.5}
+.mtw svg .mt-pw{stroke:var(--pw);stroke-width:3;fill:none;stroke-linecap:round}
+.mtw svg .mt-cmd{stroke:var(--cmd);stroke-width:3;fill:none;stroke-linecap:round}
+.mtw svg .mt-data{stroke:var(--data);stroke-width:3;fill:none;stroke-linecap:round;stroke-dasharray:1 6}
+.mtw svg .mt-mech{stroke:var(--hullLine);stroke-width:2.5;fill:none}
+.mtw svg .mt-num circle{fill:var(--navy);stroke:var(--paper);stroke-width:2}
+.mtw svg .mt-num text{fill:#fff;font:700 13px var(--f);text-anchor:middle}
+.mtw svg .mt-lab{fill:var(--ink2);font:500 12px var(--f)}
+.mtw svg .mt-labb{fill:var(--ink);font:700 12.5px var(--f)}
+.mtw svg .mt-tag{fill:var(--ink2);font:500 11px var(--m)}
+.mtw svg .mt-mast{fill:var(--paper);stroke:var(--ink);stroke-width:2}
+.mtw svg .mt-acab{stroke:var(--offLine);stroke-width:2;fill:none;stroke-dasharray:3 4}
+.mtw svg .mt-chip rect{fill:var(--offLine);opacity:.35}
+.mtw svg .mt-disc{fill:var(--hullLine);opacity:.45}
+.mtw svg .mt-tbox{fill:var(--team);stroke:var(--teamLine);stroke-width:1.5}
+.mtw svg .mt-obox{fill:var(--paper);stroke:var(--offLine);stroke-width:1.5}
+.mtw svg .mt-oflow{stroke:var(--offLine);stroke-width:2.5;fill:none;stroke-dasharray:7 5}
+.mtw svg .mt-tflow{stroke:var(--cmd);stroke-width:2.5;fill:none;stroke-dasharray:7 5}
+.mtw svg .mt-fbox{fill:var(--paper);stroke:var(--line);stroke-width:1.5}
+.mtw .mt-legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--ink2)}
+.mtw .mt-legend span{display:inline-flex;align-items:center;gap:7px}
+.mtw .mt-legend i{display:inline-block;width:24px;height:0;border-top:3px solid}
+.mtw .mt-legend b{display:inline-block;width:14px;height:14px;border-radius:4px}
+.mtw ol.mt-parts{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px;counter-reset:p}
+.mtw ol.mt-parts li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;font-size:14px;line-height:1.45}
+.mtw ol.mt-parts li::before{counter-increment:p;content:counter(p);width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font:700 12px var(--f)}
+.mtw ol.mt-parts b{display:block;font-weight:700}
+.mtw ol.mt-parts small{color:var(--ink2);font-size:13px}
+.mtw .mt-shore{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.mtw .mt-sh{border-radius:12px;background:var(--bg);padding:10px 12px;font-size:13.5px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.mtw .mt-sh b{font-weight:700}
+.mtw .mt-chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.mtw .mt-node{border-radius:9px;padding:4px 8px;font-size:12.5px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--teamLine)}
+.mtw .mt-arr{font-size:12px;color:var(--ink2)}
+.mtw .mt-rad{font:500 11.5px var(--m);color:var(--cmd)}
+.mtw .mt-rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px;font-size:13.5px}
+.mtw .mt-rules div{border-left:3px solid var(--lime);padding:2px 0 2px 10px}
+.mtw .mt-card{background:var(--surface);border:0;box-shadow:inset 0 0 0 1px var(--line)}
+.mtw .mt-h{font:500 1.1rem var(--f-d);margin:0}
+.mtw table.mt-mx{min-width:560px}
+
 </style>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="airG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DCFF3A"/><stop offset=".55" stop-color="#C7EB00"/><stop offset="1" stop-color="#43B3A3"/></linearGradient><mask id="airCut"><rect width="64" height="64" fill="#fff"/><path d="M0 31 L64 27 L64 30.2 L0 34.2Z" fill="#000"/></mask><linearGradient id="airT" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#43B3A3"/><stop offset=".55" stop-color="#C7EB00"/><stop offset="1" stop-color="#F4FF9A"/></linearGradient><symbol id="airMark" viewBox="230 215 1590 1590"><g fill="#FFFFFF"><path d="M 1255.88 281.212 C 1258.06 280.868 1256.93 280.834 1259.27 281.44 C 1259.83 283.877 1221.16 481.694 1217.28 502.632 L 1143.68 891.29 C 1140.59 908.736 1138.24 926.712 1134.73 943.996 C 1104.5 951.538 1069.83 957.706 1038.99 964.483 L 713.447 1035.66 C 692.232 1040.26 674.63 1043.24 654.291 1051.07 C 652.505 1050.96 653.405 1051.19 651.634 1050.21 C 651.537 1048.28 863.744 673.137 884.1 638.468 C 983.9 468.497 1058.38 333.775 1255.88 281.212 z"/><path d="M 1785.38 275.065 C 1786.35 275.334 1785.81 275.055 1786.62 276.402 C 1752.78 415.868 1718.25 559.945 1687.28 699.929 L 1641.42 902.123 C 1634.73 930.946 1627.14 969.771 1619 997.418 C 1605.56 1001.59 1587.24 1005.39 1573.27 1008.66 L 1480.62 1029.41 C 1405.82 1045.71 1326.43 1063.81 1252.21 1083.13 L 1250.54 1082.55 C 1248.87 1076.28 1303.48 919.308 1311.15 897.348 C 1375.44 713.235 1453.67 517.869 1596.73 380.334 C 1649.97 329.146 1716.96 299.834 1785.38 275.065 z"/><path d="M 1119.58 997.418 C 1131.17 995.644 1121.29 1018.01 1119.41 1028.49 L 1102.97 1121.19 C 1099.91 1138.48 1095.41 1160.97 1093.55 1178.18 C 1078.66 1182.8 1056.42 1187.42 1040.87 1191.18 L 504.249 1317.79 C 501.588 1318.5 502.274 1318.36 499.526 1318.46 L 498.62 1317.12 C 499.698 1312.26 516.277 1285.15 519.69 1279.25 L 577.852 1179.38 C 587.974 1161.7 607.563 1120.26 620.392 1107.27 C 636.282 1102.64 659.46 1098.16 675.986 1094.61 L 1119.58 997.418 z"/><path d="M 1081.65 1233.23 C 1083.07 1232.97 1082.87 1233.16 1084.43 1233.53 C 1085.1 1236.18 1063.45 1359.15 1060.53 1373.59 C 1044.95 1379.63 1004.23 1388.74 985.943 1393.27 L 471.215 1524.51 C 437.915 1533.18 405.406 1540.91 372.258 1550.44 C 367.51 1551.92 371.104 1544.71 372.106 1542.95 C 401.57 1491.36 430.443 1439.38 459.71 1387.67 C 467.337 1374.2 555.03 1357.72 572.781 1353.5 L 935.324 1268.75 C 980.976 1257.61 1036.07 1242.51 1081.65 1233.23 z"/><path d="M 1050.34 1429.13 L 1053.02 1428.98 L 1053.82 1429.93 C 1047.01 1463.35 1041.66 1511.1 1037.35 1545.47 C 1016.73 1552.89 987.135 1559.25 965.283 1564.86 C 732.685 1624.67 498.964 1681.12 267.218 1744.23 L 264.936 1744.66 L 263.565 1743.56 C 264.515 1739.26 332.866 1617.41 336.467 1613.5 C 357.249 1605.69 407.119 1594.5 429.693 1588.76 L 1050.34 1429.13 z"/><path d="M 1604.59 1051.07 L 1607.49 1050.86 L 1608.47 1052.08 C 1608.68 1055.5 1601.92 1083.81 1600.69 1089.58 L 1566.36 1242.8 C 1555.99 1247.38 1537.09 1251.79 1525.79 1254.5 L 1178.69 1337.78 C 1172.96 1338.21 1173.73 1333.61 1175.1 1329.18 C 1194.61 1265.83 1217.84 1202.56 1235.91 1138.91 C 1277.71 1128.36 1318.29 1119.5 1360.07 1109.74 L 1507.2 1074.43 C 1540.3 1066.49 1571.72 1060.28 1604.59 1051.07 z"/><path d="M 1551.7 1298.09 L 1553.8 1298.27 C 1555.12 1302.65 1525.14 1441.27 1521.7 1458.39 C 1486.56 1468.56 1446.47 1475.97 1410.31 1485 L 1108.2 1561.1 L 1105.64 1561.45 L 1104.66 1560.09 C 1104.94 1553.61 1154.35 1402.53 1158.08 1395.9 L 1412.5 1331.95 C 1458.84 1320.59 1505.53 1310.11 1551.7 1298.09 z"/><path d="M 1504.61 1513.15 L 1507.06 1513.29 C 1508.04 1517.15 1483.13 1619.98 1480.07 1633.27 C 1449.57 1643.88 1406.02 1651.56 1373.61 1659.72 L 1104.03 1728.39 C 1084.34 1733.17 1069.07 1735.89 1050.34 1744.23 L 1047.65 1743.38 C 1046.65 1739.05 1082.42 1630.39 1086.69 1620.52 C 1103.54 1615.21 1130.94 1608.89 1148.71 1604.18 L 1306.53 1563.98 C 1373.18 1547.54 1437.52 1529.18 1504.61 1513.15 z"/></g></symbol></defs></svg>
 <div class="wrap">
@@ -543,6 +607,194 @@ table.axt td,table.axt th{vertical-align:top;font-size:14px;line-height:1.45}
 <tr><td><b>Rien à fabriquer</b></td><td>Non : le boîtier</td><td>Oui</td><td>Seulement la girouette, simple</td></tr>
 <tr><td><b>Reprise en main</b></td><td>Interrupteur de la radio</td><td>Radio ExpressLRS en plus</td><td>Radio ExpressLRS en plus</td></tr>
 <tr><td><b>Point à valider</b></td><td>Le boîtier</td><td>Le lien ordinateur-émetteur</td><td>Les réglages sur l’eau</td></tr></tbody></table></div>
+  <div class="prose"><h3 class="h3">Le montage à bord</h3><p>Ce qu’on met dans le bateau pour chaque option, et ce que la balise officielle émet de son côté. Dans le bateau, A et B demandent le même montage ; C ajoute un pilote automatique. Plans vus de dessus, à l’échelle d’un IOM d’un mètre, à valider sur le premier bateau monté.</p></div>
+<div class="mtw"><div class="mt-card" aria-label="Liste du matériel à bord">
+    <h4 class="mt-h">Le matériel à bord, option par option</h4>
+    <div class="mt-tscroll"><table class="mt-mx">
+      <thead><tr><th>Élément</th><th>Où</th><th class="mt-c">A</th><th class="mt-c">B</th><th class="mt-c">C</th></tr></thead>
+      <tbody>
+        <tr class="mt-grp"><td colspan="5">Toujours</td></tr>
+        <tr><td>Balise officielle (imposée, scellée)</td><td>Boîtier au fond près de la quille, antennes sur le pont dans l’axe</td><td class="mt-c mt-y">✓</td><td class="mt-c mt-y">✓</td><td class="mt-c mt-y">✓</td></tr>
+        <tr><td>Servo de safran, treuil d’écoute</td><td>Ceux du bateau, inchangés</td><td class="mt-c mt-y">✓</td><td class="mt-c mt-y">✓</td><td class="mt-c mt-y">✓</td></tr>
+        <tr class="mt-grp"><td colspan="5">Selon l’option</td></tr>
+        <tr><td>Récepteur ExpressLRS</td><td>À la place du récepteur d’origine</td><td class="mt-c mt-y">ER4</td><td class="mt-c mt-y">ER4</td><td class="mt-c mt-y">RP2</td></tr>
+        <tr><td>Batterie</td><td>Au fond, calée</td><td class="mt-c mt-n">celle d’origine</td><td class="mt-c mt-n">celle d’origine</td><td class="mt-c mt-y">3S, 1 300 mAh</td></tr>
+        <tr><td>Carte de pilote automatique Matek H743-WING</td><td>Au sec, dans une boîte</td><td class="mt-c mt-n">—</td><td class="mt-c mt-n">—</td><td class="mt-c mt-y">✓</td></tr>
+        <tr><td>GPS et compas</td><td>Pont arrière</td><td class="mt-c mt-n">—</td><td class="mt-c mt-n">—</td><td class="mt-c mt-y">✓</td></tr>
+        <tr><td>Girouette</td><td>Perche à l’arrière, ou tête de mât</td><td class="mt-c mt-n">—</td><td class="mt-c mt-n">—</td><td class="mt-c mt-y">✓</td></tr>
+      </tbody>
+      <tfoot><tr><td>Poids ajouté, balise comprise</td><td></td><td class="mt-c">≈ 255 g</td><td class="mt-c">≈ 255 g</td><td class="mt-c">≈ 455 g</td></tr></tfoot>
+    </table></div>
+  </div>
+<div class="mt-card" aria-label="Plan de montage, options A et B">
+    <h4 class="mt-h">Options A et B : le montage à bord</h4>
+    <p class="mt-sub">On remplace seulement le récepteur. Il reçoit la radio et commande les deux servos, alimenté par la batterie du bateau.</p>
+    <div class="mt-plan">
+      <div class="mt-svgbox">
+        <svg viewBox="0 0 1000 450" role="img" aria-label="Vue de dessus d’un IOM pour les options A et B : balise officielle et ses trois antennes, ce qu’elle émet et reçoit, récepteur ER4 relié à la batterie, au servo de safran et au treuil d’écoute">
+<defs>
+  <marker id="mtao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--offLine)"/></marker>
+  <marker id="mtat" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--cmd)"/></marker>
+</defs>
+<text class="mt-tag" x="40" y="130">ARRIÈRE</text><text class="mt-tag" x="905" y="130">AVANT</text>
+<path class="mt-hull" d="M70 230 C320 198 700 210 955 290 C700 370 320 382 70 350 Z"/>
+<line class="mt-axis" x1="60" y1="290" x2="965" y2="290"/>
+<path class="mt-mech" d="M70 290 H40"/><rect x="26" y="282" width="18" height="16" rx="3" class="mt-orig"/>
+<text class="mt-lab" x="20" y="324">safran</text>
+<circle class="mt-mast" cx="600" cy="290" r="9"/><text class="mt-lab" x="588" y="318">mât</text><path class="mt-acab" d="M470 290 C450 290 430 290 420 290"/><path class="mt-acab" d="M560 282 C600 260 640 270 650 290"/><path class="mt-acab" d="M560 276 C610 238 680 250 700 284"/>
+<rect x="470" y="260" width="90" height="60" rx="8" class="mt-off"/>
+<g class="mt-chip"><rect x="478" y="268" width="22" height="14" rx="2"/><rect x="504" y="268" width="22" height="14" rx="2"/><rect x="530" y="268" width="22" height="14" rx="2"/><rect x="478" y="296" width="22" height="14" rx="2"/><rect x="504" y="296" width="48" height="14" rx="2"/></g>
+<circle cx="420" cy="290" r="11" class="mt-disc"/><circle cx="420" cy="290" r="6" class="mt-off"/>
+<rect x="644" y="284" width="12" height="12" rx="2" class="mt-off"/><rect x="694" y="284" width="12" height="12" rx="2" class="mt-off"/>
+<text class="mt-tag" x="404" y="318">GPS</text><text class="mt-tag" x="640" y="316">4G</text><text class="mt-tag" x="686" y="316">868</text>
+<path class="mt-cmd" d="M205 330 C185 332 172 324 160 308"/>
+<path class="mt-cmd" d="M240 316 C330 260 400 250 455 246"/>
+<path class="mt-pw" d="M262 260 C252 280 240 296 232 314"/>
+<path class="mt-mech" d="M125 298 C95 298 80 294 70 292"/>
+<rect x="125" y="286" width="40" height="24" rx="5" class="mt-orig"/>
+<rect x="455" y="228" width="52" height="34" rx="6" class="mt-orig"/>
+<rect x="245" y="232" width="62" height="28" rx="5" class="mt-orig"/>
+<rect x="200" y="314" width="44" height="28" rx="5" class="mt-team"/>
+<path d="M222 314 V282" stroke="var(--teamLine)" stroke-width="2.5"/><circle cx="222" cy="280" r="3.5" fill="var(--teamLine)"/>
+
+<g class="mt-box"><rect x="20" y="14" width="250" height="62" rx="10" class="mt-tbox"/><text class="mt-labb" x="34" y="38">Radio de l’équipe</text><text class="mt-lab" x="34" y="58">Ordres de l’ordinateur de l’équipe</text><text class="mt-lab" x="34" y="72">ExpressLRS 2,4 GHz</text></g>
+<path class="mt-tflow" d="M222 78 V272" marker-end="url(#mtat)"/>
+<g class="mt-box"><rect x="290" y="14" width="250" height="62" rx="10" class="mt-obox"/><text class="mt-labb" x="304" y="38">Reçu par la balise</text><text class="mt-lab" x="304" y="58">satellites GPS, et corrections RTK</text><text class="mt-lab" x="304" y="72">par la 4G, 1 fois/s : position au cm</text></g>
+<path class="mt-oflow" d="M420 78 V274" marker-end="url(#mtao)"/>
+<g class="mt-box"><rect x="560" y="14" width="210" height="62" rx="10" class="mt-obox"/><text class="mt-labb" x="574" y="38">Émis par la balise · 4G</text><text class="mt-lab" x="574" y="58">position, vitesse, cap, gîte</text><text class="mt-lab" x="574" y="72">10 fois/s → serveur → PC course</text></g>
+<path class="mt-oflow" d="M650 280 V80" marker-end="url(#mtao)"/>
+<g class="mt-box"><rect x="790" y="14" width="196" height="62" rx="10" class="mt-obox"/><text class="mt-labb" x="804" y="38">Secours · radio 868 MHz</text><text class="mt-lab" x="804" y="58">si la 4G sature, 2 fois/s</text><text class="mt-lab" x="804" y="72">→ antenne à terre → PC course</text></g>
+<path class="mt-oflow" d="M700 280 C700 140 860 120 880 80" marker-end="url(#mtao)"/>
+<g class="mt-num"><circle cx="515" cy="338" r="13"/><text x="515" y="343">1</text></g><g class="mt-num"><circle cx="222" cy="362" r="13"/><text x="222" y="367">2</text></g><g class="mt-num"><circle cx="276" cy="214" r="13"/><text x="276" y="219">3</text></g><g class="mt-num"><circle cx="145" cy="332" r="13"/><text x="145" y="337">4</text></g><g class="mt-num"><circle cx="481" cy="210" r="13"/><text x="481" y="215">5</text></g>
+<text class="mt-tag" x="120" y="358">sortie 1</text><text class="mt-tag" x="330" y="238">sortie 3</text>
+<text class="mt-lab" x="440" y="418">balise : aucun fil vers le reste du bateau</text>
+<text class="mt-lab" x="70" y="418">échelle : 1 m de coque</text><line x1="70" y1="430" x2="955" y2="430" stroke="var(--hullLine)" stroke-width="1"/>
+</svg>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+        <ol class="mt-parts">
+          <li><span><b>Balise officielle</b><small>Fournie et scellée, ≈ 250 g avec ses antennes. Le boîtier, au fond près de la quille, contient le GPS au centimètre, la carte avec son modem 4G, la radio de secours 868 MHz, la centrale d’attitude (cap, gîte) et sa batterie, environ 12 h d’autonomie. Ses trois antennes vont sur le pont, dans l’axe : GPS, 4G et 868 MHz. Aucun fil vers le reste du bateau.</small></span></li>
+          <li><span><b>Récepteur ExpressLRS ER4</b><small>Le seul élément nouveau. Antenne vers le haut, au sec, à 20 cm au moins des antennes de la balise.</small></span></li>
+          <li><span><b>Batterie du bateau</b><small>Celle d’origine. Branchée sur le récepteur, elle alimente aussi les servos.</small></span></li>
+          <li><span><b>Servo de safran</b><small>Celui du bateau, branché sur la sortie 1 du récepteur.</small></span></li>
+          <li><span><b>Treuil d’écoute</b><small>Celui du bateau, branché sur la sortie 3.</small></span></li>
+        </ol>
+        <div class="mt-legend"><span><i style="border-color:var(--pw)"></i>alimentation</span><span><i style="border-color:var(--cmd)"></i>commande des servos</span><span><i style="border-color:var(--offLine);border-top-style:dashed"></i>émissions de la balise</span><span><i style="border-color:var(--cmd);border-top-style:dashed"></i>radio de l’équipe</span><span><b style="background:var(--off)"></b>matériel officiel</span><span><b style="background:var(--team);box-shadow:inset 0 0 0 1.5px var(--teamLine)"></b>ajouté par l’équipe</span></div>
+      </div>
+    </div>
+    <div class="mt-shore">
+      <div class="mt-sh"><b>À terre, option A</b><div class="mt-chain"><span class="mt-node">Ordinateur</span><span class="mt-arr">USB →</span><span class="mt-node">petit boîtier</span><span class="mt-arr">jack →</span><span class="mt-node">radio imposée</span><span class="mt-rad">))) radio )))</span></div></div>
+      <div class="mt-sh"><b>À terre, option B</b><div class="mt-chain"><span class="mt-node">Ordinateur</span><span class="mt-arr">USB-C →</span><span class="mt-node">émetteur Ranger Micro</span><span class="mt-rad">))) radio )))</span></div></div>
+    </div>
+  </div>
+<div class="mt-card" aria-label="Plan de montage, option C">
+    <h4 class="mt-h">Option C : le montage à bord</h4>
+    <p class="mt-sub">La carte de pilote automatique remplace le récepteur au centre du montage : elle reçoit la radio, lit ses capteurs et commande les deux servos.</p>
+    <div class="mt-plan">
+      <div class="mt-svgbox">
+        <svg viewBox="0 0 1000 450" role="img" aria-label="Vue de dessus d’un IOM pour l’option C : balise officielle et ses trois antennes, ce qu’elle émet et reçoit, carte de pilote automatique reliée à la batterie 3S, au récepteur RP2, au GPS, à la girouette, au servo de safran et au treuil">
+<defs>
+  <marker id="mtao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--offLine)"/></marker>
+  <marker id="mtat" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--cmd)"/></marker>
+</defs>
+<text class="mt-tag" x="40" y="130">ARRIÈRE</text><text class="mt-tag" x="905" y="130">AVANT</text>
+<path class="mt-hull" d="M70 230 C320 198 700 210 955 290 C700 370 320 382 70 350 Z"/>
+<line class="mt-axis" x1="60" y1="290" x2="965" y2="290"/>
+<path class="mt-mech" d="M70 290 H40"/><rect x="26" y="282" width="18" height="16" rx="3" class="mt-orig"/>
+<text class="mt-lab" x="20" y="324">safran</text>
+<circle class="mt-mast" cx="600" cy="290" r="9"/><text class="mt-lab" x="588" y="318">mât</text><path class="mt-acab" d="M470 290 C450 290 430 290 420 290"/><path class="mt-acab" d="M560 282 C600 260 640 270 650 290"/><path class="mt-acab" d="M560 276 C610 238 680 250 700 284"/>
+<rect x="470" y="260" width="90" height="60" rx="8" class="mt-off"/>
+<g class="mt-chip"><rect x="478" y="268" width="22" height="14" rx="2"/><rect x="504" y="268" width="22" height="14" rx="2"/><rect x="530" y="268" width="22" height="14" rx="2"/><rect x="478" y="296" width="22" height="14" rx="2"/><rect x="504" y="296" width="48" height="14" rx="2"/></g>
+<circle cx="420" cy="290" r="11" class="mt-disc"/><circle cx="420" cy="290" r="6" class="mt-off"/>
+<rect x="644" y="284" width="12" height="12" rx="2" class="mt-off"/><rect x="694" y="284" width="12" height="12" rx="2" class="mt-off"/>
+<text class="mt-tag" x="404" y="318">GPS</text><text class="mt-tag" x="640" y="316">4G</text><text class="mt-tag" x="686" y="316">868</text>
+<path d="M52 218 L52 260" stroke="var(--hullLine)" stroke-width="2.5"/>
+<path d="M40 210 L66 210 M66 210 L58 204 M66 210 L58 216" stroke="var(--data)" stroke-width="3" fill="none" stroke-linecap="round"/>
+<circle cx="52" cy="210" r="5" class="mt-team"/>
+<path class="mt-data" d="M56 260 C120 260 220 285 262 306"/>
+<path class="mt-data" d="M195 260 C220 270 245 288 262 302"/>
+<path class="mt-data" d="M234 336 C248 336 256 330 262 324"/>
+<path class="mt-pw" d="M290 250 C296 270 292 282 290 294"/>
+<path class="mt-cmd" d="M262 310 C220 310 185 306 166 300"/>
+<path class="mt-cmd" d="M312 306 C380 260 410 250 455 246"/>
+<path class="mt-mech" d="M125 298 C95 298 80 294 70 292"/>
+<rect x="125" y="286" width="40" height="24" rx="5" class="mt-orig"/>
+<rect x="455" y="228" width="52" height="34" rx="6" class="mt-orig"/>
+<rect x="250" y="228" width="74" height="26" rx="5" class="mt-team"/>
+<rect x="262" y="294" width="50" height="40" rx="5" class="mt-team"/>
+<rect x="176" y="244" width="30" height="22" rx="4" class="mt-team"/>
+<rect x="200" y="326" width="34" height="22" rx="5" class="mt-team"/>
+<path d="M217 326 V306" stroke="var(--teamLine)" stroke-width="2.5"/><circle cx="217" cy="304" r="3.5" fill="var(--teamLine)"/>
+
+<g class="mt-box"><rect x="20" y="14" width="250" height="62" rx="10" class="mt-tbox"/><text class="mt-labb" x="34" y="38">Radio de l’équipe</text><text class="mt-lab" x="34" y="58">ExpressLRS 2,4 GHz, dans les deux sens :</text><text class="mt-lab" x="34" y="72">ordres, et état du pilote en retour</text></g>
+<path class="mt-tflow" d="M217 78 V296" marker-start="url(#mtat)" marker-end="url(#mtat)"/>
+<g class="mt-box"><rect x="290" y="14" width="250" height="62" rx="10" class="mt-obox"/><text class="mt-labb" x="304" y="38">Reçu par la balise</text><text class="mt-lab" x="304" y="58">satellites GPS, et corrections RTK</text><text class="mt-lab" x="304" y="72">par la 4G, 1 fois/s : position au cm</text></g>
+<path class="mt-oflow" d="M420 78 V274" marker-end="url(#mtao)"/>
+<g class="mt-box"><rect x="560" y="14" width="210" height="62" rx="10" class="mt-obox"/><text class="mt-labb" x="574" y="38">Émis par la balise · 4G</text><text class="mt-lab" x="574" y="58">position, vitesse, cap, gîte</text><text class="mt-lab" x="574" y="72">10 fois/s → serveur → PC course</text></g>
+<path class="mt-oflow" d="M650 280 V80" marker-end="url(#mtao)"/>
+<g class="mt-box"><rect x="790" y="14" width="196" height="62" rx="10" class="mt-obox"/><text class="mt-labb" x="804" y="38">Secours · radio 868 MHz</text><text class="mt-lab" x="804" y="58">si la 4G sature, 2 fois/s</text><text class="mt-lab" x="804" y="72">→ antenne à terre → PC course</text></g>
+<path class="mt-oflow" d="M700 280 C700 140 860 120 880 80" marker-end="url(#mtao)"/>
+<g class="mt-num"><circle cx="515" cy="338" r="13"/><text x="515" y="343">1</text></g><g class="mt-num"><circle cx="300" cy="358" r="13"/><text x="300" y="363">2</text></g><g class="mt-num"><circle cx="217" cy="372" r="13"/><text x="217" y="377">3</text></g><g class="mt-num"><circle cx="287" cy="210" r="13"/><text x="287" y="215">4</text></g><g class="mt-num"><circle cx="191" cy="224" r="13"/><text x="191" y="229">5</text></g><g class="mt-num"><circle cx="30" cy="184" r="13"/><text x="30" y="189">6</text></g><g class="mt-num"><circle cx="145" cy="332" r="13"/><text x="145" y="337">7</text></g><g class="mt-num"><circle cx="481" cy="206" r="13"/><text x="481" y="211">8</text></g>
+<text class="mt-tag" x="72" y="276">sortie 1</text><text class="mt-tag" x="350" y="236">sortie 2</text>
+<text class="mt-lab" x="440" y="418">balise : aucun fil vers le reste du bateau</text>
+<text class="mt-lab" x="70" y="418">échelle : 1 m de coque</text><line x1="70" y1="430" x2="955" y2="430" stroke="var(--hullLine)" stroke-width="1"/>
+</svg>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+        <ol class="mt-parts">
+          <li><span><b>Balise officielle</b><small>Comme en A et B : scellée, autonome, trois antennes sur le pont, aucun fil vers le reste. Le GPS de l’équipe ne la remplace pas : seule la balise fait foi pour le classement et l’arbitrage.</small></span></li>
+          <li><span><b>Carte de pilote automatique Matek H743-WING</b><small>Le centre du montage, au sec dans une petite boîte. Elle alimente aussi les servos, réglée à 6 V.</small></span></li>
+          <li><span><b>Récepteur ExpressLRS RP2</b><small>Relié à la carte par un fil à 4 brins. Antenne vers le haut, à 20 cm des antennes de la balise.</small></span></li>
+          <li><span><b>Batterie 3S</b><small>Remplace celle d’origine : la carte demande 8 V au moins. Elle alimente tout.</small></span></li>
+          <li><span><b>GPS et compas</b><small>Sur le pont arrière, loin du treuil (ses aimants faussent le compas) et à 20 cm au moins des antennes de la balise.</small></span></li>
+          <li><span><b>Girouette</b><small>Sur une petite perche à l’arrière, ou en tête de mât. Reliée à une entrée de la carte.</small></span></li>
+          <li><span><b>Servo de safran</b><small>Celui du bateau, sur la sortie 1 de la carte.</small></span></li>
+          <li><span><b>Treuil d’écoute</b><small>Celui du bateau, sur la sortie 2 de la carte.</small></span></li>
+        </ol>
+        <div class="mt-legend"><span><i style="border-color:var(--pw)"></i>alimentation</span><span><i style="border-color:var(--cmd)"></i>commande des servos</span><span><i style="border-color:var(--data);border-top-style:dotted"></i>capteurs et récepteur</span><span><i style="border-color:var(--offLine);border-top-style:dashed"></i>émissions de la balise</span><span><i style="border-color:var(--cmd);border-top-style:dashed"></i>radio de l’équipe</span></div>
+      </div>
+    </div>
+    <div class="mt-shore">
+      <div class="mt-sh"><b>À terre, option C</b><div class="mt-chain"><span class="mt-node">Ordinateur</span><span class="mt-arr">USB-C →</span><span class="mt-node">émetteur Ranger Micro, mode « MAVLink »</span><span class="mt-rad">))) radio dans les deux sens )))</span></div></div>
+      <div class="mt-sh"><b>Ce qui circule</b><span>Vers le bateau : les ordres de tacticien (cap, vire, va à la bouée). Vers l’ordinateur : cap, vitesse, angle du vent, batterie, état du pilote.</span></div>
+    </div>
+  </div>
+<div class="mt-card" aria-label="La boucle complète">
+    <h4 class="mt-h">La boucle complète : de la position du bateau à l’ordre de l’équipe</h4>
+    <p class="mt-sub">La position part de la balise, passe par le PC course, arrive à l’équipe ; l’ordre de l’IA repart vers le bateau par la radio de l’équipe. Deux chemins séparés, qui ne se croisent qu’à l’ordinateur de l’équipe.</p>
+    <div class="mt-svgbox"><svg viewBox="0 0 1000 350" role="img" aria-label="Boucle complète : balise vers serveur en ligne par la 4G, puis PC course, puis ordinateur de l’équipe par câble, puis émetteur ExpressLRS vers le récepteur du bateau ; secours par radio 868 MHz ; corrections RTK de la base vers la balise">
+      <defs>
+        <marker id="mtlo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--offLine)"/></marker>
+        <marker id="mtlt" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--cmd)"/></marker>
+        <marker id="mtlg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--hullLine)"/></marker>
+      </defs>
+      <text class="mt-tag" x="30" y="24">SUR L’EAU</text><text class="mt-tag" x="420" y="24">EN LIGNE</text><text class="mt-tag" x="640" y="24">À TERRE, SUR LE SITE</text>
+      <rect x="20" y="40" width="190" height="240" rx="16" class="mt-hull"/>
+      <rect x="40" y="70" width="150" height="62" rx="10" class="mt-off"/><text class="mt-labb" x="54" y="96" style="fill:#1F2600">Balise officielle</text><text class="mt-lab" x="54" y="116" style="fill:#2E3600">position au cm, cap, gîte</text>
+      <rect x="40" y="200" width="150" height="62" rx="10" class="mt-team"/><text class="mt-labb" x="54" y="226">Récepteur</text><text class="mt-lab" x="54" y="246">→ safran et écoute (C : pilote)</text>
+      <text class="mt-lab" x="40" y="168">Deux électroniques</text><text class="mt-lab" x="40" y="184">qui ne se parlent pas.</text>
+      <rect x="380" y="70" width="170" height="62" rx="10" class="mt-fbox"/><text class="mt-labb" x="394" y="96">Serveur en ligne</text><text class="mt-lab" x="394" y="116">vérifie et date</text>
+      <rect x="640" y="70" width="150" height="62" rx="10" class="mt-fbox"/><text class="mt-labb" x="654" y="96">PC course</text><text class="mt-lab" x="654" y="116">calcule la course</text>
+      <rect x="830" y="70" width="150" height="62" rx="10" class="mt-tbox"/><text class="mt-labb" x="844" y="96">Ordinateur</text><text class="mt-lab" x="844" y="116">de l’équipe, l’IA</text>
+      <rect x="830" y="200" width="150" height="62" rx="10" class="mt-tbox"/><text class="mt-labb" x="844" y="226">Émetteur</text><text class="mt-lab" x="844" y="246">ExpressLRS, USB</text>
+      <rect x="640" y="200" width="150" height="62" rx="10" class="mt-fbox"/><text class="mt-labb" x="654" y="226">Antenne de secours</text><text class="mt-lab" x="654" y="246">radio 868 MHz</text>
+      <rect x="380" y="200" width="170" height="62" rx="10" class="mt-fbox"/><text class="mt-labb" x="394" y="226">Base RTK</text><text class="mt-lab" x="394" y="246">corrections GPS</text>
+      <path class="mt-oflow" d="M190 92 H378" marker-start="url(#mtlo)" marker-end="url(#mtlo)"/><text class="mt-tag" x="222" y="84">4G · position 10 fois/s</text><text class="mt-tag" x="222" y="112">← corrections RTK 1/s</text>
+      <path class="mt-oflow" d="M550 101 H638" marker-end="url(#mtlo)"/><text class="mt-tag" x="556" y="93">tunnel</text>
+      <path class="mt-oflow" d="M790 101 H828" marker-end="url(#mtlo)"/><text class="mt-tag" x="788" y="150">câble</text>
+      <path class="mt-oflow" d="M190 124 C260 168 560 160 600 196 L636 222" marker-end="url(#mtlo)"/><text class="mt-tag" x="290" y="146">secours 868 MHz · 2/s</text>
+      <path class="mt-oflow" d="M715 200 V134" marker-end="url(#mtlo)"/>
+      <path class="mt-oflow" d="M465 200 V136" marker-end="url(#mtlg)" style="stroke:var(--hullLine)"/><text class="mt-tag" x="472" y="190">corrections</text>
+      <path class="mt-tflow" d="M905 132 V198" marker-end="url(#mtlt)"/><text class="mt-tag" x="912" y="170">USB</text>
+      <path class="mt-tflow" d="M905 262 V312 H115 V266" marker-end="url(#mtlt)"/><text class="mt-tag" x="360" y="304">ExpressLRS 2,4 GHz · ordres (C : et retours)</text>
+    </svg></div>
+    <div class="mt-rules">
+      <div><b>Position vers l’équipe</b> : 4G 50 à 150 ms, puis le réseau du site moins de 50 ms. Les mêmes données, au même instant, pour toutes les équipes.</div>
+      <div><b>Ordre vers le bateau</b> : quelques millièmes de seconde par la radio de l’équipe.</div>
+      <div><b>Si la 4G sature</b> : la radio 868 MHz prend le relais, deux positions par seconde.</div>
+      <div><b>Séparation</b> : la balise n’envoie rien à l’électronique de l’équipe, et n’en reçoit rien.</div>
+    </div>
+  </div></div>
   <p class="note"><b>Proposition :</b> tester les trois montages côte à côte avant de choisir, sur la table, en endurance puis sur l’eau : ≈ 450 € de kits d’essai, 3 à 4 jours pour A et B, une semaine de plus pour C. Le plus simple qui passe les tests est retenu. À décider aussi : l’usage de la reprise en main pendant la course (sécurité seulement, ou pénalité). Prix relevés le 25 novembre 2026 chez Studiosport, Gotronic et FPV24.</p>
 </section>
 
