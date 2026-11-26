@@ -548,7 +548,7 @@ const MT=new THREE.Vector3(0,0,0),MH=new THREE.Vector3(0,1.52,0),MC=new THREE.Ve
 const mainUV=v=>[v.z/.42,v.y/1.52];
 
 /* ================= Course : simulation reprise du prototype ================= */
-let seed=7,sim=SIM.build(seed),T=-62,raceNo=1,ended=null;
+let seed=7,sim=SIM.build(seed),T=-5,raceNo=1,ended=null;
 const finT=b=>b.fin!=null?b.fin:b.segs[b.segs.length-1].t1;
 const boats={};
 function ensureBoats(){sim.boats.forEach(b=>{if(!boats[b.id])boats[b.id]=makeBoat(b);boats[b.id].sb=b;boats[b.id].hist=[]})}
@@ -595,7 +595,7 @@ function toast(t){$$('.toast').forEach(e=>{e.textContent=t;e.classList.add('on')
 function hud(t){const rk=SIM.ranking(sim,t),leg=Math.min(5,rk[0].st.leg);
   $$('.clk').forEach(e=>e.textContent=fmt(t));$$('.leg').forEach(e=>e.textContent=t<0?'Procédure de départ':LEGN[leg]);$$('.race').forEach(e=>e.textContent='Course '+raceNo);
   [['#rkD',6],['#rkP',6]].forEach(([s])=>{const rows=$(s).children;rk.forEach((q,i)=>{const r=rows[i];if(!r)return;const L=LIV[q.b.id];r.children[0].textContent=t<0?'·':i+1;r.children[1].style.background=L.tag;r.children[2].textContent=L.name;r.children[3].textContent=q.st.fin?'arrivé':t<0?L.code:Math.max(0,q.rem).toFixed(0)+' m'})});
-  let m='';if(t>-61&&t<-58)m='Course '+raceNo+' · départ dans 1 minute';else if(t>=0&&t<3)m='Départ !';else{const f=sim.boats.filter(b=>t>=finT(b)&&t<finT(b)+3)[0];if(f){const first=sim.boats.filter(b=>finT(b)<=finT(f)).length===1;m=first?LIV[f.id].name+' gagne la course '+raceNo:LIV[f.id].name+' arrive'}}
+  let m='';if(t>-5&&t<-2)m='Course '+raceNo+' · départ dans 5 secondes';else if(t>=0&&t<3)m='Départ !';else{const f=sim.boats.filter(b=>t>=finT(b)&&t<finT(b)+3)[0];if(f){const first=sim.boats.filter(b=>finT(b)<=finT(f)).length===1;m=first?LIV[f.id].name+' gagne la course '+raceNo:LIV[f.id].name+' arrive'}}
   if(ended!=null&&t>ended+2)m='Course suivante dans quelques secondes';
   if(m&&m!==lastMsg)toast(m);lastMsg=m}
 
@@ -611,7 +611,7 @@ function speedAt(t){if(t<-8)return 7;if(t<10)return 2.5;return sim.boats.some(b=
 function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;wt+=dt;seaMat.uniforms.uT.value=wt;
   T+=dt*speedAt(T);
   const allFin=sim.boats.every(b=>T>=finT(b));if(allFin&&ended==null)ended=T;
-  if(ended!=null&&T>ended+9){seed=(seed*31+7)%9973;sim=SIM.build(seed);T=-62;ended=null;raceNo++;ensureBoats()}
+  if(ended!=null&&T>ended+9){seed=(seed*31+7)%9973;sim=SIM.build(seed);T=-5;ended=null;raceNo++;ensureBoats()}
   place(T,dt);updateCams(dt,T);
   if(scene.userData.flag)scene.userData.flag.rotation.y=.25*Math.sin(wt*3);
   acc+=dt;if(acc>.2){acc=0;hud(T)}if(msgEnd&&now>msgEnd){msgEnd=0;$$('.toast').forEach(e=>e.classList.remove('on'))}
