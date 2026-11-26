@@ -176,15 +176,16 @@ body.idle #help,#help.gone{opacity:0}
 #s7 .card p b{color:var(--ink)}
 
 /* ===== 8. lieu ===== */
-#s8{padding:0}
-#s8 .grid{position:absolute;inset:0;display:grid;grid-template-columns:1.6fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:10px}
-#s8 figure{margin:0;overflow:hidden}
-#s8 img{width:100%;height:100%;object-fit:cover;display:block}
-#s8 .m{grid-row:1/4}
-#s8.on .m img{animation:slowzoom 16s ease-out both}
-#s8 .label{position:absolute;left:90px;bottom:90px;background:rgba(8,18,48,.85);backdrop-filter:blur(8px);border:1.5px solid var(--line);border-radius:28px;padding:34px 44px}
+#s8{padding:0;background:#0B1A44}
+#s8 .pano{position:absolute;left:0;top:0;width:1920px;height:1080px;margin:0;overflow:hidden}
+#s8 .pano img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block}
+#s8.on .pano img{animation:slowzoom 16s ease-out both}
+#s8 .inset{position:absolute;right:70px;bottom:70px;width:600px;margin:0;--rot:-2deg;transform:rotate(-2deg)}
+#s8 .inset .photo{height:400px;border:6px solid #fff;border-radius:22px}
+#s8 .inset figcaption{position:absolute;left:24px;bottom:-22px;font:800 24px/1 var(--f);background:var(--pink);color:#fff;padding:14px 20px;border-radius:999px;box-shadow:0 14px 30px -10px rgba(0,0,0,.6)}
+#s8 .label{position:absolute;left:70px;bottom:70px;background:rgba(8,18,48,.85);backdrop-filter:blur(8px);border:1.5px solid var(--line);border-radius:28px;padding:30px 40px}
 #s8 .label .kicker{margin-bottom:14px}
-#s8 .label b{font:800 54px/1.05 var(--f);display:block}
+#s8 .label b{font:800 50px/1.05 var(--f);display:block}
 
 /* ===== 9. interface public ===== */
 #s9{padding:44px 60px 40px}
@@ -269,7 +270,7 @@ body.idle #help,#help.gone{opacity:0}
 #s16.on .logos .white:nth-child(2){animation-delay:.15s}
 
 @media (prefers-reduced-motion:reduce){
-  .slide.on .r,#s1.on h1 .ch,#s1.on .poster img,#s2.on .grid img,#s8.on .m img,#s4.on .badge{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}
+  .slide.on .r,#s1.on h1 .ch,#s1.on .poster img,#s2.on .grid img,#s8.on .pano img,#s4.on .badge{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}
   .slide{transition:none}
 }
 </style>
@@ -415,14 +416,10 @@ body.idle #help,#help.gone{opacity:0}
 </section>
 
 <!-- 8 ─ Le lieu -->
-<section class="slide" id="s8" data-title="Le cadre">
-  <div class="grid">
-    <figure class="m r fade"><img src="masterclass/lieu-mourillon.jpg" alt="Plage du Mourillon"></figure>
-    <figure class="r fade" style="--d:.2s"><img src="masterclass/lieu-public.jpg" alt=""></figure>
-    <figure class="r fade" style="--d:.35s"><img src="masterclass/lieu-spectacle-1.jpg" alt=""></figure>
-    <figure class="r fade" style="--d:.5s"><img src="masterclass/lieu-spectacle-2.jpg" alt=""></figure>
-  </div>
-  <div class="label r left" style="--d:.7s"><div class="kicker">Toulon</div><b>Plage du Mourillon<br>&amp; Fort Saint-Louis</b></div>
+<section class="slide" id="s8" data-title="Le plan d’eau">
+  <figure class="pano r fade"><img src="masterclass/lieu-mourillon.jpg" alt="Le plan d’eau des plages du Mourillon, vu d’en haut"></figure>
+  <div class="label r left" style="--d:.5s"><div class="kicker">Toulon · le plan d’eau</div><b>Plage du Mourillon<br>&amp; Fort Saint-Louis</b></div>
+  <figure class="inset r right" style="--d:.8s"><div class="photo"><img src="masterclass/lieu-public.jpg" alt="Spectateurs regardant la régate depuis le fort"></div><figcaption>Vue depuis le fort</figcaption></figure>
 </section>
 
 <!-- 9 ─ Interface public : régate 3D -->
