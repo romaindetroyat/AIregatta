@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>Liaison ordinateur-bateau · fiche A4</title>
+<title>Liaison ordinateur-bateau · trois options</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
 @page{size:A4;margin:0}
@@ -71,7 +71,7 @@ svg text{font-family:var(--f)}
       <h1><span class="badge">A</span>Radio imposée avec prise écolage + petit boîtier</h1>
       <p>L’ordinateur prend la place des mains sur les manches de la radio. Les servos et la batterie du bateau ne changent pas.</p>
     </div>
-    <div class="side"><b>Jeudi 26 novembre 2026</b>Recto · option A</div>
+    <div class="side"><b>Jeudi 26 novembre 2026</b>Page 1 sur 3 · option A</div>
   </header>
 
   <div class="box">
@@ -104,9 +104,9 @@ svg text{font-family:var(--f)}
           <rect x="114" y="38" width="20" height="16" rx="1" fill="#1F2937"/>
           <g fill="#C7D2DE"><rect x="140" y="34" width="3" height="3"/><rect x="146" y="34" width="3" height="3"/><rect x="152" y="34" width="3" height="3"/><rect x="158" y="34" width="3" height="3"/><rect x="140" y="55" width="3" height="3"/><rect x="146" y="55" width="3" height="3"/><rect x="152" y="55" width="3" height="3"/><rect x="158" y="55" width="3" height="3"/></g>
           <rect x="172" y="36" width="22" height="20" rx="2" fill="#FDF3E2" stroke="#B45309"/>
-          <text x="183" y="49" text-anchor="middle" font-size="6.5" font-weight="700" fill="#B45309">3,3 V</text>
+          <text x="183" y="49" text-anchor="middle" font-size="6.5" font-weight="700" fill="#B45309">1 kΩ</text>
           <text x="137" y="86" text-anchor="middle" font-size="7" fill="#475569">carte</text>
-          <text x="183" y="86" text-anchor="middle" font-size="7" fill="#475569">adaptateur</text>
+          <text x="183" y="86" text-anchor="middle" font-size="7" fill="#475569">protection</text>
           <path d="M204 45 H256" stroke="#0F172A" stroke-width="2.2" fill="none"/>
           <text x="230" y="39" text-anchor="middle" font-size="7" fill="#475569">jack 3,5 mm</text>
           <rect x="256" y="32" width="36" height="26" rx="3" fill="#EAF0FE" stroke="#2563EB"/>
@@ -114,17 +114,16 @@ svg text{font-family:var(--f)}
         </svg>
       </div>
       <div>
-        <div class="lbl">Les pièces, par boîtier</div>
+        <div class="lbl">Les pièces, par boîtier (Gotronic, prix relevés)</div>
         <table>
-          <tr><td>Carte électronique type « Arduino Nano » (le cerveau du boîtier)</td><td class="n">≈ 5 à 10 €</td></tr>
-          <tr><td>Câble jack 3,5 mm (comme un câble audio), coupé d’un côté</td><td class="n">≈ 3 €</td></tr>
-          <tr><td>Adaptateur de tension : 2 résistances et 1 petite diode, pour ne pas abîmer la radio</td><td class="n">≈ 1 €</td></tr>
-          <tr><td>Câble USB vers l’ordinateur</td><td class="n">≈ 3 €</td></tr>
-          <tr><td>Petit boîtier en plastique, un peu de gaine</td><td class="n">≈ 3 €</td></tr>
-          <tr class="tot"><td>Total des pièces</td><td class="n">≈ 15 à 20 €</td></tr>
+          <tr><td>Carte électronique compatible Nano, en 3,3 V comme la prise de la radio (le cerveau du boîtier)</td><td class="n">9,90 €</td></tr>
+          <tr><td>Cordon jack 3,5 mm vers fils, à souder sur la carte</td><td class="n">0,95 €</td></tr>
+          <tr><td>Cordon USB vers USB-C, 1 m, vers l’ordinateur</td><td class="n">4,30 €</td></tr>
+          <tr><td>Petit boîtier en plastique étanche</td><td class="n">4,50 €</td></tr>
+          <tr><td>Résistance de protection (lot de 10 pour 10 boîtiers)</td><td class="n">0,20 €</td></tr>
+          <tr class="tot"><td>Total des pièces</td><td class="n">≈ 20 €</td></tr>
         </table>
-        <p style="margin-top:1.8mm;font-size:8.4pt;color:var(--ink2)">Variante : une carte qui travaille directement en 3,3 V évite l’adaptateur. À choisir pendant la mise au point.</p>
-      </div>
+        <p style="margin-top:1.8mm;font-size:8.4pt;color:var(--ink2)">Si la carte 3,3 V ne convient pas au prototype : carte classique en 5 V et une petite diode, ≈ 1 € de plus.</div>
     </div>
   </div>
 
@@ -143,7 +142,7 @@ svg text{font-family:var(--f)}
       <h3>Les pièges connus (témoignages)</h3>
       <ul>
         <li><b>Radio en mode « élève »</b> : elle n’émet plus. Il faut le mode « maître », qui accepte la prise.</li>
-        <li><b>Tension trop forte</b> : la carte sort du 5 V, beaucoup de radios attendent du 3,3 V. D’où l’adaptateur.</li>
+        <li><b>Tension trop forte</b> : beaucoup de cartes sortent du 5 V, la radio attend du 3,3 V. D’où la carte en 3,3 V.</li>
         <li><b>Fils simplement enroulés</b> ou trop près de l’antenne : les commandes tremblent. Fils soudés, boîtier à l’écart.</li>
         <li><b>Un seul modèle de radio imposé</b> évite les différences d’une marque à l’autre.</li>
       </ul>
@@ -156,7 +155,7 @@ svg text{font-family:var(--f)}
       <table>
         <tr><td>Radio imposée</td><td class="n">65 à 130 €</td></tr>
         <tr><td>Récepteur ER4</td><td class="n">≈ 17 €</td></tr>
-        <tr><td>Boîtier (pièces)</td><td class="n">15 à 20 €</td></tr>
+        <tr><td>Boîtier (pièces)</td><td class="n">≈ 20 €</td></tr>
         <tr class="tot"><td>Total</td><td class="n">≈ 100 à 170 €</td></tr>
       </table>
     </div>
@@ -187,7 +186,7 @@ svg text{font-family:var(--f)}
     </div>
   </div>
 
-  <div class="verdict"><b>Plus :</b> un humain peut reprendre la main si l’ordinateur plante, et la technique est éprouvée. <b>Moins :</b> il faut quelqu’un pour fabriquer les boîtiers, et c’est la solution la plus chère. <b>À décider :</b> l’usage de l’interrupteur pendant la course (sécurité seulement, ou pénalité).</div>
+  <div class="verdict"><b>Plus :</b> un humain peut reprendre la main si l’ordinateur plante, et la technique est éprouvée. <b>Moins :</b> il faut quelqu’un pour fabriquer les boîtiers, et elle coûte plus cher que B. <b>À décider :</b> l’usage de l’interrupteur pendant la course (sécurité seulement, ou pénalité).</div>
 
   <div class="foot"><span>Matériel : achat et fabrication par les équipes et les partenaires. Meridia : les programmes.</span><span>Prix indicatifs relevés en novembre 2026, à confirmer.</span></div>
 </section>
@@ -200,7 +199,7 @@ svg text{font-family:var(--f)}
       <h1><span class="badge">B</span>ExpressLRS complet, sans radio</h1>
       <p>L’ordinateur pilote directement un petit émetteur du commerce. Les servos et la batterie du bateau ne changent pas.</p>
     </div>
-    <div class="side"><b>Jeudi 26 novembre 2026</b>Verso · option B</div>
+    <div class="side"><b>Jeudi 26 novembre 2026</b>Page 2 sur 3 · option B</div>
   </header>
 
   <div class="box">
@@ -302,9 +301,118 @@ svg text{font-family:var(--f)}
 
   <div class="verdict"><b>Plus :</b> la solution la moins chère, tout vient du commerce, rien à fabriquer. <b>Moins :</b> le lien avec l’ordinateur reste à valider, et pas de reprise en main humaine sans radio en plus.</div>
 
-  <div class="dec"><span><b>Proposition :</b> tester A et B côte à côte avant de choisir. On garde B s’il passe les tests, sinon A.</span><span style="white-space:nowrap"><b>≈ 200 € de matériel · 3 à 4 jours</b></span></div>
-
   <div class="foot"><span>Règles communes : 2,4 GHz à 100 mW au plus, matériel déclaré à l’inscription, sécurité vérifiée à l’homologation.</span><span>Prix indicatifs relevés en novembre 2026, à confirmer.</span></div>
+</section>
+
+
+<!-- ============ PAGE 3 : OPTION C ============ -->
+<section class="sheet">
+  <header class="top">
+    <div>
+      <div class="k">AI Regatta · Réunion technique · Piloter le bateau depuis l’ordinateur</div>
+      <h1><span class="badge">C</span>Le système des drones : pilote automatique à bord</h1>
+      <p>On reprend le montage complet d’un drone. À bord, un pilote automatique barre et règle l’écoute tout seul ; l’ordinateur lui envoie des ordres de tacticien. Les servos du bateau ne changent pas.</p>
+    </div>
+    <div class="side"><b>Jeudi 26 novembre 2026</b>Page 3 sur 3 · option C</div>
+  </header>
+
+  <div class="box">
+    <div class="lbl">Comment ça se branche</div>
+    <div class="chain">
+      <div class="node shore"><b>Ordinateur</b>Mac ou PC, avec l’IA de l’équipe et le programme Meridia</div>
+      <div class="arr"><span>→</span>câble USB-C</div>
+      <div class="node shore"><b>Émetteur</b>Ranger Micro, le même qu’en B</div>
+      <div class="radio">))) radio dans<br>les deux sens )))</div>
+      <div class="node boat"><b>Récepteur</b>RadioMaster RP2</div>
+      <div class="arr"><span>→</span>fil</div>
+      <div class="node boat focus"><b>Pilote automatique</b>Matek H743-WING, ArduPilot en mode voilier</div>
+      <div class="arr"><span>→</span></div>
+      <div class="node boat"><b>Safran et écoute</b>GPS, compas et girouette branchés au pilote</div>
+    </div>
+    <div class="legend"><span><i style="background:var(--blueSoft);border:1px solid var(--blue)"></i>à terre</span><span><i style="background:var(--okSoft);border:1px solid var(--ok)"></i>dans le bateau</span><span>Le bateau barre seul : le délai de la liaison ne le gêne pas.</span></div>
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>Ce que fait le pilote à bord</h3>
+      <ul>
+        <li>Il <b>tient le cap</b> ou l’angle au vent demandé.</li>
+        <li>Il <b>règle l’écoute</b> tout seul, d’après la girouette.</li>
+        <li>Il <b>vire et empanne</b> sur ordre.</li>
+        <li>Il <b>rejoint une bouée</b> en tirant ses bords tout seul.</li>
+        <li>Si la liaison coupe, il <b>garde le cap</b> quelques secondes, puis rejoint un point de sécurité ou se met face au vent.</li>
+      </ul>
+      <p style="margin-top:1.6mm;font-size:8.4pt;color:var(--ink2)">Logiciel libre ArduPilot, utilisé sur des milliers de drones et de bateaux autonomes. Son mode voilier existe déjà : rien à programmer à bord, seulement des réglages.</p>
+    </div>
+    <div class="box">
+      <h3>Le dialogue avec l’ordinateur</h3>
+      <ul>
+        <li>Le langage standard des drones pour parler à un ordinateur (MAVLink).</li>
+        <li>L’émetteur, réglé en mode « MAVLink », transporte <b>les ordres et les retours</b> dans un seul lien radio, sans radio de télémétrie à part.</li>
+        <li>Le branchement en USB entre l’ordinateur et l’émetteur est <b>documenté officiellement</b> par ExpressLRS.</li>
+        <li>Des logiciels prêts à l’emploi, sur Mac et PC, servent aux réglages. Le programme Meridia traduit les ordres de tacticien.</li>
+        <li>En retour, l’ordinateur reçoit le cap, la vitesse, l’angle du vent, la batterie et l’état du pilote.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="box">
+      <h3>Coût par équipe</h3>
+      <table>
+        <tr><td>Carte H743-WING</td><td class="n">≈ 110 €</td></tr>
+        <tr><td>GPS et compas</td><td class="n">≈ 45 €</td></tr>
+        <tr><td>Girouette</td><td class="n">50 à 150 €</td></tr>
+        <tr><td>Émetteur + câble</td><td class="n">≈ 43 €</td></tr>
+        <tr><td>Récepteur RP2</td><td class="n">≈ 22 €</td></tr>
+        <tr><td>Batterie 3S</td><td class="n">≈ 20 €</td></tr>
+        <tr class="tot"><td>Total</td><td class="n">≈ 290 à 390 €</td></tr>
+      </table>
+    </div>
+    <div class="box">
+      <h3>Fiabilité</h3>
+      <div class="rel">
+        <div><span class="pill ok">Éprouvé</span>La liaison dans les deux sens, documentée par ExpressLRS.</div>
+        <div><span class="pill ok">Éprouvé</span>Le pilote ArduPilot, sur drones et bateaux autonomes.</div>
+        <div><span class="pill warn">À valider</span>Les réglages du mode voilier sur ce bateau, à faire sur l’eau.</div>
+      </div>
+    </div>
+    <div class="box">
+      <h3>Ce que ça impose aux équipes</h3>
+      <ul>
+        <li>Changer le récepteur</li>
+        <li>Installer la carte, le GPS, la girouette et une batterie 3S (la carte demande 8 V au moins)</li>
+        <li>Plusieurs sorties d’essai pour régler le pilote</li>
+        <li>Environ 200 g de plus à bord</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>Les tests avant de valider</h3>
+    <div class="grid3" style="gap:3mm">
+      <div><b>1. Sur la table</b> : l’ordinateur parle au pilote, le pilote fait bouger le safran et l’écoute.</div>
+      <div><b>2. À l’eau</b> : cap tenu, écoute réglée seule, virements et empannages sur ordre, bouée rejointe.</div>
+      <div><b>3. Sécurité et endurance</b> : coupure de l’ordinateur, plusieurs heures d’affilée, portée jusqu’au point le plus loin.</div>
+    </div>
+  </div>
+
+  <div class="verdict"><b>Plus :</b> le bateau barre seul, rien à inventer, et les ordres correspondent au métier de tacticien. <b>Moins :</b> la solution la plus chère, plus de matériel dans une coque étroite, et des réglages à faire sur l’eau.</div>
+
+  <div class="box">
+    <h3>Les trois options côte à côte</h3>
+    <table>
+      <tr><th></th><th>A · Écolage + boîtier</th><th>B · Sans radio</th><th>C · Pilote à bord</th></tr>
+      <tr><td>Coût par équipe</td><td>≈ 100 à 170 €</td><td>≈ 60 à 90 €</td><td>≈ 290 à 390 €</td></tr>
+      <tr><td>Qui barre</td><td>L’ordinateur</td><td>L’ordinateur</td><td>Le pilote, à bord</td></tr>
+      <tr><td>Rien à fabriquer</td><td>Non : le boîtier</td><td>Oui</td><td>Oui</td></tr>
+      <tr><td>Point à valider</td><td>Le boîtier</td><td>Le lien ordinateur-émetteur</td><td>Les réglages sur l’eau</td></tr>
+    </table>
+  </div>
+
+  <div class="dec"><span><b>Proposition :</b> tester A, B et C côte à côte avant de choisir. Le plus simple qui passe les tests est retenu.</span><span style="white-space:nowrap"><b>≈ 550 € de matériel</b></span></div>
+
+  <div class="foot"><span>Règles communes : 2,4 GHz à 100 mW au plus, matériel déclaré à l’inscription, sécurité vérifiée à l’homologation.</span><span>Prix relevés en novembre 2026 (GPS, girouette et batterie estimés).</span></div>
 </section>
 
 </body>
