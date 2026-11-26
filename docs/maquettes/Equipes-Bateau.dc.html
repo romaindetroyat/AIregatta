@@ -107,7 +107,7 @@ class Component extends DCLogic {
     const defs = [
       M('A', 'A · Radio avec prise écolage', '2,4 GHz', 'radio imposée + petit boîtier', 'servos du bateau', 'L’ordinateur pilote la radio imposée par sa prise écolage, grâce à un petit boîtier à fabriquer. Un interrupteur rend la main à un humain. ≈ 100 à 170 € par équipe.'),
       M('B', 'B · Émetteur sans radio', '2,4 GHz', 'émetteur Ranger Micro en USB', 'servos du bateau', 'L’ordinateur pilote directement un émetteur du commerce. Rien à fabriquer ; le lien ordinateur-émetteur est à valider. ≈ 60 à 90 € par équipe.'),
-      M('C', 'C · Pilote automatique à bord', '2,4 GHz', 'émetteur Ranger Micro, dans les deux sens', 'pilote automatique ArduPilot', 'Le pilote barre seul ; l’ordinateur envoie des ordres de tacticien et reçoit le cap et la vitesse. GPS, girouette et batterie 3S à bord. ≈ 290 à 390 € par équipe.')
+      M('C', 'C · Pilote automatique à bord', '2,4 GHz', 'émetteur Ranger Micro, dans les deux sens', 'pilote automatique ArduPilot', 'Le pilote barre seul ; l’ordinateur envoie des ordres de tacticien et reçoit le cap et la vitesse. GPS, girouette et batterie 3S à bord. ≈ 240 à 260 € par équipe.')
     ];
     const media = defs.map(m => ({ ...m, on: String(st.m === m.id), bg: st.m === m.id ? 'rgba(199,235,0,.2)' : '#FFFFFF', border: st.m === m.id ? '#11150D' : 'rgba(9,11,7,.12)', go: () => this.setState({ m: m.id }) }));
     const medium = defs.find(m => m.id === st.m);

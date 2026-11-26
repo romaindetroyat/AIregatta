@@ -5,7 +5,7 @@
 ## En bref
 
 - **Le bateau** : un voilier radiocommandé de la classe IOM (1 m), d’occasion de préférence : 450 à 1 500 €.
-- **La liaison** : un des trois montages de [liaison-bateau.md](liaison-bateau.md). En A et B, seul le récepteur change dans le bateau (≈ 60 à 170 €) ; en C, on ajoute un pilote automatique à bord (≈ 290 à 390 €).
+- **La liaison** : un des trois montages de [liaison-bateau.md](liaison-bateau.md). En A et B, seul le récepteur change dans le bateau (≈ 60 à 170 €) ; en C, on ajoute un pilote automatique à bord (≈ 240 à 260 €).
 - **L’IA** : sur votre ordinateur à terre, elle lit le flux officiel et envoie des ordres de tacticien. Huit comportements suffisent pour la qualification.
 - **Le délai** : huit semaines entre l’achat du bateau et le premier parcours complet.
 
@@ -54,9 +54,9 @@ Les limites IOM ci-dessus viennent de résumés de la classe ; le texte en vigue
 | ou IOM neuf, tout équipé | ≈ 3 000 € | jusqu’à 6 mois d’attente : trop tard pour mai |
 | Liaison, montage A : radio imposée, récepteur, boîtier | ≈ 100 à 170 € | prix relevés en boutique, novembre 2026 |
 | ou montage B : émetteur, câble, récepteur | ≈ 60 à 90 € | prix relevés en boutique, novembre 2026 |
-| ou montage C : émetteur, récepteur, carte H743-WING (≈ 110 €), GPS et compas (≈ 45 €), girouette (50 à 150 €), batterie 3S | ≈ 290 à 390 € | carte relevée en boutique ; GPS et girouette estimés |
+| ou montage C : émetteur, récepteur, carte H743-WING (109,90 €), GPS et compas (26,91 €), girouette fabriquée (≈ 21 €), batterie 3S (18,90 €) | ≈ 240 à 260 € | prix relevés en boutique, novembre 2026 |
 
-Soit **≈ 510 à 1 890 €** avec un IOM d’occasion. Un IOM neuf n’arrive pas à temps : cherchez d’occasion (forum de la Classe 1 Mètre France, petites annonces de modélisme) ou auprès d’un club de voile radiocommandée.
+Soit **≈ 510 à 1 760 €** avec un IOM d’occasion. Un IOM neuf n’arrive pas à temps : cherchez d’occasion (forum de la Classe 1 Mètre France, petites annonces de modélisme) ou auprès d’un club de voile radiocommandée.
 
 ## Le poids
 
@@ -147,4 +147,4 @@ Les cinq premiers font boucler un parcours ; les trois derniers évitent les pé
 - [ExpressLRS : liaison MAVLink avec l’ordinateur](https://www.expresslrs.org/software/mavlink/)
 - [ArduPilot : carte Matek H743-WING](https://ardupilot.org/copter/docs/common-matekh743-wing.html)
 
-Les prix de la liaison et de la carte ont été relevés en boutique le 25 novembre 2026 ; ceux du GPS et de la girouette sont estimés.
+Les prix de la liaison, de la carte, du GPS, de la batterie et des pièces de la girouette ont été relevés en boutique les 25 et 26 novembre 2026.

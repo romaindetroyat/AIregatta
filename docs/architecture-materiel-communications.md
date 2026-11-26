@@ -328,7 +328,7 @@ Trois montages, détaillés dans [equipes/liaison-bateau.md](equipes/liaison-bat
 |---|---|---|
 | **A · Radio avec prise écolage** | Radio RadioMaster Pocket ou TX12 MKII (ExpressLRS), récepteur ER4, petit boîtier fabriqué (≈ 20 € de pièces) | ≈ 100–170 € |
 | **B · Émetteur sans radio** | Émetteur RadioMaster Ranger Micro et câble USB-C, récepteur ER4 | ≈ 60–90 € |
-| **C · Pilote automatique à bord** | Même émetteur, récepteur RP2, carte **Matek H743-WING V3** sous **ArduPilot Rover, mode voilier**, GPS et compas, girouette, batterie 3S | ≈ 290–390 € |
+| **C · Pilote automatique à bord** | Même émetteur, récepteur RP2, carte **Matek H743-WING V3** sous **ArduPilot Rover, mode voilier**, GPS et compas, girouette fabriquée, batterie 3S | ≈ 240–260 € |
 
 En C, ArduPilot gère nativement les voiliers : un virement peut être déclenché par une commande, et en mode automatique le bateau tire des bords tout seul pour atteindre un point au vent. L'ExpressLRS transporte dans les deux sens le langage standard des drones (MAVLink), sans radio de télémétrie séparée.
 

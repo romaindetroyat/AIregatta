@@ -58,16 +58,16 @@ Ordinateur ── USB-C ── émetteur Ranger Micro  ))) radio, dans les deux 
 
 - **Principe** : on reprend le montage complet d’un drone. À bord, une carte de pilote automatique (Matek H743-WING avec le logiciel libre ArduPilot, en mode voilier) barre et règle l’écoute toute seule. L’ordinateur envoie des ordres de tacticien : « cap 45° », « vire », « va à la bouée ». En retour, il reçoit le cap, la vitesse et l’état du bateau.
 - **La liaison** : le même émetteur qu’en B, réglé pour transporter les ordres et les retours du bateau dans les deux sens. Ce branchement en USB entre l’ordinateur et l’émetteur est **documenté officiellement** par ExpressLRS ; il utilise le langage standard des drones pour parler à un ordinateur (MAVLink).
-- **Coût par équipe** : ≈ 290 à 390 € (carte ≈ 110 €, GPS et compas ≈ 45 €, girouette 50 à 150 €, émetteur et câble ≈ 43 €, récepteur ≈ 22 €, batterie 3S ≈ 20 €). Liste d’achat : page « Pièces du pilote automatique ».
+- **Coût par équipe** : ≈ 240 à 260 € (carte 109,90 €, GPS et compas 26,91 €, girouette fabriquée ≈ 21 €, émetteur et câble 42,62 €, récepteur 21,90 €, batterie 3S 18,90 €). Liste d’achat : page « Pièces du pilote automatique ».
 - **Fiabilité** : la liaison et le logiciel sont éprouvés sur des milliers de drones et de bateaux autonomes. Le mode voilier existe mais il faut l’apprendre au bateau : réglages et essais sur l’eau.
-- **Ce que ça impose** : installer la carte, le GPS, la girouette et une batterie 3S (la carte demande 8 V au moins) ; changer le récepteur ; plusieurs sorties d’essai pour régler le pilote.
+- **Ce que ça impose** : installer la carte, le GPS, la girouette (à fabriquer : un capteur d’angle, un aimant, deux paliers, des pièces imprimées en 3D) et une batterie 3S (la carte demande 8 V au moins) ; changer le récepteur ; plusieurs sorties d’essai pour régler le pilote.
 - **Atout** : le bateau barre seul. Le délai de la liaison ne le gêne pas, et les ordres correspondent au métier de tacticien.
 
 ### Comparaison
 
 | | A. Écolage + boîtier | B. ExpressLRS sans radio | C. Pilote à bord |
 |---|---|---|---|
-| Coût par équipe | ≈ 100 à 170 € | ≈ 60 à 90 € | ≈ 290 à 390 € |
+| Coût par équipe | ≈ 100 à 170 € | ≈ 60 à 90 € | ≈ 240 à 260 € |
 | Ce qui change dans le bateau | Le récepteur | Le récepteur | Récepteur, carte, GPS, girouette, batterie 3S |
 | Qui barre | L’ordinateur, à terre | L’ordinateur, à terre | Le pilote, à bord |
 | Rien à fabriquer | Non : le boîtier | Oui | Oui |
@@ -81,7 +81,7 @@ Un kit d’essai par montage, testé dans le même ordre :
 2. **Endurance** : plusieurs heures d’affilée, sur Mac et sur PC, en comptant les coupures.
 3. **À l’eau** : portée jusqu’au point le plus loin du parcours, mise en sécurité quand on coupe l’ordinateur. Pour C, cap tenu et virements automatiques.
 
-Budget indicatif : ≈ 200 € pour A et B, ≈ 350 € de plus pour C ; 3 à 4 jours de travail pour A et B, une semaine de plus pour C (réglages sur l’eau).
+Budget indicatif : ≈ 200 € pour A et B, ≈ 250 € de plus pour C ; 3 à 4 jours de travail pour A et B, une semaine de plus pour C (réglages sur l’eau).
 
 ## 3. Les règles radio
 
