@@ -436,7 +436,7 @@ function yuzuLogo(g,x,y,h,dark,mirror){const ink=dark?'#F5EEE0':'#1C2433';g.save
 function txt(g,t,x,y,font,col,mirror,align){g.save();g.font=font;g.fillStyle=col;g.textBaseline='middle';const w=g.measureText(t).width;let cx=align==='center'?x:x+w/2;g.translate(cx,y);if(mirror)g.scale(-1,1);g.fillText(t,-w/2,0);g.restore()}
 const tex=c=>{const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=8;return t};
 // coque : u = longueur (arrière -> étrave), v = de haut en bas (liston -> quille) ; la flottaison est vers 40 % de la hauteur
-function hullTex(L,mir){const c=document.createElement('canvas');c.width=2048;c.height=256;const g=c.getContext('2d');const H=256,WL=100;
+function hullTex(L,mir){const c=document.createElement('canvas');c.width=2048;c.height=256;const g=c.getContext('2d');const H=256,WL=158;
   g.fillStyle=L.hull;g.fillRect(0,0,2048,H);
   if(L.kind==='aireg'){g.fillStyle='#F8FAFC';g.fillRect(0,0,2048,7);txt(g,'Ai Regatta.com',90,52,'700 62px "Plus Jakarta Sans",sans-serif','#FFFFFF',mir);
     g.save();g.fillStyle='#FFFFFF';for(let k=0;k<3;k++){g.beginPath();g.moveTo(1340+k*22,7);g.lineTo(1350+k*22,7);g.lineTo(1320+k*22,WL);g.lineTo(1310+k*22,WL);g.fill()}g.restore();
@@ -448,7 +448,7 @@ function hullTex(L,mir){const c=document.createElement('canvas');c.width=2048;c.
   else if(L.kind==='yuzu'){g.fillStyle='#F5C518';g.fillRect(0,0,2048,8);g.fillRect(0,WL-12,2048,5);g.fillStyle='#F5EEE0';g.fillRect(0,WL-4,2048,2);yuzuLogo(g,100,6,92,true,mir);txt(g,'yuzudigital.fr',1080,52,'500 28px "JetBrains Mono",monospace','#F5C518',mir)}
   else if(L.kind==='lavande'){g.fillStyle='#F1ECF8';g.fillRect(0,0,2048,6);g.strokeStyle='#B9A2E6';g.lineWidth=5;for(let k=0;k<14;k++){const x=1300+k*48;g.beginPath();g.moveTo(x,WL);g.quadraticCurveTo(x+8,50,x+20,14);g.stroke()}txt(g,'Lavandine',110,52,'700 60px "Plus Jakarta Sans",sans-serif','#F1ECF8',mir)}
   else if(L.kind==='phare'){g.fillStyle='#FFFFFF';for(let k=0;k<4;k++){g.beginPath();g.moveTo(1250+k*150,0);g.lineTo(1320+k*150,0);g.lineTo(1250+k*150,WL);g.lineTo(1180+k*150,WL);g.fill()}txt(g,'PHARE AZUR',110,52,'800 56px "Plus Jakarta Sans",sans-serif','#FFFFFF',mir)}
-  g.fillStyle='rgba(0,0,0,.22)';g.fillRect(0,WL+4,2048,H-WL);g.fillStyle=L.kind==='meridia'?'#14170F':L.kind==='calanque'?'#0F5F5D':'#151B2C';g.fillRect(0,WL+12,2048,H);return tex(c)}
+  g.fillStyle=L.kind==='meridia'?'#C7EB00':L.kind==='yuzu'?'#F5C518':'#EEF1F4';g.fillRect(0,WL-4,2048,7);g.fillStyle=L.kind==='meridia'?'#14170F':L.kind==='calanque'?'#0F5F5D':'#2A1A1E';g.fillRect(0,WL+3,2048,H);return tex(c)}
 function deckTex(L){const c=document.createElement('canvas');c.width=1024;c.height=128;const g=c.getContext('2d');
   if(L.deck==='wood'){g.fillStyle='#9A5636';g.fillRect(0,0,1024,128);for(let y=6;y<122;y+=9){g.fillStyle=`hsl(18,${44+hash(y)*12}%,${33+hash(y+3)*10}%)`;g.fillRect(0,y,1024,8);g.fillStyle='rgba(30,14,6,.55)';g.fillRect(0,y+8,1024,1);for(let x=hash(y)*200;x<1024;x+=180+hash(x+y)*160)g.fillRect(x,y,1,8)}
     g.fillStyle='#F8FAFC';g.fillRect(0,0,1024,6);g.fillRect(0,122,1024,6);g.fillStyle='#1C2758';g.fillRect(640,30,150,68);g.fillStyle='#F8FAFC';g.fillRect(612,24,6,80);g.fillStyle='#22242A';rr(g,470,50,70,28,14);g.fill();rr(g,250,54,120,20,10);g.fill()}
@@ -528,6 +528,15 @@ function makeBoat(T){const L=LIV[T.id],root=new THREE.Group(),heel=new THREE.Gro
   wg.setAttribute('position',new THREE.BufferAttribute(wp,3));wg.setAttribute('alpha',new THREE.BufferAttribute(wa,1));wg.setIndex(wi);
   const wm=new THREE.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{},vertexShader:'attribute float alpha;varying float vA;void main(){vA=alpha;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:'varying float vA;void main(){gl_FragColor=vec4(1.,1.,1.,vA*.55);}'});
   const wake=new THREE.Mesh(wg,wm);wake.frustumCulled=false;scene.add(wake);
+  // écume au contact coque / mer : anneau autour de la flottaison, plus large à l’étrave
+  {const NS=40,pos=[],al=[],idx=[];for(const sg of [1,-1])for(let i=0;i<=NS;i++){const t=i/NS,z=.5-t,b=halfB(t)*.9,w=.02+.06*Math.pow(t,3);pos.push(sg*b,0,z,sg*(b+w),0,z-.02*t*t);al.push(.95,0)}
+   const off=(NS+1)*2;for(let k=0;k<2;k++)for(let i=0;i<NS;i++){const a=k*off+i*2;idx.push(a,a+1,a+2,a+1,a+3,a+2)}
+   pos.push(halfB(1)*.5,0,-.52,-halfB(1)*.5,0,-.52);al.push(.9,.9);
+   const fg=new THREE.BufferGeometry();fg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));fg.setAttribute('alpha',new THREE.Float32BufferAttribute(al,1));fg.setIndex(idx);
+   const fm=new THREE.ShaderMaterial({transparent:true,depthWrite:false,side:THREE.DoubleSide,polygonOffset:true,polygonOffsetFactor:-2,uniforms:{uT:seaMat.uniforms.uT},
+     vertexShader:'attribute float alpha;varying float vA;varying vec3 vP;void main(){vA=alpha;vP=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+     fragmentShader:'uniform float uT;varying float vA;varying vec3 vP;void main(){float n=.6+.4*sin(vP.z*90.+uT*6.)*sin(vP.x*140.-uT*4.);gl_FragColor=vec4(.96,.98,1.,clamp(vA*n*1.2,0.,1.));}'});
+   const foam=new THREE.Mesh(fg,fm);foam.position.y=-.024;foam.renderOrder=2;root.add(foam)}
   return {sb:T,L,root,heel,main,mg,jg,jib,wake,wp,wa,hist:[],heelA:0,boomA:.2,cam:0}}
 const JT=new THREE.Vector3(0,sheer(.96),-.46),JH=new THREE.Vector3(0,1.36,-.11),JC0=new THREE.Vector3(0,.07,-.14),JA=JH.clone().sub(JT).normalize();
 const MT=new THREE.Vector3(0,0,0),MH=new THREE.Vector3(0,1.52,0),MC=new THREE.Vector3(0,0,.42);
@@ -539,9 +548,9 @@ const finT=b=>b.fin!=null?b.fin:b.segs[b.segs.length-1].t1;
 const boats={};
 function ensureBoats(){sim.boats.forEach(b=>{if(!boats[b.id])boats[b.id]=makeBoat(b);boats[b.id].sb=b;boats[b.id].hist=[]})}
 function place(t,dt){Object.values(boats).forEach(m=>{const st=SIM.state(m.sb,t),h=st.hdg*Math.PI/180,p=W(st.x,st.y);
-  m.root.position.set(p.x,waveH(p.x,p.z,wt)*.6+.028*K,p.z);m.root.rotation.y=PHI-h;
+  m.root.position.set(p.x,waveH(p.x,p.z,wt)*.1+.028*K,p.z);m.root.rotation.y=PHI-h;
   const twa=Math.acos(Math.max(-1,Math.min(1,Math.cos(h))))*180/Math.PI,side=Math.sin(h)>=0?1:-1;
-  const heelT=st.fin||(st.seg==='pre'&&t<-5)?.05:(st.seg==='tack'?.03:Math.max(.06,.36*(1-twa/180)));
+  const heelT=st.fin||(st.seg==='pre'&&t<-5)?.05:(st.seg==='tack'?.03:Math.max(.06,.28*(1-twa/180)));
   const boomT=Math.min(1.3,Math.max(.12,twa/180*1.55));
   m.heelA+=(side*heelT-m.heelA)*lerpK(dt,3);m.boomA+=(side*boomT-m.boomA)*lerpK(dt,2.4);m.cam+=(side*.05-m.cam)*lerpK(dt,2);
   m.heel.rotation.z=-m.heelA;m.heel.rotation.x=.025*Math.sin(wt*1.6+m.sb.i*2);m.heel.position.y=.012*Math.sin(wt*2.1+m.sb.i);
