@@ -340,13 +340,42 @@ const PARKS=GEO.park.map(P2);
 {const m=std('#948E82',1,{flatShading:true});GEO.pier.forEach(a=>{const closed=a[0],pts=P2(a.slice(1));
   if(closed&&pts.length>3){const g=new THREE.ExtrudeGeometry(shapeOf(pts),{depth:2.6,bevelEnabled:true,bevelThickness:.6,bevelSize:.8,bevelSegments:1});g.rotateX(-Math.PI/2);g.translate(0,-1.2,0);scene.add(new THREE.Mesh(g,m))}
   else for(let i=0;i<pts.length-1;i++){const[x0,z0]=pts[i],[x1,z1]=pts[i+1];const L=Math.hypot(x1-x0,z1-z0);if(L<.5)continue;const b=new THREE.Mesh(new THREE.BoxGeometry(5,2.6,L+2.5),m);b.position.set((x0+x1)/2,.1,(z0+z1)/2);b.rotation.y=Math.atan2(x1-x0,z1-z0);scene.add(b)}})}
-// forts : Fort Saint-Louis, Tour Royale, Fort Lamalgue
-{const stone=std('#D2BE95',.9),top=std('#C1AC82',.95);GEO.fort.forEach(a=>{const name=a[0],pts=P2(a.slice(1));const h=name==='Tour Royale'?15:name==='Fort Saint-Louis'?10:9;
-  const g=new THREE.ExtrudeGeometry(shapeOf(pts),{depth:h,bevelEnabled:false});g.rotateX(-Math.PI/2);g.translate(0,LAND_Y-.6,0);scene.add(new THREE.Mesh(g,[top,stone]));
-  if(name==='Fort Saint-Louis'){let cx=0,cz=0;pts.forEach(p=>{cx+=p[0];cz+=p[1]});cx/=pts.length;cz/=pts.length;
-   const t=new THREE.Mesh(new THREE.CylinderGeometry(3.2,3.6,7,18),stone);t.position.set(cx,LAND_Y+h+2.9,cz);scene.add(t);
-   const f=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,6,6),std('#EEE')),fl=new THREE.Mesh(new THREE.PlaneGeometry(2.4,1.6),new THREE.MeshStandardMaterial({color:'#2B4BA8',side:THREE.DoubleSide}));
-   f.position.set(cx,LAND_Y+h+9,cz);fl.position.set(cx+1.2,LAND_Y+h+11,cz);scene.add(f,fl);scene.userData.flag=fl}})}
+// forts : Fort Saint-Louis (modelé d’après photos), Tour Royale, Fort Lamalgue
+{const stone=std('#D2BE95',.9),top=std('#C1AC82',.95);
+ const wallC=std('#A8916B',.95,{flatShading:true}),wallD=std('#9A8260',.95,{flatShading:true}),band=std('#C8B38C',.9),tile=std('#A9441F',.8,{flatShading:true}),plaster=std('#C9AE82',.9);
+ // mur taluté : anneau du bas élargi, anneau du haut au tracé du fort
+ function battered(pts,y0,y1,k,mat){let cx=0,cz=0;pts.forEach(p=>{cx+=p[0];cz+=p[1]});cx/=pts.length;cz/=pts.length;const pos=[],n=pts.length;
+  for(let i=0;i<n;i++){const p=pts[i],q=pts[(i+1)%n],b0=[cx+(p[0]-cx)*k,cz+(p[1]-cz)*k],b1=[cx+(q[0]-cx)*k,cz+(q[1]-cz)*k];
+   pos.push(b0[0],y0,b0[1],b1[0],y0,b1[1],q[0],y1,q[1], b0[0],y0,b0[1],q[0],y1,q[1],p[0],y1,p[1])}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.computeVertexNormals();const m=new THREE.Mesh(g,mat);m.material.side=THREE.DoubleSide;scene.add(m);return [cx,cz]}
+ function ring(pts,y,h,kOut,kIn,mat,c){const sh=new THREE.Shape(pts.map(p=>new THREE.Vector2(c[0]+(p[0]-c[0])*kOut,-(c[1]+(p[1]-c[1])*kOut))));
+  sh.holes.push(new THREE.Path(pts.map(p=>new THREE.Vector2(c[0]+(p[0]-c[0])*kIn,-(c[1]+(p[1]-c[1])*kIn))).reverse()));
+  const g=new THREE.ExtrudeGeometry(sh,{depth:h,bevelEnabled:false});g.rotateX(-Math.PI/2);g.translate(0,y,0);scene.add(new THREE.Mesh(g,mat))}
+ function hip(x,z,w,d,y,h,rot){const g=new THREE.ConeGeometry(Math.hypot(w,d)/2,h,4,1);g.rotateY(Math.PI/4);g.scale(w/Math.hypot(w,d)*1.42,1,d/Math.hypot(w,d)*1.42);const m=new THREE.Mesh(g,tile);m.position.set(x,y+h/2,z);m.rotation.y=rot;scene.add(m)}
+ function box(x,z,w,d,y,h,rot,mat){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y+h/2,z);m.rotation.y=rot;scene.add(m);return m}
+ GEO.fort.forEach(a=>{const name=a[0],pts=P2(a.slice(1));
+  if(name!=='Fort Saint-Louis'){const h=name==='Tour Royale'?15:9;const g=new THREE.ExtrudeGeometry(shapeOf(pts),{depth:h,bevelEnabled:false});g.rotateX(-Math.PI/2);g.translate(0,LAND_Y-.6,0);scene.add(new THREE.Mesh(g,[top,stone]));return}
+  const H=11,y0=-1.5,yT=LAND_Y+H;
+  const c=battered(pts,y0,yT,1.07,wallC);                                    // grand mur taluté qui sort de l’eau
+  const cap=new THREE.ShapeGeometry(new THREE.Shape(pts.map(p=>new THREE.Vector2(p[0],-p[1]))));cap.rotateX(-Math.PI/2);const cm=new THREE.Mesh(cap,top);cm.position.y=yT;scene.add(cm);
+  ring(pts,yT-1.6,.55,1.015,.9,band,c);                                      // cordon de pierre sous le sommet
+  ring(pts,yT,1.3,1.0,.92,wallD,c);                                          // parapet
+  // orientation : axe principal du fort, côté terre (nord) = tour carrée, côté mer = maisons à toits de tuiles
+  let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;pts.forEach(([x,z])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);z0=Math.min(z0,z);z1=Math.max(z1,z)});
+  const W=x1-x0,D=z1-z0,cx=c[0],cz=c[1];
+  // tour carrée massive, légèrement talutée, avec parapet
+  const tw=Math.min(W,D)*.42,tx=cx+W*.18,tz=cz-D*.18;
+  battered([[tx-tw/2,tz-tw/2],[tx+tw/2,tz-tw/2],[tx+tw/2,tz+tw/2],[tx-tw/2,tz+tw/2]],yT,yT+7.5,1.04,wallC);
+  const tc=new THREE.Mesh(new THREE.BoxGeometry(tw,.4,tw),top);tc.position.set(tx,yT+7.5,tz);scene.add(tc);
+  [[0,-1],[0,1],[-1,0],[1,0]].forEach(([u,v])=>{box(tx+u*tw/2,tz+v*tw/2,u?.7:tw,v?.7:tw,yT+7.5,1.2,0,wallD)});
+  // maisons de garde : enduit ocre, toits à quatre pans en tuiles rouges
+  const hx=cx-W*.2,hz=cz+D*.12;box(hx,hz,W*.34,D*.26,yT,4.2,0,plaster);hip(hx,hz,W*.36,D*.28,yT+4.2,2.4,0);
+  const h2x=cx-W*.05,h2z=cz+D*.3;box(h2x,h2z,W*.2,D*.16,yT,3.2,0,plaster);hip(h2x,h2z,W*.22,D*.18,yT+3.2,1.8,0);
+  // échauguette d’angle et mât
+  const ex=cx+W*.42,ez=cz+D*.38;box(ex,ez,2.4,2.4,yT,3,0,wallD);hip(ex,ez,2.8,2.8,yT+3,1.4,0);
+  const f=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,6,6),std('#EEE')),fl=new THREE.Mesh(new THREE.PlaneGeometry(2.4,1.6),new THREE.MeshStandardMaterial({color:'#2B4BA8',side:THREE.DoubleSide}));
+  f.position.set(tx,yT+11,tz);fl.position.set(tx+1.2,yT+13,tz);scene.add(f,fl);scene.userData.flag=fl;
+  window.__fortC=[cx,cz];})}
 
 /* bâtiments : façades à fenêtres (texture répétée), toits plats ou en tuiles, une seule géométrie */
 const winTex=(()=>{const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,128,128);
@@ -359,9 +388,11 @@ const winTex=(()=>{const c=document.createElement('canvas');c.width=c.height=128
  const ROOF_T=new THREE.Color('#B56A48'),ROOF_F=new THREE.Color('#BDB6A8');
  const pos=[],nor=[],uv=[],col=[];
  const push=(x,y,z,nx,ny,nz,u,v,c,k)=>{pos.push(x,y,z);nor.push(nx,ny,nz);uv.push(u,v);col.push(c.r*k,c.g*k,c.b*k)};
- GEO.bld.forEach((a,bi)=>{const h=a[0]/2,roof=a[1],pts=P2(a.slice(2));if(pts.length<3)return;
+ const SEA=['#FBF8F1','#F4EEE2','#EFE6D4','#F7F1E6','#E9DFCB'].map(c=>new THREE.Color(c));
+ GEO.bld.forEach((a,bi)=>{let h=a[0]/2;const roof=a[1],pts=P2(a.slice(2));if(pts.length<3)return;
+  let bx=0,bz=0;pts.forEach(p=>{bx+=p[0];bz+=p[1]});bx/=pts.length;bz/=pts.length;const front=Math.hypot(bx,bz)<520&&!roof;if(front)h=Math.max(h,15+hash(bi*7)*15);
   let ar=0;for(let i=0;i<pts.length;i++){const p=pts[i],q=pts[(i+1)%pts.length];ar+=p[0]*q[1]-q[0]*p[1]}if(ar>0)pts.reverse();
-  const c=WALL[Math.floor(hash(bi)*WALL.length)],y0=LAND_Y,y1=LAND_Y+h;let per=0;
+  const c=front?SEA[Math.floor(hash(bi)*SEA.length)]:WALL[Math.floor(hash(bi)*WALL.length)],y0=LAND_Y,y1=LAND_Y+h;let per=0;
   for(let i=0;i<pts.length;i++){const[x0,z0]=pts[i],[x1,z1]=pts[(i+1)%pts.length];const L=Math.hypot(x1-x0,z1-z0);if(L<.05)continue;const nx=(z1-z0)/L,nz=-(x1-x0)/L;
    const sx=3.1+hash(bi*3)*1.2,u0=per/sx,u1=(per+L)/sx,v1=h/3.05;per+=L;
    push(x0,y0,z0,nx,0,nz,u0,0,c,.72);push(x1,y0,z1,nx,0,nz,u1,0,c,.72);push(x1,y1,z1,nx,0,nz,u1,v1,c,1.02);
@@ -385,6 +416,18 @@ const winTex=(()=>{const c=document.createElement('canvas');c.width=c.height=128
   if(Math.hypot((x0+x1)/2,(z0+z1)/2)>1300)return;for(let i=0;i<220&&k<420;i++){const x=x0+hash(seed++)*(x1-x0),z=z0+hash(seed++)*(z1-z0);if(!inPoly(x,z,p)||!inPoly(x,z,LAND))continue;
    P.set(x,LAND_Y+2.1,z);S.set(1,1,1);M.compose(P,Q,S);um.setMatrixAt(k,M);um.setColorAt(k,new THREE.Color(COLS[k%COLS.length]));P.set(x,LAND_Y+1.05,z);M.compose(P,Q,S);pm.setMatrixAt(k,M);k++}});
  um.count=pm.count=k;scene.add(um,pm)}
+
+/* palmiers sur le bord des plages, comme sur la promenade du Mourillon */
+{const tr=new THREE.InstancedMesh(new THREE.CylinderGeometry(.22,.38,1,6),std('#8A6E52',.9),260);
+ const cg=new THREE.CylinderGeometry(.25,3.4,1.8,9,1,true);cg.translate(0,-.5,0);
+ const cr=new THREE.InstancedMesh(cg,new THREE.MeshStandardMaterial({color:'#35592A',roughness:.9,flatShading:true,side:THREE.DoubleSide}),260);
+ const M=new THREE.Matrix4(),Q=new THREE.Quaternion(),S=new THREE.Vector3(),P=new THREE.Vector3();let n=0,sd=77;
+ GEO.beach.forEach(a=>{const p=P2(a);let cx=0,cz=0;p.forEach(([x,z])=>{cx+=x;cz+=z});cx/=p.length;cz/=p.length;if(Math.hypot(cx,cz)>900)return;
+  for(let i=0;i<p.length&&n<260;i+=2){const[x,z]=p[i];const dx=x-cx,dz=z-cz,L=Math.hypot(dx,dz)||1,qx=x+dx/L*9,qz=z+dz/L*9;
+   if(!inPoly(qx,qz,LAND)||inPoly(qx,qz,p))continue;const h=8+hash(sd++)*4;
+   P.set(qx,LAND_Y+h/2,qz);S.set(1,h,1);Q.identity();M.compose(P,Q,S);tr.setMatrixAt(n,M);
+   P.set(qx,LAND_Y+h+.3,qz);Q.setFromAxisAngle(new THREE.Vector3(0,1,0),hash(sd++)*6);S.set(1,1,1);M.compose(P,Q,S);cr.setMatrixAt(n,M);n++}});
+ tr.count=cr.count=n;scene.add(tr,cr)}
 
 /* ville lointaine, Mont Faron, presqu’île de Saint-Mandrier, Cap Brun */
 {const m=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.95,flatShading:true});

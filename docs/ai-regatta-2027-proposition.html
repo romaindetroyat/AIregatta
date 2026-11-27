@@ -178,17 +178,20 @@ body.idle #help,#help.gone{opacity:0}
 
 /* ===== 7. plan d’eau ===== */
 #s7{padding:0}
-#s7 .pano{position:absolute;inset:0;margin:0;overflow:hidden}
+#s7 .pano{position:absolute;left:0;top:0;bottom:0;width:1180px;margin:0;overflow:hidden}
+#s7 .fortph{position:absolute;right:0;top:0;bottom:0;width:740px;margin:0;overflow:hidden;border-left:8px solid var(--paper)}
+#s7 .fortph img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+#s7 .fortph figcaption{position:absolute;left:30px;bottom:34px;font:800 26px/1 var(--f);background:rgba(15,23,42,.8);color:#fff;padding:14px 20px;border-radius:999px}
 #s7 .pano img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
 #s7.on .pano img{animation:slowzoom 16s ease-out both}
-#s7 .box{position:absolute;left:70px;top:70px;width:690px;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-radius:30px;padding:40px 44px;box-shadow:0 40px 80px -40px rgba(0,0,0,.6)}
+#s7 .box{position:absolute;left:60px;top:60px;width:640px;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-radius:30px;padding:40px 44px;box-shadow:0 40px 80px -40px rgba(0,0,0,.6)}
 #s7 .box h2{font-size:56px;margin-bottom:24px}
 #s7 .box ul{list-style:none;margin:0;padding:0;display:grid;gap:16px}
 #s7 .box li{font:500 25px/1.4 var(--f);color:var(--ink2);padding-left:34px;position:relative}
 #s7 .box li::before{content:"";position:absolute;left:0;top:.45em;width:14px;height:14px;border-radius:50%;background:var(--pink)}
 #s7 .box li b{color:var(--ink)}
-#s7 .inset{position:absolute;right:70px;bottom:70px;width:560px;margin:0}
-#s7 .inset .photo{height:374px;border:6px solid #fff;border-radius:22px;transform:rotate(-2deg)}
+#s7 .inset{position:absolute;left:640px;bottom:60px;width:470px;margin:0}
+#s7 .inset .photo{height:314px;border:6px solid #fff;border-radius:22px;transform:rotate(-2deg)}
 #s7 .inset figcaption{position:absolute;left:24px;bottom:-20px;font:800 23px/1 var(--f);background:var(--pink);color:#fff;padding:13px 19px;border-radius:999px}
 
 /* ===== 8. participer ===== */
@@ -267,7 +270,7 @@ body.idle #help,#help.gone{opacity:0}
     <div class="w"><img src="masterclass/logo-battleboats.png" alt="Battleboats"></div>
     <div class="w tpr"><img src="masterclass/logo-tpr.png" alt="Toulon Provence Regatta"></div>
     <div class="w"><img src="masterclass/logo-med-events.jpg" alt="Twelve MED Events"></div>
-    <small>Dans le cadre de la Toulon Provence Regatta, sous le patronage de la DGA</small>
+    <small>Dans le cadre de la Toulon Provence Regatta</small>
   </div>
 </section>
 
@@ -277,9 +280,9 @@ body.idle #help,#help.gone{opacity:0}
   <h2 class="r" style="--d:.1s">Une première mondiale <em>née à Toulon</em></h2>
   <div class="grid">
     <div class="tl"><div class="bar"></div>
-      <div class="step r left" style="--d:.4s"><div class="yr">2024</div><p>La <b>Toulon Provence Regatta</b> accompagne l’arrivée de la flamme olympique. Des <b>12 MJI</b>, voiliers mythiques de la Coupe de l’America, régatent en rade.</p></div>
-      <div class="step r left" style="--d:.9s"><div class="yr">Mai 2026</div><p>Naissance de la <b>Destinus AI Regatta</b> : la première régate de <b>drones voiliers autonomes</b> en modèle réduit.</p></div>
-      <div class="step hi r left" style="--d:1.4s"><div class="yr">Mai 2027</div><p><b>2ᵉ édition</b>, sous le patronage de la DGA : six régates, voiliers et bateaux motorisés, pilotés à distance ou par une IA.</p></div>
+      <div class="step r left" style="--d:.4s"><div class="yr">2024</div><p>La <b>Toulon Provence Regatta</b> accompagne l’arrivée de la flamme olympique avec un <b>12 MJI</b> qui a fait les Jeux au début du siècle dernier. Cette régate de 12 MJI met en avant ces voiliers mythiques de l’<b>America’s Cup</b>, terre d’innovation.</p></div>
+      <div class="step r left" style="--d:.9s"><div class="yr">Mai 2026</div><p><b>Première mondiale</b> : une régate de <b>drones voiliers autonomes</b>.</p></div>
+      <div class="step hi r left" style="--d:1.4s"><div class="yr">Mai 2027</div><p><b>2ᵉ édition</b> : <b>six types de régates</b>, voiliers et bateaux motorisés, pilotés à distance ou par une IA.</p></div>
       <div class="step r left" style="--d:1.9s;margin-bottom:0"><div class="yr">Demain</div><p>Faire régater des <b>drones face à des voiliers classiques</b>.</p></div>
     </div>
     <div class="ph">
@@ -315,7 +318,7 @@ body.idle #help,#help.gone{opacity:0}
     <div class="card r" style="--d:.3s"><div class="hd"><div class="fam">Bateaux motorisés</div><h3>Duel</h3></div>
       <div class="bd"><p>Deux bateaux face à face sur un slalom entre les bouées, deux tours par défaut. Vitesse et précision.</p>
         <div class="chips"><span class="chip rc">Télécommande</span><span class="chip ai">IA autonome</span></div></div></div>
-    <div class="card r" style="--d:.45s"><div class="hd"><div class="fam">Bateaux motorisés</div><h3>Battleboats</h3></div>
+    <div class="card r" style="--d:.45s"><div class="hd"><div class="fam">Bateaux motorisés · sous le patronage de la DGA</div><h3>Battleboats</h3></div>
       <div class="bd"><p>Un combat naval côtier, équipe rouge contre équipe verte, 15 minutes au plus. Chaque bateau peut cacher des <b>options secrètes</b> validées par le jury : boost, grappin, parachute… toujours flottantes et sans danger.</p>
         <div class="chips"><span class="chip rc">Télécommande</span><span class="chip ai">IA autonome</span></div></div></div>
     <div class="card r" style="--d:.6s"><div class="hd"><div class="fam">Voiliers</div><h3>Régate</h3></div>
@@ -341,9 +344,11 @@ body.idle #help,#help.gone{opacity:0}
       <svg id="cvBattle" viewBox="0 0 600 380" role="img" aria-label="Battleboats : porte A-B, contourner C, puis toucher la bouée de son équipe, D verte ou E rouge">
         <rect width="600" height="380" fill="url(#seaG)"/><rect width="600" height="380" fill="url(#rip)"/>
         <line x1="470" y1="135" x2="470" y2="265" stroke="#fff" stroke-width="2.5" stroke-dasharray="7 6" opacity=".8"/>
-        <text x="20" y="372" fill="#CFE6FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="17">Équipe verte → D · équipe rouge → E</text>
-        <path class="rt" data-team="#2FA866" d="M590 200 L470 200 C380 200 230 285 140 272 C80 263 70 165 130 152 C190 142 240 118 292 110 C360 100 470 60 525 100 C570 135 590 180 590 200" fill="none"/>
-        <path class="rt" data-team="#D7263D" data-delay=".55" d="M590 200 L470 200 C380 200 230 285 140 272 C80 263 70 165 130 152 C190 145 255 290 292 308 C360 330 470 360 525 305 C570 260 590 220 590 200" fill="none"/>
+        <text x="20" y="372" fill="#CFE6FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="17">Verts : marquer sur D · Rouges : marquer sur E · chacun défend aussi</text>
+        <path class="rt" id="bbG1" d="M590 200 L470 200 C380 200 230 285 140 272 C80 263 70 165 130 152 C190 142 240 118 292 110 C360 100 470 60 525 100 C570 135 590 180 590 200" fill="none"/>
+        <path class="rt" id="bbR1" d="M590 200 L470 200 C380 200 230 285 140 272 C80 263 70 165 130 152 C190 150 235 250 262 288 C274 306 240 338 190 350" fill="none"/>
+        <path class="rt" id="bbG2" d="M440 352 C390 350 320 335 268 292" fill="none"/>
+        <path class="rt" id="bbR2" d="M450 30 C400 40 350 70 314 102" fill="none"/>
       </svg>
       <svg id="cvSail" viewBox="0 0 600 380" role="img" aria-label="Parcours voiliers : porte 1-2 départ et arrivée, bouée 3 au vent, deux tours, enrouler 1 ou 2 au choix">
         <rect width="600" height="380" fill="url(#seaG)"/><rect width="600" height="380" fill="url(#rip)"/>
@@ -394,6 +399,7 @@ body.idle #help,#help.gone{opacity:0}
 <!-- 7 ─ Plan d’eau -->
 <section class="slide" id="s7" data-title="Un plan d’eau au cœur de la ville">
   <figure class="pano r fade"><img src="masterclass/lieu-mourillon.jpg" alt="Le plan d’eau des plages du Mourillon"></figure>
+  <figure class="fortph r right" style="--d:.3s"><img src="masterclass/photo-fort.jpg" alt="Le Fort Saint-Louis et des voiliers radiocommandés"><figcaption>Le Fort Saint-Louis</figcaption></figure>
   <div class="box r left" style="--d:.4s">
     <div class="kicker">Le site</div>
     <h2>Un plan d’eau <em>au cœur de la ville</em></h2>
@@ -414,7 +420,7 @@ body.idle #help,#help.gone{opacity:0}
     <div class="rows">
       <div class="row r left" style="--d:.3s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2438B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 4.5a3.2 3.2 0 0 1 0 6.2M18 14.3c2 .7 3.5 2.9 3.5 5.7"/></svg></div><p><b>Entreprises, écoles, clubs, collectivités, particuliers</b> : en équipe, et même en équipe mixte école–entreprise.</p></div>
       <div class="row r left" style="--d:.45s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#D80000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6.5A7.5 7.5 0 1 0 18 17.5M4 10h9M4 14h9"/></svg></div><p>Un bateau dès <b>quelques centaines d’euros</b>. Inscription : 20 € par personne, polo et soirée des équipages compris.</p></div>
-      <div class="row r left" style="--d:.6s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2438B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="6" r="2.2"/><path d="M7 18h7a3.5 3.5 0 0 0 0-7H10a3.5 3.5 0 0 1 0-7h7"/></svg></div><p>Un <b>parcours d’entraînement</b> et, comme en 2026, un local près de l’eau pendant un mois pour préparer les bateaux.</p></div>
+      <div class="row r left" style="--d:.6s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2438B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="6" r="2.2"/><path d="M7 18h7a3.5 3.5 0 0 0 0-7H10a3.5 3.5 0 0 1 0-7h7"/></svg></div><p>Un <b>parcours d’entraînement</b> et un bâtiment de préparation près du plan d’eau, <b>dès le 1ᵉʳ avril</b>.</p></div>
       <div class="row r left" style="--d:.75s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#D80000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7 7 0 0 0-4 12.7V18h8v-2.3A7 7 0 0 0 12 3zM9 21h6"/></svg></div><p>Des <b>rendez-vous mensuels</b> pour accompagner les équipes, et une régate de préchauffage au premier trimestre.</p></div>
     </div>
     <div class="ex r right" style="--d:.5s"><div class="lbl">Exemple d’équipe engagée</div><img src="masterclass/participant-pyrovigil.jpg" alt="Le voilier de classe M de Pyrovigil, Battleboat 39"></div>
@@ -430,7 +436,7 @@ body.idle #help,#help.gone{opacity:0}
     <div class="agenda">
       <div class="ev r left" style="--d:.25s"><div class="d">T1 2027</div><p>Régate de préchauffage</p></div>
       <div class="ev r left" style="--d:.37s"><div class="d">1ᵉʳ mai</div><p>Chaque équipe se présente<span>Vidéo de 30 s et fiche A4</span></p></div>
-      <div class="ev r left" style="--d:.49s"><div class="d">12 – 14 mai<small>9h – 18h</small></div><p>Accueil des équipes et contrôle des bateaux</p></div>
+      <div class="ev r left" style="--d:.49s"><div class="d">12 – 14 mai<small>9h – 18h</small></div><p>Accueil des concurrents</p></div>
       <div class="ev r left" style="--d:.61s"><div class="d">15 mai<small>10h</small></div><p>Point presse, puis régates officielles<span>Soirée des équipages le soir</span></p></div>
       <div class="ev r left" style="--d:.73s"><div class="d">16 mai<small>16h30</small></div><p>Remise des prix<span>Parvis de la Préfecture maritime de Toulon</span></p></div>
     </div>
@@ -491,7 +497,8 @@ body.idle #help,#help.gone{opacity:0}
   function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
   function buoy(svg,x,y,label,grad,r){r=r||19;const g=el('g',{class:'mk',filter:'url(#shd)'},svg);el('circle',{cx:x,cy:y,r:r,fill:'url(#'+grad+')'},g);
     const t=el('text',{x:x,y:y+6,'text-anchor':'middle',fill:grad==='bY'?'#3A2A00':'#fff','font-family':'Plus Jakarta Sans,Arial','font-weight':800,'font-size':r>15?17:14},g);t.textContent=label;return {g,x,y}}
-  function mkBoat(svg,sail){const g=el('g',{opacity:0},svg),inner=el('g',{},g);
+  function mkBoat(svg,sail,motor){const g=el('g',{opacity:0},svg),inner=el('g',{},g);
+    if(motor){el('path',{d:'M-18 0 L16 0 L20 -3 L12 8 L-15 8 Z',fill:sail||'#2438B5',stroke:'#fff','stroke-width':1.5},inner);el('path',{d:'M-9 0 L-6 -7 L5 -7 L9 0 Z',fill:'#fff'},inner);el('rect',{x:-21,y:1,width:3,height:6,fill:'#333'},inner);return {g,inner}}
     el('path',{d:'M-15 4 L15 4 L11 10 L-11 10 Z',fill:'#0B1A44',stroke:'#fff','stroke-width':1.5},inner);el('path',{d:'M-1 3 L-1 -24 L13 3 Z',fill:'#fff'},inner);el('path',{d:'M-4 3 L-4 -18 L-14 3 Z',fill:sail||'#E4365E'},inner);return {g,inner}}
   function mkWake(svg){const g=el('g',{fill:'none','stroke-linecap':'round'},svg);for(let i=0;i<14;i++){const f=(i+1)/14;el('path',{stroke:'#fff','stroke-opacity':(f*f*.9).toFixed(3),'stroke-width':(1.5+f*6).toFixed(1)},g)}return g}
   function seg(r,a,b){a=Math.max(0,a);if(b-a<.5)return '';let d='';for(let k=0;k<=3;k++){const p=r.getPointAtLength(a+(b-a)*k/3);d+=(k?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)}return d}
@@ -500,13 +507,14 @@ body.idle #help,#help.gone{opacity:0}
     const a=Math.atan2(q.y-pr.y,q.x-pr.x)*180/Math.PI;b.g.setAttribute('transform','translate('+p.x.toFixed(1)+' '+(p.y-4).toFixed(1)+')');b.inner.setAttribute('transform',Math.abs(a)>90?'scale(-1 1)':'');b.g.setAttribute('opacity',op);return p}
   /* un parcours = des « pistes » (route, départ, vitesse) ; chaque piste a son bateau et son sillage */
   function course(svg,tracks,marks,extra){
-    const T=tracks.map(t=>{const r=t.route,len=r.getTotalLength();return Object.assign({len,boat:mkBoat(svg,t.sail),wake:mkWake(svg)},t)});
+    const T=tracks.map(t=>{const r=t.route,len=r.getTotalLength();return Object.assign({len,boat:mkBoat(svg,t.sail,t.motor),wake:mkWake(svg)},t)});
     marks.forEach(m=>{svg.appendChild(m.g)});T.forEach(t=>{svg.appendChild(t.wake);svg.appendChild(t.boat.g)});
     const end=Math.max(...T.map(t=>t.t0+t.len/t.v)),period=end+(extra&&extra.pause||.9);
     return {period,frame(t){const pts=[];
       T.forEach(k=>{const el=t-k.t0,d=el*k.v;
         if(el<0){k.boat.g.setAttribute('opacity',0);drawWake(k.wake,k.route,0,0);return}
         if(d<=k.len){pts.push(setBoat(k.boat,k.route,k.len,d,1));drawWake(k.wake,k.route,d,Math.min(d,k.W||150))}
+        else if(k.hold){pts.push(setBoat(k.boat,k.route,k.len,k.len,1));drawWake(k.wake,k.route,k.len,(k.W||150)-(d-k.len))}
         else{const over=d-k.len;k.boat.g.setAttribute('opacity',k.handoff?0:Math.max(0,1-over/120));if(!k.handoff)setBoat(k.boat,k.route,k.len,k.len,Math.max(0,1-over/120));drawWake(k.wake,k.route,k.len,(k.W||150)-over)}});
       marks.forEach(m=>m.g.classList.toggle('hit',pts.some(p=>Math.hypot(p.x-m.x,p.y-m.y)<(m.rad||46))));
       if(extra&&extra.onFrame)extra.onFrame(t,pts)}}
@@ -516,19 +524,24 @@ body.idle #help,#help.gone{opacity:0}
   {const s=$('cvSlalom'),r=s.querySelector('.rt');
     const m=[buoy(s,70,110,'1','bR'),buoy(s,70,250,'2','bR'),buoy(s,200,140,'3','bG'),buoy(s,300,250,'4','bR'),buoy(s,420,140,'5','bG'),buoy(s,540,200,'6','bY')];
     const c2=r.cloneNode();s.appendChild(c2);
-    courses.push(course(s,[{route:r,t0:0,v:430,W:140},{route:c2,t0:.55,v:410,W:140,sail:'#2E8BD8'}],m))}
-  // Battleboats
-  {const s=$('cvBattle'),rs=s.querySelectorAll('.rt');
+    courses.push(course(s,[{route:r,t0:0,v:430,W:140,motor:1,sail:'#D80000'},{route:c2,t0:.55,v:410,W:140,motor:1,sail:'#2438B5'}],m))}
+  // Battleboats : un attaquant vert marque sur D malgré le défenseur rouge ; l’attaquant rouge est bloqué devant E par le défenseur vert
+  {const s=$('cvBattle'),R=id=>s.querySelector('#'+id);
     const m=[buoy(s,470,135,'A','bY'),buoy(s,470,265,'B','bY'),buoy(s,130,210,'C','bY'),buoy(s,305,110,'D','bG'),buoy(s,305,310,'E','bR')];
-    const tx=[];const hitAt=[];
-    const tracks=[...rs].map((r,i)=>({route:r,t0:+(r.dataset.delay||0),v:400,W:130,sail:r.dataset.team}));
-    // « +1 » quand un bateau touche la bouée de son équipe
-    const plus=[el('text',{x:340,y:96,fill:'#7CF0A9','font-family':'Plus Jakarta Sans,Arial','font-weight':800,'font-size':30,opacity:0},s),el('text',{x:340,y:346,fill:'#FF8A9E','font-family':'Plus Jakarta Sans,Arial','font-weight':800,'font-size':30,opacity:0},s)];
-    plus.forEach(p=>p.textContent='+1');
-    const goals=[{x:305,y:110},{x:305,y:310}];let lastHit=[-9,-9];
-    courses.push(course(s,tracks,m,{onFrame(t,pts){pts.forEach((p,i)=>{if(Math.hypot(p.x-goals[i].x,p.y-goals[i].y)<24&&t-lastHit[i]>2)lastHit[i]=t});
-      plus.forEach((p,i)=>{const a=t-lastHit[i];if(a>=0&&a<1.1){p.setAttribute('opacity',(1-a/1.1).toFixed(2));p.setAttribute('transform','translate(0 '+(-a*26).toFixed(1)+')')}else p.setAttribute('opacity',0)})}}))
-    s.__reset=()=>{lastHit=[-9,-9]}}
+    const VA=360,VD=300,GREEN='#2FA866',RED='#D7263D';
+    function arcTo(r,x,y){const L=r.getTotalLength();let best=0,bd=1e9;for(let d=0;d<=L;d+=2){const p=r.getPointAtLength(d),e=Math.hypot(p.x-x,p.y-y);if(e<bd){bd=e;best=d}}return best}
+    const tScore=arcTo(R('bbG1'),305,110)/VA, tBump=.5+arcTo(R('bbR1'),262,288)/VA;
+    const tr=[{route:R('bbG1'),t0:0,v:VA,W:130,motor:1,sail:GREEN},{route:R('bbR1'),t0:.5,v:VA,W:130,motor:1,sail:RED},
+      {route:R('bbG2'),t0:tBump-R('bbG2').getTotalLength()/VD,v:VD,W:90,motor:1,sail:GREEN,hold:1},
+      {route:R('bbR2'),t0:tScore+.35-R('bbR2').getTotalLength()/VD,v:VD,W:90,motor:1,sail:RED,hold:1}];
+    const T0=-Math.min(...tr.map(t=>t.t0));tr.forEach(t=>t.t0+=T0);
+    const txt=(x,y,c,str,fs)=>{const e=el('text',{x,y,fill:c,'text-anchor':'middle','font-family':'Plus Jakarta Sans,Arial','font-weight':800,'font-size':fs||28,opacity:0},s);e.textContent=str;return e};
+    const plus=txt(305,78,'#7CF0A9','+1 Verts'),blk=txt(250,250,'#FFFFFF','Bloqué !',24),flash=el('circle',{cx:262,cy:288,r:0,fill:'none',stroke:'#fff','stroke-width':3,opacity:0},s);
+    const score=txt(24,40,'#fff','',22);score.setAttribute('text-anchor','start');
+    const show=(e,a,dur,rise)=>{if(a>=0&&a<dur){e.setAttribute('opacity',(1-a/dur).toFixed(2));if(rise)e.setAttribute('transform','translate(0 '+(-a*rise).toFixed(1)+')')}else e.setAttribute('opacity',0)};
+    courses.push(course(s,tr,m,{pause:1.4,onFrame(t){const a1=t-(tScore+T0),a2=t-(tBump+T0);show(plus,a1,1.3,22);show(blk,a2,1.2,14);
+      if(a2>=0&&a2<.5){flash.setAttribute('r',(6+a2*70).toFixed(1));flash.setAttribute('opacity',(1-a2/.5).toFixed(2))}else flash.setAttribute('opacity',0);
+      score.textContent='Verts '+(a1>=0?1:0)+' – 0 Rouges';score.setAttribute('opacity',1)}}))}
   // Voiliers : un bateau, qui se dédouble sur la bouée 1 ou 2 puis se rejoint
   {const s=$('cvSail'),q=k=>s.querySelector('[data-seq="'+k+'"]');
     const m=[buoy(s,120,72,'1','bR'),buoy(s,120,288,'2','bR'),buoy(s,520,178,'3','bR')];

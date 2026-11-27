@@ -300,6 +300,10 @@ body.idle #help,#help.gone{opacity:0}
 #dates .price p strong{color:var(--ink)}
 #dates ul.list li{font-size:29px}
 
+#s11 .bbpat{position:absolute;right:120px;top:80px;display:flex;flex-direction:column;align-items:center;gap:10px}
+#s11 .bbpat .w{background:#fff;border-radius:18px;padding:10px 16px}
+#s11 .bbpat img{display:block;height:90px}
+#s11 .bbpat small{font:600 18px/1 var(--f);color:var(--dim)}
 @media (prefers-reduced-motion:reduce){
   .slide.on .r,#s1.on h1 .ch,#s1.on .poster img,#s2.on .grid img,#s8.on .pano img,#s4.on .badge{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}
   .slide{transition:none}
@@ -324,7 +328,7 @@ body.idle #help,#help.gone{opacity:0}
     </div>
   </div>
   <div class="poster r right" style="--d:.5s"><img src="masterclass/affiche.jpg" alt="Affiche AI Regatta, 15 mai 2027"></div>
-  <div class="med r fade" style="--d:1.8s"><img src="masterclass/logo-med-events.jpg" alt="MED Events">Twelve MED Events · sous le patronage de la DGA</div>
+  <div class="med r fade" style="--d:1.8s"><img src="masterclass/logo-med-events.jpg" alt="MED Events">Twelve MED Events · Airegatta.com · Battleboats.fr</div>
 </section>
 
 <!-- 2 ─ Mosaïque -->
@@ -373,7 +377,7 @@ body.idle #help,#help.gone{opacity:0}
     <div class="arrow r fade" style="--d:.9s"><svg viewBox="0 0 110 60" fill="none" stroke="#F2476F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 30h88M74 10l22 20-22 20"/></svg></div>
     <div class="card hi r right" style="--d:1s">
       <h3><svg viewBox="0 0 24 24" fill="none" stroke="#F2476F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z"/></svg>Mai 2026</h3>
-      <p>Création d’une régate innovante de <b style="color:var(--ink)">drones voiliers autonomes</b> en modèle réduit : la <b style="color:var(--ink)">Destinus AI Regatta</b>.</p>
+      <p>Création d’une régate innovante de <b style="color:var(--ink)">drones voiliers autonomes</b> en modèle réduit.</p>
       <span class="badge">Une première mondiale</span>
     </div>
   </div>
@@ -424,6 +428,10 @@ body.idle #help,#help.gone{opacity:0}
         <li>Une régate classique de voiliers radiocommandés qui respecte les règles de priorité de l’ISAF (règles internationales de régate)</li>
         <li>Une régate de drones voiliers autonomes</li>
       </ul>
+      <div class="tags">
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="7" width="12" height="14" rx="3"/><path d="M12 7V3M9 12h.01M15 12h.01M10 17h4"/></svg>avec télécommande</span>
+        <span class="tag ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>en mode autonome sous IA</span>
+      </div>
     </div>
   </div>
   <div class="foot"><img class="lg" src="masterclass/logo-ai-regatta.png" alt="AI Regatta"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
@@ -482,6 +490,7 @@ body.idle #help,#help.gone{opacity:0}
 <!-- 11 ─ Parcours Battleboats -->
 <section class="slide" id="s11" data-title="Parcours des Battleboats">
   <div class="kicker r">Parcours</div>
+  <div class="bbpat r pop" style="--d:.3s"><div class="w"><img src="masterclass/logo-battleboats.png" alt="Battleboats"></div><small>sous le patronage de la DGA</small></div>
   <h2 class="r" style="--d:.1s">Parcours des <em>Battleboats</em></h2>
   <div class="diag" style="height:700px"><div class="photo r zoom" style="--d:.3s;height:600px"><img src="masterclass/parcours-battleboats.jpg" alt="Parcours côtier des Battleboats vu du ciel"></div></div>
   <div class="foot"><img class="lg" src="masterclass/logo-ai-regatta.png" alt="AI Regatta"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">www.battleboats.fr</span><span class="num"></span></div>
@@ -625,14 +634,14 @@ body.idle #help,#help.gone{opacity:0}
   <div class="line"><div class="bar2"></div>
     <div class="pt r pop" style="--d:.5s"><i></i><b>T1 2027</b><span>Régate de préchauffage</span></div>
     <div class="pt r pop" style="--d:.75s"><i></i><b>1ᵉʳ mai</b><span>Vidéo de 30 s et fiche A4 de l’équipe</span></div>
-    <div class="pt r pop" style="--d:1s"><i></i><b>12 – 14 mai</b><span>Inscriptions sur place, 9h – 18h</span></div>
+    <div class="pt r pop" style="--d:1s"><i></i><b>12 – 14 mai</b><span>Accueil des concurrents, 9h – 18h</span></div>
     <div class="pt hi r pop" style="--d:1.25s"><i></i><b>15 mai</b><span>Régates officielles, 10h</span></div>
     <div class="pt hi r pop" style="--d:1.5s"><i></i><b>16 mai</b><span>Remise des prix, 16h30</span></div>
   </div>
   <div class="two">
     <div class="card price r left" style="--d:1.6s"><b>20 €</b><p>par personne : <strong>polo et repas</strong> à la soirée des équipages.<br>−20 € par bateau inscrit (4 personnes et 2 bateaux = 40 €).</p></div>
     <div class="card r right" style="--d:1.75s"><ul class="list">
-      <li>Briefing chaque jour à 9h30</li><li>Bâtiment de préparation près du plan d’eau</li><li>Numéro de 10 cm de chaque côté, sur la coque ou la voile</li></ul></div>
+      <li>Briefing chaque jour à 9h30</li><li>Bâtiment de préparation près du plan d’eau dès le 1ᵉʳ avril</li><li>Numéro de 10 cm de chaque côté, sur la coque ou la voile</li></ul></div>
   </div>
   <div class="foot"><img class="lg" src="masterclass/logo-ai-regatta.png" alt="AI Regatta"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
 </section>
