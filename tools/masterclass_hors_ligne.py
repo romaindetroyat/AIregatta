@@ -37,7 +37,7 @@ s = (D / SRC).read_text()
 s = inline_fonts(s)
 # images
 mime = {'.jpg': 'image/jpeg', '.png': 'image/png', '.mp4': 'video/mp4'}
-s = re.sub(r'masterclass/[\w.-]+\.(?:jpg|png|mp4)',
+s = re.sub(r'masterclass(?:-leger)?/[\w.-]+\.(?:jpg|png|mp4)',
            lambda m: 'data:%s;base64,%s' % (mime[pathlib.Path(m.group(0)).suffix], base64.b64encode((D / m.group(0)).read_bytes()).decode()), s)
 # régate 3D : polices et three.js intégrés, mode « embed » forcé
 r3 = inline_fonts((D / 'regate-3d.html').read_text())
