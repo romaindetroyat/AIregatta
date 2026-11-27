@@ -284,9 +284,6 @@ body.idle #help,#help.gone{opacity:0}
 .v3d[data-zoom="desk"]{-webkit-clip-path:inset(0 29% 0 5%);clip-path:inset(0 29% 0 5%);transform:scale(1.12) translateX(12%)}
 .v3d[data-zoom="phone"]{-webkit-clip-path:inset(0 5% 0 72%);clip-path:inset(0 5% 0 72%);transform:scale(1.1) translateX(-33.5%)}
 
-.playv{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:rgba(8,14,30,.35);cursor:pointer;border:0;padding:0}
-.playv span{display:inline-flex;align-items:center;gap:22px;font:800 46px/1 var(--f);color:#fff;background:#D80000;padding:30px 48px;border-radius:999px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
-.playv svg{width:52px;height:52px}
 
 @media (prefers-reduced-motion:reduce){.slide.on .r,#s1.on .hero img,#s7.on .pano img{animation-duration:.01s!important;animation-delay:0s!important}.slide{transition:none}}
 </style>
@@ -544,7 +541,7 @@ body.idle #help,#help.gone{opacity:0}
 
 </div></div>
 
-<template id="vid3d" data-src="masterclass/regate-3d.mp4" data-poster="masterclass/regate-3d-apercu.jpg"></template>
+<template id="vid3d" data-src="masterclass/regate-3d.webp"></template>
 <div id="rot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M3 14a9 9 0 0 0 7 7M21 10a9 9 0 0 0-7-7"/></svg>Tournez votre téléphone</div>
 <div id="ctrl" role="group" aria-label="Navigation">
   <button id="prev" type="button" aria-label="Slide précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -626,7 +623,7 @@ body.idle #help,#help.gone{opacity:0}
 
   /* ---------- régate 3D (slide 6) ---------- */
   const frame=document.querySelector('#s6 .frame');
-  function zoom(m){const ifr=frame.querySelector('iframe'),vd=frame.querySelector('video');if(vd)vd.dataset.zoom=m==='off'?'both':m;if(m==='off'){frame.classList.remove('max');if(ifr)ifr.contentWindow.postMessage({regateMode:'both'},'*');return}
+  function zoom(m){const ifr=frame.querySelector('iframe'),vd=frame.querySelector('.v3d');if(vd)vd.dataset.zoom=m==='off'?'both':m;if(m==='off'){frame.classList.remove('max');if(ifr)ifr.contentWindow.postMessage({regateMode:'both'},'*');return}
     frame.classList.add('max');if(ifr)ifr.contentWindow.postMessage({regateMode:m},'*')}
   frame.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();zoom(b.dataset.zoom);b.blur()}));
 
@@ -636,20 +633,10 @@ body.idle #help,#help.gone{opacity:0}
     cTabs.forEach((t,j)=>{t.classList.remove('on');void t.offsetWidth;t.style.setProperty('--dur',DUR[j]+'s');if(j===i)t.classList.add('on')});
     t0=performance.now();cTimer=setTimeout(()=>showCourse((i+1)%cSvgs.length,true),DUR[i]*1000)}
   cTabs.forEach((t,i)=>t.addEventListener('click',e=>{e.stopPropagation();showCourse(i);t.blur()}));
-  // iPhone / iPad : vidéo MP4 de la régate 3D au lieu de la 3D en direct (plus fiable sur Safari mobile)
+  // iPhone / iPad : image animée de la régate 3D au lieu de la 3D en direct (se joue toujours, sans autorisation de lecture)
   const useVideo=()=>window.__forceVideo||/iP(hone|od|ad)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-  let vidURL=null;
-  function videoURL(){if(vidURL)return vidURL;const src=document.getElementById('vid3d').dataset.src;
-    if(src.indexOf('data:')===0){const b=atob(src.slice(src.indexOf(',')+1)),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);vidURL=URL.createObjectURL(new Blob([u],{type:'video/mp4'}))}else vidURL=src;return vidURL}
-  function mount3d(f){if(f.querySelector('iframe,video'))return;const done=()=>{const w=f.querySelector('.wait');if(w)w.remove()};
-    if(useVideo()){const v=document.createElement('video');v.className='v3d';v.muted=true;v.defaultMuted=true;v.playsInline=true;v.loop=true;v.autoplay=true;
-      v.setAttribute('muted','');v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');v.preload='auto';v.poster=document.getElementById('vid3d').dataset.poster;v.src=videoURL();f.prepend(v);done();
-      // lecture automatique souvent bloquée sur iPhone (économie d’énergie, aperçu de fichier) : bouton de lecture en secours
-      const btn=document.createElement('button');btn.type='button';btn.className='playv';btn.hidden=true;btn.innerHTML='<span><svg viewBox="0 0 24 24" fill="#fff"><path d="M7 4.5v15l12.5-7.5z"/></svg>Lancer la régate</span>';
-      const go=e=>{if(e){e.stopPropagation();e.preventDefault()}v.muted=true;const q=v.play();btn.hidden=true;if(q&&q.catch)q.catch(()=>{btn.hidden=false})};
-      btn.addEventListener('click',go);btn.addEventListener('touchend',go);f.appendChild(btn);
-      v.addEventListener('playing',()=>{btn.hidden=true});v.addEventListener('pause',()=>{if(!v.ended)btn.hidden=false});
-      const pl=v.play();if(pl&&pl.catch)pl.catch(()=>{btn.hidden=false});setTimeout(()=>{if(v.paused)btn.hidden=false},1200);return}
+  function mount3d(f){if(f.querySelector('iframe,.v3d'))return;const done=()=>{const w=f.querySelector('.wait');if(w)w.remove()};
+    if(useVideo()){const im=new Image();im.className='v3d';im.alt='Régate 3D simulée';im.decoding='async';im.src=document.getElementById('vid3d').dataset.src;f.prepend(im);done();return}
     const ifr=document.createElement('iframe');ifr.src='regate-3d.html#embed';ifr.title='Régate 3D';ifr.addEventListener('load',done);f.prepend(ifr)}
   let cur=-1;
   function enter(s){
@@ -657,7 +644,7 @@ body.idle #help,#help.gone{opacity:0}
     if(s.id==='s5'){const b=$('cvBattle');if(b.__reset)b.__reset();startCourses();showCourse(0,true)}
     if(s.id==='s3')countUp(s)}
   function leave(s){
-    if(s.id==='s6'){frame.classList.remove('max');frame.querySelectorAll('iframe,video,.playv').forEach(e=>e.remove());if(!frame.querySelector('.wait')){const w=document.createElement('div');w.className='wait';w.textContent='Chargement de la régate 3D…';frame.prepend(w)}}
+    if(s.id==='s6'){frame.classList.remove('max');frame.querySelectorAll('iframe,.v3d').forEach(e=>e.remove());if(!frame.querySelector('.wait')){const w=document.createElement('div');w.className='wait';w.textContent='Chargement de la régate 3D…';frame.prepend(w)}}
     if(s.id==='s5'){cancelAnimationFrame(raf);clearTimeout(cTimer)}}
   function go(i,fromHash){i=Math.max(0,Math.min(N-1,i));if(i===cur)return;if(cur>=0)leave(slides[cur]);cur=i;
     slides.forEach((s,j)=>{s.classList.toggle('on',j===i);s.setAttribute('aria-hidden',j===i?'false':'true')});enter(slides[i]);

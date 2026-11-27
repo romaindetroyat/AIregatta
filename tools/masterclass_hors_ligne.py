@@ -36,8 +36,8 @@ OUT = sys.argv[3] if len(sys.argv) > 3 else 'Battleboats-2027-AI-Regatta-masterc
 s = (D / SRC).read_text()
 s = inline_fonts(s)
 # images
-mime = {'.jpg': 'image/jpeg', '.png': 'image/png', '.mp4': 'video/mp4'}
-s = re.sub(r'masterclass(?:-leger)?/[\w.-]+\.(?:jpg|png|mp4)',
+mime = {'.jpg': 'image/jpeg', '.png': 'image/png', '.mp4': 'video/mp4', '.webp': 'image/webp'}
+s = re.sub(r'masterclass(?:-leger)?/[\w.-]+\.(?:jpg|png|mp4|webp)',
            lambda m: 'data:%s;base64,%s' % (mime[pathlib.Path(m.group(0)).suffix], base64.b64encode((D / m.group(0)).read_bytes()).decode()), s)
 # régate 3D : polices et three.js intégrés, mode « embed » forcé
 r3 = inline_fonts((D / 'regate-3d.html').read_text())
