@@ -6,11 +6,11 @@ import sys
 SRC = sys.argv[1] if len(sys.argv) > 1 else 'masterclass-ai-regatta.html'
 OUT = sys.argv[2] if len(sys.argv) > 2 else 'masterclass-ai-regatta-autonome.html'
 s = (D / SRC).read_text()
-mime = {'.jpg': 'image/jpeg', '.png': 'image/png'}
+mime = {'.jpg': 'image/jpeg', '.png': 'image/png', '.mp4': 'video/mp4'}
 def data(m):
     p = D / m.group(1)
     return 'data:%s;base64,%s' % (mime[p.suffix], base64.b64encode(p.read_bytes()).decode())
-s = re.sub(r'(masterclass/[\w.-]+\.(?:jpg|png))', data, s)
+s = re.sub(r'(masterclass/[\w.-]+\.(?:jpg|png|mp4))', data, s)
 # régate 3D : copie intégrée (mode « embed » forcé), chargée dans l’iframe via srcdoc
 r3 = ('<!doctype html><html lang="fr" class="embed"><head><meta charset="utf-8">'
       '<meta name="viewport" content="width=device-width, initial-scale=1">' + (D / 'regate-3d.html').read_text())

@@ -115,7 +115,13 @@ body.idle #help,#help.gone{opacity:0}
 #s2 .ph .lg img{display:block;width:100%}
 
 /* ===== 3. le défi + chiffres ===== */
-#s3 .top{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;margin-bottom:50px}
+#s3 .top{display:grid;grid-template-columns:1fr 820px;gap:60px;align-items:stretch;margin-bottom:34px;height:380px}
+#s3 .top .txt{display:flex;flex-direction:column;justify-content:center;gap:26px}
+#s3 .top .lead{font-size:28px}
+#s3 .top .q{font-size:33px}
+#s3 .top .photo{height:380px}
+#s3 .stat b{font-size:84px!important}
+#s3 .stat{padding:26px 30px!important}
 #s3 .q{font:700 40px/1.3 var(--f);color:var(--ink);text-wrap:balance}
 #s3 .q em{font-style:normal;color:var(--pink)}
 #s3 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
@@ -273,6 +279,10 @@ body.idle #help,#help.gone{opacity:0}
 #regles .big{display:flex;align-items:center;gap:22px;margin-top:26px;background:var(--ink);color:#fff;border-radius:24px;padding:20px 30px;font:500 25px/1.4 var(--f)}
 #regles .big b{font:800 56px/1 var(--f);color:#FF4D5E}
 
+.v3d{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0B1424;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.v3d[data-zoom="desk"]{transform-origin:38% 50%;transform:scale(1.45)}
+.v3d[data-zoom="phone"]{transform-origin:84% 50%;transform:scale(2.05)}
+
 @media (prefers-reduced-motion:reduce){.slide.on .r,#s1.on .hero img,#s7.on .pano img{animation-duration:.01s!important;animation-delay:0s!important}.slide{transition:none}}
 </style>
 </head>
@@ -323,8 +333,11 @@ body.idle #help,#help.gone{opacity:0}
   <div class="kicker r">Le défi</div>
   <h2 class="r" style="--d:.1s">Inventer le <em>tacticien virtuel</em></h2>
   <div class="top">
+    <div class="txt">
     <p class="lead r" style="--d:.3s">Aujourd’hui, l’intelligence artificielle sert à <b>régler</b> un voilier : comportement, voiles, foils. Personne ne sait encore lui confier la <b>tactique</b> d’une course de quelques minutes, où tout change sans cesse.</p>
     <p class="q r" style="--d:.5s">L’AI Regatta est un <em>laboratoire à ciel ouvert</em> : des équipes y testent, face au public, des bateaux qui décident seuls.</p>
+    </div>
+    <div class="photo r zoom" style="--d:.4s"><img src="masterclass/photo-cap-2027.jpg" alt="Voiliers radiocommandés en course devant le Fort Saint-Louis"></div>
   </div>
   <div class="stats">
     <div class="stat r" style="--d:.7s"><i></i><b data-count="6">0</b><span>régates différentes</span></div>
@@ -526,6 +539,7 @@ body.idle #help,#help.gone{opacity:0}
 
 </div></div>
 
+<template id="vid3d" data-src="masterclass/regate-3d.mp4"></template>
 <div id="rot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M3 14a9 9 0 0 0 7 7M21 10a9 9 0 0 0-7-7"/></svg>Tournez votre téléphone</div>
 <div id="ctrl" role="group" aria-label="Navigation">
   <button id="prev" type="button" aria-label="Slide précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -607,7 +621,7 @@ body.idle #help,#help.gone{opacity:0}
 
   /* ---------- régate 3D (slide 6) ---------- */
   const frame=document.querySelector('#s6 .frame');
-  function zoom(m){const ifr=frame.querySelector('iframe');if(m==='off'){frame.classList.remove('max');if(ifr)ifr.contentWindow.postMessage({regateMode:'both'},'*');return}
+  function zoom(m){const ifr=frame.querySelector('iframe'),vd=frame.querySelector('video');if(vd)vd.dataset.zoom=m==='off'?'both':m;if(m==='off'){frame.classList.remove('max');if(ifr)ifr.contentWindow.postMessage({regateMode:'both'},'*');return}
     frame.classList.add('max');if(ifr)ifr.contentWindow.postMessage({regateMode:m},'*')}
   frame.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();zoom(b.dataset.zoom);b.blur()}));
 
@@ -617,13 +631,22 @@ body.idle #help,#help.gone{opacity:0}
     cTabs.forEach((t,j)=>{t.classList.remove('on');void t.offsetWidth;t.style.setProperty('--dur',DUR[j]+'s');if(j===i)t.classList.add('on')});
     t0=performance.now();cTimer=setTimeout(()=>showCourse((i+1)%cSvgs.length,true),DUR[i]*1000)}
   cTabs.forEach((t,i)=>t.addEventListener('click',e=>{e.stopPropagation();showCourse(i);t.blur()}));
+  // iPhone / iPad : vidéo MP4 de la régate 3D au lieu de la 3D en direct (plus fiable sur Safari mobile)
+  const useVideo=()=>window.__forceVideo||/iP(hone|od|ad)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  let vidURL=null;
+  function videoURL(){if(vidURL)return vidURL;const src=document.getElementById('vid3d').dataset.src;
+    if(src.indexOf('data:')===0){const b=atob(src.slice(src.indexOf(',')+1)),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);vidURL=URL.createObjectURL(new Blob([u],{type:'video/mp4'}))}else vidURL=src;return vidURL}
+  function mount3d(f){if(f.querySelector('iframe,video'))return;const done=()=>{const w=f.querySelector('.wait');if(w)w.remove()};
+    if(useVideo()){const v=document.createElement('video');v.className='v3d';v.muted=true;v.defaultMuted=true;v.playsInline=true;v.loop=true;v.autoplay=true;
+      v.setAttribute('muted','');v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');v.src=videoURL();f.prepend(v);done();const pl=v.play();if(pl&&pl.catch)pl.catch(()=>{});return}
+    const ifr=document.createElement('iframe');ifr.src='regate-3d.html#embed';ifr.title='Régate 3D';ifr.addEventListener('load',done);f.prepend(ifr)}
   let cur=-1;
   function enter(s){
-    if(s.id==='s6'&&!frame.querySelector('iframe')){const ifr=document.createElement('iframe');ifr.src='regate-3d.html#embed';ifr.title='Régate 3D';ifr.addEventListener('load',()=>{const w=frame.querySelector('.wait');if(w)w.remove()});frame.prepend(ifr)}
+    if(s.id==='s6')mount3d(frame);
     if(s.id==='s5'){const b=$('cvBattle');if(b.__reset)b.__reset();startCourses();showCourse(0,true)}
     if(s.id==='s3')countUp(s)}
   function leave(s){
-    if(s.id==='s6'){frame.classList.remove('max');const ifr=frame.querySelector('iframe');if(ifr)ifr.remove();if(!frame.querySelector('.wait')){const w=document.createElement('div');w.className='wait';w.textContent='Chargement de la régate 3D…';frame.prepend(w)}}
+    if(s.id==='s6'){frame.classList.remove('max');frame.querySelectorAll('iframe,video').forEach(e=>e.remove());if(!frame.querySelector('.wait')){const w=document.createElement('div');w.className='wait';w.textContent='Chargement de la régate 3D…';frame.prepend(w)}}
     if(s.id==='s5'){cancelAnimationFrame(raf);clearTimeout(cTimer)}}
   function go(i,fromHash){i=Math.max(0,Math.min(N-1,i));if(i===cur)return;if(cur>=0)leave(slides[cur]);cur=i;
     slides.forEach((s,j)=>{s.classList.toggle('on',j===i);s.setAttribute('aria-hidden',j===i?'false':'true')});enter(slides[i]);
