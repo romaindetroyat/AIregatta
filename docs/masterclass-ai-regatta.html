@@ -179,13 +179,16 @@ body.idle #help,#help.gone{opacity:0}
 
 /* ===== 8. lieu ===== */
 #s8{padding:0;background:#0B1A44}
-#s8 .pano{position:absolute;left:0;top:0;width:1920px;height:1080px;margin:0;overflow:hidden}
+#s8 .pano{position:absolute;left:0;top:0;width:1180px;height:1080px;margin:0;overflow:hidden}
+#s8 .fortph{position:absolute;right:0;top:0;bottom:0;width:740px;margin:0;overflow:hidden;border-left:8px solid #0F172A}
+#s8 .fortph img{width:100%;height:100%;object-fit:cover}
+#s8 .fortph figcaption{position:absolute;left:30px;bottom:34px;font:800 26px/1 var(--f);background:rgba(15,23,42,.85);color:#fff;padding:14px 20px;border-radius:999px}
 #s8 .pano img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block}
 #s8.on .pano img{animation:slowzoom 16s ease-out both}
-#s8 .inset{position:absolute;right:70px;bottom:70px;width:600px;margin:0;--rot:-2deg;transform:rotate(-2deg)}
-#s8 .inset .photo{height:400px;border:6px solid #fff;border-radius:22px}
+#s8 .inset{position:absolute;left:640px;bottom:60px;width:470px;margin:0;--rot:-2deg;transform:rotate(-2deg)}
+#s8 .inset .photo{height:314px;border:6px solid #fff;border-radius:22px}
 #s8 .inset figcaption{position:absolute;left:24px;bottom:-22px;font:800 24px/1 var(--f);background:var(--pink);color:#fff;padding:14px 20px;border-radius:999px;box-shadow:0 14px 30px -10px rgba(0,0,0,.6)}
-#s8 .label{position:absolute;left:70px;bottom:70px;background:rgba(8,18,48,.85);backdrop-filter:blur(8px);border:1.5px solid var(--line);border-radius:28px;padding:30px 40px}
+#s8 .label{position:absolute;left:60px;top:60px;background:rgba(8,18,48,.85);backdrop-filter:blur(8px);border:1.5px solid var(--line);border-radius:28px;padding:30px 40px}
 #s8 .label .kicker{margin-bottom:14px}
 #s8 .label b{font:800 50px/1.05 var(--f);display:block}
 
@@ -304,6 +307,20 @@ body.idle #help,#help.gone{opacity:0}
 #s11 .bbpat .w{background:#fff;border-radius:18px;padding:10px 16px}
 #s11 .bbpat img{display:block;height:90px}
 #s11 .bbpat small{font:600 18px/1 var(--f);color:var(--dim)}
+/* parcours animés (slalom, Battleboats) */
+.anim{display:grid;grid-template-columns:1060px 1fr;gap:44px;align-items:start}
+.anim .stage{border-radius:28px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.9),0 0 0 1.5px var(--line)}
+.anim .stage svg{display:block;width:100%;height:auto}
+.anim .side{display:grid;gap:22px}
+.anim .side .card{padding:28px 32px}
+.anim .side p{font:500 26px/1.45 var(--f);color:var(--mute)}
+.anim .side p b{color:var(--ink)}
+.anim .orig{background:#fff;border-radius:18px;padding:10px}
+.anim .orig img{display:block;width:100%;border-radius:10px}
+.anim .orig small{display:block;font:600 16px/1.2 var(--f);color:#334155;margin:8px 4px 2px}
+.mk circle{transform-box:fill-box;transform-origin:center;transition:transform .3s cubic-bezier(.3,1.6,.5,1),filter .3s}
+.mk.hit circle{transform:scale(1.3);filter:brightness(1.2) drop-shadow(0 0 8px rgba(255,255,255,.9))}
+
 @media (prefers-reduced-motion:reduce){
   .slide.on .r,#s1.on h1 .ch,#s1.on .poster img,#s2.on .grid img,#s8.on .pano img,#s4.on .badge{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}
   .slide{transition:none}
@@ -457,6 +474,7 @@ body.idle #help,#help.gone{opacity:0}
 <!-- 8 ─ Le lieu -->
 <section class="slide" id="s8" data-title="Le plan d’eau">
   <figure class="pano r fade"><img src="masterclass/lieu-mourillon.jpg" alt="Le plan d’eau des plages du Mourillon, vu d’en haut"></figure>
+  <figure class="fortph r right" style="--d:.3s"><img src="masterclass/fort-3d.jpg" alt="Le Fort Saint-Louis et les bateaux de la régate 3D"><figcaption>Le Fort Saint-Louis</figcaption></figure>
   <div class="label r left" style="--d:.5s"><div class="kicker">Toulon · le plan d’eau</div><b>Plage du Mourillon<br>&amp; Fort Saint-Louis</b></div>
   <figure class="inset r right" style="--d:.8s"><div class="photo"><img src="masterclass/lieu-public.jpg" alt="Spectateurs regardant la régate depuis le fort"></div><figcaption>Vue depuis le fort</figcaption></figure>
 </section>
@@ -483,7 +501,18 @@ body.idle #help,#help.gone{opacity:0}
 <section class="slide" id="s10" data-title="Slalom pour les duels">
   <div class="kicker r">Parcours</div>
   <h2 class="r" style="--d:.1s">Slalom pour les <em>duels</em></h2>
-  <div class="diag" style="height:700px"><div class="white r zoom" style="--d:.3s"><img src="masterclass/parcours-slalom.png" alt="Parcours en slalom pour les duels"></div></div>
+  <div class="anim">
+    <div class="stage r zoom" style="--d:.25s"><svg id="cvSlalom" viewBox="0 0 600 380" role="img" aria-label="Slalom : porte de départ 1-2, slalom entre 3, 4 et 5, demi-tour autour de 6, retour en slalom">
+        <rect width="600" height="380" fill="url(#seaG)"/><rect width="600" height="380" fill="url(#rip)"/>
+        <line x1="70" y1="110" x2="70" y2="250" stroke="#fff" stroke-width="2.5" stroke-dasharray="7 6" opacity=".8"/>
+        <text x="20" y="372" fill="#CFE6FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="17">Porte 1–2 : départ et arrivée</text>
+        <path class="rt" d="M14 180 C60 180 130 100 200 100 C260 100 250 290 300 290 C360 290 360 100 420 100 C480 100 500 255 540 255 C600 255 605 145 540 145 C495 145 480 88 420 88 C360 88 352 305 300 305 C240 305 262 88 200 88 C130 88 96 180 14 180" fill="none"/>
+      </svg></div>
+    <div class="side">
+      <div class="card r right" style="--d:.4s"><p><b>Départ et arrivée</b> entre les bouées 1 et 2. On laisse 3 à tribord, 4 à bâbord, 5 à tribord, on <b>enroule la 6</b>, puis retour en slalom. <b>2 tours</b> par défaut.</p></div>
+      <div class="orig r right" style="--d:.55s"><img src="masterclass/parcours-slalom.png" alt="Schéma du slalom"><small>Schéma du règlement</small></div>
+    </div>
+  </div>
   <div class="foot"><img class="lg" src="masterclass/logo-ai-regatta.png" alt="AI Regatta"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">Airegatta.com</span><span class="num"></span></div>
 </section>
 
@@ -492,7 +521,21 @@ body.idle #help,#help.gone{opacity:0}
   <div class="kicker r">Parcours</div>
   <div class="bbpat r pop" style="--d:.3s"><div class="w"><img src="masterclass/logo-battleboats.png" alt="Battleboats"></div><small>sous le patronage de la DGA</small></div>
   <h2 class="r" style="--d:.1s">Parcours des <em>Battleboats</em></h2>
-  <div class="diag" style="height:700px"><div class="photo r zoom" style="--d:.3s;height:600px"><img src="masterclass/parcours-battleboats.jpg" alt="Parcours côtier des Battleboats vu du ciel"></div></div>
+  <div class="anim">
+    <div class="stage r zoom" style="--d:.25s"><svg id="cvBattle" viewBox="0 0 600 380" role="img" aria-label="Battleboats : porte A-B, contourner C, puis toucher la bouée de son équipe, D verte ou E rouge">
+        <rect width="600" height="380" fill="url(#seaG)"/><rect width="600" height="380" fill="url(#rip)"/>
+        <line x1="470" y1="135" x2="470" y2="265" stroke="#fff" stroke-width="2.5" stroke-dasharray="7 6" opacity=".8"/>
+        <text x="20" y="372" fill="#CFE6FF" font-family="Plus Jakarta Sans,Arial" font-weight="700" font-size="17">Verts : marquer sur D · Rouges : marquer sur E · chacun défend aussi</text>
+        <path class="rt" id="bbG1" d="M590 200 L470 200 C380 200 230 285 140 272 C80 263 70 165 130 152 C190 142 240 118 292 110 C360 100 470 60 525 100 C570 135 590 180 590 200" fill="none"/>
+        <path class="rt" id="bbR1" d="M590 200 L470 200 C380 200 230 285 140 272 C80 263 70 165 130 152 C190 150 235 250 262 288 C274 306 240 338 190 350" fill="none"/>
+        <path class="rt" id="bbG2" d="M440 352 C390 350 320 335 268 292" fill="none"/>
+        <path class="rt" id="bbR2" d="M450 30 C400 40 350 70 314 102" fill="none"/>
+      </svg></div>
+    <div class="side">
+      <div class="card r right" style="--d:.4s"><p><b style="color:#5FD08A">Équipe verte</b> contre <b style="color:#FF5463">équipe rouge</b>. Après la porte A-B, on contourne C puis on <b>touche la bouée de son équipe</b> : 1 point. Les autres bateaux <b>défendent</b>. 15 minutes au plus.</p></div>
+      <div class="orig r right" style="--d:.55s"><img src="masterclass/parcours-battleboats.jpg" alt="Parcours côtier des Battleboats vu du ciel"><small>Schéma du règlement</small></div>
+    </div>
+  </div>
   <div class="foot"><img class="lg" src="masterclass/logo-ai-regatta.png" alt="AI Regatta"><img src="masterclass/logo-med-events.jpg" alt="MED Events"><span class="site">www.battleboats.fr</span><span class="num"></span></div>
 </section>
 
@@ -668,6 +711,14 @@ body.idle #help,#help.gone{opacity:0}
 </section>
 
 </div></div>
+<svg width="0" height="0" style="position:absolute"><defs>
+    <linearGradient id="seaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B4E8C"/><stop offset="1" stop-color="#0E2E63"/></linearGradient>
+    <pattern id="rip" width="120" height="44" patternUnits="userSpaceOnUse"><path d="M0 22c15-6 30-6 45 0s30 6 45 0 22-4 30-3" fill="none" stroke="#7CC6FF" stroke-opacity=".12" stroke-width="1.6"/></pattern>
+    <radialGradient id="bR" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FF8A9E"/><stop offset=".55" stop-color="#E8283F"/><stop offset="1" stop-color="#A3122A"/></radialGradient>
+    <radialGradient id="bG" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#A8F0C4"/><stop offset=".55" stop-color="#2FA866"/><stop offset="1" stop-color="#18693D"/></radialGradient>
+    <radialGradient id="bY" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFF1A8"/><stop offset=".55" stop-color="#F2B705"/><stop offset="1" stop-color="#A97E00"/></radialGradient>
+    <filter id="shd" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity=".45"/></filter>
+  </defs></svg>
 
 <div id="ctrl" role="group" aria-label="Navigation">
   <button id="prev" type="button" aria-label="Slide précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -700,13 +751,71 @@ body.idle #help,#help.gone{opacity:0}
   function enter(s){
     if(s.id==='s9'){const f=s.querySelector('.frame');if(!f.querySelector('iframe')){const ifr=document.createElement('iframe');ifr.src='regate-3d.html#embed';ifr.title='Régate 3D';ifr.loading='eager';ifr.addEventListener('load',()=>{const w=f.querySelector('.wait');if(w)w.remove()});f.prepend(ifr)}}
     if(s.id==='s12')startBoat();
+    if(s.id==='s10')CRS.start(0);if(s.id==='s11')CRS.start(1);
   }
   function leave(s){
     if(s.id==='s9'){frame.classList.remove('max');const ifr=s.querySelector('iframe');if(ifr)ifr.remove();const f=s.querySelector('.frame');if(!f.querySelector('.wait')){const w=document.createElement('div');w.className='wait';w.textContent='Chargement de la régate 3D…';f.prepend(w)}}
     if(s.id==='s12')stopBoat();
+    if(s.id==='s10'||s.id==='s11')CRS.stop();
     // rejouer les animations au prochain passage
     s.querySelectorAll('.r,.ch,.route,.mark,.arrowhead').forEach(e=>{e.style.animation='none';void e.offsetWidth;e.style.animation=''});
   }
+  // parcours animés repris de la version proposée (slalom, Battleboats)
+  const CRS=(function(){const NS='http://www.w3.org/2000/svg';
+  /* ---------- bouées et bateaux des trois parcours ---------- */
+  const F='font-family="Plus Jakarta Sans,Arial" font-weight="800"';
+  function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+  function buoy(svg,x,y,label,grad,r){r=r||19;const g=el('g',{class:'mk',filter:'url(#shd)'},svg);el('circle',{cx:x,cy:y,r:r,fill:'url(#'+grad+')'},g);
+    const t=el('text',{x:x,y:y+6,'text-anchor':'middle',fill:grad==='bY'?'#3A2A00':'#fff','font-family':'Plus Jakarta Sans,Arial','font-weight':800,'font-size':r>15?17:14},g);t.textContent=label;return {g,x,y}}
+  function mkBoat(svg,sail,motor){const g=el('g',{opacity:0},svg),inner=el('g',{},g);
+    if(motor){el('path',{d:'M-18 0 L16 0 L20 -3 L12 8 L-15 8 Z',fill:sail||'#2438B5',stroke:'#fff','stroke-width':1.5},inner);el('path',{d:'M-9 0 L-6 -7 L5 -7 L9 0 Z',fill:'#fff'},inner);el('rect',{x:-21,y:1,width:3,height:6,fill:'#333'},inner);return {g,inner}}
+    el('path',{d:'M-15 4 L15 4 L11 10 L-11 10 Z',fill:'#0B1A44',stroke:'#fff','stroke-width':1.5},inner);el('path',{d:'M-1 3 L-1 -24 L13 3 Z',fill:'#fff'},inner);el('path',{d:'M-4 3 L-4 -18 L-14 3 Z',fill:sail||'#E4365E'},inner);return {g,inner}}
+  function mkWake(svg){const g=el('g',{fill:'none','stroke-linecap':'round'},svg);for(let i=0;i<14;i++){const f=(i+1)/14;el('path',{stroke:'#fff','stroke-opacity':(f*f*.9).toFixed(3),'stroke-width':(1.5+f*6).toFixed(1)},g)}return g}
+  function seg(r,a,b){a=Math.max(0,a);if(b-a<.5)return '';let d='';for(let k=0;k<=3;k++){const p=r.getPointAtLength(a+(b-a)*k/3);d+=(k?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)}return d}
+  function drawWake(w,r,d,WL){const ch=w.children,n=ch.length;for(let i=0;i<n;i++)ch[i].setAttribute('d',WL>1?seg(r,d-WL+WL*i/n,d-WL+WL*(i+1)/n-2):'')}
+  function setBoat(b,r,len,d,op){d=Math.max(0,Math.min(d,len));const p=r.getPointAtLength(d),q=r.getPointAtLength(Math.min(len,d+2)),pr=r.getPointAtLength(Math.max(0,d-2));
+    const a=Math.atan2(q.y-pr.y,q.x-pr.x)*180/Math.PI;b.g.setAttribute('transform','translate('+p.x.toFixed(1)+' '+(p.y-4).toFixed(1)+')');b.inner.setAttribute('transform',Math.abs(a)>90?'scale(-1 1)':'');b.g.setAttribute('opacity',op);return p}
+  /* un parcours = des « pistes » (route, départ, vitesse) ; chaque piste a son bateau et son sillage */
+  function course(svg,tracks,marks,extra){
+    const T=tracks.map(t=>{const r=t.route,len=r.getTotalLength();return Object.assign({len,boat:mkBoat(svg,t.sail,t.motor),wake:mkWake(svg)},t)});
+    marks.forEach(m=>{svg.appendChild(m.g)});T.forEach(t=>{svg.appendChild(t.wake);svg.appendChild(t.boat.g)});
+    const end=Math.max(...T.map(t=>t.t0+t.len/t.v)),period=end+(extra&&extra.pause||.9);
+    return {period,frame(t){const pts=[];
+      T.forEach(k=>{const el=t-k.t0,d=el*k.v;
+        if(el<0){k.boat.g.setAttribute('opacity',0);drawWake(k.wake,k.route,0,0);return}
+        if(d<=k.len){pts.push(setBoat(k.boat,k.route,k.len,d,1));drawWake(k.wake,k.route,d,Math.min(d,k.W||150))}
+        else if(k.hold){pts.push(setBoat(k.boat,k.route,k.len,k.len,1));drawWake(k.wake,k.route,k.len,(k.W||150)-(d-k.len))}
+        else{const over=d-k.len;k.boat.g.setAttribute('opacity',k.handoff?0:Math.max(0,1-over/120));if(!k.handoff)setBoat(k.boat,k.route,k.len,k.len,Math.max(0,1-over/120));drawWake(k.wake,k.route,k.len,(k.W||150)-over)}});
+      marks.forEach(m=>m.g.classList.toggle('hit',pts.some(p=>Math.hypot(p.x-m.x,p.y-m.y)<(m.rad||46))));
+      if(extra&&extra.onFrame)extra.onFrame(t,pts)}}
+  }
+  const courses=[];
+  // Slalom
+  {const s=$('cvSlalom'),r=s.querySelector('.rt');
+    const m=[buoy(s,70,110,'1','bR'),buoy(s,70,250,'2','bR'),buoy(s,200,140,'3','bG'),buoy(s,300,250,'4','bR'),buoy(s,420,140,'5','bG'),buoy(s,540,200,'6','bY')];
+    const c2=r.cloneNode();s.appendChild(c2);
+    courses.push(course(s,[{route:r,t0:0,v:430,W:140,motor:1,sail:'#D80000'},{route:c2,t0:.55,v:410,W:140,motor:1,sail:'#2438B5'}],m))}
+  // Battleboats : un attaquant vert marque sur D malgré le défenseur rouge ; l’attaquant rouge est bloqué devant E par le défenseur vert
+  {const s=$('cvBattle'),R=id=>s.querySelector('#'+id);
+    const m=[buoy(s,470,135,'A','bY'),buoy(s,470,265,'B','bY'),buoy(s,130,210,'C','bY'),buoy(s,305,110,'D','bG'),buoy(s,305,310,'E','bR')];
+    const VA=360,VD=300,GREEN='#2FA866',RED='#D7263D';
+    function arcTo(r,x,y){const L=r.getTotalLength();let best=0,bd=1e9;for(let d=0;d<=L;d+=2){const p=r.getPointAtLength(d),e=Math.hypot(p.x-x,p.y-y);if(e<bd){bd=e;best=d}}return best}
+    const tScore=arcTo(R('bbG1'),305,110)/VA, tBump=.5+arcTo(R('bbR1'),262,288)/VA;
+    const tr=[{route:R('bbG1'),t0:0,v:VA,W:130,motor:1,sail:GREEN},{route:R('bbR1'),t0:.5,v:VA,W:130,motor:1,sail:RED},
+      {route:R('bbG2'),t0:tBump-R('bbG2').getTotalLength()/VD,v:VD,W:90,motor:1,sail:GREEN,hold:1},
+      {route:R('bbR2'),t0:tScore+.35-R('bbR2').getTotalLength()/VD,v:VD,W:90,motor:1,sail:RED,hold:1}];
+    const T0=-Math.min(...tr.map(t=>t.t0));tr.forEach(t=>t.t0+=T0);
+    const txt=(x,y,c,str,fs)=>{const e=el('text',{x,y,fill:c,'text-anchor':'middle','font-family':'Plus Jakarta Sans,Arial','font-weight':800,'font-size':fs||28,opacity:0},s);e.textContent=str;return e};
+    const plus=txt(305,78,'#7CF0A9','+1 Verts'),blk=txt(250,250,'#FFFFFF','Bloqué !',24),flash=el('circle',{cx:262,cy:288,r:0,fill:'none',stroke:'#fff','stroke-width':3,opacity:0},s);
+    const score=txt(24,40,'#fff','',22);score.setAttribute('text-anchor','start');
+    const show=(e,a,dur,rise)=>{if(a>=0&&a<dur){e.setAttribute('opacity',(1-a/dur).toFixed(2));if(rise)e.setAttribute('transform','translate(0 '+(-a*rise).toFixed(1)+')')}else e.setAttribute('opacity',0)};
+    courses.push(course(s,tr,m,{pause:1.4,onFrame(t){const a1=t-(tScore+T0),a2=t-(tBump+T0);show(plus,a1,1.3,22);show(blk,a2,1.2,14);
+      if(a2>=0&&a2<.5){flash.setAttribute('r',(6+a2*70).toFixed(1));flash.setAttribute('opacity',(1-a2/.5).toFixed(2))}else flash.setAttribute('opacity',0);
+      score.textContent='Verts '+(a1>=0?1:0)+' – 0 Rouges';score.setAttribute('opacity',1)}}))}
+    let raf=0,t0=0,list=[];
+    function start(i){cancelAnimationFrame(raf);const c=courses[i];const s=i?$('cvBattle'):$('cvSlalom');t0=performance.now();
+      const step=now=>{const t=Math.max(0,(now-t0)/1000-.8);c.frame(t%c.period);raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step)}
+    return {start,stop(){cancelAnimationFrame(raf)}}})();
   // loupe de la slide 9 : agrandit la régate 3D sur toute la slide (grand écran, téléphone ou les deux)
   const frame=document.querySelector('#s9 .frame');
   function zoom(m){const ifr=frame.querySelector('iframe');
